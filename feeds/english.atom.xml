@@ -1,0 +1,740 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Ben Chuanlong Du's Blog - English</title><link href="http://www.legendu.net/misc/" rel="alternate"></link><link href="http://www.legendu.net/misc/feeds/english.atom.xml" rel="self"></link><id>http://www.legendu.net/misc/</id><updated>2019-02-10T12:26:09-08:00</updated><subtitle>It is never too late to learn.</subtitle><entry><title>English Writing</title><link href="http://www.legendu.net/misc/blog/english-writing/" rel="alternate"></link><published>2019-02-10T12:26:09-08:00</published><updated>2019-02-10T12:26:09-08:00</updated><author><name>Ben Chuanlong Du</name></author><id>tag:www.legendu.net,2019-02-10:/misc/blog/english-writing/</id><summary type="html">&lt;p&gt;&lt;strong&gt;Things on this page are fragmentary and immature notes/thoughts of the author. It is not meant to readers but rather for convenient reference of the author and future improvement.&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://en.wikipedia.org/wiki/Wikipedia:Manual_of_Style/Text_formatting"&gt;Wikipedia:Manual of Style/Text formatting&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;summary good ways to write English articles, at least scientific writings:&lt;/p&gt;
+&lt;h2 id="preferred-expressions-in-scientific-writing"&gt;Preferred Expressions in …&lt;/h2&gt;</summary><content type="html">&lt;p&gt;&lt;strong&gt;Things on this page are fragmentary and immature notes/thoughts of the author. It is not meant to readers but rather for convenient reference of the author and future improvement.&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://en.wikipedia.org/wiki/Wikipedia:Manual_of_Style/Text_formatting"&gt;Wikipedia:Manual of Style/Text formatting&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;summary good ways to write English articles, at least scientific writings:&lt;/p&gt;
+&lt;h2 id="preferred-expressions-in-scientific-writing"&gt;Preferred Expressions in Scientific Writing&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;therefore, henceforth &amp;gt; so&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;although &amp;gt; though&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;etc. &amp;gt; and so on&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;ect. (with dot) &amp;gt; etc (without dot)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;ad hoc (non-italic) &amp;gt; naive&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;ad hoc (non-italic) &amp;gt; ad hoc (italic)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;a priori (italic) &amp;gt; a priori (non-italic)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;henceforth &amp;gt; hence&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;As a consequence &amp;gt; As a consequence of this&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;\epsilon-neighborhood &amp;gt; \epsilon-neighbor&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="ana-missuse"&gt;An/a Missuse&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;an MCMC &amp;gt; a MCMC&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="missing-dash-adjective"&gt;Missing Dash (adjective)&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;better-looking &amp;gt; better looking&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Metropolis-Hastings &amp;gt; Metropolis Hasting&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Metropolis-Hasting-within-Gibbs algorithm &amp;gt; Metropolis-Hastring within Gibbs algorithm&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;large-sample based methods &amp;gt; large sample based methods&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;the real-valued Lambert-W function &amp;gt; real valued Lambert-W function&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;reduced-dimension &amp;gt; reduced dimension&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="correct-vs-wrong-expressions"&gt;Correct VS Wrong Expressions&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;back up (as a verb) &amp;gt; backup&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;backed up/backing up &amp;gt; back upped/back upping&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;i.i.d. &amp;gt; iid&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;the smf() model &amp;gt; the model smf()&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;beta distribution parameters &amp;gt; parameters in the beta distribuiton&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;equivalence classes of rotations &amp;gt; rotation matrix equivalence class&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;the human eye &amp;gt; human eyes&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;words with similar meanings, which is better to use in official writings? e.g., greater, bigger and so on ...&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;estimate of &amp;gt; estimate for&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;MLE is maximum likelihood estimation (not estimate)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;estimate of some parameter &amp;gt; estimation of some parameter&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;make ... do &amp;gt; make ... to do&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;the sample size &amp;gt; sample size&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;biostatistics applications &amp;gt; applications of biostatistics&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;It is &amp;gt; it's&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;There is &amp;gt; there's&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;with increasing use of &amp;gt; as the increasing usage of&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Bayesian methods &amp;gt; Bayesian method&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;restrict ... to &amp;gt; restrict ... to be&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;prefer "many" to "lots of"&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;prefer "involving" to "about"&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;prefer "From (2)," to "From (2), we have"&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;(random variable) X has (not is) a uniform distribution&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;avoid using words (such as, "for simplicity", "for convenience") that show your weakness&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;use "evaluate" &amp;gt; "count", "calculate" etc.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;"adaptive rejection sampling" &amp;gt; "the adaptive rejection sampling"&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;"the time required to" &amp;gt; "the time used to"&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;"From Table 2, we can see that ..." &amp;gt; "From the results in Table 2, we can see that ..."&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;"slightly more efficient" &amp;gt; "slight more efficient"&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;"large x" &amp;gt; "x with greater values"&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;"generate a draw for X" in stead of "generate a draw of X"&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Dr. Vardeman likes to put adverb before verb.
+I think this depends on what you want to emphasize.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;"Taking the second derivative, we have" &amp;gt; "Take the second derivative, we have"&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;"which implies that" &amp;gt; "which implies"&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;"a natural way" &amp;gt; "a nature way"&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;the close is the distance the ... in stead of the close the distance is the ...&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;should typically be big instead "should be big typically"&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;in terms of&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;is not appealing&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;prefer "approach" to "way"&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;a priori (adv.)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;"with a distance greater than" &amp;gt; "with a greater distance than"&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;with ... available &amp;gt; "having ... available"&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;take ... to be&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;artificial &amp;gt; fake&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;"the last step" &amp;gt; "last step"&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;prefer "could" to "can"&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;measurement error not measure error&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;underlying &amp;gt; "underline"&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="good-word"&gt;Good word&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;revealing: It is not revealing to evaluate ...&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;logically coherient&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;insensitive&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="general-rules"&gt;General Rules&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Be consistent! Sometimes, there are server writing styles.
+Choose one and stick to it.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;when state theorem from other paper,
+make it clear (add author names to the end of the theorem ...)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;avoid using too many adverb (because they don't give read any information,
+this can make your article more concise), e.g., both, so-called ....&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;is it convention not to use word "and" but use "," when people use where to
+explain notation in a formula?&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;do not use a long sentence as subject, use the form of it is ... instead&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;avoid using vague words such as previous simulation, instead, use
+simulation in section X&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;abbreation is not preferred in official writings,
+e.g., use "it is" &amp;gt; "it's";
+use "there is" &amp;gt; "there's".&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;use typewriter fonts (\texttt) for software names, package names and so on.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Prefer short sentences to long sentences.
+Use adverbial (if not long) &amp;gt; clause.
+For example,
+use "the distribution represented by f" &amp;gt; "the distribution that f represents".&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="math"&gt;Math&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Generally speaking, math symbols should use math fonts.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;use capitial letters to stand for matrix while litter letters stand for vectors, both bold&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;don't abuse symbols, e.g., don't use a same greek letter to stand for
+different things. \alpha is often used for significant levels and angles ...&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;don't use italic letters for well know symbols in math environment,
+e.g., sin, cos, exp, log and so&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;prefer complicated rather can complex when describe an expression is hard,
+because complex can make reader think that the expression is a complex number&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;do not use too many digits, first in statistics extra digits given no more
+information; second, it is hard for readers to read the results.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;do not omit radian when represent angles as people other than
+mathmaticians use angle in other units a lot.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;when numbers are too big, consider resizing unit&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="better-expression"&gt;Better Expression&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;instead of using &lt;span class="math"&gt;\(o_j \in \Omega\)&lt;/span&gt;, for &lt;span class="math"&gt;\(j=1...n\)&lt;/span&gt;,
+a more precise way is to say o_j runs through \Omega (if o_j exhaust \Omega).
+The advantage is that it's simple and make sure that o_j are distinct.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h1 id="-"&gt;----------------------------------------------------------------------&lt;/h1&gt;
+&lt;p&gt;A good way to check whether an English word is countable or uncountable?&lt;/p&gt;
+&lt;p&gt;difference between numeric and numerical?&lt;/p&gt;
+&lt;p&gt;the latex command or the command latex?&lt;/p&gt;
+&lt;p&gt;the function mean or the mean function&lt;/p&gt;
+&lt;p&gt;difference between estimate and estimation?&lt;/p&gt;
+&lt;p&gt;rate VS ratio?&lt;/p&gt;
+&lt;h2 id="questions"&gt;Questions&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;When to use "rejection sampling" vs "rejection sampling method"?&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;bla bla bla (A whole sentence.). which dot should be dropped?&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;the arugment y or the y argument? and similarly "the command" ?&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;sometimes it seems to me that lots of prepositions can be used,
+how do I decide which one is the best?&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="similar-meaning-words"&gt;Similar Meaning Words&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;sea vs ocean&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;neighbor vs neighborhood&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;dissertation vs thesis&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;underscore vs underline&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;dot vs period&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="similar-pronunciationspelling-words"&gt;Similar Pronunciation/Spelling Words&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;flatter vs flutter&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;wander vs&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;speed up vs speedup&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;subdirectory sub-directory sub directory&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;granularity vs magnitude vs size&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;talent vs tanant&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;flush vs blush&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Economics -- Economy  -- Econometrics&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;summon vs salmon&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;yoga vs yogurt&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;latitude vs longtitude vs altitude vs attitude&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;could/can/might/would&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;describe ... by/denote ... in / describe ... with/describe ... as/denote ... as&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;addon vs add-on vs extension vs plugin vs plug-in&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;use commas to separate thousands, millions, etc. in numbers&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr&gt;
+&lt;h2 id="writing-tips"&gt;Writing Tips&lt;/h2&gt;
+&lt;p&gt;Capitalization in Titles&lt;/p&gt;
+&lt;p&gt;NIVA follows the general rules for capitalizing words in document titles set out in The Chicago Manual of Style (with one minor exception—see the note in rule 3):&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Always capitalize the first and the last word.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Capitalize all nouns, pronouns, adjectives, verbs, adverbs, and subordinate conjunctions ("as", "because", "although").&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Lowercase all articles, coordinate conjunctions ("and", "or", "nor"), and prepositions regardless of length, when they are other than the first or last word. (Note: NIVA prefers to capitalize prepositions of five characters or more ("after", "among", "between").)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Lowercase the "to" in an infinitive.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Most writers are familiar with these general rules. But some have difficulty identifying the various parts of speech, while others have internalized incorrect "rules" taught in elementary school. These individuals are therefore prone to making mistakes when capitalizing or lowercasing words in titles. The most common mistakes are presented below.&lt;/p&gt;
+&lt;p&gt;Two-Letter Words
+Some writers lowercase all two-letter words, probably by extrapolation from the short prepositions "of", "to", "up", and so on, and the word "to" in infinitives. But if a two-letter word is acting as a noun, pronoun, adjective, or adverb, it must be capitalized. For example:&lt;/p&gt;
+&lt;p&gt;Go Tell it on the Mountain
+(wrong; "it" is a pronoun and should be capitalized)&lt;/p&gt;
+&lt;p&gt;When is a Spade a Spade?
+(wrong; "is" is a verb and should be capitalized)&lt;/p&gt;
+&lt;p&gt;Multipurpose Words
+Some writers lowercase words that can function as prepositions when those words are currently functioning in other capacities. For example:&lt;/p&gt;
+&lt;p&gt;The Man in the Moon Owns a Yellow Balloon
+(correct; "in" is functioning as a preposition and should be lowercased)&lt;/p&gt;
+&lt;p&gt;Bringing in the Sheaves
+(wrong; "in" is functioning as an adverb and should be capitalized)&lt;/p&gt;
+&lt;p&gt;Phrasal Verbs
+Some writers find it hard to decide how to capitalize a title containing a phrasal verb. Phrasal verbs are verbs whose meaning is completed by a word called a particle. For example, the verb "to give" has a different meaning than the phrasal verb "to give up".&lt;/p&gt;
+&lt;p&gt;Like other multipurpose words, words functioning as particles must be distinguished from the same words functioning as prepositions. Particles are always capitalized because they form part of the verb. For example:&lt;/p&gt;
+&lt;p&gt;My Travels up Nova Scotia's South Shore
+(correct; "up" is functioning as a preposition and should be lowercased)&lt;/p&gt;
+&lt;p&gt;Setting up Your Computer
+(wrong; "up" is functioning as a particle and should be capitalized)&lt;/p&gt;
+&lt;p&gt;Mistaken Notions
+Grammar just doesn't sink naturally into everyone's head. To some writers, the fact that one word resembles another is enough reason to treat those words equally when it comes to capitalization in a title. For example:&lt;/p&gt;
+&lt;p&gt;The Time of their Lives
+(wrong; "their" is an adjective and should be capitalized—the writer probably extrapolated from "the")&lt;/p&gt;
+&lt;p&gt;In Titles: Do Capitalize&lt;/p&gt;
+&lt;p&gt;Nouns (man, bus, book)
+Adjectives (angry, lovely, small)
+Verbs (run, eat, sleep)
+Adverbs (slowly, quickly, quietly)
+Pronouns (he, she, it)
+Subordinating conjunctions (as, because, that)&lt;/p&gt;
+&lt;p&gt;In Titles: Do Not Capitalize&lt;/p&gt;
+&lt;p&gt;Articles: a, an, the
+Coordinating Conjunctions: and, but, or, for, nor, etc.
+Prepositions (fewer than five letters): on, at, to, from, by, etc.&lt;/p&gt;
+&lt;p&gt;How should I capitalize album titles and band names?&lt;/p&gt;
+&lt;p&gt;Please use the following standard guidelines for capitalizing artist names, record labels, album and song titles in the English language. Other rules may apply to other languages.&lt;/p&gt;
+&lt;p&gt;All titles should be in standard mixed case, where the first letter of each word is capitalized and followed by lower case letters, as noted below:&lt;/p&gt;
+&lt;p&gt;Capitalize all nouns, verbs (including be, been, am, are, is, was, and were), adverbs, subordinating conjunctions (including if and as when it is not used as a preposition), adjectives (including so when used as an adjective), and pronouns (including he, she, we, and it). Examples:
+Love Is in the Air
+I Am the Walrus
+That Was Then, This Is Now
+You Are So Beautiful
+This Is As Good As It Gets&lt;/p&gt;
+&lt;p&gt;Do not capitalize:&lt;/p&gt;
+&lt;p&gt;a. Articles: a, an, the (unless part of an artist's name)
+The Man Who Sold the World
+In a Safe Place
+The Best of The Temptations&lt;/p&gt;
+&lt;p&gt;b. Coordinating conjunctions: and, but, or, nor, for, yet, and so
+Rattle and Hum
+It's Now or Never&lt;/p&gt;
+&lt;p&gt;Nothin' but a Good Time&lt;/p&gt;
+&lt;p&gt;Special Notes: The word "but" can function as either a conjunction, preposition, or an adverb. Most of the time, it functions as a conjunction or a preposition and should be lowercase. Much less frequently, it will function as an adverb, and should be capitalized. In that case, the word "but" will immediately follow a verb (without a comma), and can be replaced by other adverbs like "only" or "just" (without changing anything else or adding punctuation) and will convey the same message:
+Life Is But a Dream
+Ain't But a Few of Us Left
+You Are But a Draft, a Long Rehearsal for a Show That Will Never Play&lt;/p&gt;
+&lt;p&gt;If the word "but" is better replaced by the word "except", or if it is used in a phrase that contradicts the first half of the sentence, it is not an adverb and should be lowercase.
+I Know You Are but What Am I
+I Don't Know What It Is but I Like It&lt;/p&gt;
+&lt;p&gt;c. Short prepositions: as, at, by, for, in, of, on, to, from
+Live at Woodstock
+Face to Face
+Death Cab for Cutie
+Pretty in Pink&lt;/p&gt;
+&lt;p&gt;Come in from the Cold&lt;/p&gt;
+&lt;p&gt;Special Note: The word "versus" (and its abbreviated form "vs." or "v.") is commonly left in lower case, despite its being a preposition of more than three characters.
+Spy vs. Spy
+Birds v. Worms&lt;/p&gt;
+&lt;p&gt;Special Note: The word "etcetera" (and its abbreviated form "etc.") is also commonly left in lower case when used to represent the phrase "and so on" or "and so forth".
+Time After Time etc.&lt;/p&gt;
+&lt;p&gt;d. When used to form an infinitive: to
+Nowhere to Run
+How to Dismantle an Atomic Bomb
+Song I Love to Sing
+Reality Used to Be a Friend of Mine&lt;/p&gt;
+&lt;p&gt;If a title is broken up by major punctuation (colon, question mark, exclamation mark, em-dash, parentheses, or quotes), treat each distinct piece of the title as a whole, and always capitalize the first and last words of each division.
+Otis! The Definitive Otis Redding
+In Time: The Best of R.E.M.
+I'm Just a Singer (In a Rock 'n' Roll Band)&lt;/p&gt;
+&lt;p&gt;In compounds formed by hyphens, capitalize each part except where the part would not be capitalized if it were a separate word.
+The Go-Gos
+At the Drive-In
+The Boy With the X-Ray Eyes&lt;/p&gt;
+&lt;p&gt;Only use all caps for acronyms or abbreviations where common use is all caps.
+R.E.M.
+N.W.A.
+R.O.C.K. in the U.S.A.&lt;/p&gt;
+&lt;p&gt;Capitalize contractions and slang consistent with the rules above to the extent that such clearly apply. For example, do not capitalize o' for "of", or n' for "and", etc.
+Rock 'n' Roll
+Will o' the Wisp
+Sweet Child o' Mine&lt;/p&gt;
+&lt;p&gt;Proper nouns should always be capitalized appropriately. This includes parts of band names separated by the word 'and' (for example) where the two parts could stand alone, grammatically.
+Nick Cave and The Bad Seeds
+Elvis Costello and The Attractions
+Huey Lewis and The News&lt;/p&gt;
+&lt;p&gt;Always capitalize the first and last word of a title, even if it would otherwise be lowercase. Examples:
+Bring it On
+One Is For
+And You and I
+The Greatest Hits Of&lt;/p&gt;
+&lt;p&gt;[edit] Exceptions&lt;/p&gt;
+&lt;p&gt;In the case where an artist uses a nonstandard capitalization with an artistic intent, the original capitalization used by the artist should be preserved. Examples include k.d. lang (artist), Yellow mY skYcaptain (release), and "tourette's" - track 11 on the release In Utero.&lt;/p&gt;
+&lt;p&gt;Note that there are cases in which the name of an artist or album - or an entire tracklisting - is written entirely in uppercase or lowercase in the art which accompanies a release. These instances do not qualify as an exception, because they do not represent artistic intent regarding capitalization (in most cases, they are written in this manner for aesthetic purposes related to the cover art). &lt;/p&gt;
+&lt;h2 id="phrases"&gt;Phrases&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Never argue with an idiot. People watching may have trouble telling who's who.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;hit me up&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;momentum&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;sharpest knife in the draw&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;a few fingers short of high five&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;be generous at the expense of others&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;That works for me.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;It's OK with me. / I'm OK with that.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;brain drain / custom churn&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="italic"&gt;Italic&lt;/h2&gt;
+&lt;p&gt;http://www.wikihow.com/Use-Italics&lt;/p&gt;
+&lt;p&gt;When to Italicize&lt;/p&gt;
+&lt;p&gt;When you italicize a word or a phrase, it gets noticed. However, italics (typeface that slants to the right) are a bit understated and do not attract the same attention as say, bold or underline. When to use italics? There are certain style rules to remember. However, italics are popularly used to call attention to certain words in a block of text. When you think about it if all the words looked the same, reading would be a rather boring affair. One thing to remember for any typeface is not to go overboard. If every other word is italics, it loses its effect and becomes less 'special.'
+What to Italicize&lt;/p&gt;
+&lt;p&gt;Like so many rules in the English language, rules for italicization vary. Often italics and underline can be used interchangeably. There are some style guides that prefer the use of underlining over the use of italics (and vice versa).&lt;/p&gt;
+&lt;p&gt;Here are, though, some rules of what to italicize. However, do keep in mind that for some of these categories below underlining is also possible.&lt;/p&gt;
+&lt;p&gt;Emphasis: When you want to emphasize a certain word or phrase in a sentence. (She was the only girl in the class who got 100% on the exam.)&lt;/p&gt;
+&lt;p&gt;Titles of Works: (Please note that we can also underline the following)&lt;/p&gt;
+&lt;p&gt;Books: (Elements of Style, Harry Potter and the Deadly Hallows, Jane Eyre)
+Magazines: (Time magazine, Newsweek, Cosmpolitan)
+Newspapers: (USA Today, Wall Street Journal, San Francisco Chronicle)
+Plays: (Romeo &amp;amp; Juliet, Waiting for Godot, Uncle Vanya)
+Movies: (Batman, Casablanca, Twilight)
+Works of Art: (Monet’s Waterlilies, Van Gogh’s Starry Starry Night, Micheangelo’s Mona Lisa)
+TV/radio programs: (American Idol, BBC’s Woman’s Hour, The Simpsons)
+CD/Album: (Michael Jackson’s Thriller album, Parachutes by Cold Play)&lt;/p&gt;
+&lt;p&gt;Foreign Words/Technical Terms/Unfamiliar Words: When we are writing a text in one particular language (i.e. English) and want to introduce a foreign word or phrase, we tend to italicize the foreign words. (The word for cat in Spanish is gato.)&lt;/p&gt;
+&lt;p&gt;Names of Trains, Ships, Aircraft, and Spacecraft: (NASA’s Challenger, QE2) &lt;/p&gt;
+&lt;p&gt;When to Underline&lt;/p&gt;
+&lt;p&gt;As we have discussed italics and underline can both be used for titles of major works. There are certain style guides that require underlining for titles, such as the MLA.&lt;/p&gt;
+&lt;p&gt;Example:&lt;/p&gt;
+&lt;p&gt;I have never seen the movie Titanic.&lt;/p&gt;
+&lt;p&gt;We have to read two plays by Shakespeare: Hamlet and Macbeth.&lt;/p&gt;
+&lt;p&gt;Also, sometimes italics can be difficult to read, so some recommend underlining to really emphasize certain words and phrases.&lt;/p&gt;
+&lt;p&gt;Some Things to Remember&lt;/p&gt;
+&lt;p&gt;We do not italicize parts of larger works. For example, chapters in a book, poems, sections of newspapers, songs in a CD. Instead we use quotation marks (We heard the song "Billie Jean" by Michael Jackson on the radio three times last night).&lt;/p&gt;
+&lt;p&gt;We also do not italicize religious books (for example, the Bible, Koran, the Torah)&lt;/p&gt;
+&lt;p&gt;Italicize (or underline) punctuation marks that are a part of a tile (?, !)- Getting the Job You Want Now! Getting the Job You Want Now!
+Do not use italics and underline at the same time (It only cost five dollars.)&lt;/p&gt;
+&lt;p&gt;Additional Resources&lt;/p&gt;
+&lt;p&gt;To get some practice using italics and underlining take Empire State College's quiz
+Purdue University Online Writing Lab has a good overview of italics and underlining&lt;/p&gt;
+&lt;script type="text/javascript"&gt;if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
+    var align = "center",
+        indent = "0em",
+        linebreak = "false";
+
+    if (false) {
+        align = (screen.width &lt; 768) ? "left" : align;
+        indent = (screen.width &lt; 768) ? "0em" : indent;
+        linebreak = (screen.width &lt; 768) ? 'true' : linebreak;
+    }
+
+    var mathjaxscript = document.createElement('script');
+    var location_protocol = (false) ? 'https' : document.location.protocol;
+    if (location_protocol !== 'http' &amp;&amp; location_protocol !== 'https') location_protocol = 'https:';
+    mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
+    mathjaxscript.type = 'text/javascript';
+    mathjaxscript.src = location_protocol + '//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML';
+    mathjaxscript[(window.opera ? "innerHTML" : "text")] =
+        "MathJax.Hub.Config({" +
+        "    config: ['MMLorHTML.js']," +
+        "    TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'AMS' }, Macros: {} }," +
+        "    jax: ['input/TeX','input/MathML','output/HTML-CSS']," +
+        "    extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']," +
+        "    displayAlign: '"+ align +"'," +
+        "    displayIndent: '"+ indent +"'," +
+        "    showMathMenu: true," +
+        "    messageStyle: 'normal'," +
+        "    tex2jax: { " +
+        "        inlineMath: [ ['\\\\(','\\\\)'] ], " +
+        "        displayMath: [ ['$$','$$'] ]," +
+        "        processEscapes: true," +
+        "        preview: 'TeX'," +
+        "    }, " +
+        "    'HTML-CSS': { " +
+        "        styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: 'inherit ! important'} }," +
+        "        linebreaks: { automatic: "+ linebreak +", width: '90% container' }," +
+        "    }, " +
+        "}); " +
+        "if ('default' !== 'default') {" +
+            "MathJax.Hub.Register.StartupHook('HTML-CSS Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax['HTML-CSS'].FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+            "MathJax.Hub.Register.StartupHook('SVG Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax.SVG.FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+        "}";
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
+}
+&lt;/script&gt;</content><category term="English"></category><category term="writing"></category><category term="language"></category></entry><entry><title>English Learning</title><link href="http://www.legendu.net/misc/blog/english-learning/" rel="alternate"></link><published>2018-01-01T14:27:41-08:00</published><updated>2018-01-01T14:27:41-08:00</updated><author><name>Ben Chuanlong Du</name></author><id>tag:www.legendu.net,2018-01-01:/misc/blog/english-learning/</id><summary type="html">&lt;p&gt;&lt;strong&gt;
+Things on this page are
+fragmentary and immature notes/thoughts of the author.
+It is not meant to readers
+but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="www.vocabulary.com"&gt;Vocabulary&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="www.duolingo.com"&gt;duolingo&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="www.shanbay.com"&gt;ShanBay&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="www.iciba.com"&gt;iciba&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="www.m-w.com"&gt;Merriam-Webster&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;</summary><content type="html">&lt;p&gt;&lt;strong&gt;
+Things on this page are
+fragmentary and immature notes/thoughts of the author.
+It is not meant to readers
+but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="www.vocabulary.com"&gt;Vocabulary&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="www.duolingo.com"&gt;duolingo&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="www.shanbay.com"&gt;ShanBay&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="www.iciba.com"&gt;iciba&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="www.m-w.com"&gt;Merriam-Webster&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;</content><category term="English"></category><category term="language"></category><category term="learning"></category><category term="ShanBay"></category><category term="Vocabulary"></category><category term="iciba"></category><category term="Merriam-Webster"></category></entry><entry><title>English Names</title><link href="http://www.legendu.net/misc/blog/english-names/" rel="alternate"></link><published>2014-07-12T20:20:24-07:00</published><updated>2014-07-12T20:20:24-07:00</updated><author><name>Ben Chuanlong Du</name></author><id>tag:www.legendu.net,2014-07-12:/misc/blog/english-names/</id><summary type="html">&lt;p&gt;&lt;strong&gt;
+Things on this page are fragmentary and immature notes/thoughts of the author. 
+It is not meant to readers but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Almost all English names ending with "e" are female names.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;A person named William might use either Will or Bill …&lt;/p&gt;&lt;/li&gt;&lt;/ol&gt;</summary><content type="html">&lt;p&gt;&lt;strong&gt;
+Things on this page are fragmentary and immature notes/thoughts of the author. 
+It is not meant to readers but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Almost all English names ending with "e" are female names.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;A person named William might use either Will or Bill for short.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="male-names"&gt;Male Names&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Andrew -&amp;gt; Andy &lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Benjamin/Benjamini -&amp;gt; Ben&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Christopher -&amp;gt; Chris&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="female-names"&gt;Female Names&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Christine -&amp;gt; Chris&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;What do you know and what do you say?
+It is kind of like "How are you doing?"&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;What's up. Sometimes people use wup or sup.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Howdy short for "How's going?"&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;When end with etc. just one dot, right?&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;“If you always do what you’ve always done, you’ll always get what you’ve always got” 
+Anonymous&lt;/p&gt;
+&lt;p&gt;“If you change the way you look at things, the things you look at change.” 
+Wayne Dyer&lt;/p&gt;
+&lt;p&gt;“If you can't explain it simply, you don't understand it well enough.” 
+Albert Einstein&lt;/p&gt;
+&lt;p&gt;“Change is the law of life and those who look only to the past or present are certain to miss the future.” 
+John F. Kennedy&lt;/p&gt;</content><category term="English"></category><category term="name"></category><category term="abbreviation"></category></entry></feed>

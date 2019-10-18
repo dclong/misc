@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Teradata SQL Tips</title>
+  <meta name="author" content="Ben Chuanlong Du">
+
+  <link href="http://www.legendu.net/misc/atom.xml" type="application/atom+xml" rel="alternate"
+        title="Ben Chuanlong Du's Blog Atom Feed" />
+
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link href="http://www.legendu.net/misc/favicon.png" rel="icon">
+  <link href="http://www.legendu.net/misc/theme/css/main_2.css" media="screen, projection"
+        rel="stylesheet" type="text/css">
+  <script src="http://www.legendu.net/misc/theme/js/modernizr-2.0.js"></script>
+  <script src="http://www.legendu.net/misc/theme/js/ender.js"></script>
+  <script src="http://www.legendu.net/misc/theme/js/octopress.js" type="text/javascript"></script>
+
+  <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+</head>
+
+<body>
+  <header role="banner"><hgroup>
+  <h1><a href="http://www.legendu.net/misc/">Ben Chuanlong Du's Blog</a></h1>
+    <h2>It is never too late to learn.</h2>
+</hgroup></header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="http://www.legendu.net/misc/atom.xml" rel="subscribe-rss">RSS</a></li>
+</ul>
+
+<form name="search" action="https://www.bing.com/search" method="get" onSubmit="return build_query()">
+  <fieldset role="search">
+      <!--
+    <input type="hidden" name="q" value="site:http://www.legendu.net/misc" />
+        -->
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+
+<script type = "text/javascript">
+    function build_query() {
+        var query = document.forms["search"]["q"].value;
+        var prefix = "site:http://www.legendu.net/misc "
+        if (!query.startsWith(prefix)) {
+            query = prefix + query;
+            document.forms["search"]["q"].value = query;
+        }
+        return true;
+    }
+</script>
+
+<ul class="main-navigation">
+    <li><a href="http://www.legendu.net">Home</a></li>
+    <li><a href="http://www.legendu.net/misc">Blog</a></li>
+    <li><a href="http://www.legendu.net/misc/archives.html">Archives</a></li>
+    <li><a href="http://www.legendu.net/misc/pages/links.html">Links</a></li>
+</ul></nav>
+  <div id="main">
+    <div id="content">
+<div>
+  <article class="hentry" role="article">
+<header>
+      <h1 class="entry-title">Teradata SQL Tips</h1>
+      <p class="meta"><time datetime="2017-05-08T21:12:48-07:00" pubdate>May 08, 2017</time></p>
+</header>
+
+  <div class="entry-content"><p><strong>
+Things on this page are
+fragmentary and immature notes/thoughts of the author.
+It is not meant to readers
+but rather for convenient reference of the author and future improvement.
+</strong></p>
+<ul>
+<li><a href="https://github.com/Teradata">Teradata Open Source Project on GitHub</a></li>
+<li><a href="http://cuishen.iteye.com/blog/638968">Teradata SQL笔记</a></li>
+<li><a href="http://www.loyhome.com/%E6%97%A0%E7%9F%A5%E7%9A%84%E6%AF%94%E8%BE%83%EF%BC%9Ar%E5%92%8Cteradata-sql%E9%99%84%E8%B5%A0td%E7%BB%8F%E9%AA%8C%E5%87%A0%E6%9E%9A/">无知的比较：R和Teradata SQL(附赠TD经验几枚)</a></li>
+<li><a href="http://sqlfool.com/mssql-dba-guide-to-teradata/">The SQL Server DBA’s Guide to Teradata</a></li>
+</ul>
+<h2 id="performance-tips">Performance Tips</h2>
+<ol>
+<li>
+<p>if performance is an issue, avoid using sub queries, use temp tables instead ...</p>
+</li>
+<li>
+<p>When you create a table by selecting records from another table,
+    it is best to specify a primary index
+    even if the original table has primary indexes.
+    The reason is that the data you've selected might not have the same distribution as the original data.
+    Specifying a good primary index not only improve the performance of queries
+    but can also reduces the percentage of wasted spaces.</p>
+</li>
+</ol>
+<h2 id="trick-and-trap">Trick and Trap</h2>
+<ol>
+<li>
+<p>Instead of using macros of other extensions of SQL
+    (which many versions of SQL does not support),
+    an better alternative is to call SQL in other languages (Python, R, etc.).
+    This also makes it easier to do visualization or generalize reports.</p>
+</li>
+<li>
+<p>In Teradata, the maximum row size is approx 64K bytes.
+    So that you cannot define columns of size greater than 64K.
+    For example,
+    you cannot define a column of size 65K.</p>
+</li>
+<li>
+<p>You cannot create a new table using <code>insert into</code>.
+    <code>insert into</code> can only insert into an existing table.</p>
+</li>
+</ol>
+<h2 id="syntax">Syntax</h2>
+<ol>
+<li>
+<p>Always end a complete Teradata SQL statement with a semicolon.
+    Sometimes in Some SQL (e.g., SAS),
+    the codes runs OK without an ending semicolon but sometimes might not.
+    It is always good practice to end a complete SQL statement with a semicolon.</p>
+</li>
+<li>
+<p>Commands in Teradata (and other versions of SQL) SQL are case-insensitive.</p>
+</li>
+<li>
+<p>You can use <code>sel</code> as short for <code>select</code> in Teradata SQL,
+    however,
+    it is suggested that you always use <code>select</code> instead of <code>sel</code>.
+    This is because <code>sel</code> is not support in some other versions of SQL.
+    You can use SQL template to generate code for you if you are tired of typing.</p>
+</li>
+<li>
+<p>Use <code>--</code> for one line comment and <code>/*...*/</code> for multiple line comment.
+    The <code>/*...*/</code> way is recommended as it is a widely used way for commenting.</p>
+</li>
+<li>
+<p>The <code>as</code> keyword is optional when creating column aliases,
+    however,
+    it is tricky in <code>create table</code> statement.
+    When you create table schema,
+    you cannot not use the keyword <code>as</code>
+    but when you create a table using a query you must use the keyword <code>as</code>.</p>
+<div class="highlight"><pre><span></span><span class="k">create</span> <span class="k">table</span> <span class="n">A</span> <span class="cm">/*no as here*/</span><span class="p">(</span>
+    <span class="n">a</span> <span class="nb">integer</span><span class="p">,</span>
+    <span class="n">b</span> <span class="nb">char</span><span class="p">(</span><span class="mi">20</span><span class="p">),</span>
+    <span class="k">c</span> <span class="nb">decimal</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">3</span><span class="p">),</span>
+    <span class="n">d</span> <span class="nb">date</span>
+<span class="p">)</span>
+<span class="p">;</span>
+
+<span class="k">create</span> <span class="k">table</span> <span class="n">A</span> <span class="k">as</span> <span class="cm">/*must use as here*/</span><span class="p">(</span>
+    <span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">B</span>
+<span class="p">)</span>
+<span class="k">with</span> <span class="k">data</span>
+<span class="k">primary</span> <span class="k">index</span> <span class="p">(</span><span class="n">id</span><span class="p">)</span>
+<span class="p">;</span>
+</pre></div>
+
+
+</li>
+<li>
+<p><code>union (all)</code> does not match column names.
+    Columns of the two tables to be united together must have the same order.
+    If the types of a column does not match,
+    then the type of the first column is used
+    and the corresponding columns of other tables will be casted into this type.</p>
+</li>
+<li>
+<p>Both count and sum can be used to count the number of rows satisfying some condition.
+    Generally speaking, count is preferred because it is able to remove duplicated records.
+    For example, suppose we have a table A with columns <code>case_id</code> (non-unique)
+    and <code>sar</code> (Y or N). We can count the number of rows with <code>sar = Y</code> using</p>
+<div class="highlight"><pre><span></span><span class="nv">sum</span><span class="ss">(</span>
+    <span class="nv">case</span><span class="ss">(</span>
+        <span class="nv">when</span> <span class="nv">sar</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="s">Y</span><span class="s1">&#39;</span> <span class="k">then</span>
+            <span class="mi">1</span>
+        <span class="k">else</span>
+            <span class="mi">0</span>
+    <span class="k">end</span><span class="ss">)</span>
+<span class="ss">)</span> <span class="nv">as</span> <span class="nv">n</span>
+</pre></div>
+
+
+<p>How,
+if <code>case_id</code> has duplicated values and we want to count the number of distinct cases with <code>sar = 1</code>,
+then <code>sum</code> does not work well. In stead, we can use</p>
+<div class="highlight"><pre><span></span><span class="nv">count</span><span class="ss">(</span>
+    <span class="nv">case</span><span class="ss">(</span>
+        <span class="nv">when</span> <span class="nv">sar</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="s">Y</span><span class="s1">&#39;</span> <span class="k">then</span>
+            <span class="nv">case_id</span>
+        <span class="k">else</span>
+            <span class="nv">null</span>
+        <span class="k">end</span><span class="ss">)</span>
+<span class="ss">)</span> <span class="nv">as</span> <span class="nv">n</span>
+</pre></div>
+
+
+<p>It is recommended that you always use <code>count</code> to count rows satisfying a condition.</p>
+</li>
+<li>
+<p>In a case statement,
+    at most one <code>when/else</code> branch is executed.
+    As soon as a <code>when/else</code> statement is executed,
+    it jumps out (like <code>break;</code> in C) of the case statement instead of continuing to the next branch.</p>
+</li>
+<li>
+<p>Do not use natural joins (relying on same column names for joining) as it is dangerous to do so.</p>
+</li>
+<li>
+<p>When joining multiple tables,
+    SQL will determine the best way to perform the joins.
+    So do not help the SQL compiler when you do multiple joins.</p>
+</li>
+<li>
+<p>The precedence of logical operators are <code>not</code>, <code>and</code> and <code>or</code>.
+    However,
+    it is suggested that you always use parentheses to make your code easier to understand.</p>
+</li>
+<li>
+<p>Displays the code used to generate the view or table.</p>
+<div class="highlight"><pre><span></span><span class="k">show</span> <span class="nv">table</span> <span class="nv">table_name</span><span class="c1">;</span>
+</pre></div>
+
+
+</li>
+<li>
+<p>Display table schema (i.e., show column names and attributes).</p>
+<div class="highlight"><pre><span></span><span class="n">help</span> <span class="k">table</span> <span class="k">table_name</span><span class="p">;</span>
+</pre></div>
+
+
+<p>or you can use</p>
+<div class="highlight"><pre><span></span><span class="n">help</span> <span class="k">column</span> <span class="k">table_name</span><span class="p">.</span><span class="o">*</span><span class="p">;</span>
+</pre></div>
+
+
+</li>
+</ol>
+<h2 id="null-values">Null Values</h2>
+<ol>
+<li>Most functions in SQL (unless specially for <code>null</code> values) ignore
+    <code>null</code> values like they never appear in the table.</li>
+</ol>
+<h3 id="create-an-empty-table">Create an Empty Table</h3>
+<p>You can manually specify the structure of the table.</p>
+<div class="highlight"><pre><span></span><span class="k">create</span> <span class="k">table</span> <span class="n">A</span> <span class="cm">/*no as here*/</span><span class="p">(</span>
+    <span class="n">a</span> <span class="nb">integer</span><span class="p">,</span>
+    <span class="n">b</span> <span class="nb">char</span><span class="p">(</span><span class="mi">20</span><span class="p">),</span>
+    <span class="k">c</span> <span class="nb">decimal</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">3</span><span class="p">),</span>
+    <span class="n">d</span> <span class="nb">date</span>
+<span class="p">)</span>
+<span class="p">;</span>
+</pre></div>
+
+
+<p>Or you if there is an table (e.g., B) of the same structure,
+you can</p>
+<div class="highlight"><pre><span></span><span class="k">create</span> <span class="k">table</span> <span class="n">A</span> <span class="k">as</span> <span class="n">B</span>
+<span class="k">with</span> <span class="k">no</span> <span class="k">data</span><span class="p">;</span>
+</pre></div>
+
+
+<p>or</p>
+<div class="highlight"><pre><span></span><span class="k">create</span> <span class="k">table</span> <span class="n">A</span> <span class="k">as</span> <span class="cm">/*as cannot be omitted here*/</span><span class="p">(</span>
+    <span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">B</span>
+<span class="p">)</span>
+<span class="k">with</span> <span class="k">no</span> <span class="k">data</span>
+<span class="k">primary</span> <span class="k">index</span> <span class="p">(</span><span class="n">id</span><span class="p">)</span>
+<span class="p">;</span>
+</pre></div>
+
+
+<p>Notice that the syntax of Teradata SQL is different from other SQL languages
+when creating a table using a select clause.
+You have to end the statement with <code>with data;</code> or <code>with no data;</code>.
+<code>with data</code> means that you want to append the selected records into the created table
+while <code>with no data</code> creates an empty table.</p>
+<h2 id="database-information">Database Information</h2>
+<ol>
+<li>Get version of Teradata SQL.</li>
+</ol>
+<div class="highlight"><pre><span></span><span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">dbc</span><span class="p">.</span><span class="n">dbcinfo</span><span class="p">;</span>
+</pre></div>
+
+
+<h2 id="error-message">Error Message</h2>
+<ol>
+<li>
+<p>unknown error, probably network issue</p>
+</li>
+<li>
+<p>Error code 3754: precision error, character, numeric, .. -&gt; float ...</p>
+</li>
+</ol>
+<h2 id="date">Date</h2>
+<p>Be careful when you work with date in SQL.
+A non-exist date can result in tricky errors.
+For example (note that <code>2016-09-31</code> does not exist)</p>
+<div class="highlight"><pre><span></span><span class="k">where</span> <span class="n">dt</span> <span class="k">between</span> <span class="s1">&#39;2016-09-01&#39;</span> <span class="k">and</span> <span class="s1">&#39;2016-09-31&#39;</span>  
+</pre></div>
+
+
+<p>in Teradata throws the error message "a character string failed to convert to a numeric value".</p></div>
+    <footer>
+<p class="meta">
+  <span class="byline author vcard">
+    Posted by <span class="fn">Ben Chuanlong Du</span>
+  </span>
+<time datetime="2017-05-08T21:12:48-07:00" pubdate>May 08, 2017</time>  <span class="categories">
+    <a class="category" href="http://www.legendu.net/misc/tag/programming.html">programming</a>
+    <a class="category" href="http://www.legendu.net/misc/tag/tips.html">tips</a>
+    <a class="category" href="http://www.legendu.net/misc/tag/teradata-sql.html">Teradata SQL</a>
+  </span>
+</p>    </footer>
+  </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div>
+  </section>
+</div>
+<aside class="sidebar">
+  <section>
+    <h1>Recent Posts</h1>
+    <ul id="recent_posts">
+      <li class="post">
+          <a href="http://www.legendu.net/misc/blog/python-tips/">Tips on Python</a>
+      </li>
+      <li class="post">
+          <a href="http://www.legendu.net/misc/blog/python-tips-and-traps/">Python Tips and Traps</a>
+      </li>
+      <li class="post">
+          <a href="http://www.legendu.net/misc/blog/exception-and-error-handling-in-python/">Exception and Error Handling in Python</a>
+      </li>
+      <li class="post">
+          <a href="http://www.legendu.net/misc/blog/ipython-tips/">Tips on IPython</a>
+      </li>
+      <li class="post">
+          <a href="http://www.legendu.net/misc/blog/tips-for-git-large-file-storage/">Tips for Git Large File Storage</a>
+      </li>
+    </ul>
+  </section>
+  <section>
+      
+    <h1>Categories</h1>
+    <ul id="recent_posts">
+        <li><a href="http://www.legendu.net/misc/category/ai.html">AI</a></li>
+        <li><a href="http://www.legendu.net/misc/category/career.html">Career</a></li>
+        <li><a href="http://www.legendu.net/misc/category/cloud.html">Cloud</a></li>
+        <li><a href="http://www.legendu.net/misc/category/database.html">Database</a></li>
+        <li><a href="http://www.legendu.net/misc/category/encryption.html">Encryption</a></li>
+        <li><a href="http://www.legendu.net/misc/category/english.html">English</a></li>
+        <li><a href="http://www.legendu.net/misc/category/finance.html">Finance</a></li>
+        <li><a href="http://www.legendu.net/misc/category/fun-problems.html">Fun Problems</a></li>
+        <li><a href="http://www.legendu.net/misc/category/hardware.html">Hardware</a></li>
+        <li><a href="http://www.legendu.net/misc/category/internet.html">Internet</a></li>
+        <li><a href="http://www.legendu.net/misc/category/job.html">Job</a></li>
+        <li><a href="http://www.legendu.net/misc/category/jupyterlab.html">JupyterLab</a></li>
+        <li><a href="http://www.legendu.net/misc/category/language.html">Language</a></li>
+        <li><a href="http://www.legendu.net/misc/category/life.html">Life</a></li>
+        <li><a href="http://www.legendu.net/misc/category/links.html">Links</a></li>
+        <li><a href="http://www.legendu.net/misc/category/linux.html">Linux</a></li>
+        <li><a href="http://www.legendu.net/misc/category/machine-learning.html">Machine Learning</a></li>
+        <li><a href="http://www.legendu.net/misc/category/macos.html">macOS</a></li>
+        <li><a href="http://www.legendu.net/misc/category/network.html">Network</a></li>
+        <li><a href="http://www.legendu.net/misc/category/os.html">OS</a></li>
+        <li><a href="http://www.legendu.net/misc/category/people.html">People</a></li>
+        <li><a href="http://www.legendu.net/misc/category/philosophy.html">Philosophy</a></li>
+        <li><a href="http://www.legendu.net/misc/category/programming.html">Programming</a></li>
+        <li><a href="http://www.legendu.net/misc/category/research.html">Research</a></li>
+        <li><a href="http://www.legendu.net/misc/category/sheng-huo.html">生活</a></li>
+        <li><a href="http://www.legendu.net/misc/category/si-suo.html">思索</a></li>
+        <li><a href="http://www.legendu.net/misc/category/software.html">Software</a></li>
+        <li><a href="http://www.legendu.net/misc/category/statistics.html">Statistics</a></li>
+        <li><a href="http://www.legendu.net/misc/category/teleconference.html">Teleconference</a></li>
+        <li><a href="http://www.legendu.net/misc/category/tools.html">Tools</a></li>
+        <li><a href="http://www.legendu.net/misc/category/trading.html">Trading</a></li>
+        <li><a href="http://www.legendu.net/misc/category/unix.html">Unix</a></li>
+        <li><a href="http://www.legendu.net/misc/category/visualization.html">Visualization</a></li>
+        <li><a href="http://www.legendu.net/misc/category/windows.html">Windows</a></li>
+        <li><a href="http://www.legendu.net/misc/category/work.html">Work</a></li>
+    </ul>
+  </section>
+ 
+
+  <section>
+  <h1>Tags</h1>
+  <p class="tagcloud">
+  </p>
+  </section>
+
+
+
+  <section>
+    <h1>GitHub Repos</h1>
+    <ul id="gh_repos">
+      <li class="loading">Status updating...</li>
+    </ul>
+      <a href="https://github.com/dclong">@dclong</a> on GitHub
+    <script type="text/javascript">
+      $.domReady(function(){
+          if (!window.jXHR){
+              var jxhr = document.createElement('script');
+              jxhr.type = 'text/javascript';
+              jxhr.src = 'http://www.legendu.net/misc/theme/js/jXHR.js';
+              var s = document.getElementsByTagName('script')[0];
+              s.parentNode.insertBefore(jxhr, s);
+          }
+
+          github.showRepos({
+              user: 'dclong',
+              count: 3,
+              skip_forks: true,
+              target: '#gh_repos'
+          });
+      });
+    </script>
+    <script src="http://www.legendu.net/misc/theme/js/github.js" type="text/javascript"> </script>
+  </section>
+
+    <section>
+        <h1>Social</h2>
+        <ul>
+            <li><a href="https://www.linkedin.com/in/ben-chuanlong-du-1239b221/" target="_blank">LinkedIn</a></li>
+            <li><a href="https://twitter.com/longendu" target="_blank">Twitter</a></li>
+            <li><a href="https://www.facebook.com/chuanlong.du" target="_blank">Facebook</a></li>
+        <!--
+            <li><a href="http://www.legendu.net/misc/" type="application/rss+xml" rel="alternate">RSS</a></li>
+            -->
+        </ul>
+    </section>
+</aside>    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Ben Chuanlong Du -
+  <span class="credit">Powered by <a href="http://getpelican.com">Pelican</a></span>
+</p></footer>
+    <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-30259661-1']);
+    _gaq.push(['_trackPageview']);
+    (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+    </script>
+	<script type="text/javascript">
+	  var disqus_shortname = 'dclong';
+          var disqus_identifier = '/blog/teradata-sql-tips/';
+          var disqus_url = 'http://www.legendu.net/misc/blog/teradata-sql-tips/';
+          var disqus_title = 'Teradata SQL Tips';
+	  (function() {
+	    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	    dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+	    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	   })();
+	</script>
+</body>
+</html>

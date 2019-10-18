@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Macro in SAS</title>
+  <meta name="author" content="Ben Chuanlong Du">
+
+  <link href="http://www.legendu.net/misc/atom.xml" type="application/atom+xml" rel="alternate"
+        title="Ben Chuanlong Du's Blog Atom Feed" />
+
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link href="http://www.legendu.net/misc/favicon.png" rel="icon">
+  <link href="http://www.legendu.net/misc/theme/css/main_2.css" media="screen, projection"
+        rel="stylesheet" type="text/css">
+  <script src="http://www.legendu.net/misc/theme/js/modernizr-2.0.js"></script>
+  <script src="http://www.legendu.net/misc/theme/js/ender.js"></script>
+  <script src="http://www.legendu.net/misc/theme/js/octopress.js" type="text/javascript"></script>
+
+  <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+</head>
+
+<body>
+  <header role="banner"><hgroup>
+  <h1><a href="http://www.legendu.net/misc/">Ben Chuanlong Du's Blog</a></h1>
+    <h2>It is never too late to learn.</h2>
+</hgroup></header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="http://www.legendu.net/misc/atom.xml" rel="subscribe-rss">RSS</a></li>
+</ul>
+
+<form name="search" action="https://www.bing.com/search" method="get" onSubmit="return build_query()">
+  <fieldset role="search">
+      <!--
+    <input type="hidden" name="q" value="site:http://www.legendu.net/misc" />
+        -->
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+
+<script type = "text/javascript">
+    function build_query() {
+        var query = document.forms["search"]["q"].value;
+        var prefix = "site:http://www.legendu.net/misc "
+        if (!query.startsWith(prefix)) {
+            query = prefix + query;
+            document.forms["search"]["q"].value = query;
+        }
+        return true;
+    }
+</script>
+
+<ul class="main-navigation">
+    <li><a href="http://www.legendu.net">Home</a></li>
+    <li><a href="http://www.legendu.net/misc">Blog</a></li>
+    <li><a href="http://www.legendu.net/misc/archives.html">Archives</a></li>
+    <li><a href="http://www.legendu.net/misc/pages/links.html">Links</a></li>
+</ul></nav>
+  <div id="main">
+    <div id="content">
+<div>
+  <article class="hentry" role="article">
+<header>
+      <h1 class="entry-title">Macro in SAS</h1>
+      <p class="meta"><time datetime="2015-08-28T16:43:05-07:00" pubdate>Aug 28, 2015</time></p>
+</header>
+
+  <div class="entry-content"><p><strong>
+Things on this page are
+fragmentary and immature notes/thoughts of the author.
+It is not meant to readers
+but rather for convenient reference of the author and future improvement.
+</strong></p>
+<p><a href="https://bitbucket.org/dclong/sas_learn/src/">Here</a> are some examples for SAS macro.</p>
+<p>http://www.devenezia.com/downloads/sas/macros/?m=array</p>
+<ol>
+<li>
+<p>for macros, passing in a data set and operate on the data set sounds like a better way to do 
+rather than passing plain text especially when there are lots of things to pass to a macro function 
+and better to write outputs into datasets or macro variables rather than doing text substitute.</p>
+</li>
+<li>
+<p>When you select values into macro variables using a sql procedure in a macro function, 
+the macro varibles created are local to the macro function.</p>
+</li>
+<li>
+<p>avoid return a value from macro, this gives you more trouble than convenience, 
+just assign the value to macro or write results into a data set ...</p>
+</li>
+<li>
+<p>Macros are substituted with their definition before SAS code is run,
+which is similar to macros in other programming languages such as C/C++.
+The essence of macro is text substitution.
+Macro (text substitution) in SAS is tricky and error prone. 
+It is suggested that you do not overuse user-defined macros in SAS.</p>
+</li>
+<li>
+<p>Macro variable values have a maximum length of 65,534 characters. </p>
+</li>
+<li>
+<p>Arguments of a macro are local to the macro.
+However, passing macro variable name can sort give you a taste of passing by reference.</p>
+</li>
+<li>
+<p>It is recommended that 
+you define macro variables as local in user-defined macro functions using <code>%local</code>,
+especially if you use simple short macro variable names such as <code>i</code>, <code>n</code>, etc. 
+Otherwise, you will end up using GLOBAL macro variables which is error-prone.</p>
+</li>
+<li>
+<p>Do not define macro variables starting with "sys", 
+otherwise, 
+you confuse yours with system's macro variables.</p>
+</li>
+<li>
+<p>Macro variable in the smallest scope is used if not defined.</p>
+</li>
+</ol>
+<h2 id="important-and-useful-macro-variables">Important and Useful Macro Variables</h2>
+<ol>
+<li>
+<p>&amp;sysuserid</p>
+</li>
+<li>
+<p>sysver: SAS version</p>
+</li>
+<li>
+<p>%symexists</p>
+</li>
+<li>
+<p>You can use command <code>%put _ALL_;</code> to show all macro variables in SAS log.
+In addition to <code>_ALL_</code> you could use any of the following.</p>
+<div class="highlight"><pre><span></span><span class="o">-</span> <span class="ss">`_USER_`</span> <span class="k">to</span> <span class="n">list</span> <span class="n">only</span> <span class="n">user</span> <span class="n">defined</span> <span class="n">macro</span> <span class="n">variables</span><span class="p">;</span>
+
+<span class="o">-</span> <span class="ss">`_AUTOMATIC_`</span> <span class="k">to</span> <span class="n">list</span> <span class="n">those</span> <span class="n">defined</span> <span class="k">by</span> <span class="n">the</span> <span class="n">SAS</span> <span class="n">system</span><span class="p">;</span>
+
+<span class="o">-</span> <span class="ss">`_GLOBAL_`</span> <span class="k">to</span> <span class="n">list</span> <span class="k">all</span> <span class="n">session</span> <span class="n">wide</span> <span class="n">macro</span> <span class="nf">variables</span> <span class="p">(</span><span class="n">global</span> <span class="n">symbol</span> <span class="k">table</span><span class="p">);</span>
+
+<span class="o">-</span> <span class="ss">`_LOCAL_`</span> <span class="k">to</span> <span class="n">list</span> <span class="n">those</span> <span class="n">macro</span> <span class="n">variables</span> <span class="n">local</span> <span class="k">to</span> <span class="n">the</span> <span class="n">executing</span> <span class="n">macro</span><span class="p">.</span>
+</pre></div>
+
+
+</li>
+<li>
+<p>Macros in double quotation marks are expanded 
+while macros in single quotation marks are not expnaded.
+For example,</p>
+<div class="highlight"><pre><span></span><span class="nf">%let</span> <span class="n">m</span> <span class="o">=</span> <span class="s">&quot;Hello, &quot;</span><span class="p">;</span>
+<span class="n">title</span> <span class="s">&quot;&amp;amp;mWorld!&quot;</span><span class="p">;</span>
+</pre></div>
+
+
+<p>generates <code>Hello, World!</code> while</p>
+<div class="highlight"><pre><span></span><span class="nf">%let</span> <span class="n">m</span> <span class="o">=</span> <span class="s">&quot;Hello, &quot;</span><span class="p">;</span>
+<span class="n">title</span> <span class="err">&#39;</span><span class="o">&amp;</span><span class="n">amp</span><span class="p">;</span><span class="n">mWorld</span><span class="o">!</span><span class="err">&#39;</span><span class="p">;</span>
+</pre></div>
+
+
+<p>generates <code>&amp;mWorld!</code>.
+This is similar to the behavior of Bash variables in strings.</p>
+</li>
+<li>
+<p>Be careful when you use macro in SAS especially when you deal with <code>%if</code>. 
+My suggestion is that avoid using <code>%if</code> if you can. 
+You can use <code>%select</code> instead. 
+If you have to use <code>%if</code>, 
+you must be aware that the macro is expanded before it is run,
+i.e. there is no branching going on when running the code. 
+(Confused, I think %select will have same problem here,
+put the probelamtic example here ...)</p>
+</li>
+<li>
+<p>You can use dot (".") to connect a macro variable and usual characters. 
+For example,</p>
+<div class="highlight"><pre><span></span><span class="nf">%let</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+<span class="n">data</span> <span class="n">set</span><span class="p">.</span><span class="o">&amp;</span><span class="n">amp</span><span class="p">;</span><span class="n">i</span><span class="p">;</span>
+<span class="p">...</span>
+</pre></div>
+
+
+<p>is expanded to </p>
+<div class="highlight"><pre><span></span><span class="k">data</span> <span class="n">set1</span><span class="p">;</span>
+<span class="p">...</span>
+</pre></div>
+
+
+<p>before running.</p>
+</li>
+</ol>
+<p>&amp;&amp;ms&amp;i. cannot use &amp;&amp;ms.&amp;i. the reason is that ms is not a macro.
+there's good reason to end macros with ., becuase database.table ... actually, wait, try only one dot instead ...</p>
+<ol>
+<li>
+<p><code>%sysfunc</code> execute SAS or user-defined functions. 
+You must embed every expression 
+envolving SAS or user-defined functions (not pure macros) in a %sysfunc statement.
+For example,</p>
+</li>
+<li>
+<p><code>%eval</code> is similar to <code>%sysfunc</code> for only for simple arithmatic calculations in macro environment.</p>
+</li>
+<li>
+<p>You can show SAS version information by running <code>%put _automatic_;</code></p>
+</li>
+<li>
+<p><code>%sysuserid</code> represent the user id of the current SAS process. 
+It is similar to the <code>whoami</code> command in Linux 
+(of course <code>whoami</code> is a command not a environment variable, macro equivalent).</p>
+</li>
+<li>
+<p>It is suggested that you always use dot after macro variables.</p>
+</li>
+<li>
+<p><code>%array</code> is a useful (non-built-in) macro for creating macro arrays quickly.
+And <code>%do_over</code> (non-built-in) can be used to iterate through macro arrays.</p>
+</li>
+<li>
+<p>It is not very convenient to use %do_over to apply a macro 
+with multiple arguments to an array.
+It is recommended that you use the <code>%do</code> loop manually 
+inside a temorary macro. </p>
+</li>
+<li>
+<p><code>%if</code>, <code>%do ... %end</code>, etc. can only be used in a SAS macro.</p>
+</li>
+<li>
+<p>There is no concept of annonymous macro functions in SAS.</p>
+</li>
+<li>
+<p>The option <code>phrase</code> in the <code>%do_over</code> macro cannot contain commas.</p>
+</li>
+<li>
+<p>You can use the macro <code>%SYMDEL macro-variables(s);</code> to delete macro variables.
+To delete all, e.g.,  global macro variables, 
+you can use the the following code.</p>
+<div class="highlight"><pre><span></span><span class="k">data</span> <span class="n">gmv</span> <span class="p">(</span> <span class="n">keep</span> <span class="o">=</span> <span class="n">name</span> <span class="p">)</span> <span class="p">;</span>
+    <span class="k">set</span> <span class="n">sashelp</span><span class="p">.</span><span class="n">vmacro</span> <span class="p">;</span>
+    <span class="k">where</span> <span class="k">scope</span> <span class="o">=</span> <span class="s1">&#39;GLOBAL&#39;</span> <span class="p">;</span>
+<span class="n">run</span> <span class="p">;</span>
+
+<span class="k">data</span> <span class="n">_null_</span> <span class="p">;</span>
+    <span class="k">set</span> <span class="n">gmv</span> <span class="p">;</span>
+    <span class="k">call</span> <span class="n">symdel</span><span class="p">(</span><span class="n">name</span><span class="p">)</span> <span class="p">;</span>
+<span class="n">run</span> <span class="p">;</span>
+</pre></div>
+
+
+</li>
+<li>
+<p>The function <code>symget</code> gets the value of a macro variable 
+into a variable in a data step.
+It is similar to the function <code>getenv</code> in R 
+and <code>os.getenv</code> in Python.</p>
+</li>
+<li>
+<p><code>symput</code> puts the value of a variable in a data step 
+into a macro variable.
+<code>symput</code> can also export a variable (inside a data step) to a local macro variable
+inside a user-defined macro function.
+It is ugly and error-prone to manipulate macro variables directly,
+thus it is suggested that you define and manipulate (regular) variables 
+in a <code>_null_</code> data step,
+and exported (regular) variables to macro variables using <code>symput</code> when needed.</p>
+</li>
+<li>
+<p>The macro <code>%sysget</code> function gets the value 
+of the specified operating environment variable.
+It is similar to the function <code>getenv</code> in R and <code>os.getenv</code> in Python.</p>
+</li>
+<li>
+<p>You can nest definitions of macros,
+however, 
+it is suggested that you never do this
+as it is very inefficient to do so.</p>
+</li>
+<li>
+<p>When a macro functions takes no argument,
+you can omit the parentheses in the definition 
+and when you call it.</p>
+</li>
+<li>
+<p>Be careful about the restriction of length of macro variables.
+This can cause problems when you concatenate a input macro variable and a string
+to create a new macro variable name.</p>
+</li>
+<li>
+<p>Generally speaking, 
+you do not want to overwrite a macro variable with a value that has a different meaning.
+This is the same in many other programming languages (unless for serious performance concerning).
+A rule of thumb in scripting language programming is not to change type of variables.</p>
+</li>
+<li>
+<p>Macro variables and data sets (essentially files) are 2 ways 
+for procedures in SAS to communicate with each other.</p>
+</li>
+<li>
+<p>There is no limit on the maximum number of macro variables
+that can be used in a SAS program besides memory limit.
+However, the SAS symbol table exhibits a quadratic behavior,
+which means that there is a performance issue 
+when too many SAS macro variables are created.</p>
+</li>
+<li>
+<p>SAS macro functions support 2 types of arguments,
+positional arguments and keyword arguments.
+A keyword argument has a default value,
+which makes it similar to a default argument in other programming languages.
+The difference is that a keyword argument in a SAS macro function 
+can only be resolved relying on keyword not by its positions.
+That is when you want to use a different value 
+rather than the default value for a keyword argument, 
+you must pass the keyword argument with the <code>keyword_argument = value</code> style.
+When you define or call a macro function,
+all positional arguments must preceede keyword arguments.</p>
+</li>
+<li>
+<p>Pay attention to (implicitly created) macro variables.
+Generally speaking,
+you don't want to create global macro variables in your macro 
+(especially, i, j, n, etc.).
+And generally speaking, 
+you don't want to use a use-defined macro function
+which creates global macro variables.</p>
+</li>
+<li>
+<p>The <code>%eval</code> function evaluates expressions using integer arithmetic 
+while the <code>%sysevalf</code> function evaluates expressions using floating point arithmetic.</p>
+</li>
+<li>
+<p>Whenever you use a non-macro function 
+in an open macro statement 
+(i.e., macro statement outside a data step or procedure),
+you have to embed it in a <code>%sysfunc</code> call. 
+For example, 
+you cannot use</p>
+<div class="highlight"><pre><span></span><span class="nf">%let</span> <span class="n">run_date</span> <span class="o">=</span> <span class="n">intnx</span><span class="p">(</span><span class="n">month</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">amp</span><span class="p">;</span><span class="n">init_date</span><span class="p">.,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">M</span><span class="p">);</span>
+</pre></div>
+
+
+</li>
+</ol>
+<p>but instead you should use</p>
+<div class="highlight"><pre><span></span><span class="nf">%let</span> <span class="n">RUN_DATE</span> <span class="o">=</span> <span class="nf">%sysfunc</span><span class="p">(</span><span class="n">intnx</span><span class="p">(</span><span class="n">month</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">amp</span><span class="p">;</span><span class="n">INITL_DATE</span><span class="p">.,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">M</span><span class="p">));</span>
+</pre></div>
+
+
+<p>If there are multi-levels of nested non-macro functions in an open macro statement,
+you have to embed each level of non-macro functions in a <code>%sysfun</code> call.
+An illustrative example is given below.</p>
+<div class="highlight"><pre><span></span><span class="nf">%let</span> <span class="n">m2</span> <span class="o">=</span> <span class="nf">%sysfunc</span><span class="p">(</span><span class="n">putn</span><span class="p">(</span><span class="nf">%sysfunc</span><span class="p">(</span><span class="n">intnx</span><span class="p">(</span><span class="n">month</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">amp</span><span class="p">;</span><span class="n">run_date</span><span class="p">.,</span> <span class="o">-</span><span class="mf">1.</span><span class="p">,</span> <span class="n">E</span><span class="p">)),</span> <span class="n">date9</span><span class="p">.));</span>
+</pre></div>
+
+
+<ol>
+<li>
+<p>Macro variables and data sets (essentially files) are 2 ways 
+for procedures in SAS to communicate with each other.</p>
+</li>
+<li>
+<p><code>mlogic</code> specifies that the macro processor should traces its execution,
+which is helpful for debugging.
+<code>nomlogic</code> disables tracing of macro processor. </p>
+</li>
+<li>
+<p>Non-macro functions and call routines can only be used 
+in a data step or procedure.
+If you want to use it in a macro,
+you have to embed it in the macro function <code>%sysfunc</code>.</p>
+</li>
+<li>
+<p>When you develop a macro,
+you should do a clean-up by default.
+And give user the option to keep temporary files for debugging purposes.</p>
+</li>
+<li>
+<p>Be a little bit flexible on these commonly used macro function argument values 
+(e.g., Yes/No).
+Generally speaking,
+it is good to allow case-insensitive inputs. 
+You should think about how to make your code more robust (tolerrent to user input).
+And terminate program when user type in invalid argument values.</p>
+</li>
+<li>
+<p>In my mind, 
+macro variables (outside the definition of a macro) 
+should be only for sharing and passing values among procedures.
+We should do things as much as possible in a <code>_null_</code> data step 
+and then expose necessary macro variables to other procedures.</p>
+</li>
+<li>
+<p>it is suggested that you always end a macro variable with ".",
+i.e., use <code>&amp;x.</code> instead of <code>&amp;x</code></p>
+</li>
+<li>
+<p>I think keyword arguments for macro functions are cleaer ...</p>
+</li>
+</ol></div>
+    <footer>
+<p class="meta">
+  <span class="byline author vcard">
+    Posted by <span class="fn">Ben Chuanlong Du</span>
+  </span>
+<time datetime="2015-08-28T16:43:05-07:00" pubdate>Aug 28, 2015</time>  <span class="categories">
+    <a class="category" href="http://www.legendu.net/misc/tag/dot.html">dot</a>
+    <a class="category" href="http://www.legendu.net/misc/tag/sas.html">SAS</a>
+    <a class="category" href="http://www.legendu.net/misc/tag/macro.html">macro</a>
+    <a class="category" href="http://www.legendu.net/misc/tag/branch.html">branch</a>
+    <a class="category" href="http://www.legendu.net/misc/tag/programming.html">programming</a>
+  </span>
+</p>    </footer>
+  </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div>
+  </section>
+</div>
+<aside class="sidebar">
+  <section>
+    <h1>Recent Posts</h1>
+    <ul id="recent_posts">
+      <li class="post">
+          <a href="http://www.legendu.net/misc/blog/python-tips/">Tips on Python</a>
+      </li>
+      <li class="post">
+          <a href="http://www.legendu.net/misc/blog/python-tips-and-traps/">Python Tips and Traps</a>
+      </li>
+      <li class="post">
+          <a href="http://www.legendu.net/misc/blog/exception-and-error-handling-in-python/">Exception and Error Handling in Python</a>
+      </li>
+      <li class="post">
+          <a href="http://www.legendu.net/misc/blog/ipython-tips/">Tips on IPython</a>
+      </li>
+      <li class="post">
+          <a href="http://www.legendu.net/misc/blog/tips-for-git-large-file-storage/">Tips for Git Large File Storage</a>
+      </li>
+    </ul>
+  </section>
+  <section>
+      
+    <h1>Categories</h1>
+    <ul id="recent_posts">
+        <li><a href="http://www.legendu.net/misc/category/ai.html">AI</a></li>
+        <li><a href="http://www.legendu.net/misc/category/career.html">Career</a></li>
+        <li><a href="http://www.legendu.net/misc/category/cloud.html">Cloud</a></li>
+        <li><a href="http://www.legendu.net/misc/category/database.html">Database</a></li>
+        <li><a href="http://www.legendu.net/misc/category/encryption.html">Encryption</a></li>
+        <li><a href="http://www.legendu.net/misc/category/english.html">English</a></li>
+        <li><a href="http://www.legendu.net/misc/category/finance.html">Finance</a></li>
+        <li><a href="http://www.legendu.net/misc/category/fun-problems.html">Fun Problems</a></li>
+        <li><a href="http://www.legendu.net/misc/category/hardware.html">Hardware</a></li>
+        <li><a href="http://www.legendu.net/misc/category/internet.html">Internet</a></li>
+        <li><a href="http://www.legendu.net/misc/category/job.html">Job</a></li>
+        <li><a href="http://www.legendu.net/misc/category/jupyterlab.html">JupyterLab</a></li>
+        <li><a href="http://www.legendu.net/misc/category/language.html">Language</a></li>
+        <li><a href="http://www.legendu.net/misc/category/life.html">Life</a></li>
+        <li><a href="http://www.legendu.net/misc/category/links.html">Links</a></li>
+        <li><a href="http://www.legendu.net/misc/category/linux.html">Linux</a></li>
+        <li><a href="http://www.legendu.net/misc/category/machine-learning.html">Machine Learning</a></li>
+        <li><a href="http://www.legendu.net/misc/category/macos.html">macOS</a></li>
+        <li><a href="http://www.legendu.net/misc/category/network.html">Network</a></li>
+        <li><a href="http://www.legendu.net/misc/category/os.html">OS</a></li>
+        <li><a href="http://www.legendu.net/misc/category/people.html">People</a></li>
+        <li><a href="http://www.legendu.net/misc/category/philosophy.html">Philosophy</a></li>
+        <li><a href="http://www.legendu.net/misc/category/programming.html">Programming</a></li>
+        <li><a href="http://www.legendu.net/misc/category/research.html">Research</a></li>
+        <li><a href="http://www.legendu.net/misc/category/sheng-huo.html">生活</a></li>
+        <li><a href="http://www.legendu.net/misc/category/si-suo.html">思索</a></li>
+        <li><a href="http://www.legendu.net/misc/category/software.html">Software</a></li>
+        <li><a href="http://www.legendu.net/misc/category/statistics.html">Statistics</a></li>
+        <li><a href="http://www.legendu.net/misc/category/teleconference.html">Teleconference</a></li>
+        <li><a href="http://www.legendu.net/misc/category/tools.html">Tools</a></li>
+        <li><a href="http://www.legendu.net/misc/category/trading.html">Trading</a></li>
+        <li><a href="http://www.legendu.net/misc/category/unix.html">Unix</a></li>
+        <li><a href="http://www.legendu.net/misc/category/visualization.html">Visualization</a></li>
+        <li><a href="http://www.legendu.net/misc/category/windows.html">Windows</a></li>
+        <li><a href="http://www.legendu.net/misc/category/work.html">Work</a></li>
+    </ul>
+  </section>
+ 
+
+  <section>
+  <h1>Tags</h1>
+  <p class="tagcloud">
+  </p>
+  </section>
+
+
+
+  <section>
+    <h1>GitHub Repos</h1>
+    <ul id="gh_repos">
+      <li class="loading">Status updating...</li>
+    </ul>
+      <a href="https://github.com/dclong">@dclong</a> on GitHub
+    <script type="text/javascript">
+      $.domReady(function(){
+          if (!window.jXHR){
+              var jxhr = document.createElement('script');
+              jxhr.type = 'text/javascript';
+              jxhr.src = 'http://www.legendu.net/misc/theme/js/jXHR.js';
+              var s = document.getElementsByTagName('script')[0];
+              s.parentNode.insertBefore(jxhr, s);
+          }
+
+          github.showRepos({
+              user: 'dclong',
+              count: 3,
+              skip_forks: true,
+              target: '#gh_repos'
+          });
+      });
+    </script>
+    <script src="http://www.legendu.net/misc/theme/js/github.js" type="text/javascript"> </script>
+  </section>
+
+    <section>
+        <h1>Social</h2>
+        <ul>
+            <li><a href="https://www.linkedin.com/in/ben-chuanlong-du-1239b221/" target="_blank">LinkedIn</a></li>
+            <li><a href="https://twitter.com/longendu" target="_blank">Twitter</a></li>
+            <li><a href="https://www.facebook.com/chuanlong.du" target="_blank">Facebook</a></li>
+        <!--
+            <li><a href="http://www.legendu.net/misc/" type="application/rss+xml" rel="alternate">RSS</a></li>
+            -->
+        </ul>
+    </section>
+</aside>    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Ben Chuanlong Du -
+  <span class="credit">Powered by <a href="http://getpelican.com">Pelican</a></span>
+</p></footer>
+    <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-30259661-1']);
+    _gaq.push(['_trackPageview']);
+    (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+    </script>
+	<script type="text/javascript">
+	  var disqus_shortname = 'dclong';
+          var disqus_identifier = '/blog/macro-in-sas/';
+          var disqus_url = 'http://www.legendu.net/misc/blog/macro-in-sas/';
+          var disqus_title = 'Macro in SAS';
+	  (function() {
+	    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	    dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+	    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	   })();
+	</script>
+</body>
+</html>

@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Manipulate Data in SAS</title>
+  <meta name="author" content="Ben Chuanlong Du">
+
+  <link href="http://www.legendu.net/misc/atom.xml" type="application/atom+xml" rel="alternate"
+        title="Ben Chuanlong Du's Blog Atom Feed" />
+
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link href="http://www.legendu.net/misc/favicon.png" rel="icon">
+  <link href="http://www.legendu.net/misc/theme/css/main_2.css" media="screen, projection"
+        rel="stylesheet" type="text/css">
+  <script src="http://www.legendu.net/misc/theme/js/modernizr-2.0.js"></script>
+  <script src="http://www.legendu.net/misc/theme/js/ender.js"></script>
+  <script src="http://www.legendu.net/misc/theme/js/octopress.js" type="text/javascript"></script>
+
+  <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+</head>
+
+<body>
+  <header role="banner"><hgroup>
+  <h1><a href="http://www.legendu.net/misc/">Ben Chuanlong Du's Blog</a></h1>
+    <h2>It is never too late to learn.</h2>
+</hgroup></header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="http://www.legendu.net/misc/atom.xml" rel="subscribe-rss">RSS</a></li>
+</ul>
+
+<form name="search" action="https://www.bing.com/search" method="get" onSubmit="return build_query()">
+  <fieldset role="search">
+      <!--
+    <input type="hidden" name="q" value="site:http://www.legendu.net/misc" />
+        -->
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+
+<script type = "text/javascript">
+    function build_query() {
+        var query = document.forms["search"]["q"].value;
+        var prefix = "site:http://www.legendu.net/misc "
+        if (!query.startsWith(prefix)) {
+            query = prefix + query;
+            document.forms["search"]["q"].value = query;
+        }
+        return true;
+    }
+</script>
+
+<ul class="main-navigation">
+    <li><a href="http://www.legendu.net">Home</a></li>
+    <li><a href="http://www.legendu.net/misc">Blog</a></li>
+    <li><a href="http://www.legendu.net/misc/archives.html">Archives</a></li>
+    <li><a href="http://www.legendu.net/misc/pages/links.html">Links</a></li>
+</ul></nav>
+  <div id="main">
+    <div id="content">
+<div>
+  <article class="hentry" role="article">
+<header>
+      <h1 class="entry-title">Manipulate Data in SAS</h1>
+      <p class="meta"><time datetime="2015-08-02T12:40:28-07:00" pubdate>Aug 02, 2015</time></p>
+</header>
+
+  <div class="entry-content"><p><img src="http://dclong.github.io/media/sas/sas.jpg" height="200" width="240" align="right"/></p>
+<h2 id="data-manipulation">Data Manipulation</h2>
+<ol>
+<li>
+<p>Create a user library if you want your SAS data sets to persist.
+For example,
+the following code creates a library named <code>lib</code> 
+which points to the directory <code>~/sas/lib</code>,
+and creates a data set named <code>s1</code> in this library in the data step.</p>
+<div class="highlight"><pre><span></span><span class="n">libname</span> <span class="n">lib</span> <span class="ss">&quot;~/sas/lib&quot;</span><span class="p">;</span>
+<span class="k">data</span> <span class="n">lib</span><span class="p">.</span><span class="n">s1</span><span class="p">;</span>
+    <span class="p">...</span>
+<span class="n">run</span><span class="p">;</span>
+</pre></div>
+
+
+<p>The data set <code>s1</code> will persist after you quit SAS,
+and you can still access it next time you use SAS.
+Surely you have to define a library (e.g., <code>lib</code>) pointing the diretory <code>~/sas/lib</code> again,
+and use the library to reference the data set <code>s1</code> (e.g., <code>lib.s1</code>). </p>
+</li>
+<li>
+<p>You can specify several different directories as a single library in SAS. 
+For example,
+the following code creates a library named <code>mlib</code> pointing to 
+a previously created library <code>lib</code> and 
+directories <code>~/sas/lib2</code> and <code>~/sas/lib3</code>.</p>
+<div class="highlight"><pre><span></span><span class="n">libname</span> <span class="n">mlib</span> <span class="p">(</span><span class="n">lib</span><span class="p">,</span> <span class="ss">&quot;~/sas/lib2&quot;</span><span class="p">,</span> <span class="ss">&quot;~/sas/lib3&quot;</span><span class="p">);</span>
+<span class="p">...</span>
+</pre></div>
+
+
+<p>This is convenient if you previous created SAS data sets in different directories
+and want to use all of them without moving these data sets.
+Note that when you create data sets in <code>mlib</code>, 
+SAS will use these directories/libraries in the order you specified.
+That is SAS will put the data set into <code>lib</code> if there's space,
+otherwise it looks for the next directory with enough space.</p>
+</li>
+<li>
+<p>You can use create shortcuts for files in SAS.
+For example,
+the following code creates a file shortcut <code>f</code> pointing to a local file,
+and use it in data step.</p>
+<div class="highlight"><pre><span></span><span class="n">filename</span> <span class="n">f</span> <span class="ss">&quot;~/sas/examples/data/fake1.txt&quot;</span>
+<span class="k">data</span> <span class="n">s1</span><span class="p">;</span>
+    <span class="n">infile</span> <span class="n">f</span><span class="p">;</span>
+    <span class="p">...</span>
+<span class="n">run</span><span class="p">;</span>
+</pre></div>
+
+
+<p>To point a file online, 
+you can the following code.</p>
+<div class="highlight"><pre><span></span><span class="n">filename</span> <span class="n">f</span> <span class="n">url</span> <span class="ss">&quot;http://dclong.github.io/fake1.txt&quot;</span>
+<span class="k">data</span> <span class="n">s1</span><span class="p">;</span>
+    <span class="n">infile</span> <span class="n">f</span><span class="p">;</span>
+    <span class="p">...</span>
+<span class="n">run</span><span class="p">;</span>
+</pre></div>
+
+
+<p>This allows you to read files online in SAS.
+You can also create a a file shortcut point to a directory. 
+For example, the following is equivalent code to the first example.</p>
+<div class="highlight"><pre><span></span><span class="n">file</span> <span class="n">f</span> <span class="ss">&quot;~/sas/examples/data/&quot;</span><span class="p">;</span>
+<span class="k">data</span> <span class="n">s1</span><span class="p">;</span>
+    <span class="n">infile</span> <span class="n">f</span><span class="p">(</span><span class="n">fake1</span><span class="p">.</span><span class="n">txt</span><span class="p">);</span>
+    <span class="p">...</span>
+<span class="n">run</span><span class="p">;</span>
+</pre></div>
+
+
+<p>This is convenient if you have to read in many files from the same directory.</p>
+</li>
+<li>
+<p>When a matrix has many columns (variables), 
+it is not very convenient to specify variables to read in 
+(if you want to read in almost all of them). 
+A good alternative is to read in all numeric/character columns into IML procedure i
+and then drop unnecessary columns.</p>
+</li>
+<li>
+<p>You can use proc import or proc access to read data from different
+kinds of files and this enable us to read data without specify
+variable names.</p>
+</li>
+</ol>
+<p>There are two popular ways to manipulate data sets in SAS, 
+the data step and the SQL procedure. 
+The data step is often used to read in data. 
+It can also perform some simple data manipulation jobs, 
+for example, selecting variables and merge data sets. 
+The SQL procedure is an advanced way for 
+manipulating data sets. 
+Besides these two ways, 
+there are also other SAS procedures for manipulating data sets. 
+For example, the <code>transpose</code> procedure can transpose a data set. 
+Almost all SAS procedures can filter observations and variables before using a data set. 
+For example, you can use <code>where</code> statement to filter observations, 
+and you can use <code>keep</code> and <code>drop</code> after <code>data=data_set_name</code> 
+to select variables in the input and output data set. 
+In many SAS procedures, you can use the <code>var</code> statment to declare the variable(s) to work on.</p>
+<ol>
+<li>
+<p>You must sort data sets first before you merge them together.</p>
+</li>
+<li>
+<p>All temporary variables are kept in the data set by default in the data step. 
+If not overwritten, 
+the next value (value in next observation) of a variable is its value in last observation. </p>
+</li>
+<li>
+<p>You can use <code>set</code> in a data step 
+to combine data both vertically (by row) and horizontally (by column).
+When combining two data sets d1 and d2 vertically (using set d1 d2;),
+records are combined by column names,
+i.e., columns with the same name are concatenated.
+For a column in d1/d2 but not in d2/d1,
+it is recorded as missing.
+For example,
+suppose we have data set d1 </p>
+</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th align="center">x1</th>
+<th align="center">x2</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">1</td>
+<td align="center">2</td>
+</tr>
+<tr>
+<td align="center">100</td>
+<td align="center">200</td>
+</tr>
+</tbody>
+</table>
+<p>and d2</p>
+<table>
+<thead>
+<tr>
+<th align="center">x1</th>
+<th align="center">x3</th>
+<th align="center">x4</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">1000</td>
+<td align="center">3</td>
+<td align="center">4</td>
+</tr>
+<tr>
+<td align="center">-1000</td>
+<td align="center">300</td>
+<td align="center">400</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight"><pre><span></span>    <span class="k">data</span> <span class="n">d3</span><span class="p">;</span>
+        <span class="k">set</span> <span class="n">d1</span> <span class="n">d2</span><span class="p">;</span>
+    <span class="n">run</span><span class="p">;</span>
+</pre></div>
+
+
+<p>returns</p>
+<table>
+<thead>
+<tr>
+<th align="center">x1</th>
+<th align="center">x2</th>
+<th align="center">x3</th>
+<th align="center">x4</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">1</td>
+<td align="center">2</td>
+<td align="center">.</td>
+<td align="center">.</td>
+</tr>
+<tr>
+<td align="center">100</td>
+<td align="center">200</td>
+<td align="center">.</td>
+<td align="center">.</td>
+</tr>
+<tr>
+<td align="center">1000</td>
+<td align="center">.</td>
+<td align="center">3</td>
+<td align="center">4</td>
+</tr>
+<tr>
+<td align="center">-1000</td>
+<td align="center">.</td>
+<td align="center">300</td>
+<td align="center">400</td>
+</tr>
+</tbody>
+</table>
+<p>When combining two data sets horizontally,
+columns in the first data sets are overwritten
+if they also exists in the second data set.
+For example,</p>
+<div class="highlight"><pre><span></span>    <span class="k">data</span> <span class="n">d4</span><span class="p">;</span>
+        <span class="k">set</span> <span class="n">d1</span><span class="p">;</span>
+        <span class="k">set</span> <span class="n">d2</span><span class="p">;</span>
+    <span class="n">run</span><span class="p">;</span>
+</pre></div>
+
+
+<p>returns</p>
+<table>
+<thead>
+<tr>
+<th align="center">x1</th>
+<th align="center">x2</th>
+<th align="center">x3</th>
+<th align="center">x4</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">1000</td>
+<td align="center">2</td>
+<td align="center">3</td>
+<td align="center">4</td>
+</tr>
+<tr>
+<td align="center">-1000</td>
+<td align="center">200</td>
+<td align="center">300</td>
+<td align="center">400</td>
+</tr>
+</tbody>
+</table>
+<p>However,
+columns that appear in both datasets (d1 and d2) must have the same data type 
+(either numeric or character).</p>
+<ol>
+<li>
+<p><code>merge</code> to combine data horizontally (by column) in a data step. </p>
+</li>
+<li>
+<p>The <code>return</code> statement in the data step tell SAS 
+that the reading/manipulation of current observation is done 
+and it should continues to read/manipulate the next observation.</p>
+</li>
+<li>
+<p>You can use variables in the data step without initialize them. 
+The default value for numerical variables is 0,
+and the default value for character variables is the empty string. </p>
+</li>
+<li>
+<p>When we read in data in data step we can treat "txt" file as "dat" file sometimes, 
+which means that we can use file extension "dat".
+(actually, I don't file extension matters)</p>
+</li>
+<li>
+<p>PROC SQL is a very powerful procedure to deal with data set, 
+but still data step have some advantages over SQL procedure.</p>
+</li>
+<li>
+<p>When we print out a data set, 
+the label(s) we have defined in data step will not appear in the output 
+unless we define lable(s) again in print procedure. 
+However if we use PROC SQL to get a report of the data set, 
+the label(s) will appear in the output.</p>
+</li>
+<li>
+<p>You often use statement <code>filename</code> to make shortcut, 
+so that we can read in data easily either from a website or a local disk. 
+You often define a shortcut as the whole path of a file. 
+Actually, we can just specify part of the path as the shortcut.</p>
+</li>
+<li>
+<p>Sometime times problems might occur when we read data into SAS from a file. 
+This might be because that there are too many columns in a row. 
+You use option <code>lrecl=n</code> to change the configuration. 
+However the biggest value for <code>lrecl</code> is 32767, 
+which means that there cannot be unlimited columns in a row.</p>
+</li>
+<li>
+<p>The <code>if</code> statment for extracting a sub set from a data set
+can be substituted by <code>where</code> statement 
+given that you only keep the condition in the <code>if</code> statement.</p>
+</li>
+<li>
+<p>lag and dif functions very useful ...
+can we combine lag and diff? yes
+lag doesn't work on variables that don't exist in the table
+so you cannot use lag on new variables
+instead, you should use retain
+a friend of me asked a good question about lag, opposite, doesn't exists, 
+between read in data line by line ....
+such a function requires second scan ...</p>
+</li>
+</ol>
+<p>However, a lagged variable in the data step cannot be used by itself.
+That is y = f(lag_y) will not work as you expected.
+If lag1, you can use reatain. otherwise, it is very hard to do in SAS. 
+see the example on another post ...</p>
+<ol>
+<li>
+<p>scan ... similar to split in other programming languages</p>
+</li>
+<li>
+<p>It is recommended to use x1 x2 and so on as variable names in the data step. 
+this makes manipulating data much easier.</p>
+</li>
+<li>
+<p>termstr, according to files created on different operating systems ...
+use different termstr</p>
+</li>
+<li>
+<p><code>goto</code> (or <code>go to</code>) is supported in SAS.</p>
+</li>
+<li>
+<p>You can use "||" or "!!" to concatenate characters horizontally and "//" 
+to concatenate matrices vertically.</p>
+</li>
+<li>
+<p>Using multiple <code>input</code> statement in a data step allows you
+to read a single record from multiple lines
+and the double trailing at sign (<code>@@</code>) allows you to read in data in flexible way</p>
+</li>
+<li>
+<p>In many procedures, 
+you can filter data that you want to work on in parentheses following the dataset name.
+For example, 
+you can use the following code to print out the first 10 observations/rows/records of the data set <code>fit</code>.
+        proc print data = fit (obs = 10);
+            title 'Data set "fit".'
+        run;</p>
+</li>
+<li>
+<p>In a data step, 
+you can overwrite an existing data set<br>
+even if it is used in the data step.</p>
+<div class="highlight"><pre><span></span><span class="k">data</span> <span class="n">d1</span><span class="p">;</span>
+    <span class="k">set</span> <span class="n">d1</span><span class="p">;</span>
+    <span class="k">set</span> <span class="n">d2</span><span class="p">;</span>
+<span class="n">run</span><span class="p">;</span>
+</pre></div>
+
+
+</li>
+<li>
+<p>If you do not specify an output data set in the sort proc,
+the original data set will be overwritten by the result (sorted data set).</p>
+</li>
+<li>
+<p>Unlike many other programming languages,
+SAS math functions cannot handle singular point,
+e.g., log(0) is invalid in SAS.</p>
+</li>
+<li>
+<p>it is recommended to use x1 x2 and so on as variable names in the data step. this makes manipulating data much easier.</p>
+</li>
+<li>
+<p>In the data step, 
+you can assign values to a variable multiple times 
+and the last assigned value will be kept.
+However, 
+tricky things can happen if you do this.
+Please refer to the post about confusing string in sas.</p>
+</li>
+<li>
+<p>When using datalines in a sas data step, tab (instead of space) can causes troubles. 
+There might be options to get rid of the problem, but I forget which option to use ...</p>
+</li>
+<li>
+<p>The datasets procedure is recommended for copying, deleting and renaming datasets, etc.</p>
+</li>
+</ol></div>
+    <footer>
+<p class="meta">
+  <span class="byline author vcard">
+    Posted by <span class="fn">Ben Chuanlong Du</span>
+  </span>
+<time datetime="2015-08-02T12:40:28-07:00" pubdate>Aug 02, 2015</time>  <span class="categories">
+    <a class="category" href="http://www.legendu.net/misc/tag/programming.html">programming</a>
+    <a class="category" href="http://www.legendu.net/misc/tag/sas.html">SAS</a>
+    <a class="category" href="http://www.legendu.net/misc/tag/sql.html">SQL</a>
+    <a class="category" href="http://www.legendu.net/misc/tag/data-step.html">data step</a>
+    <a class="category" href="http://www.legendu.net/misc/tag/data-manipulation.html">data manipulation</a>
+  </span>
+</p>    </footer>
+  </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div>
+  </section>
+</div>
+<aside class="sidebar">
+  <section>
+    <h1>Recent Posts</h1>
+    <ul id="recent_posts">
+      <li class="post">
+          <a href="http://www.legendu.net/misc/blog/python-tips/">Tips on Python</a>
+      </li>
+      <li class="post">
+          <a href="http://www.legendu.net/misc/blog/python-tips-and-traps/">Python Tips and Traps</a>
+      </li>
+      <li class="post">
+          <a href="http://www.legendu.net/misc/blog/exception-and-error-handling-in-python/">Exception and Error Handling in Python</a>
+      </li>
+      <li class="post">
+          <a href="http://www.legendu.net/misc/blog/ipython-tips/">Tips on IPython</a>
+      </li>
+      <li class="post">
+          <a href="http://www.legendu.net/misc/blog/tips-for-git-large-file-storage/">Tips for Git Large File Storage</a>
+      </li>
+    </ul>
+  </section>
+  <section>
+      
+    <h1>Categories</h1>
+    <ul id="recent_posts">
+        <li><a href="http://www.legendu.net/misc/category/ai.html">AI</a></li>
+        <li><a href="http://www.legendu.net/misc/category/career.html">Career</a></li>
+        <li><a href="http://www.legendu.net/misc/category/cloud.html">Cloud</a></li>
+        <li><a href="http://www.legendu.net/misc/category/database.html">Database</a></li>
+        <li><a href="http://www.legendu.net/misc/category/encryption.html">Encryption</a></li>
+        <li><a href="http://www.legendu.net/misc/category/english.html">English</a></li>
+        <li><a href="http://www.legendu.net/misc/category/finance.html">Finance</a></li>
+        <li><a href="http://www.legendu.net/misc/category/fun-problems.html">Fun Problems</a></li>
+        <li><a href="http://www.legendu.net/misc/category/hardware.html">Hardware</a></li>
+        <li><a href="http://www.legendu.net/misc/category/internet.html">Internet</a></li>
+        <li><a href="http://www.legendu.net/misc/category/job.html">Job</a></li>
+        <li><a href="http://www.legendu.net/misc/category/jupyterlab.html">JupyterLab</a></li>
+        <li><a href="http://www.legendu.net/misc/category/language.html">Language</a></li>
+        <li><a href="http://www.legendu.net/misc/category/life.html">Life</a></li>
+        <li><a href="http://www.legendu.net/misc/category/links.html">Links</a></li>
+        <li><a href="http://www.legendu.net/misc/category/linux.html">Linux</a></li>
+        <li><a href="http://www.legendu.net/misc/category/machine-learning.html">Machine Learning</a></li>
+        <li><a href="http://www.legendu.net/misc/category/macos.html">macOS</a></li>
+        <li><a href="http://www.legendu.net/misc/category/network.html">Network</a></li>
+        <li><a href="http://www.legendu.net/misc/category/os.html">OS</a></li>
+        <li><a href="http://www.legendu.net/misc/category/people.html">People</a></li>
+        <li><a href="http://www.legendu.net/misc/category/philosophy.html">Philosophy</a></li>
+        <li><a href="http://www.legendu.net/misc/category/programming.html">Programming</a></li>
+        <li><a href="http://www.legendu.net/misc/category/research.html">Research</a></li>
+        <li><a href="http://www.legendu.net/misc/category/sheng-huo.html">生活</a></li>
+        <li><a href="http://www.legendu.net/misc/category/si-suo.html">思索</a></li>
+        <li><a href="http://www.legendu.net/misc/category/software.html">Software</a></li>
+        <li><a href="http://www.legendu.net/misc/category/statistics.html">Statistics</a></li>
+        <li><a href="http://www.legendu.net/misc/category/teleconference.html">Teleconference</a></li>
+        <li><a href="http://www.legendu.net/misc/category/tools.html">Tools</a></li>
+        <li><a href="http://www.legendu.net/misc/category/trading.html">Trading</a></li>
+        <li><a href="http://www.legendu.net/misc/category/unix.html">Unix</a></li>
+        <li><a href="http://www.legendu.net/misc/category/visualization.html">Visualization</a></li>
+        <li><a href="http://www.legendu.net/misc/category/windows.html">Windows</a></li>
+        <li><a href="http://www.legendu.net/misc/category/work.html">Work</a></li>
+    </ul>
+  </section>
+ 
+
+  <section>
+  <h1>Tags</h1>
+  <p class="tagcloud">
+  </p>
+  </section>
+
+
+
+  <section>
+    <h1>GitHub Repos</h1>
+    <ul id="gh_repos">
+      <li class="loading">Status updating...</li>
+    </ul>
+      <a href="https://github.com/dclong">@dclong</a> on GitHub
+    <script type="text/javascript">
+      $.domReady(function(){
+          if (!window.jXHR){
+              var jxhr = document.createElement('script');
+              jxhr.type = 'text/javascript';
+              jxhr.src = 'http://www.legendu.net/misc/theme/js/jXHR.js';
+              var s = document.getElementsByTagName('script')[0];
+              s.parentNode.insertBefore(jxhr, s);
+          }
+
+          github.showRepos({
+              user: 'dclong',
+              count: 3,
+              skip_forks: true,
+              target: '#gh_repos'
+          });
+      });
+    </script>
+    <script src="http://www.legendu.net/misc/theme/js/github.js" type="text/javascript"> </script>
+  </section>
+
+    <section>
+        <h1>Social</h2>
+        <ul>
+            <li><a href="https://www.linkedin.com/in/ben-chuanlong-du-1239b221/" target="_blank">LinkedIn</a></li>
+            <li><a href="https://twitter.com/longendu" target="_blank">Twitter</a></li>
+            <li><a href="https://www.facebook.com/chuanlong.du" target="_blank">Facebook</a></li>
+        <!--
+            <li><a href="http://www.legendu.net/misc/" type="application/rss+xml" rel="alternate">RSS</a></li>
+            -->
+        </ul>
+    </section>
+</aside>    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Ben Chuanlong Du -
+  <span class="credit">Powered by <a href="http://getpelican.com">Pelican</a></span>
+</p></footer>
+    <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-30259661-1']);
+    _gaq.push(['_trackPageview']);
+    (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+    </script>
+	<script type="text/javascript">
+	  var disqus_shortname = 'dclong';
+          var disqus_identifier = '/blog/sas-data-manipulation/';
+          var disqus_url = 'http://www.legendu.net/misc/blog/sas-data-manipulation/';
+          var disqus_title = 'Manipulate Data in SAS';
+	  (function() {
+	    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	    dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+	    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	   })();
+	</script>
+</body>
+</html>

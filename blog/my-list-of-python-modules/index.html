@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>My List of Python Modules</title>
+  <meta name="author" content="Ben Chuanlong Du">
+
+  <link href="http://www.legendu.net/misc/atom.xml" type="application/atom+xml" rel="alternate"
+        title="Ben Chuanlong Du's Blog Atom Feed" />
+
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link href="http://www.legendu.net/misc/favicon.png" rel="icon">
+  <link href="http://www.legendu.net/misc/theme/css/main_2.css" media="screen, projection"
+        rel="stylesheet" type="text/css">
+  <script src="http://www.legendu.net/misc/theme/js/modernizr-2.0.js"></script>
+  <script src="http://www.legendu.net/misc/theme/js/ender.js"></script>
+  <script src="http://www.legendu.net/misc/theme/js/octopress.js" type="text/javascript"></script>
+
+  <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+</head>
+
+<body>
+  <header role="banner"><hgroup>
+  <h1><a href="http://www.legendu.net/misc/">Ben Chuanlong Du's Blog</a></h1>
+    <h2>It is never too late to learn.</h2>
+</hgroup></header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="http://www.legendu.net/misc/atom.xml" rel="subscribe-rss">RSS</a></li>
+</ul>
+
+<form name="search" action="https://www.bing.com/search" method="get" onSubmit="return build_query()">
+  <fieldset role="search">
+      <!--
+    <input type="hidden" name="q" value="site:http://www.legendu.net/misc" />
+        -->
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+
+<script type = "text/javascript">
+    function build_query() {
+        var query = document.forms["search"]["q"].value;
+        var prefix = "site:http://www.legendu.net/misc "
+        if (!query.startsWith(prefix)) {
+            query = prefix + query;
+            document.forms["search"]["q"].value = query;
+        }
+        return true;
+    }
+</script>
+
+<ul class="main-navigation">
+    <li><a href="http://www.legendu.net">Home</a></li>
+    <li><a href="http://www.legendu.net/misc">Blog</a></li>
+    <li><a href="http://www.legendu.net/misc/archives.html">Archives</a></li>
+    <li><a href="http://www.legendu.net/misc/pages/links.html">Links</a></li>
+</ul></nav>
+  <div id="main">
+    <div id="content">
+<div>
+  <article class="hentry" role="article">
+<header>
+      <h1 class="entry-title">My List of Python Modules</h1>
+      <p class="meta"><time datetime="2019-07-19T00:33:35-07:00" pubdate>Jul 19, 2019</time></p>
+</header>
+
+  <div class="entry-content"><p><strong>
+Things on this page are fragmentary and immature notes/thoughts of the author.
+It is not meant to readers but rather for convenient reference of the author and future improvement.
+</strong></p>
+<p><strong>
+Things on this page are
+fragmentary and immature notes/thoughts of the author.
+It is not meant to readers
+but rather for convenient reference of the author and future improvement.
+</strong></p>
+<p><a href="https://github.com/vinta/awesome-python">Awesome Python</a></p>
+<p><a href="https://github.com/mahmoud/awesome-python-applications">Awesome Python Applications</a></p>
+<h2 id="data-science">Data Science</h2>
+<ol>
+<li>
+<p>pandas: data frame.</p>
+</li>
+<li>
+<p>scipy: scientific computing.</p>
+</li>
+<li>
+<p>numpy: multi-dimensional arrays, fundation of pandas and deep learning packages.</p>
+</li>
+<li>
+<p>re: regular expression</p>
+</li>
+</ol>
+<h2 id="file-system">File System</h2>
+<ol>
+<li>
+<p>shutil: copy, move and remove files.</p>
+</li>
+<li>
+<p>tempfile: create temporary files and directories.</p>
+</li>
+<li>
+<p>os: misc operating system interfaces.</p>
+</li>
+<li>
+<p>os.path: file path manipulations.</p>
+</li>
+<li>
+<p>loguru: logging made (stupidly) easy for Python. It is a much better alternative than the built-in logging module.</p>
+</li>
+</ol>
+<h2 id="python-developing-tools">Python Developing Tools</h2>
+<ol>
+<li>
+<p><a href="https://docs.python.org/3/library/venv.html">venv</a>: create virtual environment.</p>
+</li>
+<li>
+<p>pytest</p>
+</li>
+<li>
+<p>yapf</p>
+</li>
+<li>
+<p>mypy</p>
+</li>
+<li>
+<p>flake8, pylint</p>
+</li>
+</ol>
+<h2 id="visualization"><a href="http://www.legendu.net/misc/blog/python-modules-for-visualization/">Visualization</a></h2>
+<h2 id="documentation-reporting">Documentation &amp; Reporting</h2>
+<ol>
+<li>
+<p>sphinx</p>
+</li>
+<li>
+<p><a href="https://github.com/mpastell/Pweave">Pweave</a>: R knitr equivalence in Python.</p>
+</li>
+</ol>
+<h2 id="database">Database</h2>
+<p>http://www.legendu.net/misc/blog/odbc-vs-jdbc-in-python/</p>
+<h2 id="datetime">Date/Time</h2>
+<ol>
+<li>
+<p>datetime</p>
+</li>
+<li>
+<p>monthdelta</p>
+</li>
+</ol>
+<h2 id="high-performance-computing"><a href="http://www.legendu.net/misc/blog/high-performance-computing-in-python/">High Performance Computing</a></h2>
+<h2 id="command-line-arguments-parsing">Command-line Arguments Parsing</h2>
+<ol>
+<li>
+<p>argparse: Parser for command-line options, arguments and sub-commands.</p>
+</li>
+<li>
+<p>curses</p>
+</li>
+</ol>
+<h2 id="machine-learning">Machine Learning</h2>
+<ol>
+<li>
+<p><a href="http://scikit-learn.org/stable/">scikit-learn</a></p>
+</li>
+<li>
+<p><a href="https://github.com/Theano/Theano">theano</a></p>
+</li>
+</ol>
+<h2 id="gui-application">GUI application</h2>
+<ol>
+<li>
+<p>PyQt</p>
+</li>
+<li>
+<p>PySide</p>
+</li>
+</ol>
+<h2 id="calling-shell">Calling Shell</h2>
+<ol>
+<li>
+<p>os.system</p>
+</li>
+<li>
+<p>subprocess: subprocess management.</p>
+</li>
+</ol>
+<h2 id="encryption">Encryption</h2>
+<ol>
+<li>
+<p>gnupg</p>
+</li>
+<li>
+<p>pycrypto</p>
+</li>
+</ol>
+<h2 id="unit-testing">Unit Testing</h2>
+<ol>
+<li>
+<p><a href="https://github.com/pytest-dev/pytest">pytest</a>: the best unit testing framework for Python.</p>
+</li>
+<li>
+<p>unittest: built-in unit testing framework.</p>
+</li>
+</ol>
+<h2 id="networkgraph">Network/Graph</h2>
+<ol>
+<li>
+<p><a href="https://github.com/networkx/networkx">networkx/networkx</a></p>
+</li>
+<li>
+<p><a href="https://github.com/pydot/pydot">pydot/pydot</a></p>
+</li>
+<li>
+<p><a href="https://github.com/opusonesolutions/asciigraf">opusonesolutions/asciigraf</a></p>
+</li>
+<li>
+<p><a href="https://git.skewed.de/count0/graph-tool">count0/graph-tool</a></p>
+</li>
+<li>
+<p><a href="https://github.com/pydot/pydot">pydot/pydot</a></p>
+</li>
+</ol>
+<h2 id="misc">Misc</h2>
+<ol>
+<li>inspect: check class, function definition and so on.</li>
+</ol>
+<h2 id="references">References</h2>
+<ul>
+<li>
+<p><a href="https://wiki.python.org/moin/UsefulModules">https://wiki.python.org/moin/UsefulModules</a></p>
+</li>
+<li>
+<p><a href="https://freepythontips.wordpress.com/2013/07/30/20-python-libraries-you-cant-live-without/">20 Python libraries you can’t live without</a></p>
+</li>
+</ul></div>
+    <footer>
+<p class="meta">
+  <span class="byline author vcard">
+    Posted by <span class="fn">Ben Chuanlong Du</span>
+  </span>
+<time datetime="2019-07-19T00:33:35-07:00" pubdate>Jul 19, 2019</time>  <span class="categories">
+    <a class="category" href="http://www.legendu.net/misc/tag/programming.html">programming</a>
+    <a class="category" href="http://www.legendu.net/misc/tag/python.html">Python</a>
+    <a class="category" href="http://www.legendu.net/misc/tag/module.html">module</a>
+    <a class="category" href="http://www.legendu.net/misc/tag/package.html">package</a>
+  </span>
+</p>    </footer>
+  </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div>
+  </section>
+</div>
+<aside class="sidebar">
+  <section>
+    <h1>Recent Posts</h1>
+    <ul id="recent_posts">
+      <li class="post">
+          <a href="http://www.legendu.net/misc/blog/python-tips/">Tips on Python</a>
+      </li>
+      <li class="post">
+          <a href="http://www.legendu.net/misc/blog/python-tips-and-traps/">Python Tips and Traps</a>
+      </li>
+      <li class="post">
+          <a href="http://www.legendu.net/misc/blog/exception-and-error-handling-in-python/">Exception and Error Handling in Python</a>
+      </li>
+      <li class="post">
+          <a href="http://www.legendu.net/misc/blog/ipython-tips/">Tips on IPython</a>
+      </li>
+      <li class="post">
+          <a href="http://www.legendu.net/misc/blog/tips-for-git-large-file-storage/">Tips for Git Large File Storage</a>
+      </li>
+    </ul>
+  </section>
+  <section>
+      
+    <h1>Categories</h1>
+    <ul id="recent_posts">
+        <li><a href="http://www.legendu.net/misc/category/ai.html">AI</a></li>
+        <li><a href="http://www.legendu.net/misc/category/career.html">Career</a></li>
+        <li><a href="http://www.legendu.net/misc/category/cloud.html">Cloud</a></li>
+        <li><a href="http://www.legendu.net/misc/category/database.html">Database</a></li>
+        <li><a href="http://www.legendu.net/misc/category/encryption.html">Encryption</a></li>
+        <li><a href="http://www.legendu.net/misc/category/english.html">English</a></li>
+        <li><a href="http://www.legendu.net/misc/category/finance.html">Finance</a></li>
+        <li><a href="http://www.legendu.net/misc/category/fun-problems.html">Fun Problems</a></li>
+        <li><a href="http://www.legendu.net/misc/category/hardware.html">Hardware</a></li>
+        <li><a href="http://www.legendu.net/misc/category/internet.html">Internet</a></li>
+        <li><a href="http://www.legendu.net/misc/category/job.html">Job</a></li>
+        <li><a href="http://www.legendu.net/misc/category/jupyterlab.html">JupyterLab</a></li>
+        <li><a href="http://www.legendu.net/misc/category/language.html">Language</a></li>
+        <li><a href="http://www.legendu.net/misc/category/life.html">Life</a></li>
+        <li><a href="http://www.legendu.net/misc/category/links.html">Links</a></li>
+        <li><a href="http://www.legendu.net/misc/category/linux.html">Linux</a></li>
+        <li><a href="http://www.legendu.net/misc/category/machine-learning.html">Machine Learning</a></li>
+        <li><a href="http://www.legendu.net/misc/category/macos.html">macOS</a></li>
+        <li><a href="http://www.legendu.net/misc/category/network.html">Network</a></li>
+        <li><a href="http://www.legendu.net/misc/category/os.html">OS</a></li>
+        <li><a href="http://www.legendu.net/misc/category/people.html">People</a></li>
+        <li><a href="http://www.legendu.net/misc/category/philosophy.html">Philosophy</a></li>
+        <li><a href="http://www.legendu.net/misc/category/programming.html">Programming</a></li>
+        <li><a href="http://www.legendu.net/misc/category/research.html">Research</a></li>
+        <li><a href="http://www.legendu.net/misc/category/sheng-huo.html">生活</a></li>
+        <li><a href="http://www.legendu.net/misc/category/si-suo.html">思索</a></li>
+        <li><a href="http://www.legendu.net/misc/category/software.html">Software</a></li>
+        <li><a href="http://www.legendu.net/misc/category/statistics.html">Statistics</a></li>
+        <li><a href="http://www.legendu.net/misc/category/teleconference.html">Teleconference</a></li>
+        <li><a href="http://www.legendu.net/misc/category/tools.html">Tools</a></li>
+        <li><a href="http://www.legendu.net/misc/category/trading.html">Trading</a></li>
+        <li><a href="http://www.legendu.net/misc/category/unix.html">Unix</a></li>
+        <li><a href="http://www.legendu.net/misc/category/visualization.html">Visualization</a></li>
+        <li><a href="http://www.legendu.net/misc/category/windows.html">Windows</a></li>
+        <li><a href="http://www.legendu.net/misc/category/work.html">Work</a></li>
+    </ul>
+  </section>
+ 
+
+  <section>
+  <h1>Tags</h1>
+  <p class="tagcloud">
+  </p>
+  </section>
+
+
+
+  <section>
+    <h1>GitHub Repos</h1>
+    <ul id="gh_repos">
+      <li class="loading">Status updating...</li>
+    </ul>
+      <a href="https://github.com/dclong">@dclong</a> on GitHub
+    <script type="text/javascript">
+      $.domReady(function(){
+          if (!window.jXHR){
+              var jxhr = document.createElement('script');
+              jxhr.type = 'text/javascript';
+              jxhr.src = 'http://www.legendu.net/misc/theme/js/jXHR.js';
+              var s = document.getElementsByTagName('script')[0];
+              s.parentNode.insertBefore(jxhr, s);
+          }
+
+          github.showRepos({
+              user: 'dclong',
+              count: 3,
+              skip_forks: true,
+              target: '#gh_repos'
+          });
+      });
+    </script>
+    <script src="http://www.legendu.net/misc/theme/js/github.js" type="text/javascript"> </script>
+  </section>
+
+    <section>
+        <h1>Social</h2>
+        <ul>
+            <li><a href="https://www.linkedin.com/in/ben-chuanlong-du-1239b221/" target="_blank">LinkedIn</a></li>
+            <li><a href="https://twitter.com/longendu" target="_blank">Twitter</a></li>
+            <li><a href="https://www.facebook.com/chuanlong.du" target="_blank">Facebook</a></li>
+        <!--
+            <li><a href="http://www.legendu.net/misc/" type="application/rss+xml" rel="alternate">RSS</a></li>
+            -->
+        </ul>
+    </section>
+</aside>    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Ben Chuanlong Du -
+  <span class="credit">Powered by <a href="http://getpelican.com">Pelican</a></span>
+</p></footer>
+    <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-30259661-1']);
+    _gaq.push(['_trackPageview']);
+    (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+    </script>
+	<script type="text/javascript">
+	  var disqus_shortname = 'dclong';
+          var disqus_identifier = '/blog/my-list-of-python-modules/';
+          var disqus_url = 'http://www.legendu.net/misc/blog/my-list-of-python-modules/';
+          var disqus_title = 'My List of Python Modules';
+	  (function() {
+	    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	    dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+	    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	   })();
+	</script>
+</body>
+</html>

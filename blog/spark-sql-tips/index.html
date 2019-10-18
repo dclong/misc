@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Spark SQL Tips</title>
+  <meta name="author" content="Ben Chuanlong Du">
+
+  <link href="http://www.legendu.net/misc/atom.xml" type="application/atom+xml" rel="alternate"
+        title="Ben Chuanlong Du's Blog Atom Feed" />
+
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link href="http://www.legendu.net/misc/favicon.png" rel="icon">
+  <link href="http://www.legendu.net/misc/theme/css/main_2.css" media="screen, projection"
+        rel="stylesheet" type="text/css">
+  <script src="http://www.legendu.net/misc/theme/js/modernizr-2.0.js"></script>
+  <script src="http://www.legendu.net/misc/theme/js/ender.js"></script>
+  <script src="http://www.legendu.net/misc/theme/js/octopress.js" type="text/javascript"></script>
+
+  <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+</head>
+
+<body>
+  <header role="banner"><hgroup>
+  <h1><a href="http://www.legendu.net/misc/">Ben Chuanlong Du's Blog</a></h1>
+    <h2>It is never too late to learn.</h2>
+</hgroup></header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="http://www.legendu.net/misc/atom.xml" rel="subscribe-rss">RSS</a></li>
+</ul>
+
+<form name="search" action="https://www.bing.com/search" method="get" onSubmit="return build_query()">
+  <fieldset role="search">
+      <!--
+    <input type="hidden" name="q" value="site:http://www.legendu.net/misc" />
+        -->
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+
+<script type = "text/javascript">
+    function build_query() {
+        var query = document.forms["search"]["q"].value;
+        var prefix = "site:http://www.legendu.net/misc "
+        if (!query.startsWith(prefix)) {
+            query = prefix + query;
+            document.forms["search"]["q"].value = query;
+        }
+        return true;
+    }
+</script>
+
+<ul class="main-navigation">
+    <li><a href="http://www.legendu.net">Home</a></li>
+    <li><a href="http://www.legendu.net/misc">Blog</a></li>
+    <li><a href="http://www.legendu.net/misc/archives.html">Archives</a></li>
+    <li><a href="http://www.legendu.net/misc/pages/links.html">Links</a></li>
+</ul></nav>
+  <div id="main">
+    <div id="content">
+<div>
+  <article class="hentry" role="article">
+<header>
+      <h1 class="entry-title">Spark SQL Tips</h1>
+      <p class="meta"><time datetime="2019-10-11T18:15:13-07:00" pubdate>Oct 11, 2019</time></p>
+</header>
+
+  <div class="entry-content"><p><strong>
+Things on this page are fragmentary and immature notes/thoughts of the author.
+It is not meant to readers but rather for convenient reference of the author and future improvement.
+</strong></p>
+<p><a href="https://docs.databricks.com/spark/latest/spark-sql/index.html">Spark SQL Guide</a></p>
+<ol>
+<li>
+<p>It is suggested that you use Spark SQL syntax as much as possible 
+  instead of the the Spark DataFrame syntax (even though DataFrame provides more static syntax check)
+  as SQL is a universal language.</p>
+</li>
+<li>
+<p>Spark SQL follows hive sql syntax.
+    For example,
+    <code>spark.sql("show tables in some_schema like '*perf*'")</code>
+    returns a DataFrame with tables in the Hive database.</p>
+</li>
+<li>
+<p>JSON, ORC, Parquet and CSV files can be queried using Spark SQL without creating a table on the Spark DataFrame.</p>
+<div class="highlight"><pre><span></span><span class="k">select</span>
+    <span class="o">*</span>
+<span class="k">from</span>
+    <span class="n">csv</span><span class="p">.</span><span class="o">`</span><span class="n">hdfs</span><span class="p">:</span><span class="o">//</span><span class="n">cluster_name</span><span class="o">/</span><span class="n">path_to_csv</span><span class="o">`</span>
+<span class="k">where</span>
+    <span class="n">rand</span><span class="p">()</span> <span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="o">=</span> <span class="mi">0</span><span class="p">.</span><span class="mi">01</span>
+<span class="n">distribute</span> <span class="k">by</span>
+    <span class="n">rand</span><span class="p">()</span>
+<span class="n">sort</span> <span class="k">by</span>
+    <span class="n">rand</span><span class="p">()</span>
+<span class="k">limit</span> <span class="mi">10000</span>
+</pre></div>
+
+
+</li>
+<li>
+<p>Position alias is supported in Spark SQL!</p>
+</li>
+<li>
+<p>Spark SQL supports bool expressions/columns. 
+  However, you cannot sum a bool expression/column directly.
+  You have to either cast it to Int/BigInt or use the old-school case clause.</p>
+</li>
+<li>
+<p><code>select * from some_table limit 5</code> runs slow if the table <code>some_table</code> is large.
+  you can limit the selection to a specific partition (if the table is partitioned) to speed it up.</p>
+</li>
+<li>
+<p>You can use the following code to show the creation code of a Hive table in Spark.</p>
+</li>
+</ol>
+<div class="highlight"><pre><span></span><span class="nv">println</span><span class="ss">(</span><span class="nv">spark</span>.<span class="nv">sql</span><span class="ss">(</span><span class="s2">&quot;</span><span class="s">show create table some_table</span><span class="s2">&quot;</span><span class="ss">)</span>.<span class="nv">collect</span><span class="ss">()(</span><span class="mi">0</span><span class="ss">)(</span><span class="mi">0</span><span class="ss">))</span>
+</pre></div>
+
+
+<h2 id="spark-sql-create-table">Spark SQL Create Table</h2>
+<ol>
+<li>The <code>CREATE TABLE</code> clause is equivalent to the method <code>DataFrame.saveAsTable</code>,
+  which write the DataFrame into a Hive table (format of the Hive table can be specified).
+  You can also create (or replace) a global/temporary view, 
+  which is lazily computed.
+  Notice that a view can be cached too once computed if you explicitly do so
+  (by calling <code>spark.cacheTable</code> or use Spark SQL hint).</li>
+</ol>
+<h2 id="union">Union</h2>
+<p>The following queries work.
+    :::sql
+    SELECT <em>
+    FROM mrkt_data.target_unit
+    WHERE impressions IS NULL
+    UNION
+    SELECT </em>
+    FROM mrkt_data.target_unit
+    WHERE impressions &lt; 0</p>
+<div class="highlight"><pre><span></span><span class="p">(</span><span class="k">SELECT</span> <span class="o">*</span>
+     <span class="k">FROM</span> <span class="n">mrkt_data</span><span class="p">.</span><span class="n">target_unit</span>
+     <span class="k">WHERE</span> <span class="n">impressions</span> <span class="k">IS</span> <span class="k">NULL</span>
+     <span class="k">LIMIT</span> <span class="mi">10</span><span class="p">)</span>
+<span class="k">UNION</span>
+    <span class="p">(</span><span class="k">SELECT</span> <span class="o">*</span>
+     <span class="k">FROM</span> <span class="n">mrkt_data</span><span class="p">.</span><span class="n">target_unit</span>
+     <span class="k">WHERE</span> <span class="n">impressions</span> <span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span> <span class="mi">0</span>
+     <span class="k">LIMIT</span> <span class="mi">10</span><span class="p">)</span>
+
+<span class="p">:::</span><span class="k">sql</span>
+<span class="p">(</span><span class="k">SELECT</span> <span class="o">*</span>
+ <span class="k">FROM</span> <span class="n">mrkt_data</span><span class="p">.</span><span class="n">target_unit</span>
+ <span class="k">WHERE</span> <span class="n">impressions</span> <span class="k">IS</span> <span class="k">NULL</span>
+ <span class="k">LIMIT</span> <span class="mi">10</span><span class="p">)</span>
+<span class="k">UNION</span> <span class="k">ALL</span>
+<span class="p">(</span><span class="k">SELECT</span> <span class="o">*</span>
+ <span class="k">FROM</span> <span class="n">mrkt_data</span><span class="p">.</span><span class="n">target_unit</span>
+ <span class="k">WHERE</span> <span class="n">impressions</span> <span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span> <span class="mi">0</span>
+ <span class="k">LIMIT</span> <span class="mi">10</span><span class="p">)</span>
+</pre></div>
+
+
+<p>However, the following one does not.</p>
+<div class="highlight"><pre><span></span>  <span class="p">:::</span><span class="k">sql</span>
+  <span class="k">SELECT</span> <span class="o">*</span>
+  <span class="k">FROM</span> <span class="n">mrkt_data</span><span class="p">.</span><span class="n">target_unit</span>
+  <span class="k">WHERE</span> <span class="n">impressions</span> <span class="k">IS</span> <span class="k">NULL</span>
+  <span class="k">LIMIT</span> <span class="mi">10</span>
+  <span class="k">UNION</span>
+  <span class="k">SELECT</span> <span class="o">*</span>
+  <span class="k">FROM</span> <span class="n">mrkt_data</span><span class="p">.</span><span class="n">target_unit</span>
+  <span class="k">WHERE</span> <span class="n">impressions</span> <span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span> <span class="mi">0</span>
+  <span class="k">LIMIT</span> <span class="mi">10</span>
+</pre></div>
+
+
+<p>It is suggested that you always enclose subqueries in parentheses!</p>
+<h2 id="spark-sql-hint">Spark SQL Hint</h2>
+<ol>
+<li>You can use 
+  <a href="https://docs.databricks.com/spark/latest/spark-sql/language-manual/select.html#hints">Spark SQL hint</a>
+  to fine control the behavior of Spark application.
+  Specially, 
+  a hint for skew join is supported in Spark Spark!
+  You can use it to help Spark optimizing the joining when the involved columns are skewed.</li>
+</ol>
+<h3 id="coalesce-and-repartition-hints">COALESCE and REPARTITION Hints</h3>
+<div class="highlight"><pre><span></span><span class="k">SELECT</span> <span class="cm">/*+ COALESCE(5) */</span> <span class="p">...</span>
+
+<span class="k">SELECT</span> <span class="cm">/*+ REPARTITION(3) */</span> <span class="p">...</span>
+</pre></div>
+
+
+<h3 id="join-hints">Join Hints</h3>
+<div class="highlight"><pre><span></span><span class="nv">SELECT</span> <span class="cm">/*+ MAPJOIN(b) */</span> ...
+
+<span class="nv">SELECT</span> <span class="cm">/*+ BROADCASTJOIN(b) */</span> ...
+
+<span class="nv">SELECT</span> <span class="cm">/*+ BROADCAST(b) */</span> ...
+
+<span class="nv">SELECT</span> <span class="cm">/*+ RANGE_JOIN(points, 10) */</span> <span class="o">*</span>
+<span class="nv">FROM</span> <span class="nv">points</span> <span class="nv">JOIN</span> <span class="nv">ranges</span> <span class="nv">ON</span> <span class="nv">points</span>.<span class="nv">p</span> <span class="o">&gt;=</span> <span class="nv">ranges</span>.<span class="nv">start</span> <span class="nv">AND</span> <span class="nv">points</span>.<span class="nv">p</span> <span class="o">&lt;</span> <span class="nv">ranges</span>.<span class="k">end</span><span class="c1">;</span>
+
+<span class="nv">SELECT</span> <span class="cm">/*+ RANGE_JOIN(r1, 0.1) */</span> <span class="o">*</span>
+<span class="nv">FROM</span> <span class="ss">(</span><span class="nv">SELECT</span> <span class="o">*</span> <span class="nv">FROM</span> <span class="nv">ranges</span> <span class="nv">WHERE</span> <span class="nv">ranges</span>.<span class="nv">amount</span> <span class="o">&lt;</span> <span class="mi">100</span><span class="ss">)</span> <span class="nv">r1</span>, <span class="nv">ranges</span> <span class="nv">r2</span>
+<span class="nv">WHERE</span> <span class="nv">r1</span>.<span class="nv">start</span> <span class="o">&lt;</span> <span class="nv">r2</span>.<span class="nv">start</span> <span class="o">+</span> <span class="mi">100</span> <span class="nv">AND</span> <span class="nv">r2</span>.<span class="nv">start</span> <span class="o">&lt;</span> <span class="nv">r1</span>.<span class="nv">start</span> <span class="o">+</span> <span class="mi">100</span><span class="c1">;</span>
+
+<span class="nv">SELECT</span> <span class="cm">/*+ RANGE_JOIN(C, 500) */</span> <span class="o">*</span>
+<span class="nv">FROM</span> <span class="nv">a</span>
+  <span class="nv">JOIN</span> <span class="nv">b</span> <span class="nv">ON</span> <span class="ss">(</span><span class="nv">a</span>.<span class="nv">b_key</span> <span class="o">=</span> <span class="nv">b</span>.<span class="nv">id</span><span class="ss">)</span>
+  <span class="nv">JOIN</span> <span class="nv">c</span> <span class="nv">ON</span> <span class="ss">(</span><span class="nv">a</span>.<span class="nv">ts</span> <span class="nv">BETWEEN</span> <span class="nv">c</span>.<span class="nv">start_time</span> <span class="nv">AND</span> <span class="nv">c</span>.<span class="nv">end_time</span><span class="ss">)</span>
+</pre></div>
+
+
+<h3 id="skew-hint">Skew Hint</h3>
+<div class="highlight"><pre><span></span><span class="k">SELECT</span> <span class="cm">/*+ SKEW(&#39;orders&#39;) */</span> <span class="o">*</span> <span class="k">FROM</span> <span class="n">customers</span><span class="p">,</span> <span class="n">orders</span> <span class="k">WHERE</span> <span class="n">o_custId</span> <span class="o">=</span> <span class="n">c_custId</span>
+<span class="k">SELECT</span> <span class="cm">/*+ SKEW(&#39;orders&#39;), BROADCAST(demographic) */</span> <span class="o">*</span> <span class="k">FROM</span> <span class="n">orders</span><span class="p">,</span> <span class="n">customers</span><span class="p">,</span> <span class="n">demographic</span> <span class="k">WHERE</span> <span class="n">o_custId</span> <span class="o">=</span> <span class="n">c_custId</span> <span class="k">AND</span> <span class="n">c_demoId</span> <span class="o">=</span> <span class="n">d_demoId</span>
+</pre></div>
+
+
+<h2 id="spark-sql-examples">Spark SQL Examples</h2>
+<p>:::SQL
+CREATE TABLE trans (
+     col1 TYPE1,
+     col2 TYPE2,
+     col3 TYPE3
+) USING Parquet OPTIONS (
+  <code>serialization.format</code> '1',
+  path 'viewfs://...'
+)</p>
+<p>:::SQL
+CREATE TABLE trans 
+  USING Parquet
+  LOCATION '/path/to/table' AS
+select * from some_table where id = 1</p>
+<h2 id="references">References</h2>
+<p>https://stackoverflow.com/questions/41254011/sparksql-read-parquet-file-directly</p>
+<p>http://www.joefkelley.com/736/</p>
+<p>https://jaceklaskowski.gitbooks.io/mastering-spark-sql/spark-sql-hint-framework.html#specifying-query-hints</p></div>
+    <footer>
+<p class="meta">
+  <span class="byline author vcard">
+    Posted by <span class="fn">Benjamin Du</span>
+  </span>
+<time datetime="2019-10-11T18:15:13-07:00" pubdate>Oct 11, 2019</time>  <span class="categories">
+    <a class="category" href="http://www.legendu.net/misc/tag/programming.html">programming</a>
+    <a class="category" href="http://www.legendu.net/misc/tag/big-data.html">big data</a>
+    <a class="category" href="http://www.legendu.net/misc/tag/spark.html">Spark</a>
+    <a class="category" href="http://www.legendu.net/misc/tag/spark-sql.html">Spark SQL</a>
+  </span>
+</p>    </footer>
+  </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div>
+  </section>
+</div>
+<aside class="sidebar">
+  <section>
+    <h1>Recent Posts</h1>
+    <ul id="recent_posts">
+      <li class="post">
+          <a href="http://www.legendu.net/misc/blog/python-tips/">Tips on Python</a>
+      </li>
+      <li class="post">
+          <a href="http://www.legendu.net/misc/blog/python-tips-and-traps/">Python Tips and Traps</a>
+      </li>
+      <li class="post">
+          <a href="http://www.legendu.net/misc/blog/exception-and-error-handling-in-python/">Exception and Error Handling in Python</a>
+      </li>
+      <li class="post">
+          <a href="http://www.legendu.net/misc/blog/ipython-tips/">Tips on IPython</a>
+      </li>
+      <li class="post">
+          <a href="http://www.legendu.net/misc/blog/tips-for-git-large-file-storage/">Tips for Git Large File Storage</a>
+      </li>
+    </ul>
+  </section>
+  <section>
+      
+    <h1>Categories</h1>
+    <ul id="recent_posts">
+        <li><a href="http://www.legendu.net/misc/category/ai.html">AI</a></li>
+        <li><a href="http://www.legendu.net/misc/category/career.html">Career</a></li>
+        <li><a href="http://www.legendu.net/misc/category/cloud.html">Cloud</a></li>
+        <li><a href="http://www.legendu.net/misc/category/database.html">Database</a></li>
+        <li><a href="http://www.legendu.net/misc/category/encryption.html">Encryption</a></li>
+        <li><a href="http://www.legendu.net/misc/category/english.html">English</a></li>
+        <li><a href="http://www.legendu.net/misc/category/finance.html">Finance</a></li>
+        <li><a href="http://www.legendu.net/misc/category/fun-problems.html">Fun Problems</a></li>
+        <li><a href="http://www.legendu.net/misc/category/hardware.html">Hardware</a></li>
+        <li><a href="http://www.legendu.net/misc/category/internet.html">Internet</a></li>
+        <li><a href="http://www.legendu.net/misc/category/job.html">Job</a></li>
+        <li><a href="http://www.legendu.net/misc/category/jupyterlab.html">JupyterLab</a></li>
+        <li><a href="http://www.legendu.net/misc/category/language.html">Language</a></li>
+        <li><a href="http://www.legendu.net/misc/category/life.html">Life</a></li>
+        <li><a href="http://www.legendu.net/misc/category/links.html">Links</a></li>
+        <li><a href="http://www.legendu.net/misc/category/linux.html">Linux</a></li>
+        <li><a href="http://www.legendu.net/misc/category/machine-learning.html">Machine Learning</a></li>
+        <li><a href="http://www.legendu.net/misc/category/macos.html">macOS</a></li>
+        <li><a href="http://www.legendu.net/misc/category/network.html">Network</a></li>
+        <li><a href="http://www.legendu.net/misc/category/os.html">OS</a></li>
+        <li><a href="http://www.legendu.net/misc/category/people.html">People</a></li>
+        <li><a href="http://www.legendu.net/misc/category/philosophy.html">Philosophy</a></li>
+        <li><a href="http://www.legendu.net/misc/category/programming.html">Programming</a></li>
+        <li><a href="http://www.legendu.net/misc/category/research.html">Research</a></li>
+        <li><a href="http://www.legendu.net/misc/category/sheng-huo.html">生活</a></li>
+        <li><a href="http://www.legendu.net/misc/category/si-suo.html">思索</a></li>
+        <li><a href="http://www.legendu.net/misc/category/software.html">Software</a></li>
+        <li><a href="http://www.legendu.net/misc/category/statistics.html">Statistics</a></li>
+        <li><a href="http://www.legendu.net/misc/category/teleconference.html">Teleconference</a></li>
+        <li><a href="http://www.legendu.net/misc/category/tools.html">Tools</a></li>
+        <li><a href="http://www.legendu.net/misc/category/trading.html">Trading</a></li>
+        <li><a href="http://www.legendu.net/misc/category/unix.html">Unix</a></li>
+        <li><a href="http://www.legendu.net/misc/category/visualization.html">Visualization</a></li>
+        <li><a href="http://www.legendu.net/misc/category/windows.html">Windows</a></li>
+        <li><a href="http://www.legendu.net/misc/category/work.html">Work</a></li>
+    </ul>
+  </section>
+ 
+
+  <section>
+  <h1>Tags</h1>
+  <p class="tagcloud">
+  </p>
+  </section>
+
+
+
+  <section>
+    <h1>GitHub Repos</h1>
+    <ul id="gh_repos">
+      <li class="loading">Status updating...</li>
+    </ul>
+      <a href="https://github.com/dclong">@dclong</a> on GitHub
+    <script type="text/javascript">
+      $.domReady(function(){
+          if (!window.jXHR){
+              var jxhr = document.createElement('script');
+              jxhr.type = 'text/javascript';
+              jxhr.src = 'http://www.legendu.net/misc/theme/js/jXHR.js';
+              var s = document.getElementsByTagName('script')[0];
+              s.parentNode.insertBefore(jxhr, s);
+          }
+
+          github.showRepos({
+              user: 'dclong',
+              count: 3,
+              skip_forks: true,
+              target: '#gh_repos'
+          });
+      });
+    </script>
+    <script src="http://www.legendu.net/misc/theme/js/github.js" type="text/javascript"> </script>
+  </section>
+
+    <section>
+        <h1>Social</h2>
+        <ul>
+            <li><a href="https://www.linkedin.com/in/ben-chuanlong-du-1239b221/" target="_blank">LinkedIn</a></li>
+            <li><a href="https://twitter.com/longendu" target="_blank">Twitter</a></li>
+            <li><a href="https://www.facebook.com/chuanlong.du" target="_blank">Facebook</a></li>
+        <!--
+            <li><a href="http://www.legendu.net/misc/" type="application/rss+xml" rel="alternate">RSS</a></li>
+            -->
+        </ul>
+    </section>
+</aside>    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Ben Chuanlong Du -
+  <span class="credit">Powered by <a href="http://getpelican.com">Pelican</a></span>
+</p></footer>
+    <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-30259661-1']);
+    _gaq.push(['_trackPageview']);
+    (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+    </script>
+	<script type="text/javascript">
+	  var disqus_shortname = 'dclong';
+          var disqus_identifier = '/blog/spark-sql-tips/';
+          var disqus_url = 'http://www.legendu.net/misc/blog/spark-sql-tips/';
+          var disqus_title = 'Spark SQL Tips';
+	  (function() {
+	    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	    dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+	    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	   })();
+	</script>
+</body>
+</html>

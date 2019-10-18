@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>IO in Java</title>
+  <meta name="author" content="Ben Chuanlong Du">
+
+  <link href="http://www.legendu.net/misc/atom.xml" type="application/atom+xml" rel="alternate"
+        title="Ben Chuanlong Du's Blog Atom Feed" />
+
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link href="http://www.legendu.net/misc/favicon.png" rel="icon">
+  <link href="http://www.legendu.net/misc/theme/css/main_2.css" media="screen, projection"
+        rel="stylesheet" type="text/css">
+  <script src="http://www.legendu.net/misc/theme/js/modernizr-2.0.js"></script>
+  <script src="http://www.legendu.net/misc/theme/js/ender.js"></script>
+  <script src="http://www.legendu.net/misc/theme/js/octopress.js" type="text/javascript"></script>
+
+  <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+</head>
+
+<body>
+  <header role="banner"><hgroup>
+  <h1><a href="http://www.legendu.net/misc/">Ben Chuanlong Du's Blog</a></h1>
+    <h2>It is never too late to learn.</h2>
+</hgroup></header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="http://www.legendu.net/misc/atom.xml" rel="subscribe-rss">RSS</a></li>
+</ul>
+
+<form name="search" action="https://www.bing.com/search" method="get" onSubmit="return build_query()">
+  <fieldset role="search">
+      <!--
+    <input type="hidden" name="q" value="site:http://www.legendu.net/misc" />
+        -->
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+
+<script type = "text/javascript">
+    function build_query() {
+        var query = document.forms["search"]["q"].value;
+        var prefix = "site:http://www.legendu.net/misc "
+        if (!query.startsWith(prefix)) {
+            query = prefix + query;
+            document.forms["search"]["q"].value = query;
+        }
+        return true;
+    }
+</script>
+
+<ul class="main-navigation">
+    <li><a href="http://www.legendu.net">Home</a></li>
+    <li><a href="http://www.legendu.net/misc">Blog</a></li>
+    <li><a href="http://www.legendu.net/misc/archives.html">Archives</a></li>
+    <li><a href="http://www.legendu.net/misc/pages/links.html">Links</a></li>
+</ul></nav>
+  <div id="main">
+    <div id="content">
+<div>
+  <article class="hentry" role="article">
+<header>
+      <h1 class="entry-title">IO in Java</h1>
+      <p class="meta"><time datetime="2015-03-14T22:30:04-07:00" pubdate>Mar 14, 2015</time></p>
+</header>
+
+  <div class="entry-content"><p><strong>
+Things on this page are
+fragmentary and immature notes/thoughts of the author.
+It is not meant to readers
+but rather for convenient reference of the author and future improvement.
+</strong></p>
+<ol>
+<li>try catch, safe </li>
+<li>text, bin</li>
+<li>
+<p>buffered or not ...</p>
+<p>Reader - Abstract class for reading character streams
+InputStream - Abstract class is the superclass of all classes representing an input stream of bytes.
+And similary for Writer vs OutputStream</p>
+</li>
+</ol>
+<p>Scanner is used for parsing tokens from the contents of the stream while BufferedReader just reads the stream and does not do any special parsing.</p>
+<p>In fact you can pass a BufferedReader to a scanner as the source of characters to parse.</p>
+<p>As to the choice, use the Scanner if you want to parse the file, use the BufferedReader if you want to read the file line by line. Also see the introductory text of their aforelinked API documentations.</p>
+<div class="highlight"><pre><span></span><span class="nv">A</span> <span class="nv">BufferedReader</span> <span class="nv">is</span> <span class="nv">a</span> <span class="nv">simple</span> <span class="nv">class</span> <span class="nv">meant</span> <span class="nv">to</span> <span class="nv">efficiently</span> <span class="nv">read</span> <span class="nv">from</span> <span class="nv">the</span> <span class="nv">underling</span> <span class="nv">stream</span>. <span class="nv">Generally</span>, <span class="nv">each</span> <span class="nv">read</span> <span class="nv">request</span> <span class="nv">made</span> <span class="nv">of</span> <span class="nv">a</span> <span class="nv">Reader</span> <span class="nv">like</span> <span class="nv">a</span> <span class="nv">FileReader</span> <span class="nv">causes</span> <span class="nv">a</span> <span class="nv">corresponding</span> <span class="nv">read</span> <span class="nv">request</span> <span class="nv">to</span> <span class="nv">be</span> <span class="nv">made</span> <span class="nv">to</span> <span class="nv">underlying</span> <span class="nv">stream</span>. <span class="nv">Each</span> <span class="nv">invocation</span> <span class="nv">of</span> <span class="nv">read</span><span class="ss">()</span> <span class="nv">or</span> <span class="nv">readLine</span><span class="ss">()</span> <span class="nv">could</span> <span class="nv">cause</span> <span class="nv">bytes</span> <span class="nv">to</span> <span class="nv">be</span> <span class="nv">read</span> <span class="nv">from</span> <span class="nv">the</span> <span class="nv">file</span>, <span class="nv">converted</span> <span class="nv">into</span> <span class="nv">characters</span>, <span class="nv">and</span> <span class="k">then</span> <span class="nv">returned</span>, <span class="nv">which</span> <span class="nv">can</span> <span class="nv">be</span> <span class="nv">very</span> <span class="nv">inefficient</span>. <span class="nv">Efficiency</span> <span class="nv">is</span> <span class="nv">improved</span> <span class="nv">appreciably</span> <span class="k">if</span> <span class="nv">a</span> <span class="nv">Reader</span> <span class="nv">is</span> <span class="nv">warped</span> <span class="nv">in</span> <span class="nv">a</span> <span class="nv">BufferedReader</span>.
+
+<span class="nv">BufferedReader</span> <span class="nv">is</span> <span class="nv">synchronized</span>, <span class="nv">so</span> <span class="nv">read</span> <span class="nv">operations</span> <span class="nv">on</span> <span class="nv">a</span> <span class="nv">BufferedReader</span> <span class="nv">can</span> <span class="nv">safely</span> <span class="nv">be</span> <span class="nv">done</span> <span class="nv">from</span> <span class="nv">multiple</span> <span class="nv">threads</span>.
+
+<span class="nv">A</span> <span class="nv">scanner</span> <span class="nv">on</span> <span class="nv">the</span> <span class="nv">other</span> <span class="nv">hand</span> <span class="nv">has</span> <span class="nv">a</span> <span class="nv">lot</span> <span class="nv">more</span> <span class="nv">cheese</span> <span class="nv">built</span> <span class="nv">into</span> <span class="nv">it</span><span class="c1">; it can do all that a BufferedReader can do and at the same level of efficiency as well. However, in addition a Scanner can parse the underlying stream for primitive types and strings using regular expressions. It can also tokenize the underlying stream with the delimiter of your choice. It can also do forward scanning of the underlying stream disregarding the delimiter!</span>
+
+<span class="nv">A</span> <span class="nv">scanner</span> <span class="nv">however</span> <span class="nv">is</span> <span class="nv">not</span> <span class="nv">thread</span> <span class="nv">safe</span>, <span class="nv">it</span> <span class="nv">has</span> <span class="nv">to</span> <span class="nv">be</span> <span class="nv">externally</span> <span class="nv">synchronized</span>.
+
+<span class="nv">The</span> <span class="nv">choice</span> <span class="nv">of</span> <span class="nv">using</span> <span class="nv">a</span> <span class="nv">BufferedReader</span> <span class="nv">or</span> <span class="nv">a</span> <span class="nv">Scanner</span> <span class="nv">depends</span> <span class="nv">on</span> <span class="nv">the</span> <span class="nv">code</span> <span class="nv">you</span> <span class="nv">are</span> <span class="nv">writing</span>, <span class="k">if</span> <span class="nv">you</span> <span class="nv">are</span> <span class="nv">writing</span> <span class="nv">a</span> <span class="nv">simple</span> <span class="nv">log</span> <span class="nv">reader</span> <span class="nv">Buffered</span> <span class="nv">reader</span> <span class="nv">is</span> <span class="nv">adequate</span>. <span class="nv">However</span> <span class="k">if</span> <span class="nv">you</span> <span class="nv">are</span> <span class="nv">writing</span> <span class="nv">an</span> <span class="nv">XML</span> <span class="nv">parser</span> <span class="nv">Scanner</span> <span class="nv">is</span> <span class="nv">the</span> <span class="nv">more</span> <span class="nv">natural</span> <span class="nv">choice</span>.
+
+<span class="nv">Even</span> <span class="k">while</span> <span class="nv">reading</span> <span class="nv">the</span> <span class="nv">input</span>, <span class="k">if</span> <span class="nv">want</span> <span class="nv">to</span> <span class="nv">accept</span> <span class="nv">user</span> <span class="nv">input</span> <span class="nv">line</span> <span class="nv">by</span> <span class="nv">line</span> <span class="nv">and</span> <span class="nv">say</span> <span class="nv">just</span> <span class="nv">add</span> <span class="nv">it</span> <span class="nv">to</span> <span class="nv">a</span> <span class="nv">file</span>, <span class="nv">a</span> <span class="nv">BufferedReader</span> <span class="nv">is</span> <span class="nv">good</span> <span class="nv">enough</span>. <span class="nv">On</span> <span class="nv">the</span> <span class="nv">other</span> <span class="nv">hand</span> <span class="k">if</span> <span class="nv">you</span> <span class="nv">want</span> <span class="nv">to</span> <span class="nv">accept</span> <span class="nv">user</span> <span class="nv">input</span> <span class="nv">as</span> <span class="nv">a</span> <span class="nv">command</span> <span class="nv">with</span> <span class="nv">multiple</span> <span class="nv">options</span>, <span class="nv">and</span> <span class="k">then</span> <span class="nv">intend</span> <span class="nv">to</span> <span class="nv">perform</span> <span class="nv">different</span> <span class="nv">operations</span> <span class="nv">based</span> <span class="nv">on</span> <span class="nv">the</span> <span class="nv">command</span> <span class="nv">and</span> <span class="nv">options</span> <span class="nv">specified</span>, <span class="nv">a</span> <span class="nv">Scanner</span> <span class="nv">will</span> <span class="nv">suit</span> <span class="nv">better</span>.
+</pre></div>
+
+
+<p>PrintWriter is the output equivalent of the Scanner class</p>
+<div class="highlight"><pre><span></span><span class="o">//</span><span class="n">PrintWriter</span> <span class="ow">is</span> <span class="n">a</span> <span class="k">class</span> <span class="nc">for</span> <span class="n">writng</span> <span class="n">text</span> <span class="nb">file</span><span class="o">.</span>
+<span class="n">package</span> <span class="n">study</span><span class="o">.</span><span class="n">io</span><span class="p">;</span>
+
+<span class="kn">import</span> <span class="nn">java.io.FileNotFoundException</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">java.io.PrintWriter</span><span class="p">;</span>
+
+<span class="n">public</span> <span class="k">class</span> <span class="nc">TestPrintWriter</span> <span class="p">{</span>
+    <span class="n">public</span> <span class="n">static</span> <span class="n">void</span> <span class="n">main</span><span class="p">(</span><span class="n">String</span><span class="p">[]</span> <span class="n">args</span><span class="p">)</span> <span class="n">throws</span> <span class="n">FileNotFoundException</span><span class="p">{</span>
+        <span class="n">PrintWriter</span> <span class="n">out</span> <span class="o">=</span> <span class="n">new</span> <span class="n">PrintWriter</span><span class="p">(</span><span class="s2">&quot;java_out.txt&quot;</span><span class="p">);</span>
+        <span class="n">out</span><span class="o">.</span><span class="k">print</span><span class="p">(</span><span class="mf">1.11111111</span><span class="o">+</span><span class="s2">&quot; &quot;</span><span class="p">);</span>
+        <span class="n">out</span><span class="o">.</span><span class="k">print</span><span class="p">(</span><span class="mf">2.2</span><span class="o">+</span><span class="s2">&quot; &quot;</span><span class="p">);</span>
+        <span class="n">out</span><span class="o">.</span><span class="k">print</span><span class="p">(</span><span class="mf">3.3</span><span class="o">+</span><span class="s2">&quot; &quot;</span><span class="p">);</span>
+        <span class="n">out</span><span class="o">.</span><span class="n">close</span><span class="p">();</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<h2 id="input-and-output">Input and Output</h2>
+<ol>
+<li><code>System.out.println</code> is super fast. Generally speaking, you do not
+have worry much about the overheading of printing information to the
+console in Java.</li>
+</ol>
+<h2 id="reading-and-writing-text-file">Reading and Writing Text File</h2>
+<ol>
+<li>
+<p><code>Scanner</code> is convenient for parsing text data.</p>
+</li>
+<li>
+<p><code>PrintWriter</code> is for writing text file.</p>
+</li>
+</ol>
+<h2 id="reading-and-writing-binary-file">Reading and Writing Binary File</h2>
+<ol>
+<li>To read in binary data (through byte) from a file, you can use
+<code>FileInputStream</code>; to write binary data into a file, you can use
+<code>FileOutputStream</code>. To read in binary data into primitive types
+from a file, you can wrap a FileInputStream in DataInputStream;
+to write primitive types into a binary file directly, you can
+wrap a FileOutputStream in DataOutputStream. Note that
+DataInputStream and DataOutputStream is compatible, i.e., they
+recognize the format of each other. However, DataInputStream is
+not compatible with <code>writeBin</code> in R; neither is DataOutputStream
+compatible with <code>readBin</code> in R. To communicate binary data
+between Java and R, you can run Java code which do the right job
+for you using <code>rJava</code>.</li>
+</ol>
+<p>FileReader vs FileInputStream?
+Or Reader vs InputStream
+Writer vs OutputStream
+DataInputStream/DataOutPutStream vs FileInputStream/FileOutputStream</p>
+<p>The following is a simple yet very common way</p>
+<div class="highlight"><pre><span></span><span class="nv">try</span><span class="ss">(</span><span class="nv">BufferedReader</span> <span class="nv">br</span> <span class="o">=</span> <span class="nv">new</span> <span class="nv">BufferedReader</span><span class="ss">(</span><span class="nv">new</span> <span class="nv">FileReader</span><span class="ss">(</span><span class="s2">&quot;</span><span class="s">file.txt</span><span class="s2">&quot;</span><span class="ss">)))</span> {
+    <span class="nv">StringBuilder</span> <span class="nv">sb</span> <span class="o">=</span> <span class="nv">new</span> <span class="nv">StringBuilder</span><span class="ss">()</span><span class="c1">;</span>
+    <span class="nv">String</span> <span class="nv">line</span> <span class="o">=</span> <span class="nv">br</span>.<span class="nv">readLine</span><span class="ss">()</span><span class="c1">;</span>
+
+    <span class="k">while</span> <span class="ss">(</span><span class="nv">line</span> <span class="o">!=</span> <span class="nv">null</span><span class="ss">)</span> {
+        <span class="nv">sb</span>.<span class="nv">append</span><span class="ss">(</span><span class="nv">line</span><span class="ss">)</span><span class="c1">;</span>
+        <span class="nv">sb</span>.<span class="nv">append</span><span class="ss">(</span><span class="nv">System</span>.<span class="nv">lineSeparator</span><span class="ss">())</span><span class="c1">;</span>
+        <span class="nv">line</span> <span class="o">=</span> <span class="nv">br</span>.<span class="nv">readLine</span><span class="ss">()</span><span class="c1">;</span>
+    }
+    <span class="nv">String</span> <span class="nv">everything</span> <span class="o">=</span> <span class="nv">sb</span>.<span class="nv">toString</span><span class="ss">()</span><span class="c1">;</span>
+}
+</pre></div>
+
+
+<hr>
+<p>In Java 7: similar to BufferedReader(FileInputStream...)</p>
+<div class="highlight"><pre><span></span><span class="nv">Charset</span> <span class="nv">charset</span> <span class="o">=</span> <span class="nv">Charset</span>.<span class="nv">forName</span><span class="ss">(</span><span class="s2">&quot;</span><span class="s">US-ASCII</span><span class="s2">&quot;</span><span class="ss">)</span><span class="c1">;</span>
+<span class="nv">try</span> <span class="ss">(</span><span class="nv">BufferedReader</span> <span class="nv">reader</span> <span class="o">=</span> <span class="nv">Files</span>.<span class="nv">newBufferedReader</span><span class="ss">(</span><span class="nv">file</span>, <span class="nv">charset</span><span class="ss">))</span> {
+    <span class="nv">String</span> <span class="nv">line</span> <span class="o">=</span> <span class="nv">null</span><span class="c1">;</span>
+    <span class="k">while</span> <span class="ss">((</span><span class="nv">line</span> <span class="o">=</span> <span class="nv">reader</span>.<span class="nv">readLine</span><span class="ss">())</span> <span class="o">!=</span> <span class="nv">null</span><span class="ss">)</span> {
+        <span class="nv">System</span>.<span class="nv">out</span>.<span class="nv">println</span><span class="ss">(</span><span class="nv">line</span><span class="ss">)</span><span class="c1">;</span>
+    }
+} <span class="nv">catch</span> <span class="ss">(</span><span class="nv">IOException</span> <span class="nv">x</span><span class="ss">)</span> {
+    <span class="nv">System</span>.<span class="nv">err</span>.<span class="nv">format</span><span class="ss">(</span><span class="s2">&quot;</span><span class="s">IOException: %s%n</span><span class="s2">&quot;</span>, <span class="nv">x</span><span class="ss">)</span><span class="c1">;</span>
+}
+</pre></div>
+
+
+<hr>
+<p>The difference between the two methods is what to use to construct a BufferedReader. Method 1 uses InputStreamReader and Method 2 uses FileReader. What's the difference between the two classes?</p>
+<p>From Java Doc, "An InputStreamReader is a bridge from byte streams to character streams: It reads bytes and decodes them into characters using a specified charset." InputStreamReader can handle other input streams than files, such as network connections, classpath resources, ZIP files, etc.</p>
+<p>FileReader is "Convenience class for reading character files. The constructors of this class assume that the default character encoding and the default byte-buffer size are appropriate." FileReader does not allow you to specify an encoding other than the platform default encoding. Therefore, it is not a good idea to use it if the program will run on systems with different platform encoding.</p>
+<p>In summary, InputStreamReader is always a safer choice than FileReader.</p>
+<p>Scanner in = new Scanner(new FileReader("filename.txt"));</p>
+<p>http://www.javapractices.com/topic/TopicAction.do?Id=42</p>
+<p>http://howtodoinjava.com/2013/05/01/3-ways-to-read-files-using-java-nio/</p>
+<p>http://www.programcreek.com/2011/03/java-read-a-file-line-by-line-code-example/</p>
+<p>http://www.baeldung.com/java-read-lines-large-file
+Faster file copy with mapped byte buffer</p>
+<div class="highlight"><pre><span></span><span class="n">package</span> <span class="n">com</span><span class="o">.</span><span class="n">howtodoinjava</span><span class="o">.</span><span class="n">test</span><span class="o">.</span><span class="n">nio</span><span class="p">;</span>
+
+<span class="kn">import</span> <span class="nn">java.io.IOException</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">java.io.RandomAccessFile</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">java.nio.MappedByteBuffer</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">java.nio.channels.FileChannel</span><span class="p">;</span>
+
+<span class="n">public</span> <span class="k">class</span> <span class="nc">ReadFileWithMappedByteBuffer</span>
+<span class="p">{</span>
+    <span class="n">public</span> <span class="n">static</span> <span class="n">void</span> <span class="n">main</span><span class="p">(</span><span class="n">String</span><span class="p">[]</span> <span class="n">args</span><span class="p">)</span> <span class="n">throws</span> <span class="n">IOException</span>
+    <span class="p">{</span>
+        <span class="n">RandomAccessFile</span> <span class="n">aFile</span> <span class="o">=</span> <span class="n">new</span> <span class="n">RandomAccessFile</span>
+                <span class="p">(</span><span class="s2">&quot;test.txt&quot;</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">);</span>
+        <span class="n">FileChannel</span> <span class="n">inChannel</span> <span class="o">=</span> <span class="n">aFile</span><span class="o">.</span><span class="n">getChannel</span><span class="p">();</span>
+        <span class="n">MappedByteBuffer</span> <span class="nb">buffer</span> <span class="o">=</span> <span class="n">inChannel</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">FileChannel</span><span class="o">.</span><span class="n">MapMode</span><span class="o">.</span><span class="n">READ_ONLY</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">inChannel</span><span class="o">.</span><span class="n">size</span><span class="p">());</span>
+        <span class="nb">buffer</span><span class="o">.</span><span class="n">load</span><span class="p">();</span> 
+        <span class="k">for</span> <span class="p">(</span><span class="nb">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="nb">buffer</span><span class="o">.</span><span class="n">limit</span><span class="p">();</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="n">System</span><span class="o">.</span><span class="n">out</span><span class="o">.</span><span class="k">print</span><span class="p">((</span><span class="n">char</span><span class="p">)</span> <span class="nb">buffer</span><span class="o">.</span><span class="n">get</span><span class="p">());</span>
+        <span class="p">}</span>
+        <span class="nb">buffer</span><span class="o">.</span><span class="n">clear</span><span class="p">();</span> <span class="o">//</span> <span class="n">do</span> <span class="n">something</span> <span class="k">with</span> <span class="n">the</span> <span class="n">data</span> <span class="ow">and</span> <span class="n">clear</span><span class="o">/</span><span class="n">compact</span> <span class="n">it</span><span class="o">.</span>
+        <span class="n">inChannel</span><span class="o">.</span><span class="n">close</span><span class="p">();</span>
+        <span class="n">aFile</span><span class="o">.</span><span class="n">close</span><span class="p">();</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p>There are too many ways to read files from Java. Best practice?</p>
+<p>FileReader vs FileInputStream?
+Or Reader vs InputStream
+Writer vs OutputStream
+DataInputStream/DataOutPutStream vs FileInputStream/FileOutputStream</p>
+<p>The following is a simple yet very common way</p>
+<p>try(BufferedReader br = new BufferedReader(new FileReader("file.txt"))) {
+        StringBuilder sb = new StringBuilder();
+        String line = br.readLine();</p>
+<div class="highlight"><pre><span></span>    <span class="k">while</span> <span class="ss">(</span><span class="nv">line</span> <span class="o">!=</span> <span class="nv">null</span><span class="ss">)</span> {
+        <span class="nv">sb</span>.<span class="nv">append</span><span class="ss">(</span><span class="nv">line</span><span class="ss">)</span><span class="c1">;</span>
+        <span class="nv">sb</span>.<span class="nv">append</span><span class="ss">(</span><span class="nv">System</span>.<span class="nv">lineSeparator</span><span class="ss">())</span><span class="c1">;</span>
+        <span class="nv">line</span> <span class="o">=</span> <span class="nv">br</span>.<span class="nv">readLine</span><span class="ss">()</span><span class="c1">;</span>
+    }
+    <span class="nv">String</span> <span class="nv">everything</span> <span class="o">=</span> <span class="nv">sb</span>.<span class="nv">toString</span><span class="ss">()</span><span class="c1">;</span>
+</pre></div>
+
+
+<p>}</p>
+<hr>
+<p>In Java 7: similar to BufferedReader(FileInputStream...)
+Charset charset = Charset.forName("US-ASCII");
+try (BufferedReader reader = Files.newBufferedReader(file, charset)) {
+    String line = null;
+    while ((line = reader.readLine()) != null) {
+        System.out.println(line);
+    }
+} catch (IOException x) {
+    System.err.format("IOException: %s%n", x);
+}</p>
+<hr>
+<p>The difference between the two methods is what to use to construct a BufferedReader. Method 1 uses InputStreamReader and Method 2 uses FileReader. What's the difference between the two classes?</p>
+<p>From Java Doc, "An InputStreamReader is a bridge from byte streams to character streams: It reads bytes and decodes them into characters using a specified charset." InputStreamReader can handle other input streams than files, such as network connections, classpath resources, ZIP files, etc.</p>
+<p>FileReader is "Convenience class for reading character files. The constructors of this class assume that the default character encoding and the default byte-buffer size are appropriate." FileReader does not allow you to specify an encoding other than the platform default encoding. Therefore, it is not a good idea to use it if the program will run on systems with different platform encoding.</p>
+<p>In summary, InputStreamReader is always a safer choice than FileReader.</p>
+<p>Scanner in = new Scanner(new FileReader("filename.txt"));</p>
+<p>http://www.javapractices.com/topic/TopicAction.do?Id=42</p>
+<p>http://howtodoinjava.com/2013/05/01/3-ways-to-read-files-using-java-nio/</p>
+<p>http://www.programcreek.com/2011/03/java-read-a-file-line-by-line-code-example/</p>
+<p>http://www.baeldung.com/java-read-lines-large-file
+Faster file copy with mapped byte buffer</p>
+<p>package com.howtodoinjava.test.nio;</p>
+<p>import java.io.IOException;
+import java.io.RandomAccessFile;
+import java.nio.MappedByteBuffer;
+import java.nio.channels.FileChannel;</p>
+<p>public class ReadFileWithMappedByteBuffer
+{
+    public static void main(String[] args) throws IOException
+    {
+        RandomAccessFile aFile = new RandomAccessFile
+                ("test.txt", "r");
+        FileChannel inChannel = aFile.getChannel();
+        MappedByteBuffer buffer = inChannel.map(FileChannel.MapMode.READ_ONLY, 0, inChannel.size());
+        buffer.load(); 
+        for (int i = 0; i &lt; buffer.limit(); i++)
+        {
+            System.out.print((char) buffer.get());
+        }
+        buffer.clear(); // do something with the data and clear/compact it.
+        inChannel.close();
+        aFile.close();
+    }
+}</p></div>
+    <footer>
+<p class="meta">
+  <span class="byline author vcard">
+    Posted by <span class="fn">Ben Chuanlong Du</span>
+  </span>
+<time datetime="2015-03-14T22:30:04-07:00" pubdate>Mar 14, 2015</time>  <span class="categories">
+    <a class="category" href="http://www.legendu.net/misc/tag/io.html">IO</a>
+    <a class="category" href="http://www.legendu.net/misc/tag/programming.html">programming</a>
+    <a class="category" href="http://www.legendu.net/misc/tag/java.html">Java</a>
+    <a class="category" href="http://www.legendu.net/misc/tag/input.html">input</a>
+    <a class="category" href="http://www.legendu.net/misc/tag/output.html">output</a>
+  </span>
+</p>    </footer>
+  </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div>
+  </section>
+</div>
+<aside class="sidebar">
+  <section>
+    <h1>Recent Posts</h1>
+    <ul id="recent_posts">
+      <li class="post">
+          <a href="http://www.legendu.net/misc/blog/python-tips/">Tips on Python</a>
+      </li>
+      <li class="post">
+          <a href="http://www.legendu.net/misc/blog/python-tips-and-traps/">Python Tips and Traps</a>
+      </li>
+      <li class="post">
+          <a href="http://www.legendu.net/misc/blog/exception-and-error-handling-in-python/">Exception and Error Handling in Python</a>
+      </li>
+      <li class="post">
+          <a href="http://www.legendu.net/misc/blog/ipython-tips/">Tips on IPython</a>
+      </li>
+      <li class="post">
+          <a href="http://www.legendu.net/misc/blog/tips-for-git-large-file-storage/">Tips for Git Large File Storage</a>
+      </li>
+    </ul>
+  </section>
+  <section>
+      
+    <h1>Categories</h1>
+    <ul id="recent_posts">
+        <li><a href="http://www.legendu.net/misc/category/ai.html">AI</a></li>
+        <li><a href="http://www.legendu.net/misc/category/career.html">Career</a></li>
+        <li><a href="http://www.legendu.net/misc/category/cloud.html">Cloud</a></li>
+        <li><a href="http://www.legendu.net/misc/category/database.html">Database</a></li>
+        <li><a href="http://www.legendu.net/misc/category/encryption.html">Encryption</a></li>
+        <li><a href="http://www.legendu.net/misc/category/english.html">English</a></li>
+        <li><a href="http://www.legendu.net/misc/category/finance.html">Finance</a></li>
+        <li><a href="http://www.legendu.net/misc/category/fun-problems.html">Fun Problems</a></li>
+        <li><a href="http://www.legendu.net/misc/category/hardware.html">Hardware</a></li>
+        <li><a href="http://www.legendu.net/misc/category/internet.html">Internet</a></li>
+        <li><a href="http://www.legendu.net/misc/category/job.html">Job</a></li>
+        <li><a href="http://www.legendu.net/misc/category/jupyterlab.html">JupyterLab</a></li>
+        <li><a href="http://www.legendu.net/misc/category/language.html">Language</a></li>
+        <li><a href="http://www.legendu.net/misc/category/life.html">Life</a></li>
+        <li><a href="http://www.legendu.net/misc/category/links.html">Links</a></li>
+        <li><a href="http://www.legendu.net/misc/category/linux.html">Linux</a></li>
+        <li><a href="http://www.legendu.net/misc/category/machine-learning.html">Machine Learning</a></li>
+        <li><a href="http://www.legendu.net/misc/category/macos.html">macOS</a></li>
+        <li><a href="http://www.legendu.net/misc/category/network.html">Network</a></li>
+        <li><a href="http://www.legendu.net/misc/category/os.html">OS</a></li>
+        <li><a href="http://www.legendu.net/misc/category/people.html">People</a></li>
+        <li><a href="http://www.legendu.net/misc/category/philosophy.html">Philosophy</a></li>
+        <li><a href="http://www.legendu.net/misc/category/programming.html">Programming</a></li>
+        <li><a href="http://www.legendu.net/misc/category/research.html">Research</a></li>
+        <li><a href="http://www.legendu.net/misc/category/sheng-huo.html">生活</a></li>
+        <li><a href="http://www.legendu.net/misc/category/si-suo.html">思索</a></li>
+        <li><a href="http://www.legendu.net/misc/category/software.html">Software</a></li>
+        <li><a href="http://www.legendu.net/misc/category/statistics.html">Statistics</a></li>
+        <li><a href="http://www.legendu.net/misc/category/teleconference.html">Teleconference</a></li>
+        <li><a href="http://www.legendu.net/misc/category/tools.html">Tools</a></li>
+        <li><a href="http://www.legendu.net/misc/category/trading.html">Trading</a></li>
+        <li><a href="http://www.legendu.net/misc/category/unix.html">Unix</a></li>
+        <li><a href="http://www.legendu.net/misc/category/visualization.html">Visualization</a></li>
+        <li><a href="http://www.legendu.net/misc/category/windows.html">Windows</a></li>
+        <li><a href="http://www.legendu.net/misc/category/work.html">Work</a></li>
+    </ul>
+  </section>
+ 
+
+  <section>
+  <h1>Tags</h1>
+  <p class="tagcloud">
+  </p>
+  </section>
+
+
+
+  <section>
+    <h1>GitHub Repos</h1>
+    <ul id="gh_repos">
+      <li class="loading">Status updating...</li>
+    </ul>
+      <a href="https://github.com/dclong">@dclong</a> on GitHub
+    <script type="text/javascript">
+      $.domReady(function(){
+          if (!window.jXHR){
+              var jxhr = document.createElement('script');
+              jxhr.type = 'text/javascript';
+              jxhr.src = 'http://www.legendu.net/misc/theme/js/jXHR.js';
+              var s = document.getElementsByTagName('script')[0];
+              s.parentNode.insertBefore(jxhr, s);
+          }
+
+          github.showRepos({
+              user: 'dclong',
+              count: 3,
+              skip_forks: true,
+              target: '#gh_repos'
+          });
+      });
+    </script>
+    <script src="http://www.legendu.net/misc/theme/js/github.js" type="text/javascript"> </script>
+  </section>
+
+    <section>
+        <h1>Social</h2>
+        <ul>
+            <li><a href="https://www.linkedin.com/in/ben-chuanlong-du-1239b221/" target="_blank">LinkedIn</a></li>
+            <li><a href="https://twitter.com/longendu" target="_blank">Twitter</a></li>
+            <li><a href="https://www.facebook.com/chuanlong.du" target="_blank">Facebook</a></li>
+        <!--
+            <li><a href="http://www.legendu.net/misc/" type="application/rss+xml" rel="alternate">RSS</a></li>
+            -->
+        </ul>
+    </section>
+</aside>    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Ben Chuanlong Du -
+  <span class="credit">Powered by <a href="http://getpelican.com">Pelican</a></span>
+</p></footer>
+    <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-30259661-1']);
+    _gaq.push(['_trackPageview']);
+    (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+    </script>
+	<script type="text/javascript">
+	  var disqus_shortname = 'dclong';
+          var disqus_identifier = '/blog/io-in-java/';
+          var disqus_url = 'http://www.legendu.net/misc/blog/io-in-java/';
+          var disqus_title = 'IO in Java';
+	  (function() {
+	    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	    dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+	    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	   })();
+	</script>
+</body>
+</html>

@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>SSH Tunnel</title>
+  <meta name="author" content="Ben Chuanlong Du">
+
+  <link href="http://www.legendu.net/misc/atom.xml" type="application/atom+xml" rel="alternate"
+        title="Ben Chuanlong Du's Blog Atom Feed" />
+
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link href="http://www.legendu.net/misc/favicon.png" rel="icon">
+  <link href="http://www.legendu.net/misc/theme/css/main_2.css" media="screen, projection"
+        rel="stylesheet" type="text/css">
+  <script src="http://www.legendu.net/misc/theme/js/modernizr-2.0.js"></script>
+  <script src="http://www.legendu.net/misc/theme/js/ender.js"></script>
+  <script src="http://www.legendu.net/misc/theme/js/octopress.js" type="text/javascript"></script>
+
+  <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+</head>
+
+<body>
+  <header role="banner"><hgroup>
+  <h1><a href="http://www.legendu.net/misc/">Ben Chuanlong Du's Blog</a></h1>
+    <h2>It is never too late to learn.</h2>
+</hgroup></header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="http://www.legendu.net/misc/atom.xml" rel="subscribe-rss">RSS</a></li>
+</ul>
+
+<form name="search" action="https://www.bing.com/search" method="get" onSubmit="return build_query()">
+  <fieldset role="search">
+      <!--
+    <input type="hidden" name="q" value="site:http://www.legendu.net/misc" />
+        -->
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+
+<script type = "text/javascript">
+    function build_query() {
+        var query = document.forms["search"]["q"].value;
+        var prefix = "site:http://www.legendu.net/misc "
+        if (!query.startsWith(prefix)) {
+            query = prefix + query;
+            document.forms["search"]["q"].value = query;
+        }
+        return true;
+    }
+</script>
+
+<ul class="main-navigation">
+    <li><a href="http://www.legendu.net">Home</a></li>
+    <li><a href="http://www.legendu.net/misc">Blog</a></li>
+    <li><a href="http://www.legendu.net/misc/archives.html">Archives</a></li>
+    <li><a href="http://www.legendu.net/misc/pages/links.html">Links</a></li>
+</ul></nav>
+  <div id="main">
+    <div id="content">
+<div>
+  <article class="hentry" role="article">
+<header>
+      <h1 class="entry-title">SSH Tunnel</h1>
+      <p class="meta"><time datetime="2019-04-24T00:29:40-07:00" pubdate>Apr 24, 2019</time></p>
+</header>
+
+  <div class="entry-content"><p><strong>
+Things on this page are
+fragmentary and immature notes/thoughts of the author.
+It is not meant to readers
+but rather for convenient reference of the author and future improvement.
+</strong></p>
+<h2 id="ssh-tunnel">SSH Tunnel</h2>
+<p>You can create a SSH tunnel from your local machine to a server using the command below.</p>
+<div class="highlight"><pre><span></span><span class="n">ssh</span><span class="w"> </span><span class="o">-</span><span class="n">i</span><span class="w"> </span><span class="o">/</span><span class="n">path_to_key</span><span class="w"> </span><span class="o">-</span><span class="n">fND</span><span class="w"> </span><span class="mi">1080</span><span class="w"> </span><span class="k">user</span><span class="nv">@server_ip</span><span class="w"></span>
+</pre></div>
+
+
+<p>The created SSH tunnel is essentially a socks5 proxy 
+and can be accessed as <code>localhost:1080</code>.
+If you want the tunnel (socks5 proxy) to be accessible by other machines as well
+rathe than the localhost only, 
+you can bind it to all IPs.</p>
+<div class="highlight"><pre><span></span><span class="n">ssh</span><span class="w"> </span><span class="o">-</span><span class="n">i</span><span class="w"> </span><span class="o">/</span><span class="n">path_to_key</span><span class="w"> </span><span class="o">-</span><span class="n">fND</span><span class="w"> </span><span class="ss">&quot;*:1080&quot;</span><span class="w"> </span><span class="k">user</span><span class="nv">@server_ip</span><span class="w"></span>
+</pre></div>
+
+
+<p>You can verify that tunnel (socks5 proxy) is working using the following command.</p>
+<div class="highlight"><pre><span></span><span class="n">netstat</span> <span class="o">-</span><span class="n">tlnp</span>
+</pre></div>
+
+
+<p>Or you can try to visit a website using curl through the socks5 proxy.</p>
+<div class="highlight"><pre><span></span><span class="n">curl</span> <span class="c1">--socks5 localhost:8888 www.google.com</span>
+</pre></div>
+
+
+<h2 id="reverse-ssh-tunnel">Reverse SSH Tunnel</h2>
+<p>https://www.howtoforge.com/reverse-ssh-tunneling</p>
+<p>https://unix.stackexchange.com/questions/46235/how-does-reverse-ssh-tunneling-work</p>
+<p>https://blog.devolutions.net/2017/3/what-is-reverse-ssh-port-forwarding</p>
+<h2 id="advanced-usage-1-ssh-into-a-server-using-proxy">Advanced Usage 1: SSH into a Server Using Proxy</h2>
+<div class="highlight"><pre><span></span><span class="n">ssh</span> <span class="o">-</span><span class="n">o</span> <span class="n">ProxyCommand</span><span class="o">=</span><span class="s1">&#39;ssh bastion_server -W %h:%p&#39;</span> <span class="n">target_server</span>
+</pre></div>
+
+
+<h2 id="advanced-usage-2-ssh-tunnel-to-avoid-2fa">Advanced Usage 2: SSH Tunnel to Avoid 2FA</h2>
+<p>Suppose you have 2 machines A and B. 
+Machine B is only accssible from machine A using SSH through 2FA.
+You can create and persist a SSH tunnel from machine A to machine B (2FA is still required).
+Then you can avoid 2FA when connecting from machine A to machine B 
+by using the created SSH tunnel as socks5 proxy through tools such as proxychains. </p>
+<h2 id="advanced-usage-3-ssh-reverse-tunnel-using-proxy">Advanced Usage 3: SSH Reverse Tunnel Using Proxy</h2>
+<div class="highlight"><pre><span></span><span class="n">ssh</span> <span class="o">-</span><span class="n">o</span> <span class="n">ProxyCommand</span><span class="o">=</span><span class="s1">&#39;ssh bastion_server -W %h:%p&#39;</span> <span class="o">-</span><span class="n">R</span> <span class="mi">20000</span><span class="p">:</span><span class="n">localhost</span><span class="p">:</span><span class="mi">22</span> <span class="n">target_server</span>
+</pre></div>
+
+
+<h2 id="advanced-usage-4-ssh-reverse-tunnel-ssh-tunnel">Advanced Usage 4: SSH Reverse Tunnel + SSH Tunnel</h2>
+<div class="highlight"><pre><span></span><span class="n">ssh</span> <span class="o">-</span><span class="n">fND</span> <span class="ss">&quot;*:1080&quot;</span> <span class="n">target_server</span>
+</pre></div>
+
+
+<p>Suppose you have 2 machines A and B. 
+Machine B cannot visit the public network nor machine A.
+However, machine B is accssible from machine A using SSH
+and machine A can visit the public network. 
+You can follow the steps below to access the public network from machine B.</p>
+<ol>
+<li>
+<p>Create a Reverse SSH tunnel from machine A to machine B.</p>
+</li>
+<li>
+<p>Create a SSH Tunnel on machine B.</p>
+</li>
+<li>
+<p>Use the create SSH Tunnel as a socks5 proxy to visit the public network.</p>
+</li>
+</ol>
+<h2 id="references">References</h2>
+<p><a href="https://www.systutorials.com/944/proxy-using-ssh-tunnel/">Proxy Using SSH Tunnel</a></p>
+<p><a href="http://www.revsys.com/writings/quicktips/ssh-tunnel.html">Quick-Tip: SSH Tunneling Made Easy</a></p>
+<p>https://superuser.com/questions/303251/how-to-check-if-a-socks5-proxy-works</p></div>
+    <footer>
+<p class="meta">
+  <span class="byline author vcard">
+    Posted by <span class="fn">Ben Chuanlong Du</span>
+  </span>
+<time datetime="2019-04-24T00:29:40-07:00" pubdate>Apr 24, 2019</time>  <span class="categories">
+    <a class="category" href="http://www.legendu.net/misc/tag/software.html">software</a>
+    <a class="category" href="http://www.legendu.net/misc/tag/ssh-tunnel.html">SSH tunnel</a>
+    <a class="category" href="http://www.legendu.net/misc/tag/socks-proxy.html">socks proxy</a>
+    <a class="category" href="http://www.legendu.net/misc/tag/reverse.html">reverse</a>
+  </span>
+</p>    </footer>
+  </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div>
+  </section>
+</div>
+<aside class="sidebar">
+  <section>
+    <h1>Recent Posts</h1>
+    <ul id="recent_posts">
+      <li class="post">
+          <a href="http://www.legendu.net/misc/blog/python-tips/">Tips on Python</a>
+      </li>
+      <li class="post">
+          <a href="http://www.legendu.net/misc/blog/python-tips-and-traps/">Python Tips and Traps</a>
+      </li>
+      <li class="post">
+          <a href="http://www.legendu.net/misc/blog/exception-and-error-handling-in-python/">Exception and Error Handling in Python</a>
+      </li>
+      <li class="post">
+          <a href="http://www.legendu.net/misc/blog/ipython-tips/">Tips on IPython</a>
+      </li>
+      <li class="post">
+          <a href="http://www.legendu.net/misc/blog/tips-for-git-large-file-storage/">Tips for Git Large File Storage</a>
+      </li>
+    </ul>
+  </section>
+  <section>
+      
+    <h1>Categories</h1>
+    <ul id="recent_posts">
+        <li><a href="http://www.legendu.net/misc/category/ai.html">AI</a></li>
+        <li><a href="http://www.legendu.net/misc/category/career.html">Career</a></li>
+        <li><a href="http://www.legendu.net/misc/category/cloud.html">Cloud</a></li>
+        <li><a href="http://www.legendu.net/misc/category/database.html">Database</a></li>
+        <li><a href="http://www.legendu.net/misc/category/encryption.html">Encryption</a></li>
+        <li><a href="http://www.legendu.net/misc/category/english.html">English</a></li>
+        <li><a href="http://www.legendu.net/misc/category/finance.html">Finance</a></li>
+        <li><a href="http://www.legendu.net/misc/category/fun-problems.html">Fun Problems</a></li>
+        <li><a href="http://www.legendu.net/misc/category/hardware.html">Hardware</a></li>
+        <li><a href="http://www.legendu.net/misc/category/internet.html">Internet</a></li>
+        <li><a href="http://www.legendu.net/misc/category/job.html">Job</a></li>
+        <li><a href="http://www.legendu.net/misc/category/jupyterlab.html">JupyterLab</a></li>
+        <li><a href="http://www.legendu.net/misc/category/language.html">Language</a></li>
+        <li><a href="http://www.legendu.net/misc/category/life.html">Life</a></li>
+        <li><a href="http://www.legendu.net/misc/category/links.html">Links</a></li>
+        <li><a href="http://www.legendu.net/misc/category/linux.html">Linux</a></li>
+        <li><a href="http://www.legendu.net/misc/category/machine-learning.html">Machine Learning</a></li>
+        <li><a href="http://www.legendu.net/misc/category/macos.html">macOS</a></li>
+        <li><a href="http://www.legendu.net/misc/category/network.html">Network</a></li>
+        <li><a href="http://www.legendu.net/misc/category/os.html">OS</a></li>
+        <li><a href="http://www.legendu.net/misc/category/people.html">People</a></li>
+        <li><a href="http://www.legendu.net/misc/category/philosophy.html">Philosophy</a></li>
+        <li><a href="http://www.legendu.net/misc/category/programming.html">Programming</a></li>
+        <li><a href="http://www.legendu.net/misc/category/research.html">Research</a></li>
+        <li><a href="http://www.legendu.net/misc/category/sheng-huo.html">生活</a></li>
+        <li><a href="http://www.legendu.net/misc/category/si-suo.html">思索</a></li>
+        <li><a href="http://www.legendu.net/misc/category/software.html">Software</a></li>
+        <li><a href="http://www.legendu.net/misc/category/statistics.html">Statistics</a></li>
+        <li><a href="http://www.legendu.net/misc/category/teleconference.html">Teleconference</a></li>
+        <li><a href="http://www.legendu.net/misc/category/tools.html">Tools</a></li>
+        <li><a href="http://www.legendu.net/misc/category/trading.html">Trading</a></li>
+        <li><a href="http://www.legendu.net/misc/category/unix.html">Unix</a></li>
+        <li><a href="http://www.legendu.net/misc/category/visualization.html">Visualization</a></li>
+        <li><a href="http://www.legendu.net/misc/category/windows.html">Windows</a></li>
+        <li><a href="http://www.legendu.net/misc/category/work.html">Work</a></li>
+    </ul>
+  </section>
+ 
+
+  <section>
+  <h1>Tags</h1>
+  <p class="tagcloud">
+  </p>
+  </section>
+
+
+
+  <section>
+    <h1>GitHub Repos</h1>
+    <ul id="gh_repos">
+      <li class="loading">Status updating...</li>
+    </ul>
+      <a href="https://github.com/dclong">@dclong</a> on GitHub
+    <script type="text/javascript">
+      $.domReady(function(){
+          if (!window.jXHR){
+              var jxhr = document.createElement('script');
+              jxhr.type = 'text/javascript';
+              jxhr.src = 'http://www.legendu.net/misc/theme/js/jXHR.js';
+              var s = document.getElementsByTagName('script')[0];
+              s.parentNode.insertBefore(jxhr, s);
+          }
+
+          github.showRepos({
+              user: 'dclong',
+              count: 3,
+              skip_forks: true,
+              target: '#gh_repos'
+          });
+      });
+    </script>
+    <script src="http://www.legendu.net/misc/theme/js/github.js" type="text/javascript"> </script>
+  </section>
+
+    <section>
+        <h1>Social</h2>
+        <ul>
+            <li><a href="https://www.linkedin.com/in/ben-chuanlong-du-1239b221/" target="_blank">LinkedIn</a></li>
+            <li><a href="https://twitter.com/longendu" target="_blank">Twitter</a></li>
+            <li><a href="https://www.facebook.com/chuanlong.du" target="_blank">Facebook</a></li>
+        <!--
+            <li><a href="http://www.legendu.net/misc/" type="application/rss+xml" rel="alternate">RSS</a></li>
+            -->
+        </ul>
+    </section>
+</aside>    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Ben Chuanlong Du -
+  <span class="credit">Powered by <a href="http://getpelican.com">Pelican</a></span>
+</p></footer>
+    <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-30259661-1']);
+    _gaq.push(['_trackPageview']);
+    (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+    </script>
+	<script type="text/javascript">
+	  var disqus_shortname = 'dclong';
+          var disqus_identifier = '/blog/ssh-tunnel/';
+          var disqus_url = 'http://www.legendu.net/misc/blog/ssh-tunnel/';
+          var disqus_title = 'SSH Tunnel';
+	  (function() {
+	    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	    dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+	    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	   })();
+	</script>
+</body>
+</html>

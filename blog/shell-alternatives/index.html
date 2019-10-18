@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Python Alternatives to Shell</title>
+  <meta name="author" content="Ben Chuanlong Du">
+
+  <link href="http://www.legendu.net/misc/atom.xml" type="application/atom+xml" rel="alternate"
+        title="Ben Chuanlong Du's Blog Atom Feed" />
+
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link href="http://www.legendu.net/misc/favicon.png" rel="icon">
+  <link href="http://www.legendu.net/misc/theme/css/main_2.css" media="screen, projection"
+        rel="stylesheet" type="text/css">
+  <script src="http://www.legendu.net/misc/theme/js/modernizr-2.0.js"></script>
+  <script src="http://www.legendu.net/misc/theme/js/ender.js"></script>
+  <script src="http://www.legendu.net/misc/theme/js/octopress.js" type="text/javascript"></script>
+
+  <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+</head>
+
+<body>
+  <header role="banner"><hgroup>
+  <h1><a href="http://www.legendu.net/misc/">Ben Chuanlong Du's Blog</a></h1>
+    <h2>It is never too late to learn.</h2>
+</hgroup></header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="http://www.legendu.net/misc/atom.xml" rel="subscribe-rss">RSS</a></li>
+</ul>
+
+<form name="search" action="https://www.bing.com/search" method="get" onSubmit="return build_query()">
+  <fieldset role="search">
+      <!--
+    <input type="hidden" name="q" value="site:http://www.legendu.net/misc" />
+        -->
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+
+<script type = "text/javascript">
+    function build_query() {
+        var query = document.forms["search"]["q"].value;
+        var prefix = "site:http://www.legendu.net/misc "
+        if (!query.startsWith(prefix)) {
+            query = prefix + query;
+            document.forms["search"]["q"].value = query;
+        }
+        return true;
+    }
+</script>
+
+<ul class="main-navigation">
+    <li><a href="http://www.legendu.net">Home</a></li>
+    <li><a href="http://www.legendu.net/misc">Blog</a></li>
+    <li><a href="http://www.legendu.net/misc/archives.html">Archives</a></li>
+    <li><a href="http://www.legendu.net/misc/pages/links.html">Links</a></li>
+</ul></nav>
+  <div id="main">
+    <div id="content">
+<div>
+  <article class="hentry" role="article">
+<header>
+      <h1 class="entry-title">Python Alternatives to Shell</h1>
+      <p class="meta"><time datetime="2019-10-13T11:55:32-07:00" pubdate>Oct 13, 2019</time></p>
+</header>
+
+  <div class="entry-content"><p><strong>
+Things on this page are fragmentary and immature notes/thoughts of the author.
+It is not meant to readers but rather for convenient reference of the author and future improvement.
+</strong></p>
+<p>**
+Things on this page are
+fragmentary and immature notes/thoughts of the author.
+It is not meant to readers
+but rather for convenient reference of the author and future improvement.</p>
+<h2 id="python-equivalent-of-shell-commands">Python Equivalent of Shell Commands</h2>
+<table style="width:100%">
+  <tr>
+    <th> Shell Command </th>
+    <th> Python Alternative </th>
+    <th> IPython Alternative </th>
+    <th> Python xonsh Alternative </th>
+  </tr>
+  <tr>
+    <td> mkdir -p path/to/some/file </td>
+    <td> os.makedirs('path/to/some/file', exist_ok=True) </td>
+    <td> !mkdir -p path/to/some/file </td>
+    <td> mkdir -p path/to/some/file </td>
+  </tr>
+  <tr>
+    <td> mkdir -p path/to/some/file </td>
+    <td> pathlib.Path('path/to/some/file').mkdir(exist_ok=True) </td>
+    <td> !mkdir -p path/to/some/file </td>
+    <td> mkdir -p path/to/some/file </td>
+  </tr>
+  <tr>
+    <td> cp file1 file2 </td>
+    <td> shutil.copy2('file1', 'file2') </td>
+    <td> !cp file1 file2 </td>
+    <td> cp file1 file2 </td>
+  </tr>
+  <tr>
+    <td> cp file1 file2 </td>
+    <td> shutil.copyfile('file1', 'file2') </td>
+    <td> !cp file1 file2 </td>
+    <td> cp file1 file2 </td>
+  </tr>
+  <tr>
+    <td> ln -s file1 file2 </td>
+    <td> os.symlink('file1', 'file2', target_is_directory=True) </td>
+    <td> !ln -s file1 file2 </td>
+    <td> ln -s file1 file2 </td>
+  </tr>
+  <tr>
+    <td> ln -s file1 file2 </td>
+    <td> pathlib.Path('file1').symlink_to('file2', target_is_directory=True) </td>
+    <td> !ln -s file1 file2 </td>
+    <td> ln -s file1 file2 </td>
+  </tr>
+  <tr>
+    <td> ln -sT file1 file2 </td>
+    <td> os.symlink('file1', 'file2', target_is_directory=False) </td>
+    <td> !ln -sT file1 file2 </td>
+    <td> ln -sT file1 file2 </td>
+  </tr>
+  <tr>
+    <td> ln -sT file1 file2 </td>
+    <td> pathlib.Path('file1').symlink_to('file2', target_is_directory=False) </td>
+    <td> !ln -sT file1 file2 </td>
+    <td> ln -sT file1 file2 </td>
+  </tr>
+  <tr>
+    <td> rm file </td>
+    <td> os.remove(file) </td>
+    <td> !rm file </td>
+    <td> rm file </td>
+  </tr>
+  <tr>
+    <td> rm -rf dir </td>
+    <td> shutil.rmtree(dir) </td>
+    <td> !rm -rf dir </td>
+    <td> rm -rf dir </td>
+  </tr>
+  <tr>
+    <td> mv file1 file2 </td>
+    <td> os.rename('file1', 'file2') </td>
+    <td> !mv file1 file2 </td>
+    <td> mv file1 file2 </td>
+  </tr>
+  <tr>
+    <td> mv file1 file2 </td>
+    <td> shutil.move('file1', 'file2') </td>
+    <td> !mv file1 file2 </td>
+    <td> mv file1 file2 </td>
+  </tr>
+</table>
+
+<h2 id="xonsh"><a href="https://github.com/xonsh/xonsh">xonsh</a></h2>
+<p>xonsh is the best and simplest Python approach to replace (most part of) shell so far.</p>
+<h2 id="ipython"><a href="https://github.com/ipython/ipython">IPython</a></h2>
+<p>IPython is the best and simpliest Python approach to replace (all part of) shell so far.</p>
+<p>https://ipython.readthedocs.io/en/stable/interactive/magics.html</p>
+<p>https://github.com/ivanov/vim-ipython</p>
+<ol>
+<li>
+<p>Use the IPython shell or JupyterLab notebook (preferred) instead of Shell for complicated interactive operations.</p>
+</li>
+<li>
+<p>Be careful about illegal shell commands.
+    For example,
+    <code>ls )</code> in Bash shell throws the error message <code>bash: syntax error near unexpected token )</code>.
+    If you have a equivalent IPython command,
+    it will throw the same error message.
+    For example,
+    suppose <code>file</code> is path of a file which contains <code>)</code>
+    then <code>!ls {file}</code> in IPython will throws the same error message as above.
+    However,
+    this is definitely trickier to debug than the original Bash shell command <code>ls )</code>.
+    There are several ways to avoid this.
+    First,
+    you can use Python script
+    (<a href="https://github.com/xonsh/xonsh">xonsh</a> is a great choice is vanilla Python script is too verbose)
+    instead Shell as underlying commands.
+    Second,
+    you can show the underlying Shell commands for debugging.</p>
+</li>
+<li>
+<p>You can even run Shell commands on a remote server (via <code>ssh</code> or a remote kernel) in JupyterLab notebook.
+    This provide the advantage of leveraging the JupyterLab notebook UI.</p>
+</li>
+</ol>
+<h2 id="plumbum"><a href="https://github.com/tomerfiliba/plumbum">plumbum</a></h2>
+<p>Yet another Python approach as a replacement of shell.
+I personally prefer IPython and xonsh to plumbum.</p>
+<h2 id="references">References</h2>
+<p>https://github.com/ninjaaron/replacing-bash-scripting-with-python</p>
+<p>https://stackoverflow.com/questions/209470/how-to-implement-common-bash-idioms-in-python</p>
+<p>https://stackoverflow.com/questions/123198/how-do-i-copy-a-file-in-python</p>
+<p>https://docs.python.org/3/library/pathlib.html#module-pathlib</p></div>
+    <footer>
+<p class="meta">
+  <span class="byline author vcard">
+    Posted by <span class="fn">Ben Chuanlong Du</span>
+  </span>
+<time datetime="2019-10-13T11:55:32-07:00" pubdate>Oct 13, 2019</time>  <span class="categories">
+    <a class="category" href="http://www.legendu.net/misc/tag/programming.html">programming</a>
+    <a class="category" href="http://www.legendu.net/misc/tag/ipython.html">IPython</a>
+    <a class="category" href="http://www.legendu.net/misc/tag/shell.html">shell</a>
+    <a class="category" href="http://www.legendu.net/misc/tag/bash.html">bash</a>
+    <a class="category" href="http://www.legendu.net/misc/tag/xonsh.html">xonsh</a>
+    <a class="category" href="http://www.legendu.net/misc/tag/plumbum.html">plumbum</a>
+    <a class="category" href="http://www.legendu.net/misc/tag/python.html">Python</a>
+    <a class="category" href="http://www.legendu.net/misc/tag/shell-alternatives.html">shell alternatives</a>
+  </span>
+</p>    </footer>
+  </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div>
+  </section>
+</div>
+<aside class="sidebar">
+  <section>
+    <h1>Recent Posts</h1>
+    <ul id="recent_posts">
+      <li class="post">
+          <a href="http://www.legendu.net/misc/blog/python-tips/">Tips on Python</a>
+      </li>
+      <li class="post">
+          <a href="http://www.legendu.net/misc/blog/python-tips-and-traps/">Python Tips and Traps</a>
+      </li>
+      <li class="post">
+          <a href="http://www.legendu.net/misc/blog/exception-and-error-handling-in-python/">Exception and Error Handling in Python</a>
+      </li>
+      <li class="post">
+          <a href="http://www.legendu.net/misc/blog/ipython-tips/">Tips on IPython</a>
+      </li>
+      <li class="post">
+          <a href="http://www.legendu.net/misc/blog/tips-for-git-large-file-storage/">Tips for Git Large File Storage</a>
+      </li>
+    </ul>
+  </section>
+  <section>
+      
+    <h1>Categories</h1>
+    <ul id="recent_posts">
+        <li><a href="http://www.legendu.net/misc/category/ai.html">AI</a></li>
+        <li><a href="http://www.legendu.net/misc/category/career.html">Career</a></li>
+        <li><a href="http://www.legendu.net/misc/category/cloud.html">Cloud</a></li>
+        <li><a href="http://www.legendu.net/misc/category/database.html">Database</a></li>
+        <li><a href="http://www.legendu.net/misc/category/encryption.html">Encryption</a></li>
+        <li><a href="http://www.legendu.net/misc/category/english.html">English</a></li>
+        <li><a href="http://www.legendu.net/misc/category/finance.html">Finance</a></li>
+        <li><a href="http://www.legendu.net/misc/category/fun-problems.html">Fun Problems</a></li>
+        <li><a href="http://www.legendu.net/misc/category/hardware.html">Hardware</a></li>
+        <li><a href="http://www.legendu.net/misc/category/internet.html">Internet</a></li>
+        <li><a href="http://www.legendu.net/misc/category/job.html">Job</a></li>
+        <li><a href="http://www.legendu.net/misc/category/jupyterlab.html">JupyterLab</a></li>
+        <li><a href="http://www.legendu.net/misc/category/language.html">Language</a></li>
+        <li><a href="http://www.legendu.net/misc/category/life.html">Life</a></li>
+        <li><a href="http://www.legendu.net/misc/category/links.html">Links</a></li>
+        <li><a href="http://www.legendu.net/misc/category/linux.html">Linux</a></li>
+        <li><a href="http://www.legendu.net/misc/category/machine-learning.html">Machine Learning</a></li>
+        <li><a href="http://www.legendu.net/misc/category/macos.html">macOS</a></li>
+        <li><a href="http://www.legendu.net/misc/category/network.html">Network</a></li>
+        <li><a href="http://www.legendu.net/misc/category/os.html">OS</a></li>
+        <li><a href="http://www.legendu.net/misc/category/people.html">People</a></li>
+        <li><a href="http://www.legendu.net/misc/category/philosophy.html">Philosophy</a></li>
+        <li><a href="http://www.legendu.net/misc/category/programming.html">Programming</a></li>
+        <li><a href="http://www.legendu.net/misc/category/research.html">Research</a></li>
+        <li><a href="http://www.legendu.net/misc/category/sheng-huo.html">生活</a></li>
+        <li><a href="http://www.legendu.net/misc/category/si-suo.html">思索</a></li>
+        <li><a href="http://www.legendu.net/misc/category/software.html">Software</a></li>
+        <li><a href="http://www.legendu.net/misc/category/statistics.html">Statistics</a></li>
+        <li><a href="http://www.legendu.net/misc/category/teleconference.html">Teleconference</a></li>
+        <li><a href="http://www.legendu.net/misc/category/tools.html">Tools</a></li>
+        <li><a href="http://www.legendu.net/misc/category/trading.html">Trading</a></li>
+        <li><a href="http://www.legendu.net/misc/category/unix.html">Unix</a></li>
+        <li><a href="http://www.legendu.net/misc/category/visualization.html">Visualization</a></li>
+        <li><a href="http://www.legendu.net/misc/category/windows.html">Windows</a></li>
+        <li><a href="http://www.legendu.net/misc/category/work.html">Work</a></li>
+    </ul>
+  </section>
+ 
+
+  <section>
+  <h1>Tags</h1>
+  <p class="tagcloud">
+  </p>
+  </section>
+
+
+
+  <section>
+    <h1>GitHub Repos</h1>
+    <ul id="gh_repos">
+      <li class="loading">Status updating...</li>
+    </ul>
+      <a href="https://github.com/dclong">@dclong</a> on GitHub
+    <script type="text/javascript">
+      $.domReady(function(){
+          if (!window.jXHR){
+              var jxhr = document.createElement('script');
+              jxhr.type = 'text/javascript';
+              jxhr.src = 'http://www.legendu.net/misc/theme/js/jXHR.js';
+              var s = document.getElementsByTagName('script')[0];
+              s.parentNode.insertBefore(jxhr, s);
+          }
+
+          github.showRepos({
+              user: 'dclong',
+              count: 3,
+              skip_forks: true,
+              target: '#gh_repos'
+          });
+      });
+    </script>
+    <script src="http://www.legendu.net/misc/theme/js/github.js" type="text/javascript"> </script>
+  </section>
+
+    <section>
+        <h1>Social</h2>
+        <ul>
+            <li><a href="https://www.linkedin.com/in/ben-chuanlong-du-1239b221/" target="_blank">LinkedIn</a></li>
+            <li><a href="https://twitter.com/longendu" target="_blank">Twitter</a></li>
+            <li><a href="https://www.facebook.com/chuanlong.du" target="_blank">Facebook</a></li>
+        <!--
+            <li><a href="http://www.legendu.net/misc/" type="application/rss+xml" rel="alternate">RSS</a></li>
+            -->
+        </ul>
+    </section>
+</aside>    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Ben Chuanlong Du -
+  <span class="credit">Powered by <a href="http://getpelican.com">Pelican</a></span>
+</p></footer>
+    <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-30259661-1']);
+    _gaq.push(['_trackPageview']);
+    (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+    </script>
+	<script type="text/javascript">
+	  var disqus_shortname = 'dclong';
+          var disqus_identifier = '/blog/shell-alternatives/';
+          var disqus_url = 'http://www.legendu.net/misc/blog/shell-alternatives/';
+          var disqus_title = 'Python Alternatives to Shell';
+	  (function() {
+	    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	    dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+	    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	   })();
+	</script>
+</body>
+</html>

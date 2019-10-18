@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Ben Chuanlong Du's Blog - Internet</title><link href="http://www.legendu.net/misc/" rel="alternate"></link><link href="http://www.legendu.net/misc/feeds/internet.atom.xml" rel="self"></link><id>http://www.legendu.net/misc/</id><updated>2019-07-30T08:25:40-07:00</updated><subtitle>It is never too late to learn.</subtitle><entry><title>Network Tips</title><link href="http://www.legendu.net/misc/blog/network-tips/" rel="alternate"></link><published>2019-07-30T08:25:40-07:00</published><updated>2019-07-30T08:25:40-07:00</updated><author><name>Ben Chuanlong Du</name></author><id>tag:www.legendu.net,2019-07-30:/misc/blog/network-tips/</id><summary type="html">&lt;p&gt;&lt;strong&gt;
+Things on this page are fragmentary and immature notes/thoughts of the author. 
+It is not meant to readers but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id="general-tips"&gt;General Tips&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;Use the same wireless network name and password 
+    so that your laptop and phone recognize it automatically.
+    This …&lt;/li&gt;&lt;/ol&gt;</summary><content type="html">&lt;p&gt;&lt;strong&gt;
+Things on this page are fragmentary and immature notes/thoughts of the author. 
+It is not meant to readers but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id="general-tips"&gt;General Tips&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;Use the same wireless network name and password 
+    so that your laptop and phone recognize it automatically.
+    This makes things much more convenient.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="debugging-network-issues"&gt;Debugging Network Issues&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Check whether you have block some services in /etc/hosts.allow or iptables, etc.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;http://192.168.0.1/ is the router address&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Turn off wireless router and moderm. 
+    Start wireless router and wait for 30 seconds,
+    and then start the moderm.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="permanent-change-to-the-file-etcresolvconf"&gt;Permanent Change to the File /etc/resolv.conf&lt;/h2&gt;
+&lt;p&gt;Notice that the content of &lt;code&gt;/etc/resolv.conf&lt;/code&gt; is dynamically managed. 
+Content of the file might change after the host machine is rebooted. 
+Below are some ways to make changes to the file &lt;code&gt;/etc/resolv.conf&lt;/code&gt; permanent.
+(Notice that below are solutions for Linux machines only.
+Do NOT use any of the solutions below when you are building a Docker image
+as Docker has its own way of handling DNS.)&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Make &lt;code&gt;/etc/resolv.conf&lt;/code&gt; immutable. &lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Update the file &lt;code&gt;/etc/dhcp/dhclient.conf&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;use &lt;code&gt;resolvconf&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;more ...&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;https://kb.isc.org/docs/isc-dhcp-44-manual-pages-dhclientconf&lt;/p&gt;
+&lt;p&gt;https://www.techrepublic.com/article/how-to-set-dns-nameservers-in-ubuntu-server-18-04/&lt;/p&gt;
+&lt;p&gt;https://unix.stackexchange.com/questions/128220/how-do-i-set-my-dns-when-resolv-conf-is-being-overwritten&lt;/p&gt;
+&lt;p&gt;https://unix.stackexchange.com/questions/128220/how-do-i-set-my-dns-when-resolv-conf-is-being-overwritten/163506#163506&lt;/p&gt;
+&lt;p&gt;https://wiki.debian.org/resolv.conf&lt;/p&gt;
+&lt;p&gt;https://itsfoss.com/resolvconf-permanent-ubuntu/&lt;/p&gt;
+&lt;p&gt;https://askubuntu.com/questions/623940/network-manager-how-to-stop-nm-updating-etc-resolv-conf/623956#623956&lt;/p&gt;
+&lt;p&gt;https://askubuntu.com/questions/157154/how-do-i-include-lines-in-resolv-conf-that-wont-get-lost-on-reboot&lt;/p&gt;
+&lt;p&gt;https://www.linuxquestions.org/questions/linux-software-2/i-can%27t-change-file-permission-via-chattr-4175553888/&lt;/p&gt;
+&lt;p&gt;https://stackoverflow.com/questions/48578108/what-the-differences-between-chattr-i-file-and-chmod-w-file&lt;/p&gt;
+&lt;p&gt;https://askubuntu.com/questions/1006741/what-is-the-difference-between-chmod-and-chattr&lt;/p&gt;
+&lt;h2 id="list-network-cards"&gt;List Network Cards&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;lspci&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="n"&gt;egrep&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="c1"&gt;--color &amp;#39;network|ethernet&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Or you can use &lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;lshw&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="n"&gt;network&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2 id="ip-address"&gt;IP Address&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;To get the your external ip address, use the following simple command.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;curl&lt;/span&gt; &lt;span class="n"&gt;ifconfig&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;me&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Or you can directly search "my public ip" on Google.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;To scan for all ips in a local network, you can use the following command.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;arp&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;scan&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;l&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;You can specify an device to scan by the option &lt;code&gt;-I&lt;/code&gt;.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;arp&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;scan&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;l&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;I&lt;/span&gt; &lt;span class="n"&gt;dev&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;where "dev" is the device name of your net card. 
+For example, 
+if you use wireless network, "dev" is probably "wlan0".&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="network-monitoring"&gt;Network Monitoring&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;vnStat&lt;/code&gt; is a console-based tool for monitoring network traffic bandwidth usage. 
+    It uses the network interface statistics provided by the kernel as information source. 
+    This means that vnStat won't actually be sniffing any traffic 
+    and also ensures light use of system resources. &lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Tcpdump is a network sniffer tool.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="references"&gt;References&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://wiki.archlinux.org/index.php/NetworkManager"&gt;Arch Linux Doc - NetworkManager&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.cyberciti.biz/faq/linux-list-network-cards-command/"&gt;List Network Cards on Linux&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;http://www.linuxandubuntu.com/home/best-network-monitoring-tools-for-linux&lt;/p&gt;
+&lt;p&gt;https://www.ittsystems.com/linux-network-monitor-tools-and-software/&lt;/p&gt;
+&lt;p&gt;https://techtalk.gfi.com/the-top-20-free-network-monitoring-and-analysis-tools-for-sys-admins/&lt;/p&gt;
+&lt;p&gt;https://www.tecmint.com/20-netstat-commands-for-linux-network-management/&lt;/p&gt;
+&lt;p&gt;https://www.tecmint.com/12-tcpdump-commands-a-network-sniffer-tool/&lt;/p&gt;</content><category term="internet"></category><category term="web"></category><category term="network"></category><category term="tips"></category></entry><entry><title>Baidu Yun Tips</title><link href="http://www.legendu.net/misc/blog/baidu-cloud-tips/" rel="alternate"></link><published>2019-02-26T23:41:04-08:00</published><updated>2019-02-26T23:41:04-08:00</updated><author><name>Ben Chuanlong Du</name></author><id>tag:www.legendu.net,2019-02-26:/misc/blog/baidu-cloud-tips/</id><summary type="html">&lt;p&gt;&lt;strong&gt;
+Things on this page are fragmentary and immature notes/thoughts of the author. 
+It is not meant to readers but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Baidu cloud is a good backup solution but not a good synchronization solution.
+    Do not try to synchronize your devices …&lt;/p&gt;&lt;/li&gt;&lt;/ol&gt;</summary><content type="html">&lt;p&gt;&lt;strong&gt;
+Things on this page are fragmentary and immature notes/thoughts of the author. 
+It is not meant to readers but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Baidu cloud is a good backup solution but not a good synchronization solution.
+    Do not try to synchronize your devices via Baidu cloud.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;bypy -v upload&lt;/code&gt; &lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;There is a unofficial client for Baidu Cloud 
+    at &lt;a href="https://github.com/LiuLang/bcloud"&gt;https://github.com/LiuLang/bcloud&lt;/a&gt;.
+    This client support fast upload (comparing hash before uploading).
+    However, it is not compatible with Baidu's official client. 
+    Suppose a file is uploaded using this unoffical client,
+    the offical client won't use fast upload if you upload it again.
+    So the suggestion is to stick with one of them.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="alternatives"&gt;Alternatives&lt;/h2&gt;
+&lt;p&gt;https://github.com/iikira/BaiduPCS-Go&lt;/p&gt;
+&lt;p&gt;https://github.com/liuzhuoling2011/baidupcs-web&lt;/p&gt;
+&lt;p&gt;https://hub.docker.com/r/auska/docker-baidupcs&lt;/p&gt;
+&lt;p&gt;https://hub.docker.com/r/oldiy/baidupcs&lt;/p&gt;
+&lt;p&gt;wine + baidu pan &lt;/p&gt;
+&lt;p&gt;Use BaiduExporter (Chrome plugin) to get the link &lt;/p&gt;
+&lt;p&gt;Tampermonkey (Chrome plugin) + Greasy Fork (website)&lt;/p&gt;
+&lt;p&gt;WinTPC VM&lt;/p&gt;</content><category term="internet"></category><category term="web"></category><category term="Baidu Yun"></category><category term="cloud"></category><category term="tips"></category></entry><entry><title>NFS Tips</title><link href="http://www.legendu.net/misc/blog/nfs-tips/" rel="alternate"></link><published>2016-07-13T22:42:03-07:00</published><updated>2016-07-13T22:42:03-07:00</updated><author><name>Ben Chuanlong Du</name></author><id>tag:www.legendu.net,2016-07-13:/misc/blog/nfs-tips/</id><summary type="html">&lt;p&gt;&lt;strong&gt;
+Things on this page are fragmentary and immature notes/thoughts of the author. 
+It is not meant to readers but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Make sure nfs service is not blocked. 
+Check iptables and "/etc/hosts.allow".&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Make sure nfs service is running on …&lt;/p&gt;&lt;/li&gt;&lt;/ol&gt;</summary><content type="html">&lt;p&gt;&lt;strong&gt;
+Things on this page are fragmentary and immature notes/thoughts of the author. 
+It is not meant to readers but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Make sure nfs service is not blocked. 
+Check iptables and "/etc/hosts.allow".&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Make sure nfs service is running on the server.&lt;/p&gt;
+&lt;p&gt;sudo service nfs-kernel-server start&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;You can choose the version of nfs using the option &lt;code&gt;-o nfsvers=n&lt;/code&gt;
+while mounting directories.
+It seems to me on Debian you have to use &lt;code&gt;-o nfsvers=3&lt;/code&gt; (based on a previous experience).
+    mount -t nfs -o nfsvers=3 192.168.0.8:/home/dclong/downloads mnt/nfsshare
+Generally speaking, you do not have to choose a specific version manually.
+I tried on Ubuntu (server) and Linux Mint (client) and it works well with the default version (4). &lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;You can choose to change the ownership of a shared file/directory to &lt;code&gt;nobody/nogroup&lt;/code&gt;
+to make it easier to access files,
+but this is not required 
+and you will probably only have read access unless the option &lt;code&gt;no_root_squash&lt;/code&gt;
+is specified in the server settings 
+or your user name is the name on the client as on the server.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;You can use wildcard in the &lt;code&gt;/etc/exports&lt;/code&gt; settings. 
+For example,
+    /nfs 192.168.&lt;em&gt;.&lt;/em&gt;(ro,sync)
+shares /nfs with all local network devices with ready-only access.
+more examples
+    &lt;em&gt;(ro,sync) all ips
+    &lt;/em&gt;.iastate.edu(ro,sync) all iastate.edu ips&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;You can use net mask in the &lt;code&gt;/etc/exports&lt;/code&gt; settings.
+for example,
+    /nfs 192.168.1.0/24(ro,sync)
+shares /nfs with local ip address 192.168.1.1 to 192.168.1.254. 
+It is equivalent to 
+    /nfs 192.168.1.*(ro,sync)&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;</content><category term="Linux"></category><category term="internet"></category><category term="web"></category><category term="NFS"></category><category term="file system"></category><category term="tips"></category></entry><entry><title>Disqus Tips</title><link href="http://www.legendu.net/misc/blog/disqus-tips/" rel="alternate"></link><published>2015-06-14T14:54:15-07:00</published><updated>2015-06-14T14:54:15-07:00</updated><author><name>Ben Chuanlong Du</name></author><id>tag:www.legendu.net,2015-06-14:/misc/blog/disqus-tips/</id><summary type="html">&lt;p&gt;&lt;strong&gt;
+Things on this page are
+fragmentary and immature notes/thoughts of the author.
+It is not meant to readers
+but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;When migrating urls, only migrate these that are needed.
+this will make your work much simpler and make it much …&lt;/li&gt;&lt;/ol&gt;</summary><content type="html">&lt;p&gt;&lt;strong&gt;
+Things on this page are
+fragmentary and immature notes/thoughts of the author.
+It is not meant to readers
+but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;When migrating urls, only migrate these that are needed.
+this will make your work much simpler and make it much faster to migrate
+And you might have to iterate a few times ...&lt;/li&gt;
+&lt;/ol&gt;</content><category term="internet"></category><category term="web"></category><category term="forum"></category><category term="discussion"></category><category term="comment"></category></entry></feed>

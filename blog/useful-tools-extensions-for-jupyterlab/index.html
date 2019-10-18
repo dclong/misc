@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Useful Tools and Extensions for JupyterLab</title>
+  <meta name="author" content="Ben Chuanlong Du">
+
+  <link href="http://www.legendu.net/misc/atom.xml" type="application/atom+xml" rel="alternate"
+        title="Ben Chuanlong Du's Blog Atom Feed" />
+
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link href="http://www.legendu.net/misc/favicon.png" rel="icon">
+  <link href="http://www.legendu.net/misc/theme/css/main_2.css" media="screen, projection"
+        rel="stylesheet" type="text/css">
+  <script src="http://www.legendu.net/misc/theme/js/modernizr-2.0.js"></script>
+  <script src="http://www.legendu.net/misc/theme/js/ender.js"></script>
+  <script src="http://www.legendu.net/misc/theme/js/octopress.js" type="text/javascript"></script>
+
+  <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+</head>
+
+<body>
+  <header role="banner"><hgroup>
+  <h1><a href="http://www.legendu.net/misc/">Ben Chuanlong Du's Blog</a></h1>
+    <h2>It is never too late to learn.</h2>
+</hgroup></header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="http://www.legendu.net/misc/atom.xml" rel="subscribe-rss">RSS</a></li>
+</ul>
+
+<form name="search" action="https://www.bing.com/search" method="get" onSubmit="return build_query()">
+  <fieldset role="search">
+      <!--
+    <input type="hidden" name="q" value="site:http://www.legendu.net/misc" />
+        -->
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+
+<script type = "text/javascript">
+    function build_query() {
+        var query = document.forms["search"]["q"].value;
+        var prefix = "site:http://www.legendu.net/misc "
+        if (!query.startsWith(prefix)) {
+            query = prefix + query;
+            document.forms["search"]["q"].value = query;
+        }
+        return true;
+    }
+</script>
+
+<ul class="main-navigation">
+    <li><a href="http://www.legendu.net">Home</a></li>
+    <li><a href="http://www.legendu.net/misc">Blog</a></li>
+    <li><a href="http://www.legendu.net/misc/archives.html">Archives</a></li>
+    <li><a href="http://www.legendu.net/misc/pages/links.html">Links</a></li>
+</ul></nav>
+  <div id="main">
+    <div id="content">
+<div>
+  <article class="hentry" role="article">
+<header>
+      <h1 class="entry-title">Useful Tools and Extensions for JupyterLab</h1>
+      <p class="meta"><time datetime="2019-08-06T22:18:58-07:00" pubdate>Aug 06, 2019</time></p>
+</header>
+
+  <div class="entry-content"><p><strong>
+Things on this page are
+fragmentary and immature notes/thoughts of the author.
+It is not meant to readers
+but rather for convenient reference of the author and future improvement.
+</strong></p>
+<div class="highlight"><pre><span></span>jupyter labextension install some_extension
+</pre></div>
+
+
+<div class="highlight"><pre><span></span>jupyter labextension uninstall some_extension
+</pre></div>
+
+
+<h2 id="useful-tools">Useful Tools</h2>
+<h3 id="jupyternbdime"><a href="https://github.com/jupyter/nbdime">jupyter/nbdime</a></h3>
+<p>Tools for diffing and merging of Jupyter notebooks.
+Notice that nbdime integrates with git well.</p>
+<p>You can use the following command to configure nbdime for Git.</p>
+<div class="highlight"><pre><span></span><span class="n">nbdime</span> <span class="n">config</span><span class="o">-</span><span class="n">git</span> <span class="p">(</span><span class="c1">--enable | --disable) [--global | --system]</span>
+</pre></div>
+
+
+<p>Register nbdime with Git for the current project/repository.</p>
+<div class="highlight"><pre><span></span><span class="n">nbdime</span> <span class="n">config</span><span class="o">-</span><span class="n">git</span> <span class="c1">--enable</span>
+</pre></div>
+
+
+<p>Deregister nbdime with Git for the current project/repository.</p>
+<div class="highlight"><pre><span></span><span class="n">nbdime</span> <span class="n">config</span><span class="o">-</span><span class="n">git</span> <span class="c1">--disable</span>
+</pre></div>
+
+
+<p>Register nbdime with Git for global users.</p>
+<div class="highlight"><pre><span></span><span class="n">nbdime</span> <span class="n">config</span><span class="o">-</span><span class="n">git</span> <span class="c1">--enable --global</span>
+</pre></div>
+
+
+<p>Deregister nbdime with Git for global users.</p>
+<div class="highlight"><pre><span></span><span class="n">nbdime</span> <span class="n">config</span><span class="o">-</span><span class="n">git</span> <span class="c1">--disable --global</span>
+</pre></div>
+
+
+<h3 id="jupyterhub">JupyterHub</h3>
+<h3 id="sudospawner">sudospawner</h3>
+<h2 id="useful-extensions-for-jupyterlab">Useful Extensions for JupyterLab</h2>
+<h3 id="jupyterlab-toc"><a href="https://github.com/jupyterlab/jupyterlab-toc">jupyterlab-toc</a></h3>
+<h3 id="jupyterlab-drawio"><a href="https://github.com/QuantStack/jupyterlab-drawio">jupyterlab-drawio</a></h3>
+<p>www.draw.io is also interesting,</p>
+<h3 id="jupyterlab-latex"><a href="https://github.com/jupyterlab/jupyterlab-latex">jupyterlab-latex</a></h3>
+<h3 id="voila"><a href="https://github.com/QuantStack/voila">Voila</a></h3>
+<h3 id="jupyterlab-spreadsheet"><a href="https://github.com/quigleyj97/jupyterlab-spreadsheet">jupyterlab-spreadsheet</a></h3>
+<h3 id="ipywidgets"><a href="https://github.com/ipython/ipywidgets/tree/master/jupyterlab_widgets">ipywidgets</a></h3>
+<div class="highlight"><pre><span></span><span class="nv">Interactive</span> <span class="nv">HTML</span> <span class="nv">widgets</span> <span class="ss">(</span><span class="nv">slider</span>, <span class="nv">button</span>, <span class="nv">textbox</span>, <span class="nv">etc</span>.<span class="ss">)</span> <span class="k">for</span> <span class="nv">Python</span> <span class="nv">Notebook</span>.
+
+    <span class="nv">pip</span> <span class="nv">install</span> <span class="nv">jupyterlab_widgets</span>
+    <span class="nv">jupyter</span> <span class="nv">labextension</span> <span class="nv">install</span> <span class="o">--</span><span class="nv">sys</span><span class="o">-</span><span class="nv">prefix</span> <span class="o">--</span><span class="nv">py</span> <span class="nv">jupyterlab_widgets</span>
+    <span class="nv">jupyter</span> <span class="nv">labextension</span> <span class="nv">enable</span> <span class="o">--</span><span class="nv">sys</span><span class="o">-</span><span class="nv">prefix</span> <span class="o">--</span><span class="nv">py</span> <span class="nv">jupyterlab_widgets</span>
+
+<span class="nv">Examples</span> <span class="nv">of</span> <span class="nv">custom</span> <span class="nv">widget</span> <span class="nv">libraries</span> <span class="nv">built</span> <span class="nv">upon</span> <span class="nv">ipywidgets</span> <span class="nv">are</span>
+
+<span class="o">-</span> <span class="nv">bqplot</span> <span class="nv">a</span> <span class="mi">2</span><span class="nv">d</span> <span class="nv">data</span> <span class="nv">visualization</span> <span class="nv">library</span> <span class="nv">enabling</span> <span class="nv">custom</span> <span class="nv">user</span> <span class="nv">interactions</span>.
+
+<span class="o">-</span> <span class="nv">pythreejs</span> <span class="nv">a</span> <span class="nv">Jupyter</span> <span class="o">-</span> <span class="nv">Three</span>.<span class="nv">js</span> <span class="nv">wrapper</span>, <span class="nv">bringing</span> <span class="nv">Three</span>.<span class="nv">js</span> <span class="nv">to</span> <span class="nv">the</span> <span class="nv">notebook</span>.
+
+<span class="o">-</span> <span class="nv">ipyleaflet</span> <span class="nv">a</span> <span class="nv">leaflet</span> <span class="nv">widget</span> <span class="k">for</span> <span class="nv">Jupyter</span>.
+</pre></div>
+
+
+<h2 id="not-so-useful-extensions-for-jupyterlab">Not So Useful Extensions for JupyterLab</h2>
+<h3 id="jupyterlab_geojson"><a href="https://github.com/jupyterlab/jupyterlab_geojson">jupyterlab_geojson</a></h3>
+<div class="highlight"><pre><span></span>pip3 install jupyterlab_geojson
+jupyter labextension install --py --sys-prefix jupyterlab_geojson
+jupyter labextension <span class="nb">enable</span> --py --sys-prefix jupyterlab_geojson
+</pre></div>
+
+
+<h3 id="jupyterlab-quickopen"><a href="https://github.com/parente/jupyterlab-quickopen">jupyterlab-quickopen</a></h3>
+<p>Very slow when there are lots of files.</p>
+<h3 id="jupyterlab-monaco"><a href="https://github.com/jupyterlab/jupyterlab-monaco">jupyterlab-monaco</a></h3>
+<h3 id="jupyterlab_spellchecker"><a href="https://github.com/ijmbarr/jupyterlab_spellchecker">jupyterlab_spellchecker</a></h3>
+<h3 id="jupyterlab-flake8"><a href="https://github.com/mlshapiro/jupyterlab-flake8">jupyterlab-flake8</a></h3>
+<p>A non polished product. Too much messages.</p>
+<h3 id="jupyterlab_code_formatter"><a href="https://github.com/ryantam626/jupyterlab_code_formatter">jupyterlab_code_formatter</a></h3>
+<h3 id="qgrid"><a href="https://github.com/quantopian/qgrid">qgrid</a></h3>
+<h3 id="jupyterlab-google-drive"><a href="https://github.com/jupyterlab/jupyterlab-google-drive">jupyterlab-google-drive</a></h3>
+<p>Not sure whether this is useful.</p>
+<h3 id="widget-cookiecutter"><a href="https://github.com/jupyter/widget-cookiecutter">widget-cookiecutter</a></h3>
+<div class="highlight"><pre><span></span><span class="n">pip3</span> <span class="n">install</span> <span class="n">cookiecutter</span>
+</pre></div>
+
+
+<h3 id="jupyter_declarativewidgets">jupyter_declarativewidgets</h3>
+<h3 id="jupyter-wysiwyg">jupyter-wysiwyg</h3>
+<p>not available for jupyterlab yet ...</p></div>
+    <footer>
+<p class="meta">
+  <span class="byline author vcard">
+    Posted by <span class="fn">Ben Chuanlong Du</span>
+  </span>
+<time datetime="2019-08-06T22:18:58-07:00" pubdate>Aug 06, 2019</time>  <span class="categories">
+    <a class="category" href="http://www.legendu.net/misc/tag/software.html">software</a>
+    <a class="category" href="http://www.legendu.net/misc/tag/jupyterlab.html">JupyterLab</a>
+    <a class="category" href="http://www.legendu.net/misc/tag/extension.html">extension</a>
+    <a class="category" href="http://www.legendu.net/misc/tag/plugin.html">plugin</a>
+    <a class="category" href="http://www.legendu.net/misc/tag/jupyterhub.html">JupyterHub</a>
+    <a class="category" href="http://www.legendu.net/misc/tag/nbdime.html">nbdime</a>
+  </span>
+</p>    </footer>
+  </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div>
+  </section>
+</div>
+<aside class="sidebar">
+  <section>
+    <h1>Recent Posts</h1>
+    <ul id="recent_posts">
+      <li class="post">
+          <a href="http://www.legendu.net/misc/blog/python-tips/">Tips on Python</a>
+      </li>
+      <li class="post">
+          <a href="http://www.legendu.net/misc/blog/python-tips-and-traps/">Python Tips and Traps</a>
+      </li>
+      <li class="post">
+          <a href="http://www.legendu.net/misc/blog/exception-and-error-handling-in-python/">Exception and Error Handling in Python</a>
+      </li>
+      <li class="post">
+          <a href="http://www.legendu.net/misc/blog/ipython-tips/">Tips on IPython</a>
+      </li>
+      <li class="post">
+          <a href="http://www.legendu.net/misc/blog/tips-for-git-large-file-storage/">Tips for Git Large File Storage</a>
+      </li>
+    </ul>
+  </section>
+  <section>
+      
+    <h1>Categories</h1>
+    <ul id="recent_posts">
+        <li><a href="http://www.legendu.net/misc/category/ai.html">AI</a></li>
+        <li><a href="http://www.legendu.net/misc/category/career.html">Career</a></li>
+        <li><a href="http://www.legendu.net/misc/category/cloud.html">Cloud</a></li>
+        <li><a href="http://www.legendu.net/misc/category/database.html">Database</a></li>
+        <li><a href="http://www.legendu.net/misc/category/encryption.html">Encryption</a></li>
+        <li><a href="http://www.legendu.net/misc/category/english.html">English</a></li>
+        <li><a href="http://www.legendu.net/misc/category/finance.html">Finance</a></li>
+        <li><a href="http://www.legendu.net/misc/category/fun-problems.html">Fun Problems</a></li>
+        <li><a href="http://www.legendu.net/misc/category/hardware.html">Hardware</a></li>
+        <li><a href="http://www.legendu.net/misc/category/internet.html">Internet</a></li>
+        <li><a href="http://www.legendu.net/misc/category/job.html">Job</a></li>
+        <li><a href="http://www.legendu.net/misc/category/jupyterlab.html">JupyterLab</a></li>
+        <li><a href="http://www.legendu.net/misc/category/language.html">Language</a></li>
+        <li><a href="http://www.legendu.net/misc/category/life.html">Life</a></li>
+        <li><a href="http://www.legendu.net/misc/category/links.html">Links</a></li>
+        <li><a href="http://www.legendu.net/misc/category/linux.html">Linux</a></li>
+        <li><a href="http://www.legendu.net/misc/category/machine-learning.html">Machine Learning</a></li>
+        <li><a href="http://www.legendu.net/misc/category/macos.html">macOS</a></li>
+        <li><a href="http://www.legendu.net/misc/category/network.html">Network</a></li>
+        <li><a href="http://www.legendu.net/misc/category/os.html">OS</a></li>
+        <li><a href="http://www.legendu.net/misc/category/people.html">People</a></li>
+        <li><a href="http://www.legendu.net/misc/category/philosophy.html">Philosophy</a></li>
+        <li><a href="http://www.legendu.net/misc/category/programming.html">Programming</a></li>
+        <li><a href="http://www.legendu.net/misc/category/research.html">Research</a></li>
+        <li><a href="http://www.legendu.net/misc/category/sheng-huo.html">生活</a></li>
+        <li><a href="http://www.legendu.net/misc/category/si-suo.html">思索</a></li>
+        <li><a href="http://www.legendu.net/misc/category/software.html">Software</a></li>
+        <li><a href="http://www.legendu.net/misc/category/statistics.html">Statistics</a></li>
+        <li><a href="http://www.legendu.net/misc/category/teleconference.html">Teleconference</a></li>
+        <li><a href="http://www.legendu.net/misc/category/tools.html">Tools</a></li>
+        <li><a href="http://www.legendu.net/misc/category/trading.html">Trading</a></li>
+        <li><a href="http://www.legendu.net/misc/category/unix.html">Unix</a></li>
+        <li><a href="http://www.legendu.net/misc/category/visualization.html">Visualization</a></li>
+        <li><a href="http://www.legendu.net/misc/category/windows.html">Windows</a></li>
+        <li><a href="http://www.legendu.net/misc/category/work.html">Work</a></li>
+    </ul>
+  </section>
+ 
+
+  <section>
+  <h1>Tags</h1>
+  <p class="tagcloud">
+  </p>
+  </section>
+
+
+
+  <section>
+    <h1>GitHub Repos</h1>
+    <ul id="gh_repos">
+      <li class="loading">Status updating...</li>
+    </ul>
+      <a href="https://github.com/dclong">@dclong</a> on GitHub
+    <script type="text/javascript">
+      $.domReady(function(){
+          if (!window.jXHR){
+              var jxhr = document.createElement('script');
+              jxhr.type = 'text/javascript';
+              jxhr.src = 'http://www.legendu.net/misc/theme/js/jXHR.js';
+              var s = document.getElementsByTagName('script')[0];
+              s.parentNode.insertBefore(jxhr, s);
+          }
+
+          github.showRepos({
+              user: 'dclong',
+              count: 3,
+              skip_forks: true,
+              target: '#gh_repos'
+          });
+      });
+    </script>
+    <script src="http://www.legendu.net/misc/theme/js/github.js" type="text/javascript"> </script>
+  </section>
+
+    <section>
+        <h1>Social</h2>
+        <ul>
+            <li><a href="https://www.linkedin.com/in/ben-chuanlong-du-1239b221/" target="_blank">LinkedIn</a></li>
+            <li><a href="https://twitter.com/longendu" target="_blank">Twitter</a></li>
+            <li><a href="https://www.facebook.com/chuanlong.du" target="_blank">Facebook</a></li>
+        <!--
+            <li><a href="http://www.legendu.net/misc/" type="application/rss+xml" rel="alternate">RSS</a></li>
+            -->
+        </ul>
+    </section>
+</aside>    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Ben Chuanlong Du -
+  <span class="credit">Powered by <a href="http://getpelican.com">Pelican</a></span>
+</p></footer>
+    <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-30259661-1']);
+    _gaq.push(['_trackPageview']);
+    (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+    </script>
+	<script type="text/javascript">
+	  var disqus_shortname = 'dclong';
+          var disqus_identifier = '/blog/useful-tools-extensions-for-jupyterlab/';
+          var disqus_url = 'http://www.legendu.net/misc/blog/useful-tools-extensions-for-jupyterlab/';
+          var disqus_title = 'Useful Tools and Extensions for JupyterLab';
+	  (function() {
+	    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	    dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+	    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	   })();
+	</script>
+</body>
+</html>

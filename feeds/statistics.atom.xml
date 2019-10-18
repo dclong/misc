@@ -1,0 +1,1258 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Ben Chuanlong Du's Blog - Statistics</title><link href="http://www.legendu.net/misc/" rel="alternate"></link><link href="http://www.legendu.net/misc/feeds/statistics.atom.xml" rel="self"></link><id>http://www.legendu.net/misc/</id><updated>2018-05-27T16:39:55-07:00</updated><subtitle>It is never too late to learn.</subtitle><entry><title>Tools for A/B Testing</title><link href="http://www.legendu.net/misc/blog/tools-for-ab-testing/" rel="alternate"></link><published>2018-05-27T16:39:55-07:00</published><updated>2018-05-27T16:39:55-07:00</updated><author><name>Ben Chuanlong Du</name></author><id>tag:www.legendu.net,2018-05-27:/misc/blog/tools-for-ab-testing/</id><summary type="html">&lt;p&gt;&lt;strong&gt;
+Things on this page are
+fragmentary and immature notes/thoughts of the author.
+It is not meant to readers
+but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://www.evanmiller.org/ab-testing/"&gt;Evan’s Awesome A/B Tools&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;http://www.statsmodels.org/stable/stats.html#module-statsmodels.stats.power&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;strong&gt;
+Things on this page are
+fragmentary and immature notes/thoughts of the author.
+It is not meant to readers
+but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://www.evanmiller.org/ab-testing/"&gt;Evan’s Awesome A/B Tools&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;http://www.statsmodels.org/stable/stats.html#module-statsmodels.stats.power&lt;/p&gt;</content><category term="statistics"></category><category term="A/B testing"></category><category term="AB testing"></category></entry><entry><title>Effect of Duplicating Observations in Linear Models</title><link href="http://www.legendu.net/misc/blog/effect-of-duplicating-observations-in-linear-models/" rel="alternate"></link><published>2016-08-15T21:45:26-07:00</published><updated>2016-08-15T21:45:26-07:00</updated><author><name>Ben Chuanlong Du</name></author><id>tag:www.legendu.net,2016-08-15:/misc/blog/effect-of-duplicating-observations-in-linear-models/</id><summary type="html">&lt;p&gt;&lt;strong&gt;
+Things on this page are fragmentary and immature notes/thoughts of the author. 
+It is not meant to readers but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;coefficients don't change but variance become smaller.
+use formula to show it ...&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;strong&gt;
+Things on this page are fragmentary and immature notes/thoughts of the author. 
+It is not meant to readers but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;coefficients don't change but variance become smaller.
+use formula to show it ...&lt;/p&gt;</content><category term="duplicate"></category><category term="statistics"></category><category term="modeling"></category><category term="linear model"></category><category term="observation"></category></entry><entry><title>Statistics</title><link href="http://www.legendu.net/misc/blog/statistics-tips/" rel="alternate"></link><published>2016-07-13T22:40:14-07:00</published><updated>2016-07-13T22:40:14-07:00</updated><author><name>Ben Chuanlong Du</name></author><id>tag:www.legendu.net,2016-07-13:/misc/blog/statistics-tips/</id><summary type="html">&lt;p&gt;&lt;strong&gt;
+Things on this page are fragmentary and immature notes/thoughts of the author. 
+It is not meant to readers but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;in real problems, the true value of (some quantity) are usually unknow/defined,
+even if we can collect data about …&lt;/p&gt;&lt;/li&gt;&lt;/ol&gt;</summary><content type="html">&lt;p&gt;&lt;strong&gt;
+Things on this page are fragmentary and immature notes/thoughts of the author. 
+It is not meant to readers but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;in real problems, the true value of (some quantity) are usually unknow/defined,
+even if we can collect data about it,
+e.g., Amazon goods, what is the true cost of a good?
+You must first give a definition ...&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;it seems that many problems are related to survey (as long as data collection)
+though data might not be good, we can correct for sampling bias
+the way to deal with unbalanced data in logistic regression is inspring ...&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;a) weight minor class (over-sampling), recommended&lt;/p&gt;
+&lt;p&gt;b) under-sampling, throw away some observations in the larger group
+hard to do model validation&lt;/p&gt;
+&lt;p&gt;c) use similar idea as random forest, bagging ...
+similar to give more weights to minor group
+sample 90% of minor group and some part of larger group (approximately equal obs)
+repeat this ..., inherit many pros of random forest ...&lt;/p&gt;
+&lt;p&gt;some people recommend random forest as a better alternative to logistic 
+regression when data is unbalanced, but random forest need more data than logistic regression&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;if model is not good, adjust it to correct bias ...
+use simple rules, better than nothing ...&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;general effect of unbalance data? bernoulli example, central limit theorem ... confidence
+interval, simulation and so on ...&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;ways people deal with extremely unbalanced data in business ...&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;when you solve a stat problem,
+the first thing to do is to get clear about your purpose, 
+what the goal of the project?
+e.g., the bayesian, portfolio, loan, PD example, one was talking about conservative while 
+I thought about correctness&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;模型里面，multinomial还有一种是保留顺序的，更好！&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;complex model in the sake of complex won't help, 
+but complex model to address real problems helps.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;/li&gt;
+&lt;/ol&gt;</content><category term="tips"></category><category term="statistics"></category><category term="modele"></category><category term="modeling"></category></entry><entry><title>Bayesian vs Frequentist</title><link href="http://www.legendu.net/misc/blog/bayesian-vs-frequentist/" rel="alternate"></link><published>2016-07-13T22:22:54-07:00</published><updated>2016-07-13T22:22:54-07:00</updated><author><name>Ben Chuanlong Du</name></author><id>tag:www.legendu.net,2016-07-13:/misc/blog/bayesian-vs-frequentist/</id><summary type="html">&lt;p&gt;&lt;strong&gt;
+Things on this page are
+fragmentary and immature notes/thoughts of the author.
+It is not meant to readers
+but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;很多frequentist的inference是基于大样本（近似）理论的，这种情况下样本小的时候Bayesian结论可能会更好。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;某些统计量实在太复杂，（近似）分布很难推到。而Bayesian分析本质上就是模拟，简单直接有效，除了速度可能会很慢。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;某些问题时就是从Bayesian的框架（一堆conditional distribution conditions)提出的，这种问题就是为Bayesian量身裁衣的。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;</summary><content type="html">&lt;p&gt;&lt;strong&gt;
+Things on this page are
+fragmentary and immature notes/thoughts of the author.
+It is not meant to readers
+but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;很多frequentist的inference是基于大样本（近似）理论的，这种情况下样本小的时候Bayesian结论可能会更好。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;某些统计量实在太复杂，（近似）分布很难推到。而Bayesian分析本质上就是模拟，简单直接有效，除了速度可能会很慢。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;某些问题时就是从Bayesian的框架（一堆conditional distribution conditions)提出的，这种问题就是为Bayesian量身裁衣的。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;</content><category term="statistics"></category><category term="Bayesian"></category><category term="frequentist"></category><category term="large sample-based"></category><category term="likelihood"></category><category term="asymptotic"></category><category term="simulation"></category></entry><entry><title>Statistics Questions</title><link href="http://www.legendu.net/misc/blog/statistics-questions/" rel="alternate"></link><published>2016-07-12T23:36:47-07:00</published><updated>2016-07-12T23:36:47-07:00</updated><author><name>Ben Chuanlong Du</name></author><id>tag:www.legendu.net,2016-07-12:/misc/blog/statistics-questions/</id><summary type="html">&lt;p&gt;&lt;strong&gt;
+Things on this page are fragmentary and immature notes/thoughts of the author. 
+It is not meant to readers but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;What's the difference between Next Generation Sequence and RNAseq data?&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;in linear regression, we often say that extrapolation (vs interpolation …&lt;/p&gt;&lt;/li&gt;&lt;/ol&gt;</summary><content type="html">&lt;p&gt;&lt;strong&gt;
+Things on this page are fragmentary and immature notes/thoughts of the author. 
+It is not meant to readers but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;What's the difference between Next Generation Sequence and RNAseq data?&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;in linear regression, we often say that extrapolation (vs interpolation) is bad,
+however, in stress testing we are always doing extrapolation&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;</content><category term="questions"></category><category term="statistics"></category><category term="biostatatistics"></category></entry><entry><title>Make Inference Using Bootstrap</title><link href="http://www.legendu.net/misc/blog/make-inference-using-bootstrap/" rel="alternate"></link><published>2016-03-05T20:04:20-08:00</published><updated>2016-03-05T20:04:20-08:00</updated><author><name>Ben Chuanlong Du</name></author><id>tag:www.legendu.net,2016-03-05:/misc/blog/make-inference-using-bootstrap/</id><summary type="html">&lt;p&gt;&lt;strong&gt;
+Things on this page are
+fragmentary and immature notes/thoughts of the author.
+It is not meant to readers
+but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;http://www.stat.umn.edu/geyer/old/5601/examp/tests.html#pv&lt;/p&gt;
+&lt;p&gt;&lt;span class="math"&gt;\(BC_{\alpha}\)&lt;/span&gt; confidence interval
+the way to calculate …&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;strong&gt;
+Things on this page are
+fragmentary and immature notes/thoughts of the author.
+It is not meant to readers
+but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;http://www.stat.umn.edu/geyer/old/5601/examp/tests.html#pv&lt;/p&gt;
+&lt;p&gt;&lt;span class="math"&gt;\(BC_{\alpha}\)&lt;/span&gt; confidence interval
+the way to calculate p-values ...&lt;/p&gt;
+&lt;script type="text/javascript"&gt;if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
+    var align = "center",
+        indent = "0em",
+        linebreak = "false";
+
+    if (false) {
+        align = (screen.width &lt; 768) ? "left" : align;
+        indent = (screen.width &lt; 768) ? "0em" : indent;
+        linebreak = (screen.width &lt; 768) ? 'true' : linebreak;
+    }
+
+    var mathjaxscript = document.createElement('script');
+    var location_protocol = (false) ? 'https' : document.location.protocol;
+    if (location_protocol !== 'http' &amp;&amp; location_protocol !== 'https') location_protocol = 'https:';
+    mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
+    mathjaxscript.type = 'text/javascript';
+    mathjaxscript.src = location_protocol + '//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML';
+    mathjaxscript[(window.opera ? "innerHTML" : "text")] =
+        "MathJax.Hub.Config({" +
+        "    config: ['MMLorHTML.js']," +
+        "    TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'AMS' }, Macros: {} }," +
+        "    jax: ['input/TeX','input/MathML','output/HTML-CSS']," +
+        "    extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']," +
+        "    displayAlign: '"+ align +"'," +
+        "    displayIndent: '"+ indent +"'," +
+        "    showMathMenu: true," +
+        "    messageStyle: 'normal'," +
+        "    tex2jax: { " +
+        "        inlineMath: [ ['\\\\(','\\\\)'] ], " +
+        "        displayMath: [ ['$$','$$'] ]," +
+        "        processEscapes: true," +
+        "        preview: 'TeX'," +
+        "    }, " +
+        "    'HTML-CSS': { " +
+        "        styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: 'inherit ! important'} }," +
+        "        linebreaks: { automatic: "+ linebreak +", width: '90% container' }," +
+        "    }, " +
+        "}); " +
+        "if ('default' !== 'default') {" +
+            "MathJax.Hub.Register.StartupHook('HTML-CSS Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax['HTML-CSS'].FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+            "MathJax.Hub.Register.StartupHook('SVG Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax.SVG.FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+        "}";
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
+}
+&lt;/script&gt;</content><category term="statistics"></category><category term="bootstrap"></category><category term="inference"></category><category term="resample"></category></entry><entry><title>Machine Learning/Data Mining Questions</title><link href="http://www.legendu.net/misc/blog/machine-learning-data-mining-questions/" rel="alternate"></link><published>2015-05-02T18:38:09-07:00</published><updated>2015-05-02T18:38:09-07:00</updated><author><name>Ben Chuanlong Du</name></author><id>tag:www.legendu.net,2015-05-02:/misc/blog/machine-learning-data-mining-questions/</id><summary type="html">&lt;p&gt;&lt;strong&gt;
+Things on this page are fragmentary and immature notes/thoughts of the author.
+It is not meant to readers but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Is discrete variables easier to handle than continous variables (in random forest)?
+    Is there any advantage of discretize variables?&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Random …&lt;/p&gt;&lt;/li&gt;&lt;/ol&gt;</summary><content type="html">&lt;p&gt;&lt;strong&gt;
+Things on this page are fragmentary and immature notes/thoughts of the author.
+It is not meant to readers but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Is discrete variables easier to handle than continous variables (in random forest)?
+    Is there any advantage of discretize variables?&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Random forest has a way to impute missing values.
+    What if I treat missing values in categorical predictors and a new class?
+    It sounds like a good ...&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="imputation"&gt;Imputation&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;SVD imputation using low dimension to approximate high dimension data&lt;/li&gt;
+&lt;/ol&gt;</content><category term="question"></category><category term="machine learning"></category><category term="data mining"></category><category term="statistics"></category><category term="data science"></category></entry><entry><title>AR1X Process</title><link href="http://www.legendu.net/misc/blog/ar1x-process/" rel="alternate"></link><published>2015-03-13T15:26:10-07:00</published><updated>2015-03-13T15:26:10-07:00</updated><author><name>Ben Chuanlong Du</name></author><id>tag:www.legendu.net,2015-03-13:/misc/blog/ar1x-process/</id><summary type="html">&lt;p&gt;&lt;strong&gt;
+Things on this page are
+fragmentary and immature notes/thoughts of the author.
+It is not meant to readers
+but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;talk about the ar1x process, and your simulation, 
+GLM might not be as good as OLS for estimating parameters, but …&lt;/li&gt;&lt;/ol&gt;</summary><content type="html">&lt;p&gt;&lt;strong&gt;
+Things on this page are
+fragmentary and immature notes/thoughts of the author.
+It is not meant to readers
+but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;talk about the ar1x process, and your simulation, 
+GLM might not be as good as OLS for estimating parameters, but be careful about inference, why? 
+you use do inference based on simulation ...
+more complicated algorithm based on optimization ...&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Several different names are used to describe ARIMA models with input series. Transfer function model, intervention model, interrupted time series model, regression model with ARMA errors, Box-Tiao model, and ARIMAX model are all different names for ARIMA models with input series. Pankratz (1991) refers to these models as dynamic regression models.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;TSA::arimax in R, but the documentation is poor. I even don't know which model specification it uses.
+The function was implemented by Kung-Sik Chan in University of Iowa. 
+You can contact him and get clear about the model specification.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;phone : (319) 335-2849
+e-mail: kchan@stat.uiowa.edu&lt;/p&gt;
+&lt;p&gt;http://stackoverflow.com/questions/25224155/transfer-function-models-arimax-in-tsa&lt;/p&gt;
+&lt;p&gt;http://www.r-bloggers.com/the-arimax-model-muddle/&lt;/p&gt;
+&lt;p&gt;http://econometricsense.blogspot.com/2012/01/time-series-intervention-analysis-wih-r.html&lt;/p&gt;
+&lt;p&gt;http://econometricsense.blogspot.com/2012/01/intervention-analysis.html&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;SAS
+Though the following post allows differencing the response variable, it doesn't allow an arbitrary coefficient.
+http://support.sas.com/documentation/cdl/en/etsug/63348/HTML/default/viewer.htm#etsug_arima_sect012.htm&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;You can actually estimate the parameters using MLE by yourself. It seems to be very easy.
+And you can derive all the theories for it.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;I did the math, and it seems to me the MLE (under the assumption of normal) is the same as the OLS estimate,
+however, the (asymptoic) distribution of estimate of parameters are much more complicated. 
+I have 2 ideas to make inferences. &lt;/p&gt;</content><category term="statistics"></category><category term="AR1X"></category><category term="time series"></category><category term="linear regression"></category><category term="model"></category></entry><entry><title>Metric and Regularization</title><link href="http://www.legendu.net/misc/blog/metric-and-regularization/" rel="alternate"></link><published>2015-02-24T14:05:32-08:00</published><updated>2015-02-24T14:05:32-08:00</updated><author><name>Ben Chuanlong Du</name></author><id>tag:www.legendu.net,2015-02-24:/misc/blog/metric-and-regularization/</id><summary type="html">&lt;p&gt;&lt;strong&gt;Things on this page are fragmentary and immature notes/thoughts of the author. It is not meant to readers but rather for convenient reference of the author and future improvement.&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id="metricloss-function"&gt;Metric/Loss Function&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;0-1 Loss (or binary loss function)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;L1 norm&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;L2 norm&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Lp norm&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Any feasible metric&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="regularizationmodel-selection"&gt;Regularization/Model …&lt;/h2&gt;</summary><content type="html">&lt;p&gt;&lt;strong&gt;Things on this page are fragmentary and immature notes/thoughts of the author. It is not meant to readers but rather for convenient reference of the author and future improvement.&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id="metricloss-function"&gt;Metric/Loss Function&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;0-1 Loss (or binary loss function)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;L1 norm&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;L2 norm&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Lp norm&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Any feasible metric&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="regularizationmodel-selection"&gt;Regularization/Model Selection&lt;/h2&gt;
+&lt;p&gt;Regularization add a penalty term to an object function to optimize. 
+The type of regularizatin depends on the penalty used not the type of the objective function. 
+- Mallow's Cp
+- Adjusted R^2
+- AIC
+- BIC 
+- L1 penalty
+lasso regularization
+both hard and soft shrinkage (good if you can give a picture here)
+- L2 penalty 
+ridge regularization
+soft shrinkage. &lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Linear combination of L1 and L2 penalty
+elastic regularization&lt;/li&gt;
+&lt;/ul&gt;</content><category term="metric"></category><category term="statistics"></category><category term="regularization"></category><category term="machine learning"></category><category term="data mining"></category></entry><entry><title>Variance and Dispersion Estimate in Genetics</title><link href="http://www.legendu.net/misc/blog/variance-and-dispersion-estimate-in-genetics/" rel="alternate"></link><published>2015-02-24T14:05:04-08:00</published><updated>2015-02-24T14:05:04-08:00</updated><author><name>Ben Chuanlong Du</name></author><id>tag:www.legendu.net,2015-02-24:/misc/blog/variance-and-dispersion-estimate-in-genetics/</id><summary type="html">&lt;p&gt;&lt;strong&gt;
+Things on this page are fragmentary and immature notes/thoughts of the author. 
+It is not meant to readers but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;The basic idea is to borrow information across genes. 
+Some assume a distribution for the variances/dispersions while others not …&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;strong&gt;
+Things on this page are fragmentary and immature notes/thoughts of the author. 
+It is not meant to readers but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;The basic idea is to borrow information across genes. 
+Some assume a distribution for the variances/dispersions while others not.&lt;/p&gt;</content><category term="statistics"></category><category term="genetics"></category><category term="biostatistics"></category><category term="variance"></category><category term="dispersion"></category><category term="estimate"></category><category term="estimation"></category></entry><entry><title>General Tips for Modeling</title><link href="http://www.legendu.net/misc/blog/general-tips-for-modeling/" rel="alternate"></link><published>2015-02-24T14:03:01-08:00</published><updated>2015-02-24T14:03:01-08:00</updated><author><name>Ben Chuanlong Du</name></author><id>tag:www.legendu.net,2015-02-24:/misc/blog/general-tips-for-modeling/</id><summary type="html">&lt;p&gt;&lt;strong&gt;
+Things on this page are fragmentary and immature notes/thoughts of the author. 
+It is not meant to readers but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;todo ...&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;strong&gt;
+Things on this page are fragmentary and immature notes/thoughts of the author. 
+It is not meant to readers but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;todo ...&lt;/p&gt;</content><category term="tips"></category><category term="modeling"></category><category term="statistics"></category></entry><entry><title>Clustering in R</title><link href="http://www.legendu.net/misc/blog/clustering-in-r/" rel="alternate"></link><published>2015-02-24T14:00:14-08:00</published><updated>2015-02-24T14:00:14-08:00</updated><author><name>Ben Chuanlong Du</name></author><id>tag:www.legendu.net,2015-02-24:/misc/blog/clustering-in-r/</id><summary type="html">&lt;p&gt;&lt;strong&gt;
+Things on this page are fragmentary and immature notes/thoughts of the author. 
+It is not meant to readers but rather for convenient reference of the author and future improvement.&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id="hierarchical-clustering"&gt;Hierarchical Clustering&lt;/h2&gt;
+&lt;p&gt;hclust and dist&lt;/p&gt;
+&lt;h2 id="k-means-clustering"&gt;K-means Clustering&lt;/h2&gt;
+&lt;p&gt;kmeans&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;strong&gt;
+Things on this page are fragmentary and immature notes/thoughts of the author. 
+It is not meant to readers but rather for convenient reference of the author and future improvement.&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id="hierarchical-clustering"&gt;Hierarchical Clustering&lt;/h2&gt;
+&lt;p&gt;hclust and dist&lt;/p&gt;
+&lt;h2 id="k-means-clustering"&gt;K-means Clustering&lt;/h2&gt;
+&lt;p&gt;kmeans&lt;/p&gt;</content><category term="R"></category><category term="clustering"></category><category term="machine learning"></category><category term="statistics"></category><category term="CRAN"></category></entry><entry><title>Least Square Estimates</title><link href="http://www.legendu.net/misc/blog/pros-and-cons-of-least-square-estimates/" rel="alternate"></link><published>2015-02-24T13:58:18-08:00</published><updated>2015-02-24T13:58:18-08:00</updated><author><name>Ben Chuanlong Du</name></author><id>tag:www.legendu.net,2015-02-24:/misc/blog/pros-and-cons-of-least-square-estimates/</id><summary type="html">&lt;p&gt;&lt;strong&gt;
+Things on this page are fragmentary and immature notes/thoughts of the author. 
+It is not meant to readers but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id="ordinary-least-square"&gt;Ordinary Least Square&lt;/h2&gt;
+&lt;h2 id="weighted-least-sqaure"&gt;Weighted Least Sqaure&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;Heterogeneous variance&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;close results to transformation&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;strong&gt;
+Things on this page are fragmentary and immature notes/thoughts of the author. 
+It is not meant to readers but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id="ordinary-least-square"&gt;Ordinary Least Square&lt;/h2&gt;
+&lt;h2 id="weighted-least-sqaure"&gt;Weighted Least Sqaure&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;Heterogeneous variance&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;close results to transformation&lt;/p&gt;</content><category term="linear regression"></category><category term="least square"></category><category term="modeling"></category><category term="statisitcs"></category></entry><entry><title>Time Series Tips</title><link href="http://www.legendu.net/misc/blog/time-series-tips/" rel="alternate"></link><published>2015-01-21T11:28:02-08:00</published><updated>2015-01-21T11:28:02-08:00</updated><author><name>Ben Chuanlong Du</name></author><id>tag:www.legendu.net,2015-01-21:/misc/blog/time-series-tips/</id><summary type="html">&lt;p&gt;&lt;strong&gt;
+Things on this page are
+fragmentary and immature notes/thoughts of the author.
+It is not meant to readers
+but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;In statistics, 
+a unit root test tests whether a time series variable is non-stationary using an autoregressive model. A well-known …&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;strong&gt;
+Things on this page are
+fragmentary and immature notes/thoughts of the author.
+It is not meant to readers
+but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;In statistics, 
+a unit root test tests whether a time series variable is non-stationary using an autoregressive model. A well-known test that is valid in large samples is the augmented Dickey–Fuller test. The optimal finite sample tests for a unit root in autoregressive models were developed by Denis Sargan and Alok Bhargava. Another test is the Phillips–Perron test. These tests use the existence of a unit root as the null hypothesis.&lt;/p&gt;
+&lt;p&gt;In statistics and econometrics, an augmented Dickey–Fuller test (ADF) is a test for a unit root in a time series sample. It is an augmented version of the Dickey–Fuller test for a larger and more complicated set of time series models. The augmented Dickey–Fuller (ADF) statistic, used in the test, is a negative number. The more negative it is, the stronger the rejection of the hypothesis that there is a unit root at some level of confidence.[1]&lt;/p&gt;</content><category term="statistics"></category><category term="Time Series Analysis"></category><category term="unit root test"></category></entry><entry><title>Aggregation</title><link href="http://www.legendu.net/misc/blog/aggregation/" rel="alternate"></link><published>2014-08-11T01:08:36-07:00</published><updated>2014-08-11T01:08:36-07:00</updated><author><name>Ben Chuanlong Du</name></author><id>tag:www.legendu.net,2014-08-11:/misc/blog/aggregation/</id><summary type="html">&lt;p&gt;The prediction error is a trade-off of bias and variance. 
+In statistics, 
+we often talk about unbiased estimators (especially in linear regression). 
+In this case we restrict the estimators/predictors to be in a (small) class,
+and find the optimal solution in this class (called BLUE or BLUP).&lt;/p&gt;
+&lt;p&gt;Generally speaking …&lt;/p&gt;</summary><content type="html">&lt;p&gt;The prediction error is a trade-off of bias and variance. 
+In statistics, 
+we often talk about unbiased estimators (especially in linear regression). 
+In this case we restrict the estimators/predictors to be in a (small) class,
+and find the optimal solution in this class (called BLUE or BLUP).&lt;/p&gt;
+&lt;p&gt;Generally speaking, unbiased predictors are not ideas in prediction problems.
+In many situations we can easily find predictors with small bias (usually very complexed predictors/models). 
+To improve the performance of predictors, 
+we often want to decrease their variance at the cost of increase bias. 
+This is called decreasing the complexity of the predictors/models.
+This can be done by variable/feature selection. 
+This is discussed in &lt;a href=""&gt;the regularization post&lt;/a&gt;.
+Here we talk about some aggregation/ensamble technic to decrease the complexity of predictors/models.
+The is inspired by the simple fact that the variance of the mean of &lt;code&gt;n&lt;/code&gt; iid random variables (with finite variance)
+is &lt;code&gt;1/n&lt;/code&gt; times the variance of any of them. 
+This means that by combining (not strongly correlated) predictors,
+e.g., linear combination or majority vote, 
+we can get (much) better predictors. &lt;/p&gt;
+&lt;h2 id="decrease-complexity"&gt;Decrease Complexity&lt;/h2&gt;
+&lt;h3 id="bagging"&gt;Bagging&lt;/h3&gt;
+&lt;p&gt;Bagging is short for Bootstrap Aggregation.
+The basic idea is to build predictors based on bootstrap samples (sample with replacement) of the training data. 
+Each time we get a different bootstrap sample,
+so we have a different predictor.
+Hopefully these predictors are not strongly correlated so that by averaging (unweighted) them we get a better predictor.
+This idea is well used in random forest. 
+To further decrease the correlation between trees, 
+the random forest process also restricts the number of variables 
+(usually square root of the total number of variables) used to build each tree.
+The neuron network can also be considered as a way of Bagging,
+since the input of a node is a linear combination of outcomes from last layer.&lt;/p&gt;
+&lt;h3 id="stacking"&gt;Stacking&lt;/h3&gt;
+&lt;p&gt;Stacking is similar to Bagging. 
+The difference is that Stacking uses weighted averages of predictors based on their performances. 
+The weights are often chosen to minized the prediction error in leave-1-out cross validation. &lt;/p&gt;
+&lt;h2 id="increase-complexity"&gt;Increase Complexity&lt;/h2&gt;
+&lt;p&gt;An opposite approach to these discussed above is to start from a very simple predictor (big bias but small variance)
+and then increase the complexity (decrease bias at cost of increase variance) of the predictor.
+This is common in nature, e.g., the human brain is developped from simple to complex. 
+This approach is called Boosting.
+There are different version of Boosting, e.g., Gradient Boosting and AdaBoosting (Adaptive Boosting).
+AdaBoosting is popular in face recognition problems.&lt;/p&gt;</content><category term="statistics"></category><category term="ensamble"></category><category term="aggregation"></category><category term="data mining"></category><category term="machine learning"></category></entry><entry><title>Linear Models</title><link href="http://www.legendu.net/misc/blog/linear-models/" rel="alternate"></link><published>2013-10-24T23:15:05-07:00</published><updated>2013-10-24T23:15:05-07:00</updated><author><name>Ben Chuanlong Du</name></author><id>tag:www.legendu.net,2013-10-24:/misc/blog/linear-models/</id><summary type="html">&lt;p&gt;&lt;strong&gt;Things on this page are fragmentary and immature notes/thoughts of the author. It is not meant to readers but rather for convenient reference of the author and future improvement.&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Complete Randomized Design (CRD)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Randomized Complete Block Design (CBD)&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;same RNE as CRD&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Latin Square Design (LSD)&lt;ul&gt;
+&lt;li&gt;same RNE as …&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;&lt;/ol&gt;</summary><content type="html">&lt;p&gt;&lt;strong&gt;Things on this page are fragmentary and immature notes/thoughts of the author. It is not meant to readers but rather for convenient reference of the author and future improvement.&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Complete Randomized Design (CRD)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Randomized Complete Block Design (CBD)&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;same RNE as CRD&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Latin Square Design (LSD)&lt;ul&gt;
+&lt;li&gt;same RNE as CRD&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Balanced Incomplete Block Design&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;all treatments cannot fit in any one block&lt;/li&gt;
+&lt;li&gt;each treatment appears the same number of times in the design&lt;/li&gt;
+&lt;li&gt;each pair of treatment appears together in the same number of blocks&lt;/li&gt;
+&lt;li&gt;BIBD does not exist for every t (number of treatments), b (number of block) and k (the number of units in each block)&lt;/li&gt;
+&lt;li&gt;inter-block comparison, intra-block information is usually sacrificed (confounded with unknown block effect)&lt;/li&gt;
+&lt;li&gt;when block effect is random, intra-block information can be recovered. There is also a neat trick for BIBD when block effect is random: do inference using block totals (not necessarily better than inter-block information only)
+assumptions:&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Split-plot Design (SPD)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;common in animal science, agriculture, engineering, chemistry, etc.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;can analyze separately for whole-plot and split-plot (sub-plot) parts&lt;/li&gt;
+&lt;li&gt;there are random effects in SPD&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;factorial analysis:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;appearance of higher interactions requires appearance of lower interactions&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;EFFECT HIERARCHY PRINCIPLE – If an interaction
+involving a given set of factors is included in the model, all
+main effects and interactions involving subsets of these factors
+should also be included.
+• EFFECT HEREDITY PRINCIPLE – If an interaction
+involving a given set of factors is included in the model, at least
+one effect of the next smallest order involving a subset of these
+factors should also be included.&lt;/p&gt;
+&lt;p&gt;some times purposely confound a factor with another (usually these factors are not of interests to us) can be smart&lt;/p&gt;
+&lt;p&gt;random and fixed effect, fixed is easy most of time,&lt;/p&gt;
+&lt;p&gt;sometimes if random is too hard (usually seen in generalized linear models), can treat as fixed&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;independent&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;distribution assumption&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;equal variance/dispersion &lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;residual plot&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Primary concern about model is lack of fit&lt;/p&gt;
+&lt;p&gt;Primary concern about variance is equality&lt;/p&gt;
+&lt;p&gt;Levene Test and BF test &lt;/p&gt;
+&lt;p&gt;Simultaneous confidence intervals&lt;/p&gt;
+&lt;p&gt;Scheffe (all)&lt;/p&gt;
+&lt;p&gt;Tukey (pairwise)&lt;/p&gt;
+&lt;p&gt;Dunnett (multiple vs one)   &lt;/p&gt;
+&lt;p&gt;Estimation of Variance Components&lt;/p&gt;
+&lt;p&gt;REML vs ML&lt;/p&gt;
+&lt;p&gt;recursive estimating ... suppose we know variance we can estimate coefficients, and then estimate variances ... repeat ...&lt;/p&gt;
+&lt;p&gt;non-linear ... based on approximation ...&lt;/p&gt;</content><category term="model"></category><category term="statistics"></category><category term="regression"></category></entry><entry><title>Matrix Decomposition</title><link href="http://www.legendu.net/misc/blog/matrix-decomposition/" rel="alternate"></link><published>2013-10-24T23:14:16-07:00</published><updated>2013-10-24T23:14:16-07:00</updated><author><name>Ben Chuanlong Du</name></author><id>tag:www.legendu.net,2013-10-24:/misc/blog/matrix-decomposition/</id><summary type="html">&lt;p&gt;&lt;strong&gt;Things on this page are fragmentary and immature notes/thoughts of the author. It is not meant to readers but rather for convenient reference of the author and future improvement.&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id="qr-decomposition"&gt;QR Decomposition&lt;/h2&gt;
+&lt;p&gt;The QR decomposition uses the Gram-Schmidt process to express a set of vectors 
+(columns of design matrix from …&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;strong&gt;Things on this page are fragmentary and immature notes/thoughts of the author. It is not meant to readers but rather for convenient reference of the author and future improvement.&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id="qr-decomposition"&gt;QR Decomposition&lt;/h2&gt;
+&lt;p&gt;The QR decomposition uses the Gram-Schmidt process to express a set of vectors 
+(columns of design matrix from statistical view) in a set of orthogonal unit vecotors (which means that Q is matrix with orthogonal unit vectors) 
+so that for any &lt;code&gt;k&lt;/code&gt;, 
+the space spanned by the first &lt;code&gt;k&lt;/code&gt; original vectors is the same as the space spanned by the first &lt;code&gt;k&lt;/code&gt; orthogonal unit vectors. 
+The ith column of R is the way that the ith original vector can be expressed in the first &lt;code&gt;i&lt;/code&gt; orthogonal unit vectors.&lt;br&gt;
+This means that R is an upper (right) triangular matrix.&lt;/p&gt;
+&lt;p&gt;More specifically, 
+For any realy matrix &lt;span class="math"&gt;\(X_{n\times p}\)&lt;/span&gt;, there &lt;span class="math"&gt;\(Q_{n\times p}\)&lt;/span&gt; and &lt;span class="math"&gt;\(R_{p\times p}\)&lt;/span&gt; such that 
+    (X_{n\times p} = Q_{n\times p} R_{p\times p}),
+where &lt;span class="math"&gt;\(Q\)&lt;/span&gt; is a matrix with orthogonal unit column vectors, 
+i.e., &lt;span class="math"&gt;\(Q'Q=I\)&lt;/span&gt;; &lt;span class="math"&gt;\(R\)&lt;/span&gt; is an upper (right) triangular matrix.
+QR decomposition is often done throught Gram-Schmidt process. 
+Given a vector &lt;span class="math"&gt;\(x_i\)&lt;/span&gt;, 
+the Gram-Schmidt process produce a (unit) vector &lt;span class="math"&gt;\(e_i\)&lt;/span&gt; that is orthogonal to previously produced orthogonal vectors &lt;span class="math"&gt;\(\{e_1,...,e_{i-1}\}\)&lt;/span&gt;. 
+This is done by subtract the projection of &lt;span class="math"&gt;\(e_i\)&lt;/span&gt; to the space spanned by &lt;span class="math"&gt;\(\{e_1,...,e_{i-1}\}\)&lt;/span&gt; from &lt;span class="math"&gt;\(e_i\)&lt;/span&gt; (and then normalize it).
+For any &lt;span class="math"&gt;\(i\)&lt;/span&gt;, 
+the spaces spanned by &lt;span class="math"&gt;\(\{x_1, ..., x_i\}\)&lt;/span&gt; and &lt;span class="math"&gt;\(\{e_1, ..., e_i\}\)&lt;/span&gt; are the same. 
+The &lt;span class="math"&gt;\(i^{th}\)&lt;/span&gt; column of &lt;span class="math"&gt;\(R\)&lt;/span&gt; is the way that &lt;span class="math"&gt;\(x_i\)&lt;/span&gt; can be expressed by &lt;span class="math"&gt;\(\{e_1, ..., e_i\}\)&lt;/span&gt;,
+i.e., the first &lt;span class="math"&gt;\(i\)&lt;/span&gt; columns of &lt;span class="math"&gt;\(Q\)&lt;/span&gt;.&lt;/p&gt;
+&lt;p&gt;QR decomposition can be used to&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;determine the rank of a matrix. 
+For example, to find the rank of a matrix X in R, you can use command &lt;code&gt;qr(X)$rank&lt;/code&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;find estimates of coefficients in linear regression, 
+which is 
+        (\hat{\beta} = R^{-1}Q'\boldsymbol{y}).
+The fact that R is an upper (right) triangular matrix make it easy to find its inverse. &lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="singular-value-decomposition"&gt;Singular Value Decomposition&lt;/h2&gt;
+&lt;p&gt;For any real matrix &lt;span class="math"&gt;\(X_{n\times p}\)&lt;/span&gt; of rank &lt;span class="math"&gt;\(r\)&lt;/span&gt;,
+there exists matrix &lt;span class="math"&gt;\(U_{n\times r}\)&lt;/span&gt;, &lt;span class="math"&gt;\(D_{r\times r}\)&lt;/span&gt; and &lt;span class="math"&gt;\(V_{p\times r}\)&lt;/span&gt; such that
+    (X=UDV'),
+where &lt;span class="math"&gt;\(U\)&lt;/span&gt; is a matrix with orthogonal unit column vectors spanning the column space of X;
+&lt;span class="math"&gt;\(D\)&lt;/span&gt; is a diagonal matrix with positive (decreasing) diagonal elements; 
+&lt;span class="math"&gt;\(V\)&lt;/span&gt; is a matrix with orthogona unit row vectors spanning the row space of X.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;If we expand &lt;span class="math"&gt;\(U\)&lt;/span&gt; and &lt;span class="math"&gt;\(V\)&lt;/span&gt; to be squared matrixes (adding 0's into the diagonal elements of &lt;span class="math"&gt;\(D\)&lt;/span&gt;),
+the SVD can be explained as to use rotation, scaling and rotation to express any linear map &lt;span class="math"&gt;\(X\)&lt;/span&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;span class="math"&gt;\(X\)&lt;/span&gt; maps a unit sphere into a ellipsoid. 
+The singular values are the semiaxes of the ellipsoid.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;The singular values are square root of the eigenvalues of &lt;span class="math"&gt;\(X'X\)&lt;/span&gt; and &lt;span class="math"&gt;\(XX'\)&lt;/span&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;If &lt;span class="math"&gt;\(X\)&lt;/span&gt; is a square matrix and has eigenvalue decomposition,
+then the singular values are absolute eigenvalues of &lt;span class="math"&gt;\(X\)&lt;/span&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;If &lt;span class="math"&gt;\(X\)&lt;/span&gt; is a nonnegative definite matrix, 
+then the SVD is the eigenvalue decomposition.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;The SVD can be rewritten as a weighted (singular values are the weights) sum of separable matrixes.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;The SVD can be used to&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;find the rank of the matrix &lt;span class="math"&gt;\(X\)&lt;/span&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;find pseudoinverse inverse of the matirx &lt;span class="math"&gt;\(X\)&lt;/span&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;find lower rank approximation of the matrix &lt;span class="math"&gt;\(X\)&lt;/span&gt;. 
+This is one way to reduce dimension in statistics.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="eigendecomposition-spectral-decomposition"&gt;Eigendecomposition (Spectral Decomposition)&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Only diagonalizable matrices have eigendecompostions.
+The geometric dimension of an eigenvalue of a matrix is less than or equal to its algebraic dimension.
+A matrix is diagonalizable iff the geometric dimension is the same as the algebraic dimension for each eigenvalue.
+Nonnegative definite matrices are diagonalizable.
+Specially project matrices are diagonalizable (with eigenvalues 0 and 1).&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;For a Markov chain process, 
+a stationary distribution is an eigenvalue of the transition matrix with respect to the eigenvalue 1.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;The eigendecomposition can be used to calculate the power of diagonalizable matrices.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Eigendecomposition is used in principal components analysis. &lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;script type="text/javascript"&gt;if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
+    var align = "center",
+        indent = "0em",
+        linebreak = "false";
+
+    if (false) {
+        align = (screen.width &lt; 768) ? "left" : align;
+        indent = (screen.width &lt; 768) ? "0em" : indent;
+        linebreak = (screen.width &lt; 768) ? 'true' : linebreak;
+    }
+
+    var mathjaxscript = document.createElement('script');
+    var location_protocol = (false) ? 'https' : document.location.protocol;
+    if (location_protocol !== 'http' &amp;&amp; location_protocol !== 'https') location_protocol = 'https:';
+    mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
+    mathjaxscript.type = 'text/javascript';
+    mathjaxscript.src = location_protocol + '//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML';
+    mathjaxscript[(window.opera ? "innerHTML" : "text")] =
+        "MathJax.Hub.Config({" +
+        "    config: ['MMLorHTML.js']," +
+        "    TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'AMS' }, Macros: {} }," +
+        "    jax: ['input/TeX','input/MathML','output/HTML-CSS']," +
+        "    extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']," +
+        "    displayAlign: '"+ align +"'," +
+        "    displayIndent: '"+ indent +"'," +
+        "    showMathMenu: true," +
+        "    messageStyle: 'normal'," +
+        "    tex2jax: { " +
+        "        inlineMath: [ ['\\\\(','\\\\)'] ], " +
+        "        displayMath: [ ['$$','$$'] ]," +
+        "        processEscapes: true," +
+        "        preview: 'TeX'," +
+        "    }, " +
+        "    'HTML-CSS': { " +
+        "        styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: 'inherit ! important'} }," +
+        "        linebreaks: { automatic: "+ linebreak +", width: '90% container' }," +
+        "    }, " +
+        "}); " +
+        "if ('default' !== 'default') {" +
+            "MathJax.Hub.Register.StartupHook('HTML-CSS Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax['HTML-CSS'].FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+            "MathJax.Hub.Register.StartupHook('SVG Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax.SVG.FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+        "}";
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
+}
+&lt;/script&gt;</content><category term="statistics"></category><category term="math"></category><category term="algebra"></category><category term="decomposition"></category><category term="matrix"></category></entry><entry><title>Cross Validation</title><link href="http://www.legendu.net/misc/blog/cross-validation/" rel="alternate"></link><published>2013-04-03T00:00:00-07:00</published><updated>2013-04-03T00:00:00-07:00</updated><author><name>Ben Chuanlong Du</name></author><id>tag:www.legendu.net,2013-04-03:/misc/blog/cross-validation/</id><summary type="html">&lt;p&gt;&lt;strong&gt;Things on this page are fragmentary and immature notes/thoughts of the author. It is not meant to readers but rather for convenient reference of the author and future improvement.&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id="training-and-testing-data-set"&gt;Training and Testing Data Set&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;good when you have large amount of data&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;usually use 1/5 to 1/3 …&lt;/p&gt;&lt;/li&gt;&lt;/ul&gt;</summary><content type="html">&lt;p&gt;&lt;strong&gt;Things on this page are fragmentary and immature notes/thoughts of the author. It is not meant to readers but rather for convenient reference of the author and future improvement.&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id="training-and-testing-data-set"&gt;Training and Testing Data Set&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;good when you have large amount of data&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;usually use 1/5 to 1/3 of the data as testing data set.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="k-fold-cv"&gt;K-fold CV&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;suitable when you have medium number of data&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;K=10 is popular&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;computationally extensive&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="leave-k-out-cv"&gt;Leave-k-out CV&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Use this way only when you have very limited number of data.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Leave-1-out is a specially case of the K-fold CV.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;computationally very extensive&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="some-rules"&gt;Some Rules:&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;10 times number of parameters, probably in good shape&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;20 times number of prameters, usually perfect good&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;</content><category term="statistics"></category><category term="machine learning"></category></entry><entry><title>Entropy</title><link href="http://www.legendu.net/misc/blog/entropy/" rel="alternate"></link><published>2013-04-03T00:00:00-07:00</published><updated>2013-04-03T00:00:00-07:00</updated><author><name>Ben Chuanlong Du</name></author><id>tag:www.legendu.net,2013-04-03:/misc/blog/entropy/</id><summary type="html">&lt;p&gt;&lt;strong&gt;Things on this page are fragmentary and immature notes/thoughts of the author. It is not meant to readers but rather for convenient reference of the author and future improvement.&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Entropy discrete&lt;/p&gt;
+&lt;p&gt;not good for continuous distributions&lt;/p&gt;
+&lt;p&gt;K-L Divergence is good for both&lt;/p&gt;
+&lt;p&gt;Fisher information explanation&lt;/p&gt;
+&lt;p&gt;likelihood based tests: LRT …&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;strong&gt;Things on this page are fragmentary and immature notes/thoughts of the author. It is not meant to readers but rather for convenient reference of the author and future improvement.&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Entropy discrete&lt;/p&gt;
+&lt;p&gt;not good for continuous distributions&lt;/p&gt;
+&lt;p&gt;K-L Divergence is good for both&lt;/p&gt;
+&lt;p&gt;Fisher information explanation&lt;/p&gt;
+&lt;p&gt;likelihood based tests: LRT, wald, score 
+expected fisher, 
+observed fisher (sum, log, law of large number)&lt;/p&gt;</content><category term="statistics"></category></entry><entry><title>Sampling Methods</title><link href="http://www.legendu.net/misc/blog/sampling-methods/" rel="alternate"></link><published>2013-04-03T00:00:00-07:00</published><updated>2013-04-03T00:00:00-07:00</updated><author><name>Ben Chuanlong Du</name></author><id>tag:www.legendu.net,2013-04-03:/misc/blog/sampling-methods/</id><summary type="html">&lt;p&gt;&lt;strong&gt;Things on this page are fragmentary and immature notes/thoughts of the author. It is not meant to readers but rather for convenient reference of the author and future improvement.&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id="probability-sampling"&gt;Probability Sampling&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Random Sampling&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Systematic Sampling&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Stratified Sampling&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="non-probability-sampling"&gt;Non-probability Sampling&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Convenience Sampling&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Judgement Sampling&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Quota Sampling &lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Snowball Sampling &lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;bias&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;strong&gt;Things on this page are fragmentary and immature notes/thoughts of the author. It is not meant to readers but rather for convenient reference of the author and future improvement.&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id="probability-sampling"&gt;Probability Sampling&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Random Sampling&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Systematic Sampling&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Stratified Sampling&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="non-probability-sampling"&gt;Non-probability Sampling&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Convenience Sampling&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Judgement Sampling&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Quota Sampling &lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Snowball Sampling &lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;bias&lt;/p&gt;</content><category term="statistics"></category><category term="sampling"></category><category term="survey"></category></entry><entry><title>Classification</title><link href="http://www.legendu.net/misc/blog/classification/" rel="alternate"></link><published>2013-03-22T00:00:00-07:00</published><updated>2013-03-22T00:00:00-07:00</updated><author><name>Ben Chuanlong Du</name></author><id>tag:www.legendu.net,2013-03-22:/misc/blog/classification/</id><summary type="html">&lt;p&gt;&lt;strong&gt;Things on this page are fragmentary and immature notes/thoughts of the author. It is not meant to readers but rather for convenient reference of the author and future improvement.&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id="support-vector-machine-svm"&gt;Support Vector Machine (SVM)&lt;/h2&gt;
+&lt;p&gt;The basic version of SVM is a linear separation.
+This is obvious since SVM uses a …&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;strong&gt;Things on this page are fragmentary and immature notes/thoughts of the author. It is not meant to readers but rather for convenient reference of the author and future improvement.&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id="support-vector-machine-svm"&gt;Support Vector Machine (SVM)&lt;/h2&gt;
+&lt;p&gt;The basic version of SVM is a linear separation.
+This is obvious since SVM uses a hyperplane to separate data points.
+The kenel version (nonlinear transformation) of SVM uses curves/curved surfaces to separate data points.
+The Gaussian kenel is a popular choice.
+The kenel version (nonlinear transformation) of SVM is good for situations 
+where different classes are separated by simple non-linear functions.
+Another way to classify non-separable data points is to use the soft margin version.
+The soft margin version of SVM is good situations 
+whether most data points except a few data points can be separate by a hyperplane.
+In this situation it is often a bad idea to use the kenel version (nonlinear transformation).&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;The optimization problem in SVM is a quadratic programming problem,
+so it's relatively easy to solve.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;SVM is claimed to be one of the most effective classification methods (though debatable). &lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;SVM scales well to high dimension data.
+Acutally the kenel version of SVM allows it to deal with data of infinite dimensions.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;The expected prediction error is bounded by &lt;span class="math"&gt;\(\frac{n}{N-1}\)&lt;/span&gt;,
+where &lt;span class="math"&gt;\(n\)&lt;/span&gt; is the number of support vectors 
+and &lt;span class="math"&gt;\(N\)&lt;/span&gt; is the number of observations.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;SVM can be generalized to the multi-class problems. &lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Logistic Regression 
+Linear separation. 
+Logistic Regression is a specially case of the generalized linear regression,
+where the response is binary. 
+The Newton's algorithm can be used to optimize the likelihood.
+Can be generalized to the multi-class classification problem using the multinomial distribution.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Neuron Network
+Use the backpropagation algorithm to learn parameters.
+Apply observations 1 by 1, which is a stochastic gradient descent algorithm.
+The complexity of Neuron Network is related to the number of nodes in the hidden layers. &lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Tree&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Nearest Neighbour&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Naive Bayesian Classification
+Called naive becuase the assumption of conditional independent of covariates given the response variable. 
+Despite the assumption is obviously wrong, 
+the Naive Bayesian classification is very effective in text mining, 
+e.g. predict whether an email is a spam or not. 
+The way is works is to carefully select a list of words (according to expert knowledge about whether they can distinguish usually email and spam email or not).
+The size of the list is typically around 50,000 (the multinomial approach is nature but have too many parameters, this is why the conditionally independent assumption is used).
+Problem arise when words not in the dictionary appears in emails. 
+A simple way to add 1 to each category to avoid numerical problems. 
+This is caled Laplace smoothing. 
+There's actually Bayesian explanation to this Laplace smoothing approach.
+It's similar to use priors for parameters. 
+This is a very useful trick in many problems though very simple. &lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Multivariate Bernoulli Event Model&lt;/p&gt;
+&lt;p&gt;Another better way is to also take into account of the number of times that each word appears in the email.
+This lead to a multivariate multinomial event model.
+There are other more complicated models which take into account of order of words in emails,
+however, for this specific example, they only do slightly better than the Multivariate Multinomial model mentioned here. &lt;/p&gt;
+&lt;p&gt;also a linear classifier, falls into the the category of logistic regression. &lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Linear and Quadratic Discrimination
+Linear Discrimation because we use a line or hyper-plane to separate data.
+The linear discrimination assumes multinormal which is a very strong assumption and implies a logistic regression model. 
+In the contrast logistic regression does not implies linear discrimination. 
+Actually, exponential Family distributed given classes also implies a logistic regression.
+The reverse is not true.
+This means that logistic regression is a very robust assumption. 
+The advantage of Linear Discrimination is that with more assumptions, 
+less data is needed to fit a "OK" model. 
+However, when we have enough data, 
+we want to make fewer assumptions and the Linear Discrimination is often not a good choice. &lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="some-tips-for-classification"&gt;Some Tips for Classification&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Use &lt;code&gt;-1&lt;/code&gt; and &lt;code&gt;1&lt;/code&gt; to code classes for binary case instead of &lt;code&gt;0&lt;/code&gt; and &lt;code&gt;1&lt;/code&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Do not forget the const/bias variable/feature.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Create new variables/features if not many.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Select useful variables/features if there are too many.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;script type="text/javascript"&gt;if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
+    var align = "center",
+        indent = "0em",
+        linebreak = "false";
+
+    if (false) {
+        align = (screen.width &lt; 768) ? "left" : align;
+        indent = (screen.width &lt; 768) ? "0em" : indent;
+        linebreak = (screen.width &lt; 768) ? 'true' : linebreak;
+    }
+
+    var mathjaxscript = document.createElement('script');
+    var location_protocol = (false) ? 'https' : document.location.protocol;
+    if (location_protocol !== 'http' &amp;&amp; location_protocol !== 'https') location_protocol = 'https:';
+    mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
+    mathjaxscript.type = 'text/javascript';
+    mathjaxscript.src = location_protocol + '//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML';
+    mathjaxscript[(window.opera ? "innerHTML" : "text")] =
+        "MathJax.Hub.Config({" +
+        "    config: ['MMLorHTML.js']," +
+        "    TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'AMS' }, Macros: {} }," +
+        "    jax: ['input/TeX','input/MathML','output/HTML-CSS']," +
+        "    extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']," +
+        "    displayAlign: '"+ align +"'," +
+        "    displayIndent: '"+ indent +"'," +
+        "    showMathMenu: true," +
+        "    messageStyle: 'normal'," +
+        "    tex2jax: { " +
+        "        inlineMath: [ ['\\\\(','\\\\)'] ], " +
+        "        displayMath: [ ['$$','$$'] ]," +
+        "        processEscapes: true," +
+        "        preview: 'TeX'," +
+        "    }, " +
+        "    'HTML-CSS': { " +
+        "        styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: 'inherit ! important'} }," +
+        "        linebreaks: { automatic: "+ linebreak +", width: '90% container' }," +
+        "    }, " +
+        "}); " +
+        "if ('default' !== 'default') {" +
+            "MathJax.Hub.Register.StartupHook('HTML-CSS Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax['HTML-CSS'].FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+            "MathJax.Hub.Register.StartupHook('SVG Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax.SVG.FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+        "}";
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
+}
+&lt;/script&gt;</content><category term="CART"></category><category term="machine learning"></category><category term="random forests"></category><category term="statistics"></category><category term="classification"></category><category term="SVM"></category><category term="neuron network"></category><category term="regression"></category></entry><entry><title>Clustering</title><link href="http://www.legendu.net/misc/blog/clustering/" rel="alternate"></link><published>2013-03-22T00:00:00-07:00</published><updated>2013-03-22T00:00:00-07:00</updated><author><name>Ben Chuanlong Du</name></author><id>tag:www.legendu.net,2013-03-22:/misc/blog/clustering/</id><summary type="html">&lt;p&gt;&lt;strong&gt;Things on this page are fragmentary and immature notes/thoughts of the author. It is not meant to readers but rather for convenient reference of the author and future improvement.&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id="centroid-based-clustering"&gt;Centroid-Based Clustering&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;K-means Clustering&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;K-medians Clustering&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;K-mediods Clustering&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="hierarchical-clustering"&gt;Hierarchical Clustering&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Agglomerative Hierarchical Clustering&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Divisive Hierarchical Clustering&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="partional-clustering"&gt;Partional Clustering&lt;/h2&gt;</summary><content type="html">&lt;p&gt;&lt;strong&gt;Things on this page are fragmentary and immature notes/thoughts of the author. It is not meant to readers but rather for convenient reference of the author and future improvement.&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id="centroid-based-clustering"&gt;Centroid-Based Clustering&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;K-means Clustering&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;K-medians Clustering&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;K-mediods Clustering&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="hierarchical-clustering"&gt;Hierarchical Clustering&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Agglomerative Hierarchical Clustering&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Divisive Hierarchical Clustering&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="partional-clustering"&gt;Partional Clustering&lt;/h2&gt;</content><category term="statistics"></category><category term="clustering"></category><category term="machine learning"></category><category term="data mining"></category></entry><entry><title>Estimate FDR</title><link href="http://www.legendu.net/misc/blog/estimate-fdr/" rel="alternate"></link><published>2013-03-22T00:00:00-07:00</published><updated>2013-03-22T00:00:00-07:00</updated><author><name>Ben Chuanlong Du</name></author><id>tag:www.legendu.net,2013-03-22:/misc/blog/estimate-fdr/</id><summary type="html">&lt;p&gt;&lt;strong&gt;Things on this page are fragmentary and immature notes/thoughts of the author. It is not meant to readers but rather for convenient reference of the author and future improvement.&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;The problem is actually to estimate the number of null hypotheses. &lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Benjamini &lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Nettleton &lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;/li&gt;
+&lt;/ul&gt;</summary><content type="html">&lt;p&gt;&lt;strong&gt;Things on this page are fragmentary and immature notes/thoughts of the author. It is not meant to readers but rather for convenient reference of the author and future improvement.&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;The problem is actually to estimate the number of null hypotheses. &lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Benjamini &lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Nettleton &lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;/li&gt;
+&lt;/ul&gt;</content><category term="FDR"></category><category term="biostatistics"></category><category term="statistics"></category><category term="estimation"></category></entry><entry><title>Regression Classification ANOVA</title><link href="http://www.legendu.net/misc/blog/regression-classification-anova/" rel="alternate"></link><published>2013-03-22T00:00:00-07:00</published><updated>2013-03-22T00:00:00-07:00</updated><author><name>Ben Chuanlong Du</name></author><id>tag:www.legendu.net,2013-03-22:/misc/blog/regression-classification-anova/</id><summary type="html">&lt;p&gt;&lt;strong&gt;Things on this page are fragmentary and immature notes/thoughts of the author. It is not meant to readers but rather for convenient reference of the author and future improvement.&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Regression refers to problems where the response (output) variable is continous
+while classfication refers to problems where the response (output …&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;strong&gt;Things on this page are fragmentary and immature notes/thoughts of the author. It is not meant to readers but rather for convenient reference of the author and future improvement.&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Regression refers to problems where the response (output) variable is continous
+while classfication refers to problems where the response (output) variable is discrete.&lt;/p&gt;
+&lt;p&gt;Generally speaking fitting gression to classification problems is a not a good idea. &lt;/p&gt;</content><category term="anova"></category><category term="machine learning"></category><category term="statistics"></category><category term="classification"></category><category term="regression"></category><category term="data mining"></category></entry><entry><title>Model Fitting</title><link href="http://www.legendu.net/misc/blog/model-fitting/" rel="alternate"></link><published>2012-11-20T00:00:00-08:00</published><updated>2012-11-20T00:00:00-08:00</updated><author><name>Ben Chuanlong Du</name></author><id>tag:www.legendu.net,2012-11-20:/misc/blog/model-fitting/</id><summary type="html">&lt;p&gt;&lt;strong&gt;Things on this page are fragmentary and immature notes/thoughts of the author. It is not meant to readers but rather for convenient reference of the author and future improvement.&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id="contrast"&gt;Contrast&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;Usually it does not matter what contrast(s) you use for factors in
+linear model problems[^20], so you …&lt;/li&gt;&lt;/ol&gt;</summary><content type="html">&lt;p&gt;&lt;strong&gt;Things on this page are fragmentary and immature notes/thoughts of the author. It is not meant to readers but rather for convenient reference of the author and future improvement.&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id="contrast"&gt;Contrast&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;Usually it does not matter what contrast(s) you use for factors in
+linear model problems[^20], so you can choose appropriate
+contrast(s) so that your problem is most simplified. In R, you can
+use &lt;code&gt;contr.helmert&lt;/code&gt;, &lt;code&gt;contr.helmert&lt;/code&gt;, &lt;code&gt;contr.poly&lt;/code&gt;, &lt;code&gt;contr.sum&lt;/code&gt;,
+&lt;code&gt;contr.treatment&lt;/code&gt; and &lt;code&gt;contr.SAS&lt;/code&gt; to create different kinds of
+contrasts. Among all these functions, the last three are popular. By
+default, R set the first level (whichever has the smallest order
+among all the levels in R) of a factor to be 0. If you want to set
+another level to be 0, you can use &lt;code&gt;contr.treatment&lt;/code&gt; together with
+&lt;code&gt;contrasts&lt;/code&gt;. For example, suppose you have a factor &lt;code&gt;brand&lt;/code&gt; in R:&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;gt&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="n"&gt;brand&lt;/span&gt;
+&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="n"&gt;Dell&lt;/span&gt;   &lt;span class="n"&gt;Dell&lt;/span&gt;   &lt;span class="n"&gt;Lenovo&lt;/span&gt; &lt;span class="n"&gt;Lenovo&lt;/span&gt; &lt;span class="n"&gt;Mac&lt;/span&gt;    &lt;span class="n"&gt;Mac&lt;/span&gt;
+&lt;span class="n"&gt;Levels&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;Dell&lt;/span&gt; &lt;span class="n"&gt;Lenovo&lt;/span&gt; &lt;span class="n"&gt;Mac&lt;/span&gt;
+
+&lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;gt&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="n"&gt;contrasts&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;brand&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+       &lt;span class="n"&gt;Lenovo&lt;/span&gt; &lt;span class="n"&gt;Mac&lt;/span&gt;
+&lt;span class="n"&gt;Dell&lt;/span&gt;        &lt;span class="mi"&gt;0&lt;/span&gt;   &lt;span class="mi"&gt;0&lt;/span&gt;
+&lt;span class="n"&gt;Lenovo&lt;/span&gt;      &lt;span class="mi"&gt;1&lt;/span&gt;   &lt;span class="mi"&gt;0&lt;/span&gt;
+&lt;span class="n"&gt;Mac&lt;/span&gt;         &lt;span class="mi"&gt;0&lt;/span&gt;   &lt;span class="mi"&gt;1&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;You are interested in comparing &lt;code&gt;Dell&lt;/code&gt; and &lt;code&gt;Lenovo&lt;/code&gt; to &lt;code&gt;Mac&lt;/code&gt;, i.e.
+Mac is the control treatment (level) here. It's more convenient to
+do tests if you set &lt;code&gt;Mac&lt;/code&gt; as the control treatment. To do so, you
+can use the following command:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;    &lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;gt&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="n"&gt;contrasts&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;brand&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;contr&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;treatment&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Now you can check the contrast again to see how R will constructs
+design matrix based factor &lt;code&gt;brand&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;    &lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;gt&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="n"&gt;contrasts&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;brand&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+           &lt;span class="mi"&gt;1&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;
+    &lt;span class="n"&gt;Dell&lt;/span&gt;   &lt;span class="mi"&gt;1&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;
+    &lt;span class="n"&gt;Lenovo&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;
+    &lt;span class="n"&gt;Mac&lt;/span&gt;    &lt;span class="mi"&gt;0&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;ol&gt;
+&lt;li&gt;In anova, more often we data in hand and want to create the design
+matrix from the data according to different constraints. We can use
+function &lt;code&gt;lm&lt;/code&gt; and &lt;code&gt;model.matrix&lt;/code&gt; to achieve it. In order to obtain
+different kind of design matrix, we can change the options before we
+do the analysis of variance. To do this we can use function
+&lt;code&gt;options&lt;/code&gt;. The parameter contrast in this function can be
+"contr.treatment", "contr.sum" and "contr.SAS" and so on.
+However, &lt;code&gt;model.matrix&lt;/code&gt; only work for fixed effect factors. &lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="formulas"&gt;Formulas&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;统计中有很多不同的线性和非线性模型， 将它们写成R能识别的表达式是利用R来求解这些模型的第一步也是非常重要的一步， 这就决定了在R中书写
+Formula是非常重要的。 R中大部分处理模型的函数的Formula遵从通用的规则，
+但是有些Package里面的处理模型的函数有其自己的特殊规则， 比如说函数lme()和lmer()。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;函数lme()使用&lt;span class="math"&gt;\(\mid\)&lt;/span&gt;来分隔低层因此和Group因子， 用/表示因子的嵌套结构。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;函数lmer()使用小括号来表示Random Effect， 亦即小括号内的表达式部分表示随机效应， 不在小括号里面的部分表示固定效应。
+符号&lt;span class="math"&gt;\(\mid\)&lt;/span&gt;用来分隔低层因子和Group因子， &lt;span class="math"&gt;\(\mid\)&lt;/span&gt;之前的事低层因子，其后的是Group因子。
+如果没有低层因子（也可以说低层因子只有一个水平）则低层因子可以用1表示。 这个在Split模型和Repeat Measure
+模型中很有用。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="model-fitting"&gt;Model Fitting&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;There're many different functions in R used to fit different models.
+Besides, there're some many useful functions to extract useful
+information from the fitted model, such as &lt;code&gt;vcov&lt;/code&gt;,
+&lt;code&gt;fitted&lt;/code&gt;,&lt;code&gt;residuals&lt;/code&gt;,&lt;code&gt;effects&lt;/code&gt; and &lt;code&gt;coef&lt;/code&gt;. Also there's a function
+&lt;code&gt;aov&lt;/code&gt; which can be used to compare different models.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;在ANOVA里面，线性模型的选择取决很多不同的因素。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;(i) 分析试验的设计方案，找出潜在的因子（包括我们实际感兴趣的因子， 以及block factors 等）&lt;/p&gt;
+&lt;p&gt;(ii) 决定要不要加入因子的交互效应。这个步骤遵循几个原则：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="err"&gt;一般来说，我们不考虑&lt;/span&gt;&lt;span class="n"&gt;block&lt;/span&gt; &lt;span class="n"&gt;factor和感兴趣的factor的交互效应&lt;/span&gt;&lt;span class="err"&gt;。这个不是绝对的，&lt;/span&gt;
+    &lt;span class="err"&gt;比如说&lt;/span&gt;&lt;span class="n"&gt;split&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;plot&lt;/span&gt; &lt;span class="n"&gt;design里面&lt;/span&gt;&lt;span class="p"&gt;...(&lt;/span&gt;&lt;span class="k"&gt;check&lt;/span&gt;
+    &lt;span class="n"&gt;it&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="err"&gt;。这个还是取决于试验的设计方案。在统计里面&lt;/span&gt;&lt;span class="n"&gt;block里面的&lt;/span&gt; &lt;span class="n"&gt;EU性质是相近的&lt;/span&gt;&lt;span class="err"&gt;，也就是观测值是正相关的。&lt;/span&gt;&lt;span class="n"&gt;block&lt;/span&gt;
+    &lt;span class="n"&gt;factor&lt;/span&gt; &lt;span class="err"&gt;和一般因子的交互效应还是可以看作是新的&lt;/span&gt;&lt;span class="n"&gt;sub&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;block&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;
+    &lt;span class="err"&gt;至于这个&lt;/span&gt;&lt;span class="n"&gt;sub&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;block应不应该加入模型&lt;/span&gt;&lt;span class="err"&gt;，可以看实际情况中&lt;/span&gt;&lt;span class="n"&gt;sub&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;block&lt;/span&gt; &lt;span class="err"&gt;里面的&lt;/span&gt;&lt;span class="n"&gt;EUs是不是正相关的&lt;/span&gt;&lt;span class="err"&gt;。&lt;/span&gt;
+
+&lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="err"&gt;选择的统计模型必须能够估计&lt;/span&gt;&lt;span class="n"&gt;Error&lt;/span&gt;&lt;span class="err"&gt;（否则无法检验模型），这就决定&lt;/span&gt;
+    &lt;span class="err"&gt;了当观测值不是很多（比如说一个&lt;/span&gt;&lt;span class="n"&gt;Treatment只有一个观测值时&lt;/span&gt;&lt;span class="err"&gt;），&lt;/span&gt;
+    &lt;span class="err"&gt;不可能所有的&lt;/span&gt;&lt;span class="n"&gt;interaction都加入模型中&lt;/span&gt;&lt;span class="err"&gt;。根据&lt;/span&gt;&lt;span class="n"&gt;DOE里面的&lt;/span&gt;&lt;span class="p"&gt;...&lt;/span&gt;&lt;span class="err"&gt;准则（&lt;/span&gt;&lt;span class="k"&gt;check&lt;/span&gt;
+    &lt;span class="n"&gt;it&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="err"&gt;我们应该将低级&lt;/span&gt;&lt;span class="n"&gt;interaction保留在模型中&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="err"&gt;而将高级&lt;/span&gt;&lt;span class="n"&gt;interaction舍弃使得eroor可以被估计&lt;/span&gt;&lt;span class="err"&gt;。当然这实属不得已而为之。&lt;/span&gt;
+    &lt;span class="err"&gt;如果你有足够的观测值，当然可以把高级&lt;/span&gt;&lt;span class="n"&gt;interaction加入模型中&lt;/span&gt;&lt;span class="err"&gt;。&lt;/span&gt;
+
+&lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="err"&gt;通常来说我倾向于首先选择一个尽量大的模型，但这不表示我们认为这个模型是&lt;/span&gt;
+    &lt;span class="err"&gt;正确的。这个大模型只是为了方便进一步选择更好的模型。如果基于这个大模型，&lt;/span&gt;
+    &lt;span class="err"&gt;你认为某个&lt;/span&gt;&lt;span class="n"&gt;interaction是不显著的&lt;/span&gt;&lt;span class="err"&gt;，你可以将其从模型移除。当然你还是遵循&lt;/span&gt;
+    &lt;span class="err"&gt;前面提到的&lt;/span&gt;&lt;span class="p"&gt;..&lt;/span&gt;&lt;span class="err"&gt;准则，也就是说如果你的模型包含的高级&lt;/span&gt;&lt;span class="n"&gt;Interaction&lt;/span&gt;&lt;span class="err"&gt;，那么它的所有&lt;/span&gt;
+    &lt;span class="err"&gt;子&lt;/span&gt;&lt;span class="n"&gt;interaction都应该包含在模型里面&lt;/span&gt;&lt;span class="err"&gt;。&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;以上不过是纸上谈兵，实际操作中我们必须去fit很多模型。那么如何fit模型呢？我们知道在SAS 里面MIX procedure是fit
+mixed linear models 的利器。在R里面，我们以用&lt;code&gt;nlme&lt;/code&gt;里面的&lt;code&gt;lme&lt;/code&gt;或者&lt;code&gt;lme4&lt;/code&gt;里面的&lt;code&gt;lmer&lt;/code&gt;来fit
+mixed linear models.
+这两个函数的模型声明语法类似，但是&lt;code&gt;lmer&lt;/code&gt;的模型声明语法更灵活简单一些。&lt;code&gt;lmer&lt;/code&gt;的不足之
+处是fit完模型后不方便作统计检验。&lt;code&gt;anova&lt;/code&gt; 作用在&lt;code&gt;mer&lt;/code&gt;(&lt;code&gt;lmer&lt;/code&gt;的输出对象)的结果输出不完整，比如说F
+test的自由度，以及Pvalues等都没有输出。这些信息只能根据自已对模型的了解来决定。而&lt;code&gt;anova&lt;/code&gt;
+作用在&lt;code&gt;lme&lt;/code&gt;(&lt;code&gt;lme&lt;/code&gt;的输出对象）的输出结果很完整。当然这个函数在检测contrast的时候都不如SAS里面的 MIXED
+procedure 方便。在SAS的MIXED
+procedure里面，你只需要加入需要的contrast语句即可，但是在R厘米使用&lt;code&gt;lme&lt;/code&gt;和[] &lt;code&gt;lmer&lt;/code&gt;,
+你都必须自己去计算contrast，并作检验。综合来说&lt;code&gt;lme&lt;/code&gt;比&lt;code&gt;lmer&lt;/code&gt;更好使用。
+&lt;code&gt;~Device+(1|SET/Device)&lt;/code&gt; &lt;code&gt;/&lt;/code&gt;表示嵌套结构，也就是说Device的random
+效应是nested在SET里面的。当然你也可以认为是SET和Device的交互效应。 注意到你也可以fit
+&lt;code&gt;~Device+(Device|SET)&lt;/code&gt;，但是这个模型假设每个SET下的device里面有一个不同的随机效应。
+这等价于假设了一个更加复杂的convariance matrix。这个假设和一般的关于covariance matrix的假设不一样。
+至于那个更好，取决于模型的比较结果以及你对实际问题的理解。 当然，通常我们不会采用这个复杂的covariance
+matrix假设。（....比较SAS里面的结果和R的结果，尤其是自由度，为什么一下子就变成
+205了，当然，从用复杂的假设后可能使用了approximation，也就是严格的理论结果不存在了..） 在&lt;code&gt;lmer&lt;/code&gt;里面，
+random effect
+部分可以写为&lt;code&gt;~(1|SET/Device)&lt;/code&gt;或者更明白的形式&lt;code&gt;~(1|SET)+(1|SET:Device)))&lt;/code&gt;。
+&lt;code&gt;~Day+(Day|Subject)&lt;/code&gt;我们想以Day为自变量（注意这里Day不是factor)fit一个线性模型，
+但是对于每个subject来说，这个线性模型的intercept和斜率都增加了一个随机效应（注意如果没有这个随机效应
+的话，那么所有的subject里面的线性模型都是一样的）。这有点类似于按某个factor(比如说性别)fit不同的
+线性模型，但是区别是一个是Fixed
+effect(比如说性别只有两种可能性)，而subject却有无数个（试验里面具体的subject只能被认为是一个群体里面
+随机选取的）。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Function &lt;code&gt;median&lt;/code&gt; returns a vector of length one of two depending on
+whether the length of vector is odd or even. If the return result is
+a vector of 2, it might cause some bug while we can hardly notice it
+if all other vectors, matrices and arrays involved in the
+calculation with this result have even number of elements. So we
+have to be very careful about this function. My suggestion is that
+never use this function, instead, we can use &lt;code&gt;quantile(x,prob=0.5)&lt;/code&gt;
+to find the median of vector &lt;code&gt;x&lt;/code&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Function &lt;code&gt;summary&lt;/code&gt; can give some statistics about the data. But not
+as specific as SAS does.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;rstudent&lt;/code&gt; extracts studentized residuals of models from objects
+returned by modeling functions. However, it only works for some type
+of objects, e.g. &lt;code&gt;lm&lt;/code&gt; and &lt;code&gt;glm&lt;/code&gt;. It doesn't work for &lt;code&gt;lme&lt;/code&gt; objects.
+For &lt;code&gt;lme&lt;/code&gt; objects, you can use &lt;code&gt;residuals&lt;/code&gt; to extract model
+residuals. Using option &lt;code&gt;type="normalized"&lt;/code&gt;, you can extract
+studentized residuals of &lt;code&gt;lme&lt;/code&gt; objects.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;IQR&lt;/code&gt; calculate the interquartile range of a given data.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;script type="text/javascript"&gt;if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
+    var align = "center",
+        indent = "0em",
+        linebreak = "false";
+
+    if (false) {
+        align = (screen.width &lt; 768) ? "left" : align;
+        indent = (screen.width &lt; 768) ? "0em" : indent;
+        linebreak = (screen.width &lt; 768) ? 'true' : linebreak;
+    }
+
+    var mathjaxscript = document.createElement('script');
+    var location_protocol = (false) ? 'https' : document.location.protocol;
+    if (location_protocol !== 'http' &amp;&amp; location_protocol !== 'https') location_protocol = 'https:';
+    mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
+    mathjaxscript.type = 'text/javascript';
+    mathjaxscript.src = location_protocol + '//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML';
+    mathjaxscript[(window.opera ? "innerHTML" : "text")] =
+        "MathJax.Hub.Config({" +
+        "    config: ['MMLorHTML.js']," +
+        "    TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'AMS' }, Macros: {} }," +
+        "    jax: ['input/TeX','input/MathML','output/HTML-CSS']," +
+        "    extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']," +
+        "    displayAlign: '"+ align +"'," +
+        "    displayIndent: '"+ indent +"'," +
+        "    showMathMenu: true," +
+        "    messageStyle: 'normal'," +
+        "    tex2jax: { " +
+        "        inlineMath: [ ['\\\\(','\\\\)'] ], " +
+        "        displayMath: [ ['$$','$$'] ]," +
+        "        processEscapes: true," +
+        "        preview: 'TeX'," +
+        "    }, " +
+        "    'HTML-CSS': { " +
+        "        styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: 'inherit ! important'} }," +
+        "        linebreaks: { automatic: "+ linebreak +", width: '90% container' }," +
+        "    }, " +
+        "}); " +
+        "if ('default' !== 'default') {" +
+            "MathJax.Hub.Register.StartupHook('HTML-CSS Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax['HTML-CSS'].FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+            "MathJax.Hub.Register.StartupHook('SVG Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax.SVG.FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+        "}";
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
+}
+&lt;/script&gt;</content><category term="model"></category><category term="R"></category><category term="SAS"></category><category term="formula"></category><category term="statistics"></category></entry></feed>

@@ -1,0 +1,1041 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0"><channel><title>Ben Chuanlong Du's Blog - Benjamin Du</title><link>http://www.legendu.net/misc/</link><description>It is never too late to learn.</description><lastBuildDate>Wed, 16 Oct 2019 22:07:28 -0700</lastBuildDate><item><title>Python Tips and Traps</title><link>http://www.legendu.net/misc/blog/python-tips-and-traps/</link><description>&lt;p&gt;&lt;strong&gt;
+Things on this page are fragmentary and immature notes/thoughts of the author.
+It is not meant to readers but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;
+Things on this page are fragmentary and immature notes/thoughts of the author.
+It is not meant to readers but …&lt;/strong&gt;&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Benjamin Du</dc:creator><pubDate>Wed, 16 Oct 2019 22:07:28 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2019-10-16:/misc/blog/python-tips-and-traps/</guid><category>programming</category><category>Python</category><category>tricks</category><category>traps</category><category>tips</category></item><item><title>Exception and Error Handling in Python</title><link>http://www.legendu.net/misc/blog/exception-and-error-handling-in-python/</link><description>&lt;p&gt;&lt;strong&gt;
+Things on this page are fragmentary and immature notes/thoughts of the author.
+It is not meant to readers but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;https://docs.python.org/3/library/exceptions.html&lt;/p&gt;
+&lt;p&gt;https://docs.python.org/3/tutorial/errors.html&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Benjamin Du</dc:creator><pubDate>Wed, 16 Oct 2019 22:04:19 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2019-10-16:/misc/blog/exception-and-error-handling-in-python/</guid><category>programming</category><category>Python</category><category>exception</category><category>error</category><category>exception and error handling</category></item><item><title>Tips on Xonsh</title><link>http://www.legendu.net/misc/blog/tips-on-xonsh/</link><description>&lt;p&gt;&lt;strong&gt;
+Things on this page are fragmentary and immature notes/thoughts of the author.
+It is not meant to readers but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;https://github.com/xonsh/xonsh/wiki/Cheatsheet&lt;/p&gt;
+&lt;h2 id="tricks-and-traps"&gt;Tricks and Traps&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;While &lt;code&gt;$()&lt;/code&gt; in xonsh works similar to &lt;code&gt;$()&lt;/code&gt; in (all variants of …&lt;/p&gt;&lt;/li&gt;&lt;/ol&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Benjamin Du</dc:creator><pubDate>Tue, 15 Oct 2019 20:52:22 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2019-10-15:/misc/blog/tips-on-xonsh/</guid><category>programming</category><category>Python</category><category>shell</category><category>xonsh</category><category>Python evaluation</category></item><item><title>Fix Version Confliction of the Six Package</title><link>http://www.legendu.net/misc/blog/fix-version-confliction-of-the-six-package/</link><description>&lt;p&gt;&lt;strong&gt;
+Things on this page are fragmentary and immature notes/thoughts of the author.
+It is not meant to readers but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;ERROR: jsonschema 3.1.1 has requirement six&amp;gt;=1.11.0, but you'll have six 1.10.0 which is …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Benjamin Du</dc:creator><pubDate>Tue, 15 Oct 2019 08:31:38 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2019-10-15:/misc/blog/fix-version-confliction-of-the-six-package/</guid><category>programming</category><category>Python</category><category>six</category><category>version confliction</category></item><item><title>Tips on Git Submodule</title><link>http://www.legendu.net/misc/blog/tips-on-git-submodule/</link><description>&lt;p&gt;&lt;strong&gt;
+Things on this page are fragmentary and immature notes/thoughts of the author.
+It is not meant to readers but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;git submodule init
+git submodule update --recursive --remote&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Benjamin Du</dc:creator><pubDate>Mon, 14 Oct 2019 01:17:22 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2019-10-14:/misc/blog/tips-on-git-submodule/</guid><category>Software</category><category>Git</category><category>submodule</category></item><item><title>Git Shell on Windows</title><link>http://www.legendu.net/misc/blog/git-shell-on-windows/</link><description>&lt;p&gt;&lt;strong&gt;
+Things on this page are fragmentary and immature notes/thoughts of the author.
+It is not meant to readers but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;It is suggested that you use Git in Windows Subsystem Linux (WSL) 
+instead of Git Shell in Windows.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;git bash …&lt;/p&gt;&lt;/li&gt;&lt;/ol&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Benjamin Du</dc:creator><pubDate>Mon, 14 Oct 2019 01:01:31 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2019-10-14:/misc/blog/git-shell-on-windows/</guid><category>Software</category><category>Git</category><category>shell</category><category>Windows</category><category>WSL</category><category>Windows Subsystem Linux</category></item><item><title>Spark SQL Tips</title><link>http://www.legendu.net/misc/blog/spark-sql-tips/</link><description>&lt;p&gt;&lt;strong&gt;
+Things on this page are fragmentary and immature notes/thoughts of the author.
+It is not meant to readers but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://docs.databricks.com/spark/latest/spark-sql/index.html"&gt;Spark SQL Guide&lt;/a&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;It is suggested that you use Spark SQL syntax as much as possible 
+  instead of the the …&lt;/p&gt;&lt;/li&gt;&lt;/ol&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Benjamin Du</dc:creator><pubDate>Fri, 11 Oct 2019 18:15:13 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2019-10-11:/misc/blog/spark-sql-tips/</guid><category>programming</category><category>big data</category><category>Spark</category><category>Spark SQL</category></item><item><title>Update a Line in Standard Output</title><link>http://www.legendu.net/misc/blog/update-a-line-in-standard-output/</link><description>&lt;p&gt;&lt;strong&gt;
+Things on this page are fragmentary and immature notes/thoughts of the author.
+It is not meant to readers but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;The trick is to use &lt;code&gt;\r&lt;/code&gt; (return) instead &lt;code&gt;\n&lt;/code&gt; (return and new line).
+I will use Python to illustrate. 
+The …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Benjamin Du</dc:creator><pubDate>Thu, 10 Oct 2019 21:00:55 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2019-10-10:/misc/blog/update-a-line-in-standard-output/</guid><category>programming</category><category>Python</category><category>sys.stdout</category><category>standard output</category><category>return</category><category>return and new line</category></item><item><title>Understand the Design of Python</title><link>http://www.legendu.net/misc/blog/understand-the-design-of-python/</link><description>&lt;p&gt;&lt;strong&gt;
+Things on this page are fragmentary and immature notes/thoughts of the author.
+It is not meant to readers but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id="design"&gt;Design&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;There is no constant variables in Python.
+    If you need a constant variable in Python,
+    just define one and …&lt;/p&gt;&lt;/li&gt;&lt;/ol&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Benjamin Du</dc:creator><pubDate>Fri, 04 Oct 2019 20:19:41 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2019-10-04:/misc/blog/understand-the-design-of-python/</guid><category>programming</category><category>Python</category><category>design</category></item><item><title>Popular Data Structures in Python</title><link>http://www.legendu.net/misc/blog/popular-data-structures-in-python/</link><description>&lt;p&gt;&lt;strong&gt;
+Things on this page are fragmentary and immature notes/thoughts of the author.
+It is not meant to readers but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id="list"&gt;list&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;list&lt;/code&gt; is essentially a resizable array of objects in Python.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Almosts all methods of list are in-place.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;use &lt;code&gt;+&lt;/code&gt; to …&lt;/p&gt;&lt;/li&gt;&lt;/ol&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Benjamin Du</dc:creator><pubDate>Fri, 04 Oct 2019 20:14:52 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2019-10-04:/misc/blog/popular-data-structures-in-python/</guid><category>programming</category><category>Python</category><category>data structure</category><category>list</category><category>dict</category><category>tuple</category></item><item><title>Python Distribution</title><link>http://www.legendu.net/misc/blog/python-distribution/</link><description>&lt;p&gt;&lt;strong&gt;
+Things on this page are fragmentary and immature notes/thoughts of the author.
+It is not meant to readers but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;When people talks about Python,
+  it usually means the CPython implementation
+  which you can download from &lt;www.python.org&gt;.
+  There are other interesting …&lt;/www.python.org&gt;&lt;/p&gt;&lt;/li&gt;&lt;/ol&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Benjamin Du</dc:creator><pubDate>Fri, 04 Oct 2019 20:13:40 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2019-10-04:/misc/blog/python-distribution/</guid><category>programming</category><category>Python distribution</category></item><item><title>Tips on PySpark</title><link>http://www.legendu.net/misc/blog/tips-on-pyspark/</link><description>&lt;p&gt;&lt;strong&gt;
+Things on this page are fragmentary and immature notes/thoughts of the author.
+It is not meant to readers but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;You can run PySpark interactively using the &lt;code&gt;pyspark&lt;/code&gt; command
+  and submit a PySpark job to the cluster using the &lt;code&gt;spark-submit …&lt;/code&gt;&lt;/p&gt;&lt;/li&gt;&lt;/ol&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Benjamin Du</dc:creator><pubDate>Fri, 04 Oct 2019 08:22:24 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2019-10-04:/misc/blog/tips-on-pyspark/</guid><category>programming</category></item><item><title>Web Automation</title><link>http://www.legendu.net/misc/blog/web-automation/</link><description>&lt;p&gt;&lt;strong&gt;
+Things on this page are fragmentary and immature notes/thoughts of the author.
+It is not meant to readers but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id="selenium"&gt;Selenium&lt;/h2&gt;
+&lt;p&gt;Selenium is a great web automation tool!&lt;/p&gt;
+&lt;h2 id="puppeteer"&gt;&lt;a href="https://github.com/GoogleChrome/puppeteer"&gt;Puppeteer&lt;/a&gt;&lt;/h2&gt;
+&lt;h2 id="imacros"&gt;iMacros&lt;/h2&gt;
+&lt;h2 id="sikulix"&gt;SikuliX&lt;/h2&gt;
+&lt;p&gt;SikuliX is able to automate anything visual 
+but it …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Benjamin Du</dc:creator><pubDate>Fri, 27 Sep 2019 11:05:17 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2019-09-27:/misc/blog/web-automation/</guid><category>programming</category></item><item><title>Python Logging</title><link>http://www.legendu.net/misc/blog/python-logging/</link><description>&lt;p&gt;&lt;strong&gt;
+Things on this page are fragmentary and immature notes/thoughts of the author.
+It is not meant to readers but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id="loguru"&gt;&lt;a href="https://github.com/Delgan/loguru"&gt;loguru&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;The best logging package for Python!&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Note that the default logging level is &lt;code&gt;DEBUG&lt;/code&gt; in loguru
+  and it is …&lt;/p&gt;&lt;/li&gt;&lt;/ol&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Benjamin Du</dc:creator><pubDate>Tue, 24 Sep 2019 23:05:01 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2019-09-24:/misc/blog/python-logging/</guid><category>programming</category><category>Python</category><category>logging</category><category>loguru</category></item><item><title>Mypy Tips</title><link>http://www.legendu.net/misc/blog/mypy-tips/</link><description>&lt;p&gt;&lt;strong&gt;
+Things on this page are fragmentary and immature notes/thoughts of the author.
+It is not meant to readers but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;--check-untyped-defs&lt;/p&gt;
+&lt;p&gt;You can use the option &lt;code&gt;--ignore-missing-imports&lt;/code&gt; to disable the annoying error messages &lt;code&gt;No library stub file for module...&lt;/code&gt;.
+Please …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Benjamin Du</dc:creator><pubDate>Mon, 23 Sep 2019 22:22:48 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2019-09-23:/misc/blog/mypy-tips/</guid><category>programming</category><category>Python</category><category>mypy</category><category>tips</category></item><item><title>Tips for Living in Bellevue</title><link>http://www.legendu.net/misc/blog/tips-for-living-in-bellevue/</link><description>&lt;p&gt;&lt;strong&gt;
+Things on this page are fragmentary and immature notes/thoughts of the author.
+It is not meant to readers but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id="parking"&gt;Parking&lt;/h2&gt;
+&lt;p&gt;Starting from Sep, park in a garage.&lt;/p&gt;
+&lt;h2 id="food"&gt;Food&lt;/h2&gt;
+&lt;p&gt;Miah's Kitchen&lt;/p&gt;
+&lt;p&gt;Frying Fish&lt;/p&gt;
+&lt;p&gt;Gyu-Kaku Japanese BBQ&lt;/p&gt;
+&lt;p&gt;Twilight 7 Asian Dining …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Benjamin Du</dc:creator><pubDate>Tue, 17 Sep 2019 09:13:24 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2019-09-17:/misc/blog/tips-for-living-in-bellevue/</guid><category>Life</category><category>Bellevue</category><category>tips</category></item><item><title>Jingjing Asian Market</title><link>http://www.legendu.net/misc/blog/jingjing-asian-market/</link><description>&lt;p&gt;&lt;strong&gt;
+Things on this page are fragmentary and immature notes/thoughts of the author.
+It is not meant to readers but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id="jingjing-asian-market"&gt;&lt;a href="https://jingjingmarket.com/"&gt;Jingjing Asian Market&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;咸鸭蛋&lt;/p&gt;
+&lt;p&gt;卤肉饭&lt;/p&gt;
+&lt;h4 id="seafood"&gt;Seafood&lt;/h4&gt;
+&lt;p&gt;&lt;a href="https://jingjingmarket.com/catalog/9/product/11548"&gt;Fresh Salmon Steak 三文鱼排&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://jingjingmarket.com/catalog/9/product/11568"&gt;FreshSalmon fillet skinon 三文鱼片&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://jingjingmarket.com/catalog/9/product/11648"&gt;Frozen Basa Fillet / LB 冷冻养殖龙利鱼片（越南 …&lt;/a&gt;&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Benjamin Du</dc:creator><pubDate>Tue, 17 Sep 2019 09:11:39 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2019-09-17:/misc/blog/jingjing-asian-market/</guid><category>programming</category></item><item><title>Tips on eTrade</title><link>http://www.legendu.net/misc/blog/tips-on-etrade/</link><description>&lt;p&gt;&lt;strong&gt;
+Things on this page are fragmentary and immature notes/thoughts of the author.
+It is not meant to readers but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://us.etrade.com/etx/mm/movemoney/link-account"&gt;Add External Funnding Account&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://us.etrade.com/etx/hw/customerservice/uploaddoc#!/upload"&gt;Upload Documents&lt;/a&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Wire transfer is made on the same business day but cost $25.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Transfering to …&lt;/p&gt;&lt;/li&gt;&lt;/ol&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Benjamin Du</dc:creator><pubDate>Mon, 16 Sep 2019 23:29:49 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2019-09-16:/misc/blog/tips-on-etrade/</guid><category>finance</category><category>money</category><category>eTrade</category><category>stock</category></item><item><title>Tips on Subprocess</title><link>http://www.legendu.net/misc/blog/tips-on-subprocess/</link><description>&lt;p&gt;&lt;strong&gt;
+Things on this page are fragmentary and immature notes/thoughts of the author.
+It is not meant to readers but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;The method &lt;code&gt;subprocess.run&lt;/code&gt; is preferred over the older high-level APIs 
+    (&lt;code&gt;subprocess.call&lt;/code&gt;, &lt;code&gt;subprocess.check_call&lt;/code&gt;, &lt;code&gt;subprocess.check_output&lt;/code&gt;).
+    The method &lt;code&gt;subprocess …&lt;/code&gt;&lt;/p&gt;&lt;/li&gt;&lt;/ol&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Benjamin Du</dc:creator><pubDate>Mon, 16 Sep 2019 22:13:56 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2019-09-16:/misc/blog/tips-on-subprocess/</guid><category>programming</category><category>Python</category><category>subprocess</category><category>tips</category></item><item><title>Tips on yapf</title><link>http://www.legendu.net/misc/blog/tips-on-yapf/</link><description>&lt;p&gt;&lt;strong&gt;
+Things on this page are fragmentary and immature notes/thoughts of the author.
+It is not meant to readers but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://yapf.now.sh/"&gt;yapf Online Demo&lt;/a&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;There are 4 predefined styles: google, facebook, chromium, and pep8.
+    You can specify a style to use …&lt;/p&gt;&lt;/li&gt;&lt;/ol&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Benjamin Du</dc:creator><pubDate>Mon, 16 Sep 2019 22:12:27 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2019-09-16:/misc/blog/tips-on-yapf/</guid><category>programming</category><category>Python</category><category>yapf</category><category>code formatting</category></item><item><title>Tips on Yaml</title><link>http://www.legendu.net/misc/blog/tips-on-yaml/</link><description>&lt;p&gt;&lt;strong&gt;
+Things on this page are fragmentary and immature notes/thoughts of the author.
+It is not meant to readers but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;https://yaml.org/&lt;/p&gt;
+&lt;p&gt;https://yaml.org/spec/1.2/spec.html#directive/&lt;/p&gt;
+&lt;h2 id="yaml-in-python"&gt;YAML in Python&lt;/h2&gt;
+&lt;p&gt;http://sweetohm.net/article/introduction-yaml …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Benjamin Du</dc:creator><pubDate>Sat, 07 Sep 2019 06:52:17 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2019-09-07:/misc/blog/tips-on-yaml/</guid><category>programming</category><category>YAML</category><category>tips</category></item><item><title>Tips on the Tempfile Module in Python</title><link>http://www.legendu.net/misc/blog/tips-on-the-tempfile-module-in-python/</link><description>&lt;p&gt;&lt;strong&gt;
+Things on this page are fragmentary and immature notes/thoughts of the author.
+It is not meant to readers but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;https://docs.python.org/3/library/tempfile.html&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;You can use the suffix option of &lt;code&gt;tempfile.mkstemp&lt;/code&gt; to create a …&lt;/li&gt;&lt;/ol&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Benjamin Du</dc:creator><pubDate>Fri, 06 Sep 2019 21:28:15 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2019-09-06:/misc/blog/tips-on-the-tempfile-module-in-python/</guid><category>programming</category><category>Python</category><category>tempfile</category><category>temporary file</category></item><item><title>Tips on Property</title><link>http://www.legendu.net/misc/blog/tips-on-property/</link><description>&lt;p&gt;&lt;strong&gt;
+Things on this page are fragmentary and immature notes/thoughts of the author.
+It is not meant to readers but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Parcel view to check property line.&lt;/p&gt;
+&lt;p&gt;https://www.kingcounty.gov/operations/GIS/Maps.aspx/&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Benjamin Du</dc:creator><pubDate>Thu, 05 Sep 2019 06:22:17 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2019-09-05:/misc/blog/tips-on-property/</guid><category>life</category><category>property</category><category>tips</category><category>housing</category></item><item><title>Tips on Npm</title><link>http://www.legendu.net/misc/blog/tips-on-npm/</link><description>&lt;p&gt;&lt;strong&gt;
+Things on this page are fragmentary and immature notes/thoughts of the author.
+It is not meant to readers but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Avoid using sudo with npm.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;https://medium.com/@ExplosionPills/dont-use-sudo-with-npm-still-66e609f5f92&lt;/p&gt;
+&lt;p&gt;https://stackoverflow.com/questions/16151018/npm-throws-error-without-sudo&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Benjamin Du</dc:creator><pubDate>Wed, 04 Sep 2019 18:15:22 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2019-09-04:/misc/blog/tips-on-npm/</guid><category>programming</category><category>tips</category><category>npm</category><category>JavaScript</category><category>TypeScript</category></item><item><title>SpaceVim Tips</title><link>http://www.legendu.net/misc/blog/spacevim-tips/</link><description>&lt;p&gt;&lt;strong&gt;
+Things on this page are fragmentary and immature notes/thoughts of the author.
+It is not meant to readers but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id="installation"&gt;Installation&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;curl&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;sLf&lt;/span&gt; &lt;span class="n"&gt;https&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="o"&gt;//&lt;/span&gt;&lt;span class="n"&gt;spacevim&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;org&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;install&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sh&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="n"&gt;bash&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2 id="uninstallation"&gt;Uninstallation&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;curl&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;sLf&lt;/span&gt; &lt;span class="n"&gt;https&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="o"&gt;//&lt;/span&gt;&lt;span class="n"&gt;spacevim&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;org&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;install&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sh&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="n"&gt;bash&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;s&lt;/span&gt; &lt;span class="c1"&gt;-- --uninstall …&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Benjamin Du</dc:creator><pubDate>Fri, 30 Aug 2019 02:13:49 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2019-08-30:/misc/blog/spacevim-tips/</guid><category>software</category><category>SpaceVim</category><category>Vim</category><category>tips</category></item><item><title>Hyper Js Tips</title><link>http://www.legendu.net/misc/blog/hyper-js-tips/</link><description>&lt;p&gt;&lt;strong&gt;
+Things on this page are fragmentary and immature notes/thoughts of the author.
+It is not meant to readers but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://github.com/bnb/awesome-hyper"&gt;Awesome Hyper&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id="hyperjs-themes"&gt;&lt;a href="https://hyper.is/themes"&gt;HyperJS Themes&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;verminal is good one&lt;/p&gt;
+&lt;h2 id="shortcuts"&gt;Shortcuts&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Cmd+left arrow, Cmd+right arrow navigates among tabs. So does …&lt;/p&gt;&lt;/li&gt;&lt;/ul&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Benjamin Du</dc:creator><pubDate>Thu, 29 Aug 2019 08:46:26 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2019-08-29:/misc/blog/hyper-js-tips/</guid><category>software</category><category>Hyper</category><category>hyper.js</category><category>terminal</category></item><item><title>Spark Issue Duplicated Partitions</title><link>http://www.legendu.net/misc/blog/spark-issue-duplicated-partitions/</link><description>&lt;p&gt;&lt;strong&gt;
+Things on this page are fragmentary and immature notes/thoughts of the author.
+It is not meant to readers but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;There seems to be an issue in Spark that it might fail to overwrite files even if mode of &lt;code&gt;spark …&lt;/code&gt;&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Benjamin Du</dc:creator><pubDate>Thu, 29 Aug 2019 02:14:51 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2019-08-29:/misc/blog/spark-issue-duplicated-partitions/</guid><category>programming</category><category>Spark</category><category>issue</category><category>duplicate</category><category>overwrite</category></item><item><title>argparse Tips</title><link>http://www.legendu.net/misc/blog/argparse-tips/</link><description>&lt;p&gt;&lt;strong&gt;
+Things on this page are fragmentary and immature notes/thoughts of the author.
+It is not meant to readers but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;The argument &lt;code&gt;aliases&lt;/code&gt; does not take a geneartor as input.
+  Generally speaking, 
+  you should be carefule about using a generator …&lt;/p&gt;&lt;/li&gt;&lt;/ol&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Benjamin Du</dc:creator><pubDate>Thu, 29 Aug 2019 00:27:26 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2019-08-29:/misc/blog/argparse-tips/</guid><category>programming</category><category>Python</category><category>argparse</category></item><item><title>Spark Issue Mac Spark-shell Error Initializing SparkContext</title><link>http://www.legendu.net/misc/blog/spark-issue-mac-spark-shell-error-initializing-sparkcontext/</link><description>&lt;p&gt;**
+Things on this page are fragmentary and immature notes/thoughts of the author.
+It is not meant to readers but rather for convenient reference of the author and future improvement.&lt;/p&gt;
+&lt;h2 id="issue"&gt;Issue&lt;/h2&gt;
+&lt;p&gt;Mac spark-shell Error initializing SparkContext&lt;/p&gt;
+&lt;h2 id="possible-causes"&gt;Possible Causes&lt;/h2&gt;
+&lt;h2 id="solution"&gt;Solution&lt;/h2&gt;
+&lt;p&gt;One possible solution is to simplfy restart Mac.
+Other solutions exists …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Benjamin Du</dc:creator><pubDate>Tue, 27 Aug 2019 02:20:23 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2019-08-27:/misc/blog/spark-issue-mac-spark-shell-error-initializing-sparkcontext/</guid><category>programming</category><category>Spark</category><category>issue</category><category>Spark Shell</category><category>SparkContext</category></item><item><title>Spark Issue Cannot Create a Path from An Empty String</title><link>http://www.legendu.net/misc/blog/spark-issue-cannot-create-a-path-from-an-empty-string/</link><description>&lt;p&gt;&lt;strong&gt;
+Things on this page are fragmentary and immature notes/thoughts of the author.
+It is not meant to readers but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id="issue"&gt;Issue&lt;/h2&gt;
+&lt;p&gt;java.lang.IllegalArgumentException: Can not create a Path from an empty string&lt;/p&gt;
+&lt;h2 id="possible-causes"&gt;Possible Causes&lt;/h2&gt;
+&lt;p&gt;The error you are seeing …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Benjamin Du</dc:creator><pubDate>Mon, 26 Aug 2019 23:40:57 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2019-08-26:/misc/blog/spark-issue-cannot-create-a-path-from-an-empty-string/</guid><category>programming</category><category>Spark</category><category>issue</category><category>empty string</category><category>path</category></item><item><title>pylint Tips</title><link>http://www.legendu.net/misc/blog/pylint-tips/</link><description>&lt;p&gt;&lt;strong&gt;
+Things on this page are fragmentary and immature notes/thoughts of the author.
+It is not meant to readers but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id="pylint"&gt;pylint&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;Show ERROR messages only.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;pylint&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;E&lt;/span&gt; &lt;span class="n"&gt;some_script&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;py&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;ol&gt;
+&lt;li&gt;Show ERROR and WARNING messages only.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;pylint&lt;/span&gt; &lt;span class="c1"&gt;--disable=R,C some_script …&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Benjamin Du</dc:creator><pubDate>Sun, 25 Aug 2019 21:11:08 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2019-08-25:/misc/blog/pylint-tips/</guid><category>programming</category><category>Python</category><category>pylint</category><category>tips</category></item><item><title>Calling Shell from Python</title><link>http://www.legendu.net/misc/blog/calling-shell-from-python/</link><description>&lt;p&gt;&lt;strong&gt;
+Things on this page are fragmentary and immature notes/thoughts of the author.
+It is not meant to readers but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;It is suggested that you always use full path of command as the environment is not always identical across machines …&lt;/p&gt;&lt;/li&gt;&lt;/ol&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Benjamin Du</dc:creator><pubDate>Sat, 24 Aug 2019 06:48:05 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2019-08-24:/misc/blog/calling-shell-from-python/</guid><category>programming</category><category>Python</category><category>shell</category><category>os.system</category><category>subprocess</category></item><item><title>Quick Ways to Create a Questionnaire</title><link>http://www.legendu.net/misc/blog/quick-ways-to-create-a-questionnaire/</link><description>&lt;p&gt;&lt;strong&gt;
+Things on this page are fragmentary and immature notes/thoughts of the author.
+It is not meant to readers but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Google forms&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://hello.typeform.com"&gt;typeform&lt;/a&gt;&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Benjamin Du</dc:creator><pubDate>Sat, 17 Aug 2019 23:20:22 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2019-08-17:/misc/blog/quick-ways-to-create-a-questionnaire/</guid><category>tools</category><category>Google forms</category><category>TypeForm</category></item><item><title>Tips on Monkey Patching in Python</title><link>http://www.legendu.net/misc/blog/tips-on-monkey-patching-in-python/</link><description>&lt;p&gt;&lt;strong&gt;
+Things on this page are fragmentary and immature notes/thoughts of the author.
+It is not meant to readers but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;A MonkeyPatch is a piece of Python code which extends or modifies other code at runtime (typically at startup).&lt;/p&gt;
+&lt;p&gt;A …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Benjamin Du</dc:creator><pubDate>Tue, 13 Aug 2019 21:29:47 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2019-08-13:/misc/blog/tips-on-monkey-patching-in-python/</guid><category>programming</category><category>Python</category><category>monkey patching</category></item><item><title>Commonly Used File Formats for Configuration</title><link>http://www.legendu.net/misc/blog/commonly-used-file-formats-for-configuration/</link><description>&lt;p&gt;**
+Things on this page are fragmentary and immature notes/thoughts of the author.
+It is not meant to readers but rather for convenient reference of the author and future improvement.&lt;/p&gt;
+&lt;p&gt;It seems that many people recommend TOML over JSON and YAML.
+**&lt;/p&gt;
+&lt;h2 id="json"&gt;JSON&lt;/h2&gt;
+&lt;h2 id="yaml"&gt;&lt;a href="https://yaml.org/"&gt;YAML&lt;/a&gt;&lt;/h2&gt;
+&lt;h2 id="toml"&gt;&lt;a href="https://github.com/toml-lang/toml"&gt;TOML&lt;/a&gt;&lt;/h2&gt;
+&lt;h2 id="xml"&gt;XML&lt;/h2&gt;
+&lt;h2 id="translatetranslate"&gt;&lt;a href="https://github.com/translate/translate"&gt;translate/translate&lt;/a&gt;&lt;/h2&gt;
+&lt;h2 id="references"&gt;References&lt;/h2&gt;
+&lt;p&gt;https://www …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Benjamin Du</dc:creator><pubDate>Fri, 09 Aug 2019 01:08:44 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2019-08-09:/misc/blog/commonly-used-file-formats-for-configuration/</guid><category>programming</category><category>configuration</category><category>JSON</category><category>YAML</category><category>TOML</category><category>XML</category><category>file format</category></item><item><title>Data Quality</title><link>http://www.legendu.net/misc/blog/data-quality/</link><description>&lt;p&gt;&lt;strong&gt;
+Things on this page are fragmentary and immature notes/thoughts of the author.
+It is not meant to readers but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Upper and lower bounds tests and Inter Quartile Range Checks(IQR) and standard deviations&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Aggregate level checks (after manipulating data …&lt;/p&gt;&lt;/li&gt;&lt;/ul&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Benjamin Du</dc:creator><pubDate>Thu, 08 Aug 2019 21:51:10 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2019-08-08:/misc/blog/data-quality/</guid><category>database</category><category>big data</category><category>data quality</category><category>data check</category><category>data profiling</category></item><item><title>Tips on Optimus</title><link>http://www.legendu.net/misc/blog/tips-on-optimus/</link><description>&lt;p&gt;&lt;strong&gt;
+Things on this page are fragmentary and immature notes/thoughts of the author.
+It is not meant to readers but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;https://github.com/ironmussa/Optimus&lt;/p&gt;
+&lt;p&gt;https://github.com/ironmussa/Optimus/tree/master/examples&lt;/p&gt;
+&lt;p&gt;https://htmlpreview.github.io/?https://github.com …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Benjamin Du</dc:creator><pubDate>Thu, 08 Aug 2019 21:47:43 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2019-08-08:/misc/blog/tips-on-optimus/</guid><category>programming</category><category>Optimus</category><category>Spark</category><category>big data</category><category>data profiling</category></item><item><title>Network in Docker Containers</title><link>http://www.legendu.net/misc/blog/network-in-docker-containers/</link><description>&lt;p&gt;&lt;strong&gt;
+Things on this page are fragmentary and immature notes/thoughts of the author.
+It is not meant to readers but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;DNS is a common issue in Docker containers, 
+  especially behind a corporate firewall.
+  While the Linux way of handling DNS …&lt;/p&gt;&lt;/li&gt;&lt;/ol&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Benjamin Du</dc:creator><pubDate>Tue, 06 Aug 2019 22:07:34 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2019-08-06:/misc/blog/network-in-docker-containers/</guid><category>Software</category><category>Docker container</category><category>network</category><category>DNS</category><category>proxy</category></item><item><title>Schedule Cron Tasks in a Docker Container</title><link>http://www.legendu.net/misc/blog/schedule-cron-tasks-in-a-docker-container/</link><description>&lt;p&gt;&lt;strong&gt;
+Things on this page are fragmentary and immature notes/thoughts of the author.
+It is not meant to readers but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;You have to manually start the cron deamon using &lt;code&gt;cron&lt;/code&gt; or &lt;code&gt;sudo cron&lt;/code&gt; 
+  if it is not configured (via the …&lt;/li&gt;&lt;/ol&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Benjamin Du</dc:creator><pubDate>Mon, 05 Aug 2019 18:49:34 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2019-08-05:/misc/blog/schedule-cron-tasks-in-a-docker-container/</guid><category>software</category><category>Docker</category><category>crontab</category><category>cron</category><category>deamon</category></item><item><title>Instal the Latest Version of Python in Ubuntu</title><link>http://www.legendu.net/misc/blog/instal-the-latest-version-of-python-in-ubuntu/</link><description>&lt;p&gt;&lt;strong&gt;
+Things on this page are fragmentary and immature notes/thoughts of the author.
+It is not meant to readers but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id="through-ppa"&gt;Through PPA&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo add-apt-repository ppa:deadsnakes/ppa
+sudo apt-get update
+sudo apt-get install python3.7
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2 id="linuxbrew"&gt;Linuxbrew&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Install Linux brew. &lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;brew …&lt;/code&gt;&lt;/p&gt;&lt;/li&gt;&lt;/ol&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Benjamin Du</dc:creator><pubDate>Sat, 27 Jul 2019 02:26:33 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2019-07-27:/misc/blog/instal-the-latest-version-of-python-in-ubuntu/</guid><category>OS</category><category>Linux</category><category>Ubuntu</category><category>Python 3</category><category>installation</category><category>PPA</category></item><item><title>Exception Error and Critical</title><link>http://www.legendu.net/misc/blog/exception-error-and-critical/</link><description>&lt;p&gt;&lt;strong&gt;
+Things on this page are fragmentary and immature notes/thoughts of the author.
+It is not meant to readers but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;https://stackoverflow.com/questions/2031163/when-to-use-the-different-log-levels&lt;/p&gt;
+&lt;h2 id="java"&gt;Java&lt;/h2&gt;
+&lt;p&gt;An Error is a subclass of Throwable that indicates serious problems that a …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Benjamin Du</dc:creator><pubDate>Thu, 25 Jul 2019 00:48:52 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2019-07-25:/misc/blog/exception-error-and-critical/</guid><category>programming</category><category>exception</category><category>error</category><category>fatal</category><category>critical</category></item><item><title>Parsing JSON in Scala</title><link>http://www.legendu.net/misc/blog/parsing-json-in-scala/</link><description>&lt;p&gt;&lt;strong&gt;
+Things on this page are fragmentary and immature notes/thoughts of the author.
+It is not meant to readers but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id="circecirce"&gt;&lt;a href="https://github.com/circe/circe"&gt;circe/circe&lt;/a&gt;&lt;/h2&gt;
+&lt;h2 id="json4sjson4s"&gt;&lt;a href="https://github.com/json4s/json4s"&gt;json4s/json4s&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;https://stackoverflow.com/questions/29908297/how-can-i-convert-a-json-string-to-a-scala-map&lt;/p&gt;
+&lt;p&gt;There are an dependency issue using json4s with Spark. 
+This …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Benjamin Du</dc:creator><pubDate>Sun, 21 Jul 2019 20:40:24 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2019-07-21:/misc/blog/parsing-json-in-scala/</guid><category>programming</category><category>Scala</category><category>JSON</category><category>Java</category><category>gson</category></item><item><title>Unit Testing and Debugging Tools for Python</title><link>http://www.legendu.net/misc/blog/unit-testing-debugging-python/</link><description>&lt;p&gt;&lt;strong&gt;
+Things on this page are fragmentary and immature notes/thoughts of the author.
+It is not meant to readers but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;
+Things on this page are fragmentary and immature notes/thoughts of the author.
+It is not meant to readers but …&lt;/strong&gt;&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Benjamin Du</dc:creator><pubDate>Tue, 16 Jul 2019 23:41:33 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2019-07-16:/misc/blog/unit-testing-debugging-python/</guid><category>programming</category><category>Python</category><category>unit testing</category><category>debugging</category><category>command-line tools</category><category>development</category><category>dev</category></item><item><title>Regular Expression in Python</title><link>http://www.legendu.net/misc/blog/regular-expression-in-python/</link><description>&lt;p&gt;&lt;strong&gt;
+Things on this page are fragmentary and immature notes/thoughts of the author.
+It is not meant to readers but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://regex101.com/"&gt;Online Regular Expression Tester&lt;/a&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;re.search vs pattern.search: no performance difference. 
+  Python compiles and caches regular expression internally. 
+  If …&lt;/p&gt;&lt;/li&gt;&lt;/ol&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Benjamin Du</dc:creator><pubDate>Tue, 16 Jul 2019 21:49:10 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2019-07-16:/misc/blog/regular-expression-in-python/</guid><category>programming</category><category>Python</category><category>regex</category><category>regular expression</category></item><item><title>Python Big Data</title><link>http://www.legendu.net/misc/blog/python-big-data/</link><description>&lt;p&gt;&lt;strong&gt;
+Things on this page are fragmentary and immature notes/thoughts of the author.
+It is not meant to readers but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id="dask"&gt;Dask&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;You have to install the complete version of Dask using the command &lt;code&gt;pip3 install dask[complete]&lt;/code&gt;.
+  The default installation …&lt;/li&gt;&lt;/ol&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Benjamin Du</dc:creator><pubDate>Mon, 08 Jul 2019 22:23:18 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2019-07-08:/misc/blog/python-big-data/</guid><category>programming</category><category>Python</category><category>big data</category><category>Dask</category><category>PySpark</category></item><item><title>Online Image Storage</title><link>http://www.legendu.net/misc/blog/online-image-storage/</link><description>&lt;p&gt;&lt;strong&gt;
+Things on this page are fragmentary and immature notes/thoughts of the author.
+It is not meant to readers but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;GitHub itself is a good place to store images. Copy paste works&lt;/p&gt;
+&lt;p&gt;https://www.pinterest.com/&lt;/p&gt;
+&lt;p&gt;https://www.flickr.com …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Benjamin Du</dc:creator><pubDate>Sun, 30 Jun 2019 14:06:42 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2019-06-30:/misc/blog/online-image-storage/</guid><category>Software</category><category>online image storage</category></item><item><title>Tools for Web Crawling</title><link>http://www.legendu.net/misc/blog/tools-for-web-crawling/</link><description>&lt;p&gt;&lt;strong&gt;
+Things on this page are fragmentary and immature notes/thoughts of the author.
+It is not meant to readers but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id="platforms"&gt;Platforms&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://scrapinghub.com/platform"&gt;ScrapingHub&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="libraries"&gt;Libraries&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;a href="https://scrapy.org/"&gt;Scrapy&lt;/a&gt; (an open source web crawling and scraping tool written in Python)&lt;/li&gt;
+&lt;li&gt;火车采集器&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://www.80legs.com/"&gt;80legs&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;a href="https://github.com/xchaoinfo/fuck-login"&gt;xchaoinfo/fuck-login&lt;/a&gt;&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Benjamin Du</dc:creator><pubDate>Thu, 27 Jun 2019 18:34:44 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2019-06-27:/misc/blog/tools-for-web-crawling/</guid><category>programming</category><category>web crawling</category><category>web scraping</category></item><item><title>Data Sources</title><link>http://www.legendu.net/misc/blog/data-sources/</link><description>&lt;p&gt;&lt;strong&gt;
+Things on this page are fragmentary and immature notes/thoughts of the author.
+It is not meant to readers but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id="data-platforms"&gt;Data Platforms&lt;/h2&gt;
+&lt;p&gt;https://github.com/quiltdata/quilt&lt;/p&gt;
+&lt;p&gt;https://registry.opendata.aws/&lt;/p&gt;
+&lt;p&gt;https://www.google.com/publicdata/directory&lt;/p&gt;
+&lt;p&gt;https://proxycrawl.com …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Benjamin Du</dc:creator><pubDate>Thu, 27 Jun 2019 18:32:42 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2019-06-27:/misc/blog/data-sources/</guid><category>AI</category><category>machine learning</category><category>data</category><category>resource</category></item><item><title>Tips on Graph Database</title><link>http://www.legendu.net/misc/blog/tips-on-graph-database/</link><description>&lt;p&gt;&lt;strong&gt;
+Things on this page are fragmentary and immature notes/thoughts of the author.
+It is not meant to readers but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id="vesoft-incnebula"&gt;&lt;a href="https://github.com/vesoft-inc/nebula"&gt;vesoft-inc/nebula&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;A high performance distributed Graph Database&lt;/p&gt;
+&lt;h2 id="neo4jneo4j0httpsgithubcomneo4jneo4j0"&gt;[neo4j/neo4j]0https://github.com/neo4j/neo4j0&lt;/h2&gt;
+&lt;p&gt;Neo4j is the world’s …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Benjamin Du</dc:creator><pubDate>Thu, 27 Jun 2019 18:25:17 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2019-06-27:/misc/blog/tips-on-graph-database/</guid><category>programming</category><category>database</category><category>graph database</category><category>nebula</category></item><item><title>Run Commands on a Remote Machine</title><link>http://www.legendu.net/misc/blog/run-commands-on-a-remote-machine/</link><description>&lt;p&gt;&lt;strong&gt;
+Things on this page are fragmentary and immature notes/thoughts of the author.
+It is not meant to readers but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id="ssh"&gt;SSH&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;The pipeline command is run locally.
+    If you want the pipeline command to run remotely, 
+    place the whole command …&lt;/p&gt;&lt;/li&gt;&lt;/ol&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Benjamin Du</dc:creator><pubDate>Wed, 26 Jun 2019 18:39:12 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2019-06-26:/misc/blog/run-commands-on-a-remote-machine/</guid><category>programming</category><category>Shell</category><category>Python</category><category>SSH</category></item><item><title>Tips on Kerberos</title><link>http://www.legendu.net/misc/blog/tips-on-kerberos/</link><description>&lt;p&gt;&lt;strong&gt;
+Things on this page are fragmentary and immature notes/thoughts of the author.
+It is not meant to readers but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id="ubuntu"&gt;Ubuntu&lt;/h2&gt;
+&lt;p&gt;apt-get install krb5-user&lt;/p&gt;
+&lt;h2 id="centos"&gt;CentOS&lt;/h2&gt;
+&lt;p&gt;yum install -y ntp&lt;/p&gt;
+&lt;p&gt;yum install krb5-workstation krb5-libs krb5-auth-dialog&lt;/p&gt;
+&lt;p&gt;https://gist.github.com/ashrithr/4767927948eca70845db …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Benjamin Du</dc:creator><pubDate>Sun, 23 Jun 2019 02:11:01 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2019-06-23:/misc/blog/tips-on-kerberos/</guid><category>OS</category><category>Linux</category><category>CentOS</category><category>Ubuntu</category><category>kerberos</category></item><item><title>Spark Application Submission Is Not Finished</title><link>http://www.legendu.net/misc/blog/spark-issue-application-submission-is-not-finished/</link><description>&lt;p&gt;&lt;strong&gt;
+Things on this page are fragmentary and immature notes/thoughts of the author.
+It is not meant to readers but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;
+Things on this page are fragmentary and immature notes/thoughts of the author.
+It is not meant to readers but …&lt;/strong&gt;&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Benjamin Du</dc:creator><pubDate>Sat, 22 Jun 2019 19:45:56 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2019-06-22:/misc/blog/spark-issue-application-submission-is-not-finished/</guid><category>programming</category><category>Spark</category><category>big data</category><category>issue</category></item><item><title>Spark Issue Too Many Containers Asked</title><link>http://www.legendu.net/misc/blog/spark-issue-too-many-containers-asked/</link><description>&lt;p&gt;&lt;strong&gt;
+Things on this page are fragmentary and immature notes/thoughts of the author.
+It is not meant to readers but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id="error-message"&gt;Error Message&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;org.apache.hadoop.yarn.exceptions.InvalidResourceRequestException: Too many containers asked, 16731530.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;img alt="image" src="https://user-images.githubusercontent.com/824507/57563512-99b88f80-7353-11e9-8993-aee9a302c209.png"&gt;&lt;/p&gt;
+&lt;h2 id="possible-causes"&gt;Possible Causes&lt;/h2&gt;
+&lt;p&gt;"Too many containers asked" is …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Benjamin Du</dc:creator><pubDate>Sat, 22 Jun 2019 19:44:53 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2019-06-22:/misc/blog/spark-issue-too-many-containers-asked/</guid><category>programming</category><category>Spark</category><category>issue</category><category>big data</category></item><item><title>Use Scala With Picocli</title><link>http://www.legendu.net/misc/blog/use-scala-with-picocli/</link><description>&lt;p&gt;&lt;strong&gt;
+Things on this page are fragmentary and immature notes/thoughts of the author.
+It is not meant to readers but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;It is easy to make mistakes due to type of parameters when use picocli in Scala.
+It is suggested that …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Benjamin Du</dc:creator><pubDate>Sat, 22 Jun 2019 03:41:22 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2019-06-22:/misc/blog/use-scala-with-picocli/</guid><category>programming</category><category>Scala</category><category>JVM</category><category>picocli</category><category>command-line interface</category><category>command-line parser</category></item><item><title>Tips for Visual Studio Code</title><link>http://www.legendu.net/misc/blog/vscode-tips/</link><description>&lt;p&gt;&lt;strong&gt;
+Things on this page are fragmentary and immature notes/thoughts of the author.
+It is not meant to readers but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://code.visualstudio.com/blogs/2019/05/02/remote-development"&gt;Remote Development with VS Code&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://code.visualstudio.com/docs/remote/remote-overview"&gt;VS Code Remote Development&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;https://code.visualstudio.com/docs/remote/wsl&lt;/p&gt;
+&lt;p&gt;https://code.visualstudio.com …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Benjamin Du</dc:creator><pubDate>Mon, 17 Jun 2019 04:21:48 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2019-06-17:/misc/blog/vscode-tips/</guid><category>software</category><category>vscode</category><category>Visual Studio Code</category><category>tips</category><category>IDE</category></item><item><title>Tips on Improving Spark Performance</title><link>http://www.legendu.net/misc/blog/tips-on-improving-spark-performance/</link><description>&lt;p&gt;&lt;strong&gt;
+Things on this page are fragmentary and immature notes/thoughts of the author.
+It is not meant to readers but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Prefer the method &lt;code&gt;reduceByKey&lt;/code&gt; over the method &lt;code&gt;groupByKey&lt;/code&gt; when aggregating a RDD object in Spark.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Be cautious about the method …&lt;/p&gt;&lt;/li&gt;&lt;/ol&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Benjamin Du</dc:creator><pubDate>Mon, 17 Jun 2019 00:10:10 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2019-06-17:/misc/blog/tips-on-improving-spark-performance/</guid><category>programming</category><category>Spark</category><category>performance</category><category>tuning</category></item><item><title>Tips on Spark MLlib</title><link>http://www.legendu.net/misc/blog/tips-on-spark-mllib/</link><description>&lt;p&gt;&lt;strong&gt;
+Things on this page are fragmentary and immature notes/thoughts of the author.
+It is not meant to readers but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Spark MLlib RDD-based API supports 
+    &lt;a href="https://spark.apache.org/docs/latest/mllib-statistics.html#stratified-sampling"&gt;stratified sampling&lt;/a&gt;
+    but the DataFrame-based API hasn't implemented it yet as of Spark 2.4 …&lt;/li&gt;&lt;/ol&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Benjamin Du</dc:creator><pubDate>Sun, 16 Jun 2019 23:45:42 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2019-06-16:/misc/blog/tips-on-spark-mllib/</guid><category>programming</category><category>Spark</category><category>big data</category><category>MLlib</category><category>machine learning</category><category>AI</category></item><item><title>Python Poetry Tips</title><link>http://www.legendu.net/misc/blog/python-poetry-tips/</link><description>&lt;p&gt;**
+Things on this page are fragmentary and immature notes/thoughts of the author.
+It is not meant to readers but rather for convenient reference of the author and future improvement.&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://poetry.eustace.io/docs/"&gt;Poetry Documentation&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id="usage"&gt;Usage&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;poetry new proj
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;poetry init
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2 id="updating-poetry"&gt;Updating poetry&lt;/h2&gt;
+&lt;p&gt;Updating poetry to the latest stable version is as simple …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Benjamin Du</dc:creator><pubDate>Sat, 15 Jun 2019 19:09:53 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2019-06-15:/misc/blog/python-poetry-tips/</guid><category>programming</category><category>Python</category><category>poetry</category><category>build tool</category><category>dependency management</category></item><item><title>Tips on Homebrew</title><link>http://www.legendu.net/misc/blog/homebrew-tips/</link><description>&lt;p&gt;&lt;strong&gt;
+Things on this page are fragmentary and immature notes/thoughts of the author.
+It is not meant to readers but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;brew&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; 
+&lt;span class="n"&gt;brew&lt;/span&gt; &lt;span class="n"&gt;uninstall&lt;/span&gt;
+&lt;span class="n"&gt;brew&lt;/span&gt; &lt;span class="n"&gt;link&lt;/span&gt; 
+&lt;span class="n"&gt;brew&lt;/span&gt; &lt;span class="n"&gt;search&lt;/span&gt; 
+&lt;span class="n"&gt;brew&lt;/span&gt; &lt;span class="n"&gt;search&lt;/span&gt; &lt;span class="n"&gt;python&lt;/span&gt;&lt;span class="mf"&gt;@3.6&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;ol&gt;
+&lt;li&gt;Linuxbrew/brew has been merged into Homebrew …&lt;/li&gt;&lt;/ol&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Benjamin Du</dc:creator><pubDate>Thu, 23 May 2019 20:59:14 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2019-05-23:/misc/blog/homebrew-tips/</guid><category>software</category><category>Homebrew</category><category>macOS</category><category>Linuxbrew</category></item><item><title>Deep Learning Tools and Apps</title><link>http://www.legendu.net/misc/blog/deep-learning-tools-and-apps/</link><description>&lt;p&gt;&lt;strong&gt;
+Things on this page are fragmentary and immature notes/thoughts of the author.
+It is not meant to readers but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;https://www.imageidentify.com/&lt;/p&gt;
+&lt;h2 id="neural-style-transfer-applications"&gt;Neural Style Transfer Applications&lt;/h2&gt;
+&lt;p&gt;DeepArt&lt;/p&gt;
+&lt;p&gt;Prisma&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Benjamin Du</dc:creator><pubDate>Tue, 21 May 2019 01:31:55 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2019-05-21:/misc/blog/deep-learning-tools-and-apps/</guid><category>programming</category><category>deep learning</category><category>tools</category><category>applications</category></item><item><title>Computer Science Algorithms</title><link>http://www.legendu.net/misc/blog/computer-science-algorithms/</link><description>&lt;p&gt;&lt;strong&gt;
+Things on this page are fragmentary and immature notes/thoughts of the author.
+It is not meant to readers but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;https://leetcode.com/&lt;/p&gt;
+&lt;p&gt;https://github.com/TheAlgorithms/Python&lt;/p&gt;
+&lt;h2 id="specific-ones"&gt;Specific Ones&lt;/h2&gt;
+&lt;p&gt;https://en.wikipedia.org/wiki/Viterbi_algorithm&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Benjamin Du</dc:creator><pubDate>Mon, 20 May 2019 23:32:49 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2019-05-20:/misc/blog/computer-science-algorithms/</guid><category>programming</category><category>computer science algorithms</category><category>leetcode</category></item><item><title>PyPDF2 Examples</title><link>http://www.legendu.net/misc/blog/pypdf2-examples/</link><description>&lt;p&gt;&lt;strong&gt;
+Things on this page are fragmentary and immature notes/thoughts of the author.
+It is not meant to readers but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;PyPDF2&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;PdfFileWriter&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;PdfFileReader&lt;/span&gt;
+&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;typing&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;List&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;Mapping&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;Sequence&lt;/span&gt;
+
+
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;extract_pages&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;file&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="nb"&gt;str&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;subfiles&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;Mapping&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nb"&gt;str&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;Sequence&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nb"&gt;int …&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Benjamin Du</dc:creator><pubDate>Mon, 20 May 2019 19:10:07 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2019-05-20:/misc/blog/pypdf2-examples/</guid><category>programming</category><category>Python</category><category>PyPDF2</category><category>example</category></item><item><title>Escape from the Great Firewall of China</title><link>http://www.legendu.net/misc/blog/escape-from-the-great-firewall-of-china/</link><description>&lt;p&gt;&lt;strong&gt;
+Things on this page are fragmentary and immature notes/thoughts of the author.
+It is not meant to readers but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id="proxy"&gt;Proxy&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="http://www.qttc.net/201211247.html"&gt;国外SSH账号+MyEnTunnel+Firefox翻墙&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://blog.163.com/koumm@126/blog/static/95403837200921993156900/"&gt; linux squid 代理服务器实例配置&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://www.proxy360.cn/default.aspx"&gt;免费代理服务器&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://www.youbiyao.net/"&gt;有必要 - 上网代理&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="vpn"&gt;VPN&lt;/h2&gt;
+&lt;h3 id="_1"&gt;&lt;a href="http://www.doorss.com/"&gt;旗鱼&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;Unfortunately does not support Linux. Using PPTP/L2TP …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Benjamin Du</dc:creator><pubDate>Fri, 17 May 2019 03:29:44 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2019-05-17:/misc/blog/escape-from-the-great-firewall-of-china/</guid><category>network</category><category>internet</category><category>great firewall of China</category><category>proxy</category><category>VPN</category></item><item><title>Methodology for Solving Problems</title><link>http://www.legendu.net/misc/blog/methodology-for-solving-problems/</link><description>&lt;p&gt;&lt;strong&gt;
+Things on this page are fragmentary and immature notes/thoughts of the author.
+It is not meant to readers but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id="divide-and-conquer"&gt;Divide and Conquer&lt;/h2&gt;
+&lt;p&gt;How to put an elephant into a fridge&lt;/p&gt;
+&lt;h2 id="convert-to-solved-problems"&gt;Convert to Solved Problems&lt;/h2&gt;
+&lt;p&gt;Mathematicican interviewing for fire-extinguisher&lt;/p&gt;
+&lt;h2 id="control-varying-factor-and-enumerate"&gt;Control …&lt;/h2&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Benjamin Du</dc:creator><pubDate>Tue, 14 May 2019 01:49:29 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2019-05-14:/misc/blog/methodology-for-solving-problems/</guid><category>philosophy</category><category>thoughts</category><category>methodology</category></item><item><title>Clean Temporary Files on Linux</title><link>http://www.legendu.net/misc/blog/clean-temporary-files-on-linux/</link><description>&lt;p&gt;&lt;strong&gt;
+Things on this page are fragmentary and immature notes/thoughts of the author.
+It is not meant to readers but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id="apt-get"&gt;apt-get&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;apt&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="k"&gt;get&lt;/span&gt; &lt;span class="n"&gt;autoremove&lt;/span&gt;
+&lt;span class="n"&gt;apt&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="k"&gt;get&lt;/span&gt; &lt;span class="n"&gt;clean&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;https://askubuntu.com/questions/3167/what-is-difference-between-the-options-autoclean-autoremove-and-clean&lt;/p&gt;
+&lt;h2 id="pip-caching"&gt;pip Caching&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;use &lt;code&gt;--no-cache-dir&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;The sub command …&lt;/p&gt;&lt;/li&gt;&lt;/ol&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Benjamin Du</dc:creator><pubDate>Tue, 14 May 2019 01:44:38 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2019-05-14:/misc/blog/clean-temporary-files-on-linux/</guid><category>programming</category></item><item><title>Make Windows Restart Regularly</title><link>http://www.legendu.net/misc/blog/make-windows-restart-regularly/</link><description>&lt;p&gt;**
+Things on this page are fragmentary and immature notes/thoughts of the author.
+It is not meant to readers but rather for convenient reference of the author and future improvement.&lt;/p&gt;
+&lt;p&gt;My Windows PC in my office slows down signficantly after running for several days.
+I have cleaned up the startup …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Benjamin Du</dc:creator><pubDate>Mon, 13 May 2019 22:55:40 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2019-05-13:/misc/blog/make-windows-restart-regularly/</guid><category>OS</category><category>Windows</category><category>Microsoft</category><category>restart</category></item><item><title>Column/Row Expressions in Spark</title><link>http://www.legendu.net/misc/blog/column-row-expressions-in-spark/</link><description>&lt;p&gt;&lt;strong&gt;
+Things on this page are fragmentary and immature notes/thoughts of the author.
+It is not meant to readers but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Spark DataFrame is an alias to Dataset[Row].
+Even though a Spark DataFrame is stored as Rows in a Dataset …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Benjamin Du</dc:creator><pubDate>Mon, 13 May 2019 22:00:28 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2019-05-13:/misc/blog/column-row-expressions-in-spark/</guid><category>programming</category><category>Spark</category><category>big data</category><category>Column</category><category>Row</category><category>Dataset</category><category>map</category><category>flatMap</category></item><item><title>Tips on GitPython</title><link>http://www.legendu.net/misc/blog/tips-on-gitpython/</link><description>&lt;p&gt;&lt;strong&gt;
+Things on this page are fragmentary and immature notes/thoughts of the author.
+It is not meant to readers but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id="changes-files"&gt;Changes Files&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;git&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;Repo&lt;/span&gt;
+&lt;span class="n"&gt;repo&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Repo&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;.&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;files_changed&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;item&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;a_path&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;item&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;repo&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;index&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;diff&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;None&lt;/span&gt;&lt;span class="p"&gt;)]&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2 id="staged-files"&gt;Staged Files …&lt;/h2&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Benjamin Du</dc:creator><pubDate>Sun, 12 May 2019 13:27:21 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2019-05-12:/misc/blog/tips-on-gitpython/</guid><category>programming</category><category>Python</category><category>Git</category><category>GitPython</category><category>tips</category></item><item><title>PyQt5 Tips</title><link>http://www.legendu.net/misc/blog/pyqt5-tips/</link><description>&lt;p&gt;&lt;strong&gt;
+Things on this page are fragmentary and immature notes/thoughts of the author.
+It is not meant to readers but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;https://www.youtube.com/watch?v=0wAU5usATX8&lt;/p&gt;
+&lt;h2 id="examples"&gt;Examples&lt;/h2&gt;
+&lt;p&gt;https://github.com/mfitzp/15-minute-apps&lt;/p&gt;
+&lt;h2 id="good-tutorials"&gt;Good Tutorials&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://www.youtube.com/playlist?list=PL1FgJUcJJ03uwFW8ys2ov2dffKs3ieGYk"&gt;PyQt5 GUI Programming with Python …&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Benjamin Du</dc:creator><pubDate>Sun, 12 May 2019 11:12:42 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2019-05-12:/misc/blog/pyqt5-tips/</guid><category>programming</category><category>PyQt5</category><category>GUI</category><category>Python</category><category>Qt5</category></item><item><title>Spark Issue Invalidinputexception for Some Hive Data Partiions</title><link>http://www.legendu.net/misc/blog/spark-issue-InvalidInputException-for-some-Hive-data-partiions/</link><description>&lt;p&gt;&lt;strong&gt;
+Things on this page are fragmentary and immature notes/thoughts of the author.
+It is not meant to readers but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;15/12/29 17:22:27 ERROR yarn.ApplicationMaster: User class threw exception: org.apache.hadoop.mapred.InvalidInputException: Input path …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Benjamin Du</dc:creator><pubDate>Sat, 11 May 2019 02:50:52 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2019-05-11:/misc/blog/spark-issue-InvalidInputException-for-some-Hive-data-partiions/</guid><category>programming</category><category>Spark</category><category>issue</category><category>big data</category></item><item><title>Spark Issue Data Skew on Shuffle Phase</title><link>http://www.legendu.net/misc/blog/spark-issue-data-skew-on-shuffle-phase/</link><description>&lt;p&gt;&lt;strong&gt;
+Things on this page are fragmentary and immature notes/thoughts of the author.
+It is not meant to readers but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id="symptom"&gt;Symptom&lt;/h2&gt;
+&lt;p&gt;org.apache.spark.shuffle.FetchFailedException: Too large frame: 2200180718
+Caused by: java.lang.IllegalArgumentException: Too large frame: 2200289525
+at …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Benjamin Du</dc:creator><pubDate>Sat, 11 May 2019 02:50:52 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2019-05-11:/misc/blog/spark-issue-data-skew-on-shuffle-phase/</guid><category>programming</category></item><item><title>Spark Issue: Executor Out of Memory When Running Large Table Join</title><link>http://www.legendu.net/misc/blog/spark-issue-executor-out-of-memory-when-running-large-table-join/</link><description>&lt;p&gt;&lt;strong&gt;
+Things on this page are fragmentary and immature notes/thoughts of the author.
+It is not meant to readers but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id="symptom"&gt;Symptom&lt;/h2&gt;
+&lt;h3 id="symptom-1"&gt;Symptom 1&lt;/h3&gt;
+&lt;p&gt;16/04/22 04:27:18 WARN yarn.YarnAllocator: Container marked as failed: container_1459803563374_223497_02_000067 on host.
+Exit …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Benjamin Du</dc:creator><pubDate>Sat, 11 May 2019 02:50:52 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2019-05-11:/misc/blog/spark-issue-executor-out-of-memory-when-running-large-table-join/</guid><category>programming</category><category>Spark</category><category>issue</category><category>big data</category></item><item><title>Spark Issue File Not Found Exception</title><link>http://www.legendu.net/misc/blog/spark-issue-file-not-found-exception/</link><description>&lt;p&gt;&lt;strong&gt;
+Things on this page are fragmentary and immature notes/thoughts of the author.
+It is not meant to readers but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id="symptom"&gt;Symptom&lt;/h2&gt;
+&lt;h3 id="symptom-1"&gt;Symptom 1&lt;/h3&gt;
+&lt;p&gt;15/12/10 07:44:21 ERROR shuffle.OneForOneBlockFetcher: Failed while starting block fetches&lt;/p&gt;
+&lt;p&gt;java.lang.RuntimeException …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Benjamin Du</dc:creator><pubDate>Sat, 11 May 2019 02:50:52 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2019-05-11:/misc/blog/spark-issue-file-not-found-exception/</guid><category>programming</category><category>Spark</category><category>issue</category><category>big data</category></item><item><title>Spark Issue: High Disk and Memory Spill When Doing Shuffle</title><link>http://www.legendu.net/misc/blog/spark-issue-high-disk-and-memory-spill-when-doing-shuffle/</link><description>&lt;p&gt;&lt;strong&gt;
+Things on this page are fragmentary and immature notes/thoughts of the author.
+It is not meant to readers but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id="symtom"&gt;Symtom&lt;/h2&gt;
+&lt;p&gt;High disk and memory spill when doing shuffle.&lt;/p&gt;
+&lt;h2 id="cause"&gt;Cause&lt;/h2&gt;
+&lt;p&gt;Insufficient executor memory (You can monitor this spill metrics from …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Benjamin Du</dc:creator><pubDate>Sat, 11 May 2019 02:50:52 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2019-05-11:/misc/blog/spark-issue-high-disk-and-memory-spill-when-doing-shuffle/</guid><category>programming</category><category>Spark</category><category>issue</category><category>big data</category></item><item><title>Spark Issue Java.Lang.Outofmemoryerror</title><link>http://www.legendu.net/misc/blog/spark-issue-java.lang.OutOfMemoryError/</link><description>&lt;p&gt;&lt;strong&gt;
+Things on this page are fragmentary and immature notes/thoughts of the author.
+It is not meant to readers but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Cause:  Executor out of memory&lt;/p&gt;
+&lt;p&gt;Solution: Increase executor memory from 4G to 6G: --executor-memory "6G" &lt;/p&gt;
+&lt;p&gt;Reference:&lt;/p&gt;
+&lt;p&gt;http://stackoverflow.com/questions …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Benjamin Du</dc:creator><pubDate>Sat, 11 May 2019 02:50:52 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2019-05-11:/misc/blog/spark-issue-java.lang.OutOfMemoryError/</guid><category>programming</category><category>Spark</category><category>issue</category><category>big data</category></item><item><title>Spark Issue Table Not Found</title><link>http://www.legendu.net/misc/blog/spark-issue-table-not-found/</link><description>&lt;p&gt;&lt;strong&gt;
+Things on this page are fragmentary and immature notes/thoughts of the author.
+It is not meant to readers but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Solution: include Hive configuration of the Spark cluster when submitting Spark jobs.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;--files &amp;quot;/apache/spark_scala211/conf/hive-site.xml&amp;quot;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Benjamin Du</dc:creator><pubDate>Sat, 11 May 2019 02:50:52 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2019-05-11:/misc/blog/spark-issue-table-not-found/</guid><category>programming</category><category>Spark</category><category>issue</category><category>big data</category></item><item><title>Spark Issue: Timeout When Communicate With Driver During Shuffle Caused by Driver OOM</title><link>http://www.legendu.net/misc/blog/spark-issue-timeout-when-communicate-with-driver-during-shuffle/</link><description>&lt;p&gt;&lt;strong&gt;
+Things on this page are fragmentary and immature notes/thoughts of the author.
+It is not meant to readers but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id="symptom"&gt;Symptom&lt;/h2&gt;
+&lt;p&gt;15/12/24 02:04:21 INFO spark.MapOutputTrackerWorker: Doing the fetch; tracker endpoint = AkkaRpcEndpointRef(Actor[akka.tcp://sparkDriver …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Benjamin Du</dc:creator><pubDate>Sat, 11 May 2019 02:50:52 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2019-05-11:/misc/blog/spark-issue-timeout-when-communicate-with-driver-during-shuffle/</guid><category>programming</category><category>Spark</category><category>issue</category><category>big data</category></item><item><title>Spark Issue Too Large Table for Auto Broadcasthashjoin</title><link>http://www.legendu.net/misc/blog/spark-issue-too-large-table-for-auto-BroadcastHashJoin/</link><description>&lt;p&gt;&lt;strong&gt;
+Things on this page are fragmentary and immature notes/thoughts of the author.
+It is not meant to readers but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;16/04/17 11:17:36 ERROR scheduler.TaskSetManager: Total size of serialized results of 126 tasks (1137.3 MB …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Benjamin Du</dc:creator><pubDate>Sat, 11 May 2019 02:50:52 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2019-05-11:/misc/blog/spark-issue-too-large-table-for-auto-BroadcastHashJoin/</guid><category>programming</category><category>Spark</category><category>issue</category><category>big data</category></item><item><title>Spark Issue: Native Memory Usage Exceed MemoryOverhead</title><link>http://www.legendu.net/misc/blog/spark-issue-native-memory-usage-exceed-memoryOverhead/</link><description>&lt;p&gt;&lt;strong&gt;
+Things on this page are fragmentary and immature notes/thoughts of the author.
+It is not meant to readers but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id="symptom"&gt;Symptom&lt;/h2&gt;
+&lt;p&gt;Job aborted due to stage failure: Task 110 in stage 68.0 failed 1 times, 
+most recent failure: Lost …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Benjamin Du</dc:creator><pubDate>Sat, 11 May 2019 01:59:02 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2019-05-11:/misc/blog/spark-issue-native-memory-usage-exceed-memoryOverhead/</guid><category>programming</category><category>Spark</category><category>issue</category><category>big data</category></item><item><title>Spark Issue Task Not Serializable</title><link>http://www.legendu.net/misc/blog/spark-issue-task-not-serializable/</link><description>&lt;p&gt;&lt;strong&gt;
+Things on this page are fragmentary and immature notes/thoughts of the author.
+It is not meant to readers but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id="error-message"&gt;Error Message&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;org.apache.spark.SparkException: Job aborted due to stage failure: Task not serializable: java.io.NotSerializableException: ...&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id="possible-causes"&gt;Possible Causes …&lt;/h2&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Benjamin Du</dc:creator><pubDate>Sat, 11 May 2019 01:34:21 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2019-05-11:/misc/blog/spark-issue-task-not-serializable/</guid><category>programming</category></item><item><title>HDFS in Python</title><link>http://www.legendu.net/misc/blog/python-hdfs/</link><description>&lt;p&gt;&lt;strong&gt;
+Things on this page are fragmentary and immature notes/thoughts of the author.
+It is not meant to readers but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id="mtthhdfs"&gt;&lt;a href="https://github.com/mtth/hdfs/"&gt;mtth/hdfs&lt;/a&gt;&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;Supports proxy.
+    See &lt;a href="https://github.com/mtth/hdfs/issues/107"&gt;this issue&lt;/a&gt; for details.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="apache-arrow-hdfs"&gt;&lt;a href="https://arrow.apache.org/docs/python/filesystems.html#hdfs-api"&gt;Apache Arrow - HDFS&lt;/a&gt;&lt;/h2&gt;
+&lt;h2 id="references"&gt;References&lt;/h2&gt;
+&lt;p&gt;http://wesmckinney.com/blog/python-hdfs-interfaces/&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Benjamin Du</dc:creator><pubDate>Thu, 09 May 2019 23:40:06 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2019-05-09:/misc/blog/python-hdfs/</guid><category>programming</category><category>Python</category><category>Hadoop</category><category>HDFS</category></item><item><title>Check Whether a File Exists in Spark</title><link>http://www.legendu.net/misc/blog/check-whether-a-file-exists-in-spark/</link><description>&lt;p&gt;&lt;strong&gt;
+Things on this page are fragmentary and immature notes/thoughts of the author.
+It is not meant to readers but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id="orgapachehadoopfsfilesystem"&gt;org.apache.hadoop.fs.FileSystem&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;val&lt;/span&gt; &lt;span class="n"&gt;conf&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;sc&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;hadoopConfiguration&lt;/span&gt;
+&lt;span class="n"&gt;val&lt;/span&gt; &lt;span class="n"&gt;fs&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;org&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;apache&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;hadoop&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;fs&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;FileSystem&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="k"&gt;get&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;conf&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;val&lt;/span&gt; &lt;span class="k"&gt;exists …&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Benjamin Du</dc:creator><pubDate>Thu, 09 May 2019 22:30:29 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2019-05-09:/misc/blog/check-whether-a-file-exists-in-spark/</guid><category>programming</category><category>Spark</category><category>Hadoop</category><category>FileSystem</category><category>file system</category></item><item><title>Unable to Find Encoder Type Issue in Spark</title><link>http://www.legendu.net/misc/blog/spark-unable-to-find-encoder-type-issue/</link><description>&lt;p&gt;&lt;strong&gt;
+Things on this page are fragmentary and immature notes/thoughts of the author.
+It is not meant to readers but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;
+Things on this page are fragmentary and immature notes/thoughts of the author.
+It is not meant to readers but …&lt;/strong&gt;&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Benjamin Du</dc:creator><pubDate>Thu, 09 May 2019 19:48:11 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2019-05-09:/misc/blog/spark-unable-to-find-encoder-type-issue/</guid><category>programming</category><category>Spark</category><category>issue</category><category>encoder</category></item><item><title>Take Screenshots in Python</title><link>http://www.legendu.net/misc/blog/take-screenshot-in-python/</link><description>&lt;p&gt;&lt;strong&gt;
+Things on this page are fragmentary and immature notes/thoughts of the author.
+It is not meant to readers but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id="pillow"&gt;Pillow&lt;/h2&gt;
+&lt;p&gt;PIL.ImageGrab.grab(bbox=(10, 10, 510, 510))&lt;/p&gt;
+&lt;h2 id="pyqt5"&gt;PyQt5&lt;/h2&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Benjamin Du</dc:creator><pubDate>Tue, 07 May 2019 20:48:27 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2019-05-07:/misc/blog/take-screenshot-in-python/</guid><category>programming</category><category>screenshot</category><category>Python</category><category>PIL</category><category>Pillow</category><category>PyQt5</category></item><item><title>Virtual Studio Code for JVM Languages</title><link>http://www.legendu.net/misc/blog/vscode-for-jvm-languages/</link><description>&lt;p&gt;&lt;strong&gt;
+Things on this page are fragmentary and immature notes/thoughts of the author.
+It is not meant to readers but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://devblogs.microsoft.com/visualstudio/java-on-visual-studio-code-april-update/"&gt;Java on Visual Studio Code April Update&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id="extensions"&gt;Extensions&lt;/h2&gt;
+&lt;p&gt;&lt;a href="https://marketplace.visualstudio.com/items?itemName=dragos.scala-lsp"&gt;Scala Language Server&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://marketplace.visualstudio.com/items?itemName=scala-lang.scala"&gt;Scala Syntax&lt;/a&gt;&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Benjamin Du</dc:creator><pubDate>Tue, 07 May 2019 20:34:40 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2019-05-07:/misc/blog/vscode-for-jvm-languages/</guid><category>programming</category><category>Java</category><category>JVM languages</category><category>Scala</category><category>vscode</category><category>Visual Studio Code</category></item><item><title>Visual Studio Code for Python</title><link>http://www.legendu.net/misc/blog/vscode-for-python/</link><description>&lt;p&gt;&lt;strong&gt;
+Things on this page are fragmentary and immature notes/thoughts of the author.
+It is not meant to readers but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://devblogs.microsoft.com/python/remote-python-development-in-visual-studio-code/"&gt;Remote Python Development in Visual Studio Code&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://devblogs.microsoft.com/python/python-in-visual-studio-code-march-2019-release/"&gt;Python in Visual Studio Code – March 2019 Release&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://code.visualstudio.com/docs/python/python-tutorial"&gt;Getting Started with Python in …&lt;/a&gt;&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Benjamin Du</dc:creator><pubDate>Tue, 07 May 2019 20:34:40 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2019-05-07:/misc/blog/vscode-for-python/</guid><category>programming</category><category>Python</category><category>Visual Studio Code</category><category>vscode</category><category>IDE</category></item><item><title>Kubernetes Tips</title><link>http://www.legendu.net/misc/blog/kubernetes-tips/</link><description>&lt;p&gt;&lt;strong&gt;
+Things on this page are fragmentary and immature notes/thoughts of the author.
+It is not meant to readers but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;https://www.youtube.com/watch?v=ZpbXSdzp_vo&lt;/p&gt;
+&lt;p&gt;https://github.com/kubernetes/minikube&lt;/p&gt;
+&lt;p&gt;https://github.com/kubernetes/kubernetes&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://matthewpalmer.net/kubernetes-app-developer/articles/install-kubernetes-ubuntu-tutorial.html"&gt;4 Steps to …&lt;/a&gt;&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Benjamin Du</dc:creator><pubDate>Sat, 04 May 2019 01:53:39 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2019-05-04:/misc/blog/kubernetes-tips/</guid><category>programming</category><category>Kubernetes</category><category>k8s</category></item><item><title>Machine Learning Resources</title><link>http://www.legendu.net/misc/blog/machine-learning-resources/</link><description>&lt;p&gt;&lt;strong&gt;
+Things on this page are fragmentary and immature notes/thoughts of the author.
+It is not meant to readers but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id="platforms"&gt;Platforms&lt;/h2&gt;
+&lt;p&gt;https://azure.microsoft.com/en-us/services/virtual-machines/data-science-virtual-machines/&lt;/p&gt;
+&lt;p&gt;Google TPU&lt;/p&gt;
+&lt;p&gt;Amazon&lt;/p&gt;
+&lt;h2 id="misc"&gt;Misc&lt;/h2&gt;
+&lt;p&gt;https://github.com/bulutyazilim/awesome-datascience&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Benjamin Du</dc:creator><pubDate>Thu, 02 May 2019 21:53:45 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2019-05-02:/misc/blog/machine-learning-resources/</guid><category>AI</category><category>machine learning</category><category>resources</category></item><item><title>Alternative to the rm Command in Linux</title><link>http://www.legendu.net/misc/blog/alternative-to-the-rm-command-in-linux/</link><description>&lt;p&gt;&lt;strong&gt;
+Things on this page are fragmentary and immature notes/thoughts of the author.
+It is not meant to readers but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;As is know to all,
+it can be dangerous to use the &lt;code&gt;rm&lt;/code&gt; command directly in Linux/Unix. 
+A simple …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Benjamin Du</dc:creator><pubDate>Thu, 02 May 2019 02:41:04 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2019-05-02:/misc/blog/alternative-to-the-rm-command-in-linux/</guid><category>Linux</category><category>Shell</category><category>rm</category><category>Trash</category><category>mv</category></item><item><title>Change Modified Time of Files</title><link>http://www.legendu.net/misc/blog/change-modified-time-of-files/</link><description>&lt;p&gt;&lt;strong&gt;
+Things on this page are fragmentary and immature notes/thoughts of the author.
+It is not meant to readers but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Change the modifiled timestamp of a file to the specified timestamp.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;touch&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;m&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;t&lt;/span&gt; &lt;span class="mi"&gt;201512180130&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;09&lt;/span&gt; &lt;span class="n"&gt;some_file&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Change the modified …&lt;/p&gt;&lt;/li&gt;&lt;/ol&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Benjamin Du</dc:creator><pubDate>Thu, 02 May 2019 02:40:46 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2019-05-02:/misc/blog/change-modified-time-of-files/</guid><category>Linux</category><category>modified timestamp</category><category>touch</category></item><item><title>the Absolutely Best App for Taking Notes</title><link>http://www.legendu.net/misc/blog/the-absolutely-best-app-for-taking-notes/</link><description>&lt;p&gt;&lt;strong&gt;
+Things on this page are fragmentary and immature notes/thoughts of the author.
+It is not meant to readers but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;I have tried lots of notes taking applications in the past. 
+The best turns out to be GitHub!&lt;/p&gt;
+&lt;p&gt;github&lt;/p&gt;
+&lt;p&gt;pocket …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Benjamin Du</dc:creator><pubDate>Sun, 28 Apr 2019 12:41:40 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2019-04-28:/misc/blog/the-absolutely-best-app-for-taking-notes/</guid><category>Software</category><category>application</category><category>notes taking</category></item><item><title>Regular Expression in Bash</title><link>http://www.legendu.net/misc/blog/regular-expression-in-bash/</link><description>&lt;p&gt;&lt;strong&gt;
+Things on this page are fragmentary and immature notes/thoughts of the author.
+It is not meant to readers but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;You can use &lt;code&gt;=~&lt;/code&gt; for regular expression mathch in Bash.
+This make Bash syntax extremely flexible and powerful.
+For example, 
+you …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Benjamin Du</dc:creator><pubDate>Sun, 28 Apr 2019 11:53:55 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2019-04-28:/misc/blog/regular-expression-in-bash/</guid><category>programming</category><category>Bash</category><category>regular expression</category><category>regex</category></item><item><title>Parallel Computing in Bash</title><link>http://www.legendu.net/misc/blog/parallel-computing-in-bash/</link><description>&lt;p&gt;&lt;strong&gt;
+Things on this page are fragmentary and immature notes/thoughts of the author.
+It is not meant to readers but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&amp;amp; and wait &lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;parallel &lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;xargs&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;code&gt;parallel&lt;/code&gt; is a cool bash command which makes parallel computing easy in Bash.
+It is a …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Benjamin Du</dc:creator><pubDate>Sun, 28 Apr 2019 11:46:10 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2019-04-28:/misc/blog/parallel-computing-in-bash/</guid><category>programming</category><category>Bash</category><category>parallel computing</category></item><item><title>JupyterLab Issues</title><link>http://www.legendu.net/misc/blog/jupyterlab-issues/</link><description>&lt;p&gt;&lt;strong&gt;
+Things on this page are fragmentary and immature notes/thoughts of the author.
+It is not meant to readers but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;https://github.com/twosigma/beakerx/issues/7690&lt;/p&gt;
+&lt;p&gt;https://github.com/jupyterlab/jupyterlab/issues/5688&lt;/p&gt;
+&lt;p&gt;https://github.com/pyviz/holoviews/issues …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Benjamin Du</dc:creator><pubDate>Thu, 25 Apr 2019 20:32:51 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2019-04-25:/misc/blog/jupyterlab-issues/</guid><category>software</category><category>JupyterLab</category><category>issues</category><category>HoloViews</category><category>BeakerX</category></item><item><title>Rust Tips</title><link>http://www.legendu.net/misc/blog/rust-tips/</link><description>&lt;p&gt;&lt;strong&gt;
+Things on this page are fragmentary and immature notes/thoughts of the author.
+It is not meant to readers but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;http://www.arewelearningyet.com/&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Benjamin Du</dc:creator><pubDate>Sat, 20 Apr 2019 03:03:10 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2019-04-20:/misc/blog/rust-tips/</guid><category>programming</category><category>Rust</category><category>tips</category></item><item><title>General Tips for Logging</title><link>http://www.legendu.net/misc/blog/general-tips-for-logging/</link><description>&lt;p&gt;&lt;strong&gt;
+Things on this page are fragmentary and immature notes/thoughts of the author.
+It is not meant to readers but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Many logging libraries support sending logs as emails or as attachments of emails. 
+    It is suggested that you send warnings …&lt;/li&gt;&lt;/ol&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Benjamin Du</dc:creator><pubDate>Wed, 10 Apr 2019 22:33:13 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2019-04-10:/misc/blog/general-tips-for-logging/</guid><category>programming</category><category>logging</category><category>log</category></item><item><title>Economy and Finance</title><link>http://www.legendu.net/misc/blog/economy-and-finance/</link><description>&lt;p&gt;&lt;strong&gt;
+Things on this page are fragmentary and immature notes/thoughts of the author.
+It is not meant to readers but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id="economy"&gt;Economy&lt;/h2&gt;
+&lt;p&gt;&lt;a href="https://www.youtube.com/watch?v=PHe0bXAIuk0"&gt;How The Economic Machine Works by Ray Dalio&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id="finance"&gt;Finance&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;Spend less money than you can make.&lt;/li&gt;
+&lt;/ol&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Benjamin Du</dc:creator><pubDate>Sat, 30 Mar 2019 17:28:31 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2019-03-30:/misc/blog/economy-and-finance/</guid><category>programming</category></item><item><title>Make a Business Card</title><link>http://www.legendu.net/misc/blog/make-a-business-card/</link><description>&lt;p&gt;&lt;strong&gt;
+Things on this page are fragmentary and immature notes/thoughts of the author.
+It is not meant to readers but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://www.youtube.com/watch?v=DxzVnK4NuJ0"&gt;How to Make Business cards for Free&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://www.youtube.com/watch?v=WT0L9UrFKTY"&gt;Make Business Cards - PowerPoint 2010&lt;/a&gt;&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Benjamin Du</dc:creator><pubDate>Sat, 30 Mar 2019 17:20:50 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2019-03-30:/misc/blog/make-a-business-card/</guid><category>programming</category></item><item><title>Command Line Tools for Mac File System</title><link>http://www.legendu.net/misc/blog/command-line-tools-for-mac-file-system/</link><description>&lt;p&gt;&lt;strong&gt;
+Things on this page are fragmentary and immature notes/thoughts of the author.
+It is not meant to readers but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;List disk information.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;diskutil&lt;/span&gt; &lt;span class="n"&gt;list&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Management disk partition tables.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;fdisk&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Format disk partitions.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;newfs_ext4&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;dev&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;sd3&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;path_to_mount_in&lt;/span&gt;
+
+&lt;span class="n"&gt;newfs_ntfs&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;dev&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;sd3 …&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;&lt;/ol&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Benjamin Du</dc:creator><pubDate>Sat, 30 Mar 2019 14:41:00 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2019-03-30:/misc/blog/command-line-tools-for-mac-file-system/</guid><category>macOS</category><category>file system</category><category>filesystem</category><category>shell</category><category>terminal</category><category>command line</category></item><item><title>Mount Ntfs Drive Manually on Mac</title><link>http://www.legendu.net/misc/blog/mount-external-hard-drive-manually-on-mac/</link><description>&lt;p&gt;&lt;strong&gt;
+Things on this page are fragmentary and immature notes/thoughts of the author.
+It is not meant to readers but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;First use &lt;code&gt;diskutil list&lt;/code&gt; to list all avaiable disks and identifiy the external hard drive to mount.
+For example,
+running …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Benjamin Du</dc:creator><pubDate>Sat, 30 Mar 2019 14:28:17 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2019-03-30:/misc/blog/mount-external-hard-drive-manually-on-mac/</guid><category>OS</category><category>macOS</category><category>mount</category><category>NTFS</category><category>external drive</category><category>ExFAT</category></item><item><title>a Collection of Cheatsheets</title><link>http://www.legendu.net/misc/blog/a-collection-of-cheatsheets/</link><description>&lt;p&gt;&lt;strong&gt;
+Things on this page are fragmentary and immature notes/thoughts of the author.
+It is not meant to readers but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://becominghuman.ai/cheat-sheets-for-ai-neural-networks-machine-learning-deep-learning-big-data-678c51b4b463"&gt;Cheat Sheets for AI, Neural Networks, Machine Learning, Deep Learning &amp;amp; Big Data&lt;/a&gt;&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Benjamin Du</dc:creator><pubDate>Thu, 28 Mar 2019 18:49:13 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2019-03-28:/misc/blog/a-collection-of-cheatsheets/</guid><category>programming</category></item><item><title>Workflow managing Tools</title><link>http://www.legendu.net/misc/blog/workflow-managing-tools/</link><description>&lt;p&gt;&lt;strong&gt;
+Things on this page are fragmentary and immature notes/thoughts of the author.
+It is not meant to readers but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;So far most people recommends Apache Airflow!&lt;/p&gt;
+&lt;h2 id="apacheairflow"&gt;&lt;a href="https://github.com/apache/airflow"&gt;apache/airflow&lt;/a&gt;&lt;/h2&gt;
+&lt;h2 id="maradata-integration"&gt;&lt;a href="https://github.com/mara/data-integration"&gt;mara/data-integration&lt;/a&gt;&lt;/h2&gt;
+&lt;h2 id="azkabanazkaban"&gt;&lt;a href="https://github.com/azkaban/azkaban"&gt;azkaban/azkaban&lt;/a&gt;&lt;/h2&gt;
+&lt;h2 id="stackstormst2"&gt;&lt;a href="https://github.com/StackStorm/st2"&gt;StackStorm/st2&lt;/a&gt;&lt;/h2&gt;
+&lt;h2 id="rundeckrundeck"&gt;&lt;a href="https://github.com/rundeck/rundeck"&gt;rundeck/rundeck&lt;/a&gt;&lt;/h2&gt;
+&lt;h2 id="crontab"&gt;crontab&lt;/h2&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Benjamin Du</dc:creator><pubDate>Thu, 28 Mar 2019 18:42:55 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2019-03-28:/misc/blog/workflow-managing-tools/</guid><category>programming</category><category>workflow manager</category><category>scheduling</category><category>scheduler</category><category>Apache Airflow</category><category>mara</category><category>Azkaban</category><category>StackStorm</category></item><item><title>Best Filesystem Format for Cross-Platform Data Exchanging</title><link>http://www.legendu.net/misc/blog/best-filesystem-format-for-cross-platform-data-exchanging/</link><description>&lt;p&gt;&lt;strong&gt;
+Things on this page are fragmentary and immature notes/thoughts of the author.
+It is not meant to readers but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id="fat32"&gt;FAT32&lt;/h2&gt;
+&lt;p&gt;FAT32 is an outdated filesystem. 
+The maximum size for a single file is 4G.
+You should instead exFAT instead …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Benjamin Du</dc:creator><pubDate>Mon, 25 Mar 2019 00:53:40 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2019-03-25:/misc/blog/best-filesystem-format-for-cross-platform-data-exchanging/</guid><category>OS</category><category>macOS</category><category>external drive</category><category>filesystem</category></item><item><title>Typescript Tips</title><link>http://www.legendu.net/misc/blog/typescript-tips/</link><description>&lt;p&gt;&lt;strong&gt;
+Things on this page are fragmentary and immature notes/thoughts of the author.
+It is not meant to readers but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;https://code.visualstudio.com/docs/languages/typescript&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Benjamin Du</dc:creator><pubDate>Fri, 15 Mar 2019 17:52:54 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2019-03-15:/misc/blog/typescript-tips/</guid><category>programming</category><category>TypeScript</category><category>tips</category></item><item><title>Tips for Typescript Compiler</title><link>http://www.legendu.net/misc/blog/tips-for-typescript-compiler/</link><description>&lt;p&gt;&lt;strong&gt;
+Things on this page are fragmentary and immature notes/thoughts of the author.
+It is not meant to readers but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://www.typescriptlang.org/docs/handbook/compiler-options.html"&gt;Compiler Options&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;https://stackoverflow.com/questions/39416691/webpack-ts2304-cannot-find-name-map-set-promise&lt;/p&gt;
+&lt;p&gt;https://stackoverflow.com/questions/30439869/can-typescript-compile-to-es6-code&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Benjamin Du</dc:creator><pubDate>Thu, 14 Mar 2019 23:47:42 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2019-03-14:/misc/blog/tips-for-typescript-compiler/</guid><category>programming</category><category>TypeScript</category><category>compiler</category><category>ES6</category><category>JavaScript</category></item><item><title>Named Parameters in Typescript</title><link>http://www.legendu.net/misc/blog/named-parameters-in-typescript/</link><description>&lt;p&gt;&lt;strong&gt;
+Things on this page are fragmentary and immature notes/thoughts of the author.
+It is not meant to readers but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;https://github.com/Microsoft/TypeScript/issues/467&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Benjamin Du</dc:creator><pubDate>Tue, 12 Mar 2019 17:31:44 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2019-03-12:/misc/blog/named-parameters-in-typescript/</guid><category>programming</category><category>TypeScript</category><category>named parameters</category></item><item><title>Python Build Tools</title><link>http://www.legendu.net/misc/blog/python-build-tools/</link><description>&lt;p&gt;&lt;strong&gt;
+Things on this page are fragmentary and immature notes/thoughts of the author.
+It is not meant to readers but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;poetry, pybuilder and pydoit seem to be good ones.&lt;/p&gt;
+&lt;h2 id="sdispaterpoetry"&gt;&lt;a href="https://github.com/sdispater/poetry"&gt;sdispater/poetry&lt;/a&gt;&lt;/h2&gt;
+&lt;h2 id="pybuilderpybuilder"&gt;&lt;a href="https://github.com/pybuilder/pybuilder"&gt;pybuilder/pybuilder&lt;/a&gt;&lt;/h2&gt;
+&lt;h2 id="pypapipenv"&gt;&lt;a href="https://github.com/pypa/pipenv/"&gt;pypa/pipenv&lt;/a&gt;&lt;/h2&gt;
+&lt;h2 id="pydoit"&gt;&lt;a href="https://github.com/pydoit/doit"&gt;pydoit&lt;/a&gt;&lt;/h2&gt;
+&lt;h2 id="ninja"&gt;&lt;a href="https://github.com/ninja-build/ninja"&gt;ninja&lt;/a&gt;&lt;/h2&gt;
+&lt;h2 id="platformio"&gt;&lt;a href="https://github.com/platformio/platformio-core"&gt;PlatformIO&lt;/a&gt;&lt;/h2&gt;
+&lt;h2 id="meson"&gt;&lt;a href="https://github.com/mesonbuild/meson"&gt;Meson&lt;/a&gt;&lt;/h2&gt;
+&lt;h2 id="buildbotbuildbot"&gt;&lt;a href="https://github.com/buildbot/buildbot"&gt;buildbot …&lt;/a&gt;&lt;/h2&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Benjamin Du</dc:creator><pubDate>Mon, 11 Mar 2019 23:07:13 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2019-03-11:/misc/blog/python-build-tools/</guid><category>programming</category><category>Python</category><category>build tools</category></item><item><title>Install Newer Version of Sqlite3 on Debian Jessie</title><link>http://www.legendu.net/misc/blog/install-newer-version-of-sqlite3-on-debian/</link><description>&lt;p&gt;&lt;strong&gt;
+Things on this page are fragmentary and immature notes/thoughts of the author.
+It is not meant to readers but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Open &lt;code&gt;/etc/apt/sources.list&lt;/code&gt; and add the following line to the end.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;deb&lt;/span&gt; &lt;span class="s"&gt;http://www.backports.org/debian&lt;/span&gt; &lt;span class="kp"&gt;jessie-backports …&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;&lt;/ol&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Benjamin Du</dc:creator><pubDate>Mon, 11 Mar 2019 18:03:27 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2019-03-11:/misc/blog/install-newer-version-of-sqlite3-on-debian/</guid><category>Linux</category><category>SQLite3</category><category>Debian</category><category>backports</category></item><item><title>Add Method to a Python Class</title><link>http://www.legendu.net/misc/blog/add-method-to-a-python-class/</link><description>&lt;p&gt;&lt;strong&gt;
+Things on this page are fragmentary and immature notes/thoughts of the author.
+It is not meant to readers but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;https://www.ianlewis.org/en/dynamically-adding-method-classes-or-class-instanc&lt;/p&gt;
+&lt;p&gt;http://block.arch.ethz.ch/blog/2016/07/adding-methods-to-python-classes/&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Benjamin Du</dc:creator><pubDate>Sun, 10 Mar 2019 02:23:34 -0800</pubDate><guid isPermaLink="false">tag:www.legendu.net,2019-03-10:/misc/blog/add-method-to-a-python-class/</guid><category>programming</category><category>Python</category><category>reflection</category><category>method</category><category>class</category></item><item><title>Ensure Capturing Log of Applications</title><link>http://www.legendu.net/misc/blog/a-trick-to-ensure-capturing-log/</link><description>&lt;p&gt;&lt;strong&gt;
+Things on this page are fragmentary and immature notes/thoughts of the author.
+It is not meant to readers but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;
+**
+Logging is critical for debugging applications.
+For production applications,
+it is best to send log information into a file instead …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Benjamin Du</dc:creator><pubDate>Sat, 09 Mar 2019 23:49:57 -0800</pubDate><guid isPermaLink="false">tag:www.legendu.net,2019-03-09:/misc/blog/a-trick-to-ensure-capturing-log/</guid><category>programming</category><category>logging</category><category>rediction</category><category>exception</category></item><item><title>Sphinx Tips</title><link>http://www.legendu.net/misc/blog/sphinx-tips/</link><description>&lt;p&gt;&lt;strong&gt;
+Things on this page are fragmentary and immature notes/thoughts of the author.
+It is not meant to readers but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;http://www.sphinx-doc.org/en/1.5/invocation.html#invocation-apidoc&lt;/p&gt;
+&lt;p&gt;https://www.sphinx-doc.org/en/master/usage/markdown.html&lt;/p&gt;
+&lt;p&gt;https …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Benjamin Du</dc:creator><pubDate>Fri, 08 Mar 2019 23:47:26 -0800</pubDate><guid isPermaLink="false">tag:www.legendu.net,2019-03-08:/misc/blog/sphinx-tips/</guid><category>programming</category><category>Python</category><category>Sphinx</category><category>Python documentation generator</category></item><item><title>Fail to Install Packages into Python Virtual Environment in PyCharm on Windows</title><link>http://www.legendu.net/misc/blog/fail-to-install-packages-into-python-virtual-environment-in-pycharm-on-windows/</link><description>&lt;p&gt;&lt;strong&gt;
+Things on this page are fragmentary and immature notes/thoughts of the author.
+It is not meant to readers but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id="error-message"&gt;Error Message&lt;/h2&gt;
+&lt;p&gt;pip is configured with locations that require TLS/SSL, however the ssl module in Python is not available …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Benjamin Du</dc:creator><pubDate>Tue, 05 Mar 2019 02:13:27 -0800</pubDate><guid isPermaLink="false">tag:www.legendu.net,2019-03-05:/misc/blog/fail-to-install-packages-into-python-virtual-environment-in-pycharm-on-windows/</guid><category>software</category><category>PyCharm</category><category>Python virtual environment</category><category>fail to install package</category></item><item><title>Configure Terminal for PyCharm on Windows</title><link>http://www.legendu.net/misc/blog/configure-terminal-for-pycharm/</link><description>&lt;p&gt;&lt;strong&gt;
+Things on this page are fragmentary and immature notes/thoughts of the author.
+It is not meant to readers but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id="ubuntu-shell"&gt;Ubuntu Shell&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Install Ubuntu Shell on Windows 10 if it hasn't been installed.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;File -&amp;gt; Settings -&amp;gt; Tools -&amp;gt; Terminal &lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Replace the Shell …&lt;/p&gt;&lt;/li&gt;&lt;/ol&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Benjamin Du</dc:creator><pubDate>Tue, 05 Mar 2019 01:48:55 -0800</pubDate><guid isPermaLink="false">tag:www.legendu.net,2019-03-05:/misc/blog/configure-terminal-for-pycharm/</guid><category>programming</category></item><item><title>Install Python Pip in Cygwin</title><link>http://www.legendu.net/misc/blog/install-python-pip-in-cygwin/</link><description>&lt;p&gt;&lt;strong&gt;
+Things on this page are fragmentary and immature notes/thoughts of the author.
+It is not meant to readers but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;python3 -m ensurepip
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2 id="references"&gt;References&lt;/h2&gt;
+&lt;p&gt;https://stackoverflow.com/questions/30863501/installing-new-versions-of-python-on-cygwin-does-not-install-pip&lt;Paste&gt;&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Benjamin Du</dc:creator><pubDate>Mon, 04 Mar 2019 23:56:02 -0800</pubDate><guid isPermaLink="false">tag:www.legendu.net,2019-03-04:/misc/blog/install-python-pip-in-cygwin/</guid><category>software</category><category>Python</category><category>Cygwin</category><category>pip</category></item><item><title>Fix Authentication Error Docker Github</title><link>http://www.legendu.net/misc/blog/fix-authentication-error-docker-github/</link><description>&lt;p&gt;&lt;strong&gt;
+Things on this page are fragmentary and immature notes/thoughts of the author.
+It is not meant to readers but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id="solution"&gt;Solution&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Got to Account Seetings&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Navigate to the Linked Accounts seciton&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Unlink GitHub and relink it. &lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="references"&gt;References&lt;/h2&gt;
+&lt;p&gt;https://github.com …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Benjamin Du</dc:creator><pubDate>Mon, 04 Mar 2019 19:49:58 -0800</pubDate><guid isPermaLink="false">tag:www.legendu.net,2019-03-04:/misc/blog/fix-authentication-error-docker-github/</guid><category>Programming</category><category>GitHub</category><category>Docker</category><category>authentication</category><category>deployment keys</category></item><item><title>Data for Testing</title><link>http://www.legendu.net/misc/blog/data-for-testing/</link><description>&lt;p&gt;&lt;strong&gt;
+Things on this page are fragmentary and immature notes/thoughts of the author.
+It is not meant to readers but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://editor.datatables.net/generator/"&gt;DataTable Generator&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://www.freedatagenerator.com/sql-data-generator"&gt;SQL Data Generator&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://www.generatedata.com/"&gt;GenerateData&lt;/a&gt;&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Benjamin Du</dc:creator><pubDate>Sat, 02 Mar 2019 01:43:38 -0800</pubDate><guid isPermaLink="false">tag:www.legendu.net,2019-03-02:/misc/blog/data-for-testing/</guid><category>programming</category><category>data</category><category>testing</category><category>unit testing</category><category>data generator</category></item><item><title>Gitpod Tips</title><link>http://www.legendu.net/misc/blog/gitpod-tips/</link><description>&lt;p&gt;&lt;strong&gt;
+Things on this page are fragmentary and immature notes/thoughts of the author.
+It is not meant to readers but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;GitPod is a great web IDE for GitHub repositories.
+    It supports both IDE and terminal environment via Docker,
+    so a …&lt;/p&gt;&lt;/li&gt;&lt;/ol&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Benjamin Du</dc:creator><pubDate>Wed, 27 Feb 2019 09:07:14 -0800</pubDate><guid isPermaLink="false">tag:www.legendu.net,2019-02-27:/misc/blog/gitpod-tips/</guid><category>Software</category><category>programming</category><category>GitPod</category><category>GitHub</category><category>Theia IDE</category></item><item><title>Pytest Tips</title><link>http://www.legendu.net/misc/blog/pytest-tips/</link><description>&lt;p&gt;&lt;strong&gt;
+Things on this page are fragmentary and immature notes/thoughts of the author.
+It is not meant to readers but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id="plugins"&gt;Plugins&lt;/h2&gt;
+&lt;p&gt;https://github.com/ClearcodeHQ/pytest-elasticsearch&lt;/p&gt;
+&lt;p&gt;https://github.com/ClearcodeHQ/pytest-postgresql&lt;/p&gt;
+&lt;p&gt;https://github.com/ClearcodeHQ/pytest-dynamodb&lt;/p&gt;
+&lt;p&gt;https://github.com/ClearcodeHQ …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Benjamin Du</dc:creator><pubDate>Tue, 26 Feb 2019 19:06:50 -0800</pubDate><guid isPermaLink="false">tag:www.legendu.net,2019-02-26:/misc/blog/pytest-tips/</guid><category>programming</category><category>Python</category><category>pytest</category><category>fixtures</category><category>plugins</category></item><item><title>Python Profiler</title><link>http://www.legendu.net/misc/blog/python-profiler/</link><description>&lt;p&gt;&lt;strong&gt;
+Things on this page are fragmentary and immature notes/thoughts of the author.
+It is not meant to readers but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id="time"&gt;%time&lt;/h2&gt;
+&lt;h2 id="timeit"&gt;%timeit&lt;/h2&gt;
+&lt;h2 id="prun"&gt;&lt;a href="https://ipython.readthedocs.io/en/stable/interactive/magics.html#magic-prun"&gt;%prun&lt;/a&gt;&lt;/h2&gt;
+&lt;h2 id="pyheatmagic"&gt;&lt;a href="https://github.com/csurfer/pyheatmagic"&gt;pyheatmagic&lt;/a&gt;&lt;/h2&gt;
+&lt;h3 id="installation"&gt;Installation&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;pip3&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="n"&gt;py&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;heat&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;magic&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h3 id="usage"&gt;Usage&lt;/h3&gt;
+&lt;p&gt;Load the magic.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;%&lt;/span&gt;&lt;span class="n"&gt;load_ext&lt;/span&gt; &lt;span class="n"&gt;heat&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;%%heat &lt;/p&gt;
+&lt;p&gt;%%heat -o file …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Benjamin Du</dc:creator><pubDate>Fri, 22 Feb 2019 22:40:54 -0800</pubDate><guid isPermaLink="false">tag:www.legendu.net,2019-02-22:/misc/blog/python-profiler/</guid><category>programming</category><category>Python</category><category>JupyterLab</category><category>notebook</category></item><item><title>Getpocket Tips</title><link>http://www.legendu.net/misc/blog/getpocket-tips/</link><description>&lt;p&gt;&lt;strong&gt;
+Things on this page are fragmentary and immature notes/thoughts of the author.
+It is not meant to readers but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;https://help.getpocket.com/article/883-using-the-save-to-pocket-extension-for-google-chrome&lt;/p&gt;
+&lt;p&gt;https://help.getpocket.com/article/1077-what-is-article-view&lt;/p&gt;
+&lt;p&gt;https://help.getpocket.com/article/900-saving-to-pocket-and-viewing-your-list-in-firefox&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Benjamin Du</dc:creator><pubDate>Fri, 22 Feb 2019 20:04:59 -0800</pubDate><guid isPermaLink="false">tag:www.legendu.net,2019-02-22:/misc/blog/getpocket-tips/</guid><category>software</category><category>getpocket</category><category>pocket</category><category>tips</category></item><item><title>Generator in Python</title><link>http://www.legendu.net/misc/blog/generator-in-python/</link><description>&lt;p&gt;&lt;strong&gt;
+Things on this page are fragmentary and immature notes/thoughts of the author.
+It is not meant to readers but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id="when-not-to-use-generator"&gt;When Not to Use Generator&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;You need to access the data multiple times (i.e. cache the results instead of …&lt;/p&gt;&lt;/li&gt;&lt;/ol&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Benjamin Du</dc:creator><pubDate>Fri, 22 Feb 2019 08:55:04 -0800</pubDate><guid isPermaLink="false">tag:www.legendu.net,2019-02-22:/misc/blog/generator-in-python/</guid><category>programming</category><category>Python</category><category>generator</category><category>iterator</category></item><item><title>Total Size of Serialized results is bigger than spark.driver.maxResultSize</title><link>http://www.legendu.net/misc/blog/spark-issues-and-solutions/</link><description>&lt;p&gt;&lt;strong&gt;
+Things on this page are fragmentary and immature notes/thoughts of the author.
+It is not meant to readers but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;
+Things on this page are fragmentary and immature notes/thoughts of the author.
+It is not meant to readers but …&lt;/strong&gt;&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Benjamin Du</dc:creator><pubDate>Wed, 20 Feb 2019 20:37:59 -0800</pubDate><guid isPermaLink="false">tag:www.legendu.net,2019-02-20:/misc/blog/spark-issues-and-solutions/</guid><category>programming</category><category>Spark</category><category>issues</category><category>solutions</category><category>big data</category></item><item><title>Java Reflection</title><link>http://www.legendu.net/misc/blog/java-reflection/</link><description>&lt;p&gt;&lt;strong&gt;
+Things on this page are fragmentary and immature notes/thoughts of the author.
+It is not meant to readers but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;https://www.oracle.com/technetwork/articles/java/javareflection-1536171.html&lt;/p&gt;
+&lt;p&gt;https://stackoverflow.com/questions/37628/what-is-reflection-and-why-is-it-useful&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Benjamin Du</dc:creator><pubDate>Mon, 18 Feb 2019 20:15:42 -0800</pubDate><guid isPermaLink="false">tag:www.legendu.net,2019-02-18:/misc/blog/java-reflection/</guid><category>programming</category><category>Java</category><category>reflection</category></item><item><title>Github Tips</title><link>http://www.legendu.net/misc/blog/github-tips/</link><description>&lt;p&gt;&lt;strong&gt;
+Things on this page are fragmentary and immature notes/thoughts of the author.
+It is not meant to readers but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id="deploy-keys"&gt;Deploy Keys&lt;/h2&gt;
+&lt;p&gt;Deploy Keys are SSH keys which access restricted to a specific repository only.&lt;/p&gt;
+&lt;p&gt;https://developer.github.com/v3 …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Benjamin Du</dc:creator><pubDate>Mon, 11 Feb 2019 22:33:22 -0800</pubDate><guid isPermaLink="false">tag:www.legendu.net,2019-02-11:/misc/blog/github-tips/</guid><category>programming</category><category>GitHub</category><category>tips</category></item><item><title>Osquery Tips</title><link>http://www.legendu.net/misc/blog/osquery-tips/</link><description>&lt;p&gt;&lt;strong&gt;
+Things on this page are fragmentary and immature notes/thoughts of the author.
+It is not meant to readers but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id="information-about-network-cards"&gt;Information About Network Cards&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;osqueryi&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;select * from interface_details&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;&lt;code&gt;friendly_name&lt;/code&gt;, &lt;code&gt;description&lt;/code&gt; and &lt;code&gt;manufacturer&lt;/code&gt; information are not populated yet.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;osqueryi&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;select interface …&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Benjamin Du</dc:creator><pubDate>Mon, 11 Feb 2019 20:55:07 -0800</pubDate><guid isPermaLink="false">tag:www.legendu.net,2019-02-11:/misc/blog/osquery-tips/</guid><category>software</category><category>osquery</category><category>tips</category></item><item><title>Check Whether a Shell Command Exists</title><link>http://www.legendu.net/misc/blog/check-whether-a-shell-command-exists/</link><description>&lt;p&gt;&lt;strong&gt;
+Things on this page are fragmentary and immature notes/thoughts of the author.
+It is not meant to readers but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id="python"&gt;Python&lt;/h2&gt;
+&lt;p&gt;https://stackoverflow.com/questions/11210104/check-if-a-program-exists-from-a-python-script/34177358&lt;/p&gt;
+&lt;h2 id="shell"&gt;Shell&lt;/h2&gt;
+&lt;p&gt;https://stackoverflow.com/questions/592620/how-to-check-if-a-program-exists-from-a-bash-script&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Benjamin Du</dc:creator><pubDate>Sun, 10 Feb 2019 12:26:09 -0800</pubDate><guid isPermaLink="false">tag:www.legendu.net,2019-02-10:/misc/blog/check-whether-a-shell-command-exists/</guid><category>programming</category><category>Shell</category><category>command</category><category>exist</category><category>Python</category></item><item><title>Insert Or Update in Sqlite3</title><link>http://www.legendu.net/misc/blog/insert-or-update-in-sqlite3/</link><description>&lt;p&gt;&lt;strong&gt;
+Things on this page are fragmentary and immature notes/thoughts of the author.
+It is not meant to readers but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Note: UPSERT does not with virtual table in SQLite3 currently!&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;The UPSERT clause (following PostgreSQL syntax)
+is supported in SQLite …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Benjamin Du</dc:creator><pubDate>Sun, 10 Feb 2019 09:51:58 -0800</pubDate><guid isPermaLink="false">tag:www.legendu.net,2019-02-10:/misc/blog/insert-or-update-in-sqlite3/</guid><category>programming</category><category>SQLite3</category><category>upsert</category><category>insert or replace</category><category>insert or update</category></item><item><title>Install Remote Desktop for Windows in Mac</title><link>http://www.legendu.net/misc/blog/install-remote-desktop-for-windows-in-mac/</link><description>&lt;p&gt;&lt;strong&gt;
+Things on this page are fragmentary and immature notes/thoughts of the author.
+It is not meant to readers but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;The best free one is Microsoft Remote Desktop. 
+However, 
+it is available in the US App Repository but not the …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Benjamin Du</dc:creator><pubDate>Sat, 09 Feb 2019 11:55:55 -0800</pubDate><guid isPermaLink="false">tag:www.legendu.net,2019-02-09:/misc/blog/install-remote-desktop-for-windows-in-mac/</guid><category>software</category><category>macOS</category><category>remote desktop</category><category>windows</category></item><item><title>Split String into Rows in SQL</title><link>http://www.legendu.net/misc/blog/split-string-into-rows-in-SQL/</link><description>&lt;p&gt;&lt;strong&gt;
+Things on this page are fragmentary and immature notes/thoughts of the author.
+It is not meant to readers but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;
+Things on this page are fragmentary and immature notes/thoughts of the author.
+It is not meant to readers but …&lt;/strong&gt;&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Benjamin Du</dc:creator><pubDate>Sat, 09 Feb 2019 09:04:52 -0800</pubDate><guid isPermaLink="false">tag:www.legendu.net,2019-02-09:/misc/blog/split-string-into-rows-in-SQL/</guid><category>programming</category><category>SQL</category><category>SQLite3</category><category>split</category><category>string</category><category>rows</category></item><item><title>Jupyterhub Tips</title><link>http://www.legendu.net/misc/blog/jupyterhub-tips/</link><description>&lt;p&gt;&lt;strong&gt;
+Things on this page are fragmentary and immature notes/thoughts of the author.
+It is not meant to readers but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id="references"&gt;References&lt;/h2&gt;
+&lt;p&gt;https://jupyterhub.readthedocs.io/en/latest/getting-started/security-basics.html&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Benjamin Du</dc:creator><pubDate>Mon, 04 Feb 2019 14:36:23 -0800</pubDate><guid isPermaLink="false">tag:www.legendu.net,2019-02-04:/misc/blog/jupyterhub-tips/</guid><category>software</category><category>JupyterHub</category><category>tips</category></item><item><title>Generating a Self-Signed SSL</title><link>http://www.legendu.net/misc/blog/generating-a-self-signed-SSL/</link><description>&lt;p&gt;&lt;strong&gt;
+Things on this page are fragmentary and immature notes/thoughts of the author.
+It is not meant to readers but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;https://stackoverflow.com/questions/10175812/how-to-create-a-self-signed-certificate-with-openssl&lt;/p&gt;
+&lt;p&gt;https://www.linode.com/docs/security/ssl/create-a-self-signed-tls-certificate/&lt;/p&gt;
+&lt;p&gt;https://www.ibm.com/support/knowledgecenter …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Benjamin Du</dc:creator><pubDate>Mon, 04 Feb 2019 14:04:36 -0800</pubDate><guid isPermaLink="false">tag:www.legendu.net,2019-02-04:/misc/blog/generating-a-self-signed-SSL/</guid><category>software</category><category>SSL</category></item></channel></rss>

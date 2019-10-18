@@ -1,0 +1,912 @@
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Regular Expression Equivalence</title>
+  <meta name="author" content="Ben Chuanlong Du">
+
+  <link href="http://www.legendu.net/misc/atom.xml" type="application/atom+xml" rel="alternate"
+        title="Ben Chuanlong Du's Blog Atom Feed" />
+
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link href="http://www.legendu.net/misc/favicon.png" rel="icon">
+  <link href="http://www.legendu.net/misc/theme/css/main_2.css" media="screen, projection"
+        rel="stylesheet" type="text/css">
+  <script src="http://www.legendu.net/misc/theme/js/modernizr-2.0.js"></script>
+  <script src="http://www.legendu.net/misc/theme/js/ender.js"></script>
+  <script src="http://www.legendu.net/misc/theme/js/octopress.js" type="text/javascript"></script>
+
+  <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+</head>
+
+<body>
+  <header role="banner"><hgroup>
+  <h1><a href="http://www.legendu.net/misc/">Ben Chuanlong Du's Blog</a></h1>
+    <h2>It is never too late to learn.</h2>
+</hgroup></header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="http://www.legendu.net/misc/atom.xml" rel="subscribe-rss">RSS</a></li>
+</ul>
+
+<form name="search" action="https://www.bing.com/search" method="get" onSubmit="return build_query()">
+  <fieldset role="search">
+      <!--
+    <input type="hidden" name="q" value="site:http://www.legendu.net/misc" />
+        -->
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+
+<script type = "text/javascript">
+    function build_query() {
+        var query = document.forms["search"]["q"].value;
+        var prefix = "site:http://www.legendu.net/misc "
+        if (!query.startsWith(prefix)) {
+            query = prefix + query;
+            document.forms["search"]["q"].value = query;
+        }
+        return true;
+    }
+</script>
+
+<ul class="main-navigation">
+    <li><a href="http://www.legendu.net">Home</a></li>
+    <li><a href="http://www.legendu.net/misc">Blog</a></li>
+    <li><a href="http://www.legendu.net/misc/archives.html">Archives</a></li>
+    <li><a href="http://www.legendu.net/misc/pages/links.html">Links</a></li>
+</ul></nav>
+  <div id="main">
+    <div id="content">
+<div>
+  <article class="hentry" role="article">
+<header>
+      <h1 class="entry-title">Regular Expression Equivalence</h1>
+      <p class="meta"><time datetime="2017-11-07T22:34:00-08:00" pubdate>Nov 07, 2017</time></p>
+</header>
+
+  <div class="entry-content"><p><strong>
+Things on this page are fragmentary and immature notes/thoughts of the author. 
+It is not meant to readers but rather for convenient reference of the author and future improvement.
+</strong></p>
+<p><a href="https://regex101.com/">Regular Expression Tester</a></p>
+<ol>
+<li>
+<p>If you use a regular expression multiple times, 
+    then there is advantage to complie it and use the compiled version ... 
+    as everyone use a plain regrex, 
+    it is compiled and then used ...</p>
+</li>
+<li>
+<p><code>\W</code> does not include <code>^</code> and <code>$</code>.</p>
+</li>
+</ol>
+<h2 id="regular-expression-modifiers">Regular Expression Modifiers</h2>
+<p>Regular expression modifiers makes regular expression more flexible and powerful. 
+It is also a more universal way 
+than remembering different options in different programming languages or tools. 
+It is suggested that you use regular expression modifiers when possible.</p>
+<h3 id="r">R</h3>
+<p>Both regular expression in the base package and the stringi package fully supported modifiers.</p>
+<h3 id="python">Python</h3>
+<p>Partial supported.
+Turning modifiers on is supported
+however turning modifiers off is not supported.
+Modifiers (once turned on) are applied to the entire regular expression
+and cannot be turned off.</p>
+<h3 id="teradata-sql">Teradata SQL</h3>
+<p>fully supported</p>
+<h3 id="oracle-sql">Oracle SQL</h3>
+<p>Not supported. 
+Behavior of regular expressions are control via parameters of regular expression functions.</p>
+<h3 id="perl">Perl</h3>
+<p>fully supported</p>
+<h3 id="grep">grep</h3>
+<p>fully supported via Perl style regular (the -P option) expression</p>
+<h3 id="js">JS</h3>
+<p>Partial supported.
+Tunning modifiers on is supported
+however turnning modifiers off is not supported.
+Modifiers (once turned on) are applied to the entire regular expression
+and cannot be turned off.</p>
+<h2 id="greedy-match-or-not">Greedy Match or Not</h2>
+<h3 id="grep_1">grep</h3>
+<p>Greedy by default.
+However, 
+in the Perl style syntax you use the modifer <code>?</code> after the quantifier to perform a non-greedy match.
+For example, 
+instead of <code>.*</code> you can use <code>.*?</code> to do a non-greedy match.</p>
+<h2 id="popular-regular-expression-functions">Popular Regular Expression Functions</h2>
+<h3 id="r_1">R</h3>
+<div class="highlight"><pre><span></span><span class="nf">grep</span><span class="p">(</span><span class="n">pattern</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">ignore.case</span> <span class="o">=</span> <span class="kc">FALSE</span><span class="p">,</span> <span class="n">perl</span> <span class="o">=</span> <span class="kc">FALSE</span><span class="p">,</span> <span class="n">value</span> <span class="o">=</span> <span class="kc">FALSE</span><span class="p">,</span> <span class="n">fixed</span> <span class="o">=</span> <span class="kc">FALSE</span><span class="p">,</span> <span class="n">useBytes</span> <span class="o">=</span> <span class="kc">FALSE</span><span class="p">,</span> <span class="n">invert</span> <span class="o">=</span> <span class="kc">FALSE</span><span class="p">)</span>
+</pre></div>
+
+
+<p><code>grep(value = FALSE)</code> returns a vector of the indices of the elements of x that yielded a match 
+(or not, for invert = TRUE). 
+This will be an integer vector unless the input is a long vector, when it will be a double vector.
+<code>grep(value = TRUE)</code> returns a character vector containing the selected elements of x 
+(after coercion, preserving names but no other attributes).</p>
+<div class="highlight"><pre><span></span><span class="nf">grepl</span><span class="p">(</span><span class="n">pattern</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">ignore.case</span> <span class="o">=</span> <span class="kc">FALSE</span><span class="p">,</span> <span class="n">perl</span> <span class="o">=</span> <span class="kc">FALSE</span><span class="p">,</span> <span class="n">fixed</span> <span class="o">=</span> <span class="kc">FALSE</span><span class="p">,</span> <span class="n">useBytes</span> <span class="o">=</span> <span class="kc">FALSE</span><span class="p">)</span>
+</pre></div>
+
+
+<p><code>grepl</code> returns a logical vector (match or not for each element of x).</p>
+<div class="highlight"><pre><span></span><span class="nf">sub</span><span class="p">(</span><span class="n">pattern</span><span class="p">,</span> <span class="n">replacement</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">ignore.case</span> <span class="o">=</span> <span class="kc">FALSE</span><span class="p">,</span> <span class="n">perl</span> <span class="o">=</span> <span class="kc">FALSE</span><span class="p">,</span> <span class="n">fixed</span> <span class="o">=</span> <span class="kc">FALSE</span><span class="p">,</span> <span class="n">useBytes</span> <span class="o">=</span> <span class="kc">FALSE</span><span class="p">)</span>
+</pre></div>
+
+
+<div class="highlight"><pre><span></span><span class="nf">gsub</span><span class="p">(</span><span class="n">pattern</span><span class="p">,</span> <span class="n">replacement</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">ignore.case</span> <span class="o">=</span> <span class="kc">FALSE</span><span class="p">,</span> <span class="n">perl</span> <span class="o">=</span> <span class="kc">FALSE</span><span class="p">,</span> <span class="n">fixed</span> <span class="o">=</span> <span class="kc">FALSE</span><span class="p">,</span> <span class="n">useBytes</span> <span class="o">=</span> <span class="kc">FALSE</span><span class="p">)</span>
+</pre></div>
+
+
+<div class="highlight"><pre><span></span><span class="nf">regexpr</span><span class="p">(</span><span class="n">pattern</span><span class="p">,</span> <span class="n">text</span><span class="p">,</span> <span class="n">ignore.case</span> <span class="o">=</span> <span class="kc">FALSE</span><span class="p">,</span> <span class="n">perl</span> <span class="o">=</span> <span class="kc">FALSE</span><span class="p">,</span> <span class="n">fixed</span> <span class="o">=</span> <span class="kc">FALSE</span><span class="p">,</span> <span class="n">useBytes</span> <span class="o">=</span> <span class="kc">FALSE</span><span class="p">)</span>
+</pre></div>
+
+
+<div class="highlight"><pre><span></span><span class="nf">gregexpr</span><span class="p">(</span><span class="n">pattern</span><span class="p">,</span> <span class="n">text</span><span class="p">,</span> <span class="n">ignore.case</span> <span class="o">=</span> <span class="kc">FALSE</span><span class="p">,</span> <span class="n">perl</span> <span class="o">=</span> <span class="kc">FALSE</span><span class="p">,</span> <span class="n">fixed</span> <span class="o">=</span> <span class="kc">FALSE</span><span class="p">,</span> <span class="n">useBytes</span> <span class="o">=</span> <span class="kc">FALSE</span><span class="p">)</span>
+</pre></div>
+
+
+<div class="highlight"><pre><span></span><span class="nf">regexec</span><span class="p">(</span><span class="n">pattern</span><span class="p">,</span> <span class="n">text</span><span class="p">,</span> <span class="n">ignore.case</span> <span class="o">=</span> <span class="kc">FALSE</span><span class="p">,</span> <span class="n">fixed</span> <span class="o">=</span> <span class="kc">FALSE</span><span class="p">,</span> <span class="n">useBytes</span> <span class="o">=</span> <span class="kc">FALSE</span><span class="p">)</span>
+</pre></div>
+
+
+<p>For sub and gsub return a character vector of the same length and with the same attributes as x (after possible coercion to character). Elements of character vectors x which are not substituted will be returned unchanged (including any declared encoding). If useBytes = FALSE a non-ASCII substituted result will often be in UTF-8 with a marked encoding (e.g. if there is a UTF-8 input, and in a multibyte locale unless fixed = TRUE). Such strings can be re-encoded by enc2native.</p>
+<p>regexpr returns an integer vector of the same length as text giving the starting position of the first match or -1 if there is none, with attribute "match.length", an integer vector giving the length of the matched text (or -1 for no match). The match positions and lengths are in characters unless useBytes = TRUE is used, when they are in bytes. If named capture is used there are further attributes "capture.start", "capture.length" and "capture.names".</p>
+<p>gregexpr returns a list of the same length as text each element 
+of which is of the same form as the return value for regexpr, 
+except that the starting positions of every (disjoint) match are given.</p>
+<p>regexec returns a list of the same length as text each element 
+of which is either -1 if there is no match, 
+or a sequence of integers with the starting positions of the match 
+and all substrings corresponding to parenthesized subexpressions of pattern, 
+with attribute "match.length" a vector giving the lengths of the matches (or -1 for no match).</p>
+<h3 id="python_1">Python</h3>
+<p>re.search
+re.match</p>
+<h3 id="teradata-sql_1">Teradata SQL</h3>
+<p>regexp_instr</p>
+<h2 id="white-space">White Space</h2>
+<h3 id="python_2">Python</h3>
+<p><code>\s</code> or <code>[ \t\n\r\f\v]</code></p>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">re</span>
+<span class="n">m</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="s2">&quot;\s&quot;</span><span class="p">,</span> <span class="s2">&quot;abc &quot;</span><span class="p">)</span>
+<span class="n">s</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="s2">&quot;\s&quot;</span><span class="p">,</span> <span class="s2">&quot;abc &quot;</span><span class="p">)</span>
+</pre></div>
+
+
+<p>Notice that <code>re.match</code> checks for a match only at the beginning of the string, 
+while <code>re.search</code> checks for a match anywhere in the string.
+You will want to use <code>re.search</code> most of the time.</p>
+<h3 id="r_2">R</h3>
+<p><code>\\s</code> or <code>[[:space:]]</code></p>
+<div class="highlight"><pre><span></span><span class="c1"># find strings containing white spaces</span>
+<span class="nf">grep</span><span class="p">(</span><span class="s">&#39;\\s&#39;</span><span class="p">,</span> <span class="nf">c</span><span class="p">(</span><span class="s">&quot;abc &quot;</span><span class="p">,</span> <span class="s">&quot;hello&quot;</span><span class="p">))</span>
+<span class="n">[1]</span> <span class="m">1</span>
+<span class="c1"># return a vector of logical values indicating whether the corresponding strings contain white spaces</span>
+<span class="nf">grep</span><span class="p">(</span><span class="s">&#39;\\s&#39;</span><span class="p">,</span> <span class="nf">c</span><span class="p">(</span><span class="s">&quot;abc &quot;</span><span class="p">,</span> <span class="s">&quot;hello&quot;</span><span class="p">))</span>
+<span class="c1"># replace the first white space with &quot;&quot;, i.e., remove the first white space</span>
+<span class="nf">sub</span><span class="p">(</span><span class="s">&#39;\s&#39;</span><span class="p">,</span> <span class="s">&quot;&quot;</span><span class="p">,</span> <span class="nf">c</span><span class="p">(</span><span class="s">&quot;abc &quot;</span><span class="p">,</span> <span class="s">&quot;hello&quot;</span><span class="p">))</span>
+<span class="c1"># replace all first white space with &quot;&quot;, i.e., remove all white space</span>
+<span class="nf">gsub</span><span class="p">(</span><span class="s">&#39;\s&#39;</span><span class="p">,</span> <span class="s">&quot;&quot;</span><span class="p">,</span> <span class="nf">c</span><span class="p">(</span><span class="s">&quot;abc &quot;</span><span class="p">,</span> <span class="s">&quot;hello&quot;</span><span class="p">))</span>
+</pre></div>
+
+
+<h3 id="teradata-sql_2">Teradata SQL</h3>
+<p>[[:blank:]]
+[[:space:]]</p>
+<h3 id="sed">sed</h3>
+<p>[[:space:]] (recommended) or <code>\s</code></p>
+<h3 id="egrep">egrep</h3>
+<p><code>\s, [[:space:]]</code></p>
+<h3 id="grep_2">grep</h3>
+<p><code>\s, [[:space:]]</code></p>
+<h3 id="vim">Vim</h3>
+<p><code>\s</code></p>
+<h3 id="perl_1">Perl</h3>
+<p><code>\s</code></p>
+<h3 id="sas-based-on-perl-regular-expression">SAS (Based on Perl Regular Expression)</h3>
+<p><code>\s</code></p>
+<h2 id="non-whitespace-characters">Non-whitespace Characters</h2>
+<h3 id="python_3">Python</h3>
+<p><code>\S</code></p>
+<h3 id="r_3">R</h3>
+<p><code>\S</code> or <code>[^[:space:]]</code></p>
+<h3 id="sed_1">sed</h3>
+<p><code>\S</code></p>
+<h3 id="egrep_1">egrep</h3>
+<p><code>\S</code></p>
+<h3 id="grep_3">grep</h3>
+<p><code>\S</code></p>
+<h3 id="vim_1">Vim</h3>
+<p><code>\S</code></p>
+<h3 id="perl_2">Perl</h3>
+<p><code>\S</code></p>
+<h2 id="lower-case-letters">Lower-case Letters</h2>
+<h3 id="python_4">Python</h3>
+<p><code>[a-z]</code></p>
+<h3 id="r_4">R</h3>
+<p><code>[a-z], [:lower:]</code></p>
+<h3 id="sed_2">sed</h3>
+<p><code>[a-z]</code></p>
+<h3 id="egrep_2">egrep</h3>
+<p><code>[a-z]</code></p>
+<h3 id="grep_4">grep</h3>
+<p><code>[a-z]</code></p>
+<h3 id="vim_2">Vim</h3>
+<p><code>[a-z], \l</code></p>
+<h3 id="perl_3">Perl</h3>
+<p><code>[a-z]</code> </p>
+<h2 id="non-lower-case-letters-characters">Non-lower-case Letters Characters</h2>
+<h3 id="python_5">Python</h3>
+<p><code>[^a-z]</code></p>
+<h3 id="r_5">R</h3>
+<p><code>[^a-z], [^[:lower:]]</code></p>
+<h3 id="sed_3">sed</h3>
+<p><code>[^a-z]</code></p>
+<h3 id="egrep_3">egrep</h3>
+<p><code>[^a-z]</code></p>
+<h3 id="grep_5">grep</h3>
+<p><code>[^a-z]</code></p>
+<h3 id="vim_3">Vim</h3>
+<p><code>[^a-z], \L</code></p>
+<h3 id="perl_4">Perl</h3>
+<p><code>[^a-z]</code></p>
+<h2 id="upper-case-letters">Upper-case Letters</h2>
+<h3 id="python_6">Python</h3>
+<p><code>[A-Z]</code></p>
+<h3 id="r_6">R</h3>
+<p><code>[A-Z], [[:upper:]]</code></p>
+<h3 id="sed_4">sed</h3>
+<p><code>[A-Z]</code></p>
+<h3 id="egrep_4">egrep</h3>
+<p><code>[A-Z]</code></p>
+<h3 id="grep_6">grep</h3>
+<p><code>[A-Z]</code></p>
+<h3 id="vim_4">Vim</h3>
+<p><code>[A-Z], \u</code></p>
+<h3 id="perl_5">Perl</h3>
+<p><code>[A-Z]</code></p>
+<h2 id="non-upper-case-letter-characters">Non-upper-case Letter Characters</h2>
+<h3 id="python_7">Python</h3>
+<p><code>[^A-Z]</code></p>
+<h3 id="r_7">R</h3>
+<p><code>[^A-Z], [^[:upper:]]</code></p>
+<h3 id="sed_5">sed</h3>
+<p><code>[^A-Z]</code></p>
+<h3 id="egrep_5">egrep</h3>
+<p><code>[^A-Z]</code></p>
+<h3 id="grep_7">grep</h3>
+<p><code>[^A-Z]</code></p>
+<h3 id="vim_5">Vim</h3>
+<p><code>[^A-Z], \U</code></p>
+<h3 id="perl_6">Perl</h3>
+<p><code>[^A-Z]</code></p>
+<h2 id="letters">Letters</h2>
+<h3 id="python_8">Python</h3>
+<p><code>[a-zA-Z]</code></p>
+<h3 id="r_8">R</h3>
+<p><code>[a-zA-Z], [[:alpha:]]</code></p>
+<h3 id="sed_6">sed</h3>
+<p><code>[a-zA-Z]</code></p>
+<h3 id="egrep_6">egrep</h3>
+<p><code>[a-zA-Z]</code></p>
+<h3 id="grep_8">grep</h3>
+<p><code>[a-zA-Z]</code></p>
+<h3 id="vim_6">Vim</h3>
+<p><code>[a-zA-Z], \a</code></p>
+<h3 id="perl_7">Perl</h3>
+<p><code>[a-zA-Z]</code></p>
+<h2 id="non-letter-characters">Non-Letter Characters</h2>
+<h3 id="python_9">Python</h3>
+<p><code>[^a-zA-Z]</code></p>
+<h3 id="r_9">R</h3>
+<p><code>[^a-zA-Z], [^[:alpha:]]</code></p>
+<h3 id="sed_7">sed</h3>
+<p><code>[^a-zA-Z]</code></p>
+<h3 id="egrep_7">egrep</h3>
+<p><code>[^a-zA-Z]</code></p>
+<h3 id="grep_9">grep</h3>
+<p><code>[^a-zA-Z]</code></p>
+<h3 id="vim_7">Vim</h3>
+<p><code>[^a-zA-Z], \A</code></p>
+<h3 id="perl_8">Perl</h3>
+<p><code>[^a-zA-Z]</code></p>
+<h2 id="digits">Digits</h2>
+<h3 id="python_10">Python</h3>
+<p><code>\d</code></p>
+<h3 id="r_10">R</h3>
+<p><code>\\d</code> or <code>[[:digit:]]</code></p>
+<h3 id="sed_8">sed</h3>
+<p><code>\d</code></p>
+<h3 id="egrep_8">egrep</h3>
+<p><code>[[:digit:]]</code></p>
+<h3 id="grep_10">grep</h3>
+<p><code>[[:digit:]]</code></p>
+<h3 id="vim_8">Vim</h3>
+<p><code>\d</code></p>
+<h3 id="perl_9">Perl</h3>
+<p><code>\d</code></p>
+<h2 id="non-digit-characters">Non-digit Characters</h2>
+<h3 id="python_11">Python</h3>
+<p><code>\D</code></p>
+<h3 id="r_11">R</h3>
+<p><code>\\\\D, [^[:digit:]]</code></p>
+<h3 id="sed_9">sed</h3>
+<p><code>\D</code></p>
+<h3 id="egrep_9">egrep</h3>
+<p><code>[^[:digit:]]</code></p>
+<h3 id="grep_11">grep</h3>
+<p><code>[^[:digit:]]</code></p>
+<h3 id="vim_9">Vim</h3>
+<p><code>\D</code></p>
+<h3 id="perl_10">Perl</h3>
+<p><code>\D</code></p>
+<h2 id="hex-digits">Hex Digits</h2>
+<h3 id="python_12">Python</h3>
+<p><code>[0-9a-fA-F]</code></p>
+<h3 id="r_12">R</h3>
+<p><code>[0-9a-fA-F]</code></p>
+<h3 id="sed_10">sed</h3>
+<p><code>[0-9a-fA-F]</code></p>
+<h3 id="egrep_10">egrep</h3>
+<p><code>[0-9a-fA-F]</code></p>
+<h3 id="grep_12">grep</h3>
+<p><code>[0-9a-fA-F]</code></p>
+<h3 id="vim_10">Vim</h3>
+<p><code>\x</code></p>
+<h3 id="perl_11">Perl</h3>
+<p><code>[0-9a-fA-F]</code></p>
+<h2 id="non-hex-digit-characters">Non-Hex Digit Characters</h2>
+<h3 id="python_13">Python</h3>
+<p><code>[^0-9a-fA-F]</code></p>
+<h3 id="r_13">R</h3>
+<p><code>[^0-9a-fA-F]</code></p>
+<h3 id="sed_11">sed</h3>
+<p><code>[^0-9a-fA-F]</code></p>
+<h3 id="egrep_11">egrep</h3>
+<p><code>[^0-9a-fA-F]</code></p>
+<h3 id="grep_13">grep</h3>
+<p><code>[^0-9a-fA-F]</code></p>
+<h3 id="vim_11">Vim</h3>
+<p><code>\X</code></p>
+<h3 id="perl_12">Perl</h3>
+<p><code>[^0-9a-fA-F]</code></p>
+<h2 id="octal-digits">Octal Digits</h2>
+<h3 id="python_14">Python</h3>
+<p><code>[0-7]</code></p>
+<h3 id="r_14">R</h3>
+<p><code>[0-7]</code></p>
+<h3 id="sed_12">sed</h3>
+<p><code>[0-7]</code></p>
+<h3 id="egrep_12">egrep</h3>
+<p><code>[0-7]</code></p>
+<h3 id="grep_14">grep</h3>
+<p><code>[0-7]</code></p>
+<h3 id="vim_12">Vim</h3>
+<p><code>\o</code></p>
+<h3 id="perl_13">Perl</h3>
+<p><code>[0-8]</code></p>
+<h2 id="non-octal-digit-characters">Non-Octal Digit Characters</h2>
+<h3 id="python_15">Python</h3>
+<p><code>[^0-7]</code></p>
+<h3 id="r_15">R</h3>
+<p><code>[^0-7]</code></p>
+<h3 id="sed_13">sed</h3>
+<p><code>[^0-7]</code></p>
+<h3 id="egrep_13">egrep</h3>
+<p><code>[^0-7]</code></p>
+<h3 id="grep_15">grep</h3>
+<p><code>[^0-7]</code></p>
+<h3 id="vim_13">Vim</h3>
+<p><code>\O</code></p>
+<h3 id="perl_14">Perl</h3>
+<p><code>[^0-8]</code></p>
+<h2 id="head-of-word-characters">Head of Word Characters</h2>
+<h3 id="python_16">Python</h3>
+<p><code>[a-zA-Z_]</code></p>
+<h3 id="r_16">R</h3>
+<p><code>[a-zA-Z_]</code></p>
+<h3 id="sed_14">sed</h3>
+<p><code>[a-zA-Z_]</code></p>
+<h3 id="egrep_14">egrep</h3>
+<p><code>[a-zA-Z_]</code></p>
+<h3 id="grep_16">grep</h3>
+<p><code>[a-zA-Z_]</code></p>
+<h3 id="vim_14">Vim</h3>
+<p><code>\h</code></p>
+<h3 id="perl_15">Perl</h3>
+<p><code>[a-zA-Z_]</code></p>
+<h2 id="non-head-of-word-characters">Non-Head of Word Characters</h2>
+<h3 id="python_17">Python</h3>
+<p><code>[^a-zA-Z_]</code></p>
+<h3 id="r_17">R</h3>
+<p><code>[^a-zA-Z_]</code></p>
+<h3 id="sed_15">sed</h3>
+<p><code>[^a-zA-Z_]</code></p>
+<h3 id="egrep_15">egrep</h3>
+<p><code>[^a-zA-Z_]</code></p>
+<h3 id="grep_17">grep</h3>
+<p><code>[^a-zA-Z_]</code></p>
+<h3 id="vim_15">Vim</h3>
+<p><code>\H</code></p>
+<h3 id="perl_16">Perl</h3>
+<p><code>[^a-zA-Z_]</code></p>
+<h2 id="printable-character">Printable Character</h2>
+<h3 id="python_18">Python</h3>
+<p>NA</p>
+<h3 id="r_18">R</h3>
+<p>NA</p>
+<h3 id="sed_16">sed</h3>
+<p>NA</p>
+<h3 id="egrep_16">egrep</h3>
+<p>NA</p>
+<h3 id="grep_18">grep</h3>
+<p>NA</p>
+<h3 id="vim_16">Vim</h3>
+<p><code>\p</code></p>
+<h2 id="printable-character-excluding-digits">Printable Character Excluding Digits</h2>
+<h3 id="python_19">Python</h3>
+<p>NA</p>
+<h3 id="r_19">R</h3>
+<p>NA</p>
+<h3 id="sed_17">sed</h3>
+<p>NA</p>
+<h3 id="egrep_17">egrep</h3>
+<p>NA</p>
+<h3 id="grep_19">grep</h3>
+<p>NA</p>
+<h3 id="vim_17">Vim</h3>
+<p><code>\P</code></p>
+<h2 id="word-character">Word Character</h2>
+<h3 id="python_20">Python</h3>
+<p><code>\w</code></p>
+<h3 id="r_20">R</h3>
+<p><code>\\w</code> or <code>[[:alnum:]]</code></p>
+<h3 id="icu">ICU</h3>
+<p><code>\w</code></p>
+<h3 id="sed_18">sed</h3>
+<p><code>\w</code></p>
+<h3 id="egrep_18">egrep</h3>
+<p><code>\w</code></p>
+<h3 id="grep_20">grep</h3>
+<p><code>\w</code></p>
+<h3 id="vim_18">Vim</h3>
+<p><code>\w</code></p>
+<h2 id="non-word-character">Non-word Character</h2>
+<h3 id="python_21">Python</h3>
+<p><code>\W</code></p>
+<h3 id="r_21">R</h3>
+<p>Not supported in base (no <code>\\W</code> in the regular expression in the base package)
+but supported in the stringi package.</p>
+<h3 id="icu_1">ICU</h3>
+<p><code>\W</code></p>
+<h3 id="sed_19">sed</h3>
+<p><code>\W</code></p>
+<h3 id="egrep_19">egrep</h3>
+<p><code>\W</code></p>
+<h3 id="grep_21">grep</h3>
+<p><code>\W</code></p>
+<h3 id="vim_19">Vim</h3>
+<p><code>\W</code></p>
+<h2 id="grouping">Grouping</h2>
+<h3 id="python_22">Python</h3>
+<p><code>()</code></p>
+<h3 id="r_22">R</h3>
+<p><code>()</code></p>
+<h3 id="sed_20">sed</h3>
+<p><code>()</code></p>
+<h3 id="egrep_20">egrep</h3>
+<p><code>()</code></p>
+<h3 id="grep_22">grep</h3>
+<p><code>\(\)</code></p>
+<h3 id="vim_20">Vim</h3>
+<p><code>\(\)</code></p>
+<h2 id="alternation">Alternation</h2>
+<h3 id="python_23">Python</h3>
+<h3 id="r_23">R</h3>
+<h3 id="sed_21">sed</h3>
+<h3 id="egrep_21">egrep</h3>
+<h3 id="grep_23">grep</h3>
+<h3 id="vim_21">Vim</h3>
+<p>||||||||||||</p>
+<h2 id="0-or-more-matches">0 or More Matches</h2>
+<h3 id="python_24">Python</h3>
+<p><code>*</code></p>
+<h3 id="r_24">R</h3>
+<p><code>*</code></p>
+<h3 id="sed_22">sed</h3>
+<p><code>*</code></p>
+<h3 id="egrep_22">egrep</h3>
+<p><code>*</code></p>
+<h3 id="grep_24">grep</h3>
+<p><code>*</code></p>
+<h3 id="vim_22">Vim</h3>
+<p><code>*</code></p>
+<h2 id="0-or-1-match">0 or 1 match</h2>
+<h3 id="python_25">Python</h3>
+<p><code>?</code></p>
+<h3 id="r_25">R</h3>
+<p><code>?</code></p>
+<h3 id="sed_23">sed</h3>
+<p><code>?</code></p>
+<h3 id="egrep_23">egrep</h3>
+<p><code>?</code></p>
+<h3 id="grep_25">grep</h3>
+<p><code>?</code></p>
+<h3 id="vim_23">Vim</h3>
+<p><code>\=</code></p>
+<h2 id="1-or-more-matches">1 or More Matches</h2>
+<h3 id="python_26">Python</h3>
+<p><code>+</code></p>
+<h3 id="r_26">R</h3>
+<p><code>+</code></p>
+<h3 id="sed_24">sed</h3>
+<p><code>+</code></p>
+<h3 id="egrep_24">egrep</h3>
+<p><code>+</code></p>
+<h3 id="grep_26">grep</h3>
+<p><code>+</code></p>
+<h3 id="vim_24">Vim</h3>
+<p><code>\+</code></p>
+<h2 id="any-character-except-a-newline">Any Character Except a Newline</h2>
+<h3 id="python_27">Python</h3>
+<p><code>.</code></p>
+<h3 id="r_27">R</h3>
+<p><code>.</code></p>
+<h3 id="sed_25">sed</h3>
+<p><code>.</code></p>
+<h3 id="egrep_25">egrep</h3>
+<p><code>.</code></p>
+<h3 id="grep_27">grep</h3>
+<p><code>.</code></p>
+<h3 id="vim_25">Vim</h3>
+<p><code>.</code></p>
+<h2 id="start-of-a-line">Start of a Line</h2>
+<h3 id="python_28">Python</h3>
+<p><code>^</code></p>
+<h3 id="r_28">R</h3>
+<p><code>^</code></p>
+<h3 id="sed_26">sed</h3>
+<p><code>^</code></p>
+<h3 id="egrep_26">egrep</h3>
+<p><code>^</code></p>
+<h3 id="grep_28">grep</h3>
+<p><code>^</code></p>
+<h3 id="vim_26">Vim</h3>
+<p><code>^</code></p>
+<h2 id="end-of-a-line">End of a Line</h2>
+<h3 id="python_29">Python</h3>
+<p><code>$</code></p>
+<h3 id="r_29">R</h3>
+<p><code>$</code></p>
+<h3 id="sed_27">sed</h3>
+<p><code>$</code></p>
+<h3 id="egrep_27">egrep</h3>
+<p><code>$</code></p>
+<h3 id="grep_29">grep</h3>
+<p><code>$</code></p>
+<h3 id="vim_27">Vim</h3>
+<p><code>$</code></p>
+<h2 id="exactly-m-matches">Exactly <code>m</code> Matches</h2>
+<h3 id="python_30">Python</h3>
+<p><code>{m}</code></p>
+<h3 id="r_30">R</h3>
+<p><code>{m}</code></p>
+<h3 id="sed_28">sed</h3>
+<p><code>{m}</code></p>
+<h3 id="egrep_28">egrep</h3>
+<p><code>{m}</code></p>
+<h3 id="grep_30">grep</h3>
+<p><code>{m}</code></p>
+<h3 id="vim_28">Vim</h3>
+<p><code>\\{m\\}</code></p>
+<h2 id="m-or-more-matches"><code>m</code> or More Matches</h2>
+<h3 id="python_31">Python</h3>
+<p><code>{m,}</code></p>
+<h3 id="r_31">R</h3>
+<p><code>{m,}</code></p>
+<h3 id="sed_29">sed</h3>
+<p><code>{m,}</code></p>
+<h3 id="egrep_29">egrep</h3>
+<p><code>{m,}</code></p>
+<h3 id="grep_31">grep</h3>
+<p><code>{m,}</code></p>
+<h3 id="vim_29">Vim</h3>
+<p><code>\\{m,\\}</code></p>
+<h2 id="m-to-n-matches"><code>m</code> to <code>n</code> Matches</h2>
+<h3 id="python_32">Python</h3>
+<p><code>{m,n}</code></p>
+<h3 id="r_32">R</h3>
+<p><code>{m,n}</code></p>
+<h3 id="sed_30">sed</h3>
+<p><code>{m,n}</code></p>
+<h3 id="egrep_30">egrep</h3>
+<p><code>{m,n}</code></p>
+<h3 id="grep_32">grep</h3>
+<p><code>{m,n}</code></p>
+<h3 id="vim_30">Vim</h3>
+<p><code>\\{m,n\\}</code></p>
+<h2 id="at-most-n-matches">At Most <code>n</code> Matches</h2>
+<h3 id="python_33">Python</h3>
+<p><code>{,n}</code></p>
+<h3 id="r_33">R</h3>
+<p><code>{,n}</code></p>
+<h3 id="sed_31">sed</h3>
+<p><code>{,n}</code></p>
+<h3 id="egrep_31">egrep</h3>
+<p><code>{,n}</code></p>
+<h3 id="grep_33">grep</h3>
+<p><code>{,n}</code></p>
+<h3 id="vim_31">Vim</h3>
+<p><code>\\{,n\\}</code></p>
+<h2 id="0-or-more-matches-as-few-as-possible">0 or More Matches (as few as possible)</h2>
+<h3 id="python_34">Python</h3>
+<p>NA</p>
+<h3 id="r_34">R</h3>
+<p>NA</p>
+<h3 id="sed_32">sed</h3>
+<p>NA</p>
+<h3 id="egrep_32">egrep</h3>
+<p>NA</p>
+<h3 id="grep_34">grep</h3>
+<p>NA</p>
+<h3 id="vim_32">Vim</h3>
+<p><code>\\{-\\}</code></p>
+<h2 id="m-to-n-matches-as-few-as-possible">m to n matches, as few as possible</h2>
+<h3 id="python_35">Python</h3>
+<p>NA</p>
+<h3 id="r_35">R</h3>
+<p>NA</p>
+<h3 id="sed_33">sed</h3>
+<p>NA</p>
+<h3 id="egrep_33">egrep</h3>
+<p>NA</p>
+<h3 id="grep_35">grep</h3>
+<p>NA</p>
+<h3 id="vim_33">Vim</h3>
+<p><code>\\{-m,n\\}</code></p>
+<h2 id="at-least-m-matches-as-few-as-possible">at least m matches, as few as possible</h2>
+<h3 id="python_36">Python</h3>
+<p>NA</p>
+<h3 id="r_36">R</h3>
+<p>NA</p>
+<h3 id="sed_34">sed</h3>
+<p>NA</p>
+<h3 id="egrep_34">egrep</h3>
+<p>NA</p>
+<h3 id="grep_36">grep</h3>
+<p>NA</p>
+<h3 id="vim_34">Vim</h3>
+<p><code>\\{-m,\\}</code></p>
+<h2 id="at-most-m-matches-as-few-as-possible">at most m matches, as few as possible</h2>
+<h3 id="python_37">Python</h3>
+<p>NA</p>
+<h3 id="r_37">R</h3>
+<p>NA</p>
+<h3 id="sed_35">sed</h3>
+<p>NA</p>
+<h3 id="egrep_35">egrep</h3>
+<p>NA</p>
+<h3 id="grep_37">grep</h3>
+<p>NA</p>
+<h3 id="vim_35">Vim</h3>
+<p><code>\\{-,m\\}</code></p>
+<h2 id="word-boundry">Word Boundry</h2>
+<h3 id="python_38">Python</h3>
+<p><code>\b</code></p>
+<h3 id="r_38">R</h3>
+<p>Notice that word boundry in R includes <code>_</code>, numbers, etc.
+<code>\b</code></p>
+<h3 id="python_39">Python</h3>
+<p><code>\b</code></p>
+<h3 id="sed_36">sed</h3>
+<p><code>\b</code></p>
+<h3 id="perl_17">Perl</h3>
+<p><code>\b</code></p>
+<h3 id="egrep_36">egrep</h3>
+<p><code>\b</code></p>
+<h3 id="grep_38">grep</h3>
+<p><code>\b</code></p>
+<h3 id="vim_36">Vim</h3>
+<p><code>\b</code></p>
+<h2 id="escape-special-characters">Escape Special Characters</h2>
+<h3 id="teradata-sql_3">Teradata SQL</h3>
+<ol>
+<li>No need to escape <code>/</code>.</li>
+</ol>
+<h3 id="r_39">R</h3>
+<p><code>\\$</code>, <code>\\{</code>, <code>\\|</code></p>
+<h3 id="python_40">Python</h3>
+<ol>
+<li>Need to escape <code>/</code>.</li>
+</ol>
+<h3 id="sed_37">sed</h3>
+<ol>
+<li><code>.</code> -&gt; <code>\\.</code></li>
+</ol>
+<h2 id="some-confusing-concept">Some Confusing Concept</h2>
+<ol>
+<li>white spaces vs word boundry
+word boundry is a super set of white spaces.</li>
+<li><code>\w</code> vs [[:alnum:]]
+[[:alnum:]] contains all letters and numbers 
+while <code>\w</code> contains not only letters and numbers but also some special character such as <code>_</code>. 
+So in short <code>\w</code> is a super set of <code>[[:alnum:]]</code>.</li>
+</ol></div>
+    <footer>
+<p class="meta">
+  <span class="byline author vcard">
+    Posted by <span class="fn">Ben Chuanlong Du</span>
+  </span>
+<time datetime="2017-11-07T22:34:00-08:00" pubdate>Nov 07, 2017</time>  <span class="categories">
+    <a class="category" href="http://www.legendu.net/misc/tag/tips.html">tips</a>
+    <a class="category" href="http://www.legendu.net/misc/tag/regex.html">regex</a>
+    <a class="category" href="http://www.legendu.net/misc/tag/equivalence.html">equivalence</a>
+    <a class="category" href="http://www.legendu.net/misc/tag/regular-expression.html">regular expression</a>
+    <a class="category" href="http://www.legendu.net/misc/tag/regexp.html">regexp</a>
+    <a class="category" href="http://www.legendu.net/misc/tag/python.html">Python</a>
+    <a class="category" href="http://www.legendu.net/misc/tag/r.html">R</a>
+    <a class="category" href="http://www.legendu.net/misc/tag/cran.html">CRAN</a>
+    <a class="category" href="http://www.legendu.net/misc/tag/perl.html">Perl</a>
+    <a class="category" href="http://www.legendu.net/misc/tag/sas.html">SAS</a>
+    <a class="category" href="http://www.legendu.net/misc/tag/grep.html">grep</a>
+    <a class="category" href="http://www.legendu.net/misc/tag/egrep.html">egrep</a>
+  </span>
+</p>    </footer>
+  </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div>
+  </section>
+</div>
+<aside class="sidebar">
+  <section>
+    <h1>Recent Posts</h1>
+    <ul id="recent_posts">
+      <li class="post">
+          <a href="http://www.legendu.net/misc/blog/python-tips/">Tips on Python</a>
+      </li>
+      <li class="post">
+          <a href="http://www.legendu.net/misc/blog/python-tips-and-traps/">Python Tips and Traps</a>
+      </li>
+      <li class="post">
+          <a href="http://www.legendu.net/misc/blog/exception-and-error-handling-in-python/">Exception and Error Handling in Python</a>
+      </li>
+      <li class="post">
+          <a href="http://www.legendu.net/misc/blog/ipython-tips/">Tips on IPython</a>
+      </li>
+      <li class="post">
+          <a href="http://www.legendu.net/misc/blog/tips-for-git-large-file-storage/">Tips for Git Large File Storage</a>
+      </li>
+    </ul>
+  </section>
+  <section>
+      
+    <h1>Categories</h1>
+    <ul id="recent_posts">
+        <li><a href="http://www.legendu.net/misc/category/ai.html">AI</a></li>
+        <li><a href="http://www.legendu.net/misc/category/career.html">Career</a></li>
+        <li><a href="http://www.legendu.net/misc/category/cloud.html">Cloud</a></li>
+        <li><a href="http://www.legendu.net/misc/category/database.html">Database</a></li>
+        <li><a href="http://www.legendu.net/misc/category/encryption.html">Encryption</a></li>
+        <li><a href="http://www.legendu.net/misc/category/english.html">English</a></li>
+        <li><a href="http://www.legendu.net/misc/category/finance.html">Finance</a></li>
+        <li><a href="http://www.legendu.net/misc/category/fun-problems.html">Fun Problems</a></li>
+        <li><a href="http://www.legendu.net/misc/category/hardware.html">Hardware</a></li>
+        <li><a href="http://www.legendu.net/misc/category/internet.html">Internet</a></li>
+        <li><a href="http://www.legendu.net/misc/category/job.html">Job</a></li>
+        <li><a href="http://www.legendu.net/misc/category/jupyterlab.html">JupyterLab</a></li>
+        <li><a href="http://www.legendu.net/misc/category/language.html">Language</a></li>
+        <li><a href="http://www.legendu.net/misc/category/life.html">Life</a></li>
+        <li><a href="http://www.legendu.net/misc/category/links.html">Links</a></li>
+        <li><a href="http://www.legendu.net/misc/category/linux.html">Linux</a></li>
+        <li><a href="http://www.legendu.net/misc/category/machine-learning.html">Machine Learning</a></li>
+        <li><a href="http://www.legendu.net/misc/category/macos.html">macOS</a></li>
+        <li><a href="http://www.legendu.net/misc/category/network.html">Network</a></li>
+        <li><a href="http://www.legendu.net/misc/category/os.html">OS</a></li>
+        <li><a href="http://www.legendu.net/misc/category/people.html">People</a></li>
+        <li><a href="http://www.legendu.net/misc/category/philosophy.html">Philosophy</a></li>
+        <li><a href="http://www.legendu.net/misc/category/programming.html">Programming</a></li>
+        <li><a href="http://www.legendu.net/misc/category/research.html">Research</a></li>
+        <li><a href="http://www.legendu.net/misc/category/sheng-huo.html">生活</a></li>
+        <li><a href="http://www.legendu.net/misc/category/si-suo.html">思索</a></li>
+        <li><a href="http://www.legendu.net/misc/category/software.html">Software</a></li>
+        <li><a href="http://www.legendu.net/misc/category/statistics.html">Statistics</a></li>
+        <li><a href="http://www.legendu.net/misc/category/teleconference.html">Teleconference</a></li>
+        <li><a href="http://www.legendu.net/misc/category/tools.html">Tools</a></li>
+        <li><a href="http://www.legendu.net/misc/category/trading.html">Trading</a></li>
+        <li><a href="http://www.legendu.net/misc/category/unix.html">Unix</a></li>
+        <li><a href="http://www.legendu.net/misc/category/visualization.html">Visualization</a></li>
+        <li><a href="http://www.legendu.net/misc/category/windows.html">Windows</a></li>
+        <li><a href="http://www.legendu.net/misc/category/work.html">Work</a></li>
+    </ul>
+  </section>
+ 
+
+  <section>
+  <h1>Tags</h1>
+  <p class="tagcloud">
+  </p>
+  </section>
+
+
+
+  <section>
+    <h1>GitHub Repos</h1>
+    <ul id="gh_repos">
+      <li class="loading">Status updating...</li>
+    </ul>
+      <a href="https://github.com/dclong">@dclong</a> on GitHub
+    <script type="text/javascript">
+      $.domReady(function(){
+          if (!window.jXHR){
+              var jxhr = document.createElement('script');
+              jxhr.type = 'text/javascript';
+              jxhr.src = 'http://www.legendu.net/misc/theme/js/jXHR.js';
+              var s = document.getElementsByTagName('script')[0];
+              s.parentNode.insertBefore(jxhr, s);
+          }
+
+          github.showRepos({
+              user: 'dclong',
+              count: 3,
+              skip_forks: true,
+              target: '#gh_repos'
+          });
+      });
+    </script>
+    <script src="http://www.legendu.net/misc/theme/js/github.js" type="text/javascript"> </script>
+  </section>
+
+    <section>
+        <h1>Social</h2>
+        <ul>
+            <li><a href="https://www.linkedin.com/in/ben-chuanlong-du-1239b221/" target="_blank">LinkedIn</a></li>
+            <li><a href="https://twitter.com/longendu" target="_blank">Twitter</a></li>
+            <li><a href="https://www.facebook.com/chuanlong.du" target="_blank">Facebook</a></li>
+        <!--
+            <li><a href="http://www.legendu.net/misc/" type="application/rss+xml" rel="alternate">RSS</a></li>
+            -->
+        </ul>
+    </section>
+</aside>    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Ben Chuanlong Du -
+  <span class="credit">Powered by <a href="http://getpelican.com">Pelican</a></span>
+</p></footer>
+    <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-30259661-1']);
+    _gaq.push(['_trackPageview']);
+    (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+    </script>
+	<script type="text/javascript">
+	  var disqus_shortname = 'dclong';
+          var disqus_identifier = '/blog/regex-equivalence/';
+          var disqus_url = 'http://www.legendu.net/misc/blog/regex-equivalence/';
+          var disqus_title = 'Regular Expression Equivalence';
+	  (function() {
+	    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	    dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+	    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	   })();
+	</script>
+</body>
+</html>

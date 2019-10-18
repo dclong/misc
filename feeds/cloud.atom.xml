@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Ben Chuanlong Du's Blog - Cloud</title><link href="http://www.legendu.net/misc/" rel="alternate"></link><link href="http://www.legendu.net/misc/feeds/cloud.atom.xml" rel="self"></link><id>http://www.legendu.net/misc/</id><updated>2017-02-19T10:23:04-08:00</updated><subtitle>It is never too late to learn.</subtitle><entry><title>Cloud VMs Tips</title><link href="http://www.legendu.net/misc/blog/cloud-vms-tips/" rel="alternate"></link><published>2017-02-19T10:23:04-08:00</published><updated>2017-02-19T10:23:04-08:00</updated><author><name>Ben Chuanlong Du</name></author><id>tag:www.legendu.net,2017-02-19:/misc/blog/cloud-vms-tips/</id><summary type="html">&lt;p&gt;&lt;strong&gt;
+Things on this page are
+fragmentary and immature notes/thoughts of the author.
+It is not meant to readers
+but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;VPN/proxy&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Make sure you have needed ports open. 
+I deployed a docker image for RStudio on my AWS EC2 …&lt;/p&gt;&lt;/li&gt;&lt;/ol&gt;</summary><content type="html">&lt;p&gt;&lt;strong&gt;
+Things on this page are
+fragmentary and immature notes/thoughts of the author.
+It is not meant to readers
+but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;VPN/proxy&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Make sure you have needed ports open. 
+I deployed a docker image for RStudio on my AWS EC2 but cannot connect to it. 
+It turned out that I did open the port that RStudio listens to.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;</content><category term="cloud"></category><category term="VMs"></category><category term="ports"></category><category term="AWS EC2"></category></entry></feed>

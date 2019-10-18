@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>SQL Questions</title>
+  <meta name="author" content="Ben Chuanlong Du">
+
+  <link href="http://www.legendu.net/misc/atom.xml" type="application/atom+xml" rel="alternate"
+        title="Ben Chuanlong Du's Blog Atom Feed" />
+
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link href="http://www.legendu.net/misc/favicon.png" rel="icon">
+  <link href="http://www.legendu.net/misc/theme/css/main_2.css" media="screen, projection"
+        rel="stylesheet" type="text/css">
+  <script src="http://www.legendu.net/misc/theme/js/modernizr-2.0.js"></script>
+  <script src="http://www.legendu.net/misc/theme/js/ender.js"></script>
+  <script src="http://www.legendu.net/misc/theme/js/octopress.js" type="text/javascript"></script>
+
+  <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+</head>
+
+<body>
+  <header role="banner"><hgroup>
+  <h1><a href="http://www.legendu.net/misc/">Ben Chuanlong Du's Blog</a></h1>
+    <h2>It is never too late to learn.</h2>
+</hgroup></header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="http://www.legendu.net/misc/atom.xml" rel="subscribe-rss">RSS</a></li>
+</ul>
+
+<form name="search" action="https://www.bing.com/search" method="get" onSubmit="return build_query()">
+  <fieldset role="search">
+      <!--
+    <input type="hidden" name="q" value="site:http://www.legendu.net/misc" />
+        -->
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+
+<script type = "text/javascript">
+    function build_query() {
+        var query = document.forms["search"]["q"].value;
+        var prefix = "site:http://www.legendu.net/misc "
+        if (!query.startsWith(prefix)) {
+            query = prefix + query;
+            document.forms["search"]["q"].value = query;
+        }
+        return true;
+    }
+</script>
+
+<ul class="main-navigation">
+    <li><a href="http://www.legendu.net">Home</a></li>
+    <li><a href="http://www.legendu.net/misc">Blog</a></li>
+    <li><a href="http://www.legendu.net/misc/archives.html">Archives</a></li>
+    <li><a href="http://www.legendu.net/misc/pages/links.html">Links</a></li>
+</ul></nav>
+  <div id="main">
+    <div id="content">
+<div>
+  <article class="hentry" role="article">
+<header>
+      <h1 class="entry-title">SQL Questions</h1>
+      <p class="meta"><time datetime="2016-11-20T19:10:30-08:00" pubdate>Nov 20, 2016</time></p>
+</header>
+
+  <div class="entry-content"><p><strong>
+Things on this page are fragmentary and immature notes/thoughts of the author. 
+It is not meant to readers but rather for convenient reference of the author and future improvement.
+</strong></p>
+<ol>
+<li>比如在 LEFT JOIN 中过滤条件写在 ON 和 WHERE 的区别。</li>
+<li>函数和存储过程的区别？</li>
+<li>Table-value function 和 scalar-valued function 的区别.</li>
+<li>char、varchar、nvarchar之间的区别(包括用途和空间占用</li>
+<li>有哪些操作会使用到TempDB;如果TempDB异常变大，可能的原因是什么，该如何处理;
+6.Index有哪些类型，它们的区别和实现原理是什么，索引有啥优点和缺点;如何为SQL
+语句创建合适的索引，索引创建时有哪些需要注意的项</li>
+<li>临时表、表变量、CTE(公用表表达式)有啥区别和联系，保存位置有啥不一样，使用
+时如何决定选哪种;</li>
+<li>视图和索引视图有什么区别</li>
+<li>如何实现分区，分区的步骤，分区有什么好处，怎么实现 Sliding Window.
+10.如何比较两个同结构的表数据的差异
+11.SQL调优步骤，如何来判断SQL语句存在问题，怎么定位问题，如何解决这些问题;
+平时也可以看看 http://www.flybi.net/ 里面有很多这种问题</li>
+<li>一个table，就两个field， ManagerID 和 direct Reporter ID
+要求是得出每个manager下面的有多少direct和indirect reporters</li>
+</ol>
+<h2 id="general-sql-questions">General SQL Questions</h2>
+<h2 id="teradata-related">Teradata Related</h2>
+<ol>
+<li>
+<p>select, union: strange that sometimes white spaces at the end causes problems ...
+not sure this is an issue of Teradata SQL or Teradata Studio</p>
+</li>
+<li>
+<p>is there convenient way to calculate percentiles in Teradata SQL?
+Some SQL has <code>percentile_disc</code> and <code>percentile_cont</code>.</p>
+</li>
+<li>
+<p>sql exist vs in?</p>
+</li>
+<li>
+<p>Is/are the primary key(s) automatically indexed?</p>
+</li>
+<li>
+<p>create PI on multiple columns, what are the advantages and disadvantages?
+why not create PI on all columns?</p>
+</li>
+<li>
+<p>Does SQL truncate integer/float computation results?
+What is they type of new created columns?</p>
+</li>
+<li>
+<p>how to create a small temp table?</p>
+</li>
+</ol>
+<h2 id="questions">Questions</h2>
+<ol>
+<li>
+<p>when join, which talbe to use first? 
+Does this affect performance a lot? might be
+I heard that you should use the smaller table as the first one.</p>
+</li>
+<li>
+<p>doesn't join create large table sometimes? 
+Which is prefered? smaller talbes using multiple queries 
+or a really large talbe with just one query?</p>
+</li>
+<li>
+<p>what happens if an left/right join retrieve fields 
+from a table with constraint NOT NULL
+but match is not found?</p>
+</li>
+<li>
+<p>how to use keywords as column names?</p>
+</li>
+<li>
+<p>how to use space in column names?
+In teratadata sql, you can just quote it (double quotes?)</p>
+</li>
+<li>
+<p>prefer to compare numbers or strings?
+I think comparing number will be much faster.</p>
+</li>
+<li>
+<p>Is it possible to define variables in teradata sql? 
+so that we don't have type the same value again and again?
+it seems that there is no simple way to do this</p>
+</li>
+<li>
+<p>what issue does the following style of code have?
+recursive? actually will this work? probably not ...
+have a try on this ...</p>
+</li>
+</ol>
+<div class="highlight"><pre><span></span><span class="k">create</span> <span class="k">table</span> <span class="n">t</span> <span class="k">as</span>
+<span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">t</span><span class="p">;</span>
+</pre></div>
+
+
+<p>Generally speaking, this does not work. 
+You want to avoid it.</p>
+<ol>
+<li>what is the difference between cast and convert in transaction-SQL (MS SQL)?</li>
+</ol>
+<p>sql: some expression is used multiple times, is it better to define it as a column alias and then use it? Better alternative? nad temp volatile volumn?</p>
+<ol>
+<li>
+<p>why cannot I create a view in Hopper?</p>
+</li>
+<li>
+<p>which rows are updated in the following code?</p>
+</li>
+</ol>
+<div class="highlight"><pre><span></span><span class="k">update</span> <span class="o">#</span><span class="n">ST_Master</span>
+<span class="k">set</span>  <span class="o">#</span><span class="n">ST_Master</span><span class="p">.</span><span class="s1">&#39;+ @Var_ST_1st + &#39;</span><span class="o">=</span> <span class="o">#</span><span class="n">t1</span><span class="p">.</span><span class="n">Var_ST_1st</span>
+<span class="k">from</span>  <span class="o">#</span><span class="n">ST_Master</span> <span class="k">left</span> <span class="k">join</span> <span class="o">#</span><span class="n">t1</span>
+<span class="k">on</span>  <span class="o">#</span><span class="n">ST_Master</span><span class="p">.</span><span class="n">LoanID</span> <span class="o">=</span> <span class="o">#</span><span class="n">t1</span><span class="p">.</span><span class="n">LoanID</span>
+</pre></div>
+
+
+<p>Must number of rows be the same?</p>
+<ol>
+<li>
+<p>is there any way to check functions and function args in SQL?</p>
+</li>
+<li>
+<p>group by and partition over together? partition over runs after group by?</p>
+</li>
+<li>
+<p>is there a better way of formatting besides casting?</p>
+</li>
+<li>
+<p>self join in each group, is there any efficient way to do it? avoid the full n^2 join?</p>
+</li>
+</ol></div>
+    <footer>
+<p class="meta">
+  <span class="byline author vcard">
+    Posted by <span class="fn">Ben Chuanlong Du</span>
+  </span>
+<time datetime="2016-11-20T19:10:30-08:00" pubdate>Nov 20, 2016</time>  <span class="categories">
+    <a class="category" href="http://www.legendu.net/misc/tag/programming.html">programming</a>
+    <a class="category" href="http://www.legendu.net/misc/tag/sql.html">SQL</a>
+    <a class="category" href="http://www.legendu.net/misc/tag/questions.html">questions</a>
+  </span>
+</p>    </footer>
+  </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div>
+  </section>
+</div>
+<aside class="sidebar">
+  <section>
+    <h1>Recent Posts</h1>
+    <ul id="recent_posts">
+      <li class="post">
+          <a href="http://www.legendu.net/misc/blog/python-tips/">Tips on Python</a>
+      </li>
+      <li class="post">
+          <a href="http://www.legendu.net/misc/blog/python-tips-and-traps/">Python Tips and Traps</a>
+      </li>
+      <li class="post">
+          <a href="http://www.legendu.net/misc/blog/exception-and-error-handling-in-python/">Exception and Error Handling in Python</a>
+      </li>
+      <li class="post">
+          <a href="http://www.legendu.net/misc/blog/ipython-tips/">Tips on IPython</a>
+      </li>
+      <li class="post">
+          <a href="http://www.legendu.net/misc/blog/tips-for-git-large-file-storage/">Tips for Git Large File Storage</a>
+      </li>
+    </ul>
+  </section>
+  <section>
+      
+    <h1>Categories</h1>
+    <ul id="recent_posts">
+        <li><a href="http://www.legendu.net/misc/category/ai.html">AI</a></li>
+        <li><a href="http://www.legendu.net/misc/category/career.html">Career</a></li>
+        <li><a href="http://www.legendu.net/misc/category/cloud.html">Cloud</a></li>
+        <li><a href="http://www.legendu.net/misc/category/database.html">Database</a></li>
+        <li><a href="http://www.legendu.net/misc/category/encryption.html">Encryption</a></li>
+        <li><a href="http://www.legendu.net/misc/category/english.html">English</a></li>
+        <li><a href="http://www.legendu.net/misc/category/finance.html">Finance</a></li>
+        <li><a href="http://www.legendu.net/misc/category/fun-problems.html">Fun Problems</a></li>
+        <li><a href="http://www.legendu.net/misc/category/hardware.html">Hardware</a></li>
+        <li><a href="http://www.legendu.net/misc/category/internet.html">Internet</a></li>
+        <li><a href="http://www.legendu.net/misc/category/job.html">Job</a></li>
+        <li><a href="http://www.legendu.net/misc/category/jupyterlab.html">JupyterLab</a></li>
+        <li><a href="http://www.legendu.net/misc/category/language.html">Language</a></li>
+        <li><a href="http://www.legendu.net/misc/category/life.html">Life</a></li>
+        <li><a href="http://www.legendu.net/misc/category/links.html">Links</a></li>
+        <li><a href="http://www.legendu.net/misc/category/linux.html">Linux</a></li>
+        <li><a href="http://www.legendu.net/misc/category/machine-learning.html">Machine Learning</a></li>
+        <li><a href="http://www.legendu.net/misc/category/macos.html">macOS</a></li>
+        <li><a href="http://www.legendu.net/misc/category/network.html">Network</a></li>
+        <li><a href="http://www.legendu.net/misc/category/os.html">OS</a></li>
+        <li><a href="http://www.legendu.net/misc/category/people.html">People</a></li>
+        <li><a href="http://www.legendu.net/misc/category/philosophy.html">Philosophy</a></li>
+        <li><a href="http://www.legendu.net/misc/category/programming.html">Programming</a></li>
+        <li><a href="http://www.legendu.net/misc/category/research.html">Research</a></li>
+        <li><a href="http://www.legendu.net/misc/category/sheng-huo.html">生活</a></li>
+        <li><a href="http://www.legendu.net/misc/category/si-suo.html">思索</a></li>
+        <li><a href="http://www.legendu.net/misc/category/software.html">Software</a></li>
+        <li><a href="http://www.legendu.net/misc/category/statistics.html">Statistics</a></li>
+        <li><a href="http://www.legendu.net/misc/category/teleconference.html">Teleconference</a></li>
+        <li><a href="http://www.legendu.net/misc/category/tools.html">Tools</a></li>
+        <li><a href="http://www.legendu.net/misc/category/trading.html">Trading</a></li>
+        <li><a href="http://www.legendu.net/misc/category/unix.html">Unix</a></li>
+        <li><a href="http://www.legendu.net/misc/category/visualization.html">Visualization</a></li>
+        <li><a href="http://www.legendu.net/misc/category/windows.html">Windows</a></li>
+        <li><a href="http://www.legendu.net/misc/category/work.html">Work</a></li>
+    </ul>
+  </section>
+ 
+
+  <section>
+  <h1>Tags</h1>
+  <p class="tagcloud">
+  </p>
+  </section>
+
+
+
+  <section>
+    <h1>GitHub Repos</h1>
+    <ul id="gh_repos">
+      <li class="loading">Status updating...</li>
+    </ul>
+      <a href="https://github.com/dclong">@dclong</a> on GitHub
+    <script type="text/javascript">
+      $.domReady(function(){
+          if (!window.jXHR){
+              var jxhr = document.createElement('script');
+              jxhr.type = 'text/javascript';
+              jxhr.src = 'http://www.legendu.net/misc/theme/js/jXHR.js';
+              var s = document.getElementsByTagName('script')[0];
+              s.parentNode.insertBefore(jxhr, s);
+          }
+
+          github.showRepos({
+              user: 'dclong',
+              count: 3,
+              skip_forks: true,
+              target: '#gh_repos'
+          });
+      });
+    </script>
+    <script src="http://www.legendu.net/misc/theme/js/github.js" type="text/javascript"> </script>
+  </section>
+
+    <section>
+        <h1>Social</h2>
+        <ul>
+            <li><a href="https://www.linkedin.com/in/ben-chuanlong-du-1239b221/" target="_blank">LinkedIn</a></li>
+            <li><a href="https://twitter.com/longendu" target="_blank">Twitter</a></li>
+            <li><a href="https://www.facebook.com/chuanlong.du" target="_blank">Facebook</a></li>
+        <!--
+            <li><a href="http://www.legendu.net/misc/" type="application/rss+xml" rel="alternate">RSS</a></li>
+            -->
+        </ul>
+    </section>
+</aside>    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Ben Chuanlong Du -
+  <span class="credit">Powered by <a href="http://getpelican.com">Pelican</a></span>
+</p></footer>
+    <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-30259661-1']);
+    _gaq.push(['_trackPageview']);
+    (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+    </script>
+	<script type="text/javascript">
+	  var disqus_shortname = 'dclong';
+          var disqus_identifier = '/blog/sql-questions/';
+          var disqus_url = 'http://www.legendu.net/misc/blog/sql-questions/';
+          var disqus_title = 'SQL Questions';
+	  (function() {
+	    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	    dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+	    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	   })();
+	</script>
+</body>
+</html>

@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Ben Chuanlong Du's Blog - JupyterLab</title><link href="http://www.legendu.net/misc/" rel="alternate"></link><link href="http://www.legendu.net/misc/feeds/jupyterlab.atom.xml" rel="self"></link><id>http://www.legendu.net/misc/</id><updated>2019-10-10T09:23:03-07:00</updated><subtitle>It is never too late to learn.</subtitle><entry><title>Public Jupyter/JupyterLab Hosts</title><link href="http://www.legendu.net/misc/blog/jupyter-hosts/" rel="alternate"></link><published>2019-10-10T09:23:03-07:00</published><updated>2019-10-10T09:23:03-07:00</updated><author><name>Ben Chuanlong Du</name></author><id>tag:www.legendu.net,2019-10-10:/misc/blog/jupyter-hosts/</id><summary type="html">&lt;p&gt;&lt;strong&gt;
+Things on this page are
+fragmentary and immature notes/thoughts of the author.
+It is not meant to readers
+but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="https://cocalc.com/"&gt;Cocalc&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="https://notebooks.ai/"&gt;RMOTR Notebooks | notebooks.ai&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="https://colab.research.google.com/"&gt;Google Colaboratory&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Amazon SageMath&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="https://www.ibm.com/cloud/watson-studio"&gt;IBM Watson Studio&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="https://r-brain.io/en/"&gt;R-Brain&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;deploy your own public JupyterHub server&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;</summary><content type="html">&lt;p&gt;&lt;strong&gt;
+Things on this page are
+fragmentary and immature notes/thoughts of the author.
+It is not meant to readers
+but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="https://cocalc.com/"&gt;Cocalc&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="https://notebooks.ai/"&gt;RMOTR Notebooks | notebooks.ai&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="https://colab.research.google.com/"&gt;Google Colaboratory&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Amazon SageMath&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="https://www.ibm.com/cloud/watson-studio"&gt;IBM Watson Studio&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="https://r-brain.io/en/"&gt;R-Brain&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;deploy your own public JupyterHub server&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;</content><category term="Data Science"></category><category term="JuptyerLab"></category><category term="Jupyter"></category><category term="notebook"></category></entry><entry><title>Converting JupyterLab notebooks</title><link href="http://www.legendu.net/misc/blog/nbconvert-tips/" rel="alternate"></link><published>2019-08-06T22:10:36-07:00</published><updated>2019-08-06T22:10:36-07:00</updated><author><name>Ben Chuanlong Du</name></author><id>tag:www.legendu.net,2019-08-06:/misc/blog/nbconvert-tips/</id><summary type="html">&lt;p&gt;&lt;strong&gt;
+Things on this page are
+fragmentary and immature notes/thoughts of the author.
+It is not meant to readers
+but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Converting too many notebooks at the same (multiprocessing) causes &lt;code&gt;zmq.error.ZMQError: Address already in use&lt;/code&gt;.
+    The simple way to …&lt;/p&gt;&lt;/li&gt;&lt;/ol&gt;</summary><content type="html">&lt;p&gt;&lt;strong&gt;
+Things on this page are
+fragmentary and immature notes/thoughts of the author.
+It is not meant to readers
+but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Converting too many notebooks at the same (multiprocessing) causes &lt;code&gt;zmq.error.ZMQError: Address already in use&lt;/code&gt;.
+    The simple way to fix this issue is to limit the number of processes converting notebooks.
+    It is suggested that you keep in within 3.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;You can execute a notebook without converting it to a different format using the following command.
+    &lt;code&gt;Bash
+    jupyter nbconvert --to notebook --execute mynotebook.ipynb&lt;/code&gt;
+    This will generate another notebook with the output inlined.
+    You can use the option &lt;code&gt;--inplace&lt;/code&gt; to overwrite the file inplace.
+    &lt;code&gt;Bash
+    jupyter nbconvert --to notebook --inplace --execute mynotebook.ipynb&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="references"&gt;References&lt;/h2&gt;
+&lt;p&gt;https://nbconvert.readthedocs.io/en/latest/usage.html&lt;/p&gt;</content><category term="JupyterLab"></category><category term="notebook"></category><category term="nbconvert"></category><category term="tips"></category><category term="zmq.error.ZMQError"></category></entry></feed>

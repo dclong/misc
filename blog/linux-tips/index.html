@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Tips for Linux</title>
+  <meta name="author" content="Ben Chuanlong Du">
+
+  <link href="http://www.legendu.net/misc/atom.xml" type="application/atom+xml" rel="alternate"
+        title="Ben Chuanlong Du's Blog Atom Feed" />
+
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link href="http://www.legendu.net/misc/favicon.png" rel="icon">
+  <link href="http://www.legendu.net/misc/theme/css/main_2.css" media="screen, projection"
+        rel="stylesheet" type="text/css">
+  <script src="http://www.legendu.net/misc/theme/js/modernizr-2.0.js"></script>
+  <script src="http://www.legendu.net/misc/theme/js/ender.js"></script>
+  <script src="http://www.legendu.net/misc/theme/js/octopress.js" type="text/javascript"></script>
+
+  <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+</head>
+
+<body>
+  <header role="banner"><hgroup>
+  <h1><a href="http://www.legendu.net/misc/">Ben Chuanlong Du's Blog</a></h1>
+    <h2>It is never too late to learn.</h2>
+</hgroup></header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="http://www.legendu.net/misc/atom.xml" rel="subscribe-rss">RSS</a></li>
+</ul>
+
+<form name="search" action="https://www.bing.com/search" method="get" onSubmit="return build_query()">
+  <fieldset role="search">
+      <!--
+    <input type="hidden" name="q" value="site:http://www.legendu.net/misc" />
+        -->
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+
+<script type = "text/javascript">
+    function build_query() {
+        var query = document.forms["search"]["q"].value;
+        var prefix = "site:http://www.legendu.net/misc "
+        if (!query.startsWith(prefix)) {
+            query = prefix + query;
+            document.forms["search"]["q"].value = query;
+        }
+        return true;
+    }
+</script>
+
+<ul class="main-navigation">
+    <li><a href="http://www.legendu.net">Home</a></li>
+    <li><a href="http://www.legendu.net/misc">Blog</a></li>
+    <li><a href="http://www.legendu.net/misc/archives.html">Archives</a></li>
+    <li><a href="http://www.legendu.net/misc/pages/links.html">Links</a></li>
+</ul></nav>
+  <div id="main">
+    <div id="content">
+<div>
+  <article class="hentry" role="article">
+<header>
+      <h1 class="entry-title">Tips for Linux</h1>
+      <p class="meta"><time datetime="2017-11-16T00:15:26-08:00" pubdate>Nov 16, 2017</time></p>
+</header>
+
+  <div class="entry-content"><p><strong>
+Things on this page are
+fragmentary and immature notes/thoughts of the author.
+It is not meant to readers
+but rather for convenient reference of the author and future improvement.
+</strong></p>
+<h2 id="tricks-and-traps">Tricks and Traps</h2>
+<ol>
+<li>
+<p>Use full paths of commands when you use a batch account
+    or schedule a cron job.
+    The reason is that batch account 
+    and/or cron might have different environment from your personal account.
+    So if a shell script works in your personal account,
+    it might not work in a batch account or in cron. </p>
+</li>
+<li>
+<p><a href="http://www.explainshell.com/">explainshell.com</a> 
+    is a great place for learning shell.</p>
+</li>
+<li>
+<p>Broken symbolic link <code>.bashrc</code> (and probably other configuration files/scripts) 
+    stops Xfce4 (and probably other DEs) from login to the GUI.
+    Fix the broken symbolic links resolves the issue.</p>
+</li>
+</ol>
+<h2 id="installation">Installation</h2>
+<ol>
+<li>After a new kernel is installed, 
+    the old image is usually kept and you can still boot into the old kernel if you like.
+    This make is convenient if the new kernel has some issues.</li>
+</ol>
+<h2 id="remote">Remote</h2>
+<ol>
+<li>
+<p>The remote desktop software Remmina leaks the super key, 
+    which is problematic ...
+    I think the problem is Ubuntu, not the remote apps ...</p>
+</li>
+<li>
+<p>When you connect to a server, 
+    you'd better not use the super key. 
+    Because it is active on both the server and the local machines. </p>
+</li>
+</ol>
+<h2 id="file-system">File System</h2>
+<ol>
+<li>
+<p>You cannot change permission of files on NTFS filesystem ..., 
+    they are determined when mounted</p>
+</li>
+<li>
+<p>Linux hard disk saves properties, user, group of files, 
+    a different user must have enough permission to mount it</p>
+</li>
+<li>
+<p>do not use gui to remove large file/directories, use command line instead</p>
+</li>
+</ol>
+<h2 id="good-practice">Good Practice</h2>
+<ol>
+<li>The home directory is where you should work in, 
+    you should put all your personal data in your home directory. 
+    When you need to reinstall the system or backup your data, 
+    you can make a copy of your home directory. 
+    However, I go one step further to make things even more convenient. 
+    I create a directory named archives in my home directory,
+    put all my persoanl data including configuration files there
+    (except cloud, such as Dropbox, TeamDrive, etc.) </li>
+</ol>
+<h2 id="links">Links</h2>
+<ol>
+<li>Linux does not support variant symbolic links, i.e., you can use environment variables in symbolic links.
+    and link them to places where needed.
+    This way, 
+    I can just make a copy of the archives directory 
+    which is even more convenient.
+    Avoid copying unnecessary files.</li>
+</ol>
+<h2 id="terminal">Terminal</h2>
+<ol>
+<li>
+<p>nautilus-open-terminal allow you to open a terminal 
+    in any directory via short menu.</p>
+</li>
+<li>
+<p>A good backgroup color setting for terminal Hue: 85, Saturation: 36,
+    Value: 71, Red: 155, Green: 182 and Blue: 117. color name: #9BB675.
+    Cursor color: #B93A3A.
+    The theme goes well with this color setting is "Xterm".</p>
+<div class="highlight"><pre><span></span><span class="o">^</span><span class="n">P</span> <span class="p">:</span> <span class="k">move</span> <span class="n">up</span> <span class="n">through</span> <span class="n">history</span> <span class="n">list</span><span class="p">,</span> <span class="n">one</span> <span class="n">command</span> <span class="k">at</span> <span class="n">a</span> <span class="n">time</span><span class="p">.</span> <span class="p">(</span><span class="n">Up</span> <span class="n">arrow</span> <span class="k">key</span><span class="p">)</span> 
+<span class="o">^</span><span class="n">N</span> <span class="p">:</span> <span class="k">move</span> <span class="n">down</span> <span class="p">(</span><span class="k">or</span> <span class="n">Down</span> <span class="n">arrow</span> <span class="k">key</span><span class="p">).</span>
+</pre></div>
+
+
+</li>
+<li>
+<p>Use <code>Shift+PageUp</code> and <code>Shift+PageDown</code> to scroll up and down in virtual console.</p>
+</li>
+</ol>
+<h2 id="shell">Shell</h2>
+<ol>
+<li>
+<p>White spaces matters a lot in bash. To assign a string to a variable,
+    you can use <code>v=some_content</code> but not <code>v = some_content</code>. 
+    The reason is that space is used to separate bash commands and arguments. 
+    Bash will treat <code>v</code> as a command instead of a variable. </p>
+</li>
+<li>
+<p>To source in a bash file "a-bash-file" so that commands in the file
+    will be executed, you can use <code>source a-bash-file</code>, or you can use a
+    period "." in place of "source", i.e., you can also use <code>.
+    a-bash-file</code>.</p>
+</li>
+<li>
+<p><code>return</code> returns a bash function and thus can only be used in a bash function. 
+    The argument of <code>return</code> must be a numeric number. 
+    <code>exit</code> exits the bash enviroment, 
+    i.e., terminate the terminal you are using.</p>
+</li>
+<li>
+<p>to add path to the "PATH" environment variable, use the following command</p>
+<div class="highlight"><pre><span></span><span class="n">PATH</span><span class="o">=</span><span class="err">$</span><span class="n">PATH</span><span class="p">:</span><span class="n">path_to_add</span>
+</pre></div>
+
+
+<p>If you want to add the path permanently, 
+you can put the command into the ".bashrc" file under your home directory. 
+If you have to add lots of paths into the PATH environment variable, 
+you can put them into a seperate file, 
+and link it in the ".bashrc" file.</p>
+</li>
+</ol>
+<h2 id="path-in-bash-script">Path in Bash Script</h2>
+<ol>
+<li>
+<p>Full path of current directory</p>
+<div class="highlight"><pre><span></span><span class="err">$</span><span class="n">PWD</span>
+</pre></div>
+
+
+</li>
+<li>
+<p>base name of current directory</p>
+<div class="highlight"><pre><span></span><span class="cp">${</span><span class="n">PWD</span><span class="c1">##*/</span><span class="cp">}</span>
+</pre></div>
+
+
+<p>or</p>
+<div class="highlight"><pre><span></span><span class="k">basename</span> $<span class="nv">PWD</span>
+</pre></div>
+
+
+</li>
+</ol>
+<h2 id="cd">cd</h2>
+<ol>
+<li>
+<p>use - to go back to last directory</p>
+</li>
+<li>
+<p>use $CDPATH</p>
+</li>
+<li>
+<p>use pushd and popd</p>
+</li>
+</ol>
+<h2 id="ftp">FTP</h2>
+<ol>
+<li>ftp transfer non-text use binary mode</li>
+</ol>
+<h2 id="file-association">File Association</h2>
+<ol>
+<li>The user-specific file association information is save in the file
+    <code>/.local/share/applications/mimeapps.list</code>, 
+    and the global file association information is saved in file <code>/etc/gnome/defaults.list</code>.</li>
+</ol>
+<h2 id="change-hostname">Change Hostname</h2>
+<ol>
+<li>To change hostname permanently, 
+    change the hostname to what you want
+    in files [] <code>/etc/hostname</code> and [] <code>/etc/hosts</code>, and then use the
+    following code to make the change in effect without restarting your
+    computer.<div class="highlight"><pre><span></span><span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">init</span><span class="p">.</span><span class="n">d</span><span class="o">/</span><span class="n">hostname</span><span class="p">.</span><span class="n">sh</span> <span class="k">start</span>
+</pre></div>
+
+
+</li>
+</ol>
+<h2 id="sudo">sudo</h2>
+<ol>
+<li>
+<p>To change the timeout of the sudo password, add the following line
+    to the end of the /etc/sudoers file.</p>
+<div class="highlight"><pre><span></span><span class="n">Defaults</span><span class="o">:</span><span class="n">your_username</span> <span class="n">timestamp_timeout</span><span class="o">=</span><span class="n">SECONDS</span>
+<span class="n">Defaults</span> <span class="n">syslog</span><span class="o">=</span><span class="n">auth</span><span class="o">,</span><span class="n">passwd_timeout</span><span class="o">=</span><span class="mi">10</span>
+</pre></div>
+
+
+<p>j</p>
+<h2 id="users-and-groups">users and groups</h2>
+</li>
+<li>
+<p><code>id</code> displays information of a user.</p>
+</li>
+</ol>
+<h2 id="skills">Skills</h2>
+<ol>
+<li>
+<p>If you select some text, 
+    right click on it but nothings happens (i.e., no short menu poped up), 
+    it means that the selected text has already been copied to the mouse buffer. 
+    This is one place that Linux is different from Windows. 
+    Notice that no all selct and copy process is like this. 
+    You still have to copy the selected text into the buffer manually sometimes.</p>
+</li>
+<li>
+<p>Hard drive related operations: <a href="http://www.skullbox.net/newsda.php">http://www.skullbox.net/newsda.php</a></p>
+</li>
+<li>
+<p>check cpu information <code>cat /proc/cpuinfo</code> and memory <code>cat /proc/meminfo</code></p>
+</li>
+<li>
+<p>Linux system support <em>true</em> random number generator, 
+    which is implemented by collecting the noise generate by hardwares. 
+    To use generate <em>true</em> random numbers, 
+    you can use the command.</p>
+<p>head -1 /dev/random | od -i -N 10 | awk '{ print $2 }' </p>
+<p>Note that <code>/dev/random</code> will block until additional environmental noise is gathered
+if the entropy pool in the machine is empty. 
+If you do not want to be block, 
+you can use <code>/dev/urandom</code> to generate random numbers, 
+which reuses the internal pool to produce more pseudo-random bits when the entropy pool is empty. 
+Though <code>/dev/urandom</code> might contain less entropy than <code>/dev/random</code> does,
+it is still valide for usual use.</p>
+</li>
+</ol>
+<h2 id="copy-using-ui">Copy using UI</h2>
+<ol>
+<li>Many Linux/Unix realted applications use <code>copy on selection</code>.
+    This features makes things confusing sometimes. 
+    For example, if you copy things from one place and want to paste it into a terminal which has <code>copy on selection</code> enable.
+    Then you click on the terminal to paste. 
+    The thing is that when you click on the terminal, 
+    you often select a blank line which means that you have copied a blank line before pasting. 
+    This often make your copy/paste fail to work.
+    If copy/paste fail to work in some application, 
+    it is possibly because of the <code>copy on selection</code> feature. 
+    A workaround is to right click ...</li>
+</ol></div>
+    <footer>
+<p class="meta">
+  <span class="byline author vcard">
+    Posted by <span class="fn">Ben Chuanlong Du</span>
+  </span>
+<time datetime="2017-11-16T00:15:26-08:00" pubdate>Nov 16, 2017</time>  <span class="categories">
+    <a class="category" href="http://www.legendu.net/misc/tag/tips.html">tips</a>
+    <a class="category" href="http://www.legendu.net/misc/tag/linux.html">Linux</a>
+  </span>
+</p>    </footer>
+  </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div>
+  </section>
+</div>
+<aside class="sidebar">
+  <section>
+    <h1>Recent Posts</h1>
+    <ul id="recent_posts">
+      <li class="post">
+          <a href="http://www.legendu.net/misc/blog/python-tips/">Tips on Python</a>
+      </li>
+      <li class="post">
+          <a href="http://www.legendu.net/misc/blog/python-tips-and-traps/">Python Tips and Traps</a>
+      </li>
+      <li class="post">
+          <a href="http://www.legendu.net/misc/blog/exception-and-error-handling-in-python/">Exception and Error Handling in Python</a>
+      </li>
+      <li class="post">
+          <a href="http://www.legendu.net/misc/blog/ipython-tips/">Tips on IPython</a>
+      </li>
+      <li class="post">
+          <a href="http://www.legendu.net/misc/blog/tips-for-git-large-file-storage/">Tips for Git Large File Storage</a>
+      </li>
+    </ul>
+  </section>
+  <section>
+      
+    <h1>Categories</h1>
+    <ul id="recent_posts">
+        <li><a href="http://www.legendu.net/misc/category/ai.html">AI</a></li>
+        <li><a href="http://www.legendu.net/misc/category/career.html">Career</a></li>
+        <li><a href="http://www.legendu.net/misc/category/cloud.html">Cloud</a></li>
+        <li><a href="http://www.legendu.net/misc/category/database.html">Database</a></li>
+        <li><a href="http://www.legendu.net/misc/category/encryption.html">Encryption</a></li>
+        <li><a href="http://www.legendu.net/misc/category/english.html">English</a></li>
+        <li><a href="http://www.legendu.net/misc/category/finance.html">Finance</a></li>
+        <li><a href="http://www.legendu.net/misc/category/fun-problems.html">Fun Problems</a></li>
+        <li><a href="http://www.legendu.net/misc/category/hardware.html">Hardware</a></li>
+        <li><a href="http://www.legendu.net/misc/category/internet.html">Internet</a></li>
+        <li><a href="http://www.legendu.net/misc/category/job.html">Job</a></li>
+        <li><a href="http://www.legendu.net/misc/category/jupyterlab.html">JupyterLab</a></li>
+        <li><a href="http://www.legendu.net/misc/category/language.html">Language</a></li>
+        <li><a href="http://www.legendu.net/misc/category/life.html">Life</a></li>
+        <li><a href="http://www.legendu.net/misc/category/links.html">Links</a></li>
+        <li><a href="http://www.legendu.net/misc/category/linux.html">Linux</a></li>
+        <li><a href="http://www.legendu.net/misc/category/machine-learning.html">Machine Learning</a></li>
+        <li><a href="http://www.legendu.net/misc/category/macos.html">macOS</a></li>
+        <li><a href="http://www.legendu.net/misc/category/network.html">Network</a></li>
+        <li><a href="http://www.legendu.net/misc/category/os.html">OS</a></li>
+        <li><a href="http://www.legendu.net/misc/category/people.html">People</a></li>
+        <li><a href="http://www.legendu.net/misc/category/philosophy.html">Philosophy</a></li>
+        <li><a href="http://www.legendu.net/misc/category/programming.html">Programming</a></li>
+        <li><a href="http://www.legendu.net/misc/category/research.html">Research</a></li>
+        <li><a href="http://www.legendu.net/misc/category/sheng-huo.html">生活</a></li>
+        <li><a href="http://www.legendu.net/misc/category/si-suo.html">思索</a></li>
+        <li><a href="http://www.legendu.net/misc/category/software.html">Software</a></li>
+        <li><a href="http://www.legendu.net/misc/category/statistics.html">Statistics</a></li>
+        <li><a href="http://www.legendu.net/misc/category/teleconference.html">Teleconference</a></li>
+        <li><a href="http://www.legendu.net/misc/category/tools.html">Tools</a></li>
+        <li><a href="http://www.legendu.net/misc/category/trading.html">Trading</a></li>
+        <li><a href="http://www.legendu.net/misc/category/unix.html">Unix</a></li>
+        <li><a href="http://www.legendu.net/misc/category/visualization.html">Visualization</a></li>
+        <li><a href="http://www.legendu.net/misc/category/windows.html">Windows</a></li>
+        <li><a href="http://www.legendu.net/misc/category/work.html">Work</a></li>
+    </ul>
+  </section>
+ 
+
+  <section>
+  <h1>Tags</h1>
+  <p class="tagcloud">
+  </p>
+  </section>
+
+
+
+  <section>
+    <h1>GitHub Repos</h1>
+    <ul id="gh_repos">
+      <li class="loading">Status updating...</li>
+    </ul>
+      <a href="https://github.com/dclong">@dclong</a> on GitHub
+    <script type="text/javascript">
+      $.domReady(function(){
+          if (!window.jXHR){
+              var jxhr = document.createElement('script');
+              jxhr.type = 'text/javascript';
+              jxhr.src = 'http://www.legendu.net/misc/theme/js/jXHR.js';
+              var s = document.getElementsByTagName('script')[0];
+              s.parentNode.insertBefore(jxhr, s);
+          }
+
+          github.showRepos({
+              user: 'dclong',
+              count: 3,
+              skip_forks: true,
+              target: '#gh_repos'
+          });
+      });
+    </script>
+    <script src="http://www.legendu.net/misc/theme/js/github.js" type="text/javascript"> </script>
+  </section>
+
+    <section>
+        <h1>Social</h2>
+        <ul>
+            <li><a href="https://www.linkedin.com/in/ben-chuanlong-du-1239b221/" target="_blank">LinkedIn</a></li>
+            <li><a href="https://twitter.com/longendu" target="_blank">Twitter</a></li>
+            <li><a href="https://www.facebook.com/chuanlong.du" target="_blank">Facebook</a></li>
+        <!--
+            <li><a href="http://www.legendu.net/misc/" type="application/rss+xml" rel="alternate">RSS</a></li>
+            -->
+        </ul>
+    </section>
+</aside>    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Ben Chuanlong Du -
+  <span class="credit">Powered by <a href="http://getpelican.com">Pelican</a></span>
+</p></footer>
+    <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-30259661-1']);
+    _gaq.push(['_trackPageview']);
+    (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+    </script>
+	<script type="text/javascript">
+	  var disqus_shortname = 'dclong';
+          var disqus_identifier = '/blog/linux-tips/';
+          var disqus_url = 'http://www.legendu.net/misc/blog/linux-tips/';
+          var disqus_title = 'Tips for Linux';
+	  (function() {
+	    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	    dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+	    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	   })();
+	</script>
+</body>
+</html>

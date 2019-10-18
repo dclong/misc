@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Tips on Virtualbox</title>
+  <meta name="author" content="Ben Chuanlong Du">
+
+  <link href="http://www.legendu.net/misc/atom.xml" type="application/atom+xml" rel="alternate"
+        title="Ben Chuanlong Du's Blog Atom Feed" />
+
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link href="http://www.legendu.net/misc/favicon.png" rel="icon">
+  <link href="http://www.legendu.net/misc/theme/css/main_2.css" media="screen, projection"
+        rel="stylesheet" type="text/css">
+  <script src="http://www.legendu.net/misc/theme/js/modernizr-2.0.js"></script>
+  <script src="http://www.legendu.net/misc/theme/js/ender.js"></script>
+  <script src="http://www.legendu.net/misc/theme/js/octopress.js" type="text/javascript"></script>
+
+  <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+</head>
+
+<body>
+  <header role="banner"><hgroup>
+  <h1><a href="http://www.legendu.net/misc/">Ben Chuanlong Du's Blog</a></h1>
+    <h2>It is never too late to learn.</h2>
+</hgroup></header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="http://www.legendu.net/misc/atom.xml" rel="subscribe-rss">RSS</a></li>
+</ul>
+
+<form name="search" action="https://www.bing.com/search" method="get" onSubmit="return build_query()">
+  <fieldset role="search">
+      <!--
+    <input type="hidden" name="q" value="site:http://www.legendu.net/misc" />
+        -->
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+
+<script type = "text/javascript">
+    function build_query() {
+        var query = document.forms["search"]["q"].value;
+        var prefix = "site:http://www.legendu.net/misc "
+        if (!query.startsWith(prefix)) {
+            query = prefix + query;
+            document.forms["search"]["q"].value = query;
+        }
+        return true;
+    }
+</script>
+
+<ul class="main-navigation">
+    <li><a href="http://www.legendu.net">Home</a></li>
+    <li><a href="http://www.legendu.net/misc">Blog</a></li>
+    <li><a href="http://www.legendu.net/misc/archives.html">Archives</a></li>
+    <li><a href="http://www.legendu.net/misc/pages/links.html">Links</a></li>
+</ul></nav>
+  <div id="main">
+    <div id="content">
+<div>
+  <article class="hentry" role="article">
+<header>
+      <h1 class="entry-title">Tips on Virtualbox</h1>
+      <p class="meta"><time datetime="2019-05-11T01:05:59-07:00" pubdate>May 11, 2019</time></p>
+</header>
+
+  <div class="entry-content"><p><strong>
+Things on this page are fragmentary and immature notes/thoughts of the author. 
+It is not meant to readers but rather for convenient reference of the author and future improvement.
+</strong></p>
+<div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">mount</span> <span class="o">-</span><span class="n">t</span> <span class="n">vboxsf</span> <span class="o">-</span><span class="n">o</span> <span class="n">uid</span><span class="o">=</span><span class="err">$</span><span class="p">(</span><span class="n">whoami</span><span class="p">),</span><span class="n">gid</span><span class="o">=</span><span class="err">$</span><span class="p">(</span><span class="n">whoami</span><span class="p">),</span><span class="n">fmask</span><span class="o">=</span><span class="mi">177</span><span class="p">,</span><span class="n">dmask</span><span class="o">=</span><span class="mi">077</span>
+</pre></div>
+
+
+<ol>
+<li>
+<p>use command line to export guest machines (see vbvm.export.sh),
+    not recommended, directly copy everything is easier,
+    especially for windows machines</p>
+</li>
+<li>
+<p>Check if you set a UUID for virtualbox, whether re-activation is still needed for MS word.
+    Another thing is too see whether VM can access usb.</p>
+</li>
+<li>
+<p>The activation has to do with the uuid change when creating the guest. 
+    Windows sees this as a changed motherboard and that is enough to trigger activation.
+    However, 
+    instead of exporting and importing which does trigger this 
+    you can (since version 4.x of VirtualBox) simply copy the entire guests folder out 
+    to a saved location, 
+    then copy it back into the new install 
+    and place it back in the VirtualBox VMs folder and dbl click the <code>*.vbox</code> file. 
+    Since this does not re-install anything it does not require re-activation.</p>
+</li>
+<li>
+<p>Word 2010 require reactivation on Virtualbox even if you COPY The entire virtual machine 
+    Word 2007 not sure, probably will work</p>
+</li>
+<li>
+<p>If you install a backported linux image, 
+    the usually version of Virtualbox might not work. 
+    You can try the backported version of Virtualbox which will probably work.</p>
+</li>
+<li>
+<p>The "Shared Clipboard" functionality relies on the VirtualBox Guest Additions to work.</p>
+</li>
+<li>
+<p>you probably need to restart after if you encounter problems in virtualbox and are required to install dkms to solve it ...</p>
+</li>
+</ol>
+<h2 id="settings">Settings</h2>
+<ol>
+<li>You'd better check "Enable PAE/NX" under the "Processor" tab in the "System" settings group
+    when you use a Linux guest machine on a Windows host.
+    This is because a Linux machine usually support Physical Address Extension (PAE),
+    and if PAE is not enable in VirtualBox, 
+    the Linux guest machine might fail to start.</li>
+</ol>
+<h2 id="error-messages">Error Messages</h2>
+<ol>
+<li>
+<p>VirtualBox Version 4.3.10</p>
+<div class="highlight"><pre><span></span> <span class="nv">mount</span>: <span class="nv">wrong</span> <span class="nv">fs</span> <span class="nv">type</span>, <span class="nv">bad</span> <span class="nv">option</span>, <span class="nv">bad</span> <span class="nv">superblock</span> <span class="nv">on</span> <span class="nv">UbuntuShared</span>,
+        <span class="nv">missing</span> <span class="nv">codepage</span> <span class="nv">or</span> <span class="nv">helper</span> <span class="nv">program</span>, <span class="nv">or</span> <span class="nv">other</span> <span class="nv">error</span>
+        <span class="ss">(</span><span class="k">for</span> <span class="nv">several</span> <span class="nv">filesystems</span> <span class="ss">(</span><span class="nv">e</span>.<span class="nv">g</span>. <span class="nv">nfs</span>, <span class="nv">cifs</span><span class="ss">)</span> <span class="nv">you</span> <span class="nv">might</span>
+        <span class="nv">need</span> <span class="nv">a</span> <span class="o">/</span><span class="nv">sbin</span><span class="o">/</span><span class="nv">mount</span>.<span class="o">&amp;</span><span class="nv">lt</span><span class="c1">;type&amp;gt; helper program)</span>
+        <span class="nv">In</span> <span class="nv">some</span> <span class="nv">cases</span> <span class="nv">useful</span> <span class="nv">info</span> <span class="nv">is</span> <span class="nv">found</span> <span class="nv">in</span> <span class="nv">syslog</span> <span class="o">-</span> <span class="nv">try</span>
+    <span class="nv">dmesg</span> <span class="o">|</span> <span class="nv">tail</span>  <span class="nv">or</span> <span class="nv">so</span>
+</pre></div>
+
+
+<p>This is probably because of a bad symbolic link.
+Adding a symblic link might solve the problem.</p>
+<p>sudo ln -s /opt/VBoxGuestAdditions-4.3.10/lib/VBoxGuestAdditions /usr/lib/VBoxGuestAdditions</p>
+</li>
+</ol>
+<h2 id="speedup-virtualbox">Speedup Virtualbox</h2>
+<ol>
+<li>
+<p>use fixed size disk</p>
+</li>
+<li>
+<p>install guest additions</p>
+</li>
+</ol>
+<h2 id="vboxmanage">VBOXManage</h2>
+<ol>
+<li>
+<p>to create a shared folder </p>
+<p>VBoxManage sharedfolder add "VM name" --name "sharename" --hostpath "C:\test"</p>
+</li>
+<li>
+<p>To change the UUID of a Virtual Machine disk.</p>
+<p>VBoxManage internalcommands sethduuid WinTPC.vdi </p>
+<p>If you change the UUID of a disk of an existing Virtual Machine, 
+it probably won't work any more. 
+You can simply create a new Virtual Machine using the disk.</p>
+</li>
+<li>
+<p>Fail to install VirtualBox Guest Additions on antiX. 
+    Couldn't figure out what caused the problem. 
+    The problem is the Linux kernel. 
+    After installing an older version 3.2 of kernel, VirtualBox Guest Additions can be installed successfully.</p>
+</li>
+<li>
+<p>Better to make 32 bit virtual machines as it runs OK on both 32 and 64 bit computers.</p>
+</li>
+<li>
+<p>Virtual machine is a good way to learn new technologies, 
+    summary steps to learn Oracle SQL ... and big data, virtual machines ...</p>
+</li>
+</ol>
+<h2 id="vboxadditions">VBoxAdditions</h2>
+<ol>
+<li>Sometimes the virtual machine fails to load VBoxAdditions iso image into the CD/DVD drive. 
+    You can manually download the image, mount it (using mount) and then install it.</li>
+</ol>
+<h2 id="issues">Issues</h2>
+<ol>
+<li>
+<p>it seems that VirtualBox has caused the blue screen problem on the office laptop, 
+    avoid using it for a while to see whether the problem comes up again.
+    NEVER appeared. So VirtualBox caused the problem.</p>
+</li>
+<li>
+<p>sometimes cannot run .exe from ...
+    This is usually a problem when running .exe files 
+    from a virtual box shared folder on the windows guest. 
+    The solution is to run the .exe using UNC paths 
+    ie In your Explorer (in Windows) go to \Vboxsvr\your shared folder\path\to\folder\with\exe 
+    and run the .exe from there.
+    problematic for CygwinPortable, as you cannot install to a network folder</p>
+</li>
+</ol>
+<h2 id="multiscreen">Multiscreen</h2>
+<p>View -&gt; Virtual screen 1 -&gt; use host screen 1/2</p>
+<h2 id="network">Network</h2>
+<p><a href="http://www.virtualbox.org/manual/ch06.html">http://www.virtualbox.org/manual/ch06.html</a> covers the virtualbox networking quite well.</p>
+<ol>
+<li>To make the guest virtual machine behave like a machine in the local network,
+    you have to use the bridged network.
+    You must choose the right network device when you use bridged network. 
+    For example, if the host machine is using the wireless network, 
+    you might have to choose <code>wlan0</code> 
+    (different according to network settings of the host machine).</li>
+</ol>
+<p>NAT - Your host will act as a router (firewall) and your hosts will be on a private subnet. 
+Use this if you are not running servers on the guests.</p>
+<p>Bridged - Your guests will get a ip address on the same subnet as your host. 
+Use this if you are running servers on the guest 
+and wish to connect from other computers on the LAN.</p>
+<p>Host Only - Sort of a hybrid. As the name implies, 
+with this option you can connect to the guest servers from the host only. 
+Use this for "private" (host only) servers. 
+I use this if I am running a test web server.</p>
+<p>To make a long story short, 
+assuming you have a router, I would use bridged networking.</p>
+<h2 id="questions">Questions</h2>
+<ol>
+<li>how to automatically mount a shared folder in VirtualBox ?</li>
+</ol>
+<h2 id="references">References</h2>
+<ul>
+<li><a href="http://www.virtualbox.org/manual/">Oracle VM VirtualBox® User Manual</a></li>
+<li><a href="http://www.trimentation.com/wp/?p=100">VirtualBox on the command line: Importing, Exporting, and Duplicating VMs</a></li>
+<li><a href="http://andunix.net/info/virtualbox/cli">VirtualBox Command Line Interface</a></li>
+<li><a href="http://nakkaya.com/2012/08/30/create-manage-virtualBox-vms-from-the-command-line/">Create/Manage VirtualBox VMs from the Command Line</a></li>
+<li><a href="http://superuser.com/questions/472951/make-a-clone-of-virtualbox-machine-that-doesnt-cause-windows-re-activation-afte">Make a clone of VirtualBox Machine that doesn't cause Windows Re-Activation after installing Windows</a></li>
+<li><a href="http://grahamrhay.wordpress.com/2012/04/22/activation-woes-with-windows-7-virtualbox/">Activation woes with Windows 7 &amp; VirtualBox | Look on my works, ye Mighty, and despair!</a></li>
+<li><a href="http://www.windowstablet.tv/windows-tips/190-virtualbox-clone-windows-activation/">VirtualBox: Clone VM without Re-activation of Windows 7</a></li>
+</ul></div>
+    <footer>
+<p class="meta">
+  <span class="byline author vcard">
+    Posted by <span class="fn">Ben Chuanlong Du</span>
+  </span>
+<time datetime="2019-05-11T01:05:59-07:00" pubdate>May 11, 2019</time>  <span class="categories">
+    <a class="category" href="http://www.legendu.net/misc/tag/tips.html">tips</a>
+    <a class="category" href="http://www.legendu.net/misc/tag/virtualbox.html">virtualbox</a>
+    <a class="category" href="http://www.legendu.net/misc/tag/virtualization.html">virtualization</a>
+  </span>
+</p>    </footer>
+  </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div>
+  </section>
+</div>
+<aside class="sidebar">
+  <section>
+    <h1>Recent Posts</h1>
+    <ul id="recent_posts">
+      <li class="post">
+          <a href="http://www.legendu.net/misc/blog/python-tips/">Tips on Python</a>
+      </li>
+      <li class="post">
+          <a href="http://www.legendu.net/misc/blog/python-tips-and-traps/">Python Tips and Traps</a>
+      </li>
+      <li class="post">
+          <a href="http://www.legendu.net/misc/blog/exception-and-error-handling-in-python/">Exception and Error Handling in Python</a>
+      </li>
+      <li class="post">
+          <a href="http://www.legendu.net/misc/blog/ipython-tips/">Tips on IPython</a>
+      </li>
+      <li class="post">
+          <a href="http://www.legendu.net/misc/blog/tips-for-git-large-file-storage/">Tips for Git Large File Storage</a>
+      </li>
+    </ul>
+  </section>
+  <section>
+      
+    <h1>Categories</h1>
+    <ul id="recent_posts">
+        <li><a href="http://www.legendu.net/misc/category/ai.html">AI</a></li>
+        <li><a href="http://www.legendu.net/misc/category/career.html">Career</a></li>
+        <li><a href="http://www.legendu.net/misc/category/cloud.html">Cloud</a></li>
+        <li><a href="http://www.legendu.net/misc/category/database.html">Database</a></li>
+        <li><a href="http://www.legendu.net/misc/category/encryption.html">Encryption</a></li>
+        <li><a href="http://www.legendu.net/misc/category/english.html">English</a></li>
+        <li><a href="http://www.legendu.net/misc/category/finance.html">Finance</a></li>
+        <li><a href="http://www.legendu.net/misc/category/fun-problems.html">Fun Problems</a></li>
+        <li><a href="http://www.legendu.net/misc/category/hardware.html">Hardware</a></li>
+        <li><a href="http://www.legendu.net/misc/category/internet.html">Internet</a></li>
+        <li><a href="http://www.legendu.net/misc/category/job.html">Job</a></li>
+        <li><a href="http://www.legendu.net/misc/category/jupyterlab.html">JupyterLab</a></li>
+        <li><a href="http://www.legendu.net/misc/category/language.html">Language</a></li>
+        <li><a href="http://www.legendu.net/misc/category/life.html">Life</a></li>
+        <li><a href="http://www.legendu.net/misc/category/links.html">Links</a></li>
+        <li><a href="http://www.legendu.net/misc/category/linux.html">Linux</a></li>
+        <li><a href="http://www.legendu.net/misc/category/machine-learning.html">Machine Learning</a></li>
+        <li><a href="http://www.legendu.net/misc/category/macos.html">macOS</a></li>
+        <li><a href="http://www.legendu.net/misc/category/network.html">Network</a></li>
+        <li><a href="http://www.legendu.net/misc/category/os.html">OS</a></li>
+        <li><a href="http://www.legendu.net/misc/category/people.html">People</a></li>
+        <li><a href="http://www.legendu.net/misc/category/philosophy.html">Philosophy</a></li>
+        <li><a href="http://www.legendu.net/misc/category/programming.html">Programming</a></li>
+        <li><a href="http://www.legendu.net/misc/category/research.html">Research</a></li>
+        <li><a href="http://www.legendu.net/misc/category/sheng-huo.html">生活</a></li>
+        <li><a href="http://www.legendu.net/misc/category/si-suo.html">思索</a></li>
+        <li><a href="http://www.legendu.net/misc/category/software.html">Software</a></li>
+        <li><a href="http://www.legendu.net/misc/category/statistics.html">Statistics</a></li>
+        <li><a href="http://www.legendu.net/misc/category/teleconference.html">Teleconference</a></li>
+        <li><a href="http://www.legendu.net/misc/category/tools.html">Tools</a></li>
+        <li><a href="http://www.legendu.net/misc/category/trading.html">Trading</a></li>
+        <li><a href="http://www.legendu.net/misc/category/unix.html">Unix</a></li>
+        <li><a href="http://www.legendu.net/misc/category/visualization.html">Visualization</a></li>
+        <li><a href="http://www.legendu.net/misc/category/windows.html">Windows</a></li>
+        <li><a href="http://www.legendu.net/misc/category/work.html">Work</a></li>
+    </ul>
+  </section>
+ 
+
+  <section>
+  <h1>Tags</h1>
+  <p class="tagcloud">
+  </p>
+  </section>
+
+
+
+  <section>
+    <h1>GitHub Repos</h1>
+    <ul id="gh_repos">
+      <li class="loading">Status updating...</li>
+    </ul>
+      <a href="https://github.com/dclong">@dclong</a> on GitHub
+    <script type="text/javascript">
+      $.domReady(function(){
+          if (!window.jXHR){
+              var jxhr = document.createElement('script');
+              jxhr.type = 'text/javascript';
+              jxhr.src = 'http://www.legendu.net/misc/theme/js/jXHR.js';
+              var s = document.getElementsByTagName('script')[0];
+              s.parentNode.insertBefore(jxhr, s);
+          }
+
+          github.showRepos({
+              user: 'dclong',
+              count: 3,
+              skip_forks: true,
+              target: '#gh_repos'
+          });
+      });
+    </script>
+    <script src="http://www.legendu.net/misc/theme/js/github.js" type="text/javascript"> </script>
+  </section>
+
+    <section>
+        <h1>Social</h2>
+        <ul>
+            <li><a href="https://www.linkedin.com/in/ben-chuanlong-du-1239b221/" target="_blank">LinkedIn</a></li>
+            <li><a href="https://twitter.com/longendu" target="_blank">Twitter</a></li>
+            <li><a href="https://www.facebook.com/chuanlong.du" target="_blank">Facebook</a></li>
+        <!--
+            <li><a href="http://www.legendu.net/misc/" type="application/rss+xml" rel="alternate">RSS</a></li>
+            -->
+        </ul>
+    </section>
+</aside>    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Ben Chuanlong Du -
+  <span class="credit">Powered by <a href="http://getpelican.com">Pelican</a></span>
+</p></footer>
+    <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-30259661-1']);
+    _gaq.push(['_trackPageview']);
+    (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+    </script>
+	<script type="text/javascript">
+	  var disqus_shortname = 'dclong';
+          var disqus_identifier = '/blog/virtualbox-tips/';
+          var disqus_url = 'http://www.legendu.net/misc/blog/virtualbox-tips/';
+          var disqus_title = 'Tips on Virtualbox';
+	  (function() {
+	    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	    dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+	    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	   })();
+	</script>
+</body>
+</html>

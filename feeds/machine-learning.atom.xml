@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Ben Chuanlong Du's Blog - Machine Learning</title><link href="http://www.legendu.net/misc/" rel="alternate"></link><link href="http://www.legendu.net/misc/feeds/machine-learning.atom.xml" rel="self"></link><id>http://www.legendu.net/misc/</id><updated>2018-06-24T21:51:21-07:00</updated><subtitle>It is never too late to learn.</subtitle><entry><title>H2O Tips</title><link href="http://www.legendu.net/misc/blog/h2o-tips/" rel="alternate"></link><published>2018-06-24T21:51:21-07:00</published><updated>2018-06-24T21:51:21-07:00</updated><author><name>Ben Chuanlong Du</name></author><id>tag:www.legendu.net,2018-06-24:/misc/blog/h2o-tips/</id><summary type="html">&lt;p&gt;&lt;strong&gt;
+Things on this page are
+fragmentary and immature notes/thoughts of the author.
+It is not meant to readers
+but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id="install-h2o-using-conda"&gt;Install H2O Using conda&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;conda&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="k"&gt;c&lt;/span&gt; &lt;span class="n"&gt;h2oai&lt;/span&gt; &lt;span class="n"&gt;h2o&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2 id="references"&gt;References&lt;/h2&gt;
+&lt;p&gt;http://docs.h2o.ai/h2o/latest-stable/h2o-docs/downloading.html&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;strong&gt;
+Things on this page are
+fragmentary and immature notes/thoughts of the author.
+It is not meant to readers
+but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id="install-h2o-using-conda"&gt;Install H2O Using conda&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;conda&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="k"&gt;c&lt;/span&gt; &lt;span class="n"&gt;h2oai&lt;/span&gt; &lt;span class="n"&gt;h2o&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2 id="references"&gt;References&lt;/h2&gt;
+&lt;p&gt;http://docs.h2o.ai/h2o/latest-stable/h2o-docs/downloading.html&lt;/p&gt;</content><category term="machine learning"></category><category term="H2O"></category><category term="software"></category><category term="framework"></category></entry><entry><title>NLTK Tips</title><link href="http://www.legendu.net/misc/blog/nltk%20tips/" rel="alternate"></link><published>2016-07-13T22:20:46-07:00</published><updated>2016-07-13T22:20:46-07:00</updated><author><name>Ben Chuanlong Du</name></author><id>tag:www.legendu.net,2016-07-13:/misc/blog/nltk tips/</id><summary type="html">&lt;p&gt;&lt;strong&gt;
+Things on this page are
+fragmentary and immature notes/thoughts of the author.
+It is not meant to readers
+but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;nltk.util.ngrams
+nltk.bigrams&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;nltk.util&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;ngrams&lt;/span&gt;
+&lt;span class="n"&gt;sentence&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;this is a foo bar sentences and i want …&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;&lt;strong&gt;
+Things on this page are
+fragmentary and immature notes/thoughts of the author.
+It is not meant to readers
+but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;nltk.util.ngrams
+nltk.bigrams&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;nltk.util&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;ngrams&lt;/span&gt;
+&lt;span class="n"&gt;sentence&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;this is a foo bar sentences and i want to ngramize it&amp;#39;&lt;/span&gt;
+&lt;span class="n"&gt;n&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;6&lt;/span&gt;
+&lt;span class="n"&gt;sixgrams&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;ngrams&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;sentence&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;split&lt;/span&gt;&lt;span class="p"&gt;(),&lt;/span&gt; &lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;grams&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;sixgrams&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+  &lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="n"&gt;grams&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;nltk.PorterStemmer&lt;/p&gt;</content><category term="machine learning"></category><category term="data mining"></category><category term="text mining"></category><category term="data science"></category><category term="NLP"></category></entry><entry><title>Keywords Extracting from Text</title><link href="http://www.legendu.net/misc/blog/keywords%20extracting%20from%20text/" rel="alternate"></link><published>2014-11-23T20:37:11-08:00</published><updated>2014-11-23T20:37:11-08:00</updated><author><name>Ben Chuanlong Du</name></author><id>tag:www.legendu.net,2014-11-23:/misc/blog/keywords extracting from text/</id><summary type="html">&lt;p&gt;&lt;strong&gt;
+Things on this page are
+fragmentary and immature notes/thoughts of the author.
+It is not meant to readers
+but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id="word-stemming"&gt;Word Stemming&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;existing stemming method such as NLTK.PorterStem, etc.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;didn't -&amp;gt; did not, there's -&amp;gt; there is, etc.
+Mr. -&amp;gt; Mister
+Mrs …&lt;/p&gt;&lt;/li&gt;&lt;/ol&gt;</summary><content type="html">&lt;p&gt;&lt;strong&gt;
+Things on this page are
+fragmentary and immature notes/thoughts of the author.
+It is not meant to readers
+but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id="word-stemming"&gt;Word Stemming&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;existing stemming method such as NLTK.PorterStem, etc.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;didn't -&amp;gt; did not, there's -&amp;gt; there is, etc.
+Mr. -&amp;gt; Mister
+Mrs. -&amp;gt; ...
+Ms. -&amp;gt; ...&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="other-things"&gt;Other things&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;it seems that it is hard to get useful information using 1-gram&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;URLs in text are often important and is relatively easy to extract. &lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;After handing URLs, you can replace "/" and "." with spaces to avoid confusing them with real long words.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;long words often contain useful information, 
+however, you have to be careful about  words of the form "and/or", etc.
+And do not confuse it with URLs.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;the idea of keeping upper/lower quantile (e.g., 5%) of long words, 2-grams, etc. is a very good idea&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;</content><category term="machine learning"></category><category term="text mining"></category><category term="data mining"></category><category term="data science"></category></entry></feed>

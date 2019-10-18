@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>VBA Tips</title>
+  <meta name="author" content="Ben Chuanlong Du">
+
+  <link href="http://www.legendu.net/misc/atom.xml" type="application/atom+xml" rel="alternate"
+        title="Ben Chuanlong Du's Blog Atom Feed" />
+
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link href="http://www.legendu.net/misc/favicon.png" rel="icon">
+  <link href="http://www.legendu.net/misc/theme/css/main_2.css" media="screen, projection"
+        rel="stylesheet" type="text/css">
+  <script src="http://www.legendu.net/misc/theme/js/modernizr-2.0.js"></script>
+  <script src="http://www.legendu.net/misc/theme/js/ender.js"></script>
+  <script src="http://www.legendu.net/misc/theme/js/octopress.js" type="text/javascript"></script>
+
+  <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+</head>
+
+<body>
+  <header role="banner"><hgroup>
+  <h1><a href="http://www.legendu.net/misc/">Ben Chuanlong Du's Blog</a></h1>
+    <h2>It is never too late to learn.</h2>
+</hgroup></header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="http://www.legendu.net/misc/atom.xml" rel="subscribe-rss">RSS</a></li>
+</ul>
+
+<form name="search" action="https://www.bing.com/search" method="get" onSubmit="return build_query()">
+  <fieldset role="search">
+      <!--
+    <input type="hidden" name="q" value="site:http://www.legendu.net/misc" />
+        -->
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+
+<script type = "text/javascript">
+    function build_query() {
+        var query = document.forms["search"]["q"].value;
+        var prefix = "site:http://www.legendu.net/misc "
+        if (!query.startsWith(prefix)) {
+            query = prefix + query;
+            document.forms["search"]["q"].value = query;
+        }
+        return true;
+    }
+</script>
+
+<ul class="main-navigation">
+    <li><a href="http://www.legendu.net">Home</a></li>
+    <li><a href="http://www.legendu.net/misc">Blog</a></li>
+    <li><a href="http://www.legendu.net/misc/archives.html">Archives</a></li>
+    <li><a href="http://www.legendu.net/misc/pages/links.html">Links</a></li>
+</ul></nav>
+  <div id="main">
+    <div id="content">
+<div>
+  <article class="hentry" role="article">
+<header>
+      <h1 class="entry-title">VBA Tips</h1>
+      <p class="meta"><time datetime="2014-11-07T04:44:03-08:00" pubdate>Nov 07, 2014</time></p>
+</header>
+
+  <div class="entry-content"><p><strong>
+Things on this page are 
+fragmentary and immature notes/thoughts of the author.
+It is not meant to readers 
+but rather for convenient reference of the author and future improvement.
+</strong></p>
+<h2 id="syntax">Syntax</h2>
+<ol>
+<li>In some programming languages, an ending semicolon is optional. 
+However, you cannot end statements with semicolons in VBA.</li>
+</ol>
+<h2 id="string">String</h2>
+<ol>
+<li>String must quoted by double quotation marks instead of single quotation marks.</li>
+</ol>
+<h2 id="array">Array</h2>
+<ol>
+<li>
+<p>By default, array or string comparion/search is 1-based in VBA.</p>
+</li>
+<li>
+<p>You must use pass an array by reference in VBA (use the keyword byref)</p>
+</li>
+<li>
+<p>UBound returns the upper bound (inclusive) of an array 
+and LBound gets the lower bound (inclusive) of an array.</p>
+</li>
+<li>
+<p>When you define an array in a usual way, 
+e.g., 
+<code>Dim arr(10) as Integer</code>,
+the array <code>arr</code> is 0-based (the default), 
+but the upper bound (10) is inclusive 
+which is different from most other programming languages (upper bound is pass-by-1).</p>
+</li>
+<li>
+<p>VBA use parentheses <code>()</code> for slicing arrays and array index starts from 1 by default in VBA.</p>
+</li>
+<li>
+<p>define a dynamic integer arrary</p>
+<div class="highlight"><pre><span></span><span class="n">Dim</span> <span class="n">Zombies</span><span class="p">()</span> <span class="k">As</span> <span class="nb">Integer</span>
+</pre></div>
+
+
+</li>
+</ol>
+<p>however, you have populate it using ReDim before you can use it</p>
+<h2 id="object">Object</h2>
+<ol>
+<li>
+<p>You can assign values to non-object variables directly (e.g., a = 3),
+however, you must assign values to an object variable using <code>set</code>.</p>
+</li>
+<li>
+<p>Selection is an object not a type.
+Selection of cells in Excel share many properties with the range object.</p>
+</li>
+</ol>
+<h3 id="range-object">Range Object</h3>
+<ol>
+<li>
+<p>The <code>Offset</code> method of the <code>Range</code> object counts from the top-left most cell. 
+        Range("A1").Offset(2,3).Value = 4</p>
+</li>
+<li>
+<p>You cannot do vector/matrix calculations directly on <code>Range</code> values.
+For example, <code>range.value + 1</code>, <code>range.value / 10</code>, etc. raise errors.
+However, you can use set a value for all cells in a range. 
+For example, <code>Range("A1:F5").value = 1</code>.</p>
+</li>
+<li>
+<p>prompt to select range</p>
+<div class="highlight"><pre><span></span><span class="nv">Set</span> <span class="nv">UserRange</span> <span class="o">=</span> <span class="nv">Application</span>.<span class="k">InputBox</span><span class="ss">(</span><span class="nv">Prompt</span>:<span class="o">=</span><span class="s2">&quot;</span><span class="s">Please Select Range</span><span class="s2">&quot;</span>, <span class="nv">Title</span>:<span class="o">=</span><span class="s2">&quot;</span><span class="s">Range Select</span><span class="s2">&quot;</span>, <span class="nv">Type</span>:<span class="o">=</span><span class="mi">8</span><span class="ss">)</span>
+</pre></div>
+
+
+</li>
+</ol>
+<p>If you want to the range to be highlighted after OK is clicked </p>
+<div class="highlight"><pre><span></span>    <span class="n">Application</span><span class="p">.</span><span class="k">GoTo</span> <span class="n">UserRange</span>
+</pre></div>
+
+
+<h2 id="misc">Misc</h2>
+<ol>
+<li>
+<p>You can either omit an optional argument of a function or leave it blank (i.e., pass a blank value to it) in VBA. </p>
+</li>
+<li>
+<p>There is no loop control statement such as next/continue, break, etc. in VBA. 
+You have to use the goto statement instead. 
+You can also use <code>Exit For</code>, <code>Exit Do</code> and <code>Exit While</code> as alternatives to <code>break</code>.
+You can use <code>Exit Sub</code> and <code>Exit Function</code> to exit subroutines and functions.</p>
+</li>
+<li>
+<p>Application.CountA: number of cells in the selected range.</p>
+</li>
+<li>
+<p>One way to call an Excel function is 
+to assign the Excel function as a formula to a cell 
+and then extract the value of the cell.
+Mostly of the time, 
+you can call an Excel function directly by <code>application.funname</code>. </p>
+</li>
+<li>
+<p>VBA uses parentheses to slice array, 
+which is the same as matlab 
+and different from most other programming languages 
+(which uses square brackets to slice array).</p>
+</li>
+</ol>
+<h2 id="error-handling">Error Handling</h2>
+<ol>
+<li>The <code>On Error GoTo line_label</code> trick for handling errors.
+<code>On Error GoTo 0</code> 
+turns off error handling.</li>
+</ol>
+<h2 id="tricks-and-traps">Tricks and Traps</h2>
+<ol>
+<li>Code that relies on selction/activation to work is considered harmful
+unless the selection/activation is temporary and absolutely won't cause problems.</li>
+</ol>
+<h2 id="user-defined-modulesfunctionssubroutinsmacro">User-defined Modules/Functions/Subroutins/Macro</h2>
+<ol>
+<li>
+<p>Subroutins in VBA perform actions but does not return any value 
+while a function can perform actions and return a value.
+You cannot change values of others cells in a function? <check it></p>
+</li>
+<li>
+<p>You'd better use modules instead of plain functions in code editor, 
+not sure about the difference</p>
+</li>
+<li>
+<p>You can run macro defined in another workbook</p>
+<div class="highlight"><pre><span></span><span class="nv">Private</span> <span class="nv">Sub</span> <span class="nv">Workbook_Open</span><span class="ss">()</span> 
+    <span class="nv">Workbooks</span>.<span class="nv">Open</span> <span class="s2">&quot;</span><span class="se">\\</span><span class="s">scsrv-03\mktgdata$\Adcopy\Ad Master2.xls</span><span class="s2">&quot;</span> 
+    <span class="nv">Application</span>.<span class="nv">Run</span> <span class="s2">&quot;</span><span class="s">&#39;Ad Master2.xls&#39;!DisplayBriefDetails</span><span class="s2">&quot;</span> 
+    <span class="nv">Workbooks</span><span class="ss">(</span><span class="s2">&quot;</span><span class="s">Ad Master2.xls</span><span class="s2">&quot;</span><span class="ss">)</span>.<span class="nv">Close</span> <span class="nv">True</span> 
+<span class="k">End</span> <span class="nv">Sub</span>
+</pre></div>
+
+
+</li>
+</ol></div>
+    <footer>
+<p class="meta">
+  <span class="byline author vcard">
+    Posted by <span class="fn">Ben Chuanlong Du</span>
+  </span>
+<time datetime="2014-11-07T04:44:03-08:00" pubdate>Nov 07, 2014</time>  <span class="categories">
+    <a class="category" href="http://www.legendu.net/misc/tag/programming.html">programming</a>
+    <a class="category" href="http://www.legendu.net/misc/tag/vba.html">VBA</a>
+    <a class="category" href="http://www.legendu.net/misc/tag/tips.html">tips</a>
+  </span>
+</p>    </footer>
+  </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div>
+  </section>
+</div>
+<aside class="sidebar">
+  <section>
+    <h1>Recent Posts</h1>
+    <ul id="recent_posts">
+      <li class="post">
+          <a href="http://www.legendu.net/misc/blog/python-tips/">Tips on Python</a>
+      </li>
+      <li class="post">
+          <a href="http://www.legendu.net/misc/blog/python-tips-and-traps/">Python Tips and Traps</a>
+      </li>
+      <li class="post">
+          <a href="http://www.legendu.net/misc/blog/exception-and-error-handling-in-python/">Exception and Error Handling in Python</a>
+      </li>
+      <li class="post">
+          <a href="http://www.legendu.net/misc/blog/ipython-tips/">Tips on IPython</a>
+      </li>
+      <li class="post">
+          <a href="http://www.legendu.net/misc/blog/tips-for-git-large-file-storage/">Tips for Git Large File Storage</a>
+      </li>
+    </ul>
+  </section>
+  <section>
+      
+    <h1>Categories</h1>
+    <ul id="recent_posts">
+        <li><a href="http://www.legendu.net/misc/category/ai.html">AI</a></li>
+        <li><a href="http://www.legendu.net/misc/category/career.html">Career</a></li>
+        <li><a href="http://www.legendu.net/misc/category/cloud.html">Cloud</a></li>
+        <li><a href="http://www.legendu.net/misc/category/database.html">Database</a></li>
+        <li><a href="http://www.legendu.net/misc/category/encryption.html">Encryption</a></li>
+        <li><a href="http://www.legendu.net/misc/category/english.html">English</a></li>
+        <li><a href="http://www.legendu.net/misc/category/finance.html">Finance</a></li>
+        <li><a href="http://www.legendu.net/misc/category/fun-problems.html">Fun Problems</a></li>
+        <li><a href="http://www.legendu.net/misc/category/hardware.html">Hardware</a></li>
+        <li><a href="http://www.legendu.net/misc/category/internet.html">Internet</a></li>
+        <li><a href="http://www.legendu.net/misc/category/job.html">Job</a></li>
+        <li><a href="http://www.legendu.net/misc/category/jupyterlab.html">JupyterLab</a></li>
+        <li><a href="http://www.legendu.net/misc/category/language.html">Language</a></li>
+        <li><a href="http://www.legendu.net/misc/category/life.html">Life</a></li>
+        <li><a href="http://www.legendu.net/misc/category/links.html">Links</a></li>
+        <li><a href="http://www.legendu.net/misc/category/linux.html">Linux</a></li>
+        <li><a href="http://www.legendu.net/misc/category/machine-learning.html">Machine Learning</a></li>
+        <li><a href="http://www.legendu.net/misc/category/macos.html">macOS</a></li>
+        <li><a href="http://www.legendu.net/misc/category/network.html">Network</a></li>
+        <li><a href="http://www.legendu.net/misc/category/os.html">OS</a></li>
+        <li><a href="http://www.legendu.net/misc/category/people.html">People</a></li>
+        <li><a href="http://www.legendu.net/misc/category/philosophy.html">Philosophy</a></li>
+        <li><a href="http://www.legendu.net/misc/category/programming.html">Programming</a></li>
+        <li><a href="http://www.legendu.net/misc/category/research.html">Research</a></li>
+        <li><a href="http://www.legendu.net/misc/category/sheng-huo.html">生活</a></li>
+        <li><a href="http://www.legendu.net/misc/category/si-suo.html">思索</a></li>
+        <li><a href="http://www.legendu.net/misc/category/software.html">Software</a></li>
+        <li><a href="http://www.legendu.net/misc/category/statistics.html">Statistics</a></li>
+        <li><a href="http://www.legendu.net/misc/category/teleconference.html">Teleconference</a></li>
+        <li><a href="http://www.legendu.net/misc/category/tools.html">Tools</a></li>
+        <li><a href="http://www.legendu.net/misc/category/trading.html">Trading</a></li>
+        <li><a href="http://www.legendu.net/misc/category/unix.html">Unix</a></li>
+        <li><a href="http://www.legendu.net/misc/category/visualization.html">Visualization</a></li>
+        <li><a href="http://www.legendu.net/misc/category/windows.html">Windows</a></li>
+        <li><a href="http://www.legendu.net/misc/category/work.html">Work</a></li>
+    </ul>
+  </section>
+ 
+
+  <section>
+  <h1>Tags</h1>
+  <p class="tagcloud">
+  </p>
+  </section>
+
+
+
+  <section>
+    <h1>GitHub Repos</h1>
+    <ul id="gh_repos">
+      <li class="loading">Status updating...</li>
+    </ul>
+      <a href="https://github.com/dclong">@dclong</a> on GitHub
+    <script type="text/javascript">
+      $.domReady(function(){
+          if (!window.jXHR){
+              var jxhr = document.createElement('script');
+              jxhr.type = 'text/javascript';
+              jxhr.src = 'http://www.legendu.net/misc/theme/js/jXHR.js';
+              var s = document.getElementsByTagName('script')[0];
+              s.parentNode.insertBefore(jxhr, s);
+          }
+
+          github.showRepos({
+              user: 'dclong',
+              count: 3,
+              skip_forks: true,
+              target: '#gh_repos'
+          });
+      });
+    </script>
+    <script src="http://www.legendu.net/misc/theme/js/github.js" type="text/javascript"> </script>
+  </section>
+
+    <section>
+        <h1>Social</h2>
+        <ul>
+            <li><a href="https://www.linkedin.com/in/ben-chuanlong-du-1239b221/" target="_blank">LinkedIn</a></li>
+            <li><a href="https://twitter.com/longendu" target="_blank">Twitter</a></li>
+            <li><a href="https://www.facebook.com/chuanlong.du" target="_blank">Facebook</a></li>
+        <!--
+            <li><a href="http://www.legendu.net/misc/" type="application/rss+xml" rel="alternate">RSS</a></li>
+            -->
+        </ul>
+    </section>
+</aside>    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Ben Chuanlong Du -
+  <span class="credit">Powered by <a href="http://getpelican.com">Pelican</a></span>
+</p></footer>
+    <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-30259661-1']);
+    _gaq.push(['_trackPageview']);
+    (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+    </script>
+	<script type="text/javascript">
+	  var disqus_shortname = 'dclong';
+          var disqus_identifier = '/blog/vba-tips/';
+          var disqus_url = 'http://www.legendu.net/misc/blog/vba-tips/';
+          var disqus_title = 'VBA Tips';
+	  (function() {
+	    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	    dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+	    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	   })();
+	</script>
+</body>
+</html>

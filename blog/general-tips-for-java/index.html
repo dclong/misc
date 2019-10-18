@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>General Tips for Java</title>
+  <meta name="author" content="Ben Chuanlong Du">
+
+  <link href="http://www.legendu.net/misc/atom.xml" type="application/atom+xml" rel="alternate"
+        title="Ben Chuanlong Du's Blog Atom Feed" />
+
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link href="http://www.legendu.net/misc/favicon.png" rel="icon">
+  <link href="http://www.legendu.net/misc/theme/css/main_2.css" media="screen, projection"
+        rel="stylesheet" type="text/css">
+  <script src="http://www.legendu.net/misc/theme/js/modernizr-2.0.js"></script>
+  <script src="http://www.legendu.net/misc/theme/js/ender.js"></script>
+  <script src="http://www.legendu.net/misc/theme/js/octopress.js" type="text/javascript"></script>
+
+  <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+</head>
+
+<body>
+  <header role="banner"><hgroup>
+  <h1><a href="http://www.legendu.net/misc/">Ben Chuanlong Du's Blog</a></h1>
+    <h2>It is never too late to learn.</h2>
+</hgroup></header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="http://www.legendu.net/misc/atom.xml" rel="subscribe-rss">RSS</a></li>
+</ul>
+
+<form name="search" action="https://www.bing.com/search" method="get" onSubmit="return build_query()">
+  <fieldset role="search">
+      <!--
+    <input type="hidden" name="q" value="site:http://www.legendu.net/misc" />
+        -->
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+
+<script type = "text/javascript">
+    function build_query() {
+        var query = document.forms["search"]["q"].value;
+        var prefix = "site:http://www.legendu.net/misc "
+        if (!query.startsWith(prefix)) {
+            query = prefix + query;
+            document.forms["search"]["q"].value = query;
+        }
+        return true;
+    }
+</script>
+
+<ul class="main-navigation">
+    <li><a href="http://www.legendu.net">Home</a></li>
+    <li><a href="http://www.legendu.net/misc">Blog</a></li>
+    <li><a href="http://www.legendu.net/misc/archives.html">Archives</a></li>
+    <li><a href="http://www.legendu.net/misc/pages/links.html">Links</a></li>
+</ul></nav>
+  <div id="main">
+    <div id="content">
+<div>
+  <article class="hentry" role="article">
+<header>
+      <h1 class="entry-title">General Tips for Java</h1>
+      <p class="meta"><time datetime="2016-11-20T19:19:03-08:00" pubdate>Nov 20, 2016</time></p>
+</header>
+
+  <div class="entry-content"><h2 id="package-dependency-management">Package Dependency Management</h2>
+<ol>
+<li>It is suggested that you use gradle (instead of maven or sbt) for JVM projects.</li>
+</ol>
+<h2 id="jvm-profiler">JVM Profiler</h2>
+<ol>
+<li><a href="https://plugins.jetbrains.com/plugin/7115-visualvm-launcher">VisualVM</a>
+    is a free JVM profiling tool. 
+    There is also a plugin 
+    <a href="https://plugins.jetbrains.com/plugin/7115-visualvm-launcher">VisualVM Launcher</a>
+    which integrates it with IntelliJ IDEA.</li>
+</ol>
+<h2 id="containers">Containers</h2>
+<ol>
+<li>You can use <code>Arrays.fill</code> to set a value to all elements of an array at once.</li>
+</ol>
+<h2 id="code-flow-control">Code Flow Control</h2>
+<ol>
+<li>
+<p>To jump out a single loop, 
+    you can use statement <code>break;</code>. 
+    However, this doesn't work if there're nest loops. 
+    To jump out nested loops,
+    you can modify the loop variables so that the conditions of all loops are violated.</p>
+</li>
+<li>
+<p>There is not <code>goto</code> statement in Java, 
+    however you have several ways to make the program in Java jump to other place.</p>
+<ul>
+<li>
+<p>The <code>break</code> and <code>continue</code> statements allow you 
+    to jump out of a block in a loop or switch statement.</p>
+</li>
+<li>
+<p>A labeled statement and <code>break label;</code> allow you 
+    to jump out of an arbitrary compound statement 
+    to any level within a given method (or initializer block).</p>
+</li>
+</ul>
+</li>
+<li>
+<p>For multi-threads programs in Java, 
+    it is hard to debug the whole program directly. 
+    To make sure that the program works, 
+    you can test each class in the program 
+    by writing a testing class for each of them.</p>
+<ul>
+<li>
+<p>Throwing and catching exceptions allows you 
+    to (effectively) jump out of many levels of method call. 
+    However, exceptions is relatively expensive 
+    and are considered to be a bad way to do "ordinary" control flow.)</p>
+</li>
+<li>
+<p>And of course, there is <code>return</code>.</p>
+</li>
+</ul>
+</li>
+</ol>
+<h2 id="keyword-final">Keyword <code>final</code></h2>
+<ol>
+<li>
+<p>Even if you make an object <code>final</code>, 
+    you might still be able to mutate it. 
+    This is because <code>final</code> describes the name of the object,
+    which means that the variable cannot point to a new address, 
+    but the content of the address (where the variable points to) might still be changed. 
+    For example, if you define </p>
+<div class="highlight"><pre><span></span> <span class="o">`</span><span class="k">public</span> <span class="k">final</span> <span class="nb">int</span><span class="p">[]</span> <span class="n">a</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">int</span><span class="p">[</span><span class="mi">10</span><span class="p">]</span><span class="o">`</span>
+</pre></div>
+
+
+<p>you cannot point <code>a</code> to another address, 
+but you are still able to change the elements of <code>a</code>, 
+i.e., you're able to change the value of <code>a[i]</code> for $i=0,\ldots,9`). 
+This is one reason that defensive copy is preferred when you pass around a mutable object. 
+Generally speaking, defensive copy is preferred if it doesn't affect performance badly. 
+Also, if a getter method returns a mutable object, 
+you'd better make a defensive copy.</p>
+</li>
+<li>
+<p>You can use the <code>final</code> keyword to tell the compiler that an object won't be reassigned value.
+    This guarantees that a primitive variable marked as <code>final</code> is a constant.
+    But there is no guarantee that an object marked as <code>final</code> is a constant. 
+    You cannot reassign value to the object but you might still be able to change its internal content.
+    For example, the the object is an ArrayList, 
+    you can still change its elements.<br>
+    Notice that the <code>const</code> keyword is reserve but not used in Java.</p>
+</li>
+</ol>
+<h2 id="print-and-log">Print and Log</h2>
+<ol>
+<li>
+<p>Always print some indicating information to the console 
+    when you expect some input from the console. 
+    Otherwise, 
+    you when you run the application, 
+    it waits for your input but you might think that it's not running. 
+    Also if you do an intensive computing in Java, 
+    you'd better print the progress (if you can) to the console. 
+    At least you should print message to the console after the simulation is done!</p>
+</li>
+<li>
+<p>In many programming languages, 
+    you can print out more than one variables (not necessarily the same type) at a time. 
+    In Java, 
+    the method <code>println()</code> (or other similar methods) of <code>System.out</code> 
+    can only accept one parameter. 
+    However, you can concatenate different variables as a string 
+    and print out the string.</p>
+</li>
+</ol>
+<h2 id="operators">Operators</h2>
+<ol>
+<li>
+<p>There are many operators in C/C++ 
+    which makes operations faster and calculation faster, 
+    e.g. <code>++</code>, <code>–</code>, <code>+=</code>, <code>\*=</code>, and so on. 
+    Similarly to C/C++, you can also use them in Java. 
+    Specially, for the increase (<code>++</code>) and decrease <code>–</code> operator, 
+    you can use them both before and after numerical variables in Java.</p>
+<p>you can throw out exceptions, 
+or you can use method <code>System.err.println()</code> to print error information 
+to the console and end the program.</p>
+</li>
+</ol>
+<h2 id="misc">Misc</h2>
+<ol>
+<li>
+<p><code>getClass</code> returns the RUNTIME class of the object not the declared type!</p>
+</li>
+<li>
+<p><code>Objects.hash</code> can be used to create hash code for an object easily.</p>
+</li>
+<li>
+<p><code>Double.compare</code> is the recommended way to compare whether 2 double values are equal.</p>
+</li>
+<li>
+<p>Since you do not have to assign the returned value of method to any object in Java, 
+    you can use any method as if it is a <code>void</code> method.
+    This means that for any method that is <code>void</code> it does not hurt 
+    to declare it as a method that returns some object (or primitive type value). 
+    Actually this might be very convenient sometimes, 
+    because by doing so you can do the operation you want 
+    and at the time you have extra information about the operation. 
+    For example, 
+    if you want to insert a value to a sorted array, 
+    you can make the method return an integer which is the index of the inserted place. 
+    This extra information (the index of the inserted place) is highly useful in may cases.</p>
+</li>
+<li>
+<p>It is expensive to allocating a new block of memory 
+    (not only in Java but also in other languages), 
+    so you should avoid allocating new block of memory all the time. 
+    If it is impossible to avoid allocating memory, 
+    you can allocate a bigger memory than needed each time. 
+    In this way, you waste some space, but might save much time.</p>
+</li>
+<li>
+<p>Method <code>getClass</code> can return the class of an object.</p>
+</li>
+<li>
+<p>If you have an array of objects of some super class, 
+    you can cast the whole array to sub class at once. 
+    However, usually you cannot cast all elements of an array at a time. 
+    For example, 
+    if you have an array of <code>double</code>, 
+    you cannot cast the whole array into <code>int</code> at a time.
+    Instead, you must cast each element one by one.</p>
+</li>
+<li>
+<p>If you want let the compiler know that a number you use in your code
+    is a double precision number you can add suffix <code>d</code> to the number.
+    For example if you want to do double precision calculation for <code>3 / 6</code>, 
+    you can write it as <code>3 / 6d</code> instead of casting integer to
+    double using <code>(double)</code>.</p>
+</li>
+<li>
+<p>Avoid using a local variable which has the same name as an instance variable.</p>
+</li>
+</ol>
+<h2 id="eclipse-for-java">Eclipse for Java</h2>
+<ol>
+<li>You can use <code>format</code> button under <code>source</code> menu to tidy the code.</li>
+</ol></div>
+    <footer>
+<p class="meta">
+  <span class="byline author vcard">
+    Posted by <span class="fn">Ben Chuanlong Du</span>
+  </span>
+<time datetime="2016-11-20T19:19:03-08:00" pubdate>Nov 20, 2016</time>  <span class="categories">
+    <a class="category" href="http://www.legendu.net/misc/tag/tips.html">tips</a>
+    <a class="category" href="http://www.legendu.net/misc/tag/programming.html">programming</a>
+    <a class="category" href="http://www.legendu.net/misc/tag/java.html">Java</a>
+  </span>
+</p>    </footer>
+  </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div>
+  </section>
+</div>
+<aside class="sidebar">
+  <section>
+    <h1>Recent Posts</h1>
+    <ul id="recent_posts">
+      <li class="post">
+          <a href="http://www.legendu.net/misc/blog/python-tips/">Tips on Python</a>
+      </li>
+      <li class="post">
+          <a href="http://www.legendu.net/misc/blog/python-tips-and-traps/">Python Tips and Traps</a>
+      </li>
+      <li class="post">
+          <a href="http://www.legendu.net/misc/blog/exception-and-error-handling-in-python/">Exception and Error Handling in Python</a>
+      </li>
+      <li class="post">
+          <a href="http://www.legendu.net/misc/blog/ipython-tips/">Tips on IPython</a>
+      </li>
+      <li class="post">
+          <a href="http://www.legendu.net/misc/blog/tips-for-git-large-file-storage/">Tips for Git Large File Storage</a>
+      </li>
+    </ul>
+  </section>
+  <section>
+      
+    <h1>Categories</h1>
+    <ul id="recent_posts">
+        <li><a href="http://www.legendu.net/misc/category/ai.html">AI</a></li>
+        <li><a href="http://www.legendu.net/misc/category/career.html">Career</a></li>
+        <li><a href="http://www.legendu.net/misc/category/cloud.html">Cloud</a></li>
+        <li><a href="http://www.legendu.net/misc/category/database.html">Database</a></li>
+        <li><a href="http://www.legendu.net/misc/category/encryption.html">Encryption</a></li>
+        <li><a href="http://www.legendu.net/misc/category/english.html">English</a></li>
+        <li><a href="http://www.legendu.net/misc/category/finance.html">Finance</a></li>
+        <li><a href="http://www.legendu.net/misc/category/fun-problems.html">Fun Problems</a></li>
+        <li><a href="http://www.legendu.net/misc/category/hardware.html">Hardware</a></li>
+        <li><a href="http://www.legendu.net/misc/category/internet.html">Internet</a></li>
+        <li><a href="http://www.legendu.net/misc/category/job.html">Job</a></li>
+        <li><a href="http://www.legendu.net/misc/category/jupyterlab.html">JupyterLab</a></li>
+        <li><a href="http://www.legendu.net/misc/category/language.html">Language</a></li>
+        <li><a href="http://www.legendu.net/misc/category/life.html">Life</a></li>
+        <li><a href="http://www.legendu.net/misc/category/links.html">Links</a></li>
+        <li><a href="http://www.legendu.net/misc/category/linux.html">Linux</a></li>
+        <li><a href="http://www.legendu.net/misc/category/machine-learning.html">Machine Learning</a></li>
+        <li><a href="http://www.legendu.net/misc/category/macos.html">macOS</a></li>
+        <li><a href="http://www.legendu.net/misc/category/network.html">Network</a></li>
+        <li><a href="http://www.legendu.net/misc/category/os.html">OS</a></li>
+        <li><a href="http://www.legendu.net/misc/category/people.html">People</a></li>
+        <li><a href="http://www.legendu.net/misc/category/philosophy.html">Philosophy</a></li>
+        <li><a href="http://www.legendu.net/misc/category/programming.html">Programming</a></li>
+        <li><a href="http://www.legendu.net/misc/category/research.html">Research</a></li>
+        <li><a href="http://www.legendu.net/misc/category/sheng-huo.html">生活</a></li>
+        <li><a href="http://www.legendu.net/misc/category/si-suo.html">思索</a></li>
+        <li><a href="http://www.legendu.net/misc/category/software.html">Software</a></li>
+        <li><a href="http://www.legendu.net/misc/category/statistics.html">Statistics</a></li>
+        <li><a href="http://www.legendu.net/misc/category/teleconference.html">Teleconference</a></li>
+        <li><a href="http://www.legendu.net/misc/category/tools.html">Tools</a></li>
+        <li><a href="http://www.legendu.net/misc/category/trading.html">Trading</a></li>
+        <li><a href="http://www.legendu.net/misc/category/unix.html">Unix</a></li>
+        <li><a href="http://www.legendu.net/misc/category/visualization.html">Visualization</a></li>
+        <li><a href="http://www.legendu.net/misc/category/windows.html">Windows</a></li>
+        <li><a href="http://www.legendu.net/misc/category/work.html">Work</a></li>
+    </ul>
+  </section>
+ 
+
+  <section>
+  <h1>Tags</h1>
+  <p class="tagcloud">
+  </p>
+  </section>
+
+
+
+  <section>
+    <h1>GitHub Repos</h1>
+    <ul id="gh_repos">
+      <li class="loading">Status updating...</li>
+    </ul>
+      <a href="https://github.com/dclong">@dclong</a> on GitHub
+    <script type="text/javascript">
+      $.domReady(function(){
+          if (!window.jXHR){
+              var jxhr = document.createElement('script');
+              jxhr.type = 'text/javascript';
+              jxhr.src = 'http://www.legendu.net/misc/theme/js/jXHR.js';
+              var s = document.getElementsByTagName('script')[0];
+              s.parentNode.insertBefore(jxhr, s);
+          }
+
+          github.showRepos({
+              user: 'dclong',
+              count: 3,
+              skip_forks: true,
+              target: '#gh_repos'
+          });
+      });
+    </script>
+    <script src="http://www.legendu.net/misc/theme/js/github.js" type="text/javascript"> </script>
+  </section>
+
+    <section>
+        <h1>Social</h2>
+        <ul>
+            <li><a href="https://www.linkedin.com/in/ben-chuanlong-du-1239b221/" target="_blank">LinkedIn</a></li>
+            <li><a href="https://twitter.com/longendu" target="_blank">Twitter</a></li>
+            <li><a href="https://www.facebook.com/chuanlong.du" target="_blank">Facebook</a></li>
+        <!--
+            <li><a href="http://www.legendu.net/misc/" type="application/rss+xml" rel="alternate">RSS</a></li>
+            -->
+        </ul>
+    </section>
+</aside>    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Ben Chuanlong Du -
+  <span class="credit">Powered by <a href="http://getpelican.com">Pelican</a></span>
+</p></footer>
+    <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-30259661-1']);
+    _gaq.push(['_trackPageview']);
+    (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+    </script>
+	<script type="text/javascript">
+	  var disqus_shortname = 'dclong';
+          var disqus_identifier = '/blog/general-tips-for-java/';
+          var disqus_url = 'http://www.legendu.net/misc/blog/general-tips-for-java/';
+          var disqus_title = 'General Tips for Java';
+	  (function() {
+	    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	    dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+	    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	   })();
+	</script>
+</body>
+</html>

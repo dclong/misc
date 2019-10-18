@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Ben Chuanlong Du's Blog - Database</title><link href="http://www.legendu.net/misc/" rel="alternate"></link><link href="http://www.legendu.net/misc/feeds/database.atom.xml" rel="self"></link><id>http://www.legendu.net/misc/</id><updated>2019-08-08T21:51:10-07:00</updated><subtitle>It is never too late to learn.</subtitle><entry><title>Data Quality</title><link href="http://www.legendu.net/misc/blog/data-quality/" rel="alternate"></link><published>2019-08-08T21:51:10-07:00</published><updated>2019-08-08T21:51:10-07:00</updated><author><name>Benjamin Du</name></author><id>tag:www.legendu.net,2019-08-08:/misc/blog/data-quality/</id><summary type="html">&lt;p&gt;&lt;strong&gt;
+Things on this page are fragmentary and immature notes/thoughts of the author.
+It is not meant to readers but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Upper and lower bounds tests and Inter Quartile Range Checks(IQR) and standard deviations&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Aggregate level checks (after manipulating data …&lt;/p&gt;&lt;/li&gt;&lt;/ul&gt;</summary><content type="html">&lt;p&gt;&lt;strong&gt;
+Things on this page are fragmentary and immature notes/thoughts of the author.
+It is not meant to readers but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Upper and lower bounds tests and Inter Quartile Range Checks(IQR) and standard deviations&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Aggregate level checks (after manipulating data, there should still be the ability to explain how the data aggregates back to the previous data set)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Tracking percentage of nulls and dropped columns (Define what is an acceptable amount)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Data Type Checks (This should be done earlier at the application level, as well as data value constraints e.g. WA is a state abbreviation KZ is not)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Tracking Data Inserts&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Wherever data comes from, whether it is flat files, IPs, users, etc. This should all be tracked. Especially if it is specific files. 
+    If your team finds out that the data from a specific file was inaccurate. 
+    Then it would want to remove it. If you have tracked what file the data came from, this is easy.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="useful-libraries"&gt;Useful Libraries&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;a href="https://github.com/ironmussa/Optimus"&gt;Optimus&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Optimus is the one that is closest to what I want to achieve so far. 
+Looks promissing.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;a href="https://github.com/apache/griffin"&gt;Apache Griffin&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Apache Griffin supports data profiling but seems to be heavy and limited.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;a href="https://github.com/datacleaner/DataCleaner"&gt;DataCleaner&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;A GUI tool for data cleaning, profiling ,etc.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="https://github.com/arrahtech/osdq-spark"&gt;osdq-spark&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="https://www.talend.com/products/data-quality/data-quality-open-studio/"&gt;Open Stduio for Data Quality&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;athena &lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="https://github.com/SauceCat/pydqc"&gt;pydqc&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="https://github.com/kenfar/DataGristle"&gt;DataGristle&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="commercial-solutions"&gt;Commercial Solutions&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;a href="https://www.trifacta.com/"&gt;Trifacta&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="books"&gt;Books&lt;/h2&gt;
+&lt;p&gt;Python Business Intelligence Bookbook&lt;/p&gt;
+&lt;h2 id="references"&gt;References&lt;/h2&gt;
+&lt;p&gt;https://towardsdatascience.com/introducing-pydqc-7f23d04076b3&lt;/p&gt;
+&lt;p&gt;https://medium.com/@SeattleDataGuy/good-data-quality-is-key-for-great-data-science-and-analytics-ccfa18d0fff8&lt;/p&gt;
+&lt;p&gt;https://dzone.com/articles/java-amp-apache-spark-for-data-quality-amp-validat&lt;/p&gt;</content><category term="database"></category><category term="big data"></category><category term="data quality"></category><category term="data check"></category><category term="data profiling"></category></entry><entry><title>JSON Tips</title><link href="http://www.legendu.net/misc/blog/json-tips/" rel="alternate"></link><published>2019-05-02T22:41:41-07:00</published><updated>2019-05-02T22:41:41-07:00</updated><author><name>Ben Chuanlong Du</name></author><id>tag:www.legendu.net,2019-05-02:/misc/blog/json-tips/</id><summary type="html">&lt;p&gt;&lt;strong&gt;
+Things on this page are
+fragmentary and immature notes/thoughts of the author.
+It is not meant to readers
+but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Empty rows are not allowed in a list in JSON.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="references"&gt;References&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="http://www.jquery4u.com/json/10-online-json-tools/"&gt;Jason&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;http://json-schema.org/implementations.html&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;strong&gt;
+Things on this page are
+fragmentary and immature notes/thoughts of the author.
+It is not meant to readers
+but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Empty rows are not allowed in a list in JSON.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="references"&gt;References&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="http://www.jquery4u.com/json/10-online-json-tools/"&gt;Jason&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;http://json-schema.org/implementations.html&lt;/p&gt;</content><category term="database"></category><category term="JSON"></category><category term="tips"></category></entry><entry><title>MySQL Tips</title><link href="http://www.legendu.net/misc/blog/mysql-tips/" rel="alternate"></link><published>2017-05-24T20:24:47-07:00</published><updated>2017-05-24T20:24:47-07:00</updated><author><name>Ben Chuanlong Du</name></author><id>tag:www.legendu.net,2017-05-24:/misc/blog/mysql-tips/</id><summary type="html">&lt;p&gt;&lt;strong&gt;
+Things on this page are
+fragmentary and immature notes/thoughts of the author.
+It is not meant to readers
+but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo service mysql restart
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;mysqladmin -u root -p variables &lt;span class="p"&gt;|&lt;/span&gt; grep port
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;&lt;code&gt;mysqladmin --help&lt;/code&gt; list the locations of &lt;code&gt;my.cnf&lt;/code&gt;.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;mysqladmin …&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;&lt;strong&gt;
+Things on this page are
+fragmentary and immature notes/thoughts of the author.
+It is not meant to readers
+but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo service mysql restart
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;mysqladmin -u root -p variables &lt;span class="p"&gt;|&lt;/span&gt; grep port
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;&lt;code&gt;mysqladmin --help&lt;/code&gt; list the locations of &lt;code&gt;my.cnf&lt;/code&gt;.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;mysqladmin --help
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2 id="python-packages"&gt;Python Packages&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;peewee&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;PyMySQL&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;MySQLdb&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;</content><category term="Database"></category><category term="programming"></category><category term="tips"></category><category term="MySQL"></category><category term="Python"></category></entry></feed>

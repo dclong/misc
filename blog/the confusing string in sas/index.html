@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>The Confusing String in SAS</title>
+  <meta name="author" content="Ben Chuanlong Du">
+
+  <link href="http://www.legendu.net/misc/atom.xml" type="application/atom+xml" rel="alternate"
+        title="Ben Chuanlong Du's Blog Atom Feed" />
+
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link href="http://www.legendu.net/misc/favicon.png" rel="icon">
+  <link href="http://www.legendu.net/misc/theme/css/main_2.css" media="screen, projection"
+        rel="stylesheet" type="text/css">
+  <script src="http://www.legendu.net/misc/theme/js/modernizr-2.0.js"></script>
+  <script src="http://www.legendu.net/misc/theme/js/ender.js"></script>
+  <script src="http://www.legendu.net/misc/theme/js/octopress.js" type="text/javascript"></script>
+
+  <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+</head>
+
+<body>
+  <header role="banner"><hgroup>
+  <h1><a href="http://www.legendu.net/misc/">Ben Chuanlong Du's Blog</a></h1>
+    <h2>It is never too late to learn.</h2>
+</hgroup></header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="http://www.legendu.net/misc/atom.xml" rel="subscribe-rss">RSS</a></li>
+</ul>
+
+<form name="search" action="https://www.bing.com/search" method="get" onSubmit="return build_query()">
+  <fieldset role="search">
+      <!--
+    <input type="hidden" name="q" value="site:http://www.legendu.net/misc" />
+        -->
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+
+<script type = "text/javascript">
+    function build_query() {
+        var query = document.forms["search"]["q"].value;
+        var prefix = "site:http://www.legendu.net/misc "
+        if (!query.startsWith(prefix)) {
+            query = prefix + query;
+            document.forms["search"]["q"].value = query;
+        }
+        return true;
+    }
+</script>
+
+<ul class="main-navigation">
+    <li><a href="http://www.legendu.net">Home</a></li>
+    <li><a href="http://www.legendu.net/misc">Blog</a></li>
+    <li><a href="http://www.legendu.net/misc/archives.html">Archives</a></li>
+    <li><a href="http://www.legendu.net/misc/pages/links.html">Links</a></li>
+</ul></nav>
+  <div id="main">
+    <div id="content">
+<div>
+  <article class="hentry" role="article">
+<header>
+      <h1 class="entry-title">The Confusing String in SAS</h1>
+      <p class="meta"><time datetime="2015-08-28T16:55:06-07:00" pubdate>Aug 28, 2015</time></p>
+</header>
+
+  <div class="entry-content"><p><strong>
+Things on this page are
+fragmentary and immature notes/thoughts of the author.
+It is not meant to readers
+but rather for convenient reference of the author and future improvement.
+</strong></p>
+<ol>
+<li>
+<p>the <code>min</code> function also works on string variables.</p>
+</li>
+<li>
+<p>A missing character in SAS is represented by any number of white spaces. 
+To see more detailed discussion on missing values, 
+please refer to the post 
+<a href="http://www.legendu.net/en/blog/missing-values-in-sas/">Missing Values in SAS</a>.</p>
+</li>
+<li>
+<p>In the data step characters and number are implicitly converted to each other when necessary.
+However, 
+this is not the case in <code>proc iml</code>.
+You have to use the <code>char</code> function to convert number to string in the <code>iml</code> procedure.</p>
+</li>
+</ol>
+<p>the convert of dot and blank values? ...
+if I remember correctly,
+A missing character value (any number of white spaces) becomes a missing numeric value (<code>.</code>) 
+when converted to numeric. 
+However,
+a missing numeric value (<code>.</code>) becomes <code>"."</code> when converted to character.
+The inconsistent behavior here is annoying.</p>
+<ol>
+<li>When you define a variable in SAS, 
+it has a fixed length (no matter it is numeric or character). 
+Things can be really tricky for (fixed length) character variables.
+Suppose we have a string variable <code>s</code>. 
+If you concatenate <code>s</code> (using <code>||</code> or <code>cat</code>) with another string 
+and assign it back to <code>s</code> as illustrated below</li>
+</ol>
+<div class="highlight"><pre><span></span>s = cat(s, <span class="s">&quot;another string&quot;</span>);
+</pre></div>
+
+
+<p>you will find that the value of <code>s</code> is not changed. 
+This is caused by the fact that a string in SAS has a fixed length. 
+The value of a string variable is always truncated/padded to meet the length requirement.
+When you assign 
+<code>cat(s, "another string")</code> 
+to <code>s</code> the concatenated part is truncated, 
+so the value <code>s</code> stays the same.
+To avoid this problem, 
+you should always remove leading and trailing white spaces (using <code>strip</code>)in string variables 
+before concatenating them unless you know what you are doing.
+There is a function <code>catx</code> in SAS, 
+which automatically strips string variables before concatenating them.
+Another tricky issue caused by this is when you convert between numeric and character values. 
+Always strip a value/variable before you convert it to the other type. </p>
+<ol>
+<li>
+<p>The use of string in SAS is a little bit confusing. 
+Some rules of them are summarized below.</p>
+<ul>
+<li>You should not use single/double quotation marks in macro 
+(i.e., outside the data step and procedures) 
+except for numbers represented using string (e.g., '01aug11'd) 
+or literal quotations marks. 
+This is because that macros are essentially string.
+For example, 
+you should not quote <code>month</code> in the following code, 
+however, 
+you must quote <code>08aug2013</code>.  </li>
+</ul>
+</li>
+</ol>
+<div class="highlight"><pre><span></span><span class="nb">%let</span> alertdatestr= <span class="nb">%sysfunc</span>(<span class="nb">compress(%sysfunc</span>(<span class="nb">putn(%eval</span>(<span class="nb">%sysfunc</span>(<span class="nb">intnx(</span>month, <span class="s">&#39;08aug2013&#39;</span>d, <span class="m">0</span>))), YYMMDD10.)),<span class="s">&#39;-&#39;</span>));<span class="k"></span>
+<span class="k">%put </span><span class="nv">&amp;alertdatestr</span><span class="err">;</span>
+</pre></div>
+
+
+<div class="highlight"><pre><span></span><span class="o">-</span> <span class="nv">You</span> <span class="nv">have</span> <span class="nv">to</span> <span class="nv">use</span> <span class="nv">single</span><span class="o">/</span><span class="nv">double</span> <span class="nv">quotation</span> <span class="nv">marks</span> 
+<span class="k">for</span> <span class="nv">strings</span> <span class="ss">(</span><span class="nv">including</span> <span class="nv">informat</span><span class="o">/</span><span class="nv">outformat</span><span class="ss">)</span> <span class="nv">inside</span> <span class="nv">data</span> <span class="nv">steps</span> <span class="nv">or</span> <span class="nv">procedures</span>.
+<span class="nv">However</span>, <span class="nv">informat</span><span class="o">/</span><span class="nv">outformat</span> <span class="ss">(</span><span class="nv">e</span>.<span class="nv">g</span>., `<span class="nv">date9</span>.`, `<span class="nv">datetime19</span>.`, <span class="nv">etc</span>.<span class="ss">)</span> 
+<span class="nv">in</span> <span class="nv">a</span> `<span class="nv">put</span>`, `<span class="o">%</span><span class="nv">put</span>` <span class="nv">statement</span> <span class="nv">should</span> <span class="nv">not</span> <span class="nv">be</span> <span class="nv">quoted</span>.
+<span class="k">For</span> <span class="nv">example</span>, 
+<span class="nv">you</span> <span class="nv">must</span> <span class="nv">quote</span> `<span class="nv">week</span>` <span class="nv">in</span> <span class="nv">the</span> <span class="nv">following</span> <span class="nv">code</span>. 
+<span class="nv">However</span>, <span class="nv">pay</span> <span class="nv">attention</span> <span class="nv">to</span> <span class="nv">when</span> `<span class="nv">date9</span>.` <span class="nv">should</span> <span class="nv">be</span> <span class="nv">quoted</span> <span class="nv">and</span> <span class="nv">when</span> <span class="nv">not</span>.
+</pre></div>
+
+
+<div class="highlight"><pre><span></span><span class="kr">data </span><span class="kc">_null_</span>;
+    <span class="k">x</span> = <span class="nb">intnx(</span><span class="s">&#39;week&#39;</span>, <span class="s">&#39;17oct03&#39;</span>d, <span class="m">6</span>);
+    y = <span class="nb">putn(</span><span class="s">&#39;17Oct2013&#39;</span>d, <span class="s">&quot;date9.&quot;</span>);<span class="k"></span>
+<span class="k">    put x</span><span class="err"> date9.;</span>
+<span class="kr">run;</span>
+</pre></div>
+
+
+<ol>
+<li>
+<p>The function <code>compress</code> removes specified characters from a string.
+If the character list is not specified, 
+then spaces are removed.
+It is functionally equivalent to replace the specified characters with blank strings.
+It is similar to <code>std::remove_if</code> on <code>std::string</code> in C++. </p>
+</li>
+<li>
+<p>The function <code>tranwrd</code> replaces a substring with another one.
+It is similar to <code>sub/gsub</code> in R and <code>str.replace</code> in Python.
+It takes 3 arguments; 
+first is source string; 
+second is string to be replaced and last one is string to be replaced by. 
+<code>tranwrd</code> will find out every occurrence of the second argument 
+in the first argument and will replace it with the third argument.</p>
+</li>
+<li>
+<p>Do not pass numerical arguments to functions taking string arguments,
+and vice versa.</p>
+</li>
+<li>
+<p>Generally speaking, 
+you do not have to quote macros.
+However, 
+when you use a macro variable in a string,
+you must quote it in double quotes 
+(A macro variable in single quotes does not expand.)
+For example, 
+you have to quote <code>&amp;dir.</code> in the following SAS statement.</p>
+</li>
+</ol>
+<div class="highlight"><pre><span></span><span class="k">libname</span> N3D <span class="s">&quot;</span><span class="nv">&amp;dir.</span><span class="s">&quot;</span>;
+</pre></div>
+
+
+<ol>
+<li>
+<p>The function <code>lowcase</code> converts all letters in a string to lower case. 
+It is similar to the function tolower in R and str.lower in Python.</p>
+</li>
+<li>
+<p>The function <code>upcase</code> converts all letters in a string to upper case.
+It is similar to the functions <code>toupper</code> in R and <code>str.upper</code> in Python.</p>
+</li>
+<li>
+<p>The function <code>substr</code> extracts a sub string from a string.
+The length of the sub string cannot exceedes the maximum possible length.</p>
+</li>
+<li>
+<p>The function <code>scan</code> is somewhat similar to 
+the function <code>split</code> in R and <code>str.split</code> in Python.
+However ,
+it is different in the sense 
+that it returns the nth word (from a string) instead of return a vector/list of words. 
+You can use multiple delimiters for scan.</p>
+</li>
+<li>
+<p><code>left</code>/<code>%left</code> is equivalent to the function <code>ltrim</code> in VBA.</p>
+</li>
+<li>
+<p>In most programming languages,
+you have to escape the backslash (<code>\</code>) in Windows paths.
+In SAS, 
+it does not matter whether you escape it or not. </p>
+</li>
+<li>
+<p>To escape the double/single quotation mark, 
+you can double it. 
+For example,</p>
+</li>
+</ol>
+<div class="highlight"><pre><span></span><span class="kr">data </span><span class="kc">_null_</span>;
+    <span class="k">x</span> = <span class="s">&#39;How&#39;&#39;s everything going?&#39;</span>;<span class="k"></span>
+<span class="k">    put x</span><span class="err">;</span>
+    y = <span class="s">&quot;What do you mean by &quot;&quot;BTW&quot;&quot;?&quot;</span>;<span class="k"></span>
+<span class="k">    put </span><span class="err">y;</span>
+<span class="kr">run;</span>
+</pre></div>
+
+
+<h2 id="tricks-and-traps">Tricks and Traps</h2>
+<ol>
+<li>
+<p>The function <code>trim</code> is a different from <code>trim</code> functions in other programming languages.
+While in most programming languages 
+<code>trim</code> removes both leading and trailing blanks,
+the <code>trim</code> function in SAS removes only trailing blanks.
+To remove both leading and trailing blanks in SAS,
+you have to use the function <code>strip</code>.</p>
+</li>
+<li>
+<p>You cannot set the delimiter to be blank in catx.
+If you specify <code>""</code> as the delimiter, 
+then <code>" "</code> will be used.
+This is really really stupid.</p>
+</li>
+</ol>
+<h2 id="striptrimcompress">strip/trim/compress</h2>
+<p>strip removes both trailing and leading white spaces
+TRIM Function
+Removes trailing blanks from a character string, 
+and returns one blank if the string is missing.
+this is ugly as most languages, trim is strip</p>
+<p>however, compress is much more diffrent!!!
+Returns a character string with specified characters removed from the original string.</p>
+<p>you will use strip to remove .. most of the time.</p></div>
+    <footer>
+<p class="meta">
+  <span class="byline author vcard">
+    Posted by <span class="fn">Ben Chuanlong Du</span>
+  </span>
+<time datetime="2015-08-28T16:55:06-07:00" pubdate>Aug 28, 2015</time>  <span class="categories">
+    <a class="category" href="http://www.legendu.net/misc/tag/programming.html">programming</a>
+    <a class="category" href="http://www.legendu.net/misc/tag/sas.html">SAS</a>
+    <a class="category" href="http://www.legendu.net/misc/tag/string.html">String</a>
+    <a class="category" href="http://www.legendu.net/misc/tag/data-type.html">data type</a>
+  </span>
+</p>    </footer>
+  </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div>
+  </section>
+</div>
+<aside class="sidebar">
+  <section>
+    <h1>Recent Posts</h1>
+    <ul id="recent_posts">
+      <li class="post">
+          <a href="http://www.legendu.net/misc/blog/python-tips/">Tips on Python</a>
+      </li>
+      <li class="post">
+          <a href="http://www.legendu.net/misc/blog/python-tips-and-traps/">Python Tips and Traps</a>
+      </li>
+      <li class="post">
+          <a href="http://www.legendu.net/misc/blog/exception-and-error-handling-in-python/">Exception and Error Handling in Python</a>
+      </li>
+      <li class="post">
+          <a href="http://www.legendu.net/misc/blog/ipython-tips/">Tips on IPython</a>
+      </li>
+      <li class="post">
+          <a href="http://www.legendu.net/misc/blog/tips-for-git-large-file-storage/">Tips for Git Large File Storage</a>
+      </li>
+    </ul>
+  </section>
+  <section>
+      
+    <h1>Categories</h1>
+    <ul id="recent_posts">
+        <li><a href="http://www.legendu.net/misc/category/ai.html">AI</a></li>
+        <li><a href="http://www.legendu.net/misc/category/career.html">Career</a></li>
+        <li><a href="http://www.legendu.net/misc/category/cloud.html">Cloud</a></li>
+        <li><a href="http://www.legendu.net/misc/category/database.html">Database</a></li>
+        <li><a href="http://www.legendu.net/misc/category/encryption.html">Encryption</a></li>
+        <li><a href="http://www.legendu.net/misc/category/english.html">English</a></li>
+        <li><a href="http://www.legendu.net/misc/category/finance.html">Finance</a></li>
+        <li><a href="http://www.legendu.net/misc/category/fun-problems.html">Fun Problems</a></li>
+        <li><a href="http://www.legendu.net/misc/category/hardware.html">Hardware</a></li>
+        <li><a href="http://www.legendu.net/misc/category/internet.html">Internet</a></li>
+        <li><a href="http://www.legendu.net/misc/category/job.html">Job</a></li>
+        <li><a href="http://www.legendu.net/misc/category/jupyterlab.html">JupyterLab</a></li>
+        <li><a href="http://www.legendu.net/misc/category/language.html">Language</a></li>
+        <li><a href="http://www.legendu.net/misc/category/life.html">Life</a></li>
+        <li><a href="http://www.legendu.net/misc/category/links.html">Links</a></li>
+        <li><a href="http://www.legendu.net/misc/category/linux.html">Linux</a></li>
+        <li><a href="http://www.legendu.net/misc/category/machine-learning.html">Machine Learning</a></li>
+        <li><a href="http://www.legendu.net/misc/category/macos.html">macOS</a></li>
+        <li><a href="http://www.legendu.net/misc/category/network.html">Network</a></li>
+        <li><a href="http://www.legendu.net/misc/category/os.html">OS</a></li>
+        <li><a href="http://www.legendu.net/misc/category/people.html">People</a></li>
+        <li><a href="http://www.legendu.net/misc/category/philosophy.html">Philosophy</a></li>
+        <li><a href="http://www.legendu.net/misc/category/programming.html">Programming</a></li>
+        <li><a href="http://www.legendu.net/misc/category/research.html">Research</a></li>
+        <li><a href="http://www.legendu.net/misc/category/sheng-huo.html">生活</a></li>
+        <li><a href="http://www.legendu.net/misc/category/si-suo.html">思索</a></li>
+        <li><a href="http://www.legendu.net/misc/category/software.html">Software</a></li>
+        <li><a href="http://www.legendu.net/misc/category/statistics.html">Statistics</a></li>
+        <li><a href="http://www.legendu.net/misc/category/teleconference.html">Teleconference</a></li>
+        <li><a href="http://www.legendu.net/misc/category/tools.html">Tools</a></li>
+        <li><a href="http://www.legendu.net/misc/category/trading.html">Trading</a></li>
+        <li><a href="http://www.legendu.net/misc/category/unix.html">Unix</a></li>
+        <li><a href="http://www.legendu.net/misc/category/visualization.html">Visualization</a></li>
+        <li><a href="http://www.legendu.net/misc/category/windows.html">Windows</a></li>
+        <li><a href="http://www.legendu.net/misc/category/work.html">Work</a></li>
+    </ul>
+  </section>
+ 
+
+  <section>
+  <h1>Tags</h1>
+  <p class="tagcloud">
+  </p>
+  </section>
+
+
+
+  <section>
+    <h1>GitHub Repos</h1>
+    <ul id="gh_repos">
+      <li class="loading">Status updating...</li>
+    </ul>
+      <a href="https://github.com/dclong">@dclong</a> on GitHub
+    <script type="text/javascript">
+      $.domReady(function(){
+          if (!window.jXHR){
+              var jxhr = document.createElement('script');
+              jxhr.type = 'text/javascript';
+              jxhr.src = 'http://www.legendu.net/misc/theme/js/jXHR.js';
+              var s = document.getElementsByTagName('script')[0];
+              s.parentNode.insertBefore(jxhr, s);
+          }
+
+          github.showRepos({
+              user: 'dclong',
+              count: 3,
+              skip_forks: true,
+              target: '#gh_repos'
+          });
+      });
+    </script>
+    <script src="http://www.legendu.net/misc/theme/js/github.js" type="text/javascript"> </script>
+  </section>
+
+    <section>
+        <h1>Social</h2>
+        <ul>
+            <li><a href="https://www.linkedin.com/in/ben-chuanlong-du-1239b221/" target="_blank">LinkedIn</a></li>
+            <li><a href="https://twitter.com/longendu" target="_blank">Twitter</a></li>
+            <li><a href="https://www.facebook.com/chuanlong.du" target="_blank">Facebook</a></li>
+        <!--
+            <li><a href="http://www.legendu.net/misc/" type="application/rss+xml" rel="alternate">RSS</a></li>
+            -->
+        </ul>
+    </section>
+</aside>    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Ben Chuanlong Du -
+  <span class="credit">Powered by <a href="http://getpelican.com">Pelican</a></span>
+</p></footer>
+    <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-30259661-1']);
+    _gaq.push(['_trackPageview']);
+    (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+    </script>
+	<script type="text/javascript">
+	  var disqus_shortname = 'dclong';
+          var disqus_identifier = '/blog/the confusing string in sas/';
+          var disqus_url = 'http://www.legendu.net/misc/blog/the confusing string in sas/';
+          var disqus_title = 'The Confusing String in SAS';
+	  (function() {
+	    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	    dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+	    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	   })();
+	</script>
+</body>
+</html>

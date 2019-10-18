@@ -1,0 +1,2646 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Ben Chuanlong Du's Blog - OS</title><link href="http://www.legendu.net/misc/" rel="alternate"></link><link href="http://www.legendu.net/misc/feeds/os.atom.xml" rel="self"></link><id>http://www.legendu.net/misc/</id><updated>2019-09-27T11:05:17-07:00</updated><subtitle>It is never too late to learn.</subtitle><entry><title>Useful Tools in Linux</title><link href="http://www.legendu.net/misc/blog/useful-tools-linux/" rel="alternate"></link><published>2019-09-27T11:05:17-07:00</published><updated>2019-09-27T11:05:17-07:00</updated><author><name>Ben Chuanlong Du</name></author><id>tag:www.legendu.net,2019-09-27:/misc/blog/useful-tools-linux/</id><summary type="html">&lt;p&gt;&lt;strong&gt;
+Things on this page are
+fragmentary and immature notes/thoughts of the author.
+It is not meant to readers
+but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src="http://dclong.github.io/media/linux/linux.png" height="200" width="240" align="right"/&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://www.icewalkers.com/"&gt;IceWalkers&lt;/a&gt; is a great place
+to find software/tools for all kinds of purposes.&lt;/p&gt;
+&lt;h2 id="project"&gt;&lt;a href="http://www.legendu.net/misc/blog/project-tips/"&gt;Project&lt;/a&gt;&lt;/h2&gt;
+&lt;h2 id="serverdesktop-management"&gt;Server/Desktop Management&lt;/h2&gt;
+&lt;h3 id="linux-desktop-environment"&gt;&lt;a href="http://www.legendu.net/misc/blog/desktop-environments-for-linux/"&gt;Linux Desktop …&lt;/a&gt;&lt;/h3&gt;</summary><content type="html">&lt;p&gt;&lt;strong&gt;
+Things on this page are
+fragmentary and immature notes/thoughts of the author.
+It is not meant to readers
+but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src="http://dclong.github.io/media/linux/linux.png" height="200" width="240" align="right"/&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://www.icewalkers.com/"&gt;IceWalkers&lt;/a&gt; is a great place
+to find software/tools for all kinds of purposes.&lt;/p&gt;
+&lt;h2 id="project"&gt;&lt;a href="http://www.legendu.net/misc/blog/project-tips/"&gt;Project&lt;/a&gt;&lt;/h2&gt;
+&lt;h2 id="serverdesktop-management"&gt;Server/Desktop Management&lt;/h2&gt;
+&lt;h3 id="linux-desktop-environment"&gt;&lt;a href="http://www.legendu.net/misc/blog/desktop-environments-for-linux/"&gt;Linux Desktop Environment&lt;/a&gt;&lt;/h3&gt;
+&lt;h3 id="linux-package-management"&gt;&lt;a href="http://www.legendu.net/misc/blog/package-management-in-linux/"&gt;Linux Package Management&lt;/a&gt;&lt;/h3&gt;
+&lt;h3 id="terminal-tools"&gt;&lt;a href="http://www.legendu.net/misc/blog/linux-terminal-tips/"&gt;Terminal Tools&lt;/a&gt;&lt;/h3&gt;
+&lt;h3 id="administer"&gt;&lt;a href="http://www.legendu.net/misc/blog/linux-administrator-tools/"&gt;Administer&lt;/a&gt;&lt;/h3&gt;
+&lt;h3 id="disk-maintenance"&gt;&lt;a href="http://www.legendu.net/misc/blog/command-line-tools-for-linux-file-system/"&gt;Disk Maintenance&lt;/a&gt;&lt;/h3&gt;
+&lt;h3 id="admin-tools"&gt;&lt;a href="http://www.legendu.net/misc/blog/linux-administrator-tools/"&gt;Admin Tools&lt;/a&gt;&lt;/h3&gt;
+&lt;h3 id="security"&gt;Security&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;fail2ban&lt;/li&gt;
+&lt;li&gt;Tor (on-line anonymity)&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id="encryption"&gt;Encryption&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;gpg&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id="time-synchronization"&gt;Time Synchronization&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;ntp (sync-debian)&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id="task-scheduling"&gt;Task Scheduling&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;at&lt;/li&gt;
+&lt;li&gt;watch&lt;/li&gt;
+&lt;li&gt;crontab&lt;/li&gt;
+&lt;li&gt;inotify (monitoring file system changes and trigger events)&lt;/li&gt;
+&lt;li&gt;parallel&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="backup"&gt;Backup&lt;/h2&gt;
+&lt;h3 id="cloud-backup-tools"&gt;Cloud Backup Tools&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Network Attach Storage (NAS)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Storage Made Simple (SME)&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h4 id="centralized"&gt;Centralized&lt;/h4&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Amazon S3&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;AeroFS can backup to Amazon S3&lt;/li&gt;
+&lt;li&gt;s3cmd is a command line client for Linux&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Dropbox&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;TeamDrive (secure, fast)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Bitcasa (security, infinite storage)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Google Drive&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h4 id="decentralized-private-security"&gt;Decentralized (private, security)&lt;/h4&gt;
+&lt;ol&gt;
+&lt;li&gt;BitTorrent Sync (BTSync)&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h5 id="pros"&gt;Pros&lt;/h5&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;secure&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;free&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;no limit on files except the limit of your own disk&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h5 id="cons"&gt;Cons&lt;/h5&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;beta version, not stable enough&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;versioning is a little bit tricky&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;no GUI version for Linux&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;AeroFS (can use Amazon S3 as the central repository)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Syncthing&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id="non-cloud-backup-tools"&gt;Non-cloud Backup Tools&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;rsync (1-way synchronization)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;rsnapshot (incremental backup)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;duplicity (incremental backup with encryption and compression)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;borg&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Back In Time&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;unison (2-way synchronization, not a good solution compared to cloud backup tools)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Bacula (comprehensive backup tool)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;BackupPC&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;FreeFileSync (a very good synchronization software written in C++, but bundled with malware now)&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id="file-transfer"&gt;File Transfer&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;infinit (fast, secure)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;BitTorrent&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;BiTorrent Sync&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id="file-cleaning"&gt;File Cleaning&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;BleachBit&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id="file-hosting"&gt;File Hosting&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;Mega&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h4 id="pros_1"&gt;Pros&lt;/h4&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;50 GB free&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;secure (encrypted before upload)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;10 GB every 30 minutes free (essentially free consider currently network speed)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;maximum file size is only restricted by browser memory capability&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;never expire&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;cross-platform and command line tools available for Linux&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;able to follow symbolic link&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h4 id="cons_1"&gt;Cons&lt;/h4&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;. &lt;span class="nv"&gt;one&lt;/span&gt; &lt;span class="nv"&gt;file&lt;/span&gt; &lt;span class="nv"&gt;at&lt;/span&gt; &lt;span class="nv"&gt;a&lt;/span&gt; &lt;span class="nv"&gt;time&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="nv"&gt;free&lt;/span&gt; &lt;span class="nv"&gt;account&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;ol&gt;
+&lt;li&gt;File Dropper&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h4 id="pros_2"&gt;Pros&lt;/h4&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;unlimited space&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;no bandwith limit&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h4 id="cons_2"&gt;Cons&lt;/h4&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;uploaded files will be removed if they are not downloaded even once
+    within 30 days consecutively (files belong to premium account are never removed)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;upload file can be at most 5 GB&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;the cheapest plan is $1/month.
+    really no free account, but rather just upload and keep link
+    so not convenient for people without an premium account&lt;/p&gt;
+&lt;p&gt;Good for people who would like to share large files and do not need uploaded files to be persistent.
+Or for backing up frequently changed files so that before an uploaded file is removed,
+another updated version is uploaded.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Baidu Yun&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Tencent Weiyun&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="network"&gt;&lt;a href="http://www.legendu.net/misc/blog/linux-network-tools/"&gt;Network&lt;/a&gt;&lt;/h2&gt;
+&lt;h2 id="compress-and-uncompress"&gt;&lt;a href="http://www.legendu.net/en/blog/compress-and-decompress-in-linux/"&gt;Compress and Uncompress&lt;/a&gt;&lt;/h2&gt;
+&lt;h2 id="virtual-machine"&gt;Virtual Machine&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;VirtualBox&lt;/li&gt;
+&lt;li&gt;VMWare&lt;/li&gt;
+&lt;li&gt;Xen&lt;/li&gt;
+&lt;li&gt;KVM (requires hardware support, e.g., Intel VT-x or AMD-V)&lt;/li&gt;
+&lt;li&gt;QEMU-KVM (requires hardware support, e.g., Intel VT-x or AMD-V)&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="database-management-system-dbms"&gt;Database Management System (DBMS)&lt;/h2&gt;
+&lt;h3 id="relational-dbms"&gt;Relational DBMS&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;MySQL&lt;ul&gt;
+&lt;li&gt;MySQL Workbench&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;SQLite (embedded database)&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id="objectdocument-oriented-dbms"&gt;Object/Document-oriented DBMS&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;MongoDB&lt;/li&gt;
+&lt;li&gt;CouchDB&lt;/li&gt;
+&lt;li&gt;OrientDB (written in Java)&lt;/li&gt;
+&lt;li&gt;UnQLite (embedded database, sounds like a good replace for SQLite)&lt;/li&gt;
+&lt;li&gt;MooDB (embedded database)&lt;/li&gt;
+&lt;li&gt;Kyoto Cabinet (embedded, for simple key-value data)&lt;/li&gt;
+&lt;li&gt;LevelDB (embedded, for simple key-value data)&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="daily-work-tools-office-tools-etc"&gt;Daily Work Tools (Office Tools, etc.)&lt;/h2&gt;
+&lt;h3 id="well-supported-printers"&gt;Well Supported Printers&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;HP&lt;/li&gt;
+&lt;li&gt;Brother&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id="pinyin-input-method"&gt;Pinyin Input Method&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;Sogou Pinyin&lt;/li&gt;
+&lt;li&gt;Google Pinyin&lt;/li&gt;
+&lt;li&gt;Sun Pinyin&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id="web-browser"&gt;Web Browser&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;Tor (on-line anonymity)&lt;/li&gt;
+&lt;li&gt;Google Chrome&lt;/li&gt;
+&lt;li&gt;Firefox/Iceweasel&lt;/li&gt;
+&lt;li&gt;w3m (a powerful text-based web browser)&lt;/li&gt;
+&lt;li&gt;lynx (another text-based web browser)&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id="on-line-tools"&gt;On-line Tools&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;Doodle&lt;/li&gt;
+&lt;li&gt;Survata (for custom surveys)&lt;/li&gt;
+&lt;li&gt;Google Docs (Google Form can a simple solution to custom surveys)&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id="finance"&gt;Finance&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;gnucash&lt;/li&gt;
+&lt;li&gt;DocumentBurst&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id="password-management"&gt;&lt;a href="http://www.legendu.net/misc/blog/password-management/"&gt;Password Management&lt;/a&gt;&lt;/h3&gt;
+&lt;h3 id="data-manipulation"&gt;Data Manipulation&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;grep/sed/awk/cut/sort/uniq/comm&lt;/li&gt;
+&lt;li&gt;pdfgrep&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Search in pdf files for strings matching a regular expression.
+It only works on PDF files but even not text files.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;taggrepper - search and match tags of audio files against regular expressions&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;crgrep - common resource grep&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;sgrep - tool to search a file for structured pattern&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;recoll&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Personal full text search package with a Qt GUI&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;catdoc/xls2csv/catppt&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id="text-editor"&gt;Text Editor&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;Vim (general purpose text editor)&lt;/li&gt;
+&lt;li&gt;Visual Studio Code&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="ms-office-alternative"&gt;MS Office Alternative&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;LibreOffice&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="http://www.onlyoffice.com/"&gt;OnlyOffice&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Calligra Suite (KDE dependent)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;AbiWord (Word)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;gnumeric (Excel)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;WPS Office&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id="publishing-tools"&gt;Publishing Tools&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;LaTex&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h4 id="scribus"&gt;&lt;a href="https://www.scribus.net/magazine-production/"&gt;Scribus&lt;/a&gt;&lt;/h4&gt;
+&lt;p&gt;Opensource Desktop Publishing&lt;/p&gt;
+&lt;h3 id="dictionary"&gt;Dictionary&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;goldendict&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;dict&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id="email-client"&gt;Email Client&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Thunderbird (called IceDove in Debian)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Evolution&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Claws Mail&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Sieve (mail filtering language)&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id="contacts"&gt;Contacts&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;cobook&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;plaxo contact&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;fullcontact&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id="pdf-tools"&gt;PDF Tools&lt;/h3&gt;
+&lt;h4 id="readerviewer"&gt;Reader/Viewer&lt;/h4&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;evince&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;xpdf&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;okular&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h4 id="manipulation"&gt;Manipulation&lt;/h4&gt;
+&lt;ol&gt;
+&lt;li&gt;pdftk&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id="scientific-reference-management"&gt;Scientific Reference Management&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Zotero (open source, a very good one)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Mendeley (2G free, social network based, good for small usage, better to use together with Zotero)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;ReadCube&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;JabRef (OK but not good)&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id="e-book-library-management"&gt;E-book library management&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;calibre&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id="notes-taking"&gt;Notes Taking&lt;/h3&gt;
+&lt;p&gt;&lt;a href="http://www.legendu.net/misc/blog/software-for-taking-notes/"&gt;http://www.legendu.net/misc/blog/software-for-taking-notes/&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id="task-management"&gt;Task Management&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;XMind&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;WorkFlowy&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Todoist&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Wunderlist&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Taskwarrior&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id="auto-typing-tools"&gt;&lt;a href="http://www.legendu.net/misc/blog/auto-typing-tools/"&gt;Auto Typing Tools&lt;/a&gt;&lt;/h3&gt;
+&lt;h2 id="programming-tools"&gt;Programming Tools&lt;/h2&gt;
+&lt;h3 id="compiler"&gt;Compiler&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;GCC&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Clang&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id="debugging-tools"&gt;Debugging Tools&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;GDB&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Valgrind&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;CUDA-Memcheck&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id="version-control"&gt;Version Control&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;git&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="multimedia-tools"&gt;Multimedia Tools&lt;/h2&gt;
+&lt;h3 id="music-player"&gt;Music Player&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;a href="https://www.clementine-player.org/"&gt;Clementine&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id="screenshot"&gt;Screenshot&lt;/h3&gt;
+&lt;p&gt;&lt;a href="http://shutter-project.org/"&gt;Shutter&lt;/a&gt;
+is the best screenshot application for Linux (only).
+You can install it on Ubuntu using the following command.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;wajig&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="n"&gt;libgoo&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;canvas&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;perl&lt;/span&gt; &lt;span class="n"&gt;shutter&lt;/span&gt; &lt;span class="n"&gt;shutter&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h3 id="cddvd-burning"&gt;CD/DVD burning&lt;/h3&gt;
+&lt;h4 id="gui-tools"&gt;GUI Tools&lt;/h4&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;k3b  &lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;gnome baker&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;brasero&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h4 id="command-line-tools"&gt;Command line Tools&lt;/h4&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;xvidenc (shell script to encode DVDs to Xvid)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;isoinfo&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;genisoimage (Debian) or mkisofs (other Linux)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;dd or cat&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id="videoaudio-playerediting"&gt;Video/Audio Player/Editing&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;vlc&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;MPlayer, SMPlayer&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Kdenlive&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Lightworks&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;ffmpeg&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;HandBrake&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;exiftool (command line multimedia meta data editor)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Exiv2 (image meta data library and tools written in C++)&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id="audio"&gt;Audio&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;puddletag (simple, powerful audio tag editor)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;beets (command line tool for managing music tagger and library)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;clementine (a modern music player)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;cmus (a very cool Command-line MUSic player)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;mutagen (a python library for handling audio meta data)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;festival (sound synthesis)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Ardour (audio editing)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Audacity (audo recording, editing)&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id="screencast"&gt;Screencast&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;comstudio (Windows only)&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id="voice-control"&gt;Voice Control&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Blather&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Voxforge&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Simon&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id="image"&gt;Image&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;ImageMagic&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;GwenView (KDE)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;digiKam (KDE)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;PIL (python image library)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;exiftool&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id="scanocr"&gt;Scan/OCR&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;VueScan&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;tesseract&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;gocr&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id="charts"&gt;&lt;a href="http://www.legendu.net/misc/blog/software-for-charts/"&gt;Charts&lt;/a&gt;&lt;/h3&gt;
+&lt;h3 id="3-d-modelling"&gt;3-D Modelling&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;blender&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;freeCAD&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;OpenSCAD&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Google Sketchup&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;EQUINOX-3D&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="social-tools"&gt;Social Tools&lt;/h2&gt;
+&lt;h3 id="teleconference"&gt;Teleconference&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Blink&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Skype&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Wire&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Jitsi&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;ekiga&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;QQ (webqq, wineqq)&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="web-hosting"&gt;Web Hosting&lt;/h2&gt;
+&lt;h3 id="server-side-scripting-language"&gt;Server Side Scripting Language&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;PHP&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;JSP&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id="client-side-scripting-language"&gt;Client Side Scripting Language&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;JavaScript&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id="integrated-package-for-web-hosting"&gt;Integrated Package for Web Hosting&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;XAMPP (originaly called LAMPP)&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id="math-formulas-in-web-pages"&gt;Math Formulas in Web Pages&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;MathJax (a successor to jsMath)&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="performance-tools"&gt;Performance Tools&lt;/h2&gt;
+&lt;h2 id="boot-performance"&gt;Boot Performance&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;bootchart&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;readahead-fedora&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="runtime-performance"&gt;Runtime Performance&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;preload&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;localepurge&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="other-suggestions"&gt;Other Suggestions&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;remove old kernels&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;package clean-up&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="web-tools"&gt;Web Tools&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;ol&gt;
+&lt;li&gt;JustInMind Prototyper&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Ruby On Rails (RoR)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Django&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Node.JS&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;ActiveJDBC&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;web2py&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;SAS Stored Process (Web Application) and SAS Visual Analytics&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="software-host"&gt;Software Host&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;GitHub&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;no private repository for free account&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Bitbucket&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;unlimited private repositories for free account&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;SourceForge&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="repository-hosting-tools"&gt;Repository Hosting Tools&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;gitolite&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;gitlab&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="websites"&gt;Websites&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;MileWise&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;BTGuard&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;http://dedalvs.tumblr.com/post/48998678919/99-life-hacks-to-make-your-life-easier&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="translation"&gt;Translation&lt;/h2&gt;
+&lt;p&gt;https://www.apertium.org/index.eng.html?dir=eng-cat#translation&lt;/p&gt;
+&lt;h2 id="misc"&gt;Misc&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;KeyMon: displays the mouse button or key being clicked/pressed,
+useful when you video tape your screen&lt;/li&gt;
+&lt;/ol&gt;</content><category term="shell"></category><category term="remote"></category><category term="PDF"></category><category term="software"></category><category term="tools"></category><category term="terminal"></category><category term="application"></category><category term="Linux"></category></entry><entry><title>Instal the Latest Version of Python in Ubuntu</title><link href="http://www.legendu.net/misc/blog/instal-the-latest-version-of-python-in-ubuntu/" rel="alternate"></link><published>2019-07-27T02:26:33-07:00</published><updated>2019-07-27T02:26:33-07:00</updated><author><name>Benjamin Du</name></author><id>tag:www.legendu.net,2019-07-27:/misc/blog/instal-the-latest-version-of-python-in-ubuntu/</id><summary type="html">&lt;p&gt;&lt;strong&gt;
+Things on this page are fragmentary and immature notes/thoughts of the author.
+It is not meant to readers but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id="through-ppa"&gt;Through PPA&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo add-apt-repository ppa:deadsnakes/ppa
+sudo apt-get update
+sudo apt-get install python3.7
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2 id="linuxbrew"&gt;Linuxbrew&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Install Linux brew. &lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;brew …&lt;/code&gt;&lt;/p&gt;&lt;/li&gt;&lt;/ol&gt;</summary><content type="html">&lt;p&gt;&lt;strong&gt;
+Things on this page are fragmentary and immature notes/thoughts of the author.
+It is not meant to readers but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id="through-ppa"&gt;Through PPA&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo add-apt-repository ppa:deadsnakes/ppa
+sudo apt-get update
+sudo apt-get install python3.7
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2 id="linuxbrew"&gt;Linuxbrew&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Install Linux brew. &lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;brew install python3&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="anaconda-python"&gt;Anaconda Python&lt;/h2&gt;
+&lt;h2 id="references"&gt;References&lt;/h2&gt;
+&lt;p&gt;https://websiteforstudents.com/installing-the-latest-python-3-7-on-ubuntu-16-04-18-04/&lt;/p&gt;
+&lt;p&gt;http://ubuntuhandbook.org/index.php/2019/02/install-python-3-7-ubuntu-18-04/&lt;/p&gt;
+&lt;p&gt;https://launchpad.net/~deadsnakes/+archive/ubuntu/ppa&lt;/p&gt;</content><category term="OS"></category><category term="Linux"></category><category term="Ubuntu"></category><category term="Python 3"></category><category term="installation"></category><category term="PPA"></category></entry><entry><title>Tips on rsync</title><link href="http://www.legendu.net/misc/blog/rsync-tips/" rel="alternate"></link><published>2019-07-08T23:21:31-07:00</published><updated>2019-07-08T23:21:31-07:00</updated><author><name>Ben Chuanlong Du</name></author><id>tag:www.legendu.net,2019-07-08:/misc/blog/rsync-tips/</id><summary type="html">&lt;p&gt;&lt;strong&gt;
+Things on this page are
+fragmentary and immature notes/thoughts of the author.
+It is not meant to readers
+but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id="tricks-traps"&gt;Tricks &amp;amp; Traps&lt;/h2&gt;
+&lt;p&gt;The command &lt;code&gt;rsync -avh src_dir des_dir&lt;/code&gt; synchronizes the whole directory &lt;code&gt;src_dir&lt;/code&gt; 
+into the destination directory &lt;code&gt;des_dir&lt;/code&gt;
+while &lt;code&gt;rsync …&lt;/code&gt;&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;strong&gt;
+Things on this page are
+fragmentary and immature notes/thoughts of the author.
+It is not meant to readers
+but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id="tricks-traps"&gt;Tricks &amp;amp; Traps&lt;/h2&gt;
+&lt;p&gt;The command &lt;code&gt;rsync -avh src_dir des_dir&lt;/code&gt; synchronizes the whole directory &lt;code&gt;src_dir&lt;/code&gt; 
+into the destination directory &lt;code&gt;des_dir&lt;/code&gt;
+while &lt;code&gt;rsync -avh src_dir/ des_dir&lt;/code&gt; synchronizes the contents 
+(sub-files and sub-directories) of &lt;code&gt;src_dir&lt;/code&gt;
+into the destination directory &lt;code&gt;des_dir&lt;/code&gt;.
+However, 
+one thing tricky is that &lt;code&gt;rsync -avh . des_dir&lt;/code&gt; synchronizes the content 
+(sub-files and sub-directories) of the current directory 
+into the destination directory &lt;code&gt;des_dir&lt;/code&gt;.
+This is especially tricky if you programmally get the source directory that you want to synchronize.
+Here are a few good practices to follow.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Convert programmally generated path (for use in &lt;code&gt;rsync&lt;/code&gt;) into its absolute form.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Always use the form &lt;code&gt;rsync -avh src_dir/ des_dir/&lt;/code&gt; instead of the form &lt;code&gt;rsync -avh src_dir des_dir&lt;/code&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="examples"&gt;Examples&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Disable strickt host key checking. &lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;rsync&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;e&lt;/span&gt; &lt;span class="ss"&gt;&amp;quot;ssh -o StrictHostKeyChecking=no&amp;quot;&lt;/span&gt; &lt;span class="p"&gt;...&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Use a different port (rather than 22).&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;rsync&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;e&lt;/span&gt; &lt;span class="ss"&gt;&amp;quot;ssh -p 323&amp;quot;&lt;/span&gt; &lt;span class="p"&gt;...&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Copy specified patterns (e.g., JupyterLab notebooks) only.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nv"&gt;rsync&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;avh&lt;/span&gt; &lt;span class="o"&gt;--&lt;/span&gt;&lt;span class="k"&gt;include&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;&lt;span class="s"&gt;*.ipynb&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&lt;/span&gt; &lt;span class="o"&gt;--&lt;/span&gt;&lt;span class="k"&gt;include&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;&lt;span class="s"&gt;*/&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&lt;/span&gt; &lt;span class="o"&gt;--&lt;/span&gt;&lt;span class="nv"&gt;exclude&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;&lt;span class="s"&gt;*&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&lt;/span&gt; &lt;span class="o"&gt;--&lt;/span&gt;&lt;span class="nv"&gt;delete&lt;/span&gt; &lt;span class="nv"&gt;src_dir&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt; &lt;span class="nv"&gt;des_dir&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Sync one directory to another one. 
+    &lt;code&gt;Bash
+    rsync -avh --progress --exclude=‘*.pyc’ --exclude=‘.Trash-*’ --exclude=‘lost+found’ --delete $tiger:/workdir/ /workdir/&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;An example script for synchronizing a Java project directory.&lt;/p&gt;
+&lt;table class="highlighttable"&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="ch"&gt;#!/usr/bin/env bash&lt;/span&gt;
+
+&lt;span class="nv"&gt;dir&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="k"&gt;$(&lt;/span&gt;dirname &lt;span class="k"&gt;$(&lt;/span&gt;dirname &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="nv"&gt;$0&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="k"&gt;))&lt;/span&gt;
+
+rsync -avh &lt;span class="se"&gt;\&lt;/span&gt;
+    --progress &lt;span class="se"&gt;\&lt;/span&gt;
+    --delete &lt;span class="se"&gt;\&lt;/span&gt;
+    --exclude&lt;span class="o"&gt;=&lt;/span&gt;.git/ &lt;span class="se"&gt;\&lt;/span&gt;
+    --exclude&lt;span class="o"&gt;=&lt;/span&gt;target/ &lt;span class="se"&gt;\&lt;/span&gt;
+    --exclude&lt;span class="o"&gt;=&lt;/span&gt;build/ &lt;span class="se"&gt;\&lt;/span&gt;
+    --exclude&lt;span class="o"&gt;=&lt;/span&gt;analysis/ &lt;span class="se"&gt;\&lt;/span&gt;
+    --exclude&lt;span class="o"&gt;=&lt;/span&gt;classes/ &lt;span class="se"&gt;\&lt;/span&gt;
+    --exclude&lt;span class="o"&gt;=&lt;/span&gt;maven-archiver/ &lt;span class="se"&gt;\&lt;/span&gt;
+    --exclude&lt;span class="o"&gt;=&lt;/span&gt;surefire-reports/ &lt;span class="se"&gt;\&lt;/span&gt;
+    --exclude&lt;span class="o"&gt;=&lt;/span&gt;test-classes/ &lt;span class="se"&gt;\&lt;/span&gt;
+    --exclude&lt;span class="o"&gt;=&lt;/span&gt;generated-sources/ &lt;span class="se"&gt;\&lt;/span&gt;
+    --exclude&lt;span class="o"&gt;=&lt;/span&gt;generated-test-sources/ &lt;span class="se"&gt;\&lt;/span&gt;
+    --exclude&lt;span class="o"&gt;=&lt;/span&gt;java.io.tmpdir/ &lt;span class="se"&gt;\&lt;/span&gt;
+    --exclude&lt;span class="o"&gt;=&lt;/span&gt;out &lt;span class="se"&gt;\&lt;/span&gt;
+    &lt;span class="nv"&gt;$dir&lt;/span&gt;/ &lt;span class="se"&gt;\&lt;/span&gt;
+    &lt;span class="nv"&gt;$tiger&lt;/span&gt;:/workdir/users/
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="squeeze-the-performance-out-of-rsync-over-ssh"&gt;Squeeze the Performance out of &lt;code&gt;rsync&lt;/code&gt; over &lt;code&gt;ssh&lt;/code&gt;&lt;/h2&gt;
+&lt;h3 id="some-options-of-rsync"&gt;Some Options of &lt;code&gt;rsync&lt;/code&gt;&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;a: archive mode - rescursive, preserves owner, preserves permissions, preserves modification times, preserves group, copies symlinks as symlinks, preserves device files.&lt;/li&gt;
+&lt;li&gt;H: preserves hard-links&lt;/li&gt;
+&lt;li&gt;A: preserves ACLs&lt;/li&gt;
+&lt;li&gt;X: preserves extended attributes&lt;/li&gt;
+&lt;li&gt;x: don't cross file-system boundaries&lt;/li&gt;
+&lt;li&gt;v: increase verbosity&lt;/li&gt;
+&lt;li&gt;--numeric-ds: don't map uid/gid values by user/group name&lt;/li&gt;
+&lt;li&gt;--delete: delete extraneous files from dest dirs (differential clean-up during sync)&lt;/li&gt;
+&lt;li&gt;--progress: show progress during transfer&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="some-options-of-ssh"&gt;Some Options of &lt;code&gt;ssh&lt;/code&gt;&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;T: turn off pseudo-tty to decrease cpu load on destination.&lt;/li&gt;
+&lt;li&gt;c arcfour: use the weakest but fastest SSH encryption. Must specify "Ciphers arcfour" in sshd_config on destination.&lt;/li&gt;
+&lt;li&gt;o Compression=no: Turn off SSH compression.&lt;/li&gt;
+&lt;li&gt;x: turn off X forwarding if it is on by default.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Example of copying files from local to a remote server using rsync and ssh with optimal speed.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;rsync -aHAXxv --numeric-ids --delete --progress -e &lt;span class="s2"&gt;&amp;quot;ssh -T -c arcfour -o Compression=no -x&amp;quot;&lt;/span&gt; user@remote_host:source_dir dest_dir
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Example of copying files from a remote server to local using rsync and ssh with optimal speed.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;rsync -aHAXxv --numeric-ids --delete --progress -e &lt;span class="s2"&gt;&amp;quot;ssh -T -c arcfour -o Compression=no -x&amp;quot;&lt;/span&gt; source_dir user@remote_host:dest_dir&lt;span class="o"&gt;]&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2 id="errors-solutions"&gt;Errors &amp;amp; Solutions&lt;/h2&gt;
+&lt;h3 id="error-in-protocol-data-stream-code-12"&gt;error in protocol data stream (code 12)&lt;/h3&gt;
+&lt;p&gt;It is probably because the remote diretory does not exist.&lt;/p&gt;
+&lt;h3 id="references"&gt;References&lt;/h3&gt;
+&lt;p&gt;&lt;a href="http://www.librebyte.net/en/gnulinux/14-practical-examples-of-the-rsync-command/"&gt;14 Practical examples of the rsync command&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;https://askubuntu.com/questions/625085/rsync-over-ssh-error-in-protocol-data-stream-code-12-ssh-works&lt;/p&gt;
+&lt;p&gt;https://gist.github.com/KartikTalwar/4393116&lt;/p&gt;</content><category term="Linux"></category><category term="copy"></category><category term="synchronization"></category><category term="file system"></category><category term="filesystem"></category><category term="rsync"></category></entry><entry><title>Tips on Kerberos</title><link href="http://www.legendu.net/misc/blog/tips-on-kerberos/" rel="alternate"></link><published>2019-06-23T02:11:01-07:00</published><updated>2019-06-23T02:11:01-07:00</updated><author><name>Benjamin Du</name></author><id>tag:www.legendu.net,2019-06-23:/misc/blog/tips-on-kerberos/</id><summary type="html">&lt;p&gt;&lt;strong&gt;
+Things on this page are fragmentary and immature notes/thoughts of the author.
+It is not meant to readers but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id="ubuntu"&gt;Ubuntu&lt;/h2&gt;
+&lt;p&gt;apt-get install krb5-user&lt;/p&gt;
+&lt;h2 id="centos"&gt;CentOS&lt;/h2&gt;
+&lt;p&gt;yum install -y ntp&lt;/p&gt;
+&lt;p&gt;yum install krb5-workstation krb5-libs krb5-auth-dialog&lt;/p&gt;
+&lt;p&gt;https://gist.github.com/ashrithr/4767927948eca70845db …&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;strong&gt;
+Things on this page are fragmentary and immature notes/thoughts of the author.
+It is not meant to readers but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id="ubuntu"&gt;Ubuntu&lt;/h2&gt;
+&lt;p&gt;apt-get install krb5-user&lt;/p&gt;
+&lt;h2 id="centos"&gt;CentOS&lt;/h2&gt;
+&lt;p&gt;yum install -y ntp&lt;/p&gt;
+&lt;p&gt;yum install krb5-workstation krb5-libs krb5-auth-dialog&lt;/p&gt;
+&lt;p&gt;https://gist.github.com/ashrithr/4767927948eca70845db&lt;/p&gt;</content><category term="OS"></category><category term="Linux"></category><category term="CentOS"></category><category term="Ubuntu"></category><category term="kerberos"></category></entry><entry><title>Shortcuts for Mac</title><link href="http://www.legendu.net/misc/blog/shortcuts-for-mac/" rel="alternate"></link><published>2019-06-16T22:10:09-07:00</published><updated>2019-06-16T22:10:09-07:00</updated><author><name>Ben Chuanlong Du</name></author><id>tag:www.legendu.net,2019-06-16:/misc/blog/shortcuts-for-mac/</id><summary type="html">&lt;p&gt;&lt;strong&gt;
+Things on this page are
+fragmentary and immature notes/thoughts of the author.
+It is not meant to readers
+but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://en.wikipedia.org/wiki/Windows_shortcuts"&gt;Table of keyboard shortcuts&lt;/a&gt;
+lists comparisons of shortcuts on Windows, macOS and Linux.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Unless you have a full Mac keyboard …&lt;/p&gt;&lt;/li&gt;&lt;/ol&gt;</summary><content type="html">&lt;p&gt;&lt;strong&gt;
+Things on this page are
+fragmentary and immature notes/thoughts of the author.
+It is not meant to readers
+but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://en.wikipedia.org/wiki/Windows_shortcuts"&gt;Table of keyboard shortcuts&lt;/a&gt;
+lists comparisons of shortcuts on Windows, macOS and Linux.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Unless you have a full Mac keyboard,
+  you will not have the &lt;code&gt;Home/End&lt;/code&gt; keys.
+  &lt;code&gt;Fn + Left/Right&lt;/code&gt; act as equivalent to &lt;code&gt;Home/End&lt;/code&gt; keys in macOS,
+  however, &lt;code&gt;Home/End&lt;/code&gt; keys not necessarily behave the same as in Windows/Linux.
+  &lt;code&gt;Command + Left/Right&lt;/code&gt; behave equivalent to what &lt;code&gt;Home/End&lt;/code&gt; keys do in Windows/Linux.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;Delete&lt;/code&gt; acts like the key &lt;code&gt;Backspace&lt;/code&gt; in Windows/Linux
+  &lt;code&gt;Fn + Delete&lt;/code&gt; acts like the key &lt;code&gt;Delete&lt;/code&gt; in Windows/Linux.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;CMD + C&lt;/code&gt; copies files and &lt;code&gt;CMD + V&lt;/code&gt; pastes the copied files.
+&lt;code&gt;CMD + Option + V&lt;/code&gt; moves the files instead of to copy them.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;table style="width:100%"&gt;
+  &lt;tr&gt;
+    &lt;th&gt; Key Binding &lt;/th&gt;
+    &lt;th&gt; Description &lt;/th&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt; F11 or Fn + F11 (depends) &lt;/td&gt;
+    &lt;td&gt; show desktop (press again to bring back windows) &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt; Command + Q &lt;/td&gt;
+    &lt;td&gt; Quit the current active application &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/table&gt;
+
+&lt;p&gt;Command + k: connect to server&lt;/p&gt;
+&lt;p&gt;Option + Left/Right: move to the left/right by one word&lt;/p&gt;
+&lt;p&gt;Basic Shortcuts&lt;/p&gt;
+&lt;p&gt;Command + W = Close the current active window
+Command + O = Open a file in your application
+Command + P = Print
+Command + C = Copy
+Command + V = Paste
+Command + X = Cut
+Command + S = Save
+Command + Z = Undo
+Command + A = Select All
+Command + Y or Space = Quicklook
+Command + Tab = Cycle through windows&lt;/p&gt;
+&lt;p&gt;Other Shortcuts&lt;/p&gt;
+&lt;p&gt;Command + Shift + 3 = Take fullscreen picture
+Command + Shift + 4 = Take selected area screenshot
+Command + Shift + 4 + Space = Take screenshot of window or menu
+Option + Command + Escape = Bring up Force Quit window
+Command + Space = Spotlight search
+Command + ` (back tick) = Cycle through applications windows
+Command + . = Cancel operation
+Command + Shift + ? = Open help
+Command + I = Get Info
+Command + [ = Go backwards in history in Finder
+Command + ] = Go forwards in history in Finder
+Command + Up Arrow = Go to previous folder in hierarchy
+Command + Down Arrow = Open folder of file in Finder
+Command + Option/Alt + T = Show hide Finder’s toolbar
+Command + Delete = Move item to Trash
+Command + Shift + Delete = Empty Trash
+Command + E = Eject disk
+Command + F = Find
+Command + G = Next result in Find option
+Command + H = Hide application
+Command + M = Minimize
+Command + N = New window
+Command + Option/Alt + W = Close all windows
+Command + Shift + Z = Redo
+Command + Shift + H = Go to Home folder
+Command + Shift + D = Go to Desktop
+Command + Shift + C = Go to Computer
+Command + Shift + K = Go to Network
+Command + Shift + I = Go to iDisk
+Command + Shift + A = Go to Application
+Command + Shift + U = Go to Utilities
+Command + Shift + G = Go to folder
+Shift + Command + Q = Log out
+Shift + Command + Option/Alt + Q = Log out immediately.
+Command + D = Duplicate in Finder
+Command + Option/Alt + 8 = Turn on Voice Over
+Command + Option/Alt + + or Command + Plus = Zoom in (if turned on)
+Command + Option/Alt + – or Command + Minus = Zoom Out
+Command + Option/Alt + D = Show/Hide Dock
+Ctrl + Eject = Show shutdown dialog
+Ctrl + Command + Eject = Close all and restart
+Option + Command + Eject = Sleep
+Command + Shift + F = Find file by name
+Command + R = Refresh widget&lt;/p&gt;
+&lt;p&gt;Command + = = Zoom in (works in terminal, iterm2, etc.)
+Command + - = Zoom out (works in terminal, iterm2, etc.)&lt;/p&gt;
+&lt;h2 id="shortcuts-for-moving-windows-among-monitors"&gt;Shortcuts for Moving Windows Among Monitors&lt;/h2&gt;
+&lt;p&gt;https://www.youtube.com/watch?v=Hcp5YpFv1d0&lt;/p&gt;
+&lt;p&gt;http://www.keyboardmaestro.com/main/&lt;/p&gt;
+&lt;h2 id="web-browsing"&gt;Web Browsing&lt;/h2&gt;
+&lt;p&gt;Different web browsers share standard keyboard shortcuts
+that work similarly on all operating systems,
+including Mac OS X. On a Mac, the big difference is
+that you’ll usually be pressing the Command key instead of the Ctrl
+or Alt keys you’d press on Windows.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;Command&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;F&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="err"&gt;–&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;Start&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;searching&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;the&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;current&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;page&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;This&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;also&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;works&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ow"&gt;in&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;other&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;applications&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="n"&gt;Command&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nf"&gt;Left&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;Arrow&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="err"&gt;–&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;Go&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;back&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;page&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="n"&gt;Command&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nf"&gt;Right&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;Arrow&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="err"&gt;–&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;Go&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;forward&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;page&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="n"&gt;Command&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;T&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="err"&gt;–&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;Open&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;new&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;tab&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="n"&gt;Command&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;W&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="err"&gt;–&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;Close&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;the&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;current&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;tab&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="n"&gt;Command&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;L&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="err"&gt;–&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;Focus&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;the&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;browser&lt;/span&gt;&lt;span class="err"&gt;’&lt;/span&gt;&lt;span class="n"&gt;s&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;location&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;bar&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;so&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;you&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;can&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;start&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;typing&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;search&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ow"&gt;or&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;web&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;address&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;immediately&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="n"&gt;Ctrl&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;Tab&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="err"&gt;–&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;Switch&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ow"&gt;between&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;open&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;tabs&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="n"&gt;Ctrl&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;Shift&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;Tab&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="err"&gt;–&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;Switch&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ow"&gt;between&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;open&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;tabs&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ow"&gt;in&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nf"&gt;reverse&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2 id="text-editing"&gt;Text Editing&lt;/h2&gt;
+&lt;p&gt;Text-editing keyboard shortcuts also function similarly between Mac and Windows.
+One again, you’ll mostly just be pressing the Command key instead of the Ctrl key.
+This is a bigger difference than it seems at first glance.
+The Command key is directly adjacent to the Space bar on Mac keyboards,
+while the Ctrl key is in the bottom-left corner on Windows keyboards.
+The way you have to position your fingers is different,
+so your muscle memory can interfere with these shortcuts.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nv"&gt;Command&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="nv"&gt;A&lt;/span&gt; – &lt;span class="nv"&gt;Select&lt;/span&gt; &lt;span class="nv"&gt;All&lt;/span&gt;
+&lt;span class="nv"&gt;Command&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="nv"&gt;X&lt;/span&gt; – &lt;span class="nv"&gt;Cut&lt;/span&gt;
+&lt;span class="nv"&gt;Command&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="nv"&gt;C&lt;/span&gt; – &lt;span class="nv"&gt;Copy&lt;/span&gt;
+&lt;span class="nv"&gt;Command&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="nv"&gt;V&lt;/span&gt; – &lt;span class="nv"&gt;Paste&lt;/span&gt;
+&lt;span class="nv"&gt;Command&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="nv"&gt;Z&lt;/span&gt; – &lt;span class="nv"&gt;Undo&lt;/span&gt;
+&lt;span class="nv"&gt;Command&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="nv"&gt;Shift&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="nv"&gt;Z&lt;/span&gt; – &lt;span class="nv"&gt;Redo&lt;/span&gt;
+&lt;span class="nv"&gt;Command&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="nv"&gt;Left&lt;/span&gt; &lt;span class="nv"&gt;Arrow&lt;/span&gt; –  &lt;span class="nv"&gt;Go&lt;/span&gt; &lt;span class="nv"&gt;to&lt;/span&gt; &lt;span class="nv"&gt;the&lt;/span&gt; &lt;span class="nv"&gt;beginning&lt;/span&gt; &lt;span class="nv"&gt;of&lt;/span&gt; &lt;span class="nv"&gt;the&lt;/span&gt; &lt;span class="nv"&gt;current&lt;/span&gt; &lt;span class="nv"&gt;line&lt;/span&gt;.
+&lt;span class="nv"&gt;Command&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="nv"&gt;Right&lt;/span&gt; &lt;span class="nv"&gt;Arrow&lt;/span&gt; – &lt;span class="nv"&gt;Go&lt;/span&gt; &lt;span class="nv"&gt;to&lt;/span&gt; &lt;span class="nv"&gt;the&lt;/span&gt; &lt;span class="k"&gt;end&lt;/span&gt; &lt;span class="nv"&gt;of&lt;/span&gt; &lt;span class="nv"&gt;the&lt;/span&gt; &lt;span class="nv"&gt;current&lt;/span&gt; &lt;span class="nv"&gt;line&lt;/span&gt;.
+&lt;span class="nv"&gt;Option&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="nv"&gt;Left&lt;/span&gt; &lt;span class="nv"&gt;Arrow&lt;/span&gt; – &lt;span class="nv"&gt;Move&lt;/span&gt; &lt;span class="nv"&gt;the&lt;/span&gt; &lt;span class="nv"&gt;cursor&lt;/span&gt; &lt;span class="nv"&gt;left&lt;/span&gt; &lt;span class="nv"&gt;one&lt;/span&gt; &lt;span class="nv"&gt;word&lt;/span&gt;.
+&lt;span class="nv"&gt;Option&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="nv"&gt;Right&lt;/span&gt; &lt;span class="nv"&gt;Arrow&lt;/span&gt; – &lt;span class="nv"&gt;Move&lt;/span&gt; &lt;span class="nv"&gt;the&lt;/span&gt; &lt;span class="nv"&gt;cursor&lt;/span&gt; &lt;span class="nv"&gt;right&lt;/span&gt; &lt;span class="nv"&gt;one&lt;/span&gt; &lt;span class="nv"&gt;word&lt;/span&gt;.
+&lt;span class="nv"&gt;Option&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="nv"&gt;Delete&lt;/span&gt; – &lt;span class="nv"&gt;Delete&lt;/span&gt; &lt;span class="nv"&gt;the&lt;/span&gt; &lt;span class="nv"&gt;word&lt;/span&gt; &lt;span class="nv"&gt;to&lt;/span&gt; &lt;span class="nv"&gt;the&lt;/span&gt; &lt;span class="nv"&gt;left&lt;/span&gt; &lt;span class="nv"&gt;of&lt;/span&gt; &lt;span class="nv"&gt;the&lt;/span&gt; &lt;span class="nv"&gt;cursor&lt;/span&gt;. &lt;span class="nv"&gt;Bear&lt;/span&gt; &lt;span class="nv"&gt;in&lt;/span&gt; &lt;span class="nv"&gt;mind&lt;/span&gt; &lt;span class="nv"&gt;that&lt;/span&gt; &lt;span class="nv"&gt;the&lt;/span&gt; &lt;span class="nv"&gt;Delete&lt;/span&gt; &lt;span class="nv"&gt;button&lt;/span&gt; &lt;span class="nv"&gt;on&lt;/span&gt; &lt;span class="nv"&gt;a&lt;/span&gt; &lt;span class="nv"&gt;Mac&lt;/span&gt; &lt;span class="nv"&gt;functions&lt;/span&gt; &lt;span class="nv"&gt;like&lt;/span&gt; &lt;span class="nv"&gt;Backspace&lt;/span&gt; &lt;span class="nv"&gt;on&lt;/span&gt; &lt;span class="nv"&gt;Windows&lt;/span&gt;.
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;As on Windows, you can press Shift to select text while using these shortcuts. For example, hold down Shift and Option and tap the left arrow repeatedly to select entire previous words.&lt;/p&gt;
+&lt;h2 id="managing-open-applications"&gt;Managing Open Applications&lt;/h2&gt;
+&lt;p&gt;Macs offer an application switcher that works just like Alt + Tab does on Windows,
+but there are many more keyboard shortcuts that tie into the Mission Control feature.
+Read our our guide to using Mission Control for more keyboard shortcuts and tricks.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;Command&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;Tab&lt;/span&gt; &lt;span class="err"&gt;–&lt;/span&gt; &lt;span class="k"&gt;Move&lt;/span&gt; &lt;span class="n"&gt;through&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="n"&gt;list&lt;/span&gt; &lt;span class="k"&gt;of&lt;/span&gt; &lt;span class="k"&gt;open&lt;/span&gt; &lt;span class="n"&gt;applications&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt; &lt;span class="n"&gt;This&lt;/span&gt; &lt;span class="k"&gt;is&lt;/span&gt; &lt;span class="k"&gt;like&lt;/span&gt; &lt;span class="n"&gt;Alt&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;Tab&lt;/span&gt; &lt;span class="k"&gt;on&lt;/span&gt; &lt;span class="n"&gt;Windows&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;
+&lt;span class="n"&gt;Command&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;Shift&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;Tab&lt;/span&gt; &lt;span class="err"&gt;–&lt;/span&gt; &lt;span class="k"&gt;Move&lt;/span&gt; &lt;span class="n"&gt;through&lt;/span&gt; &lt;span class="n"&gt;the&lt;/span&gt; &lt;span class="n"&gt;list&lt;/span&gt; &lt;span class="k"&gt;in&lt;/span&gt; &lt;span class="n"&gt;reverse&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;
+&lt;span class="n"&gt;Command&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;Q&lt;/span&gt; &lt;span class="err"&gt;–&lt;/span&gt; &lt;span class="n"&gt;Quit&lt;/span&gt; &lt;span class="n"&gt;the&lt;/span&gt; &lt;span class="k"&gt;current&lt;/span&gt; &lt;span class="n"&gt;application&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt; &lt;span class="n"&gt;This&lt;/span&gt; &lt;span class="k"&gt;is&lt;/span&gt; &lt;span class="k"&gt;like&lt;/span&gt; &lt;span class="n"&gt;Alt&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;F4&lt;/span&gt; &lt;span class="k"&gt;on&lt;/span&gt; &lt;span class="n"&gt;Windows&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;
+&lt;span class="n"&gt;F3&lt;/span&gt; &lt;span class="err"&gt;–&lt;/span&gt; &lt;span class="k"&gt;Open&lt;/span&gt; &lt;span class="n"&gt;Mission&lt;/span&gt; &lt;span class="n"&gt;Control&lt;/span&gt; &lt;span class="k"&gt;to&lt;/span&gt; &lt;span class="k"&gt;view&lt;/span&gt; &lt;span class="k"&gt;all&lt;/span&gt; &lt;span class="k"&gt;open&lt;/span&gt; &lt;span class="n"&gt;application&lt;/span&gt; &lt;span class="n"&gt;windows&lt;/span&gt; &lt;span class="k"&gt;and&lt;/span&gt; &lt;span class="n"&gt;desktops&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;
+&lt;span class="n"&gt;Ctrl&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="k"&gt;Left&lt;/span&gt; &lt;span class="n"&gt;Arrow&lt;/span&gt; &lt;span class="err"&gt;–&lt;/span&gt; &lt;span class="k"&gt;Move&lt;/span&gt; &lt;span class="n"&gt;one&lt;/span&gt; &lt;span class="n"&gt;desktop&lt;/span&gt; &lt;span class="k"&gt;to&lt;/span&gt; &lt;span class="n"&gt;the&lt;/span&gt; &lt;span class="k"&gt;left&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;
+&lt;span class="n"&gt;Ctrl&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="k"&gt;Right&lt;/span&gt; &lt;span class="n"&gt;Arrow&lt;/span&gt; &lt;span class="err"&gt;–&lt;/span&gt; &lt;span class="k"&gt;Move&lt;/span&gt; &lt;span class="n"&gt;one&lt;/span&gt; &lt;span class="n"&gt;desktop&lt;/span&gt; &lt;span class="k"&gt;to&lt;/span&gt; &lt;span class="n"&gt;the&lt;/span&gt; &lt;span class="k"&gt;right&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2 id="references"&gt;References&lt;/h2&gt;
+&lt;p&gt;https://appuals.com/cut-paste-mac/&lt;/p&gt;</content><category term="macOS"></category><category term="Apple"></category><category term="shortcuts"></category><category term="GUI"></category></entry><entry><title>Make Windows Restart Regularly</title><link href="http://www.legendu.net/misc/blog/make-windows-restart-regularly/" rel="alternate"></link><published>2019-05-13T22:55:40-07:00</published><updated>2019-05-13T22:55:40-07:00</updated><author><name>Benjamin Du</name></author><id>tag:www.legendu.net,2019-05-13:/misc/blog/make-windows-restart-regularly/</id><summary type="html">&lt;p&gt;**
+Things on this page are fragmentary and immature notes/thoughts of the author.
+It is not meant to readers but rather for convenient reference of the author and future improvement.&lt;/p&gt;
+&lt;p&gt;My Windows PC in my office slows down signficantly after running for several days.
+I have cleaned up the startup …&lt;/p&gt;</summary><content type="html">&lt;p&gt;**
+Things on this page are fragmentary and immature notes/thoughts of the author.
+It is not meant to readers but rather for convenient reference of the author and future improvement.&lt;/p&gt;
+&lt;p&gt;My Windows PC in my office slows down signficantly after running for several days.
+I have cleaned up the startup applications to the most I can. 
+The only way I can think of is to automatically restart the computer early morning every few days. 
+The article 
+&lt;a href="https://www.sysmiks.com/automatic-restart-shut-down-pc/"&gt;[Windows10] How to set to automatically restart or shut down the PC at the specified time using Task Scheduler&lt;/a&gt;
+is a great one on how to make Windows restart/shutdown at scheduled time.&lt;/p&gt;</content><category term="OS"></category><category term="Windows"></category><category term="Microsoft"></category><category term="restart"></category></entry><entry><title>Tips on macOS</title><link href="http://www.legendu.net/misc/blog/mac-tips/" rel="alternate"></link><published>2019-05-11T01:05:59-07:00</published><updated>2019-05-11T01:05:59-07:00</updated><author><name>Ben Chuanlong Du</name></author><id>tag:www.legendu.net,2019-05-11:/misc/blog/mac-tips/</id><summary type="html">&lt;p&gt;&lt;strong&gt;
+Things on this page are
+fragmentary and immature notes/thoughts of the author.
+It is not meant to readers
+but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Print Mac OS X operating system version information.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;sw_vers&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;productName&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;iTerm2&lt;/code&gt; is the best termimal application in Mac. &lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;You can …&lt;/p&gt;&lt;/li&gt;&lt;/ol&gt;</summary><content type="html">&lt;p&gt;&lt;strong&gt;
+Things on this page are
+fragmentary and immature notes/thoughts of the author.
+It is not meant to readers
+but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Print Mac OS X operating system version information.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;sw_vers&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;productName&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;iTerm2&lt;/code&gt; is the best termimal application in Mac. &lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;You can use Homebrew to install applications in Mac
+    similar to the command &lt;code&gt;apt-get&lt;/code&gt; or wajig in Debian series of Linux distributions.
+    However, you do not have to run the command brew with sudo.
+    As a matter of fact, 
+    you should never do this. &lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="key-repeating"&gt;Key Repeating&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Run the following command in terminal and then &lt;strong&gt;restart your Mac&lt;/strong&gt; to enable key repeating by pressing and holding.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;defaults&lt;/span&gt; &lt;span class="k"&gt;write&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="k"&gt;g&lt;/span&gt; &lt;span class="n"&gt;ApplePressAndHoldEnabled&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;bool&lt;/span&gt; &lt;span class="k"&gt;false&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Run the following command in terminal and then &lt;strong&gt;restart your Mac&lt;/strong&gt; to disable key repeating by presing and holding.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;defaults&lt;/span&gt; &lt;span class="k"&gt;write&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="k"&gt;g&lt;/span&gt; &lt;span class="n"&gt;ApplePressAndHoldEnabled&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;bool&lt;/span&gt; &lt;span class="k"&gt;true&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;For more details please refer to
+&lt;a href="https://www.howtogeek.com/267463/how-to-enable-key-repeating-in-macos/"&gt;How to Enable Key Repeating in macOS&lt;/a&gt;
+.&lt;/p&gt;
+&lt;h2 id="allow-ssh-into-mac"&gt;Allow SSH into Mac&lt;/h2&gt;
+&lt;p&gt;&lt;a href="http://osxdaily.com/2011/09/30/remote-login-ssh-server-mac-os-x/"&gt;Enable Remote Login to Start SSH Server in Mac OS X&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id="ip-address"&gt;IP Address&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;ifconfig&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="n"&gt;grep&lt;/span&gt; &lt;span class="n"&gt;inet&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;&lt;a href="https://blog.pcrisk.com/mac/12377-how-to-find-out-your-ip-address-on-mac"&gt;How to find internal and external IP addresses on Mac OS X and macOS?&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id="touchpad"&gt;Touchpad&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Enable tapping (for click) by checking the checkbox &lt;code&gt;Tap to click&lt;/code&gt;
+    in &lt;code&gt;System preference...&lt;/code&gt; &amp;gt; &lt;code&gt;Trackpad&lt;/code&gt; &amp;gt; &lt;code&gt;Point &amp;amp; Click&lt;/code&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Enable tapping with two fingers for right click by checking the checkboxs &lt;code&gt;Tap to click&lt;/code&gt; and &lt;code&gt;Secondary click&lt;/code&gt;
+    in &lt;code&gt;System preference...&lt;/code&gt; &amp;gt; &lt;code&gt;Trackpad&lt;/code&gt; &amp;gt; &lt;code&gt;Point &amp;amp; Click&lt;/code&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Tapping is automatically disable while typing on Mac.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="move-and-resize-windows"&gt;Move and Resize Windows&lt;/h2&gt;
+&lt;p&gt;https://www.spectacleapp.co/&lt;/p&gt;
+&lt;p&gt;https://github.com/eczarny/spectacle&lt;/p&gt;
+&lt;h2 id="external-monitors"&gt;External Monitors&lt;/h2&gt;
+&lt;p&gt;https://support.apple.com/en-us/HT202351&lt;/p&gt;</content><category term="macOS"></category><category term="tips"></category><category term="Apple"></category></entry><entry><title>Command Line Tools for Linux File System</title><link href="http://www.legendu.net/misc/blog/command-line-tools-for-linux-file-system/" rel="alternate"></link><published>2019-03-30T14:41:00-07:00</published><updated>2019-03-30T14:41:00-07:00</updated><author><name>Ben Chuanlong Du</name></author><id>tag:www.legendu.net,2019-03-30:/misc/blog/command-line-tools-for-linux-file-system/</id><summary type="html">&lt;p&gt;&lt;strong&gt;
+Things on this page are
+fragmentary and immature notes/thoughts of the author.
+It is not meant to readers
+but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;List disk information.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;df&lt;/span&gt;
+&lt;span class="n"&gt;df&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;HOME&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Management disk partition tables.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;fdisk&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Format disk partitions.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;mkfs&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;ext4&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;dev&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;sd3&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;path_to_mount_in&lt;/span&gt;
+
+&lt;span class="n"&gt;mkfs …&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;&lt;/ol&gt;</summary><content type="html">&lt;p&gt;&lt;strong&gt;
+Things on this page are
+fragmentary and immature notes/thoughts of the author.
+It is not meant to readers
+but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;List disk information.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;df&lt;/span&gt;
+&lt;span class="n"&gt;df&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;HOME&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Management disk partition tables.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;fdisk&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Format disk partitions.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;mkfs&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;ext4&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;dev&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;sd3&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;path_to_mount_in&lt;/span&gt;
+
+&lt;span class="n"&gt;mkfs&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;ntfs&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;dev&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;sd3&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;path_to_mount_in&lt;/span&gt;
+
+&lt;span class="n"&gt;mkfs&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;exfat&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;dev&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;sd3&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;path_to_mount_in&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Report disk usage.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;du&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;lhd&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt; &lt;span class="p"&gt;.&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;dd&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;dd&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;badblocks&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;</content><category term="Linux"></category><category term="file system"></category><category term="filesystem"></category><category term="shell"></category><category term="terminal"></category><category term="command line"></category></entry><entry><title>Command Line Tools for Mac File System</title><link href="http://www.legendu.net/misc/blog/command-line-tools-for-mac-file-system/" rel="alternate"></link><published>2019-03-30T14:41:00-07:00</published><updated>2019-03-30T14:41:00-07:00</updated><author><name>Benjamin Du</name></author><id>tag:www.legendu.net,2019-03-30:/misc/blog/command-line-tools-for-mac-file-system/</id><summary type="html">&lt;p&gt;&lt;strong&gt;
+Things on this page are fragmentary and immature notes/thoughts of the author.
+It is not meant to readers but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;List disk information.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;diskutil&lt;/span&gt; &lt;span class="n"&gt;list&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Management disk partition tables.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;fdisk&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Format disk partitions.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;newfs_ext4&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;dev&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;sd3&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;path_to_mount_in&lt;/span&gt;
+
+&lt;span class="n"&gt;newfs_ntfs&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;dev&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;sd3 …&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;&lt;/ol&gt;</summary><content type="html">&lt;p&gt;&lt;strong&gt;
+Things on this page are fragmentary and immature notes/thoughts of the author.
+It is not meant to readers but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;List disk information.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;diskutil&lt;/span&gt; &lt;span class="n"&gt;list&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Management disk partition tables.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;fdisk&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Format disk partitions.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;newfs_ext4&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;dev&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;sd3&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;path_to_mount_in&lt;/span&gt;
+
+&lt;span class="n"&gt;newfs_ntfs&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;dev&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;sd3&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;path_to_mount_in&lt;/span&gt;
+
+&lt;span class="n"&gt;newfs_exfat&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;dev&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;sd3&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;path_to_mount_in&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Report disk usage.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;du&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;lhd&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt; &lt;span class="p"&gt;.&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;dd&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;dd&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;badblocks&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;</content><category term="macOS"></category><category term="file system"></category><category term="filesystem"></category><category term="shell"></category><category term="terminal"></category><category term="command line"></category></entry><entry><title>Mount Ntfs Drive Manually on Mac</title><link href="http://www.legendu.net/misc/blog/mount-external-hard-drive-manually-on-mac/" rel="alternate"></link><published>2019-03-30T14:28:17-07:00</published><updated>2019-03-30T14:28:17-07:00</updated><author><name>Benjamin Du</name></author><id>tag:www.legendu.net,2019-03-30:/misc/blog/mount-external-hard-drive-manually-on-mac/</id><summary type="html">&lt;p&gt;&lt;strong&gt;
+Things on this page are fragmentary and immature notes/thoughts of the author.
+It is not meant to readers but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;First use &lt;code&gt;diskutil list&lt;/code&gt; to list all avaiable disks and identifiy the external hard drive to mount.
+For example,
+running …&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;strong&gt;
+Things on this page are fragmentary and immature notes/thoughts of the author.
+It is not meant to readers but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;First use &lt;code&gt;diskutil list&lt;/code&gt; to list all avaiable disks and identifiy the external hard drive to mount.
+For example,
+running &lt;code&gt;diskutil list&lt;/code&gt; on my Mac gives me the following output
+and &lt;code&gt;/dev/disk2s1&lt;/code&gt; is the partition (NTFS) to mount.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ diskutil list
+/dev/disk0 &lt;span class="o"&gt;(&lt;/span&gt;internal&lt;span class="o"&gt;)&lt;/span&gt;:
+   &lt;span class="c1"&gt;#:                       TYPE NAME                    SIZE       IDENTIFIER&lt;/span&gt;
+   &lt;span class="m"&gt;0&lt;/span&gt;:      GUID_partition_scheme                         &lt;span class="m"&gt;500&lt;/span&gt;.3 GB   disk0
+   &lt;span class="m"&gt;1&lt;/span&gt;:                        EFI EFI                     &lt;span class="m"&gt;314&lt;/span&gt;.6 MB   disk0s1
+   &lt;span class="m"&gt;2&lt;/span&gt;:                 Apple_APFS Container disk1         &lt;span class="m"&gt;500&lt;/span&gt;.0 GB   disk0s2
+
+/dev/disk1 &lt;span class="o"&gt;(&lt;/span&gt;synthesized&lt;span class="o"&gt;)&lt;/span&gt;:
+   &lt;span class="c1"&gt;#:                       TYPE NAME                    SIZE       IDENTIFIER&lt;/span&gt;
+   &lt;span class="m"&gt;0&lt;/span&gt;:      APFS Container Scheme -                      +500.0 GB   disk1
+                                 Physical Store disk0s2
+   &lt;span class="m"&gt;1&lt;/span&gt;:                APFS Volume Macintosh HD            &lt;span class="m"&gt;102&lt;/span&gt;.7 GB   disk1s1
+   &lt;span class="m"&gt;2&lt;/span&gt;:                APFS Volume Preboot                 &lt;span class="m"&gt;45&lt;/span&gt;.2 MB    disk1s2
+   &lt;span class="m"&gt;3&lt;/span&gt;:                APFS Volume Recovery                &lt;span class="m"&gt;517&lt;/span&gt;.0 MB   disk1s3
+   &lt;span class="m"&gt;4&lt;/span&gt;:                APFS Volume VM                      &lt;span class="m"&gt;3&lt;/span&gt;.2 GB     disk1s4
+
+/dev/disk2 &lt;span class="o"&gt;(&lt;/span&gt;external, physical&lt;span class="o"&gt;)&lt;/span&gt;:
+   &lt;span class="c1"&gt;#:                       TYPE NAME                    SIZE       IDENTIFIER&lt;/span&gt;
+   &lt;span class="m"&gt;0&lt;/span&gt;:     FDisk_partition_scheme                        *1.0 TB     disk2
+   &lt;span class="m"&gt;1&lt;/span&gt;:                      Linux                         &lt;span class="m"&gt;1&lt;/span&gt;.0 TB     disk2s1
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2 id="ntfs"&gt;NTFS&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo mount_ntfs /dev/disk2s1 /path_to_mount_in
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2 id="exfat"&gt;ExFAT&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo mount_exfat /dev/disk2s1 /path_to_mount_in
+&lt;/pre&gt;&lt;/div&gt;</content><category term="OS"></category><category term="macOS"></category><category term="mount"></category><category term="NTFS"></category><category term="external drive"></category><category term="ExFAT"></category></entry><entry><title>Best Filesystem Format for Cross-Platform Data Exchanging</title><link href="http://www.legendu.net/misc/blog/best-filesystem-format-for-cross-platform-data-exchanging/" rel="alternate"></link><published>2019-03-25T00:53:40-07:00</published><updated>2019-03-25T00:53:40-07:00</updated><author><name>Benjamin Du</name></author><id>tag:www.legendu.net,2019-03-25:/misc/blog/best-filesystem-format-for-cross-platform-data-exchanging/</id><summary type="html">&lt;p&gt;&lt;strong&gt;
+Things on this page are fragmentary and immature notes/thoughts of the author.
+It is not meant to readers but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id="fat32"&gt;FAT32&lt;/h2&gt;
+&lt;p&gt;FAT32 is an outdated filesystem. 
+The maximum size for a single file is 4G.
+You should instead exFAT instead …&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;strong&gt;
+Things on this page are fragmentary and immature notes/thoughts of the author.
+It is not meant to readers but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id="fat32"&gt;FAT32&lt;/h2&gt;
+&lt;p&gt;FAT32 is an outdated filesystem. 
+The maximum size for a single file is 4G.
+You should instead exFAT instead of FAT32 where possible.&lt;/p&gt;
+&lt;h2 id="exfat"&gt;&lt;a href="https://en.wikipedia.org/wiki/ExFAT"&gt;exFAT&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;exFAT is great cross-platform filesystem that is support out-of-box by Windows, Linux and macOS.
+There is practically no limit (big enough for average users) on single file size.&lt;/p&gt;
+&lt;h2 id="ntfs"&gt;NTFS&lt;/h2&gt;
+&lt;p&gt;NTFS is the current MS Windows Filesystem. 
+It is superior to exFAT and is supported by Linux out-of-box, 
+however, there is limited support on macOS. 
+Reading a NTFS filesystem is supported in macOS 
+but writing to a NTFS drive is experimental currently
+and it is strongly suggest that you don't try it at this time.&lt;/p&gt;
+&lt;p&gt;NTFS is a POSIX-compatible filesystem, 
+and it is POSSIBLE to use permissions (even though complicated) on NTFS (but not on FAT systems).
+To enable permissions on NTFS, 
+you need a "User Mapping File" or just give the permissions option when mounting (when no compatibility with Windows is needed). 
+This maps linux users on your system with the user IDs like NTFS/Windows use them internally.
+Please refer to the &lt;a href="http://manpages.ubuntu.com/manpages/bionic/en/man8/ntfs-3g.8.html"&gt;ntfs-3g manual&lt;/a&gt; for more information.&lt;/p&gt;
+&lt;h2 id="ext4"&gt;ext4&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;ext4&lt;/code&gt; is the current default filesystem for Linux operating systems.
+It worth mentioning that the Windows Subsystem Linux (WSL) sees what the Windows system sees,
+so it supports mounting Windows fileystems (FAT32, exFAT and NTFS) into WSL but not the ext4 filesystem at this time.
+However, 
+this might be changed in future. 
+And if mouting ext4 is supported in WSL, 
+ext4 will be even a better way for sharing data between Windows and Linux.&lt;/p&gt;
+&lt;p&gt;Reading ext4 on Mac can be supported by installing &lt;code&gt;ext4fuse&lt;/code&gt;,
+however, 
+reading/writing ext4 on Mac is experimental and it is strongly suggested that you don't try it at this time.&lt;/p&gt;
+&lt;h2 id="mount-external-hard-drive-via-virtual-machine"&gt;Mount External Hard Drive Via Virtual Machine&lt;/h2&gt;
+&lt;p&gt;Given the above said,
+there is a heavy and hacking way to read all kinds of filesystem 
+if your machine is powerful enough to run a Virtual Machine.
+You can mount an external hard drive that is not supported by the current operating system 
+via a virtual machine which can read/write it.
+For example, 
+if you have an external ext4 hard drive and want to read/write in Mac, 
+you can run a Ubuntu virtual machine in Mac to read/write it.
+In order for the guest virtual machine to read/write the external hard drive, 
+it must be able to access the USB devices.
+Below are details steps to access an external hard drive in a VirtualBox VM.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Download and install VirtualBox.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Download and install VirtualBox Extension pack. 
+    You can install it by double clicking it.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Plug in your external hard drive to the host machine. 
+    Notice that you must be umounted on the host machine 
+    in order for it to be accsible on the guest virtual machine.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Enable the USB device on the guest virtual machine.
+    You hve to do this by adding a corresponding USB filter.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;The hard drive will auto mount on some Linux distributions (e.g., Ubuntu). 
+    If not, just manually mount it.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="references"&gt;References&lt;/h2&gt;
+&lt;p&gt;https://dzone.com/articles/how-to-mount-usb-drives-on-virtualbox&lt;/p&gt;
+&lt;p&gt;https://www.virtualbox.org/wiki/Downloads&lt;/p&gt;
+&lt;p&gt;https://askubuntu.com/questions/11840/how-do-i-use-chmod-on-an-ntfs-or-fat32-partition&lt;/p&gt;</content><category term="OS"></category><category term="macOS"></category><category term="external drive"></category><category term="filesystem"></category></entry><entry><title>Install Software on Mac</title><link href="http://www.legendu.net/misc/blog/install-software-on-mac/" rel="alternate"></link><published>2019-03-07T03:11:14-08:00</published><updated>2019-03-07T03:11:14-08:00</updated><author><name>Ben Chuanlong Du</name></author><id>tag:www.legendu.net,2019-03-07:/misc/blog/install-software-on-mac/</id><summary type="html">&lt;p&gt;&lt;strong&gt;
+Things on this page are
+fragmentary and immature notes/thoughts of the author.
+It is not meant to readers
+but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id="homebrew"&gt;Homebrew&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;You might encounter link problems when you use the &lt;code&gt;brew&lt;/code&gt; command to install packages on Mac.
+    A quick and …&lt;/p&gt;&lt;/li&gt;&lt;/ol&gt;</summary><content type="html">&lt;p&gt;&lt;strong&gt;
+Things on this page are
+fragmentary and immature notes/thoughts of the author.
+It is not meant to readers
+but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id="homebrew"&gt;Homebrew&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;You might encounter link problems when you use the &lt;code&gt;brew&lt;/code&gt; command to install packages on Mac.
+    A quick and dirty way to solve the problem is to link the executable file into &lt;code&gt;$HOME/bin&lt;/code&gt;.
+    This will not solve all problems, of course.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;You can install a specific version of a package using the &lt;code&gt;@&lt;/code&gt; symbol.
+    For example,
+    the command below installs node 8.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;brew&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="n"&gt;node&lt;/span&gt;&lt;span class="mi"&gt;@8&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;All available versions of a package (say, node) can be listed using the following command.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;brew&lt;/span&gt; &lt;span class="k"&gt;search&lt;/span&gt; &lt;span class="n"&gt;node&lt;/span&gt;&lt;span class="o"&gt;@&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;If there are multiple version of a package (say, node) installed, 
+you can set the default version of the package to use using the command below.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;brew&lt;/span&gt; &lt;span class="n"&gt;switch&lt;/span&gt; &lt;span class="n"&gt;node&lt;/span&gt; &lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;15&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Uninstall a package, say, &lt;code&gt;telnet&lt;/code&gt;.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;brew&lt;/span&gt; &lt;span class="n"&gt;uninstall&lt;/span&gt; &lt;span class="n"&gt;telnet&lt;/span&gt;
+&lt;span class="o"&gt;#&lt;/span&gt; &lt;span class="k"&gt;or&lt;/span&gt;
+&lt;span class="n"&gt;brew&lt;/span&gt; &lt;span class="n"&gt;remove&lt;/span&gt; &lt;span class="n"&gt;telnet&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Do not install python using brew as you will end up with 2 copies of python&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;better to use MacVim instead of Vim. &lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;brew&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="n"&gt;macvim&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;The command for MacVim is &lt;code&gt;mvim&lt;/code&gt;. 
+For convenience, 
+you can link it to &lt;code&gt;$HOME/bin/vim&lt;/code&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;No readlink on Mac.  Use &lt;code&gt;greadlink&lt;/code&gt; instead.
+    You have install the package &lt;code&gt;coreutils&lt;/code&gt; in order to use &lt;code&gt;greadlink&lt;/code&gt;.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;brew&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="n"&gt;coreutils&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="references"&gt;References&lt;/h2&gt;
+&lt;p&gt;https://apple.stackexchange.com/questions/329187/homebrew-rollback-from-python-3-7-to-python-3-6-5-x&lt;/p&gt;
+&lt;p&gt;https://stackoverflow.com/questions/3987683/homebrew-install-specific-version-of-formula&lt;/p&gt;
+&lt;p&gt;http://osxdaily.com/2018/06/13/how-install-update-python-3x-mac/&lt;/p&gt;</content><category term="macOS"></category><category term="installing software"></category><category term="Homebrew"></category></entry><entry><title>Turn on Remote Login in Mac</title><link href="http://www.legendu.net/misc/blog/turn-on-remote-login-in-mac/" rel="alternate"></link><published>2018-06-24T21:39:37-07:00</published><updated>2018-06-24T21:39:37-07:00</updated><author><name>Ben Chuanlong Du</name></author><id>tag:www.legendu.net,2018-06-24:/misc/blog/turn-on-remote-login-in-mac/</id><summary type="html">&lt;p&gt;&lt;strong&gt;
+Things on this page are
+fragmentary and immature notes/thoughts of the author.
+It is not meant to readers
+but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;You cannot SSH into a Mac (even if openssh is install on it) 
+unless Remote Login is turned on.
+You …&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;strong&gt;
+Things on this page are
+fragmentary and immature notes/thoughts of the author.
+It is not meant to readers
+but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;You cannot SSH into a Mac (even if openssh is install on it) 
+unless Remote Login is turned on.
+You can follow the steps below to turn on Remote Login on Mac.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Go to &lt;code&gt;System Preferences&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;Select &lt;code&gt;Sharing&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;Check &lt;code&gt;Remote Login&lt;/code&gt; in the left panel.&lt;/li&gt;
+&lt;/ol&gt;</content><category term="OS"></category><category term="Mac OS X"></category><category term="Apple"></category></entry><entry><title>Change Shell in Mac</title><link href="http://www.legendu.net/misc/blog/change-shell-in-mac/" rel="alternate"></link><published>2018-04-30T16:48:28-07:00</published><updated>2018-04-30T16:48:28-07:00</updated><author><name>Ben Chuanlong Du</name></author><id>tag:www.legendu.net,2018-04-30:/misc/blog/change-shell-in-mac/</id><summary type="html">&lt;p&gt;&lt;strong&gt;
+Things on this page are
+fragmentary and immature notes/thoughts of the author.
+It is not meant to readers
+but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;You can change the default shell to bash in Mac using the command below.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;chsh&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;s&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;bin&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;bash&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;&lt;strong&gt;
+Things on this page are
+fragmentary and immature notes/thoughts of the author.
+It is not meant to readers
+but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;You can change the default shell to bash in Mac using the command below.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;chsh&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;s&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;bin&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;bash&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;</content><category term="macOS"></category><category term="shell"></category></entry><entry><title>MacPorts Tips</title><link href="http://www.legendu.net/misc/blog/macports-tips/" rel="alternate"></link><published>2017-10-22T13:30:59-07:00</published><updated>2017-10-22T13:30:59-07:00</updated><author><name>Ben Chuanlong Du</name></author><id>tag:www.legendu.net,2017-10-22:/misc/blog/macports-tips/</id><summary type="html">&lt;p&gt;&lt;strong&gt;
+Things on this page are
+fragmentary and immature notes/thoughts of the author.
+It is not meant to readers
+but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="n"&gt;port&lt;/span&gt; &lt;span class="n"&gt;selfupdate&lt;/span&gt;
+
+&lt;span class="n"&gt;port&lt;/span&gt; &lt;span class="k"&gt;search&lt;/span&gt; &lt;span class="n"&gt;pkg&lt;/span&gt;
+
+&lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="n"&gt;port&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="n"&gt;pkg&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2 id="macports-behind-firewall"&gt;MacPorts behind Firewall&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Use http instead of rsync. 
+    Open the …&lt;/p&gt;&lt;/li&gt;&lt;/ol&gt;</summary><content type="html">&lt;p&gt;&lt;strong&gt;
+Things on this page are
+fragmentary and immature notes/thoughts of the author.
+It is not meant to readers
+but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="n"&gt;port&lt;/span&gt; &lt;span class="n"&gt;selfupdate&lt;/span&gt;
+
+&lt;span class="n"&gt;port&lt;/span&gt; &lt;span class="k"&gt;search&lt;/span&gt; &lt;span class="n"&gt;pkg&lt;/span&gt;
+
+&lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="n"&gt;port&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="n"&gt;pkg&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2 id="macports-behind-firewall"&gt;MacPorts behind Firewall&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Use http instead of rsync. 
+    Open the file &lt;code&gt;/opt/local/etc/macports/sources.conf&lt;/code&gt;
+    and replace the line &lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nl"&gt;rsync&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="o"&gt;//&lt;/span&gt;&lt;span class="n"&gt;rsync&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;macports&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;org&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="k"&gt;release&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;tarballs&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;ports&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;tar&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="n"&gt;default&lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;with&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nl"&gt;http&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="o"&gt;//&lt;/span&gt;&lt;span class="n"&gt;www&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;macports&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;org&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;files&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;ports&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;tar&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;gz&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="n"&gt;default&lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Configure proxy.&lt;/p&gt;
+&lt;p&gt;export http_proxy=http://username:password@proxyURL:portNumber
+export HTTP_PROXY=http://username:password@proxyURL:portNumberexport 
+export ftp_proxy=ftp://username:password@proxyURL:portNumber
+export FTP_PROXY=ftp://username:password@proxyURL:portNumber
+export rsync_proxy=username:password@proxyURL:portNumber
+export RSYNC_PROXY=username:password@proxyURL:portNumber&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Use &lt;code&gt;sudo port -d sync&lt;/code&gt; instead of &lt;code&gt;sudo port selfupdate&lt;/code&gt; to print debugging information while updating.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="references"&gt;References&lt;/h2&gt;
+&lt;p&gt;https://destefano.wordpress.com/2011/03/18/macports-behind-a-proxy/&lt;/p&gt;
+&lt;p&gt;https://samkhan13.wordpress.com/2012/06/15/make-macports-work-behind-proxy/&lt;/p&gt;</content><category term="macOS"></category><category term="MacPorts"></category><category term="tips"></category></entry><entry><title>Install GNU Utils Using MacPorts</title><link href="http://www.legendu.net/misc/blog/install-gnu-utils-using-macports/" rel="alternate"></link><published>2017-10-22T12:32:25-07:00</published><updated>2017-10-22T12:32:25-07:00</updated><author><name>Ben Chuanlong Du</name></author><id>tag:www.legendu.net,2017-10-22:/misc/blog/install-gnu-utils-using-macports/</id><summary type="html">&lt;p&gt;&lt;strong&gt;
+Things on this page are
+fragmentary and immature notes/thoughts of the author.
+It is not meant to readers
+but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id="configuration"&gt;Configuration&lt;/h2&gt;
+&lt;p&gt;Run the following command after installation.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;export&lt;/span&gt; &lt;span class="n"&gt;PATH&lt;/span&gt;&lt;span class="o"&gt;=/&lt;/span&gt;&lt;span class="n"&gt;opt&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="k"&gt;local&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;libexec&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;gnubin&lt;/span&gt;&lt;span class="err"&gt;：&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;opt&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="k"&gt;local&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;bin&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;opt&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="k"&gt;local&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;sbin&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="err"&gt;$&lt;/span&gt;&lt;span class="n"&gt;PATH …&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;&lt;strong&gt;
+Things on this page are
+fragmentary and immature notes/thoughts of the author.
+It is not meant to readers
+but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id="configuration"&gt;Configuration&lt;/h2&gt;
+&lt;p&gt;Run the following command after installation.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;export&lt;/span&gt; &lt;span class="n"&gt;PATH&lt;/span&gt;&lt;span class="o"&gt;=/&lt;/span&gt;&lt;span class="n"&gt;opt&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="k"&gt;local&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;libexec&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;gnubin&lt;/span&gt;&lt;span class="err"&gt;：&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;opt&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="k"&gt;local&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;bin&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;opt&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="k"&gt;local&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;sbin&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="err"&gt;$&lt;/span&gt;&lt;span class="n"&gt;PATH&lt;/span&gt;
+&lt;span class="n"&gt;export&lt;/span&gt; &lt;span class="n"&gt;MANPATH&lt;/span&gt;&lt;span class="o"&gt;=/&lt;/span&gt;&lt;span class="n"&gt;opt&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="k"&gt;local&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="k"&gt;share&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;man&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="err"&gt;$&lt;/span&gt;&lt;span class="n"&gt;MANPATH&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2 id="installation"&gt;Installation&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="n"&gt;port&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="n"&gt;file&lt;/span&gt;
+&lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="n"&gt;port&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="n"&gt;coreutils&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2 id="issues"&gt;Issues&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;had issues to sync ports in office, not sure this is due to network issue or firewall in office
+    rsync: failed to connect to rsync.macports.org: No route to host (65)
+    exit code 10&lt;/li&gt;
+&lt;/ol&gt;</content><category term="Mac"></category><category term="Mac OSX"></category><category term="MacPorts"></category></entry><entry><title>Mount Samba on Mac</title><link href="http://www.legendu.net/misc/blog/mount-samba-on-mac/" rel="alternate"></link><published>2017-08-26T20:18:18-07:00</published><updated>2017-08-26T20:18:18-07:00</updated><author><name>Ben Chuanlong Du</name></author><id>tag:www.legendu.net,2017-08-26:/misc/blog/mount-samba-on-mac/</id><summary type="html">&lt;p&gt;&lt;strong&gt;
+Things on this page are
+fragmentary and immature notes/thoughts of the author.
+It is not meant to readers
+but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id="gui"&gt;GUI&lt;/h2&gt;
+&lt;p&gt;Go -&amp;gt; Connect to Server&lt;/p&gt;
+&lt;p&gt;smb://path_to_dir&lt;/p&gt;
+&lt;h2 id="command-line"&gt;Command Line&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;mount&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;t&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;smbfs&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;//&lt;/span&gt;&lt;span class="k"&gt;user&lt;/span&gt;&lt;span class="nv"&gt;@server&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;sharename&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;share&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+
+&lt;span class="n"&gt;mount_smbfs&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;//&lt;/span&gt;&lt;span class="k"&gt;user&lt;/span&gt;&lt;span class="nv"&gt;@SERVER&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;folder …&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;&lt;strong&gt;
+Things on this page are
+fragmentary and immature notes/thoughts of the author.
+It is not meant to readers
+but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id="gui"&gt;GUI&lt;/h2&gt;
+&lt;p&gt;Go -&amp;gt; Connect to Server&lt;/p&gt;
+&lt;p&gt;smb://path_to_dir&lt;/p&gt;
+&lt;h2 id="command-line"&gt;Command Line&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;mount&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;t&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;smbfs&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;//&lt;/span&gt;&lt;span class="k"&gt;user&lt;/span&gt;&lt;span class="nv"&gt;@server&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;sharename&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;share&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+
+&lt;span class="n"&gt;mount_smbfs&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;//&lt;/span&gt;&lt;span class="k"&gt;user&lt;/span&gt;&lt;span class="nv"&gt;@SERVER&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;folder&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;mntpoint&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;</content><category term="macOS"></category><category term="mount"></category><category term="SAMBA"></category></entry><entry><title>Things to Do After Installing Linux</title><link href="http://www.legendu.net/misc/blog/things-to-do-after-installing-linux/" rel="alternate"></link><published>2016-12-04T20:59:32-08:00</published><updated>2016-12-04T20:59:32-08:00</updated><author><name>Ben Chuanlong Du</name></author><id>tag:www.legendu.net,2016-12-04:/misc/blog/things-to-do-after-installing-linux/</id><summary type="html">&lt;p&gt;&lt;strong&gt;
+Things on this page are
+fragmentary and immature notes/thoughts of the author.
+It is not meant to readers
+but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Choose a fast mirror.
+If you are using Ubuntu, 
+a fast mirror will be automatically decided based on your location …&lt;/p&gt;&lt;/li&gt;&lt;/ol&gt;</summary><content type="html">&lt;p&gt;&lt;strong&gt;
+Things on this page are
+fragmentary and immature notes/thoughts of the author.
+It is not meant to readers
+but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Choose a fast mirror.
+If you are using Ubuntu, 
+a fast mirror will be automatically decided based on your location. 
+However, if you are using other Linux distribution (e.g., Linux Mint),
+you might have to choose a fast mirror manually.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Install a good alternative package manager.
+&lt;code&gt;apt-get&lt;/code&gt; is a very good package manager for Debian series Linux distributions,
+however, &lt;code&gt;wajig&lt;/code&gt; is much superior choice.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo apt-get install wajig
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;ol&gt;
+&lt;li&gt;Upgrade the system.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;wajig update &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; wajig upgrade
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Swap the &lt;code&gt;Caps Lock&lt;/code&gt; key with the &lt;code&gt;Escape&lt;/code&gt; key.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;install must have software&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;aria2, uGet&lt;/li&gt;
+&lt;li&gt;install and configure Firefox &lt;/li&gt;
+&lt;li&gt;skype&lt;/li&gt;
+&lt;li&gt;sogou pinyin&lt;/li&gt;
+&lt;li&gt;transimission&lt;/li&gt;
+&lt;li&gt;teamdrive&lt;/li&gt;
+&lt;li&gt;teamviewer&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;This list is probelm not best suited for you. 
+For a general list of useful software/tools for Linux, 
+please check the post &lt;a href="http://www.legendu.net/misc/blog/useful-tools-linux/"&gt;Useful Tools in Linux&lt;/a&gt;.&lt;/p&gt;</content><category term="Linux"></category><category term="OS"></category><category term="installation"></category></entry><entry><title>Synchronize System Time in Debian</title><link href="http://www.legendu.net/misc/blog/synchronize-system-time-in-debian/" rel="alternate"></link><published>2016-07-13T22:18:56-07:00</published><updated>2016-07-13T22:18:56-07:00</updated><author><name>Ben Chuanlong Du</name></author><id>tag:www.legendu.net,2016-07-13:/misc/blog/synchronize-system-time-in-debian/</id><summary type="html">&lt;p&gt;&lt;strong&gt;
+Things on this page are fragmentary and immature notes/thoughts of the author. 
+It is not meant to readers but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sync-debian
+&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;&lt;strong&gt;
+Things on this page are fragmentary and immature notes/thoughts of the author. 
+It is not meant to readers but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sync-debian
+&lt;/pre&gt;&lt;/div&gt;</content><category term="synchronization"></category><category term="Linux"></category><category term="time"></category></entry><entry><title>KDE Questions</title><link href="http://www.legendu.net/misc/blog/kde-questions/" rel="alternate"></link><published>2016-07-13T22:06:20-07:00</published><updated>2016-07-13T22:06:20-07:00</updated><author><name>Ben Chuanlong Du</name></author><id>tag:www.legendu.net,2016-07-13:/misc/blog/kde-questions/</id><summary type="html">&lt;p&gt;&lt;strong&gt;
+Things on this page are fragmentary and immature notes/thoughts of the author. 
+It is not meant to readers but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;How to maximize window in KDE when launch it?&lt;/li&gt;
+&lt;/ol&gt;</summary><content type="html">&lt;p&gt;&lt;strong&gt;
+Things on this page are fragmentary and immature notes/thoughts of the author. 
+It is not meant to readers but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;How to maximize window in KDE when launch it?&lt;/li&gt;
+&lt;/ol&gt;</content><category term="KDE"></category><category term="OS"></category><category term="operating system"></category><category term="Linux"></category><category term="desktop environment"></category></entry><entry><title>Fonts for Linux</title><link href="http://www.legendu.net/misc/blog/fonts-for-linux/" rel="alternate"></link><published>2016-07-13T00:07:00-07:00</published><updated>2016-07-13T00:07:00-07:00</updated><author><name>Ben Chuanlong Du</name></author><id>tag:www.legendu.net,2016-07-13:/misc/blog/fonts-for-linux/</id><summary type="html">&lt;p&gt;&lt;strong&gt;
+Things on this page are fragmentary and immature notes/thoughts of the author. 
+It is not meant to readers but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;ttf-arphic-uming&lt;/code&gt;, &lt;code&gt;ttf-wqy-microhei&lt;/code&gt;, &lt;code&gt;ttf-wqy-zenhei&lt;/code&gt;, &lt;code&gt;xfonts-wqy&lt;/code&gt; and &lt;code&gt;ttf-opensymbol&lt;/code&gt; 
+are some packages related to Chinese fonts.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;If you have Adobe Reader installed on …&lt;/p&gt;&lt;/li&gt;&lt;/ol&gt;</summary><content type="html">&lt;p&gt;&lt;strong&gt;
+Things on this page are fragmentary and immature notes/thoughts of the author. 
+It is not meant to readers but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;ttf-arphic-uming&lt;/code&gt;, &lt;code&gt;ttf-wqy-microhei&lt;/code&gt;, &lt;code&gt;ttf-wqy-zenhei&lt;/code&gt;, &lt;code&gt;xfonts-wqy&lt;/code&gt; and &lt;code&gt;ttf-opensymbol&lt;/code&gt; 
+are some packages related to Chinese fonts.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;If you have Adobe Reader installed on your computer, 
+you can use Adobe Chinese fonts for free.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;To check Chinese fonts installed on your computer,
+you can use the command &lt;code&gt;fc-list :lang=zh-cn | sort&lt;/code&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;To install extra fonts in linux, 
+you can just copy the font files to the directory '$HOME/.fonts'.
+To make them in effect, 
+you have to run &lt;code&gt;fc-cache&lt;/code&gt; to update the system fonts cache.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;If you ever have any fonts problem with Tex Live in Linux, 
+install the package &lt;code&gt;texlive-fonts-extra&lt;/code&gt; (if you haven't done so) and try again.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;</content><category term="fonts"></category><category term="LaTeX"></category><category term="Chinese"></category><category term="Linux"></category><category term="Tex Live"></category><category term="TexLive"></category></entry><entry><title>FFmpeg</title><link href="http://www.legendu.net/misc/blog/ffmpeg/" rel="alternate"></link><published>2016-07-12T23:21:30-07:00</published><updated>2016-07-12T23:21:30-07:00</updated><author><name>Ben Chuanlong Du</name></author><id>tag:www.legendu.net,2016-07-12:/misc/blog/ffmpeg/</id><summary type="html">&lt;p&gt;&lt;strong&gt;
+Things on this page are fragmentary and immature notes/thoughts of the author. 
+It is not meant to readers but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;extrac audio from video&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;convert between different formats of audios&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;capture screen &lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;</summary><content type="html">&lt;p&gt;&lt;strong&gt;
+Things on this page are fragmentary and immature notes/thoughts of the author. 
+It is not meant to readers but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;extrac audio from video&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;convert between different formats of audios&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;capture screen &lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;</content><category term="multimedia"></category><category term="Linux"></category><category term="video"></category><category term="audio"></category></entry><entry><title>Install and Configure Iterm2 on Mac</title><link href="http://www.legendu.net/misc/blog/install-and-configure-iterm2-on-mac/" rel="alternate"></link><published>2016-07-05T07:51:37-07:00</published><updated>2016-07-05T07:51:37-07:00</updated><author><name>Ben Chuanlong Du</name></author><id>tag:www.legendu.net,2016-07-05:/misc/blog/install-and-configure-iterm2-on-mac/</id><summary type="html">&lt;p&gt;&lt;strong&gt;
+Things on this page are
+fragmentary and immature notes/thoughts of the author.
+It is not meant to readers
+but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="http://iterm2.com/downloads.html"&gt;Download&lt;/a&gt; 
+    the latest stable version of &lt;a href="http://iterm2.com"&gt;iTerm2&lt;/a&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Install iTerm2.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Download &lt;a href="http://iterm2colorschemes.com/"&gt;iTerm2 Color Schemes&lt;/a&gt;.
+    You can also download it from &lt;a href="https://github.com/mbadolato/iTerm2-Color-Schemes"&gt;GitHub …&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;&lt;/ol&gt;</summary><content type="html">&lt;p&gt;&lt;strong&gt;
+Things on this page are
+fragmentary and immature notes/thoughts of the author.
+It is not meant to readers
+but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="http://iterm2.com/downloads.html"&gt;Download&lt;/a&gt; 
+    the latest stable version of &lt;a href="http://iterm2.com"&gt;iTerm2&lt;/a&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Install iTerm2.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Download &lt;a href="http://iterm2colorschemes.com/"&gt;iTerm2 Color Schemes&lt;/a&gt;.
+    You can also download it from &lt;a href="https://github.com/mbadolato/iTerm2-Color-Schemes"&gt;GitHub&lt;/a&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Select the schemes you like. &lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;</content><category term="macOS"></category><category term="Apple"></category><category term="iTerm2"></category><category term="color schemes"></category></entry><entry><title>Things to Do After Reimaging Mac</title><link href="http://www.legendu.net/misc/blog/things-to-do-after-reimaging-mac/" rel="alternate"></link><published>2016-06-18T15:34:41-07:00</published><updated>2016-06-18T15:34:41-07:00</updated><author><name>Ben Chuanlong Du</name></author><id>tag:www.legendu.net,2016-06-18:/misc/blog/things-to-do-after-reimaging-mac/</id><summary type="html">&lt;p&gt;&lt;strong&gt;
+Things on this page are
+fragmentary and immature notes/thoughts of the author.
+It is not meant to readers
+but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Install &lt;a href="brew.sh"&gt;Homebrew&lt;/a&gt;.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;usr&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;bin&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;ruby&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;e&lt;/span&gt; &lt;span class="ss"&gt;&amp;quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&amp;quot;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Install XCode from the …&lt;/p&gt;&lt;/li&gt;&lt;/ol&gt;</summary><content type="html">&lt;p&gt;&lt;strong&gt;
+Things on this page are
+fragmentary and immature notes/thoughts of the author.
+It is not meant to readers
+but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Install &lt;a href="brew.sh"&gt;Homebrew&lt;/a&gt;.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;usr&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;bin&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;ruby&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;e&lt;/span&gt; &lt;span class="ss"&gt;&amp;quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&amp;quot;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Install XCode from the App store.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Install and configure &lt;a href="http://iterm2.com/"&gt;item2&lt;/a&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Install macvim.&lt;/p&gt;
+&lt;p&gt;brew install macvim&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;</content><category term="macOS"></category><category term="Apple"></category><category term="reinstallation"></category><category term="reimage"></category></entry><entry><title>Linux Mint Tips</title><link href="http://www.legendu.net/misc/blog/linux-mint-tips/" rel="alternate"></link><published>2016-06-06T18:48:54-07:00</published><updated>2016-06-06T18:48:54-07:00</updated><author><name>Ben Chuanlong Du</name></author><id>tag:www.legendu.net,2016-06-06:/misc/blog/linux-mint-tips/</id><summary type="html">&lt;p&gt;&lt;strong&gt;
+Things on this page are fragmentary and immature notes/thoughts of the author. 
+It is not meant to readers but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://segfault.linuxmint.com/"&gt;News from the Linux Mint development team&lt;/a&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;The Mint-X theme is a good one. 
+Themes downloaded from internet might cause …&lt;/p&gt;&lt;/li&gt;&lt;/ol&gt;</summary><content type="html">&lt;p&gt;&lt;strong&gt;
+Things on this page are fragmentary and immature notes/thoughts of the author. 
+It is not meant to readers but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://segfault.linuxmint.com/"&gt;News from the Linux Mint development team&lt;/a&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;The Mint-X theme is a good one. 
+Themes downloaded from internet might cause panel not working right.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;For input method related issues, 
+check the Input Method Tips post.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;To go to the GUI session, 
+press ctrl + alt + f8 instead of ctrl + alt + f7.
+Generally speaking,
+you want to try 
+ctrl + alt + f6 
+or
+ctrl + alt + f8 
+if
+ctrl + alt + f7 
+does not work on a Linux OS.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;you can choose the fastest mirror (for both Main and Base) in "Software Source"
+similarly as in Ubuntu.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Chinese Language Localization&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;set languages to be chinese&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;install Chinese language packages&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo apt-get install language-pack-zh-hans language-pack-gnome-zh-hans libreoffice-l10n-zh-cn thunderbird-locale-zh-hans firefox-locale-zh-hans
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;ol&gt;
+&lt;li&gt;download and install Sogou Pinyin&lt;/li&gt;
+&lt;/ol&gt;</content><category term="OS"></category><category term="operating system"></category><category term="Linux Mint"></category><category term="tips"></category></entry><entry><title>Make Linux Run Faster</title><link href="http://www.legendu.net/misc/blog/make-your-computer-run-faster/" rel="alternate"></link><published>2015-06-08T08:54:21-07:00</published><updated>2015-06-08T08:54:21-07:00</updated><author><name>Ben Chuanlong Du</name></author><id>tag:www.legendu.net,2015-06-08:/misc/blog/make-your-computer-run-faster/</id><summary type="html">&lt;p&gt;&lt;strong&gt;
+Things on this page are fragmentary and immature notes/thoughts of the author. 
+It is not meant to readers but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id="upgrading-hardware"&gt;Upgrading Hardware&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;RAM (first thing to be considered)  &lt;/li&gt;
+&lt;li&gt;Disk (considering SSD or Hybrid disk)&lt;/li&gt;
+&lt;li&gt;Video card (generally speaking, not a …&lt;/li&gt;&lt;/ol&gt;</summary><content type="html">&lt;p&gt;&lt;strong&gt;
+Things on this page are fragmentary and immature notes/thoughts of the author. 
+It is not meant to readers but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id="upgrading-hardware"&gt;Upgrading Hardware&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;RAM (first thing to be considered)  &lt;/li&gt;
+&lt;li&gt;Disk (considering SSD or Hybrid disk)&lt;/li&gt;
+&lt;li&gt;Video card (generally speaking, not a good idea for laptops)&lt;/li&gt;
+&lt;li&gt;CPU (generally speaking, not a good idea for laptops)&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="software-based-optimization"&gt;Software-based Optimization&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Use a light-weighted Linux distribution. 
+For example,
+antiX Linux is a light-weighted debian-based Linux operating system.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Use a light-weighted desktop environment.
+For example, Xfce is a good choice. 
+LXDE is even more light-weighted but not as feature complete as Xfce.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Remove resource hungry software.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Okular: has lots of KDE dependencies&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Remove non-necessary software.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;deborphan
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2 id="tips-for-speeding-up-debian-series-linux-operation-systems"&gt;Tips for Speeding up Debian Series Linux Operation Systems&lt;/h2&gt;
+&lt;p&gt;The following are some more tips for speeding up Debian Series Linux operation systems.
+These Tips also apply to other Linux operation systems, 
+except that you have to modify the commands.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Upgrade your operating system.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;wajig update &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; wajig upgrade
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Use the &lt;code&gt;noatime&lt;/code&gt; option for filesystems. 
+Add the &lt;code&gt;noatime&lt;/code&gt; option into your fstab for all non-swap partitions.  &lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Use dash instead of bash (make boot faster)&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;wajig install dash
+wajig reconfigure dash
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;ol&gt;
+&lt;li&gt;readahead (make boot faster)&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;wajig install readahead
+&lt;span class="c1"&gt;# or depending on your Linux distribution, you might have to use&lt;/span&gt;
+wajig install ureadahead
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;ol&gt;
+&lt;li&gt;localepurge&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;wajig install localepurge
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;ol&gt;
+&lt;li&gt;remove old kernels&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# Don&amp;#39;t worry. This won&amp;#39;t remove the up-to-date Linux kernel.&lt;/span&gt;
+wajig purge linux-image-&amp;lt;TAB&amp;gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;ol&gt;
+&lt;li&gt;package cleanup&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# find orphan packages&lt;/span&gt;
+deborphan
+&lt;span class="c1"&gt;# auto remove non-needed packages and clean package caches&lt;/span&gt;
+wajig autoremove &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; wajig autoclean
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;ol&gt;
+&lt;li&gt;bootchart&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;wajig install bootchart
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;ol&gt;
+&lt;li&gt;preload&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;wajig install preload
+&lt;/pre&gt;&lt;/div&gt;</content><category term="RAM"></category><category term="speedup"></category><category term="SSD"></category><category term="software"></category><category term="optimization"></category><category term="hardware"></category><category term="Linux"></category><category term="fast"></category><category term="performance"></category></entry><entry><title>antiX Tips</title><link href="http://www.legendu.net/misc/blog/antix-tips/" rel="alternate"></link><published>2014-12-28T16:53:07-08:00</published><updated>2014-12-28T16:53:07-08:00</updated><author><name>Ben Chuanlong Du</name></author><id>tag:www.legendu.net,2014-12-28:/misc/blog/antix-tips/</id><summary type="html">&lt;p&gt;&lt;strong&gt;
+Things on this page are fragmentary and immature notes/thoughts of the author. 
+It is not meant to readers but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;I forget whether antiX image is hybrid or not. Try and find this out.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;The command line installer of antiX …&lt;/p&gt;&lt;/li&gt;&lt;/ol&gt;</summary><content type="html">&lt;p&gt;&lt;strong&gt;
+Things on this page are fragmentary and immature notes/thoughts of the author. 
+It is not meant to readers but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;I forget whether antiX image is hybrid or not. Try and find this out.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;The command line installer of antiX is not intuitive (not as good as command line installer of Debian), 
+so you'd better use the graphic installer which is much easier to use.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;To avoid configure network manually, 
+you'd better install the full version of antiX.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;antiX uses &lt;code&gt;slim&lt;/code&gt; as the login manager&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;failed to install VBoxAdditions on antiX, the Linux image is too new
+use an older linux image solves antiX vboxaddition problem&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;</content><category term="antiX"></category><category term="tips"></category><category term="Linux"></category></entry><entry><title>Fcitx Tips</title><link href="http://www.legendu.net/misc/blog/fcitx-tips/" rel="alternate"></link><published>2014-12-25T22:41:48-08:00</published><updated>2014-12-25T22:41:48-08:00</updated><author><name>Ben Chuanlong Du</name></author><id>tag:www.legendu.net,2014-12-25:/misc/blog/fcitx-tips/</id><summary type="html">&lt;p&gt;&lt;strong&gt;Things on this page are fragmentary and immature notes/thoughts of the author. 
+It is not meant to readers but rather for convenient reference of the author and future improvement.&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id="fcitx"&gt;fcitx&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;Add Pinyin method: add -&amp;gt; type in pinyin, type in chinese doesn't help &lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="ibus"&gt;IBus&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;I suggest you use &lt;code&gt;CTRL&lt;/code&gt; + &lt;code&gt;SPACE …&lt;/code&gt;&lt;/p&gt;&lt;/li&gt;&lt;/ol&gt;</summary><content type="html">&lt;p&gt;&lt;strong&gt;Things on this page are fragmentary and immature notes/thoughts of the author. 
+It is not meant to readers but rather for convenient reference of the author and future improvement.&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id="fcitx"&gt;fcitx&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;Add Pinyin method: add -&amp;gt; type in pinyin, type in chinese doesn't help &lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="ibus"&gt;IBus&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;I suggest you use &lt;code&gt;CTRL&lt;/code&gt; + &lt;code&gt;SPACE&lt;/code&gt; as the switching hotkey,
+because it's the default hotkey for most input method engines.
+If the hotkey conflicts with other applications,
+you can quit IBus.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;In Mint, it might not work after you install IBus.
+This is because some IBus components are missing.
+To fix the problem,
+goto System Settings -&amp;gt; Language -&amp;gt; Input Method
+Check the button right to "IBus". 
+If it says some IBus components are missing,
+then click the button "Install Missing IBus components".&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;</content><category term="Linux"></category><category term="software"></category><category term="fcitx"></category><category term="input method"></category><category term="IBus"></category></entry><entry><title>Android Tips</title><link href="http://www.legendu.net/misc/blog/android-tips/" rel="alternate"></link><published>2014-12-16T23:05:28-08:00</published><updated>2014-12-16T23:05:28-08:00</updated><author><name>Ben Chuanlong Du</name></author><id>tag:www.legendu.net,2014-12-16:/misc/blog/android-tips/</id><summary type="html">&lt;p&gt;&lt;strong&gt;
+Things on this page are
+fragmentary and immature notes/thoughts of the author.
+It is not meant to readers
+but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;code&gt;scp&lt;/code&gt; works well but &lt;code&gt;rsync&lt;/code&gt; not.&lt;/li&gt;
+&lt;/ol&gt;</summary><content type="html">&lt;p&gt;&lt;strong&gt;
+Things on this page are
+fragmentary and immature notes/thoughts of the author.
+It is not meant to readers
+but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;code&gt;scp&lt;/code&gt; works well but &lt;code&gt;rsync&lt;/code&gt; not.&lt;/li&gt;
+&lt;/ol&gt;</content><category term="Android"></category><category term="OS"></category></entry><entry><title>Comparison of (Debian Series) Linux Distributions</title><link href="http://www.legendu.net/misc/blog/debian-vs-ubuntu/" rel="alternate"></link><published>2014-09-18T19:08:42-07:00</published><updated>2014-09-18T19:08:42-07:00</updated><author><name>Ben Chuanlong Du</name></author><id>tag:www.legendu.net,2014-09-18:/misc/blog/debian-vs-ubuntu/</id><summary type="html">&lt;p&gt;&lt;strong&gt;
+Things on this page are fragmentary and immature notes/thoughts of the author. 
+It is not meant to readers but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;The Debian series Linux 
+(including Debian, Ubuntu, Mint, antiX, etc) is a popular Linux distribution series. 
+It is a good …&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;strong&gt;
+Things on this page are fragmentary and immature notes/thoughts of the author. 
+It is not meant to readers but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;The Debian series Linux 
+(including Debian, Ubuntu, Mint, antiX, etc) is a popular Linux distribution series. 
+It is a good choice for personal (desktop) use. 
+The following are some comparisons based on my PERSONAL experience.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Ease to install: Ubuntu = Mint &amp;gt;&amp;gt; Debian.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Usability: Ubuntu = Mint &amp;gt; Debian.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Stability: Debian &amp;gt; Mint &amp;gt;= Ubuntu.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Performance: Debian &amp;gt; Ubuntu, Mint&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;antiX is lightweighted Debian compatible Linux distribution.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Ubuntu has more commercial, graphics related packages,
+and these packages make Ubuntu more user friendly.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Xubuntu (Ubuntu + Xfce) (preferrable LTS) is sweet.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Linux distribution are based on the same kernel. 
+Choosing a good desktop environment is more important than choose a Linux distribution.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Debian is not user friendly but it's very stable compared to Ubuntu. 
+I think Linux Mint Debian Edition (LMDE) with either Mate or Cinnamon 
+is a very good choice for daily use.
+First, it's toally based on Debian (testing), so it's very stable. 
+Second, it's very user friendly.
+And it's rolling release.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;I recommend to choose one among LMDE, Xubuntu and Ubuntu.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Distributions:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;ubuntu is much simpler than other Linux distributions, very fancy. 
+I like it honest speaking. 
+The only thing I'm worrying about is stablity. I might switch back to ubuntu in future. &lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Ubuntu, Mint and Fedora are easy to install and use. &lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Debian have more strict selection on "free" softwares.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;ArchLinux is for geek. &lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Handy Linux is a Debian and Xfce-based Linux distribution,
+not good as advertised.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="more-distirbutions"&gt;More Distirbutions&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;Zorin OS (based on Ubuntu)&lt;/li&gt;
+&lt;li&gt;Ubuntu Kylin (good for Chinese users)&lt;/li&gt;
+&lt;li&gt;Deepin (good for Chinese users, 可惜沾染了一些国内流氓软件的习气)&lt;/li&gt;
+&lt;li&gt;StartOS (good for Chinese users)&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="choose-a-desktop-environment"&gt;Choose a Desktop Environment&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;Stable or features?&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Xfce is lightweight and very stable.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Depends on your Linux distribution&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Xfce looks ugly in Debian but looks beautiful in Ubuntu.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;How fast is your computer?&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;XFCE, Mate and Cinnamon are good ones&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;LXDE &lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;RazorQT, Hawaii are potentially good ones
+lightweight but lacks functionalities&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="lightweight-debian-comparable-linux-distribution"&gt;Lightweight Debian Comparable Linux Distribution&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Damn Samll Linux (development is slowed down and almost paused, uncertain future)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;AntiX (128M - 256M ram, good for old computers)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;CrunchBang &lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="lightweight-ubuntu-comparable-linux-distribution"&gt;Lightweight Ubuntu Comparable Linux Distribution&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Lubuntu&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="other-lightweight-linux-distributions"&gt;Other Lightweight Linux Distributions&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;SliTaz (ISO image containing all packages available thus requires no internet connections)&lt;/li&gt;
+&lt;/ol&gt;</content><category term="antiX"></category><category term="Linux Mint"></category><category term="Ubuntu"></category><category term="Linux"></category><category term="Debian"></category></entry><entry><title>OS Questions</title><link href="http://www.legendu.net/misc/blog/os-questions/" rel="alternate"></link><published>2014-07-03T17:50:03-07:00</published><updated>2014-07-03T17:50:03-07:00</updated><author><name>Ben Chuanlong Du</name></author><id>tag:www.legendu.net,2014-07-03:/misc/blog/os-questions/</id><summary type="html">&lt;p&gt;&lt;strong&gt;Things on this page are fragmentary and immature notes/thoughts of the author. It is not meant to readers but rather for convenient reference of the author and future improvement.&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;If I use dual operating systems.
+I can shutdown my computer and then start it into the other OS,
+or …&lt;/li&gt;&lt;/ol&gt;</summary><content type="html">&lt;p&gt;&lt;strong&gt;Things on this page are fragmentary and immature notes/thoughts of the author. It is not meant to readers but rather for convenient reference of the author and future improvement.&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;If I use dual operating systems.
+I can shutdown my computer and then start it into the other OS,
+or I directly reboot into the other OS. 
+Is there any danger of doing the latter way?
+I somehow heard that it is not suggested to directly boot into the other OS.&lt;/li&gt;
+&lt;/ol&gt;</content><category term="os"></category><category term="operating system"></category><category term="tips"></category></entry><entry><title>Quick Application Search in Linux Desktop</title><link href="http://www.legendu.net/misc/blog/quick-application-search-in-linux-desktop/" rel="alternate"></link><published>2014-06-20T17:16:05-07:00</published><updated>2014-06-20T17:16:05-07:00</updated><author><name>Ben Chuanlong Du</name></author><id>tag:www.legendu.net,2014-06-20:/misc/blog/quick-application-search-in-linux-desktop/</id><summary type="html">&lt;p&gt;&lt;strong&gt;Things on this page are fragmentary and immature notes/thoughts of the author. It is not meant to readers but rather for convenient reference of the author and future improvement.&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Terminator -&amp;gt; nator&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;(Ubuntu) Software Center -&amp;gt; ware center&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Virtualbox -&amp;gt; virt/lbox&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Dropbox -&amp;gt; drop/pbox&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;</summary><content type="html">&lt;p&gt;&lt;strong&gt;Things on this page are fragmentary and immature notes/thoughts of the author. It is not meant to readers but rather for convenient reference of the author and future improvement.&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Terminator -&amp;gt; nator&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;(Ubuntu) Software Center -&amp;gt; ware center&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Virtualbox -&amp;gt; virt/lbox&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Dropbox -&amp;gt; drop/pbox&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;</content><category term="os"></category><category term="operating system"></category><category term="Linux"></category><category term="desktop"></category><category term="tips"></category></entry><entry><title>Cool Shell/Terminal Commands</title><link href="http://www.legendu.net/misc/blog/cool-shell-commands/" rel="alternate"></link><published>2014-06-18T21:38:38-07:00</published><updated>2014-06-18T21:38:38-07:00</updated><author><name>Ben Chuanlong Du</name></author><id>tag:www.legendu.net,2014-06-18:/misc/blog/cool-shell-commands/</id><summary type="html">&lt;p&gt;&lt;strong&gt;Things on this page are fragmentary and immature notes/thoughts of the author. It is not meant to readers but rather for convenient reference of the author and future improvement.&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://www.gnu.org/software/bash/manual/bashref.html"&gt;Bash Reference Manual&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://www.explainshell.com/"&gt;ExplainShell&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id="seeking-help"&gt;Seeking Help&lt;/h2&gt;
+&lt;p&gt;The best way to seek for help is surely to use a search engine …&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;strong&gt;Things on this page are fragmentary and immature notes/thoughts of the author. It is not meant to readers but rather for convenient reference of the author and future improvement.&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://www.gnu.org/software/bash/manual/bashref.html"&gt;Bash Reference Manual&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://www.explainshell.com/"&gt;ExplainShell&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id="seeking-help"&gt;Seeking Help&lt;/h2&gt;
+&lt;p&gt;The best way to seek for help is surely to use a search engine.
+However, there are serveral terminal command that can help you quickly.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;whatis&lt;/code&gt; briefly describes what a command does.
+    For example,&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ whatis man
+man &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="m"&gt;7&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;              - macros to format man pages
+man &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;              - an interface to the on-line reference manuals
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;whereis&lt;/code&gt; locate the binary, source, and manual page files for a command.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;apropos&lt;/code&gt; searches description of commands
+    and find these associated with the job you specify.
+    For example,&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ apropos gzip
+gzip &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; - compress or expand files
+zforce &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; - force a &lt;span class="s1"&gt;&amp;#39;.gz&amp;#39;&lt;/span&gt; extension on all gzip files
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;man&lt;/code&gt; display help documentation of commands.
+    Note that you display the description of &lt;code&gt;man&lt;/code&gt; itself by&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;man&lt;/span&gt; &lt;span class="n"&gt;man&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;When display contents of a file in terminal,
+you can use &lt;code&gt;/&lt;/code&gt; to search for strings that match the one you specify.
+When searching,
+you can use &lt;code&gt;n/N&lt;/code&gt; to jump to the next/previous match.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id="retrieving-history-commands"&gt;Retrieving History Commands&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;!!&lt;/code&gt; or &lt;code&gt;!:-1&lt;/code&gt; stands for the last command.
+    &lt;code&gt;!!&lt;/code&gt; runs last command and &lt;code&gt;sudo !!&lt;/code&gt; runs the last command with &lt;code&gt;sudo&lt;/code&gt; permission.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;!n&lt;/code&gt; (where &lt;span class="math"&gt;\(n\)&lt;/span&gt; is a natural number) stands for the &lt;span class="math"&gt;\(n^{th}\)&lt;/span&gt; command in the command history.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;!-n&lt;/code&gt; stands for the last but &lt;span class="math"&gt;\(n-1\)&lt;/span&gt; command in the command history,&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;!foo&lt;/code&gt; stands for the most recent command starting with &lt;code&gt;foo&lt;/code&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id="manipulating-commands"&gt;Manipulating Commands&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;You can use the suffix &lt;code&gt;:-&lt;/code&gt; to get rid of
+    the last parameter of the retrieved command.
+    For example,
+    &lt;code&gt;!!:-&lt;/code&gt; stands for the last command without the last parameter.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;^foo^bar^&lt;/code&gt; stands for the last command
+    with the first occurence of &lt;code&gt;foo&lt;/code&gt; replaced by &lt;code&gt;bar&lt;/code&gt;.
+    The last &lt;code&gt;^&lt;/code&gt; can be omitted if no more manipulation on the command is neede.
+    (Note that this trick only works for the last command.)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;You can use the suffix &lt;code&gt;:s/foo/bar/&lt;/code&gt; to replace the first occurrence of &lt;code&gt;foo&lt;/code&gt; with &lt;code&gt;bar&lt;/code&gt;
+    in a retrieved command.
+    For example,
+    &lt;code&gt;!!:s/foo/bar/&lt;/code&gt; stands for the last command
+    with the first occurrence of &lt;code&gt;foo&lt;/code&gt; replaced by &lt;code&gt;bar&lt;/code&gt;.
+    The last &lt;code&gt;/&lt;/code&gt; can be omitted if no more manipulation on the command is needed.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;You can use the suffix &lt;code&gt;:gs/foo/bar/&lt;/code&gt; to replace all occurrences of &lt;code&gt;foo&lt;/code&gt; with &lt;code&gt;bar&lt;/code&gt;
+    in a retrieved command.
+    For example,
+    &lt;code&gt;!!:gs/foo/bar/&lt;/code&gt; stands for the last command
+    with all occurences of &lt;code&gt;foo&lt;/code&gt; replaced by &lt;code&gt;bar&lt;/code&gt;.
+    The last &lt;code&gt;/&lt;/code&gt; can be omitted if no more manipulation on the command is needed.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;You can add vanilla strings before and/or after a retrieved command.
+    For example,&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;sudo !foo&lt;/code&gt; runs the most recent command starting with &lt;code&gt;foo&lt;/code&gt; with
+    &lt;code&gt;sudo&lt;/code&gt; permissions.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;!n:gs/foo/bar/ | less&lt;/code&gt; runs the &lt;span class="math"&gt;\(n^{th}\)&lt;/span&gt; command in the history
+    with all occurrences of &lt;code&gt;foo&lt;/code&gt; replaced by &lt;code&gt;bar&lt;/code&gt;
+    and displays the result in &lt;code&gt;less&lt;/code&gt; mode.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;sudo ^foo^bar^ | less&lt;/code&gt; or &lt;code&gt;sudo !!:s/foo/bar/ | less&lt;/code&gt; runs last command
+    with &lt;code&gt;sudo&lt;/code&gt; permissions and displays the results in &lt;code&gt;less&lt;/code&gt; mode.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id="previeawing-commands"&gt;Previeawing Commands&lt;/h3&gt;
+&lt;p&gt;You can preview (rather than run) a retrived and manipulated (using string substitution) command
+by adding the suffix &lt;code&gt;:p&lt;/code&gt; to the command.  &lt;/p&gt;
+&lt;p&gt;In the above commands,
+if you add suffix &lt;code&gt;:p&lt;/code&gt; (e.g, &lt;code&gt;!!:p&lt;/code&gt;),
+then the corresponding command is printed to the console without being executed.
+Notice that the previewed command will be added to the command history,
+so you can press "Arrow Up" key to retrieve it.
+&lt;code&gt;^foo^bar^:p&lt;/code&gt; &lt;code&gt;!n:gs/foo/bar/:p&lt;/code&gt;&lt;/p&gt;
+&lt;h2 id="retrieve-parameter-of-commands"&gt;Retrieve Parameter of Commands&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;!$&lt;/code&gt; stands for the last parameter of last command.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;$_&lt;/code&gt; stands for the last parameter of last command.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;!:0&lt;/code&gt; stands for the Linux command in the last command.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;!:3-5&lt;/code&gt; stands for the third to fifth parameters of the last command.
+    If the first argument index is 0, then it can be omitted.
+    For example, &lt;code&gt;!:0-2&lt;/code&gt; can be simplified as &lt;code&gt;!:-2&lt;/code&gt;.
+    If the "TO" argument index is omited,
+    then the last argument is not included.
+    For example, &lt;code&gt;!:3-&lt;/code&gt; means the third argument to the last-but-1 argument.
+    Specially, &lt;code&gt;!:-&lt;/code&gt; stands for last command without the last argument.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;&amp;lt;ESC&amp;gt; .&lt;/code&gt; or &lt;code&gt;ALT + .&lt;/code&gt; retrieves the last parameter of any previous command.
+    Pressed once, it retrives the last parameter of the last command;
+    pressed twice, it retrives the last parameter of the 2nd last command,
+    and so on and so forth.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="retrieve-output-of-commands"&gt;Retrieve Output of Commands&lt;/h2&gt;
+&lt;p&gt;There is no direct way to retrieve the output of the last command.
+However,
+there are several indirect ways to do this.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Use substitution.
+    For example,
+    &lt;code&gt;v=`ls`&lt;/code&gt; makes &lt;code&gt;v&lt;/code&gt; a variable containing the result of last command.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Assign result to a variable.
+    For example,
+    &lt;code&gt;v=$(ls)&lt;/code&gt; makes &lt;code&gt;v&lt;/code&gt; a variable contining the result of last command.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Use &lt;code&gt;$(!!)&lt;/code&gt; to retrieve the result of last command.
+    Similarly,
+    one can use &lt;code&gt;$(!-2)&lt;/code&gt; to retrieve the result of the 2nd last command.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="terminal"&gt;Terminal&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;CTRL+X E editor command in an editor&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;See useful shortcuts at
+&lt;a href="https://wiki.archlinux.org/index.php/Keyboard_Shortcuts"&gt;Arch Wiki&lt;/a&gt;&lt;/p&gt;
+&lt;script type="text/javascript"&gt;if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
+    var align = "center",
+        indent = "0em",
+        linebreak = "false";
+
+    if (false) {
+        align = (screen.width &lt; 768) ? "left" : align;
+        indent = (screen.width &lt; 768) ? "0em" : indent;
+        linebreak = (screen.width &lt; 768) ? 'true' : linebreak;
+    }
+
+    var mathjaxscript = document.createElement('script');
+    var location_protocol = (false) ? 'https' : document.location.protocol;
+    if (location_protocol !== 'http' &amp;&amp; location_protocol !== 'https') location_protocol = 'https:';
+    mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
+    mathjaxscript.type = 'text/javascript';
+    mathjaxscript.src = location_protocol + '//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML';
+    mathjaxscript[(window.opera ? "innerHTML" : "text")] =
+        "MathJax.Hub.Config({" +
+        "    config: ['MMLorHTML.js']," +
+        "    TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'AMS' }, Macros: {} }," +
+        "    jax: ['input/TeX','input/MathML','output/HTML-CSS']," +
+        "    extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']," +
+        "    displayAlign: '"+ align +"'," +
+        "    displayIndent: '"+ indent +"'," +
+        "    showMathMenu: true," +
+        "    messageStyle: 'normal'," +
+        "    tex2jax: { " +
+        "        inlineMath: [ ['\\\\(','\\\\)'] ], " +
+        "        displayMath: [ ['$$','$$'] ]," +
+        "        processEscapes: true," +
+        "        preview: 'TeX'," +
+        "    }, " +
+        "    'HTML-CSS': { " +
+        "        styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: 'inherit ! important'} }," +
+        "        linebreaks: { automatic: "+ linebreak +", width: '90% container' }," +
+        "    }, " +
+        "}); " +
+        "if ('default' !== 'default') {" +
+            "MathJax.Hub.Register.StartupHook('HTML-CSS Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax['HTML-CSS'].FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+            "MathJax.Hub.Register.StartupHook('SVG Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax.SVG.FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+        "}";
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
+}
+&lt;/script&gt;</content><category term="shell"></category><category term="terminal"></category><category term="Linux"></category></entry><entry><title>Autostart Tips</title><link href="http://www.legendu.net/misc/blog/autostart-tips/" rel="alternate"></link><published>2014-03-14T22:19:40-07:00</published><updated>2014-03-14T22:19:40-07:00</updated><author><name>Ben Chuanlong Du</name></author><id>tag:www.legendu.net,2014-03-14:/misc/blog/autostart-tips/</id><summary type="html">&lt;p&gt;&lt;strong&gt;Things on this page are fragmentary and immature notes/thoughts of the author. It is not meant to readers but rather for convenient reference of the author and future improvement.&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Autostart files create by Xfce4 might not be recognized by KDE.&lt;/li&gt;
+&lt;/ol&gt;</summary><content type="html">&lt;p&gt;&lt;strong&gt;Things on this page are fragmentary and immature notes/thoughts of the author. It is not meant to readers but rather for convenient reference of the author and future improvement.&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Autostart files create by Xfce4 might not be recognized by KDE.&lt;/li&gt;
+&lt;/ol&gt;</content><category term="Linux"></category><category term="autostart"></category><category term="desktop environment"></category><category term="KDE"></category><category term="Xfce"></category></entry><entry><title>Create a Temporary File in Linux Command</title><link href="http://www.legendu.net/misc/blog/create-a-temporary-file-in-linux-command/" rel="alternate"></link><published>2013-12-23T01:00:32-08:00</published><updated>2013-12-23T01:00:32-08:00</updated><author><name>Ben Chuanlong Du</name></author><id>tag:www.legendu.net,2013-12-23:/misc/blog/create-a-temporary-file-in-linux-command/</id><summary type="html">&lt;p&gt;&lt;strong&gt;Things on this page are fragmentary and immature notes/thoughts of the author. It is not meant to readers but rather for convenient reference of the author and future improvement.&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;code&gt;mktemp&lt;/code&gt; is preferred to &lt;code&gt;tempfile&lt;/code&gt;.&lt;/li&gt;
+&lt;/ol&gt;</summary><content type="html">&lt;p&gt;&lt;strong&gt;Things on this page are fragmentary and immature notes/thoughts of the author. It is not meant to readers but rather for convenient reference of the author and future improvement.&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;code&gt;mktemp&lt;/code&gt; is preferred to &lt;code&gt;tempfile&lt;/code&gt;.&lt;/li&gt;
+&lt;/ol&gt;</content><category term="OS"></category><category term="operating system"></category><category term="Linux"></category><category term="temporary file"></category></entry><entry><title>Lightdm Tips</title><link href="http://www.legendu.net/misc/blog/lightdm-tips/" rel="alternate"></link><published>2013-12-21T20:30:07-08:00</published><updated>2013-12-21T20:30:07-08:00</updated><author><name>Ben Chuanlong Du</name></author><id>tag:www.legendu.net,2013-12-21:/misc/blog/lightdm-tips/</id><summary type="html">&lt;p&gt;&lt;strong&gt;Things on this page are fragmentary and immature notes/thoughts of the author. It is not meant to readers but rather for convenient reference of the author and future improvement.&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;it seems that you can choose to enable VNC 
+while starting lightdm. 
+Does this solves the problem of auto-login?
+If …&lt;/li&gt;&lt;/ol&gt;</summary><content type="html">&lt;p&gt;&lt;strong&gt;Things on this page are fragmentary and immature notes/thoughts of the author. It is not meant to readers but rather for convenient reference of the author and future improvement.&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;it seems that you can choose to enable VNC 
+while starting lightdm. 
+Does this solves the problem of auto-login?
+If you are allowed to login into the computer via VNC without login physically,
+everything becomes great!
+If that's the case, what about NX server?&lt;/li&gt;
+&lt;/ol&gt;</content><category term="OS"></category><category term="Linux"></category><category term="desktop environment"></category><category term="desktop management"></category><category term="lightdm"></category></entry></feed>

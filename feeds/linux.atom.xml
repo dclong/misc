@@ -1,0 +1,2321 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Ben Chuanlong Du's Blog - Linux</title><link href="http://www.legendu.net/misc/" rel="alternate"></link><link href="http://www.legendu.net/misc/feeds/linux.atom.xml" rel="self"></link><id>http://www.legendu.net/misc/</id><updated>2019-07-03T04:25:47-07:00</updated><subtitle>It is never too late to learn.</subtitle><entry><title>Some Tips for Shell Commands</title><link href="http://www.legendu.net/misc/blog/shell-tips/" rel="alternate"></link><published>2019-07-03T04:25:47-07:00</published><updated>2019-07-03T04:25:47-07:00</updated><author><name>Ben Chuanlong Du</name></author><id>tag:www.legendu.net,2019-07-03:/misc/blog/shell-tips/</id><summary type="html">&lt;p&gt;&lt;strong&gt;
+Things on this page are fragmentary and immature notes/thoughts of the author.
+It is not meant to readers but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://www.explainshell.com/"&gt;explainshell.com&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id="tips-traps"&gt;Tips &amp;amp; Traps&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;Do NOT use &lt;code&gt;;&lt;/code&gt; to delimit paths passed to a shell command because &lt;code&gt;;&lt;/code&gt; terminates shell commands.
+  Use …&lt;/li&gt;&lt;/ol&gt;</summary><content type="html">&lt;p&gt;&lt;strong&gt;
+Things on this page are fragmentary and immature notes/thoughts of the author.
+It is not meant to readers but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://www.explainshell.com/"&gt;explainshell.com&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id="tips-traps"&gt;Tips &amp;amp; Traps&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;Do NOT use &lt;code&gt;;&lt;/code&gt; to delimit paths passed to a shell command because &lt;code&gt;;&lt;/code&gt; terminates shell commands.
+  Use &lt;code&gt;,&lt;/code&gt; to delimit paths if needed.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="configuration"&gt;Configuration&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Debian does not read in the &lt;code&gt;.profile&lt;/code&gt; file on start-up of X windows.
+    To solve this problem,
+    you can source in &lt;code&gt;.profile&lt;/code&gt; in in the &lt;code&gt;.xsessionrc&lt;/code&gt; file.
+    Ubuntu and Mint does read in the &lt;code&gt;.profile&lt;/code&gt; file on start-up of  X windows.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;You'd better use robust configuration files.
+    If an error is encountered in the &lt;code&gt;.xsessionrc&lt;/code&gt; file,
+    the desktop environment might fail to start.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Bash supports both Vi mode and Emacs mode.
+    The default is Emacs mode.
+    You can turn on the Vim mode by &lt;code&gt;set -o vi&lt;/code&gt; in &lt;code&gt;.bashrc&lt;/code&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="programming"&gt;Programming&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Dash is faster than bash and thus is often used as login shell
+    while bash has more features and is often used as interactive shell
+    &lt;code&gt;.profile&lt;/code&gt; is intend to be read by shell script
+    you should not use any bash specific feature in it.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;You do not have to escape quotes in sub shells (command in &lt;code&gt;$()&lt;/code&gt;).&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id="media"&gt;Media&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;Empty CD tray, cannot eject by pressing the bussion,
+    an interesting trick to eject CD: try to amount the CD eject the tray&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="cool-command"&gt;Cool Command&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;~&lt;/code&gt; is recognized as the home directory of the current user in shell only.
+    You'd better not use it in other places.
+    Whenever the home directory of the current user is needed,
+    you can always use &lt;code&gt;$HOME&lt;/code&gt; instead.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Check whether a system is 32 bit or 64 bit&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;getconf&lt;/span&gt; &lt;span class="n"&gt;LONG_BIT&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;all parameters: &lt;code&gt;$@&lt;/code&gt; (what about &lt;code&gt;$*&lt;/code&gt;?)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;advance use of &lt;code&gt;[[ ]]&lt;/code&gt; wild cards ...&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;alias, function versus scripts, function is more robust, convenient,
+    but you have to source them in every time, which decreases performance
+    you should think about things similar to python and ruby, use them in both ways!
+    alias similar to function,
+    prefer script than alias and function, generally speaking
+    counter example cs
+    Vim !: has no access to shell alias or functions
+    another reason to use script
+    function versus script:
+    function need to refreshed (fun is cached)
+    while scripts need not after modified
+    so I think scripts is more suitable to use
+    I vote for separate fun and script&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;shell scripts are more flexible than shell functions,
+    because you can use shabang, which gives flexibility to use any script language
+    shell function is must sometimes, e.g., cs example, shell scripts are run in sub shell
+    () ... $() ...
+    use $0 and $BASH_SOURCE to write ... your example&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Examples of getting file name and extension.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;FILE=&amp;quot;example.tar.gz&amp;quot;
+echo &amp;quot;&lt;span class="cp"&gt;${&lt;/span&gt;&lt;span class="n"&gt;FILE&lt;/span&gt;&lt;span class="o"&gt;%%.*&lt;/span&gt;&lt;span class="cp"&gt;}&lt;/span&gt;&amp;quot;
+# returns example
+
+echo &amp;quot;&lt;span class="cp"&gt;${&lt;/span&gt;&lt;span class="n"&gt;FILE&lt;/span&gt;&lt;span class="o"&gt;%.*&lt;/span&gt;&lt;span class="cp"&gt;}&lt;/span&gt;&amp;quot;
+# returns example.tar
+
+echo &amp;quot;&lt;span class="cp"&gt;${&lt;/span&gt;&lt;span class="n"&gt;FILE&lt;/span&gt;&lt;span class="c1"&gt;#*.&lt;/span&gt;&lt;span class="cp"&gt;}&lt;/span&gt;&amp;quot;
+# returns tar.gz
+
+echo &amp;quot;&lt;span class="cp"&gt;${&lt;/span&gt;&lt;span class="n"&gt;FILE&lt;/span&gt;&lt;span class="c1"&gt;##*.&lt;/span&gt;&lt;span class="cp"&gt;}&lt;/span&gt;&amp;quot;
+# returns gz
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;avoid using "global" bash variables in sub shell,
+    many things are sub shell, very dangerous, and be careful!!!,
+    duplicity, aerofs, dropbox examples ...&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;bash array index is 0-based&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Be careful about &lt;code&gt;.&lt;/code&gt; when using regular expressions (e.g., sed),
+    this is really a general problem&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;code&gt;-b file&lt;/code&gt; = True if the file exists and is block special file.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;-c file&lt;/code&gt; = True if the file exists and is character special file.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;-d file&lt;/code&gt; = True if the file exists and is a directory.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;-e file&lt;/code&gt; = True if the file exists.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;-f file&lt;/code&gt; = True if the file exists and is a regular file&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;-g file&lt;/code&gt; = True if the file exists and the set-group-id bit is set.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;-k file&lt;/code&gt; = True if the files' "sticky" bit is set.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;-L file&lt;/code&gt; = True if the file exists and is a symbolic link.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;-p file&lt;/code&gt; = True if the file exists and is a named pipe.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;-r file&lt;/code&gt; = True if the file exists and is readable.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;-s file&lt;/code&gt; = True if the file exists and its size is greater than zero.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;-s file&lt;/code&gt; = True if the file exists and is a socket.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;-t fd&lt;/code&gt; = True if the file descriptor is opened on a terminal.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;-u file&lt;/code&gt; = True if the file exists and its set-user-id bit is set.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;-w file&lt;/code&gt; = True if the file exists and is writable.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;-x file&lt;/code&gt; = True if the file exists and is executable.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;-O file&lt;/code&gt; = True if the file exists and is owned by the effective user id.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;-G file&lt;/code&gt; = True if the file exists and is owned by the effective group id.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;file1 –nt file2&lt;/code&gt; = True if file1 is newer, by modification date, than file2.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;file1 ot file2&lt;/code&gt; = True if file1 is older than file2.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;file1 ef file2&lt;/code&gt; = True if file1 and file2 have the same device and inode numbers.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;-z string&lt;/code&gt; = True if the length of the string is 0.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;-n string&lt;/code&gt; = True if the length of the string is non-zero.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;string1 = string2&lt;/code&gt; = True if the strings are equal.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;string1 != string2&lt;/code&gt; = True if the strings are not equal.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;!expr =&lt;/code&gt; True if the expr evaluates to false.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;expr1 –a expr2&lt;/code&gt; = True if both expr1 and expr2 are true.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;expr1 –o expr2&lt;/code&gt; = True is either expr1 or expr2 is true.&lt;/p&gt;
+&lt;p&gt;if a function has the same name as a script,
+the function comes first,
+but if you prefix it with sudo, then the script is run as a function
+is invisible in sub shells&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;the trick of "--" end of command after which only positional arguments are accepted&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;variable substituation makes things very interesting in shell,
+    for example awk and so on ..., always be careful if you use "$" and so on....&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;process of substitution &amp;lt;() &amp;gt;(), pipe ...&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;variables defined in bash function won't polute the global environment
+    and local make the variables visible only to the scope of the function&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;prefer dot rather than source for sourcing script,
+    because source is only for bash&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;executable files:
+    if in $HOME/bin, prefer symbolic links,
+    if for general uer, prefer to make a global copy,
+    don't use symbolic link in /usr/bin pointing to your own files,
+    you might change your file permissions and mess up the program&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;If an environment path contains spaces,
+    you have to quote it with double/single quotations marks
+    in order to make shell commands work correctly.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id="bash-programming"&gt;Bash Programming&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;case ... esac is different from switch(){} in C/C++.
+    You do not have to return/exit manually after each branch.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;not condition&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="o"&gt;[&lt;/span&gt; ! -d &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="nv"&gt;$1&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;then&lt;/span&gt;
+&lt;span class="k"&gt;fi&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h3 id="top"&gt;top&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;top command
+    Unit of the Time+ column: minutes:seconds.hundredths&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id="ls"&gt;ls&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;ls -d */&lt;/code&gt; displays all directories in the current folder&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;ls /home/*&lt;/code&gt; in bash, don't use it, instead use &lt;code&gt;(/home/*)&lt;/code&gt; directly&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;ls&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;d&lt;/span&gt; &lt;span class="ss"&gt;&amp;quot;/home/dclong/btsync/backup/tbp_&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;instead of&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;ls&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;d&lt;/span&gt; &lt;span class="ss"&gt;&amp;quot;/home/dclong/btsync/backup/tbp_*&amp;quot;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;it seems to me that if you wildcard,
+then full names are returned, otherwise, short names are returned.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;By default,
+    the year for files older than 6 month are not displayed.
+    You can force &lt;code&gt;ls&lt;/code&gt; to show full time information by &lt;code&gt;ls -lh --full-time&lt;/code&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id="rsync"&gt;rsync&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;code&gt;rsync&lt;/code&gt;, &lt;code&gt;/&lt;/code&gt; at the end is important,
+    this decides whether the folder is copy or its content is copied, unison is similar ...
+    This is the same for some other commands like Amazon S3, etc.
+    Also if you want to exclude an folder from &lt;code&gt;rsync&lt;/code&gt;,
+    you have to include the trailing slash.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id="alias"&gt;alias&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;it seems alias has lots of limitations ... only use single quotation mark,
+    causes lots of problem
+    YOU ACTUALLY CAN USE DOUBLE QUTOES&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;If you define an alias of a path (especially a Windows path in Cygwin, MobaXterm, etc.),
+    you have to quote the path in commands, generally speaking.
+    For example, if the alias of path you define is &lt;code&gt;p&lt;/code&gt; (which contains spaces),
+    you can use &lt;code&gt;cd "$p"&lt;/code&gt; to change working directory to it.
+    Note that you cannot omit the quotes.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="filesystem"&gt;Filesystem&lt;/h2&gt;
+&lt;h3 id="cp"&gt;cp&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;always use &lt;code&gt;cp&lt;/code&gt; with &lt;code&gt;-i&lt;/code&gt; option!&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;cp -a&lt;/code&gt; might not be a good idea sometimes,
+    e.g., when in Cygwin/MobaXterm, because you might lose file permissions due to unmatch of users&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Both cp and mv overwrite the destination file
+    if is is already exists.
+    cp does not overwrite existing destination directory
+    but instead acts as merging contents of directories.
+    mv refuses to rename a directory to a destination directory
+    if the destination directory is not empty.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;It is suggested that you use rsync as much as possible
+as an alternative to cp.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# copy sub files/folders excluding hidden files/folders&lt;/span&gt;
+cp a/* b
+&lt;span class="c1"&gt;# copy sub files/folders including hidden files/folders&lt;/span&gt;
+cp a/. b
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h3 id="mv"&gt;mv&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;always use interactive version of &lt;code&gt;mv&lt;/code&gt; and &lt;code&gt;cp&lt;/code&gt; ...
+    and always use &lt;code&gt;trash&lt;/code&gt; instead of &lt;code&gt;rm&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id="rm"&gt;rm&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Remove a file whose name starts with &lt;code&gt;--&lt;/code&gt; and has special characters.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;rm&lt;/span&gt; &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;--exclude.!sync&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Get file name without extension.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;basename&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;s&lt;/span&gt; .&lt;span class="nv"&gt;txt&lt;/span&gt; &lt;span class="nv"&gt;f&lt;/span&gt;.&lt;span class="nv"&gt;txt&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Create a temp file.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;mktemp&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;tu&lt;/span&gt; &lt;span class="n"&gt;file&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;XXXXX&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;&lt;code&gt;mktemp&lt;/code&gt; is preferred over &lt;code&gt;tempfile&lt;/code&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id="gpasswd"&gt;gpasswd&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;gpasswd&lt;/code&gt; is great for adding and removing user to/from groups&lt;/p&gt;
+&lt;p&gt;gpasswd -d user group&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id="type"&gt;type&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;code&gt;type fun_name&lt;/code&gt; shows source code of bash functions or use &lt;code&gt;declare -f&lt;/code&gt;
+    &lt;code&gt;type command&lt;/code&gt; path of command&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id="mount"&gt;mount&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;check if a path is a mount point&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;if&lt;/span&gt; [ $&lt;span class="ss"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;stat&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;fc&lt;/span&gt;&lt;span class="o"&gt;%&lt;/span&gt;&lt;span class="nv"&gt;t&lt;/span&gt;:&lt;span class="o"&gt;%&lt;/span&gt;&lt;span class="nv"&gt;T&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="s"&gt;mnt/wd&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="ss"&gt;)&lt;/span&gt; &lt;span class="o"&gt;!=&lt;/span&gt; $&lt;span class="ss"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;stat&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;fc&lt;/span&gt;&lt;span class="o"&gt;%&lt;/span&gt;&lt;span class="nv"&gt;t&lt;/span&gt;:&lt;span class="o"&gt;%&lt;/span&gt;&lt;span class="nv"&gt;T&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="s"&gt;mnt/wd/..&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="ss"&gt;)&lt;/span&gt; ]&lt;span class="c1"&gt;; then&lt;/span&gt;
+    &lt;span class="nv"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="s"&gt;mounted&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="c1"&gt;; else echo &amp;quot;not mounted&amp;quot;;&lt;/span&gt;
+&lt;span class="nv"&gt;fi&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;mount as normal user instead of root&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;mount&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;o&lt;/span&gt; &lt;span class="n"&gt;uid&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;dclong&lt;/span&gt; &lt;span class="p"&gt;...&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id="sudo"&gt;sudo&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;I think it's better to use sudo inside bash script
+    instead of prefix sudo to script names to invoke them.
+    The reason is that you use sudo only when needed.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;sudo alias&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;alias&lt;/span&gt; &lt;span class="n"&gt;sudo&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;sudo &amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;the space is necessary&lt;/p&gt;
+&lt;h3 id="real-absolute-path"&gt;real absolute path&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;realpath: absolute path&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;absolute path&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;readlink path
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h3 id="random"&gt;random&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Generate a random number.&lt;/p&gt;
+&lt;p&gt;random 0 - 32767 uniform&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id="power-management"&gt;Power Management&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;Show battery/power information&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;acpi&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;bi&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id="shell-programing-trick"&gt;Shell Programing Trick&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;Generate 00, 01, ..., to 25.&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="nv"&gt;i&lt;/span&gt; &lt;span class="nv"&gt;in&lt;/span&gt; {&lt;span class="mi"&gt;00&lt;/span&gt;..&lt;span class="mi"&gt;25&lt;/span&gt;}&lt;span class="c1"&gt;; do echo $i; done&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;or
+    seq -f %02g 0 25&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="administration"&gt;Administration&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;shutdown, poweroff, halt
+    It seems these commands have different meanings on different Linux distributions.
+    The actually case is really complicated.
+    It depends on different Linux distributions and also the services running on laptops.
+    If a service fails to stop,
+    the shutdown process might freeze at the logo page.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;halt&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;p&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;It is suggested that you always use the &lt;code&gt;poweroff&lt;/code&gt; command to shutdown (and poweroff) your computer.
+You should close all programs before you logout or shutdown your computer.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;to change time zone using command sudo dpkg-reconfigure tzdata&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;ssh -X&lt;/code&gt; X11 forwarding, make it possible for you to use GUI applications on server&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="task"&gt;Task&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;code&gt;at&lt;/code&gt; command run in backgroud,
+    so do not use it to do things that have to communicate with stdin stdout ...&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="shell-scripting"&gt;Shell Scripting&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;It is recommended that you use single quotes when defining aliases
+    unless you have good reasons to use double quotes.
+    The reason is that shell variables in aliases defined in single quotes
+    are not expanded until runtime.
+    This makes your alias more robust (shell variables do not have to defined before aliases)
+    and flexible (you can change definition of shell variables later as needed).&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;In terminal,
+    wild cards are expanded before passed to functions.
+    This means that if you pass wild cards from a function to nested functions,
+    it usually will not work.
+    Instead,
+    you should pass the whole argument list,
+    which is represented by &lt;code&gt;$@&lt;/code&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="archive"&gt;Archive&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;DO NOT USE the 7-zip format for backup purpose on Linux/Unix
+    because 7-zip does not store the owner/group of the file.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;difference between 7za and 7z?&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="ui"&gt;UI&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;use syndaemon -dti 0.5 to disable touchpad while typing.
+    You have to have &lt;code&gt;Option SHMConfig "on"&lt;/code&gt; or &lt;code&gt;Option SHMConfig "true"&lt;/code&gt; in the synaptics configuration file.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Sometimes when you login into a server,
+    it freezes after printing the welcome message.
+    You can press &lt;code&gt;CTRL + C&lt;/code&gt; to kill running process and it might help you bring the terminal back.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Linux release specific information&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;lsb_release&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;a&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;the lsb-release package&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="process"&gt;Process&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Use &lt;code&gt;Ctrl + Z&lt;/code&gt; to pause a process and use &lt;code&gt;bg&lt;/code&gt; to send it to background to run.
+    Use &lt;code&gt;fg&lt;/code&gt; to bring a background process to foreground.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;ldd --version&lt;/code&gt; check glibc version&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;You can use &lt;code&gt;ps aux | grep -i user_id&lt;/code&gt; to list your jobs
+    and &lt;code&gt;kill -9 process_id&lt;/code&gt; to kill a process.
+    On platform Load Sharing Facility (LSF),
+    you probably don't have access to &lt;code&gt;kill&lt;/code&gt; unless are a privileged user.
+    Instead of using &lt;code&gt;ps&lt;/code&gt; and &lt;code&gt;kill&lt;/code&gt;,
+    you can use &lt;code&gt;bjobs&lt;/code&gt; to show your jobs and &lt;code&gt;bkill process_id&lt;/code&gt; to kill your process.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;when defining alias,
+    do not use tailing &lt;code&gt;/&lt;/code&gt; in paths unless you have a good reason for that ...&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;file to check link cannot use trailing &lt;code&gt;/&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;what have caused the blog difference issue?, line terminators&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;comm: make sure you don't screw up by invisible white spaces!!!,
+    intersection/inner join, left join, right join (add keywords to your blog)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;type of disk&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;df&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;T&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;In a &lt;code&gt;case ... esac&lt;/code&gt; clause, you have to espace spaces in matching patterns,
+    e.g., You should use &lt;code&gt;*Linux\ Mint*&lt;/code&gt; instead of &lt;code&gt;*Linux Mint*&lt;/code&gt; in the following code.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nv"&gt;case&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="s"&gt;$dist&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt; &lt;span class="nv"&gt;in&lt;/span&gt;
+    &lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="nv"&gt;Debian&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="nv"&gt;LMDE&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="nv"&gt;Ubuntu&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="nv"&gt;Linux&lt;/span&gt;\ &lt;span class="nv"&gt;Mint&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="ss"&gt;)&lt;/span&gt;
+        # &lt;span class="nv"&gt;install&lt;/span&gt; &lt;span class="nv"&gt;minimum&lt;/span&gt; &lt;span class="nv"&gt;texlive&lt;/span&gt; &lt;span class="nv"&gt;and&lt;/span&gt; &lt;span class="nv"&gt;some&lt;/span&gt; &lt;span class="nv"&gt;extra&lt;/span&gt; &lt;span class="nv"&gt;fonts&lt;/span&gt;
+        &lt;span class="nv"&gt;wajig&lt;/span&gt; &lt;span class="nv"&gt;install&lt;/span&gt; &lt;span class="nv"&gt;texlive&lt;/span&gt; &lt;span class="nv"&gt;texlive&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;latex&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;extra&lt;/span&gt; &lt;span class="nv"&gt;texlive&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;fonts&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;extra&lt;/span&gt; &lt;span class="nv"&gt;dvipng&lt;/span&gt; &lt;span class="nv"&gt;texstudio&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="c1"&gt;;;&lt;/span&gt;
+    &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="ss"&gt;)&lt;/span&gt;
+        &lt;span class="nv"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="s"&gt;This script does not support ${dist:13}.&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="c1"&gt;;;&lt;/span&gt;
+&lt;span class="nv"&gt;esac&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;loop throught English letters&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="nv"&gt;letter&lt;/span&gt; &lt;span class="nv"&gt;in&lt;/span&gt; {&lt;span class="nv"&gt;a&lt;/span&gt;..&lt;span class="nv"&gt;z&lt;/span&gt;} &lt;span class="c1"&gt;; do&lt;/span&gt;
+&lt;span class="nv"&gt;echo&lt;/span&gt; $&lt;span class="nv"&gt;letter&lt;/span&gt;
+&lt;span class="nv"&gt;done&lt;/span&gt;
+
+&lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="nv"&gt;letter&lt;/span&gt; &lt;span class="nv"&gt;in&lt;/span&gt; {&lt;span class="nv"&gt;c&lt;/span&gt;..&lt;span class="nv"&gt;f&lt;/span&gt;} &lt;span class="c1"&gt;; do&lt;/span&gt;
+&lt;span class="nv"&gt;echo&lt;/span&gt; $&lt;span class="nv"&gt;letter&lt;/span&gt;
+&lt;span class="nv"&gt;done&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Direct output and error message&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;command1&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;gt&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;out&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;txt&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;gt&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="n"&gt;err&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;txt&lt;/span&gt;
+
+&lt;span class="n"&gt;command2&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;f&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;z&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;y&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;gt&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;out&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;txt&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;gt&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="n"&gt;err&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;txt&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="environment-variables"&gt;Environment Variables&lt;/h2&gt;
+&lt;p&gt;using envrionment variables in script that doesn't exists is really dangerous!!!
+came across this multiple times.
+how should solve the problem?
+Check whether a variable exists before you use it?&lt;/p&gt;
+&lt;p&gt;CPU Stats&lt;/p&gt;
+&lt;h2 id="uuid-in-bash"&gt;UUID in Bash&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;uuidgen
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;need the libuuid library which is part of &lt;code&gt;util-linux&lt;/code&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;code&gt;id -un&lt;/code&gt; is a better alternative than &lt;code&gt;whoami&lt;/code&gt;.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="timezone"&gt;Timezone&lt;/h2&gt;
+&lt;p&gt;Linux&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;cat&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;etc&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;timezone&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Mac
+&lt;a href="https://slaptijack.com/system-administration/set-mac-os-x-time-zone-from-the-command-line/"&gt;https://slaptijack.com/system-administration/set-mac-os-x-time-zone-from-the-command-line/&lt;/a&gt;&lt;/p&gt;</content><category term="tips"></category><category term="Linux"></category><category term="shell"></category><category term="terminal"></category></entry><entry><title>Yum Tips</title><link href="http://www.legendu.net/misc/blog/yum-tips/" rel="alternate"></link><published>2019-06-23T01:27:02-07:00</published><updated>2019-06-23T01:27:02-07:00</updated><author><name>Ben Chuanlong Du</name></author><id>tag:www.legendu.net,2019-06-23:/misc/blog/yum-tips/</id><summary type="html">&lt;p&gt;&lt;strong&gt;
+Things on this page are
+fragmentary and immature notes/thoughts of the author.
+It is not meant to readers
+but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;yum update
+
+yum search vim
+
+yum install yum-utils
+
+yum install pkg
+
+yum localinstall pkg
+
+yum groupinstall development
+
+yum install https …&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;&lt;strong&gt;
+Things on this page are
+fragmentary and immature notes/thoughts of the author.
+It is not meant to readers
+but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;yum update
+
+yum search vim
+
+yum install yum-utils
+
+yum install pkg
+
+yum localinstall pkg
+
+yum groupinstall development
+
+yum install https://centos7.iuscommunity.org/ius-release.rpm
+
+yum info unixODBC 
+
+rpm -ivh pkg.rpm
+rpm -qa
+rpm -qa &lt;span class="p"&gt;|&lt;/span&gt; grep -i odbc
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2 id="proxy"&gt;Proxy&lt;/h2&gt;
+&lt;p&gt;&lt;a href="https://docs.fedoraproject.org/en-US/Fedora_Core/3/html/Software_Management_Guide/sn-yum-proxy-server.html"&gt;Using yum with a Proxy Server&lt;/a&gt;&lt;/p&gt;</content><category term="Linux"></category><category term="yum"></category><category term="rpm"></category><category term="RedHat"></category><category term="CentOS"></category><category term="package management"></category></entry><entry><title>Alternative to the rm Command in Linux</title><link href="http://www.legendu.net/misc/blog/alternative-to-the-rm-command-in-linux/" rel="alternate"></link><published>2019-05-02T02:41:04-07:00</published><updated>2019-05-02T02:41:04-07:00</updated><author><name>Benjamin Du</name></author><id>tag:www.legendu.net,2019-05-02:/misc/blog/alternative-to-the-rm-command-in-linux/</id><summary type="html">&lt;p&gt;&lt;strong&gt;
+Things on this page are fragmentary and immature notes/thoughts of the author.
+It is not meant to readers but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;As is know to all,
+it can be dangerous to use the &lt;code&gt;rm&lt;/code&gt; command directly in Linux/Unix. 
+A simple …&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;strong&gt;
+Things on this page are fragmentary and immature notes/thoughts of the author.
+It is not meant to readers but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;As is know to all,
+it can be dangerous to use the &lt;code&gt;rm&lt;/code&gt; command directly in Linux/Unix. 
+A simple idea is to define other commands/alias/script to replace it.
+For example, 
+I have a shell script named &lt;code&gt;trash&lt;/code&gt; which moves files (as input arguments) to the system's Trash directory.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;trash&lt;/span&gt; &lt;span class="n"&gt;files_to_remove&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Another even simplier way is to directly move files to the directory &lt;code&gt;/tmp&lt;/code&gt;.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;mv&lt;/span&gt; &lt;span class="n"&gt;files_to_remove&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;tmp&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;</content><category term="Linux"></category><category term="Shell"></category><category term="rm"></category><category term="Trash"></category><category term="mv"></category></entry><entry><title>Change Modified Time of Files</title><link href="http://www.legendu.net/misc/blog/change-modified-time-of-files/" rel="alternate"></link><published>2019-05-02T02:40:46-07:00</published><updated>2019-05-02T02:40:46-07:00</updated><author><name>Benjamin Du</name></author><id>tag:www.legendu.net,2019-05-02:/misc/blog/change-modified-time-of-files/</id><summary type="html">&lt;p&gt;&lt;strong&gt;
+Things on this page are fragmentary and immature notes/thoughts of the author.
+It is not meant to readers but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Change the modifiled timestamp of a file to the specified timestamp.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;touch&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;m&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;t&lt;/span&gt; &lt;span class="mi"&gt;201512180130&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;09&lt;/span&gt; &lt;span class="n"&gt;some_file&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Change the modified …&lt;/p&gt;&lt;/li&gt;&lt;/ol&gt;</summary><content type="html">&lt;p&gt;&lt;strong&gt;
+Things on this page are fragmentary and immature notes/thoughts of the author.
+It is not meant to readers but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Change the modifiled timestamp of a file to the specified timestamp.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;touch&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;m&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;t&lt;/span&gt; &lt;span class="mi"&gt;201512180130&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;09&lt;/span&gt; &lt;span class="n"&gt;some_file&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Change the modified timestamp of a file to the current time.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;touch&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;m&lt;/span&gt; &lt;span class="n"&gt;some_file&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Change the modified timestamp of all files in the current directory to the current time.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;find&lt;/span&gt; &lt;span class="p"&gt;.&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="k"&gt;type&lt;/span&gt; &lt;span class="n"&gt;f&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;print0&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="n"&gt;xargs&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt; &lt;span class="n"&gt;touch&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;m&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;You can use the &lt;code&gt;stat&lt;/code&gt; command to show the modified timestamps of files.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;stat&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="k"&gt;c&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;%y&amp;#39;&lt;/span&gt; &lt;span class="n"&gt;some_file&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="references"&gt;References&lt;/h2&gt;
+&lt;p&gt;https://unix.stackexchange.com/questions/118577/changing-a-files-date-created-and-last-modified-attributes-to-another-file&lt;/p&gt;</content><category term="Linux"></category><category term="modified timestamp"></category><category term="touch"></category></entry><entry><title>Tips About "rename"</title><link href="http://www.legendu.net/misc/blog/rename-tips/" rel="alternate"></link><published>2019-04-18T17:57:21-07:00</published><updated>2019-04-18T17:57:21-07:00</updated><author><name>Ben Chuanlong Du</name></author><id>tag:www.legendu.net,2019-04-18:/misc/blog/rename-tips/</id><summary type="html">&lt;p&gt;&lt;strong&gt;
+Things on this page are
+fragmentary and immature notes/thoughts of the author.
+It is not meant to readers
+but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Change names of &lt;code&gt;.txt&lt;/code&gt; files to lowercase.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;rename &lt;span class="s1"&gt;&amp;#39;y/A-Z/a-z/&amp;#39;&lt;/span&gt; *.txt
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Get rid of &lt;code&gt;(1)&lt;/code&gt; in file names.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;rename …&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;&lt;strong&gt;
+Things on this page are
+fragmentary and immature notes/thoughts of the author.
+It is not meant to readers
+but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Change names of &lt;code&gt;.txt&lt;/code&gt; files to lowercase.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;rename &lt;span class="s1"&gt;&amp;#39;y/A-Z/a-z/&amp;#39;&lt;/span&gt; *.txt
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Get rid of &lt;code&gt;(1)&lt;/code&gt; in file names.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;rename &lt;span class="s1"&gt;&amp;#39;s/\(1\)//&amp;#39;&lt;/span&gt; * 
+&lt;/pre&gt;&lt;/div&gt;</content><category term="Linux"></category><category term="rename"></category><category term="shell"></category><category term="tip"></category></entry><entry><title>Install Newer Version of Sqlite3 on Debian Jessie</title><link href="http://www.legendu.net/misc/blog/install-newer-version-of-sqlite3-on-debian/" rel="alternate"></link><published>2019-03-11T18:03:27-07:00</published><updated>2019-03-11T18:03:27-07:00</updated><author><name>Benjamin Du</name></author><id>tag:www.legendu.net,2019-03-11:/misc/blog/install-newer-version-of-sqlite3-on-debian/</id><summary type="html">&lt;p&gt;&lt;strong&gt;
+Things on this page are fragmentary and immature notes/thoughts of the author.
+It is not meant to readers but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Open &lt;code&gt;/etc/apt/sources.list&lt;/code&gt; and add the following line to the end.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;deb&lt;/span&gt; &lt;span class="s"&gt;http://www.backports.org/debian&lt;/span&gt; &lt;span class="kp"&gt;jessie-backports …&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;&lt;/ol&gt;</summary><content type="html">&lt;p&gt;&lt;strong&gt;
+Things on this page are fragmentary and immature notes/thoughts of the author.
+It is not meant to readers but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Open &lt;code&gt;/etc/apt/sources.list&lt;/code&gt; and add the following line to the end.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;deb&lt;/span&gt; &lt;span class="s"&gt;http://www.backports.org/debian&lt;/span&gt; &lt;span class="kp"&gt;jessie-backports&lt;/span&gt; &lt;span class="kp"&gt;main&lt;/span&gt; &lt;span class="kp"&gt;contrib&lt;/span&gt; &lt;span class="kp"&gt;non-free&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;or&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;deb&lt;/span&gt; &lt;span class="s"&gt;http://ftp.us.debian.org/debian/&lt;/span&gt; &lt;span class="kp"&gt;jessie-backports&lt;/span&gt; &lt;span class="kp"&gt;main&lt;/span&gt; &lt;span class="kp"&gt;contrib&lt;/span&gt; &lt;span class="kp"&gt;non-free&lt;/span&gt;
+&lt;span class="k"&gt;deb-src&lt;/span&gt; &lt;span class="s"&gt;http://ftp.us.debian.org/debian/&lt;/span&gt; &lt;span class="kp"&gt;jessie-backports&lt;/span&gt; &lt;span class="kp"&gt;main&lt;/span&gt; &lt;span class="kp"&gt;contrib&lt;/span&gt; &lt;span class="kp"&gt;non-free&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;make sure the GPG signatures are correct by running the following command.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="n"&gt;apt&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="k"&gt;get&lt;/span&gt; &lt;span class="k"&gt;update&lt;/span&gt;
+&lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="n"&gt;apt&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="k"&gt;get&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="n"&gt;debian&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;backports&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;keyring&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Install SQLite3.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="n"&gt;apt&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="k"&gt;get&lt;/span&gt; &lt;span class="k"&gt;update&lt;/span&gt;
+&lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="n"&gt;apt&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="k"&gt;get&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;t&lt;/span&gt; &lt;span class="n"&gt;jessie&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;backports&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="n"&gt;sqlite3&lt;/span&gt; &lt;span class="n"&gt;libsqlite3&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;dev&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;/ol&gt;</content><category term="Linux"></category><category term="SQLite3"></category><category term="Debian"></category><category term="backports"></category></entry><entry><title>Configure Proxy for Apt</title><link href="http://www.legendu.net/misc/blog/apt-proxy/" rel="alternate"></link><published>2019-03-07T23:42:48-08:00</published><updated>2019-03-07T23:42:48-08:00</updated><author><name>Ben Chuanlong Du</name></author><id>tag:www.legendu.net,2019-03-07:/misc/blog/apt-proxy/</id><summary type="html">&lt;p&gt;&lt;strong&gt;
+Things on this page are
+fragmentary and immature notes/thoughts of the author.
+It is not meant to readers
+but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Add the following lines into the file &lt;code&gt;/etc/apt/apt.conf&lt;/code&gt;,
+where &lt;code&gt;proxy_server&lt;/code&gt; is the address/ip of the server …&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;strong&gt;
+Things on this page are
+fragmentary and immature notes/thoughts of the author.
+It is not meant to readers
+but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Add the following lines into the file &lt;code&gt;/etc/apt/apt.conf&lt;/code&gt;,
+where &lt;code&gt;proxy_server&lt;/code&gt; is the address/ip of the server
+and &lt;code&gt;port&lt;/code&gt; is the port of the proxy service.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;Acquire::http::Proxy &lt;span class="s2"&gt;&amp;quot;proxy_server:port&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+Acquire::https::Proxy &lt;span class="s2"&gt;&amp;quot;proxy_server:port&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;A HTTP proxy can be used as both HTTP and HTTPS proxy.&lt;/p&gt;
+&lt;h2 id="question"&gt;Question&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;Does apt support socks proxy? If not, can a socks proxy be used as HTTP/HTTPS proxy for apt?&lt;/li&gt;
+&lt;/ol&gt;</content><category term="Linux"></category><category term="apt"></category><category term="source list"></category><category term="proxy"></category></entry><entry><title>Tips for Debian</title><link href="http://www.legendu.net/misc/blog/debian-tips/" rel="alternate"></link><published>2019-03-07T09:29:38-08:00</published><updated>2019-03-07T09:29:38-08:00</updated><author><name>Ben Chuanlong Du</name></author><id>tag:www.legendu.net,2019-03-07:/misc/blog/debian-tips/</id><summary type="html">&lt;p&gt;&lt;strong&gt;Things on this page are fragmentary and immature notes/thoughts of the author. 
+It is not meant to readers but rather for convenient reference of the author and future improvement.&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://debgen.simplylinux.ch/"&gt;Debian Apt Sources List Generator&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="http://www.fakeroot.info/2012/12/debian-downgrade-from-sid-to-testing.html"&gt;Debian downgrade from SID to testing &lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://archives.ryandaigle.com/articles/2005/10/31/listing-downgrading-unstable-testing-debian-packages"&gt;Listing &amp;amp; Downgrading Unstable/Testing Debian Packages&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://www.cyberciti.biz/howto/debian-linux/aptget-install-and-configure-compiz-eye-candy-effects/"&gt;Debian Linux 6 …&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;</summary><content type="html">&lt;p&gt;&lt;strong&gt;Things on this page are fragmentary and immature notes/thoughts of the author. 
+It is not meant to readers but rather for convenient reference of the author and future improvement.&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://debgen.simplylinux.ch/"&gt;Debian Apt Sources List Generator&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="http://www.fakeroot.info/2012/12/debian-downgrade-from-sid-to-testing.html"&gt;Debian downgrade from SID to testing &lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://archives.ryandaigle.com/articles/2005/10/31/listing-downgrading-unstable-testing-debian-packages"&gt;Listing &amp;amp; Downgrading Unstable/Testing Debian Packages&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://www.cyberciti.biz/howto/debian-linux/aptget-install-and-configure-compiz-eye-candy-effects/"&gt;Debian Linux 6: Install and Configure Compiz Eye Candy Effects&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="http://wiki.debian.org/iwlwifi"&gt;Intel Wireless WiFi Link, Wireless-N, Advanced-N, Ultimate-N devices&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;it seems that even Debian testing is outdated, the package ...&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;use apt-file update/search to find the right file ...&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;use sudo dpkg-reconfigure tzdata to change time zone&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;do not use the unstable/sid version unless you are a package developer&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;use all package sources instead of just stable, testing or sid
+and use pin&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;wajig install pkg/wheezy-backports 
+not wajig install pkg/stable-backports
+you can use stable-backports in source.list, however&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="installation"&gt;Installation&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;You'd better not install back ported Linux images, 
+because this makes it harder to use Virtualbox.
+It's suggested that &lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;you use the Linux image in the testing repository.&lt;/li&gt;
+&lt;li&gt;you always install headers corresponding to images you installed on your machine. &lt;/li&gt;
+&lt;li&gt;you install virtualbox in the same repository as the Linux image&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;If you install Linux using command line tools 
+and then install a desktop environment, you might not boot into DE automatically 
+because you also have to install a DE manager, e.g., gdm or lightdm
+without the login/DE manager, Linux won't boot into DE.
+so removing login/DE manager is a dirty trick to suppress X if you don't know 
+how to editing init scripts.
+You can always manually start X using &lt;code&gt;startx&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;</content><category term="tips"></category><category term="Linux"></category><category term="Debian"></category></entry><entry><title>WSL Tips</title><link href="http://www.legendu.net/misc/blog/wsl-tips/" rel="alternate"></link><published>2019-03-04T23:07:55-08:00</published><updated>2019-03-04T23:07:55-08:00</updated><author><name>Ben Chuanlong Du</name></author><id>tag:www.legendu.net,2019-03-04:/misc/blog/wsl-tips/</id><summary type="html">&lt;p&gt;&lt;strong&gt;
+Things on this page are
+fragmentary and immature notes/thoughts of the author.
+It is not meant to readers
+but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id="installation"&gt;Installation&lt;/h2&gt;
+&lt;p&gt;https://devtidbits.com/2017/06/08/run-ubuntu-16-04-on-windows-10-creators-update/&lt;/p&gt;
+&lt;h2 id="access-linux-filesystems-from-windows"&gt;Access Linux Filesystems from Windows&lt;/h2&gt;
+&lt;p&gt;https://blogs.msdn.microsoft.com/commandline/2016 …&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;strong&gt;
+Things on this page are
+fragmentary and immature notes/thoughts of the author.
+It is not meant to readers
+but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id="installation"&gt;Installation&lt;/h2&gt;
+&lt;p&gt;https://devtidbits.com/2017/06/08/run-ubuntu-16-04-on-windows-10-creators-update/&lt;/p&gt;
+&lt;h2 id="access-linux-filesystems-from-windows"&gt;Access Linux Filesystems from Windows&lt;/h2&gt;
+&lt;p&gt;https://blogs.msdn.microsoft.com/commandline/2016/11/17/do-not-change-linux-files-using-windows-apps-and-tools/&lt;/p&gt;
+&lt;p&gt;With the 1903 update, users can access Linux Filesystem from Windows directly.&lt;/p&gt;
+&lt;h2 id="general-tips"&gt;General Tips&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="http://cmder.net/"&gt;cmder&lt;/a&gt; is a good alternative UI for WSL (and also PowerShell and CMD).&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;All windows disks are mounted under &lt;code&gt;/mnt&lt;/code&gt;. 
+    You can visit all Windows files/directories that do not require admin privilige in WSL. 
+    However, 
+    if you want to visit files/directories that require admin privilige, 
+    you have to run WSL with admin and visit these files/directories using sudo in WSL.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;You'd better use files names that work both in Windows and Linux, 
+  otherwise, weird behavior might happen. &lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Shift + Right Click -&amp;gt; "Open CMD here ..."&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Starting with Win 10 Creator Update, Ubuntu 16.04 is available. if you installed old Ubuntu bash,
+    you need to first uninstall it and then reinstall again to get Ubuntu 16.04.
+    Upgrade to Ubuntu 16.04
+    https://www.howtogeek.com/278152/how-to-update-the-windows-bash-shell/&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="copy-and-paste"&gt;Copy and Paste&lt;/h2&gt;
+&lt;p&gt;Another solution would be to enable "QuickEdit Mode" and then you can paste by right-clicking in the terminal.&lt;/p&gt;
+&lt;p&gt;To enable QuickEdit Mode, right-click on the toolbar (or simply click on the icon in the upper left corner), select Properties, and in the the Options tab, click the checkbox next to QuickEdit Mode.&lt;/p&gt;
+&lt;p&gt;With this mode enabled, you can also copy text in the terminal by clicking and dragging. Once a selection is made, you can press Enter or right-click to copy.&lt;/p&gt;
+&lt;h2 id="daemonservice"&gt;Daemon/Service&lt;/h2&gt;
+&lt;p&gt;You cannot run daemon/services in WSL currently. However, it might be supported in future.&lt;/p&gt;
+&lt;h2 id="samba-remote-file-system"&gt;Samba Remote File System&lt;/h2&gt;
+&lt;p&gt;cannot mount samba in WSL currently.
+samba requires kernelspace while WSL only implements a userspace.&lt;/p&gt;
+&lt;h2 id="references"&gt;References&lt;/h2&gt;
+&lt;p&gt;&lt;a href="https://zhuanlan.zhihu.com/p/24537874"&gt;简明的WSL教程&lt;/a&gt;&lt;/p&gt;</content><category term="Linux"></category><category term="WSL"></category><category term="Windows"></category><category term="BashOnWindows"></category><category term="Bash on Windows"></category><category term="tips"></category></entry><entry><title>Shortcuts for KDE</title><link href="http://www.legendu.net/misc/blog/shortcuts-for-kde/" rel="alternate"></link><published>2019-03-04T08:53:41-08:00</published><updated>2019-03-04T08:53:41-08:00</updated><author><name>Ben Chuanlong Du</name></author><id>tag:www.legendu.net,2019-03-04:/misc/blog/shortcuts-for-kde/</id><summary type="html">&lt;p&gt;&lt;strong&gt;
+Things on this page are
+fragmentary and immature notes/thoughts of the author.
+It is not meant to readers
+but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;KDE supports the Win/Super key to bring up the application launcher now.
+    If you are on an older KDE …&lt;/p&gt;&lt;/li&gt;&lt;/ol&gt;</summary><content type="html">&lt;p&gt;&lt;strong&gt;
+Things on this page are
+fragmentary and immature notes/thoughts of the author.
+It is not meant to readers
+but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;KDE supports the Win/Super key to bring up the application launcher now.
+    If you are on an older KDE distributions which does not have it by default,
+    you can get it enabled by installing the &lt;code&gt;ksuperkey&lt;/code&gt; package.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Win + Arrow to resize windows.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;</content><category term="Linux"></category><category term="KDE"></category><category term="desktop environment"></category><category term="shortcuts"></category></entry><entry><title>Linux Administrator Tools</title><link href="http://www.legendu.net/misc/blog/linux-administrator-tools/" rel="alternate"></link><published>2019-01-22T21:46:37-08:00</published><updated>2019-01-22T21:46:37-08:00</updated><author><name>Ben Chuanlong Du</name></author><id>tag:www.legendu.net,2019-01-22:/misc/blog/linux-administrator-tools/</id><summary type="html">&lt;p&gt;&lt;strong&gt;
+Things on this page are
+fragmentary and immature notes/thoughts of the author.
+It is not meant to readers
+but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;webmin, cloudmin, usermin&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;id, adduser, gpasswd (recommended for adding/removing groups)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;uptime, top, netstat, ifconfig, top, iotop (input and output …&lt;/p&gt;&lt;/li&gt;&lt;/ol&gt;</summary><content type="html">&lt;p&gt;&lt;strong&gt;
+Things on this page are
+fragmentary and immature notes/thoughts of the author.
+It is not meant to readers
+but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;webmin, cloudmin, usermin&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;id, adduser, gpasswd (recommended for adding/removing groups)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;uptime, top, netstat, ifconfig, top, iotop (input and output monitoring), atop,&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;htop (a better alternative to top)&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="osquery"&gt;&lt;a href="https://github.com/facebook/osquery"&gt;osquery&lt;/a&gt;&lt;/h2&gt;
+&lt;h2 id="references"&gt;References&lt;/h2&gt;
+&lt;p&gt;https://www.tecmint.com/command-line-tools-to-monitor-linux-performance/&lt;/p&gt;
+&lt;p&gt;https://blog.serverdensity.com/80-linux-monitoring-tools-know/&lt;/p&gt;</content><category term="Linux"></category><category term="admin"></category><category term="administrator"></category><category term="tools"></category></entry><entry><title>Use Autojump to Help Quick Navigation in Terminal in Linux</title><link href="http://www.legendu.net/misc/blog/use-autojump-to-help-quick-navigation-in-terminal-in-linux/" rel="alternate"></link><published>2018-10-29T08:28:14-07:00</published><updated>2018-10-29T08:28:14-07:00</updated><author><name>Ben Chuanlong Du</name></author><id>tag:www.legendu.net,2018-10-29:/misc/blog/use-autojump-to-help-quick-navigation-in-terminal-in-linux/</id><summary type="html">&lt;p&gt;&lt;strong&gt;
+Things on this page are
+fragmentary and immature notes/thoughts of the author.
+It is not meant to readers
+but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://github.com/wting/autojump"&gt;autojump&lt;/a&gt; &lt;/p&gt;
+&lt;h2 id="installation"&gt;Installation&lt;/h2&gt;
+&lt;p&gt;Use the following command to install autojump on Ubuntu.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;wajig install autojump
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Place the following code in your …&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;strong&gt;
+Things on this page are
+fragmentary and immature notes/thoughts of the author.
+It is not meant to readers
+but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://github.com/wting/autojump"&gt;autojump&lt;/a&gt; &lt;/p&gt;
+&lt;h2 id="installation"&gt;Installation&lt;/h2&gt;
+&lt;p&gt;Use the following command to install autojump on Ubuntu.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;wajig install autojump
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Place the following code in your &lt;code&gt;.bashrc&lt;/code&gt; file and you are good to go.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="o"&gt;[[&lt;/span&gt; -f /usr/share/autojump/autojump.bash &lt;span class="o"&gt;]]&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;then&lt;/span&gt;
+    . /usr/share/autojump/autojump.bash
+&lt;span class="k"&gt;fi&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;</content><category term="Linux"></category><category term="autojump"></category><category term="cd"></category><category term="terminal"></category><category term="shell"></category><category term="navigation"></category></entry><entry><title>Fix Package Installation Issue in Linux</title><link href="http://www.legendu.net/misc/blog/fix-package-installation-issue-in-linux/" rel="alternate"></link><published>2018-07-21T12:31:03-07:00</published><updated>2018-07-21T12:31:03-07:00</updated><author><name>Ben Chuanlong Du</name></author><id>tag:www.legendu.net,2018-07-21:/misc/blog/fix-package-installation-issue-in-linux/</id><summary type="html">&lt;p&gt;&lt;strong&gt;
+Things on this page are
+fragmentary and immature notes/thoughts of the author.
+It is not meant to readers
+but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Error message: The package hl1440lpr needs to be reinstalled, but I can't find an archive for it.&lt;/p&gt;
+&lt;p&gt;Steps to fix …&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;strong&gt;
+Things on this page are
+fragmentary and immature notes/thoughts of the author.
+It is not meant to readers
+but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Error message: The package hl1440lpr needs to be reinstalled, but I can't find an archive for it.&lt;/p&gt;
+&lt;p&gt;Steps to fix the issue:&lt;/p&gt;
+&lt;p&gt;Start with&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="n"&gt;dpkg&lt;/span&gt; &lt;span class="c1"&gt;--remove --force-all hl1440lpr&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;If that fails ...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nv"&gt;sudo&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;i&lt;/span&gt;
+&lt;span class="nv"&gt;cd&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nv"&gt;var&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nv"&gt;lib&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nv"&gt;dpkg&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nv"&gt;info&lt;/span&gt;
+&lt;span class="nv"&gt;rm&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;rf&lt;/span&gt; &lt;span class="nv"&gt;hl1440lpr&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;
+&lt;span class="nv"&gt;dpkg&lt;/span&gt; &lt;span class="o"&gt;--&lt;/span&gt;&lt;span class="nv"&gt;remove&lt;/span&gt; &lt;span class="o"&gt;--&lt;/span&gt;&lt;span class="nv"&gt;force&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;remove&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;reinstreq&lt;/span&gt; &lt;span class="nv"&gt;hl1440lpr&lt;/span&gt;
+&lt;span class="k"&gt;exit&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Confirm apt-get is fixed&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="n"&gt;apt&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="k"&gt;get&lt;/span&gt; &lt;span class="k"&gt;update&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2 id="reference"&gt;Reference&lt;/h2&gt;
+&lt;p&gt;https://askubuntu.com/questions/88371/apt-synaptic-needs-to-reinstall-package-but-cant-find-the-archive-for-it&lt;/p&gt;</content><category term="Linux"></category><category term="package management"></category><category term="issue"></category><category term="apt"></category><category term="dpkg"></category></entry><entry><title>Package Management in Linux</title><link href="http://www.legendu.net/misc/blog/package-management-in-linux/" rel="alternate"></link><published>2018-04-30T18:17:41-07:00</published><updated>2018-04-30T18:17:41-07:00</updated><author><name>Ben Chuanlong Du</name></author><id>tag:www.legendu.net,2018-04-30:/misc/blog/package-management-in-linux/</id><summary type="html">&lt;p&gt;&lt;strong&gt;
+Things on this page are
+fragmentary and immature notes/thoughts of the author.
+It is not meant to readers
+but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;apt-get&lt;/li&gt;
+&lt;li&gt;wajig (my favourite Debian/Ubuntu package management command)&lt;/li&gt;
+&lt;li&gt;Software Center (A fancy GUI for managing packages on Ubuntu/Debian …&lt;/li&gt;&lt;/ol&gt;</summary><content type="html">&lt;p&gt;&lt;strong&gt;
+Things on this page are
+fragmentary and immature notes/thoughts of the author.
+It is not meant to readers
+but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;apt-get&lt;/li&gt;
+&lt;li&gt;wajig (my favourite Debian/Ubuntu package management command)&lt;/li&gt;
+&lt;li&gt;Software Center (A fancy GUI for managing packages on Ubuntu/Debian)&lt;/li&gt;
+&lt;li&gt;Software Management (Linux Mint)&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="debian"&gt;Debian&lt;/h2&gt;
+&lt;p&gt;wajig apt-get, dpkg,&lt;/p&gt;
+&lt;p&gt;use alien or rpm to install rpm packages, wajig install alien; sudo alien -i *.rpm&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;dpkg&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;S&lt;/span&gt; &lt;span class="err"&gt;$&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;which&lt;/span&gt; &lt;span class="k"&gt;free&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Apt-get有问题时可以试试dpkg,
+apt-get worries about dependencies but dpkg not,
+so then dependency is broken,
+you can use dpkg to install/remove packages&lt;/p&gt;
+&lt;p&gt;$ aptitude why libpng12-0&lt;/p&gt;
+&lt;p&gt;apt-mark manual&lt;/p&gt;
+&lt;h2 id="nix"&gt;&lt;a href="https://nixos.org/nix/"&gt;Nix&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;sounds interesting&lt;/p&gt;
+&lt;h2 id="redhat"&gt;RedHat&lt;/h2&gt;
+&lt;p&gt;https://www.digitalocean.com/community/tutorials/package-management-basics-apt-yum-dnf-pkg&lt;/p&gt;
+&lt;p&gt;https://pkgs.org/&lt;/p&gt;</content><category term="Linux"></category><category term="package management"></category><category term="wajig"></category><category term="apt-get"></category><category term="dpkg"></category></entry><entry><title>Samba Tips</title><link href="http://www.legendu.net/misc/blog/samba-tips/" rel="alternate"></link><published>2017-12-31T21:39:17-08:00</published><updated>2017-12-31T21:39:17-08:00</updated><author><name>Ben Chuanlong Du</name></author><id>tag:www.legendu.net,2017-12-31:/misc/blog/samba-tips/</id><summary type="html">&lt;p&gt;&lt;strong&gt;
+Things on this page are
+fragmentary and immature notes/thoughts of the author.
+It is not meant to readers
+but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;SAMBA File System is a great way to share files among computers in local network (e.g., office or home …&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;strong&gt;
+Things on this page are
+fragmentary and immature notes/thoughts of the author.
+It is not meant to readers
+but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;SAMBA File System is a great way to share files among computers in local network (e.g., office or home).
+You do NOT need a synchronization software.
+However,
+if you use SAMBA in office,
+make sure that the file permissions are as you expected.
+Some companies make SAMBA file system accessible to everyone!&lt;/p&gt;
+&lt;h2 id="docker-images"&gt;Docker Images&lt;/h2&gt;
+&lt;p&gt;dclong/samba&lt;/p&gt;
+&lt;h2 id="mount-windows-samba-share-on-ubuntu"&gt;Mount Windows Samba Share on Ubuntu&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="n"&gt;mount&lt;/span&gt; &lt;span class="o"&gt;//&lt;/span&gt;&lt;span class="n"&gt;WINSRV&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="k"&gt;SHARE&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;t&lt;/span&gt; &lt;span class="n"&gt;cifs&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;o&lt;/span&gt; &lt;span class="n"&gt;uid&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;1000&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;gid&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;1000&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;username&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;winuser&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;mnt&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;path&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2 id="mount-samba-in-wsl"&gt;Mount Samba in WSL&lt;/h2&gt;
+&lt;p&gt;It is now possible to mount USB media (including formatted as FAT)
+and network shares with &lt;code&gt;drvfs&lt;/code&gt; on Windows 10.&lt;/p&gt;
+&lt;p&gt;You can use the following command to mount removable media (e.g. D:).&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="n"&gt;mkdir&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;mnt&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;d&lt;/span&gt;
+&lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="n"&gt;mount&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;t&lt;/span&gt; &lt;span class="n"&gt;drvfs&lt;/span&gt; &lt;span class="n"&gt;D&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;mnt&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;d&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;And use the following command to safely unmount it.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="n"&gt;umount&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;mnt&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;d&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;You can also mount network shares without &lt;code&gt;smbfs&lt;/code&gt;.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="n"&gt;mount&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;t&lt;/span&gt; &lt;span class="n"&gt;drvfs&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;\\server\share&amp;#39;&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;mnt&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="k"&gt;share&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;https://blogs.msdn.microsoft.com/wsl/2017/04/18/file-system-improvements-to-the-windows-subsystem-for-linux/&lt;/p&gt;
+&lt;h2 id="issues"&gt;Issues&lt;/h2&gt;
+&lt;p&gt;I couldn't mount ubuntu SAMBA share on windows ...&lt;/p&gt;
+&lt;h2 id="misc"&gt;Misc&lt;/h2&gt;
+&lt;p&gt;https://ubuntuforums.org/showthread.php?t=1865953&lt;/p&gt;
+&lt;p&gt;https://stackoverflow.com/questions/3323966/echo-smbpasswd-by-stdin-doesnt-work&lt;/p&gt;
+&lt;p&gt;https://help.ubuntu.com/community/How%20to%20Create%20a%20Network%20Share%20Via%20Samba%20Via%20CLI%20%28Command-line%20interface/Linux%20Terminal%29%20-%20Uncomplicated%2C%20Simple%20and%20Brief%20Way%21&lt;/p&gt;
+&lt;p&gt;https://superuser.com/questions/1109993/accessing-removable-media-in-bash-on-windows/1209701#1209701&lt;/p&gt;</content><category term="Linux"></category><category term="SAMBA"></category><category term="remote file system"></category><category term="file sharing"></category></entry><entry><title>Tips for Linux</title><link href="http://www.legendu.net/misc/blog/linux-tips/" rel="alternate"></link><published>2017-11-16T00:15:26-08:00</published><updated>2017-11-16T00:15:26-08:00</updated><author><name>Ben Chuanlong Du</name></author><id>tag:www.legendu.net,2017-11-16:/misc/blog/linux-tips/</id><summary type="html">&lt;p&gt;&lt;strong&gt;
+Things on this page are
+fragmentary and immature notes/thoughts of the author.
+It is not meant to readers
+but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id="tricks-and-traps"&gt;Tricks and Traps&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Use full paths of commands when you use a batch account
+    or schedule a cron job.
+    The …&lt;/p&gt;&lt;/li&gt;&lt;/ol&gt;</summary><content type="html">&lt;p&gt;&lt;strong&gt;
+Things on this page are
+fragmentary and immature notes/thoughts of the author.
+It is not meant to readers
+but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id="tricks-and-traps"&gt;Tricks and Traps&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Use full paths of commands when you use a batch account
+    or schedule a cron job.
+    The reason is that batch account 
+    and/or cron might have different environment from your personal account.
+    So if a shell script works in your personal account,
+    it might not work in a batch account or in cron. &lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="http://www.explainshell.com/"&gt;explainshell.com&lt;/a&gt; 
+    is a great place for learning shell.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Broken symbolic link &lt;code&gt;.bashrc&lt;/code&gt; (and probably other configuration files/scripts) 
+    stops Xfce4 (and probably other DEs) from login to the GUI.
+    Fix the broken symbolic links resolves the issue.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="installation"&gt;Installation&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;After a new kernel is installed, 
+    the old image is usually kept and you can still boot into the old kernel if you like.
+    This make is convenient if the new kernel has some issues.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="remote"&gt;Remote&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;The remote desktop software Remmina leaks the super key, 
+    which is problematic ...
+    I think the problem is Ubuntu, not the remote apps ...&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;When you connect to a server, 
+    you'd better not use the super key. 
+    Because it is active on both the server and the local machines. &lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="file-system"&gt;File System&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;You cannot change permission of files on NTFS filesystem ..., 
+    they are determined when mounted&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Linux hard disk saves properties, user, group of files, 
+    a different user must have enough permission to mount it&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;do not use gui to remove large file/directories, use command line instead&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="good-practice"&gt;Good Practice&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;The home directory is where you should work in, 
+    you should put all your personal data in your home directory. 
+    When you need to reinstall the system or backup your data, 
+    you can make a copy of your home directory. 
+    However, I go one step further to make things even more convenient. 
+    I create a directory named archives in my home directory,
+    put all my persoanl data including configuration files there
+    (except cloud, such as Dropbox, TeamDrive, etc.) &lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="links"&gt;Links&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;Linux does not support variant symbolic links, i.e., you can use environment variables in symbolic links.
+    and link them to places where needed.
+    This way, 
+    I can just make a copy of the archives directory 
+    which is even more convenient.
+    Avoid copying unnecessary files.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="terminal"&gt;Terminal&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;nautilus-open-terminal allow you to open a terminal 
+    in any directory via short menu.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;A good backgroup color setting for terminal Hue: 85, Saturation: 36,
+    Value: 71, Red: 155, Green: 182 and Blue: 117. color name: #9BB675.
+    Cursor color: #B93A3A.
+    The theme goes well with this color setting is "Xterm".&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;^&lt;/span&gt;&lt;span class="n"&gt;P&lt;/span&gt; &lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="k"&gt;move&lt;/span&gt; &lt;span class="n"&gt;up&lt;/span&gt; &lt;span class="n"&gt;through&lt;/span&gt; &lt;span class="n"&gt;history&lt;/span&gt; &lt;span class="n"&gt;list&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;one&lt;/span&gt; &lt;span class="n"&gt;command&lt;/span&gt; &lt;span class="k"&gt;at&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="n"&gt;time&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Up&lt;/span&gt; &lt;span class="n"&gt;arrow&lt;/span&gt; &lt;span class="k"&gt;key&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; 
+&lt;span class="o"&gt;^&lt;/span&gt;&lt;span class="n"&gt;N&lt;/span&gt; &lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="k"&gt;move&lt;/span&gt; &lt;span class="n"&gt;down&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;or&lt;/span&gt; &lt;span class="n"&gt;Down&lt;/span&gt; &lt;span class="n"&gt;arrow&lt;/span&gt; &lt;span class="k"&gt;key&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Use &lt;code&gt;Shift+PageUp&lt;/code&gt; and &lt;code&gt;Shift+PageDown&lt;/code&gt; to scroll up and down in virtual console.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="shell"&gt;Shell&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;White spaces matters a lot in bash. To assign a string to a variable,
+    you can use &lt;code&gt;v=some_content&lt;/code&gt; but not &lt;code&gt;v = some_content&lt;/code&gt;. 
+    The reason is that space is used to separate bash commands and arguments. 
+    Bash will treat &lt;code&gt;v&lt;/code&gt; as a command instead of a variable. &lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;To source in a bash file "a-bash-file" so that commands in the file
+    will be executed, you can use &lt;code&gt;source a-bash-file&lt;/code&gt;, or you can use a
+    period "." in place of "source", i.e., you can also use &lt;code&gt;.
+    a-bash-file&lt;/code&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;return&lt;/code&gt; returns a bash function and thus can only be used in a bash function. 
+    The argument of &lt;code&gt;return&lt;/code&gt; must be a numeric number. 
+    &lt;code&gt;exit&lt;/code&gt; exits the bash enviroment, 
+    i.e., terminate the terminal you are using.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;to add path to the "PATH" environment variable, use the following command&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;PATH&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="err"&gt;$&lt;/span&gt;&lt;span class="n"&gt;PATH&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="n"&gt;path_to_add&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;If you want to add the path permanently, 
+you can put the command into the ".bashrc" file under your home directory. 
+If you have to add lots of paths into the PATH environment variable, 
+you can put them into a seperate file, 
+and link it in the ".bashrc" file.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="path-in-bash-script"&gt;Path in Bash Script&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Full path of current directory&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="err"&gt;$&lt;/span&gt;&lt;span class="n"&gt;PWD&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;base name of current directory&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="cp"&gt;${&lt;/span&gt;&lt;span class="n"&gt;PWD&lt;/span&gt;&lt;span class="c1"&gt;##*/&lt;/span&gt;&lt;span class="cp"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;or&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;basename&lt;/span&gt; $&lt;span class="nv"&gt;PWD&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="cd"&gt;cd&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;use - to go back to last directory&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;use $CDPATH&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;use pushd and popd&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="ftp"&gt;FTP&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;ftp transfer non-text use binary mode&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="file-association"&gt;File Association&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;The user-specific file association information is save in the file
+    &lt;code&gt;/.local/share/applications/mimeapps.list&lt;/code&gt;, 
+    and the global file association information is saved in file &lt;code&gt;/etc/gnome/defaults.list&lt;/code&gt;.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="change-hostname"&gt;Change Hostname&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;To change hostname permanently, 
+    change the hostname to what you want
+    in files [] &lt;code&gt;/etc/hostname&lt;/code&gt; and [] &lt;code&gt;/etc/hosts&lt;/code&gt;, and then use the
+    following code to make the change in effect without restarting your
+    computer.&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;etc&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;init&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;d&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;hostname&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sh&lt;/span&gt; &lt;span class="k"&gt;start&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="sudo"&gt;sudo&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;To change the timeout of the sudo password, add the following line
+    to the end of the /etc/sudoers file.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;Defaults&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="n"&gt;your_username&lt;/span&gt; &lt;span class="n"&gt;timestamp_timeout&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;SECONDS&lt;/span&gt;
+&lt;span class="n"&gt;Defaults&lt;/span&gt; &lt;span class="n"&gt;syslog&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;auth&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt;&lt;span class="n"&gt;passwd_timeout&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;10&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;j&lt;/p&gt;
+&lt;h2 id="users-and-groups"&gt;users and groups&lt;/h2&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;id&lt;/code&gt; displays information of a user.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="skills"&gt;Skills&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;If you select some text, 
+    right click on it but nothings happens (i.e., no short menu poped up), 
+    it means that the selected text has already been copied to the mouse buffer. 
+    This is one place that Linux is different from Windows. 
+    Notice that no all selct and copy process is like this. 
+    You still have to copy the selected text into the buffer manually sometimes.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Hard drive related operations: &lt;a href="http://www.skullbox.net/newsda.php"&gt;http://www.skullbox.net/newsda.php&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;check cpu information &lt;code&gt;cat /proc/cpuinfo&lt;/code&gt; and memory &lt;code&gt;cat /proc/meminfo&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Linux system support &lt;em&gt;true&lt;/em&gt; random number generator, 
+    which is implemented by collecting the noise generate by hardwares. 
+    To use generate &lt;em&gt;true&lt;/em&gt; random numbers, 
+    you can use the command.&lt;/p&gt;
+&lt;p&gt;head -1 /dev/random | od -i -N 10 | awk '{ print $2 }' &lt;/p&gt;
+&lt;p&gt;Note that &lt;code&gt;/dev/random&lt;/code&gt; will block until additional environmental noise is gathered
+if the entropy pool in the machine is empty. 
+If you do not want to be block, 
+you can use &lt;code&gt;/dev/urandom&lt;/code&gt; to generate random numbers, 
+which reuses the internal pool to produce more pseudo-random bits when the entropy pool is empty. 
+Though &lt;code&gt;/dev/urandom&lt;/code&gt; might contain less entropy than &lt;code&gt;/dev/random&lt;/code&gt; does,
+it is still valide for usual use.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="copy-using-ui"&gt;Copy using UI&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;Many Linux/Unix realted applications use &lt;code&gt;copy on selection&lt;/code&gt;.
+    This features makes things confusing sometimes. 
+    For example, if you copy things from one place and want to paste it into a terminal which has &lt;code&gt;copy on selection&lt;/code&gt; enable.
+    Then you click on the terminal to paste. 
+    The thing is that when you click on the terminal, 
+    you often select a blank line which means that you have copied a blank line before pasting. 
+    This often make your copy/paste fail to work.
+    If copy/paste fail to work in some application, 
+    it is possibly because of the &lt;code&gt;copy on selection&lt;/code&gt; feature. 
+    A workaround is to right click ...&lt;/li&gt;
+&lt;/ol&gt;</content><category term="tips"></category><category term="Linux"></category></entry><entry><title>Account Management in Linux</title><link href="http://www.legendu.net/misc/blog/account-management-in-linux/" rel="alternate"></link><published>2017-10-22T13:30:05-07:00</published><updated>2017-10-22T13:30:05-07:00</updated><author><name>Ben Chuanlong Du</name></author><id>tag:www.legendu.net,2017-10-22:/misc/blog/account-management-in-linux/</id><summary type="html">&lt;p&gt;&lt;strong&gt;
+Things on this page are
+fragmentary and immature notes/thoughts of the author.
+It is not meant to readers
+but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id="create-a-user"&gt;Create a User&lt;/h2&gt;
+&lt;p&gt;Both &lt;code&gt;adduser&lt;/code&gt; and &lt;code&gt;useradd&lt;/code&gt; can be used to create a new user. 
+&lt;code&gt;adduser&lt;/code&gt; is interactive while &lt;code&gt;useradd …&lt;/code&gt;&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;strong&gt;
+Things on this page are
+fragmentary and immature notes/thoughts of the author.
+It is not meant to readers
+but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id="create-a-user"&gt;Create a User&lt;/h2&gt;
+&lt;p&gt;Both &lt;code&gt;adduser&lt;/code&gt; and &lt;code&gt;useradd&lt;/code&gt; can be used to create a new user. 
+&lt;code&gt;adduser&lt;/code&gt; is interactive while &lt;code&gt;useradd&lt;/code&gt; is non-interactive.
+It is suggested that you use &lt;code&gt;useradd&lt;/code&gt; in batch mode
+and &lt;code&gt;adduser&lt;/code&gt; in non-batch mode.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;useradd -o -m -u -g -d 
+groupadd -o -g 
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2 id="group"&gt;Group&lt;/h2&gt;
+&lt;p&gt;Add a user to a group.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;gpasswd -a user_name group_name
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Get information about a group.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;getent group group_name
+getent group group_id
+&lt;/pre&gt;&lt;/div&gt;</content><category term="Linux"></category><category term="account management"></category><category term="group managment"></category><category term="adduser"></category><category term="useradd"></category><category term="gpasswd"></category><category term="getent"></category></entry><entry><title>Install sbt on CentOS</title><link href="http://www.legendu.net/misc/blog/install-sbt-on-centos/" rel="alternate"></link><published>2017-06-25T10:37:51-07:00</published><updated>2017-06-25T10:37:51-07:00</updated><author><name>Ben Chuanlong Du</name></author><id>tag:www.legendu.net,2017-06-25:/misc/blog/install-sbt-on-centos/</id><summary type="html">&lt;p&gt;&lt;strong&gt;
+Things on this page are
+fragmentary and immature notes/thoughts of the author.
+It is not meant to readers
+but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;wget http://dl.bintray.com/sbt/rpm/sbt-0.13.5.rpm
+sudo yum install sbt-0.13.5.rpm
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;curl https …&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;&lt;strong&gt;
+Things on this page are
+fragmentary and immature notes/thoughts of the author.
+It is not meant to readers
+but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;wget http://dl.bintray.com/sbt/rpm/sbt-0.13.5.rpm
+sudo yum install sbt-0.13.5.rpm
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;curl https://bintray.com/sbt/rpm/rpm &lt;span class="p"&gt;|&lt;/span&gt; sudo tee /etc/yum.repos.d/bintray-sbt-rpm.repo
+sudo yum install sbt
+&lt;/pre&gt;&lt;/div&gt;</content><category term="Linux"></category><category term="CentOS"></category><category term="RedHat"></category><category term="sbt"></category><category term="install"></category></entry><entry><title>Snappy Tips</title><link href="http://www.legendu.net/misc/blog/snappy-tips/" rel="alternate"></link><published>2017-04-22T21:55:58-07:00</published><updated>2017-04-22T21:55:58-07:00</updated><author><name>Ben Chuanlong Du</name></author><id>tag:www.legendu.net,2017-04-22:/misc/blog/snappy-tips/</id><summary type="html">&lt;p&gt;&lt;strong&gt;
+Things on this page are
+fragmentary and immature notes/thoughts of the author.
+It is not meant to readers
+but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Available commands for snap:&lt;/p&gt;
+&lt;p&gt;abort       Abort a pending change
+ack         Adds an assertion to the system
+alias       Enables the given …&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;strong&gt;
+Things on this page are
+fragmentary and immature notes/thoughts of the author.
+It is not meant to readers
+but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Available commands for snap:&lt;/p&gt;
+&lt;p&gt;abort       Abort a pending change
+ack         Adds an assertion to the system
+alias       Enables the given aliases
+aliases     Lists aliases in the system
+buy         Buys a snap
+change      List a change's tasks
+changes     List system changes
+connect     Connects a plug to a slot
+disable     Disables a snap in the system
+disconnect  Disconnects a plug from a slot
+download    Downloads the given snap
+enable      Enables a snap in the system
+find        Finds packages to install
+get         Prints configuration options
+help        Help
+info        show detailed information about a snap
+install     Installs a snap to the system
+interfaces  Lists interfaces in the system
+known       Shows known assertions of the provided type
+list        List installed snaps
+login       Authenticates on snapd and the store
+logout      Log out of the store
+refresh     Refreshes a snap in the system
+remove      Removes a snap from the system
+revert      Reverts the given snap to the previous state
+run         Run the given snap command
+set         Changes configuration options
+try         Tests a snap in the system
+unalias     Disables the given aliases
+version     Help
+watch       Watch a change in progress&lt;/p&gt;</content><category term="Linux"></category><category term="snappy"></category><category term="snap"></category><category term="tips"></category></entry><entry><title>CentOS Tips</title><link href="http://www.legendu.net/misc/blog/centos-tips/" rel="alternate"></link><published>2017-04-22T13:24:33-07:00</published><updated>2017-04-22T13:24:33-07:00</updated><author><name>Ben Chuanlong Du</name></author><id>tag:www.legendu.net,2017-04-22:/misc/blog/centos-tips/</id><summary type="html">&lt;p&gt;&lt;strong&gt;
+Things on this page are
+fragmentary and immature notes/thoughts of the author.
+It is not meant to readers
+but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;The &lt;code&gt;wheel&lt;/code&gt; group is the &lt;code&gt;sudo&lt;/code&gt; group.
+So to grant a user the sudo previlege,
+just add it to the …&lt;/li&gt;&lt;/ol&gt;</summary><content type="html">&lt;p&gt;&lt;strong&gt;
+Things on this page are
+fragmentary and immature notes/thoughts of the author.
+It is not meant to readers
+but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;The &lt;code&gt;wheel&lt;/code&gt; group is the &lt;code&gt;sudo&lt;/code&gt; group.
+So to grant a user the sudo previlege,
+just add it to the &lt;code&gt;wheel&lt;/code&gt; group.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;gpasswd -a user_name wheel
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2 id="epel"&gt;EPEL&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo yum -y install epel
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2 id="ius-release"&gt;IUS Release&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo yum -y install https://centos7.iuscommunity.org/ius-release.rpm
+&lt;/pre&gt;&lt;/div&gt;</content><category term="Linux"></category><category term="CentOS"></category><category term="tips"></category></entry><entry><title>Find Tips</title><link href="http://www.legendu.net/misc/blog/find-tips/" rel="alternate"></link><published>2017-03-19T10:00:54-07:00</published><updated>2017-03-19T10:00:54-07:00</updated><author><name>Ben Chuanlong Du</name></author><id>tag:www.legendu.net,2017-03-19:/misc/blog/find-tips/</id><summary type="html">&lt;p&gt;&lt;strong&gt;
+Things on this page are
+fragmentary and immature notes/thoughts of the author.
+It is not meant to readers
+but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Find all files with extension ".out" in currently directory and its subdirectory, 
+    and then make them executable.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nv"&gt;find&lt;/span&gt; . &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;type&lt;/span&gt; &lt;span class="nv"&gt;f …&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;&lt;/ol&gt;</summary><content type="html">&lt;p&gt;&lt;strong&gt;
+Things on this page are
+fragmentary and immature notes/thoughts of the author.
+It is not meant to readers
+but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Find all files with extension ".out" in currently directory and its subdirectory, 
+    and then make them executable.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nv"&gt;find&lt;/span&gt; . &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;type&lt;/span&gt; &lt;span class="nv"&gt;f&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;iname&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt;.&lt;span class="nv"&gt;out&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="k"&gt;exec&lt;/span&gt; &lt;span class="nv"&gt;chmod&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="nv"&gt;x&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;&lt;span class="s"&gt;{}&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&lt;/span&gt; \&lt;span class="c1"&gt;;&lt;/span&gt;
+# &lt;span class="nv"&gt;or&lt;/span&gt; &lt;span class="nv"&gt;you&lt;/span&gt; &lt;span class="nv"&gt;can&lt;/span&gt; &lt;span class="nv"&gt;use&lt;/span&gt; 
+&lt;span class="nv"&gt;find&lt;/span&gt; . &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;type&lt;/span&gt; &lt;span class="nv"&gt;f&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;iname&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt;.&lt;span class="nv"&gt;out&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;print0&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="nv"&gt;xargs&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt; &lt;span class="nv"&gt;chmod&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="nv"&gt;x&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Find files whose names contain "conflicted" and remove them.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;find&lt;/span&gt; &lt;span class="p"&gt;.&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;iname&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;*conflicted*&amp;#39;&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;print0&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="n"&gt;xargs&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt; &lt;span class="n"&gt;rm&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="size-related-finding"&gt;Size Related Finding&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Find files with 0 size and delete them.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nv"&gt;find&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nv"&gt;path&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nv"&gt;to&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nv"&gt;files&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;size&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;ok&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="k"&gt;exec&lt;/span&gt; &lt;span class="nv"&gt;rm&lt;/span&gt; {} \&lt;span class="c1"&gt;;&lt;/span&gt;
+# &lt;span class="nv"&gt;or&lt;/span&gt; &lt;span class="nv"&gt;you&lt;/span&gt; &lt;span class="nv"&gt;can&lt;/span&gt; &lt;span class="nv"&gt;use&lt;/span&gt;
+&lt;span class="nv"&gt;find&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nv"&gt;path&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nv"&gt;to&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nv"&gt;files&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;size&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;ok&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="nv"&gt;xargs&lt;/span&gt; &lt;span class="nv"&gt;rm&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Find empty directories. &lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;find&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="k"&gt;type&lt;/span&gt; &lt;span class="n"&gt;d&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;empty&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Find files greater than 1G.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;find&lt;/span&gt; &lt;span class="p"&gt;.&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;xdev&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="k"&gt;type&lt;/span&gt; &lt;span class="n"&gt;f&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="k"&gt;size&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="k"&gt;G&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;First find files and then pass them to other commands is a very useful trick.
+    For example, 
+    you can use the following command to find all R scripts containing the word &lt;code&gt;paste&lt;/code&gt;.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;find&lt;/span&gt; &lt;span class="p"&gt;.&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="k"&gt;type&lt;/span&gt; &lt;span class="n"&gt;f&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;iname&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;*.r&amp;#39;&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="n"&gt;grep&lt;/span&gt; &lt;span class="c1"&gt;--color=auto paste&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="time-related-finding"&gt;Time Related Finding&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Find files created with in 60 minutes.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;find&lt;/span&gt; &lt;span class="p"&gt;.&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;cmin&lt;/span&gt; &lt;span class="mi"&gt;60&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Find files more than 30 days ago&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;find&lt;/span&gt; &lt;span class="p"&gt;.&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;ctime&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="mi"&gt;30&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Find file less than 30 days ago.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;find&lt;/span&gt; &lt;span class="p"&gt;.&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;ctime&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;30&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Find files that are exactly 30 days ago.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;find&lt;/span&gt; &lt;span class="p"&gt;.&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;ctime&lt;/span&gt; &lt;span class="mi"&gt;30&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Find all files modified on the June 7, 2007 in the current directory.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;find&lt;/span&gt; &lt;span class="p"&gt;.&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="k"&gt;type&lt;/span&gt; &lt;span class="n"&gt;f&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;newermt&lt;/span&gt; &lt;span class="mi"&gt;2007&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;06&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;07&lt;/span&gt; &lt;span class="o"&gt;!&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;newermt&lt;/span&gt; &lt;span class="mi"&gt;2007&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;06&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;08&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Find all files accessed on the Sep 29, 2008 in the current directory.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;find&lt;/span&gt; &lt;span class="p"&gt;.&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="k"&gt;type&lt;/span&gt; &lt;span class="n"&gt;f&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;newerat&lt;/span&gt; &lt;span class="mi"&gt;2008&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;09&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;29&lt;/span&gt; &lt;span class="o"&gt;!&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;newerat&lt;/span&gt; &lt;span class="mi"&gt;2008&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;09&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;30&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Find files which had their permission changed on the same day.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;find&lt;/span&gt; &lt;span class="p"&gt;.&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="k"&gt;type&lt;/span&gt; &lt;span class="n"&gt;f&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;newerct&lt;/span&gt; &lt;span class="mi"&gt;2008&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;09&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;29&lt;/span&gt; &lt;span class="o"&gt;!&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;newerct&lt;/span&gt; &lt;span class="mi"&gt;2008&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;09&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;30&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="file-type-related-finding"&gt;File Type Related Finding&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Find broken symbolic links.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;find&lt;/span&gt; &lt;span class="p"&gt;.&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;xtype&lt;/span&gt; &lt;span class="n"&gt;l&lt;/span&gt;
+&lt;span class="o"&gt;#&lt;/span&gt; &lt;span class="k"&gt;or&lt;/span&gt;
+&lt;span class="n"&gt;find&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;L&lt;/span&gt; &lt;span class="p"&gt;.&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="k"&gt;type&lt;/span&gt; &lt;span class="n"&gt;l&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Find executable files in current directory &lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;find&lt;/span&gt; &lt;span class="p"&gt;.&lt;/span&gt;  &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;maxdepth&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="k"&gt;type&lt;/span&gt; &lt;span class="n"&gt;f&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;executable&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="user-related-finding"&gt;User Related Finding&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Find files that belong to a user but writable by its group or other people.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;find&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;path&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="k"&gt;to&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;file&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="k"&gt;user&lt;/span&gt; &lt;span class="n"&gt;user1&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;perm&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="mi"&gt;022&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Check file type of all files under the current directory.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;find&lt;/span&gt; &lt;span class="p"&gt;.&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="k"&gt;type&lt;/span&gt; &lt;span class="n"&gt;f&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="n"&gt;xargs&lt;/span&gt; &lt;span class="n"&gt;file&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;-perm mode: File's permission bits are exactly mode (octal or symbolic).
+-perm -mode: All  of  the  permission bits mode are set for the file. 
+-perm /mode: Any of the permission bits mode are set for the file. 
+a little bit trick about how to understand the last 2 permission criterias.
+as suggested, think in terms of permission BITs (0/1)&lt;/p&gt;
+&lt;p&gt;The following command finds all files that readable or writable by the group or (readable or writable) by others.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;find /path/to/file -user user1 -perm /066
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;The following command find all files that readable and writable by the group and (readable and writable) by others.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;find /path/to/file -user user1 -perm -066
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;The following command find all files that readable or writable by the group and (readable or writable) by others.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;find /path/to/file -user user1 -perm /060 -perm /006
+&lt;/pre&gt;&lt;/div&gt;</content><category term="linux"></category><category term="find"></category><category term="tips"></category><category term="search"></category></entry><entry><title>Remote Desktop on Linux</title><link href="http://www.legendu.net/misc/blog/remote-desktop-on-linux/" rel="alternate"></link><published>2017-03-02T00:34:31-08:00</published><updated>2017-03-02T00:34:31-08:00</updated><author><name>Ben Chuanlong Du</name></author><id>tag:www.legendu.net,2017-03-02:/misc/blog/remote-desktop-on-linux/</id><summary type="html">&lt;p&gt;&lt;strong&gt;
+Things on this page are
+fragmentary and immature notes/thoughts of the author.
+It is not meant to readers
+but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id="nomachine"&gt;NoMachine&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;Do not install a desktop manager (lightdm, kdm, xdm, etc.) if you use NoMachine.&lt;/li&gt;
+&lt;/ol&gt;</summary><content type="html">&lt;p&gt;&lt;strong&gt;
+Things on this page are
+fragmentary and immature notes/thoughts of the author.
+It is not meant to readers
+but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id="nomachine"&gt;NoMachine&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;Do not install a desktop manager (lightdm, kdm, xdm, etc.) if you use NoMachine.&lt;/li&gt;
+&lt;/ol&gt;</content><category term="Linux"></category><category term="remote desktop"></category><category term="NX"></category><category term="NoMachine"></category><category term="VNC"></category></entry><entry><title>Tips for Ubuntu</title><link href="http://www.legendu.net/misc/blog/ubuntu-tips/" rel="alternate"></link><published>2017-02-19T12:20:43-08:00</published><updated>2017-02-19T12:20:43-08:00</updated><author><name>Ben Chuanlong Du</name></author><id>tag:www.legendu.net,2017-02-19:/misc/blog/ubuntu-tips/</id><summary type="html">&lt;p&gt;&lt;strong&gt;
+Things on this page are fragmentary and immature notes/thoughts of the author. 
+It is not meant to readers but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://www.dedoimedo.com/computers/ubuntu-initrd-bug.html"&gt;How to solve boot problems with Ubuntu after kernel upgrade&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://repogen.simplylinux.ch/"&gt;Ubuntu Sources List Generator&lt;/a&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;use CTRL + D in a folder …&lt;/p&gt;&lt;/li&gt;&lt;/ol&gt;</summary><content type="html">&lt;p&gt;&lt;strong&gt;
+Things on this page are fragmentary and immature notes/thoughts of the author. 
+It is not meant to readers but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://www.dedoimedo.com/computers/ubuntu-initrd-bug.html"&gt;How to solve boot problems with Ubuntu after kernel upgrade&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://repogen.simplylinux.ch/"&gt;Ubuntu Sources List Generator&lt;/a&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;use CTRL + D in a folder to add it as a bookmark&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;If a user never logged in before, the removal disk won't be mounted.
+But you can always mount the disk manually.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;If a user never logged in before, the vino-server is not usable. 
+There is a solution if gdm is used, 
+but I don't know how to resolve this problem when lightdm is used. 
+One good way is to let ubuntu login automatically and then lock screen automatically.
+You can also think about whether the way you used in Debian is applicable to Ubuntu.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;It seems that account services override the lightdm configuration file. &lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Unity in Ubuntu crashes frequently. 
+This might due to Firefox not unity itself. 
+You might want to check the log information. 
+And if it's indeed the problem of firefox, 
+it might due to plugins installed in firefox. &lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;lightdm fails to start on Y450. 
+This is probably due to xfce environment installed. 
+You can remove it and check whether it works OK then. &lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;For some reason I don't know, lightdm fails to restart after running "sudo service lightdm restart".
+However, it starts if I login into tty and start it manually by "sudo service lightdm start".
+I think this probably means that something is wrong stopping the lightdm service. &lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="installation"&gt;Installation&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Ubuntu image is Hybrid, 
+which means that you can dd/cat it into a flash drive directly to make a bootable flash drive.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Ubuntu have good hardware support. 
+You can probably also use a wireless network while installing Ubuntu.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="vpn"&gt;VPN&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;openvpn&lt;/li&gt;
+&lt;/ol&gt;</content><category term="tips"></category><category term="Ubuntu"></category><category term="Linux"></category><category term="OS"></category></entry><entry><title>Chinese Locale in Linux</title><link href="http://www.legendu.net/misc/blog/chinese-locale/" rel="alternate"></link><published>2017-01-15T19:46:38-08:00</published><updated>2017-01-15T19:46:38-08:00</updated><author><name>Ben Chuanlong Du</name></author><id>tag:www.legendu.net,2017-01-15:/misc/blog/chinese-locale/</id><summary type="html">&lt;p&gt;&lt;strong&gt;
+Things on this page are
+fragmentary and immature notes/thoughts of the author.
+It is not meant to readers
+but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# GB2312 encoding support&lt;/span&gt;
+locale-gen zh_CN
+&lt;span class="c1"&gt;# UTF-8 encoding support&lt;/span&gt;
+locale-gen zh_CN.UTF-8
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;$LANG environment control the different language to use ...&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;strong&gt;
+Things on this page are
+fragmentary and immature notes/thoughts of the author.
+It is not meant to readers
+but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# GB2312 encoding support&lt;/span&gt;
+locale-gen zh_CN
+&lt;span class="c1"&gt;# UTF-8 encoding support&lt;/span&gt;
+locale-gen zh_CN.UTF-8
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;$LANG environment control the different language to use ...&lt;/p&gt;</content><category term="Linux"></category><category term="Chinese"></category><category term="Locale"></category></entry><entry><title>Some Tips for grep</title><link href="http://www.legendu.net/misc/blog/grep-tips/" rel="alternate"></link><published>2016-11-20T17:59:09-08:00</published><updated>2016-11-20T17:59:09-08:00</updated><author><name>Ben Chuanlong Du</name></author><id>tag:www.legendu.net,2016-11-20:/misc/blog/grep-tips/</id><summary type="html">&lt;p&gt;&lt;strong&gt;
+Things on this page are fragmentary and immature notes/thoughts of the author. 
+It is not meant to readers but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Following are some good articles about &lt;code&gt;grep&lt;/code&gt;.
+- &lt;a href="http://www.librebyte.net/en/gnulinux/14-practical-examples-of-the-grep-command/"&gt;14 Practical examples of the grep command&lt;/a&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;The Perl style (option &lt;code&gt;-P&lt;/code&gt;) regular …&lt;/p&gt;&lt;/li&gt;&lt;/ol&gt;</summary><content type="html">&lt;p&gt;&lt;strong&gt;
+Things on this page are fragmentary and immature notes/thoughts of the author. 
+It is not meant to readers but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Following are some good articles about &lt;code&gt;grep&lt;/code&gt;.
+- &lt;a href="http://www.librebyte.net/en/gnulinux/14-practical-examples-of-the-grep-command/"&gt;14 Practical examples of the grep command&lt;/a&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;The Perl style (option &lt;code&gt;-P&lt;/code&gt;) regular expression is more powerful 
+than the basic (default) and extended (option &lt;code&gt;-E&lt;/code&gt;) regular expression. 
+It is suggested that you use the perl style as much as possible.
+However, 
+be careful about unimplemented features. &lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Options &lt;code&gt;-n&lt;/code&gt; and &lt;code&gt;-o&lt;/code&gt; of &lt;code&gt;grep&lt;/code&gt; are useful.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Search in current directory recursively for files containing the text "video".
+Symbolic links are followed.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;grep &lt;span class="s1"&gt;&amp;#39;video&amp;#39;&lt;/span&gt; -iR .
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Search in current directory recursively for files containing the text "video".
+Symbolic links are NOT followed.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;grep &lt;span class="s1"&gt;&amp;#39;video&amp;#39;&lt;/span&gt; -ir .
+&lt;/pre&gt;&lt;/div&gt;</content><category term="tips"></category><category term="grep"></category><category term="egrep"></category></entry><entry><title>Change File Permission on Linux</title><link href="http://www.legendu.net/misc/blog/change-file-permission-on-linux/" rel="alternate"></link><published>2016-08-15T23:45:23-07:00</published><updated>2016-08-15T23:45:23-07:00</updated><author><name>Ben Chuanlong Du</name></author><id>tag:www.legendu.net,2016-08-15:/misc/blog/change-file-permission-on-linux/</id><summary type="html">&lt;p&gt;R: 4
+W: 2
+X: 1&lt;/p&gt;
+&lt;p&gt;Make a directory readable to other people.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;chmod &lt;span class="m"&gt;755&lt;/span&gt; dir  
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Make a file readable to other people.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;chmod &lt;span class="m"&gt;644&lt;/span&gt; file 
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Make a directory and all its subcontents readable to other people.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# make the dir and its subcontents readable and executable&lt;/span&gt;
+chmod &lt;span class="m"&gt;755&lt;/span&gt; -R dir …&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;R: 4
+W: 2
+X: 1&lt;/p&gt;
+&lt;p&gt;Make a directory readable to other people.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;chmod &lt;span class="m"&gt;755&lt;/span&gt; dir  
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Make a file readable to other people.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;chmod &lt;span class="m"&gt;644&lt;/span&gt; file 
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Make a directory and all its subcontents readable to other people.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# make the dir and its subcontents readable and executable&lt;/span&gt;
+chmod &lt;span class="m"&gt;755&lt;/span&gt; -R dir
+&lt;span class="c1"&gt;# remove executable permission from files&lt;/span&gt;
+find dir -type f &lt;span class="p"&gt;|&lt;/span&gt; xargs chmod -x
+&lt;/pre&gt;&lt;/div&gt;</content><category term="Linux"></category><category term="file permission"></category><category term="file system"></category><category term="filesystem"></category></entry><entry><title>Questions About Ubuntu</title><link href="http://www.legendu.net/misc/blog/ubuntu-questions/" rel="alternate"></link><published>2016-07-13T23:04:35-07:00</published><updated>2016-07-13T23:04:35-07:00</updated><author><name>Ben Chuanlong Du</name></author><id>tag:www.legendu.net,2016-07-13:/misc/blog/ubuntu-questions/</id><summary type="html">&lt;p&gt;&lt;strong&gt;
+Things on this page are fragmentary and immature notes/thoughts of the author. 
+It is not meant to readers but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Ubuntu:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;The openvpn is good choice for ubuntu. The vpnc does not work in my case. &lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;how to set hosts …&lt;/p&gt;&lt;/li&gt;&lt;/ol&gt;</summary><content type="html">&lt;p&gt;&lt;strong&gt;
+Things on this page are fragmentary and immature notes/thoughts of the author. 
+It is not meant to readers but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Ubuntu:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;The openvpn is good choice for ubuntu. The vpnc does not work in my case. &lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;how to set hosts restriction for vpn?&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;How to change icon of files?&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;After upgrade to a new kernel, 
+Ubuntu fails to boot both normally and in the recovery mode,
+how do I remove the new kernel?&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;It seems that evince is not working properly in Ubuntu. 
+The marks made in Adobe cannot be seen on evince in Ubuntu. 
+However, there's no problem in debian.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;If a user never logged in before, the removal disk is not accessible. 
+I think one can probably mount the disk manually. &lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;If a user never logged in before, the vino-server is not usable. 
+There is a solution if gdm is used, but I don't know how to resolve this problem when lightdm is used. &lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;It seems that account services override the lightdm configuration file. &lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Unity in Ubuntu crashes frequently. 
+This might due to Firefox not unity itself. 
+You might want to check the log information. 
+And if it's indeed the problem of firefox, 
+it might due to plugins installed in firefox. &lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;lightdm fails to start on Y450. 
+This is probably due to xfce environment installed. 
+You can remove it and check whether it works OK then. &lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;For some reason I don't know, lightdm fails to restart after running "sudo service lightdm restart".
+However, it starts if I login into tty and start it manually by "sudo service lightdm start".
+I think this probably means that something is wrong stopping the lightdm service. &lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;How do I add a entry into the menu, e.g. MATLAB starting menu?&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;how to add a folder as bookmark in 13.04?&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;</content><category term="questions"></category><category term="Ubuntu"></category><category term="Linux"></category><category term="OS"></category></entry><entry><title>Prevent Linux Command from Being Interruptted</title><link href="http://www.legendu.net/misc/blog/prevent-linux-command-from-being-interruptted/" rel="alternate"></link><published>2016-07-13T22:48:16-07:00</published><updated>2016-07-13T22:48:16-07:00</updated><author><name>Ben Chuanlong Du</name></author><id>tag:www.legendu.net,2016-07-13:/misc/blog/prevent-linux-command-from-being-interruptted/</id><summary type="html">&lt;p&gt;&lt;strong&gt;
+Things on this page are
+fragmentary and immature notes/thoughts of the author.
+It is not meant to readers
+but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;screen&lt;/li&gt;
+&lt;li&gt;tmux&lt;/li&gt;
+&lt;li&gt;nohup and &amp;amp;: before you run a command&lt;/li&gt;
+&lt;li&gt;disown: useful when after you have started a command that takes …&lt;/li&gt;&lt;/ol&gt;</summary><content type="html">&lt;p&gt;&lt;strong&gt;
+Things on this page are
+fragmentary and immature notes/thoughts of the author.
+It is not meant to readers
+but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;screen&lt;/li&gt;
+&lt;li&gt;tmux&lt;/li&gt;
+&lt;li&gt;nohup and &amp;amp;: before you run a command&lt;/li&gt;
+&lt;li&gt;disown: useful when after you have started a command that takes a long time to run.&lt;/li&gt;
+&lt;/ol&gt;</content><category term="Shell"></category><category term="Terminal"></category><category term="Linux"></category><category term="remote"></category></entry><entry><title>Install Firefox in Debian</title><link href="http://www.legendu.net/misc/blog/install%20firefox%20in%20debian/" rel="alternate"></link><published>2016-07-13T22:21:27-07:00</published><updated>2016-07-13T22:21:27-07:00</updated><author><name>Ben Chuanlong Du</name></author><id>tag:www.legendu.net,2016-07-13:/misc/blog/install firefox in debian/</id><summary type="html">&lt;p&gt;&lt;strong&gt;
+Things on this page are
+fragmentary and immature notes/thoughts of the author.
+It is not meant to readers
+but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;you have to update your script based on the DE being used.
+but first check whether a desktop file created …&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;strong&gt;
+Things on this page are
+fragmentary and immature notes/thoughts of the author.
+It is not meant to readers
+but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;you have to update your script based on the DE being used.
+but first check whether a desktop file created in GNOME can be used in Xfce or not.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;# &lt;span class="nv"&gt;download&lt;/span&gt; &lt;span class="nv"&gt;latest&lt;/span&gt; &lt;span class="nv"&gt;firefox&lt;/span&gt;
+&lt;span class="nv"&gt;path&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="nv"&gt;ftp&lt;/span&gt;.&lt;span class="nv"&gt;mozilla&lt;/span&gt;.&lt;span class="nv"&gt;org&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nv"&gt;pub&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nv"&gt;mozilla&lt;/span&gt;.&lt;span class="nv"&gt;org&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nv"&gt;firefox&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nv"&gt;releases&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nv"&gt;latest&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nv"&gt;linux&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;$&lt;span class="ss"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;uname&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;m&lt;/span&gt;&lt;span class="ss"&gt;)&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nv"&gt;en&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;US&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;
+&lt;span class="nv"&gt;dir&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;$&lt;span class="ss"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;mktemp&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;d&lt;/span&gt;&lt;span class="ss"&gt;)&lt;/span&gt;
+&lt;span class="nv"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="s"&gt;Temporary directory \&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="mh"&gt;$d&lt;/span&gt;&lt;span class="nv"&gt;ir&lt;/span&gt;\&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="s"&gt; is created.&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;
+&lt;span class="nv"&gt;cd&lt;/span&gt; &lt;span class="mh"&gt;$d&lt;/span&gt;&lt;span class="nv"&gt;ir&lt;/span&gt;
+&lt;span class="nv"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="s"&gt;Downloading firefox into \&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="mh"&gt;$d&lt;/span&gt;&lt;span class="nv"&gt;ir&lt;/span&gt;\&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="s"&gt; ...&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;
+&lt;span class="nv"&gt;wget&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;r&lt;/span&gt; &lt;span class="o"&gt;--&lt;/span&gt;&lt;span class="nv"&gt;no&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;parent&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;e&lt;/span&gt; &lt;span class="nv"&gt;robots&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="nv"&gt;off&lt;/span&gt; &lt;span class="nv"&gt;http&lt;/span&gt;:&lt;span class="o"&gt;//&lt;/span&gt;$&lt;span class="nv"&gt;path&lt;/span&gt;
+&lt;span class="nv"&gt;path&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;$&lt;span class="ss"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;ls&lt;/span&gt; $&lt;span class="nv"&gt;path&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nv"&gt;firefox&lt;/span&gt;&lt;span class="o"&gt;-*&lt;/span&gt;&lt;span class="ss"&gt;)&lt;/span&gt;
+&lt;span class="nv"&gt;filename&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;$&lt;span class="ss"&gt;(&lt;/span&gt;&lt;span class="k"&gt;basename&lt;/span&gt; $&lt;span class="nv"&gt;path&lt;/span&gt;&lt;span class="ss"&gt;)&lt;/span&gt;
+&lt;span class="nv"&gt;cp&lt;/span&gt; $&lt;span class="nv"&gt;path&lt;/span&gt; &lt;span class="mh"&gt;$f&lt;/span&gt;&lt;span class="nv"&gt;ilename&lt;/span&gt;
+# &lt;span class="nv"&gt;decompress&lt;/span&gt; &lt;span class="nv"&gt;firefox&lt;/span&gt; &lt;span class="nv"&gt;installation&lt;/span&gt; &lt;span class="nv"&gt;files&lt;/span&gt;
+&lt;span class="nv"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="s"&gt;Decompressing firefox installation file ...&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;
+&lt;span class="k"&gt;if&lt;/span&gt; [[ &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="s"&gt;$filename&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt;.&lt;span class="nv"&gt;tar&lt;/span&gt;.&lt;span class="nv"&gt;bz2&lt;/span&gt; ]]&lt;span class="c1"&gt;; then&lt;/span&gt;
+    &lt;span class="nv"&gt;option&lt;/span&gt;&lt;span class="o"&gt;=-&lt;/span&gt;&lt;span class="nv"&gt;jxvf&lt;/span&gt;
+&lt;span class="nv"&gt;elif&lt;/span&gt; [[ &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="s"&gt;$extension&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt;.&lt;span class="nv"&gt;tar&lt;/span&gt;.&lt;span class="nv"&gt;gz&lt;/span&gt; ]]&lt;span class="c1"&gt;; then&lt;/span&gt;
+    &lt;span class="nv"&gt;option&lt;/span&gt;&lt;span class="o"&gt;=-&lt;/span&gt;&lt;span class="nv"&gt;zxvf&lt;/span&gt;
+&lt;span class="k"&gt;else&lt;/span&gt;
+    &lt;span class="nv"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="s"&gt;Unrecognized installation file!&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;
+&lt;span class="nv"&gt;fi&lt;/span&gt;
+&lt;span class="nv"&gt;tar&lt;/span&gt; $&lt;span class="nv"&gt;option&lt;/span&gt; &lt;span class="mh"&gt;$f&lt;/span&gt;&lt;span class="nv"&gt;ilename&lt;/span&gt;
+# &lt;span class="nv"&gt;copy&lt;/span&gt; &lt;span class="nv"&gt;to&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nv"&gt;opt&lt;/span&gt;
+&lt;span class="nv"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="s"&gt;Copying firefox files to /opt ...&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;
+&lt;span class="nv"&gt;sudo&lt;/span&gt; &lt;span class="nv"&gt;rm&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;rf&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nv"&gt;opt&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nv"&gt;firefox&lt;/span&gt;
+&lt;span class="nv"&gt;sudo&lt;/span&gt; &lt;span class="nv"&gt;cp&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;r&lt;/span&gt; &lt;span class="nv"&gt;firefox&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nv"&gt;opt&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;
+# &lt;span class="nv"&gt;install&lt;/span&gt; &lt;span class="nv"&gt;flashplugin&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;nonfree&lt;/span&gt; &lt;span class="nv"&gt;to&lt;/span&gt; &lt;span class="nv"&gt;make&lt;/span&gt; &lt;span class="nv"&gt;firefox&lt;/span&gt; &lt;span class="nv"&gt;more&lt;/span&gt; &lt;span class="nv"&gt;usable&lt;/span&gt;
+&lt;span class="nv"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="s"&gt;Installing flashplugin-nonfree ...&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;
+&lt;span class="nv"&gt;wajig&lt;/span&gt; &lt;span class="nv"&gt;install&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;y&lt;/span&gt; &lt;span class="nv"&gt;flashplugin&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;nonfree&lt;/span&gt;
+# &lt;span class="nv"&gt;uninstall&lt;/span&gt; &lt;span class="nv"&gt;iceweasel&lt;/span&gt;
+&lt;span class="k"&gt;if&lt;/span&gt; [ &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="s"&gt;$(wajig list | grep -i iceweasel)&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;!=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;&amp;quot;&lt;/span&gt; ]&lt;span class="c1"&gt;; then &lt;/span&gt;
+    # &lt;span class="nv"&gt;wajig&lt;/span&gt; &lt;span class="nv"&gt;purge&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;y&lt;/span&gt; &lt;span class="nv"&gt;iceweasel&lt;/span&gt;
+    &lt;span class="nv"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="s"&gt;Please uninstall iceweasel manually!&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;
+&lt;span class="nv"&gt;fi&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;</content><category term="Linux"></category><category term="Firefox"></category><category term="Debian"></category><category term="web browser"></category></entry><entry><title>CrunchBang Tips</title><link href="http://www.legendu.net/misc/blog/crunchbang-tips/" rel="alternate"></link><published>2016-07-13T22:19:19-07:00</published><updated>2016-07-13T22:19:19-07:00</updated><author><name>Ben Chuanlong Du</name></author><id>tag:www.legendu.net,2016-07-13:/misc/blog/crunchbang-tips/</id><summary type="html">&lt;p&gt;&lt;strong&gt;
+Things on this page are
+fragmentary and immature notes/thoughts of the author.
+It is not meant to readers
+but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Step by step: Configuring automatic logins&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Right-click anywhere on your Crunchbang desktop and browse to the System menu. 
+Click on …&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;strong&gt;
+Things on this page are
+fragmentary and immature notes/thoughts of the author.
+It is not meant to readers
+but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Step by step: Configuring automatic logins&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Right-click anywhere on your Crunchbang desktop and browse to the System menu. 
+Click on GDM Login Set-up. 
+You'll be prompted for your administration password to make these changes.
+Now, when the Login Window Preferences window appears, 
+click on the Security tab and select Enable automatic login. 
+You need to use the drop-down box to select the user account to log in when the computer starts.
+Save your settings and reboot the computer. 
+It should log in automatically first time.&lt;/p&gt;
+&lt;p&gt;And that's it. 
+In our next tutorial, 
+we'll be looking at making applications start automatically when the Crunchbang computer starts up.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Private Internet Access fails to install on 64 bit version.
+It is recommended that you always use 32 bit version of CrunchBang.&lt;/li&gt;
+&lt;/ol&gt;</content><category term="Linux"></category><category term="tips"></category><category term="CrunchBang"></category><category term="OS"></category></entry><entry><title>Desktop Environments for Linux</title><link href="http://www.legendu.net/misc/blog/desktop-environments-for-linux/" rel="alternate"></link><published>2016-07-13T22:09:04-07:00</published><updated>2016-07-13T22:09:04-07:00</updated><author><name>Ben Chuanlong Du</name></author><id>tag:www.legendu.net,2016-07-13:/misc/blog/desktop-environments-for-linux/</id><summary type="html">&lt;p&gt;&lt;strong&gt;
+Things on this page are fragmentary and immature notes/thoughts of the author. 
+It is not meant to readers but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;desktop files in /usr/share/applications/
+different DEs might have different format. 
+At least I know that a desktop file …&lt;/li&gt;&lt;/ol&gt;</summary><content type="html">&lt;p&gt;&lt;strong&gt;
+Things on this page are fragmentary and immature notes/thoughts of the author. 
+It is not meant to readers but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;desktop files in /usr/share/applications/
+different DEs might have different format. 
+At least I know that a desktop file created by Xfce cannot be used in GNOME,
+not sure the opposite works or not.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;The icon entry in the desktop file can be defined as a full path.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Do not remove Iceweasel in GNOME 
+even if you have installed other web browsers like Firefox, Chrome, etc.
+Some GNOME components depends on Iceweasel. 
+Removing Iceweasel might have undesirable effect on your GNOME desktop environment.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="desktop-environments"&gt;Desktop Environments&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;LXQt&lt;/li&gt;
+&lt;li&gt;Xfce&lt;/li&gt;
+&lt;li&gt;KDE&lt;/li&gt;
+&lt;li&gt;Gnome&lt;/li&gt;
+&lt;li&gt;Cinnamon&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="desktop-manager"&gt;Desktop Manager&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;lightdm
+lightdm might have problems when multiple desktop enviroments are installed.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;gdm3&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;kdm&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id="tiling-windows-manager"&gt;Tiling Windows Manager&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;Xmonad&lt;/li&gt;
+&lt;li&gt;i3&lt;/li&gt;
+&lt;/ol&gt;</content><category term="DE"></category><category term="Linux"></category><category term="desktop environment"></category><category term="Xfce"></category><category term="GNOME"></category><category term="KDE"></category><category term="Unity"></category><category term="lightdm"></category><category term="gdm3"></category><category term="kdm"></category><category term="mdm"></category></entry><entry><title>Some Questions About Linux</title><link href="http://www.legendu.net/misc/blog/linux-questions/" rel="alternate"></link><published>2016-07-09T19:01:47-07:00</published><updated>2016-07-09T19:01:47-07:00</updated><author><name>Ben Chuanlong Du</name></author><id>tag:www.legendu.net,2016-07-09:/misc/blog/linux-questions/</id><summary type="html">&lt;ol&gt;
+&lt;li&gt;If a file is in use (e.g., being written data into),
+can it be moved using mv?
+If so, 
+how can I avoid this?&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;I think so. But you still have a buffer copy in the editor.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;is it possible to change default file/folder permissions when creating a …&lt;/p&gt;&lt;/li&gt;&lt;/ol&gt;</summary><content type="html">&lt;ol&gt;
+&lt;li&gt;If a file is in use (e.g., being written data into),
+can it be moved using mv?
+If so, 
+how can I avoid this?&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;I think so. But you still have a buffer copy in the editor.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;is it possible to change default file/folder permissions when creating a new file/folder?&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;linux list files that belongs to some user?&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;how to revert the scroll direction in Linux (DE)?&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;linux mint: hiding panel can cause problems in sometimes, e.g., teamviewer, recordmydesktop, etc., you want to unhide panel first before ...
+not sure whether this issue has been fixed in Cinnamon 3&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;some linux applications ... the copy on select features makes things confusing sometiumes, you'd better right click directly without left click ...&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;</content><category term="questions"></category><category term="Linux"></category></entry><entry><title>Arch Linux Tips</title><link href="http://www.legendu.net/misc/blog/arch-linux-tips/" rel="alternate"></link><published>2016-05-12T00:09:47-07:00</published><updated>2016-05-12T00:09:47-07:00</updated><author><name>Ben Chuanlong Du</name></author><id>tag:www.legendu.net,2016-05-12:/misc/blog/arch-linux-tips/</id><summary type="html">&lt;p&gt;&lt;strong&gt;
+Things on this page are
+fragmentary and immature notes/thoughts of the author.
+It is not meant to readers
+but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Manjaro is a good Arch Linux based distribution.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Install a package&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;pacman -S package_name 
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Search for a package&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;pacman -Ss …&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;&lt;strong&gt;
+Things on this page are
+fragmentary and immature notes/thoughts of the author.
+It is not meant to readers
+but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Manjaro is a good Arch Linux based distribution.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Install a package&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;pacman -S package_name 
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Search for a package&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;pacman -Ss package_name
+&lt;/pre&gt;&lt;/div&gt;</content><category term="Linux"></category><category term="tips"></category><category term="Arch Linux"></category></entry><entry><title>Copy Pictures in Android to Computer</title><link href="http://www.legendu.net/misc/blog/copy-pictures-in-android-to-computer/" rel="alternate"></link><published>2015-12-06T09:09:35-08:00</published><updated>2015-12-06T09:09:35-08:00</updated><author><name>Ben Chuanlong Du</name></author><id>tag:www.legendu.net,2015-12-06:/misc/blog/copy-pictures-in-android-to-computer/</id><summary type="html">&lt;p&gt;&lt;strong&gt;
+Things on this page are
+fragmentary and immature notes/thoughts of the author.
+It is not meant to readers
+but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;You have to have a SSH server installed on the Android phone.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;scp -r -P port user_name@192.168.1 …&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;&lt;strong&gt;
+Things on this page are
+fragmentary and immature notes/thoughts of the author.
+It is not meant to readers
+but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;You have to have a SSH server installed on the Android phone.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;scp -r -P port user_name@192.168.1.105:/sdcard/DCIM . 
+scp -r -P port user_name@192.168.1.105:/sdcard/DCIM/Camera .
+scp -r -P port user_name@192.168.1.105:/sdcard/Download .
+scp -r -P port user_name@192.168.1.105:/sdcard/Tencent/MicroMsg/WeChat .
+scp -r -P port user_name@192.168.1.105:/sdcard/Tencent/MicroMsg/WeiXin .
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;&lt;code&gt;/sdcard/DCIM&lt;/code&gt;
+&lt;code&gt;/sdcard/Download&lt;/code&gt;
+&lt;code&gt;/sdcard/MicroMsg&lt;/code&gt;&lt;/p&gt;</content><category term="Linux"></category><category term="scp"></category><category term="rsync"></category><category term="pictures"></category><category term="image"></category><category term="photo"></category><category term="media"></category><category term="Android"></category></entry><entry><title>Undelete Files in Linux</title><link href="http://www.legendu.net/misc/blog/undelete-files-in-linux/" rel="alternate"></link><published>2015-09-12T01:39:06-07:00</published><updated>2015-09-12T01:39:06-07:00</updated><author><name>Ben Chuanlong Du</name></author><id>tag:www.legendu.net,2015-09-12:/misc/blog/undelete-files-in-linux/</id><summary type="html">&lt;p&gt;&lt;strong&gt;
+Things on this page are
+fragmentary and immature notes/thoughts of the author.
+It is not meant to readers
+but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo mount -o remount,ro /dev/sdb1
+sudo extundelete --restore-all /dev/sdb1 
+&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;&lt;strong&gt;
+Things on this page are
+fragmentary and immature notes/thoughts of the author.
+It is not meant to readers
+but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo mount -o remount,ro /dev/sdb1
+sudo extundelete --restore-all /dev/sdb1 
+&lt;/pre&gt;&lt;/div&gt;</content><category term="Linux"></category><category term="undelete"></category><category term="recover"></category><category term="files"></category><category term="filesystem"></category><category term="restore"></category><category term="trash"></category></entry><entry><title>Linux Links</title><link href="http://www.legendu.net/misc/blog/linux-links/" rel="alternate"></link><published>2015-03-15T22:15:08-07:00</published><updated>2015-03-15T22:15:08-07:00</updated><author><name>Ben Chuanlong Du</name></author><id>tag:www.legendu.net,2015-03-15:/misc/blog/linux-links/</id><summary type="html">&lt;p&gt;&lt;strong&gt;
+Things on this page are fragmentary and immature notes/thoughts of the author. 
+It is not meant to readers but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="http://www.commandlinefu.com/commands/browse/sort-by-votes"&gt;CommandLineFu&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://www.cyberciti.biz/tips/linux-unix-bsd-documentations.html"&gt;Best Documentation&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://www.cyberciti.biz/"&gt;nixCraftA&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="http://www.ibm.com/developerworks/cn/linux/"&gt;developerWorks&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="http://www.computerandyou.net/2011/05/how-to-mount-a-windows-partition-on-linux-automatically-on-each-start-up/"&gt;How to mount a windows partition on Linux automatically on each start up&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="http://aaronwalrath.wordpress.com/2011/03/21/configure-automountautofs-on-ubuntu-10-10-maverick-linux/"&gt;Configure Automount …&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;&lt;/ul&gt;</summary><content type="html">&lt;p&gt;&lt;strong&gt;
+Things on this page are fragmentary and immature notes/thoughts of the author. 
+It is not meant to readers but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="http://www.commandlinefu.com/commands/browse/sort-by-votes"&gt;CommandLineFu&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://www.cyberciti.biz/tips/linux-unix-bsd-documentations.html"&gt;Best Documentation&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://www.cyberciti.biz/"&gt;nixCraftA&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="http://www.ibm.com/developerworks/cn/linux/"&gt;developerWorks&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="http://www.computerandyou.net/2011/05/how-to-mount-a-windows-partition-on-linux-automatically-on-each-start-up/"&gt;How to mount a windows partition on Linux automatically on each start up&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="http://aaronwalrath.wordpress.com/2011/03/21/configure-automountautofs-on-ubuntu-10-10-maverick-linux/"&gt;Configure Automount/Autofs on Ubuntu 10.10 Maverick Linux&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="http://www.linux-on-laptops.com/"&gt;Linux on Laptops&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://www.quora.com/Linux/What-are-some-time-saving-tips-that-every-Linux-user-should-know#"&gt;Linux: What are some time-saving tips that every Linux user should know?&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://www.cyberciti.biz/faq/linux-find-wireless-driver-chipset/"&gt;Linux: Find Wireless Driver Chipset Information&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;http://blog.scoutapp.com/articles/2015/02/24/understanding-linuxs-cpu-stats&lt;/p&gt;
+&lt;p&gt;https://h-node.org/home/index/en&lt;/p&gt;
+&lt;p&gt;http://www-03.ibm.com/systems/power/software/aix/linux/toolbox/alpha.html&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://www.redbooks.ibm.com/abstracts/tips0124.html?Open"&gt;AIX - The getconf Command for System Information&lt;/a&gt;&lt;/p&gt;</content><category term="links"></category><category term="Linux"></category></entry><entry><title>The Best Scripting Language?</title><link href="http://www.legendu.net/misc/blog/choose-a-script-language/" rel="alternate"></link><published>2015-03-13T11:00:27-07:00</published><updated>2015-03-13T11:00:27-07:00</updated><author><name>Ben Chuanlong Du</name></author><id>tag:www.legendu.net,2015-03-13:/misc/blog/choose-a-script-language/</id><summary type="html">&lt;p&gt;&lt;strong&gt;
+Things on this page are fragmentary and immature notes/thoughts of the author. 
+It is not meant to readers but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id="shell-vs-python-vs-julia"&gt;shell vs python vs julia&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;I think if there are existing functionalities in shell, just use them. 
+If you want …&lt;/li&gt;&lt;/ol&gt;</summary><content type="html">&lt;p&gt;&lt;strong&gt;
+Things on this page are fragmentary and immature notes/thoughts of the author. 
+It is not meant to readers but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id="shell-vs-python-vs-julia"&gt;shell vs python vs julia&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;I think if there are existing functionalities in shell, just use them. 
+If you want to write general purpose script, use other scripting languages, I recommend julia&lt;/li&gt;
+&lt;/ol&gt;</content><category term="scripting language"></category><category term="Linux"></category><category term="shell"></category><category term="Julia"></category><category term="Python"></category></entry><entry><title>Questions About Debian</title><link href="http://www.legendu.net/misc/blog/debian-questions/" rel="alternate"></link><published>2015-02-24T13:40:26-08:00</published><updated>2015-02-24T13:40:26-08:00</updated><author><name>Ben Chuanlong Du</name></author><id>tag:www.legendu.net,2015-02-24:/misc/blog/debian-questions/</id><summary type="html">&lt;p&gt;&lt;strong&gt;
+Things on this page are fragmentary and immature notes/thoughts of the author. 
+It is not meant to readers but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Folders on the desktop (mapped to home directory) cannot be openned by double clicking. 
+Not sure whether this is a …&lt;/p&gt;&lt;/li&gt;&lt;/ol&gt;</summary><content type="html">&lt;p&gt;&lt;strong&gt;
+Things on this page are fragmentary and immature notes/thoughts of the author. 
+It is not meant to readers but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Folders on the desktop (mapped to home directory) cannot be openned by double clicking. 
+Not sure whether this is a bug of which file manager.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;How to set up static ip in debian? 
+I followed tutorials on line but had no luck. 
+I'm not sure whether it's because of the version of debian that 
+I used was sid. &lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;some program creates a directory "Documents" in my home directory. 
+I have disabled XDG to do this. 
+How do I know which program does this? And how can I disable it?
+Mendeley&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;meanings of wheezy-updates and wheezy/updates (for security)?&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;</content><category term="question"></category><category term="Linux"></category><category term="Debian"></category></entry><entry><title>Copying Files in Linux</title><link href="http://www.legendu.net/misc/blog/cp-tips/" rel="alternate"></link><published>2015-01-03T21:07:54-08:00</published><updated>2015-01-03T21:07:54-08:00</updated><author><name>Ben Chuanlong Du</name></author><id>tag:www.legendu.net,2015-01-03:/misc/blog/cp-tips/</id><summary type="html">&lt;p&gt;&lt;strong&gt;
+Things on this page are
+fragmentary and immature notes/thoughts of the author.
+It is not meant to readers
+but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Generally speaking, 
+    you do not want to follow symbolic links when copying files 
+    unless you are copying from one machine …&lt;/li&gt;&lt;/ol&gt;</summary><content type="html">&lt;p&gt;&lt;strong&gt;
+Things on this page are
+fragmentary and immature notes/thoughts of the author.
+It is not meant to readers
+but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Generally speaking, 
+    you do not want to follow symbolic links when copying files 
+    unless you are copying from one machine to another.
+    If you do not want follow symbolic links,
+    use &lt;code&gt;cp -av&lt;/code&gt; and &lt;code&gt;rsync -avh&lt;/code&gt;.
+    If you do want to follow symbolic links,
+    use &lt;code&gt;cp -rL&lt;/code&gt; and &lt;code&gt;rsync -rLvh&lt;/code&gt;.
+    It is suggested that you use &lt;code&gt;rsync&lt;/code&gt; instead of &lt;code&gt;cp&lt;/code&gt; and &lt;code&gt;scp&lt;/code&gt;.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="cp"&gt;cp&lt;/h2&gt;
+&lt;p&gt;By default, 
+cp does not copy directories. 
+However, 
+the &lt;code&gt;-R&lt;/code&gt;, &lt;code&gt;-a&lt;/code&gt;, and &lt;code&gt;-r&lt;/code&gt; options cause cp to copy recursively 
+by descending into source directories 
+and copying files to corresponding destination directories.&lt;/p&gt;
+&lt;p&gt;When copying from a symbolic link, 
+cp normally follows the link only when not copying recursively 
+or when &lt;code&gt;--link&lt;/code&gt; (&lt;code&gt;-l&lt;/code&gt;) is used. 
+This default can be overridden 
+with the &lt;code&gt;--archive&lt;/code&gt; (&lt;code&gt;-a&lt;/code&gt;), &lt;code&gt;-d&lt;/code&gt;, &lt;code&gt;--dereference&lt;/code&gt; (&lt;code&gt;-L&lt;/code&gt;), &lt;code&gt;--no-dereference&lt;/code&gt; (&lt;code&gt;-P&lt;/code&gt;), 
+and &lt;code&gt;-H&lt;/code&gt; options. 
+If more than one of these options is specified, the last one silently overrides the others.&lt;/p&gt;
+&lt;p&gt;When copying to a symbolic link, 
+cp follows the link only when it refers to an existing regular file. 
+However, 
+when copying to a dangling symbolic link, 
+cp refuses by default, 
+and fails with a diagnostic, 
+since the operation is inherently dangerous. 
+This behavior is contrary to historical practice and to POSIX. 
+Set POSIXLY_CORRECT to make cp attempt to create the target of a dangling destination symlink, in spite of the possible risk. Also, when an option like --backup or --link acts to rename or remove the destination before copying, cp renames or removes the symbolic link rather than the file it points to.&lt;/p&gt;
+&lt;p&gt;By default, cp copies the contents of special files only when not copying recursively. This default can be overridden with the --copy-contents option.&lt;/p&gt;
+&lt;p&gt;cp generally refuses to copy a file onto itself, with the following exception: if --force --backup is specified with source and dest identical, and referring to a regular file, cp will make a backup file, either regular or numbered, as specified in the usual ways (see Backup options). This is useful when you simply want to make a backup of an existing file before changing it.&lt;/p&gt;
+&lt;p&gt;The program accepts the following options. Also see Common options. &lt;/p&gt;</content><category term="linux"></category><category term="cp"></category><category term="command-line"></category><category term="rsync"></category><category term="scp"></category></entry></feed>

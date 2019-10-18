@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>UltiSnips Tips</title>
+  <meta name="author" content="Ben Chuanlong Du">
+
+  <link href="http://www.legendu.net/misc/atom.xml" type="application/atom+xml" rel="alternate"
+        title="Ben Chuanlong Du's Blog Atom Feed" />
+
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link href="http://www.legendu.net/misc/favicon.png" rel="icon">
+  <link href="http://www.legendu.net/misc/theme/css/main_2.css" media="screen, projection"
+        rel="stylesheet" type="text/css">
+  <script src="http://www.legendu.net/misc/theme/js/modernizr-2.0.js"></script>
+  <script src="http://www.legendu.net/misc/theme/js/ender.js"></script>
+  <script src="http://www.legendu.net/misc/theme/js/octopress.js" type="text/javascript"></script>
+
+  <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+</head>
+
+<body>
+  <header role="banner"><hgroup>
+  <h1><a href="http://www.legendu.net/misc/">Ben Chuanlong Du's Blog</a></h1>
+    <h2>It is never too late to learn.</h2>
+</hgroup></header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="http://www.legendu.net/misc/atom.xml" rel="subscribe-rss">RSS</a></li>
+</ul>
+
+<form name="search" action="https://www.bing.com/search" method="get" onSubmit="return build_query()">
+  <fieldset role="search">
+      <!--
+    <input type="hidden" name="q" value="site:http://www.legendu.net/misc" />
+        -->
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+
+<script type = "text/javascript">
+    function build_query() {
+        var query = document.forms["search"]["q"].value;
+        var prefix = "site:http://www.legendu.net/misc "
+        if (!query.startsWith(prefix)) {
+            query = prefix + query;
+            document.forms["search"]["q"].value = query;
+        }
+        return true;
+    }
+</script>
+
+<ul class="main-navigation">
+    <li><a href="http://www.legendu.net">Home</a></li>
+    <li><a href="http://www.legendu.net/misc">Blog</a></li>
+    <li><a href="http://www.legendu.net/misc/archives.html">Archives</a></li>
+    <li><a href="http://www.legendu.net/misc/pages/links.html">Links</a></li>
+</ul></nav>
+  <div id="main">
+    <div id="content">
+<div>
+  <article class="hentry" role="article">
+<header>
+      <h1 class="entry-title">UltiSnips Tips</h1>
+      <p class="meta"><time datetime="2017-11-16T00:59:21-08:00" pubdate>Nov 16, 2017</time></p>
+</header>
+
+  <div class="entry-content"><p><strong>
+Things on this page are fragmentary and immature notes/thoughts of the author.
+It is not meant to readers but rather for convenient reference of the author and future improvement.
+</strong></p>
+<ol>
+<li>
+<p>Python3 is supported!</p>
+</li>
+<li>
+<p>Your auto completiion scripts requires <code>python-dateutil</code>.
+    (check whether you can get rid of this dependency ...)</p>
+<div class="highlight"><pre><span></span><span class="n">pip3</span> <span class="n">install</span> <span class="n">python</span><span class="o">-</span><span class="n">dateutil</span>
+</pre></div>
+
+
+</li>
+<li>
+<p>ultisnips list snippet does not show regex snippet.
+    however, YouCompleteMe solves this problem perfectly!!!
+    It is suggested that you always use UltiSnips together with YouCompleteMe.</p>
+</li>
+<li>
+<p>when use user-defined modules (e.g., complete),
+    you have to make sure that all modules imported in the user-defined modules are installed.
+    Otherwise, you will get an error message
+    "ImportError: no module named complete"
+    This can be miss leading as you might think that something is wrong with the path settings for the user-defined moduel,
+    however,
+    it is really a missing module used in the user-defined module (complete) which causes the problem.
+    And a fix can be really easy:
+    just install the missing module used in the user-defined module (complete).</p>
+</li>
+<li>
+<p>It is suggested that you make a separate folder for snippet of each kind.
+    Split snippets into smaller parts according to functionalities.</p>
+</li>
+<li>
+<p>When creating auto complete triggers, e.g., continue,
+    do not use the full word.
+    There are 2 reasons.
+    First, auto complete is not needed if you have typed the full word.
+    Second, if you use the full word as trigger for itself, it causes problems.
+    The cursor will be trapped and never being able to jump to the next tab stop.</p>
+</li>
+<li>
+<p>g:UltiSnipsSnippetsDir set private snip dir</p>
+</li>
+<li>
+<p>extends sql loads sql snippets automatically</p>
+</li>
+<li>
+<p>snippet filename filetype ~</p>
+<p>ruby.snippets ruby
+perl.snippets perl
+c.snippets c
+c_my.snippets c
+c/a c
+c/b.snippets c
+all.snippets <em>all
+all/a.snippets </em>all</p>
+<p>my question is that will they all get used or not?
+and if we add snippets, which one is used?</p>
+</li>
+<li>
+<p>Use <code>:UltiSnipsAddFiletypes</code> to assocate more snippets with current file.
+    For example, <code>:UltiSnipsAddFiletypes text.markdown</code> associate text.snippets and markdown.snippets with current file.
+    Note that you can type in <code>:U</code> and then press up/down key to quick navigate to a previous UltiSnips command.</p>
+</li>
+<li>
+<p>The suggested way to edit snippets is to open a (temp) file
+    using vim and use the <code>:UltiSnipsEdit</code> command.</p>
+</li>
+<li>
+<p>ultisnips $1 does not have to be continuous!!!</p>
+</li>
+<li>
+<p>You can use the option <code>r</code> with other options.
+    For example, you can use <code>rb</code>.
+    However, <code>r</code> together with <code>w</code> does not work well.
+    You should avoid using this combination.
+    To achieve "rw", use "\bTrigger".
+    r is dominant and drowns out all other options, so the w does nothing in your example. Reason is that regular expressions offer you all you want and more already. use \b(tolower|lcase) as your trigger.</p>
+</li>
+<li>
+<p>A regular expression trigger (or part of it) can be used in a snippet using <code>match.group</code> in Python script.</p>
+</li>
+<li>
+<p>It is suggested that you do not overuse regular expressions in UltiSnips.
+    Simpler solutions are usually better and more robust.
+    For example, instead of using regular expression <code>'write.table|wt'</code>,
+    you can define two non-regular expression triggers <code>write.table</code> and <code>wt</code>.
+    Though it seems that the latter rquires more work,
+    it is more robust and less trouble-making.
+    If you use regular expression,
+    you may soon come across issues of word bundary, white spaces, begin of line, etc.</p>
+</li>
+<li>
+<p>If you defined a regular expression trigger <code>'\s*be'</code> with option <code>!r</code>,
+    you will find that when it is triggered the leading white spaces are eaten by the trigger.
+    One way is to solve this problem is to define <code>'(\s*)be'</code>
+    with option <code>!r</code> and recover white spaces using <code>match.group(1)</code> in Python script.
+    A more convenient and elegant way is to define trigger <code>'be'</code> with option <code>!rb</code>.</p>
+</li>
+<li>
+<p>If you use only one snippets directory,
+    you must use the default "UltiSnips" directory
+    in order for snippets for snippets (i.e., snippets.snippets) to work well.</p>
+</li>
+<li>
+<p>Regular expression <code>/*</code> is represented as <code>'\/\*'</code> in UltiSnips but <code>'\\/\\*'</code> in Python.</p>
+</li>
+<li>
+<p>Both MATLAB and Mathematica has ".m" as file extensions,
+    however, ".m" is only recognized as file extension for MATLAB m-files.
+    "mma.snippets" is the snippets file for Mathematica ".nb" files.
+    You can manually add "mma.snippets" when you edit a Mathematica ".m" file.</p>
+</li>
+<li>
+<p>A trigger should be quoted with <code>""</code> when it contains white spaces.</p>
+</li>
+<li>
+<p>ignoring case and adjust accordingly is interesting in AutoHotkey and AutoKey. Can we do that in UltiSnips? you can do it using regular expression</p>
+</li>
+<li>
+<p>it's better to use .markdown instead of .md</p>
+</li>
+<li>
+<p>s.m or s. give options of str object methods, and also for other types of objects
+    or use .s .f, etc. to indicate ..., this is great!</p>
+</li>
+<li>
+<p>use python code to generate snippets for you!</p>
+</li>
+<li>
+<p>a good way is to end variable names with <code>_s</code>.
+    This make it easy for auto complete.
+    another good way is to prompt for all funtions, supporting fuzz search, etc. ...</p>
+</li>
+<li>
+<p>the vim module is not availble in a usual python session,
+    but when you use python code in vim, it is avalaible.</p>
+</li>
+</ol>
+<h2 id="fantastic-ideas-not-work">Fantastic Ideas (not work)</h2>
+<ol>
+<li>
+<p>an even cooler way is to use fuzz match for completing methods of ojects!!!
+    And you should just copy and paste a page and then write code to parse the text to extract method and argument information</p>
+</li>
+<li>
+<p>using vimscript to delete $1, etc. this give you the ability to use fuzz match, etc.</p>
+</li>
+<li>
+<p>I think it's better to allow alias in UltiSnips. If the author don't add this, do it yourself!</p>
+</li>
+<li>
+<p>use <code>extends file_type</code> to automatically include another snippet file.</p>
+</li>
+<li>
+<p>if ultisnips fails to associate a file with the corresponding snippets,
+    you can do it manually.
+    for example, tex files</p>
+</li>
+<li>
+<p>you can use tab stop to force the snippet jumps to a place.
+    this is very help when you want to use multi-step triggers</p>
+</li>
+</ol>
+<h2 id="tricky-mistakes">Tricky Mistakes</h2>
+<ol>
+<li>
+<p>Unmatched parenthesis when using regular expression triggers.</p>
+</li>
+<li>
+<p>when using the "r" option, do not use other
+    do not use the "r" option together with other options.
+    use regular expression to achive what you want.</p>
+<p>"^\s*" for "b"
+"\b" for "w"</p>
+</li>
+<li>
+<p>Sometime the trigger <code>snip</code> (for snippets) does not expand in a snippet files.
+    This is probably due to the name you used for the snippet file
+    contains special characters (e.g., underscore).
+    Vim highlight mode does not work if a snippet file is not recognized correctly.</p>
+</li>
+<li>
+<p>"[" in regular expression, you should use "[" instead</p>
+</li>
+<li>
+<p>ultisnips: it seems that nested snippets causes troubles ...
+    it suggest that you manually type in nest snippets</p>
+<p>ultisnips: it seems that problem occurs,
+if you delete some part of the snippets,
+but go back and then go forward can problem resolve the issue ...</p>
+<p>ultisnips: it seems that if you put select there, it causes problem, but if you manually type it in, no problem ... very strange ...</p>
+</li>
+<li>
+<p>ultisnips: see whether you can resolve the tab completion vs snippet trigger issue:
+    define different keys can definite solve the problem, check if superTab ...
+    you can define different keys and then use superTab to help you</p>
+</li>
+<li>
+<p>Ultisnips import Multiple files ..., one compelete
+    the author does not like this idea</p>
+</li>
+</ol>
+<h2 id="useful-snippets">Useful Snippets</h2>
+<h3 id="date-for-all">Date for all</h3>
+<p>d-
+d/
+dns
+tns</p>
+<h2 id="questions">Questions</h2>
+<ol>
+<li>
+<p>command :UltiSnipsListSnippets doesn't work?</p>
+</li>
+<li>
+<p>how to remove file types added to an opened file for editing?</p>
+</li>
+<li>
+<p>It seems that when you use multiple snippets for a file type (e.g., Python),
+    there's no main snippet?
+    what I'm looking for that functions defined in one snippet file can be used in other files.</p>
+</li>
+<li>
+<p>it seems that snippet.snippet doesn't support symbolic link?
+    That is if I have "UltiSnip" point to a folder, then expansion won't work!
+    It seems that only in a empy file? It seems that ... works in an empty file
+    even if not open using the UltiSnipsEditor command.</p>
+</li>
+<li>
+<p>UltiSnips</p>
+<p>a. how to default to edit private snippets?</p>
+<p>b. why snippets (snip) doesn't trigger when edit directly?</p>
+<p>ultisnips auto indent problem?</p>
+</li>
+<li>
+<p>SnippetSyntaxError: Invalid multiword trigger: 'pa' in git/config/linux/common/vim/UltiSnips/r.snippets:5
+    Possibly because you used option <code>r</code> for a non-regular expression trigger, or miss '' for regular expression triggers.</p>
+</li>
+<li>
+<p>fuzz complete and case-insensitive compelete has problem.
+    One way to avoid this is to user later completions to correct them.
+    fuzz matching, regular expression, etc. ...</p>
+</li>
+<li>
+<p>The $0 tabstop is special: it defines the final position of the cursor,
+    regardless of how many tabstops you specify.</p>
+</li>
+<li>
+<p>why tex files are not recognized automatically?
+    Currently I have to manually add filetype, how to fix the problem?</p>
+</li>
+<li>
+<p>it seems that there's a bug in UltiSnips when using mirror,
+    if the typed text is shorter than the default one ...,
+    the mirros are automatically extended using following characters ...</p>
+</li>
+<li>
+<p>how to set different keys for expand and ultisnip trigger</p>
+</li>
+</ol>
+<h2 id="tricks-and-traps">Tricks and Traps</h2>
+<ol>
+<li>unbalanced parentheses in regular expression triggers causes tricky problems.</li>
+</ol>
+<p>ultisnips, can triggers be nested? that is, can I trigger use another trigger/
+this is generally speaking not a good idea, you can manully invoke another snippet trigger ...</p>
+<p>ultisnips: see how you can check whether a snippet is inside some procedure ...</p></div>
+    <footer>
+<p class="meta">
+  <span class="byline author vcard">
+    Posted by <span class="fn">Ben Chuanlong Du</span>
+  </span>
+<time datetime="2017-11-16T00:59:21-08:00" pubdate>Nov 16, 2017</time>  <span class="categories">
+    <a class="category" href="http://www.legendu.net/misc/tag/snippet.html">snippet</a>
+    <a class="category" href="http://www.legendu.net/misc/tag/ultisnips.html">UltiSnips</a>
+    <a class="category" href="http://www.legendu.net/misc/tag/tips.html">tips</a>
+    <a class="category" href="http://www.legendu.net/misc/tag/software.html">software</a>
+  </span>
+</p>    </footer>
+  </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div>
+  </section>
+</div>
+<aside class="sidebar">
+  <section>
+    <h1>Recent Posts</h1>
+    <ul id="recent_posts">
+      <li class="post">
+          <a href="http://www.legendu.net/misc/blog/python-tips/">Tips on Python</a>
+      </li>
+      <li class="post">
+          <a href="http://www.legendu.net/misc/blog/python-tips-and-traps/">Python Tips and Traps</a>
+      </li>
+      <li class="post">
+          <a href="http://www.legendu.net/misc/blog/exception-and-error-handling-in-python/">Exception and Error Handling in Python</a>
+      </li>
+      <li class="post">
+          <a href="http://www.legendu.net/misc/blog/ipython-tips/">Tips on IPython</a>
+      </li>
+      <li class="post">
+          <a href="http://www.legendu.net/misc/blog/tips-for-git-large-file-storage/">Tips for Git Large File Storage</a>
+      </li>
+    </ul>
+  </section>
+  <section>
+      
+    <h1>Categories</h1>
+    <ul id="recent_posts">
+        <li><a href="http://www.legendu.net/misc/category/ai.html">AI</a></li>
+        <li><a href="http://www.legendu.net/misc/category/career.html">Career</a></li>
+        <li><a href="http://www.legendu.net/misc/category/cloud.html">Cloud</a></li>
+        <li><a href="http://www.legendu.net/misc/category/database.html">Database</a></li>
+        <li><a href="http://www.legendu.net/misc/category/encryption.html">Encryption</a></li>
+        <li><a href="http://www.legendu.net/misc/category/english.html">English</a></li>
+        <li><a href="http://www.legendu.net/misc/category/finance.html">Finance</a></li>
+        <li><a href="http://www.legendu.net/misc/category/fun-problems.html">Fun Problems</a></li>
+        <li><a href="http://www.legendu.net/misc/category/hardware.html">Hardware</a></li>
+        <li><a href="http://www.legendu.net/misc/category/internet.html">Internet</a></li>
+        <li><a href="http://www.legendu.net/misc/category/job.html">Job</a></li>
+        <li><a href="http://www.legendu.net/misc/category/jupyterlab.html">JupyterLab</a></li>
+        <li><a href="http://www.legendu.net/misc/category/language.html">Language</a></li>
+        <li><a href="http://www.legendu.net/misc/category/life.html">Life</a></li>
+        <li><a href="http://www.legendu.net/misc/category/links.html">Links</a></li>
+        <li><a href="http://www.legendu.net/misc/category/linux.html">Linux</a></li>
+        <li><a href="http://www.legendu.net/misc/category/machine-learning.html">Machine Learning</a></li>
+        <li><a href="http://www.legendu.net/misc/category/macos.html">macOS</a></li>
+        <li><a href="http://www.legendu.net/misc/category/network.html">Network</a></li>
+        <li><a href="http://www.legendu.net/misc/category/os.html">OS</a></li>
+        <li><a href="http://www.legendu.net/misc/category/people.html">People</a></li>
+        <li><a href="http://www.legendu.net/misc/category/philosophy.html">Philosophy</a></li>
+        <li><a href="http://www.legendu.net/misc/category/programming.html">Programming</a></li>
+        <li><a href="http://www.legendu.net/misc/category/research.html">Research</a></li>
+        <li><a href="http://www.legendu.net/misc/category/sheng-huo.html">生活</a></li>
+        <li><a href="http://www.legendu.net/misc/category/si-suo.html">思索</a></li>
+        <li><a href="http://www.legendu.net/misc/category/software.html">Software</a></li>
+        <li><a href="http://www.legendu.net/misc/category/statistics.html">Statistics</a></li>
+        <li><a href="http://www.legendu.net/misc/category/teleconference.html">Teleconference</a></li>
+        <li><a href="http://www.legendu.net/misc/category/tools.html">Tools</a></li>
+        <li><a href="http://www.legendu.net/misc/category/trading.html">Trading</a></li>
+        <li><a href="http://www.legendu.net/misc/category/unix.html">Unix</a></li>
+        <li><a href="http://www.legendu.net/misc/category/visualization.html">Visualization</a></li>
+        <li><a href="http://www.legendu.net/misc/category/windows.html">Windows</a></li>
+        <li><a href="http://www.legendu.net/misc/category/work.html">Work</a></li>
+    </ul>
+  </section>
+ 
+
+  <section>
+  <h1>Tags</h1>
+  <p class="tagcloud">
+  </p>
+  </section>
+
+
+
+  <section>
+    <h1>GitHub Repos</h1>
+    <ul id="gh_repos">
+      <li class="loading">Status updating...</li>
+    </ul>
+      <a href="https://github.com/dclong">@dclong</a> on GitHub
+    <script type="text/javascript">
+      $.domReady(function(){
+          if (!window.jXHR){
+              var jxhr = document.createElement('script');
+              jxhr.type = 'text/javascript';
+              jxhr.src = 'http://www.legendu.net/misc/theme/js/jXHR.js';
+              var s = document.getElementsByTagName('script')[0];
+              s.parentNode.insertBefore(jxhr, s);
+          }
+
+          github.showRepos({
+              user: 'dclong',
+              count: 3,
+              skip_forks: true,
+              target: '#gh_repos'
+          });
+      });
+    </script>
+    <script src="http://www.legendu.net/misc/theme/js/github.js" type="text/javascript"> </script>
+  </section>
+
+    <section>
+        <h1>Social</h2>
+        <ul>
+            <li><a href="https://www.linkedin.com/in/ben-chuanlong-du-1239b221/" target="_blank">LinkedIn</a></li>
+            <li><a href="https://twitter.com/longendu" target="_blank">Twitter</a></li>
+            <li><a href="https://www.facebook.com/chuanlong.du" target="_blank">Facebook</a></li>
+        <!--
+            <li><a href="http://www.legendu.net/misc/" type="application/rss+xml" rel="alternate">RSS</a></li>
+            -->
+        </ul>
+    </section>
+</aside>    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Ben Chuanlong Du -
+  <span class="credit">Powered by <a href="http://getpelican.com">Pelican</a></span>
+</p></footer>
+    <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-30259661-1']);
+    _gaq.push(['_trackPageview']);
+    (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+    </script>
+	<script type="text/javascript">
+	  var disqus_shortname = 'dclong';
+          var disqus_identifier = '/blog/ultisnips-tips/';
+          var disqus_url = 'http://www.legendu.net/misc/blog/ultisnips-tips/';
+          var disqus_title = 'UltiSnips Tips';
+	  (function() {
+	    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	    dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+	    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	   })();
+	</script>
+</body>
+</html>

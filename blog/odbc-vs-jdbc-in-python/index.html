@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>ODBC vs JDBC in Python</title>
+  <meta name="author" content="Ben Chuanlong Du">
+
+  <link href="http://www.legendu.net/misc/atom.xml" type="application/atom+xml" rel="alternate"
+        title="Ben Chuanlong Du's Blog Atom Feed" />
+
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link href="http://www.legendu.net/misc/favicon.png" rel="icon">
+  <link href="http://www.legendu.net/misc/theme/css/main_2.css" media="screen, projection"
+        rel="stylesheet" type="text/css">
+  <script src="http://www.legendu.net/misc/theme/js/modernizr-2.0.js"></script>
+  <script src="http://www.legendu.net/misc/theme/js/ender.js"></script>
+  <script src="http://www.legendu.net/misc/theme/js/octopress.js" type="text/javascript"></script>
+
+  <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+</head>
+
+<body>
+  <header role="banner"><hgroup>
+  <h1><a href="http://www.legendu.net/misc/">Ben Chuanlong Du's Blog</a></h1>
+    <h2>It is never too late to learn.</h2>
+</hgroup></header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="http://www.legendu.net/misc/atom.xml" rel="subscribe-rss">RSS</a></li>
+</ul>
+
+<form name="search" action="https://www.bing.com/search" method="get" onSubmit="return build_query()">
+  <fieldset role="search">
+      <!--
+    <input type="hidden" name="q" value="site:http://www.legendu.net/misc" />
+        -->
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+
+<script type = "text/javascript">
+    function build_query() {
+        var query = document.forms["search"]["q"].value;
+        var prefix = "site:http://www.legendu.net/misc "
+        if (!query.startsWith(prefix)) {
+            query = prefix + query;
+            document.forms["search"]["q"].value = query;
+        }
+        return true;
+    }
+</script>
+
+<ul class="main-navigation">
+    <li><a href="http://www.legendu.net">Home</a></li>
+    <li><a href="http://www.legendu.net/misc">Blog</a></li>
+    <li><a href="http://www.legendu.net/misc/archives.html">Archives</a></li>
+    <li><a href="http://www.legendu.net/misc/pages/links.html">Links</a></li>
+</ul></nav>
+  <div id="main">
+    <div id="content">
+<div>
+  <article class="hentry" role="article">
+<header>
+      <h1 class="entry-title">ODBC vs JDBC in Python</h1>
+      <p class="meta"><time datetime="2019-10-02T18:37:49-07:00" pubdate>Oct 02, 2019</time></p>
+</header>
+
+  <div class="entry-content"><p><strong>
+Things on this page are
+fragmentary and immature notes/thoughts of the author.
+It is not meant to readers
+but rather for convenient reference of the author and future improvement.
+</strong></p>
+<p>Overall speaking,
+Python has better ODBC support than JDBC support.
+Most database related packages in Python support or rely on ODBC.
+Currently, ODBC packages also have richer feathers than JDBC packages.
+However,
+it is not an easy job to install and configure ODBC drivers for a non-open source databases.</p>
+<h2 id="odbc-vs-jdbc">ODBC vs JDBC</h2>
+<h3 id="jdbc-packages-in-python">JDBC Packages in Python</h3>
+<ol>
+<li>
+<p><code>JayDeBeApi</code> is currently the first choice even thought it is not fully DB-API compliant.
+It works on both Python 2 and Python 3.</p>
+</li>
+<li>
+<p><code>py4jdbc</code> (based on Py4j) is another JDBC package which claims to be faster than <code>JayDeBeApi</code> (based on JPype)
+but it is relative young compared to JayDeBeApi.</p>
+</li>
+<li>
+<p>Just ignore the JayDeBeApi3 package (for Python3 only).</p>
+</li>
+<li>
+<p>PyAthenaJDBC is a JDBC package specifically for Amazon Athena.</p>
+</li>
+</ol>
+<h3 id="odbc-packages-in-python">ODBC Packages in Python</h3>
+<ol>
+<li>
+<p><code>pyodbc</code> and <code>SQLAlchemy</code> are general purpose packages relying on ODBC.</p>
+</li>
+<li>
+<p>There are lots of database specific packages relying on ODBC.
+For example,
+<code>teradata</code> is a Python package for Teradata SQL which relies on ODBC or RESTful.</p>
+</li>
+</ol>
+<h2 id="database-modules">Database Modules</h2>
+<ol>
+<li>
+<p>json: JSON parsing.</p>
+</li>
+<li>
+<p>sqlite3</p>
+</li>
+<li>
+<p><a href="https://github.com/jreese/aiosqlite">jreese/aiosqlite</a></p>
+</li>
+<li>
+<p><a href="https://github.com/baztian/jaydebeapi">JayDeBeApi</a>: connect to databases using Java JDBC in Python.</p>
+</li>
+<li>
+<p>PyMySQL, MySQLdb</p>
+</li>
+<li>
+<p>PyMongo</p>
+</li>
+<li>
+<p>teradata</p>
+</li>
+<li>
+<p>pyodbc, pypyodbc: Python ODBC bridget.</p>
+</li>
+<li>
+<p>SQLAlchemy</p>
+</li>
+<li>
+<p>sqlalchemy-teradata</p>
+</li>
+</ol>
+<h2 id="misc">Misc</h2>
+<p>http://docs.python-guide.org/en/latest/scenarios/db/</p>
+<p>the teradata package is weird, the file option can be used to run multiple statements in file ...
+but if I manually pass a string, it doesn't work ... check the implementation ...
+https://support.microsoft.com/en-us/help/3103282/teradata-odbc-configuration-on-linux
+https://developer.teradata.com/tools/articles/teradata-sqlalchemy-introduction
+https://github.com/Teradata/sqlalchemy-teradata
+http://developer.teradata.com/tools/reference/teradata-python-module#Installing
+http://stackoverflow.com/questions/34948453/read-teradata-query-into-pandas</p>
+<h2 id="orm">ORM</h2>
+<ol>
+<li><a href="https://www.sqlalchemy.org/">SQLAlchemy</a>
+    is the most popular ORM package for Python.
+    <a href="https://github.com/coleifer/peewee">peewee</a>
+    and
+    <a href="https://github.com/sdispater/orator">orator</a>
+    are lightweight ORM solutions compared to <code>SQLAlchemy</code>.</li>
+</ol>
+<p>http://stackoverflow.com/questions/10797794/multiple-queries-executed-in-java-in-single-statement</p>
+<p>https://wiki.vip.corp.ebay.com/pages/viewpage.action?pageId=327124647</p>
+<p>http://stackoverflow.com/questions/4493614/sqlalchemy-equivalent-of-pyodbc-connect-string-using-freetds</p>
+<p>https://developer.teradata.com/tools/articles/teradata-sqlalchemy-introduction</p>
+<p>http://stackoverflow.com/questions/12047193/how-to-convert-sql-query-result-to-pandas-data-structure</p>
+<p>http://stackoverflow.com/questions/29525808/sqlalchemy-orm-conversion-to-pandas-dataframe/29528804#29528804</p>
+<h2 id="jdbc">JDBC</h2>
+<p>https://analyticsanvil.wordpress.com/2016/06/08/python-jdbc-dyanmic-hive-scripting/</p>
+<p>https://github.com/minatverma/pythonWorks/blob/master/DQM.py</p>
+<p>https://www.fullstackpython.com/databases.html</p>
+<p>http://docs.python-guide.org/en/latest/scenarios/db/</p>
+<h2 id="references">References</h2>
+<p>https://docs.python-guide.org/scenarios/db/</p>
+<p>https://www.python.org/dev/peps/pep-0249/</p></div>
+    <footer>
+<p class="meta">
+  <span class="byline author vcard">
+    Posted by <span class="fn">Ben Chuanlong Du</span>
+  </span>
+<time datetime="2019-10-02T18:37:49-07:00" pubdate>Oct 02, 2019</time>  <span class="categories">
+    <a class="category" href="http://www.legendu.net/misc/tag/programming.html">programming</a>
+    <a class="category" href="http://www.legendu.net/misc/tag/python.html">Python</a>
+    <a class="category" href="http://www.legendu.net/misc/tag/odbc.html">ODBC</a>
+    <a class="category" href="http://www.legendu.net/misc/tag/jdbc.html">JDBC</a>
+    <a class="category" href="http://www.legendu.net/misc/tag/database.html">database</a>
+    <a class="category" href="http://www.legendu.net/misc/tag/sql.html">SQL</a>
+  </span>
+</p>    </footer>
+  </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div>
+  </section>
+</div>
+<aside class="sidebar">
+  <section>
+    <h1>Recent Posts</h1>
+    <ul id="recent_posts">
+      <li class="post">
+          <a href="http://www.legendu.net/misc/blog/python-tips/">Tips on Python</a>
+      </li>
+      <li class="post">
+          <a href="http://www.legendu.net/misc/blog/python-tips-and-traps/">Python Tips and Traps</a>
+      </li>
+      <li class="post">
+          <a href="http://www.legendu.net/misc/blog/exception-and-error-handling-in-python/">Exception and Error Handling in Python</a>
+      </li>
+      <li class="post">
+          <a href="http://www.legendu.net/misc/blog/ipython-tips/">Tips on IPython</a>
+      </li>
+      <li class="post">
+          <a href="http://www.legendu.net/misc/blog/tips-for-git-large-file-storage/">Tips for Git Large File Storage</a>
+      </li>
+    </ul>
+  </section>
+  <section>
+      
+    <h1>Categories</h1>
+    <ul id="recent_posts">
+        <li><a href="http://www.legendu.net/misc/category/ai.html">AI</a></li>
+        <li><a href="http://www.legendu.net/misc/category/career.html">Career</a></li>
+        <li><a href="http://www.legendu.net/misc/category/cloud.html">Cloud</a></li>
+        <li><a href="http://www.legendu.net/misc/category/database.html">Database</a></li>
+        <li><a href="http://www.legendu.net/misc/category/encryption.html">Encryption</a></li>
+        <li><a href="http://www.legendu.net/misc/category/english.html">English</a></li>
+        <li><a href="http://www.legendu.net/misc/category/finance.html">Finance</a></li>
+        <li><a href="http://www.legendu.net/misc/category/fun-problems.html">Fun Problems</a></li>
+        <li><a href="http://www.legendu.net/misc/category/hardware.html">Hardware</a></li>
+        <li><a href="http://www.legendu.net/misc/category/internet.html">Internet</a></li>
+        <li><a href="http://www.legendu.net/misc/category/job.html">Job</a></li>
+        <li><a href="http://www.legendu.net/misc/category/jupyterlab.html">JupyterLab</a></li>
+        <li><a href="http://www.legendu.net/misc/category/language.html">Language</a></li>
+        <li><a href="http://www.legendu.net/misc/category/life.html">Life</a></li>
+        <li><a href="http://www.legendu.net/misc/category/links.html">Links</a></li>
+        <li><a href="http://www.legendu.net/misc/category/linux.html">Linux</a></li>
+        <li><a href="http://www.legendu.net/misc/category/machine-learning.html">Machine Learning</a></li>
+        <li><a href="http://www.legendu.net/misc/category/macos.html">macOS</a></li>
+        <li><a href="http://www.legendu.net/misc/category/network.html">Network</a></li>
+        <li><a href="http://www.legendu.net/misc/category/os.html">OS</a></li>
+        <li><a href="http://www.legendu.net/misc/category/people.html">People</a></li>
+        <li><a href="http://www.legendu.net/misc/category/philosophy.html">Philosophy</a></li>
+        <li><a href="http://www.legendu.net/misc/category/programming.html">Programming</a></li>
+        <li><a href="http://www.legendu.net/misc/category/research.html">Research</a></li>
+        <li><a href="http://www.legendu.net/misc/category/sheng-huo.html">生活</a></li>
+        <li><a href="http://www.legendu.net/misc/category/si-suo.html">思索</a></li>
+        <li><a href="http://www.legendu.net/misc/category/software.html">Software</a></li>
+        <li><a href="http://www.legendu.net/misc/category/statistics.html">Statistics</a></li>
+        <li><a href="http://www.legendu.net/misc/category/teleconference.html">Teleconference</a></li>
+        <li><a href="http://www.legendu.net/misc/category/tools.html">Tools</a></li>
+        <li><a href="http://www.legendu.net/misc/category/trading.html">Trading</a></li>
+        <li><a href="http://www.legendu.net/misc/category/unix.html">Unix</a></li>
+        <li><a href="http://www.legendu.net/misc/category/visualization.html">Visualization</a></li>
+        <li><a href="http://www.legendu.net/misc/category/windows.html">Windows</a></li>
+        <li><a href="http://www.legendu.net/misc/category/work.html">Work</a></li>
+    </ul>
+  </section>
+ 
+
+  <section>
+  <h1>Tags</h1>
+  <p class="tagcloud">
+  </p>
+  </section>
+
+
+
+  <section>
+    <h1>GitHub Repos</h1>
+    <ul id="gh_repos">
+      <li class="loading">Status updating...</li>
+    </ul>
+      <a href="https://github.com/dclong">@dclong</a> on GitHub
+    <script type="text/javascript">
+      $.domReady(function(){
+          if (!window.jXHR){
+              var jxhr = document.createElement('script');
+              jxhr.type = 'text/javascript';
+              jxhr.src = 'http://www.legendu.net/misc/theme/js/jXHR.js';
+              var s = document.getElementsByTagName('script')[0];
+              s.parentNode.insertBefore(jxhr, s);
+          }
+
+          github.showRepos({
+              user: 'dclong',
+              count: 3,
+              skip_forks: true,
+              target: '#gh_repos'
+          });
+      });
+    </script>
+    <script src="http://www.legendu.net/misc/theme/js/github.js" type="text/javascript"> </script>
+  </section>
+
+    <section>
+        <h1>Social</h2>
+        <ul>
+            <li><a href="https://www.linkedin.com/in/ben-chuanlong-du-1239b221/" target="_blank">LinkedIn</a></li>
+            <li><a href="https://twitter.com/longendu" target="_blank">Twitter</a></li>
+            <li><a href="https://www.facebook.com/chuanlong.du" target="_blank">Facebook</a></li>
+        <!--
+            <li><a href="http://www.legendu.net/misc/" type="application/rss+xml" rel="alternate">RSS</a></li>
+            -->
+        </ul>
+    </section>
+</aside>    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Ben Chuanlong Du -
+  <span class="credit">Powered by <a href="http://getpelican.com">Pelican</a></span>
+</p></footer>
+    <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-30259661-1']);
+    _gaq.push(['_trackPageview']);
+    (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+    </script>
+	<script type="text/javascript">
+	  var disqus_shortname = 'dclong';
+          var disqus_identifier = '/blog/odbc-vs-jdbc-in-python/';
+          var disqus_url = 'http://www.legendu.net/misc/blog/odbc-vs-jdbc-in-python/';
+          var disqus_title = 'ODBC vs JDBC in Python';
+	  (function() {
+	    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	    dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+	    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	   })();
+	</script>
+</body>
+</html>

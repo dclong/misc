@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Ben Chuanlong Du's Blog - Windows</title><link href="http://www.legendu.net/misc/" rel="alternate"></link><link href="http://www.legendu.net/misc/feeds/windows.atom.xml" rel="self"></link><id>http://www.legendu.net/misc/</id><updated>2016-06-01T22:17:13-07:00</updated><subtitle>It is never too late to learn.</subtitle><entry><title>Map Keys in Windows</title><link href="http://www.legendu.net/misc/blog/map-keys-in-windows/" rel="alternate"></link><published>2016-06-01T22:17:13-07:00</published><updated>2016-06-01T22:17:13-07:00</updated><author><name>Ben Chuanlong Du</name></author><id>tag:www.legendu.net,2016-06-01:/misc/blog/map-keys-in-windows/</id><summary type="html">&lt;p&gt;&lt;strong&gt;
+Things on this page are
+fragmentary and immature notes/thoughts of the author.
+It is not meant to readers
+but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;If you are a heavy Vim user and you have work on Windows, 
+it is suggested that you Swap the …&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;strong&gt;
+Things on this page are
+fragmentary and immature notes/thoughts of the author.
+It is not meant to readers
+but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;If you are a heavy Vim user and you have work on Windows, 
+it is suggested that you Swap the Caps Lock key with the Escape key.
+The swaped key mapping will even pass to virtual machines,
+so that if you use Linux VMs you don't have swap the two keys in the VMs again.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;AutoHotkey&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;editing registry manually (not recommended)&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;sometimes it won't work even if you follow popular instructions found online&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;SharpKeys (great!)&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;SharpKeys modify the registry to map keys. 
+SharpKeys is great!!! modifying the registry by myself didn't make it work 
+but Sharpkeys works perfectly and is stunningly easy&lt;/p&gt;</content><category term="Windows"></category><category term="keys"></category><category term="mapping"></category><category term="swap"></category><category term="Caps Lock"></category><category term="Escape"></category></entry><entry><title>Useful Windows Shortcuts</title><link href="http://www.legendu.net/misc/blog/useful-windows-shortcuts/" rel="alternate"></link><published>2015-05-19T23:09:50-07:00</published><updated>2015-05-19T23:09:50-07:00</updated><author><name>Ben Chuanlong Du</name></author><id>tag:www.legendu.net,2015-05-19:/misc/blog/useful-windows-shortcuts/</id><summary type="html">&lt;p&gt;&lt;strong&gt;
+Things on this page are 
+fragmentary and immature notes/thoughts of the author.
+It is not meant to readers 
+but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id="os"&gt;OS&lt;/h2&gt;
+&lt;p&gt;Alt + Print Screen: Make a screenshot of the active WINDOW only (when you are using multiple screens).
+Note that …&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;strong&gt;
+Things on this page are 
+fragmentary and immature notes/thoughts of the author.
+It is not meant to readers 
+but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id="os"&gt;OS&lt;/h2&gt;
+&lt;p&gt;Alt + Print Screen: Make a screenshot of the active WINDOW only (when you are using multiple screens).
+Note that this shortcut also works in Linux Mint.&lt;/p&gt;
+&lt;p&gt;Shift + Win + Right/Left: Move the active window to the monitor/screen on the right/left.&lt;/p&gt;
+&lt;p&gt;Win + Home: Clear all but the active window.&lt;/p&gt;
+&lt;p&gt;Win + Space: All windows become transparent so you can see through to the desktop.&lt;/p&gt;
+&lt;p&gt;Win + Up: Maximize the active window.&lt;/p&gt;
+&lt;p&gt;Shift + Win + Up: Maximize the active window vertically.&lt;/p&gt;
+&lt;p&gt;Win + Down: Minimize the window/Restore the window if it's maximized.&lt;/p&gt;
+&lt;p&gt;Win + Left/Right: Dock the window to each side of the monitor.&lt;/p&gt;
+&lt;p&gt;Win + L: Lock Windows.&lt;/p&gt;
+&lt;p&gt;Shift + Win + Left/Right: Move the window to the monitor on the left or right.&lt;/p&gt;
+&lt;p&gt;Shift + Right Click (file/folder): select "copy as path" to copy the full path of the file/folder.&lt;/p&gt;
+&lt;h2 id="outlook"&gt;Outlook&lt;/h2&gt;
+&lt;p&gt;Ctrl + Scroll: Zoom in/out the email message.&lt;/p&gt;
+&lt;h2 id="word"&gt;Word&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;Alt + = inserts an equation in Word.&lt;/li&gt;
+&lt;/ol&gt;</content><category term="Windows"></category><category term="shortcut"></category></entry><entry><title>Tips for Windows Operating System</title><link href="http://www.legendu.net/misc/blog/tips-windows/" rel="alternate"></link><published>2014-12-16T20:04:38-08:00</published><updated>2014-12-16T20:04:38-08:00</updated><author><name>Ben Chuanlong Du</name></author><id>tag:www.legendu.net,2014-12-16:/misc/blog/tips-windows/</id><summary type="html">&lt;p&gt;&lt;img src="http://dclong.github.io/media/windows/windows.png" height="200" width="240" align="right"/&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://chocolatey.org/"&gt;Chocolatey&lt;/a&gt; is a cool software management tool for Windows.&lt;/p&gt;
+&lt;h2 id="tricky-problem"&gt;Tricky Problem&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;When Dropbox is synchronizing a file, 
+    it might be unaccessible temporarily. 
+    If this happens, 
+    you can simplify retry 
+    or you can quit Dropbox and try again.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="tips"&gt;Tips&lt;/h2&gt;
+&lt;p&gt;To add an entry into the right-click menu in Windows, 
+edit the …&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;img src="http://dclong.github.io/media/windows/windows.png" height="200" width="240" align="right"/&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://chocolatey.org/"&gt;Chocolatey&lt;/a&gt; is a cool software management tool for Windows.&lt;/p&gt;
+&lt;h2 id="tricky-problem"&gt;Tricky Problem&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;When Dropbox is synchronizing a file, 
+    it might be unaccessible temporarily. 
+    If this happens, 
+    you can simplify retry 
+    or you can quit Dropbox and try again.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="tips"&gt;Tips&lt;/h2&gt;
+&lt;p&gt;To add an entry into the right-click menu in Windows, 
+edit the registry following the steps below.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Navigate to the key &lt;code&gt;HKEY_CLASSES_ROOT\Directory\Background\shell&lt;/code&gt; in the registry.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Create another key with any name (e.g., rstudio) under &lt;code&gt;HKEY_CLASSES_ROOT\Directory\Background\shell&lt;/code&gt;. &lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Set a value (e.g., Rstudio) for the newly created key (rstudio)
+    in the right-side pane of the registry.
+    This value (Rstudio) shows up in the right-click menu whenever you right click.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Create another key named &lt;code&gt;command&lt;/code&gt; under the newly created key (rstudio).&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Set the value of the newly created key &lt;code&gt;command&lt;/code&gt; 
+    to be the full path of the application
+    (e.g., &lt;code&gt;C:\Program Files\RStudio\bin\rstudio.exe&lt;/code&gt;)
+    that you want to launch.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Though you can also use &lt;code&gt;/&lt;/code&gt; as the delimiter for paths in Windows system sometimes, 
+    you can only use &lt;code&gt;\&lt;/code&gt; as the delimiter for paths when you use DOS command, 
+    because &lt;code&gt;/&lt;/code&gt; has been already used for other meanings in DOS command.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;?&lt;/code&gt; stand for a single character in DOS command, 
+    and &lt;code&gt;??&lt;/code&gt; stand for one or two characters.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;By default Windows 7 updates automatically unless you turn the auto update off. 
+    This can be annoying if you do some long time computing in Windows, 
+    because the auto-updating might force the computer to reboot 
+    when the computing is still running. 
+    A way to solve this problem is to turn off the auto-updating 
+    before you do computing in Windows. 
+    However it is a convenient way, 
+    because you have to turn on the auto-updating after the computing is done. 
+    A better way is to lock your computer, 
+    in this way the auto-updating will be halt and won't screw up your running program. 
+    What's more, this can also prevent your privacy from other people. 
+    (Actually I have to check whether it is because of lock or it is just because of the computer is too busy.)&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="vbscript"&gt;VBScript&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;An VBScript is accesible anywhere if it is placed into a searchable path 
+    (a path included in the path environment). &lt;/li&gt;
+&lt;/ol&gt;</content><category term="tips"></category><category term="anti-virus"></category><category term="Windows"></category><category term="Dropbox"></category><category term="OS"></category></entry></feed>

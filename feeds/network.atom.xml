@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Ben Chuanlong Du's Blog - Network</title><link href="http://www.legendu.net/misc/" rel="alternate"></link><link href="http://www.legendu.net/misc/feeds/network.atom.xml" rel="self"></link><id>http://www.legendu.net/misc/</id><updated>2019-05-17T03:29:44-07:00</updated><subtitle>It is never too late to learn.</subtitle><entry><title>Escape from the Great Firewall of China</title><link href="http://www.legendu.net/misc/blog/escape-from-the-great-firewall-of-china/" rel="alternate"></link><published>2019-05-17T03:29:44-07:00</published><updated>2019-05-17T03:29:44-07:00</updated><author><name>Benjamin Du</name></author><id>tag:www.legendu.net,2019-05-17:/misc/blog/escape-from-the-great-firewall-of-china/</id><summary type="html">&lt;p&gt;&lt;strong&gt;
+Things on this page are fragmentary and immature notes/thoughts of the author.
+It is not meant to readers but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id="proxy"&gt;Proxy&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="http://www.qttc.net/201211247.html"&gt;国外SSH账号+MyEnTunnel+Firefox翻墙&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://blog.163.com/koumm@126/blog/static/95403837200921993156900/"&gt; linux squid 代理服务器实例配置&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://www.proxy360.cn/default.aspx"&gt;免费代理服务器&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://www.youbiyao.net/"&gt;有必要 - 上网代理&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="vpn"&gt;VPN&lt;/h2&gt;
+&lt;h3 id="_1"&gt;&lt;a href="http://www.doorss.com/"&gt;旗鱼&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;Unfortunately does not support Linux. Using PPTP/L2TP …&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;strong&gt;
+Things on this page are fragmentary and immature notes/thoughts of the author.
+It is not meant to readers but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id="proxy"&gt;Proxy&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="http://www.qttc.net/201211247.html"&gt;国外SSH账号+MyEnTunnel+Firefox翻墙&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://blog.163.com/koumm@126/blog/static/95403837200921993156900/"&gt; linux squid 代理服务器实例配置&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://www.proxy360.cn/default.aspx"&gt;免费代理服务器&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://www.youbiyao.net/"&gt;有必要 - 上网代理&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="vpn"&gt;VPN&lt;/h2&gt;
+&lt;h3 id="_1"&gt;&lt;a href="http://www.doorss.com/"&gt;旗鱼&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;Unfortunately does not support Linux. Using PPTP/L2TP on Linux does not work. &lt;/p&gt;
+&lt;h3 id="greenvpn"&gt;GreenVPN&lt;/h3&gt;
+&lt;h3 id="vpn_1"&gt;&lt;a href="http://www.sfvpn.com.cn/"&gt;速飞VPN&lt;/a&gt;&lt;/h3&gt;
+&lt;h3 id="vpn_2"&gt;&lt;a href="http://www.williamlong.info/blog/archives/397.html"&gt;免费VPN账号&lt;/a&gt;&lt;/h3&gt;
+&lt;h3 id="loco"&gt;&lt;a href="http://vp.locovpn.com/"&gt;LoCo加速器&lt;/a&gt;&lt;/h3&gt;
+&lt;h2 id="tips-about-vpn"&gt;Tips about VPN&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="http://vp.locovpn.com/mannul/5855.html"&gt;Linux / Ubuntu PPTP设置教程&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://www.tuicool.com/articles/7zEJ7v"&gt;自己搭建智能翻墙服务器&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://hivenkay.me/2015/06/27/使用阿里云构建vpn服务器访问国外网站/"&gt;使用阿里云构建VPN服务器访问国外网站&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://vpn.ac/knowledgebase/36/PPTP-vs-L2TP-vs-OpenVPN-which-one-to-use.html"&gt;PPTP vs. L2TP vs. OpenVPN: which one to use?&lt;/a&gt;
+The bottom line is avoid using PPTP.&lt;/li&gt;
+&lt;/ul&gt;</content><category term="network"></category><category term="internet"></category><category term="great firewall of China"></category><category term="proxy"></category><category term="VPN"></category></entry><entry><title>Socks Proxy to HTTP Proxy</title><link href="http://www.legendu.net/misc/blog/socks-proxy-to-http-proxy/" rel="alternate"></link><published>2019-03-08T18:57:48-08:00</published><updated>2019-03-08T18:57:48-08:00</updated><author><name>Ben Chuanlong Du</name></author><id>tag:www.legendu.net,2019-03-08:/misc/blog/socks-proxy-to-http-proxy/</id><summary type="html">&lt;p&gt;&lt;strong&gt;
+Things on this page are
+fragmentary and immature notes/thoughts of the author.
+It is not meant to readers
+but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id="convert-socks-proxy-to-http-proxy"&gt;Convert Socks Proxy to HTTP Proxy&lt;/h2&gt;
+&lt;p&gt;Polipo is a tool that can convert a socks proxy to a HTTP proxy …&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;strong&gt;
+Things on this page are
+fragmentary and immature notes/thoughts of the author.
+It is not meant to readers
+but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id="convert-socks-proxy-to-http-proxy"&gt;Convert Socks Proxy to HTTP Proxy&lt;/h2&gt;
+&lt;p&gt;Polipo is a tool that can convert a socks proxy to a HTTP proxy.
+However this might not be needed
+as many tools directly accepts a socks proxy as a HTTP/HTTPS proxy.
+For example, 
+if you have a socks5 proxy at &lt;code&gt;localhost:1080&lt;/code&gt;,
+you can pass &lt;code&gt;socks5://localhost:1080&lt;/code&gt; to tools that require a HTTP/HTTPS proxy.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# install polipo&lt;/span&gt;
+wajig search polipo
+
+&lt;span class="c1"&gt;# create a http proxy at 8123 using the socks proxy&lt;/span&gt;
+polipo &lt;span class="nv"&gt;socksParentProxy&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;localhost:1080
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2 id="http-proxy-to-socks-proxy"&gt;HTTP Proxy to Socks Proxy&lt;/h2&gt;
+&lt;p&gt;https://www.npmjs.com/package/http-proxy-to-socks&lt;/p&gt;
+&lt;h2 id="references"&gt;References&lt;/h2&gt;
+&lt;p&gt;https://www.codevoila.com/post/16/convert-socks-proxy-to-http-proxy-using-polipo&lt;/p&gt;</content><category term="network"></category><category term="socks proxy"></category><category term="http proxy"></category><category term="polipo"></category></entry><entry><title>WebRTC</title><link href="http://www.legendu.net/misc/blog/webrtc/" rel="alternate"></link><published>2017-04-03T18:45:15-07:00</published><updated>2017-04-03T18:45:15-07:00</updated><author><name>Ben Chuanlong Du</name></author><id>tag:www.legendu.net,2017-04-03:/misc/blog/webrtc/</id><summary type="html">&lt;p&gt;&lt;strong&gt;
+Things on this page are
+fragmentary and immature notes/thoughts of the author.
+It is not meant to readers
+but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Appear.in seems to be a good one and easy to use.&lt;/p&gt;
+&lt;p&gt;Talky: Provides both video and screen sharing using …&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;strong&gt;
+Things on this page are
+fragmentary and immature notes/thoughts of the author.
+It is not meant to readers
+but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Appear.in seems to be a good one and easy to use.&lt;/p&gt;
+&lt;p&gt;Talky: Provides both video and screen sharing using WebRTC.
+Cisco Spark: Create rooms for video calling, group messaging and sharing.
+Appear.in: Group video calling for up to eight people.
+Jitsi Meet: Group video calling and screen sharing using WebRTC. &lt;/p&gt;</content><category term="network"></category><category term="WebRTC"></category></entry></feed>

@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Ben Chuanlong Du's Blog - Fun Problems</title><link href="http://www.legendu.net/misc/" rel="alternate"></link><link href="http://www.legendu.net/misc/feeds/fun-problems.atom.xml" rel="self"></link><id>http://www.legendu.net/misc/</id><updated>2016-07-13T22:16:06-07:00</updated><subtitle>It is never too late to learn.</subtitle><entry><title>Unfair Wager</title><link href="http://www.legendu.net/misc/blog/unfair-wager/" rel="alternate"></link><published>2016-07-13T22:16:06-07:00</published><updated>2016-07-13T22:16:06-07:00</updated><author><name>Ben Chuanlong Du</name></author><id>tag:www.legendu.net,2016-07-13:/misc/blog/unfair-wager/</id><summary type="html">&lt;p&gt;&lt;strong&gt;
+Things on this page are
+fragmentary and immature notes/thoughts of the author.
+It is not meant to readers
+but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;https://projecteuler.net/problem=436&lt;/p&gt;
+&lt;p&gt;&lt;span class="math"&gt;\(X_i \sim Bernoulli(p)\)&lt;/span&gt;&lt;/p&gt;
+&lt;div class="math"&gt;$$\bar{X}_n \dot{\sim} N(p, \frac{p(1-p)}{n …&lt;/div&gt;</summary><content type="html">&lt;p&gt;&lt;strong&gt;
+Things on this page are
+fragmentary and immature notes/thoughts of the author.
+It is not meant to readers
+but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;https://projecteuler.net/problem=436&lt;/p&gt;
+&lt;p&gt;&lt;span class="math"&gt;\(X_i \sim Bernoulli(p)\)&lt;/span&gt;&lt;/p&gt;
+&lt;div class="math"&gt;$$\bar{X}_n \dot{\sim} N(p, \frac{p(1-p)}{n})$$&lt;/div&gt;
+&lt;div class="math"&gt;$$[\bar{X}\pm C_{\alpha} \sqrt{\frac{p(1-p)}{n}}]$$&lt;/div&gt;
+&lt;p&gt;\frac{c_{\alpha}}{\sqrt{n}} \le 0.5\times 10^{-10}&lt;/p&gt;
+&lt;p&gt;n \ge 10^{20} C_{\alpha}^2&lt;/p&gt;
+&lt;script type="text/javascript"&gt;if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
+    var align = "center",
+        indent = "0em",
+        linebreak = "false";
+
+    if (false) {
+        align = (screen.width &lt; 768) ? "left" : align;
+        indent = (screen.width &lt; 768) ? "0em" : indent;
+        linebreak = (screen.width &lt; 768) ? 'true' : linebreak;
+    }
+
+    var mathjaxscript = document.createElement('script');
+    var location_protocol = (false) ? 'https' : document.location.protocol;
+    if (location_protocol !== 'http' &amp;&amp; location_protocol !== 'https') location_protocol = 'https:';
+    mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
+    mathjaxscript.type = 'text/javascript';
+    mathjaxscript.src = location_protocol + '//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML';
+    mathjaxscript[(window.opera ? "innerHTML" : "text")] =
+        "MathJax.Hub.Config({" +
+        "    config: ['MMLorHTML.js']," +
+        "    TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'AMS' }, Macros: {} }," +
+        "    jax: ['input/TeX','input/MathML','output/HTML-CSS']," +
+        "    extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']," +
+        "    displayAlign: '"+ align +"'," +
+        "    displayIndent: '"+ indent +"'," +
+        "    showMathMenu: true," +
+        "    messageStyle: 'normal'," +
+        "    tex2jax: { " +
+        "        inlineMath: [ ['\\\\(','\\\\)'] ], " +
+        "        displayMath: [ ['$$','$$'] ]," +
+        "        processEscapes: true," +
+        "        preview: 'TeX'," +
+        "    }, " +
+        "    'HTML-CSS': { " +
+        "        styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: 'inherit ! important'} }," +
+        "        linebreaks: { automatic: "+ linebreak +", width: '90% container' }," +
+        "    }, " +
+        "}); " +
+        "if ('default' !== 'default') {" +
+            "MathJax.Hub.Register.StartupHook('HTML-CSS Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax['HTML-CSS'].FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+            "MathJax.Hub.Register.StartupHook('SVG Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax.SVG.FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+        "}";
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
+}
+&lt;/script&gt;</content><category term="fun problems"></category><category term="uniform distribution"></category><category term="probability"></category><category term="statistics"></category><category term="puzzle"></category><category term="todo"></category></entry><entry><title>Fun Problem Links</title><link href="http://www.legendu.net/misc/blog/fun-problem-links/" rel="alternate"></link><published>2016-07-13T22:12:45-07:00</published><updated>2016-07-13T22:12:45-07:00</updated><author><name>Ben Chuanlong Du</name></author><id>tag:www.legendu.net,2016-07-13:/misc/blog/fun-problem-links/</id><summary type="html">&lt;p&gt;&lt;strong&gt;
+Things on this page are
+fragmentary and immature notes/thoughts of the author.
+It is not meant to readers
+but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;https://projecteuler.net/&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;strong&gt;
+Things on this page are
+fragmentary and immature notes/thoughts of the author.
+It is not meant to readers
+but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;https://projecteuler.net/&lt;/p&gt;</content><category term="fun problems"></category><category term="links"></category></entry><entry><title>Fewest Scalings to Identify the Fake Ball</title><link href="http://www.legendu.net/misc/blog/fewest-scalings-to-identify-the-fake-ball/" rel="alternate"></link><published>2014-10-23T17:12:23-07:00</published><updated>2014-10-23T17:12:23-07:00</updated><author><name>Ben Chuanlong Du</name></author><id>tag:www.legendu.net,2014-10-23:/misc/blog/fewest-scalings-to-identify-the-fake-ball/</id><summary type="html">&lt;p&gt;&lt;strong&gt;
+Things on this page are
+fragmentary and immature notes/thoughts of the author.
+It is not meant to readers 
+but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt; &lt;/p&gt;
+&lt;p&gt;8 balls, one fake
+2 problems&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;strong&gt;
+Things on this page are
+fragmentary and immature notes/thoughts of the author.
+It is not meant to readers 
+but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt; &lt;/p&gt;
+&lt;p&gt;8 balls, one fake
+2 problems&lt;/p&gt;</content><category term="fun problems"></category><category term="scale"></category><category term="fake"></category><category term="ball"></category></entry><entry><title>Stick Breaking Paradox</title><link href="http://www.legendu.net/misc/blog/stick-breaking-paradox/" rel="alternate"></link><published>2014-10-23T17:11:45-07:00</published><updated>2014-10-23T17:11:45-07:00</updated><author><name>Ben Chuanlong Du</name></author><id>tag:www.legendu.net,2014-10-23:/misc/blog/stick-breaking-paradox/</id><summary type="html">&lt;p&gt;&lt;strong&gt;
+Things on this page arefragmentary and immature notes/thoughts of the author.
+It is not meant to readersbut rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;dirichlet distribution, circle, unit, identical, mixing problem ...&lt;/li&gt;
+&lt;/ol&gt;</summary><content type="html">&lt;p&gt;&lt;strong&gt;
+Things on this page arefragmentary and immature notes/thoughts of the author.
+It is not meant to readersbut rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;dirichlet distribution, circle, unit, identical, mixing problem ...&lt;/li&gt;
+&lt;/ol&gt;</content><category term="fun problems"></category><category term="stick breaking"></category><category term="probability"></category><category term="statistics"></category><category term="paradox"></category><category term="todo"></category></entry><entry><title>Ratio of Boy to Girl</title><link href="http://www.legendu.net/misc/blog/ratio-of-boy-to-girl/" rel="alternate"></link><published>2014-10-23T17:09:37-07:00</published><updated>2014-10-23T17:09:37-07:00</updated><author><name>Ben Chuanlong Du</name></author><id>tag:www.legendu.net,2014-10-23:/misc/blog/ratio-of-boy-to-girl/</id><summary type="html">&lt;p&gt;&lt;strong&gt;
+Things on this page are
+fragmentary and immature notes/thoughts of the author.
+It is not meant to readers
+but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;In a country, all families prefer to have boys. 
+They will keep having baby until they have a boy. 
+After …&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;strong&gt;
+Things on this page are
+fragmentary and immature notes/thoughts of the author.
+It is not meant to readers
+but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;In a country, all families prefer to have boys. 
+They will keep having baby until they have a boy. 
+After a long time, what is the ratio of boys to girls in this country?&lt;/p&gt;
+&lt;p&gt;The popular answer to this questions is 1:1,
+however, I think this answer has too strong and simple assumptions. 
+Have a think on this problem ...&lt;/p&gt;</content><category term="fun problems"></category><category term="family"></category><category term="boy"></category><category term="girl"></category><category term="ratio"></category><category term="todo"></category></entry><entry><title>Expected Time to Hit Zero</title><link href="http://www.legendu.net/misc/blog/expected%20time%20to%20hit%20zero/" rel="alternate"></link><published>2014-10-23T17:03:01-07:00</published><updated>2014-10-23T17:03:01-07:00</updated><author><name>Ben Chuanlong Du</name></author><id>tag:www.legendu.net,2014-10-23:/misc/blog/expected time to hit zero/</id><summary type="html">&lt;p&gt;&lt;strong&gt;
+Things on this page are
+fragmentary and immature notes/thoughts of the author.
+It is not meant to readers
+but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Let DU(0, n) be the discrete uniform distribution on 0, 1, ..., n-1.
+X_1 \sim DU(0, n)
+X_2 \sim …&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;strong&gt;
+Things on this page are
+fragmentary and immature notes/thoughts of the author.
+It is not meant to readers
+but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Let DU(0, n) be the discrete uniform distribution on 0, 1, ..., n-1.
+X_1 \sim DU(0, n)
+X_2 \sim DU(0, X_2)
+repeat this process until we get zero.
+What is the expected time to hit zero? &lt;/p&gt;
+&lt;p&gt;Let T_n be the time needed to hit zero.&lt;/p&gt;
+&lt;p&gt;t_n=E(T_n) = E\left(E(T_n|X_1)\right) 
+= \sum_{i=0}^{n-1} \frac{1}{n} E(T_n|X_1=i)&lt;br&gt;
+= \sum_{i=0}^{n-1} \frac{1}{n} (1 + E(T_i))&lt;br&gt;
+= \sum_{i=0}^{n-1} \frac{1}{n} (1 + t_i)  &lt;/p&gt;
+&lt;p&gt;nt_n = n + \sum_{i=0}^{n-1} t_i
+(n-1)t_{n-1} = (n-1) + \sum_{i=0}^{n-2} t_i&lt;/p&gt;
+&lt;p&gt;nt_n = n + t_{n-1} + (n-1)t_{n-1} - (n-1)
+= nt_{n-1} + 1&lt;/p&gt;
+&lt;p&gt;t_n - t_{n-1} = \frac{1}{n}&lt;/p&gt;
+&lt;p&gt;\sum_{i=1}^n (t_i - t_{i-1}) = \sum_{i=1}^n \frac{1}{i}&lt;/p&gt;
+&lt;p&gt;t_0 = 0&lt;/p&gt;
+&lt;p&gt;t_n = \sum_{i=1}^n \frac{1}{i}&lt;/p&gt;</content><category term="fun problems"></category><category term="expected time"></category><category term="hitting time"></category><category term="discrete uniform distribution"></category></entry></feed>

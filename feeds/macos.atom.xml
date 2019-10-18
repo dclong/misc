@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Ben Chuanlong Du's Blog - macOS</title><link href="http://www.legendu.net/misc/" rel="alternate"></link><link href="http://www.legendu.net/misc/feeds/macos.atom.xml" rel="self"></link><id>http://www.legendu.net/misc/</id><updated>2019-02-18T17:37:15-08:00</updated><subtitle>It is never too late to learn.</subtitle><entry><title>Install Java 8 in Mac</title><link href="http://www.legendu.net/misc/blog/install-java8-in-mac/" rel="alternate"></link><published>2019-02-18T17:37:15-08:00</published><updated>2019-02-18T17:37:15-08:00</updated><author><name>Ben Chuanlong Du</name></author><id>tag:www.legendu.net,2019-02-18:/misc/blog/install-java8-in-mac/</id><summary type="html">&lt;p&gt;&lt;strong&gt;
+Things on this page are
+fragmentary and immature notes/thoughts of the author.
+It is not meant to readers
+but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;OpenJDK 8 can be installed on Mac using the following commands.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;    &lt;span class="p"&gt;:::&lt;/span&gt;&lt;span class="n"&gt;python3&lt;/span&gt;
+    &lt;span class="n"&gt;brew&lt;/span&gt; &lt;span class="n"&gt;tap&lt;/span&gt; &lt;span class="n"&gt;AdoptOpenJDK&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;openjdk&lt;/span&gt;
+    &lt;span class="n"&gt;brew&lt;/span&gt; &lt;span class="n"&gt;cask&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="n"&gt;adoptopenjdk8 …&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;&lt;strong&gt;
+Things on this page are
+fragmentary and immature notes/thoughts of the author.
+It is not meant to readers
+but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;OpenJDK 8 can be installed on Mac using the following commands.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;    &lt;span class="p"&gt;:::&lt;/span&gt;&lt;span class="n"&gt;python3&lt;/span&gt;
+    &lt;span class="n"&gt;brew&lt;/span&gt; &lt;span class="n"&gt;tap&lt;/span&gt; &lt;span class="n"&gt;AdoptOpenJDK&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;openjdk&lt;/span&gt;
+    &lt;span class="n"&gt;brew&lt;/span&gt; &lt;span class="n"&gt;cask&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="n"&gt;adoptopenjdk8&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Other versions are also available.
+For more details,
+please refer to 
+https://github.com/AdoptOpenJDK/homebrew-openjdk.&lt;/p&gt;</content><category term="Java"></category><category term="macOS"></category><category term="Homebrew"></category><category term="JDK"></category><category term="mac"></category></entry></feed>

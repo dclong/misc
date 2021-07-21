@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Ben Chuanlong Du's Blog - programming</title>
+  <meta name="author" content="Ben Chuanlong Du">
+
+  <link href="http://www.legendu.net/misc/atom.xml" type="application/atom+xml" rel="alternate"
+        title="Ben Chuanlong Du's Blog Atom Feed" />
+
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link href="http://www.legendu.net/misc/favicon.png" rel="icon">
+  <link href="http://www.legendu.net/misc/theme/css/main_2.css" media="screen, projection"
+        rel="stylesheet" type="text/css">
+  <script src="http://www.legendu.net/misc/theme/js/modernizr-2.0.js"></script>
+  <script src="http://www.legendu.net/misc/theme/js/ender.js"></script>
+  <script src="http://www.legendu.net/misc/theme/js/octopress.js" type="text/javascript"></script>
+
+  <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <script data-ad-client="ca-pub-3836424032203369" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+</head>
+
+<body>
+  <header role="banner"><hgroup>
+  <h1><a href="http://www.legendu.net/misc/">Ben Chuanlong Du's Blog</a></h1>
+    <h2>It is never too late to learn.</h2>
+</hgroup></header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="http://www.legendu.net/misc/atom.xml" rel="subscribe-rss">RSS</a></li>
+</ul>
+
+<form name="search" action="https://www.bing.com/search" method="get" onSubmit="return build_query()">
+  <fieldset role="search">
+      <!--
+    <input type="hidden" name="q" value="site:http://www.legendu.net/misc" />
+        -->
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+
+<script type = "text/javascript">
+    function build_query() {
+        var query = document.forms["search"]["q"].value;
+        var prefix = "site:http://www.legendu.net/misc "
+        if (!query.startsWith(prefix)) {
+            query = prefix + query;
+            document.forms["search"]["q"].value = query;
+        }
+        return true;
+    }
+</script>
+
+<ul class="main-navigation">
+    <li><a href="http://www.legendu.net">Home</a></li>
+    <li><a href="http://www.legendu.net/misc">Blog</a></li>
+    <li><a href="http://www.legendu.net/misc/archives.html">Archives</a></li>
+    <li><a href="http://www.legendu.net/misc/pages/links.html">Links</a></li>
+</ul></nav>
+  <div id="main">
+    <div id="content">
+<div class="blog-index">
+  		<article>
+<header>
+      <h1 class="entry-title">
+        <a href="http://www.legendu.net/misc/blog/general-programming-tips/">General Tips on Programming</a>
+      </h1>
+      <p class="meta"><time datetime="2018-07-20T00:25:59-07:00" pubdate>Jul 20, 2018</time></p>
+</header>
+
+  <div class="entry-content"><p><strong>
+Things on this page are
+fragmentary and immature notes/thoughts of the author.
+Please read with your own judgement!
+</strong></p>
+<ol>
+<li>
+<p>Do NOT chase the latest versions of libraries/software/tools. 
+  Wait for some time for them to be tested thoroughly before adopting them.</p>
+</li>
+<li>
+<p>Follow a good <a href="https://semver.org/">Semantic Versioning</a> 
+  if you release …</p></li></ol></div>
+  <footer>
+    <a rel="full-article" href="http://www.legendu.net/misc/blog/general-programming-tips/">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
+        <a href="http://www.legendu.net/misc/blog/sql-style-and-formatter/">SQL Style And Formatter</a>
+      </h1>
+      <p class="meta"><time datetime="2020-08-13T13:12:21-07:00" pubdate>Aug 13, 2020</time></p>
+</header>
+
+  <div class="entry-content"><div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Python-Libraries">Python Libraries<a class="anchor-link" href="#Python-Libraries">&#182;</a></h2><h3 id="sqlfluff"><a href="http://www.legendu.net/misc/blog/tips-on-sqlfluff">sqlfluff</a><a class="anchor-link" href="#sqlfluff">&#182;</a></h3><p>The command <code>sqlfluff fix</code> can be used to fix issues (including formatting issues) in SQL code. 
+It can be used as a tool to format SQL code. 
+However, 
+<code>sqlfluff fix</code> runs extremely slow.</p>
+<h3 id="dsutil.sql.format"><a href="https://github.com/dclong/dsutil/blob/dev/dsutil/sql.py#L7">dsutil.sql.format</a><a class="anchor-link" href="#dsutil.sql.format">&#182;</a></h3><p><a href="https://github.com/dclong/dsutil/blob/dev/dsutil/sql.py#L7">dsutil.sql.format</a>
+is a good SQL formatting tool 
+which is a combination of pgFormatter and sqlparse.</p>
+<h3 id="andialbrecht/sqlparse"><a href="https://github.com/andialbrecht/sqlparse">andialbrecht/sqlparse</a><a class="anchor-link" href="#andialbrecht/sqlparse">&#182;</a></h3><p>You can also use the Python library 
+<a href="https://github.com/andialbrecht/sqlparse">andialbrecht/sqlparse</a></div>
+  <footer>
+    <a rel="full-article" href="http://www.legendu.net/misc/blog/sql-style-and-formatter/">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
+        <a href="http://www.legendu.net/misc/blog/sql-translation-tools/">SQL Translation Tools</a>
+      </h1>
+      <p class="meta"><time datetime="2020-12-13T13:10:21-08:00" pubdate>Dec 13, 2020</time></p>
+</header>
+
+  <div class="entry-content"><p><strong>
+Things on this page are fragmentary and immature notes/thoughts of the author.
+Please read with your own judgement!
+</strong></p>
+<h2 id="the-orm-library-sqlalchemy">The ORM library SQLAlchemy</h2>
+<p>can be leverage</p>
+<h2 id="sql-translation-tools">SQL Translation Tools</h2>
+<p><a href="https://www.jooq.org/translate/">JOOQ Parser</a></p></div>
+  <footer>
+    <a rel="full-article" href="http://www.legendu.net/misc/blog/sql-translation-tools/">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
+        <a href="http://www.legendu.net/misc/blog/pyspark-koalas/">Koalas is pandas API on PySpark</a>
+      </h1>
+      <p class="meta"><time datetime="2020-12-11T23:05:28-08:00" pubdate>Dec 11, 2020</time></p>
+</header>
+
+  <div class="entry-content"><div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="References">References<a class="anchor-link" href="#References">&#182;</a></h2><p><a href="https://github.com/databricks/koalas">https://github.com/databricks/koalas</a></p>
+<p><a href="https://databricks.com/blog/2020/08/11/interoperability-between-koalas-and-apache-spark.html">https://databricks.com/blog/2020/08/11/interoperability-between-koalas-and-apache-spark.html</a></p>
+<p><a href="https://notebooks.gesis.org/binder/jupyter/user/databricks-koalas-mxw72n1l/notebooks/docs/source/getting_started/10min.ipynb">https://notebooks.gesis.org/binder/jupyter/user/databricks-koalas-mxw72n1l/notebooks/docs/source/getting_started/10min.ipynb</a></p>
+<p><a href="https://spark.apache.org/docs/latest/api/python/pyspark.sql.html">https://spark.apache.org/docs/latest/api/python/pyspark.sql.html</a></p>
+<p><a href="https://spark.apache.org/docs/latest/api/python/pyspark.sql.html#pyspark.sql.DataFrame">https://spark.apache.org/docs/latest/api/python/pyspark.sql.html#pyspark.sql.DataFrame</a></p>
+<p><a href="https://spark.apache.org/docs/latest/api/python/pyspark.sql.html#pyspark.sql.Column">https://spark.apache.org/docs/latest/api/python/pyspark.sql.html#pyspark.sql.Column</a></p>
+<p><a href="https://spark.apache.org/docs/latest/api/python/pyspark.sql.html#module-pyspark.sql.functions">https://spark.apache.org/docs/latest/api/python/pyspark.sql.html#module-pyspark.sql.functions</a></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input"></div>
+  <footer>
+    <a rel="full-article" href="http://www.legendu.net/misc/blog/pyspark-koalas/">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
+        <a href="http://www.legendu.net/misc/blog/working-with-spreadsheet-with-python/">Working With Spreadsheet with Python</a>
+      </h1>
+      <p class="meta"><time datetime="2015-05-09T08:43:45-07:00" pubdate>May 09, 2015</time></p>
+</header>
+
+  <div class="entry-content"><p><strong>
+Things on this page are
+fragmentary and immature notes/thoughts of the author.
+Please read with your own judgement!
+</strong></p>
+<h2 id="pandas">pandas</h2>
+<p>If you just want to read an Excel spreadsheet to a pandas DataFrame 
+or write a pandas DataFrame to an Excel file, 
+it is best to use the pandas library …</p></div>
+  <footer>
+    <a rel="full-article" href="http://www.legendu.net/misc/blog/working-with-spreadsheet-with-python/">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
+        <a href="http://www.legendu.net/misc/blog/run-commands-on-remote-machines/">Run Commands on Remote Machines</a>
+      </h1>
+      <p class="meta"><time datetime="2019-02-06T23:21:30-08:00" pubdate>Feb 06, 2019</time></p>
+</header>
+
+  <div class="entry-content"><p><strong>
+Things on this page are fragmentary and immature notes/thoughts of the author.
+Please read with your own judgement!
+</strong></p>
+<h2 id="on-a-sinsgle-machine">On a Sinsgle Machine</h2>
+<h3 id="ssh">SSH</h3>
+<ol>
+<li>
+<p>The pipeline command is run locally.
+    If you want the pipeline command to run remotely, 
+    place the whole command to be run remotely in double/single …</p></li></ol></div>
+  <footer>
+    <a rel="full-article" href="http://www.legendu.net/misc/blog/run-commands-on-remote-machines/">Read On &crarr;</a>
+  </footer>
+  		</article>
+<div class="pagination">
+    <a class="prev" href="http://www.legendu.net/misc/tag/programming31.html">&larr; Older</a>
+
+      <a class="next" href="http://www.legendu.net/misc/tag/programming29.html">Newer &rarr;</a>
+  <br />
+</div></div>
+<aside class="sidebar">
+  <section>
+    <h1>Recent Posts</h1>
+    <ul id="recent_posts">
+      <li class="post">
+          <a href="http://www.legendu.net/misc/blog/build-docker-images-using-kaniko/">Build Docker Images Using Kaniko</a>
+      </li>
+      <li class="post">
+          <a href="http://www.legendu.net/misc/blog/packaging-python-dependencies-for-pyspark-using-pex/">Packaging Python Dependencies for PySpark Using Pex</a>
+      </li>
+      <li class="post">
+          <a href="http://www.legendu.net/misc/blog/rust-collection-array/">Array in Rust</a>
+      </li>
+      <li class="post">
+          <a href="http://www.legendu.net/misc/blog/data-frame-implementations-in-rust/">Data Frame Implementations in Rust</a>
+      </li>
+      <li class="post">
+          <a href="http://www.legendu.net/misc/blog/python-profile/">Profile Performance of Python Applications</a>
+      </li>
+    </ul>
+  </section>
+  <section>
+    <h1>Categories</h1>
+    <ul id="recent_posts">
+        <li><a href="http://www.legendu.net/misc/category/ai.html">AI</a></li>
+        <li><a href="http://www.legendu.net/misc/category/career.html">Career</a></li>
+        <li><a href="http://www.legendu.net/misc/category/cloud.html">Cloud</a></li>
+        <li><a href="http://www.legendu.net/misc/category/computer-science.html">Computer Science</a></li>
+        <li><a href="http://www.legendu.net/misc/category/finance.html">Finance</a></li>
+        <li><a href="http://www.legendu.net/misc/category/fun-problems.html">Fun Problems</a></li>
+        <li><a href="http://www.legendu.net/misc/category/hardware.html">Hardware</a></li>
+        <li><a href="http://www.legendu.net/misc/category/internet.html">Internet</a></li>
+        <li><a href="http://www.legendu.net/misc/category/life.html">Life</a></li>
+        <li><a href="http://www.legendu.net/misc/category/os.html">OS</a></li>
+        <li><a href="http://www.legendu.net/misc/category/people.html">People</a></li>
+        <li><a href="http://www.legendu.net/misc/category/philosophy.html">Philosophy</a></li>
+        <li><a href="http://www.legendu.net/misc/category/research.html">Research</a></li>
+        <li><a href="http://www.legendu.net/misc/category/soft-skills.html">soft skills</a></li>
+        <li><a href="http://www.legendu.net/misc/category/software.html">Software</a></li>
+        <li><a href="http://www.legendu.net/misc/category/tools.html">Tools</a></li>
+    </ul>
+  </section>
+ 
+
+  <section>
+  <h1>Tags</h1>
+  <ul class="tagcloud">
+  </ul>
+  </section>
+
+
+
+  <section>
+    <h1>GitHub Repos</h1>
+    <ul id="gh_repos">
+      <li class="loading">Status updating...</li>
+    </ul>
+      <a href="https://github.com/dclong">@dclong</a> on GitHub
+    <script type="text/javascript">
+      $.domReady(function(){
+          if (!window.jXHR){
+              var jxhr = document.createElement('script');
+              jxhr.type = 'text/javascript';
+              jxhr.src = 'http://www.legendu.net/misc/theme/js/jXHR.js';
+              var s = document.getElementsByTagName('script')[0];
+              s.parentNode.insertBefore(jxhr, s);
+          }
+
+          github.showRepos({
+              user: 'dclong',
+              count: 3,
+              skip_forks: true,
+              target: '#gh_repos'
+          });
+      });
+    </script>
+    <script src="http://www.legendu.net/misc/theme/js/github.js" type="text/javascript"> </script>
+  </section>
+
+    <section>
+        <h1>Social</h2>
+        <ul>
+            <li><a href="https://www.linkedin.com/in/ben-chuanlong-du-1239b221/" target="_blank">LinkedIn</a></li>
+            <li><a href="https://twitter.com/longendu" target="_blank">Twitter</a></li>
+            <li><a href="https://www.facebook.com/chuanlong.du" target="_blank">Facebook</a></li>
+        <!--
+            <li><a href="http://www.legendu.net/misc/" type="application/rss+xml" rel="alternate">RSS</a></li>
+            -->
+        </ul>
+    </section>
+</aside>    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Ben Chuanlong Du -
+  <span class="credit">Powered by <a href="http://getpelican.com">Pelican</a></span>
+</p></footer>
+    <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-30259661-1']);
+    _gaq.push(['_trackPageview']);
+    (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+    </script>
+	<script type="text/javascript">
+	  var disqus_shortname = 'dclong';
+	  (function() {
+	    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	    dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+	    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	   })();
+	</script>
+</body>
+</html>

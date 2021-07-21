@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Ben Chuanlong Du's Blog - programming</title>
+  <meta name="author" content="Ben Chuanlong Du">
+
+  <link href="http://www.legendu.net/misc/atom.xml" type="application/atom+xml" rel="alternate"
+        title="Ben Chuanlong Du's Blog Atom Feed" />
+
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link href="http://www.legendu.net/misc/favicon.png" rel="icon">
+  <link href="http://www.legendu.net/misc/theme/css/main_2.css" media="screen, projection"
+        rel="stylesheet" type="text/css">
+  <script src="http://www.legendu.net/misc/theme/js/modernizr-2.0.js"></script>
+  <script src="http://www.legendu.net/misc/theme/js/ender.js"></script>
+  <script src="http://www.legendu.net/misc/theme/js/octopress.js" type="text/javascript"></script>
+
+  <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <script data-ad-client="ca-pub-3836424032203369" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+</head>
+
+<body>
+  <header role="banner"><hgroup>
+  <h1><a href="http://www.legendu.net/misc/">Ben Chuanlong Du's Blog</a></h1>
+    <h2>It is never too late to learn.</h2>
+</hgroup></header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="http://www.legendu.net/misc/atom.xml" rel="subscribe-rss">RSS</a></li>
+</ul>
+
+<form name="search" action="https://www.bing.com/search" method="get" onSubmit="return build_query()">
+  <fieldset role="search">
+      <!--
+    <input type="hidden" name="q" value="site:http://www.legendu.net/misc" />
+        -->
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+
+<script type = "text/javascript">
+    function build_query() {
+        var query = document.forms["search"]["q"].value;
+        var prefix = "site:http://www.legendu.net/misc "
+        if (!query.startsWith(prefix)) {
+            query = prefix + query;
+            document.forms["search"]["q"].value = query;
+        }
+        return true;
+    }
+</script>
+
+<ul class="main-navigation">
+    <li><a href="http://www.legendu.net">Home</a></li>
+    <li><a href="http://www.legendu.net/misc">Blog</a></li>
+    <li><a href="http://www.legendu.net/misc/archives.html">Archives</a></li>
+    <li><a href="http://www.legendu.net/misc/pages/links.html">Links</a></li>
+</ul></nav>
+  <div id="main">
+    <div id="content">
+<div class="blog-index">
+  		<article>
+<header>
+      <h1 class="entry-title">
+        <a href="http://www.legendu.net/misc/blog/exception-and-error-handling-in-python/">Exception and Error Handling in Python</a>
+      </h1>
+      <p class="meta"><time datetime="2020-12-15T10:33:03-08:00" pubdate>Dec 15, 2020</time></p>
+</header>
+
+  <div class="entry-content"><div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Tips-and-Traps">Tips and Traps<a class="anchor-link" href="#Tips-and-Traps">&#182;</a></h2><ol>
+<li><p>If you need trackback information when throwing an exception use <code>raise ExceptionClass(msg)</code>,
+ otherwise, use <code>sys.exit(msg)</code> instead.</p>
+</li>
+<li><p>The <code>assert</code> statement (which raises <code>AssertionError</code> if the assertion is not met) 
+ is a very good way to ensure conditions to be met.</p>
+
+<pre><code> :::python
+ assert some_condition</code></pre>
+</li>
+</ol>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input"></div>
+  <footer>
+    <a rel="full-article" href="http://www.legendu.net/misc/blog/exception-and-error-handling-in-python/">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
+        <a href="http://www.legendu.net/misc/blog/dataclass-vs-namedtuple-in-python/">Dataclass vs namedtuple in Python</a>
+      </h1>
+      <p class="meta"><time datetime="2020-10-14T23:34:04-07:00" pubdate>Oct 14, 2020</time></p>
+</header>
+
+  <div class="entry-content"><div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Tips-and-Traps">Tips and Traps<a class="anchor-link" href="#Tips-and-Traps">&#182;</a></h2><ol>
+<li><p>Prefer <code>Dataclass</code> to <code>namedtuple</code> for many reasons.</p>
+<ul>
+<li><p>A namedtuple is immutable while a dataclass can be both 
+  mutable (<code>frozen=False</code> which is the default) or immutable (<code>frozen=True</code>).</p>
+<p>However,
+namedtuple does have one advantage over dataclass. 
+Members of a namedtuple is assible both via the dot operator and index.
+In situations where both dot accessing and index accessing of members is required,
+a namedtuple comes handy.
+For examples, 
+a list of namedtuple objects can be used as the data for creating a pandas DataFrame
+but not a list of dataclass objects.</p></div>
+  <footer>
+    <a rel="full-article" href="http://www.legendu.net/misc/blog/dataclass-vs-namedtuple-in-python/">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
+        <a href="http://www.legendu.net/misc/blog/python-for-desktop-applications/">Python for Desktop Applications</a>
+      </h1>
+      <p class="meta"><time datetime="2019-10-13T23:40:08-07:00" pubdate>Oct 13, 2019</time></p>
+</header>
+
+  <div class="entry-content"><p><strong>
+Things on this page are fragmentary and immature notes/thoughts of the author.
+Please read with your own judgement!
+</strong></p>
+<h2 id="simple-python-packages-for-gui-applications">Simple Python Packages for GUI Applications</h2>
+<h3 id="tkinter"><a href="http://www.legendu.net/misc/blog/use-tkinter-to-build-gui-applications-in-python/">Tkinter</a></h3>
+<h3 id="dearpygui"><a href="https://github.com/hoffstadt/DearPyGui">DearPyGui</a></h3>
+<p><a href="https://github.com/hoffstadt/DearPyGui">DearPyGui</a>
+Dear PyGui is a simple to use (but powerful) Python GUI framework. 
+Dear PyGui provides a wrapping of <a href="https://github.com/ocornut/imgui">Dear ImGui</a> 
+which simulates …</p></div>
+  <footer>
+    <a rel="full-article" href="http://www.legendu.net/misc/blog/python-for-desktop-applications/">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
+        <a href="http://www.legendu.net/misc/blog/tips-on-electron/">Tips on Electron</a>
+      </h1>
+      <p class="meta"><time datetime="2021-04-13T23:37:07-07:00" pubdate>Apr 13, 2021</time></p>
+</header>
+
+  <div class="entry-content"><p><strong>
+Things on this page are fragmentary and immature notes/thoughts of the author.
+Please read with your own judgement!
+</strong></p>
+<h2 id="references">References</h2>
+<p><a href="https://www.youtube.com/watch?v=3yqDxhR2XxE">Build a Desktop App with Electron... But Should You?</a></p></div>
+  <footer>
+    <a rel="full-article" href="http://www.legendu.net/misc/blog/tips-on-electron/">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
+        <a href="http://www.legendu.net/misc/blog/web-engines/">Web Engines</a>
+      </h1>
+      <p class="meta"><time datetime="2021-04-13T23:22:21-07:00" pubdate>Apr 13, 2021</time></p>
+</header>
+
+  <div class="entry-content"><p><strong>
+Things on this page are fragmentary and immature notes/thoughts of the author.
+Please read with your own judgement!
+</strong></p>
+<h2 id="webview"><a href="https://github.com/webview/webview">webview</a></h2>
+<p>A tiny cross-platform webview library for C/C++/Golang to build modern cross-platform GUIs. 
+The goal of the project is to create a common HTML5 UI abstraction layer for the …</p></div>
+  <footer>
+    <a rel="full-article" href="http://www.legendu.net/misc/blog/web-engines/">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
+        <a href="http://www.legendu.net/misc/blog/my-list-of-python-modules/">My List of Python Modules</a>
+      </h1>
+      <p class="meta"><time datetime="2014-09-13T09:48:04-07:00" pubdate>Sep 13, 2014</time></p>
+</header>
+
+  <div class="entry-content"><p><strong>
+Things on this page are
+fragmentary and immature notes/thoughts of the author.
+Please read with your own judgement!
+</strong></p>
+<p><a href="https://github.com/vinta/awesome-python">Awesome Python</a></p>
+<p><a href="https://github.com/mahmoud/awesome-python-applications">Awesome Python Applications</a></p>
+<h2 id="data-science">Data Science</h2>
+<ol>
+<li>
+<p>pandas: data frame.</p>
+</li>
+<li>
+<p>scipy: scientific computing.</p>
+</li>
+<li>
+<p>numpy: multi-dimensional arrays, fundation of pandas and deep learning packages.</p>
+</li>
+<li>
+<p>re: regular expression</p>
+</li>
+</ol>
+<h2 id="file-system">File System</h2>
+<ol>
+<li>
+<p>shutil: copy, move …</p></li></ol></div>
+  <footer>
+    <a rel="full-article" href="http://www.legendu.net/misc/blog/my-list-of-python-modules/">Read On &crarr;</a>
+  </footer>
+  		</article>
+<div class="pagination">
+    <a class="prev" href="http://www.legendu.net/misc/tag/programming17.html">&larr; Older</a>
+
+      <a class="next" href="http://www.legendu.net/misc/tag/programming15.html">Newer &rarr;</a>
+  <br />
+</div></div>
+<aside class="sidebar">
+  <section>
+    <h1>Recent Posts</h1>
+    <ul id="recent_posts">
+      <li class="post">
+          <a href="http://www.legendu.net/misc/blog/build-docker-images-using-kaniko/">Build Docker Images Using Kaniko</a>
+      </li>
+      <li class="post">
+          <a href="http://www.legendu.net/misc/blog/packaging-python-dependencies-for-pyspark-using-pex/">Packaging Python Dependencies for PySpark Using Pex</a>
+      </li>
+      <li class="post">
+          <a href="http://www.legendu.net/misc/blog/rust-collection-array/">Array in Rust</a>
+      </li>
+      <li class="post">
+          <a href="http://www.legendu.net/misc/blog/data-frame-implementations-in-rust/">Data Frame Implementations in Rust</a>
+      </li>
+      <li class="post">
+          <a href="http://www.legendu.net/misc/blog/python-profile/">Profile Performance of Python Applications</a>
+      </li>
+    </ul>
+  </section>
+  <section>
+    <h1>Categories</h1>
+    <ul id="recent_posts">
+        <li><a href="http://www.legendu.net/misc/category/ai.html">AI</a></li>
+        <li><a href="http://www.legendu.net/misc/category/career.html">Career</a></li>
+        <li><a href="http://www.legendu.net/misc/category/cloud.html">Cloud</a></li>
+        <li><a href="http://www.legendu.net/misc/category/computer-science.html">Computer Science</a></li>
+        <li><a href="http://www.legendu.net/misc/category/finance.html">Finance</a></li>
+        <li><a href="http://www.legendu.net/misc/category/fun-problems.html">Fun Problems</a></li>
+        <li><a href="http://www.legendu.net/misc/category/hardware.html">Hardware</a></li>
+        <li><a href="http://www.legendu.net/misc/category/internet.html">Internet</a></li>
+        <li><a href="http://www.legendu.net/misc/category/life.html">Life</a></li>
+        <li><a href="http://www.legendu.net/misc/category/os.html">OS</a></li>
+        <li><a href="http://www.legendu.net/misc/category/people.html">People</a></li>
+        <li><a href="http://www.legendu.net/misc/category/philosophy.html">Philosophy</a></li>
+        <li><a href="http://www.legendu.net/misc/category/research.html">Research</a></li>
+        <li><a href="http://www.legendu.net/misc/category/soft-skills.html">soft skills</a></li>
+        <li><a href="http://www.legendu.net/misc/category/software.html">Software</a></li>
+        <li><a href="http://www.legendu.net/misc/category/tools.html">Tools</a></li>
+    </ul>
+  </section>
+ 
+
+  <section>
+  <h1>Tags</h1>
+  <ul class="tagcloud">
+  </ul>
+  </section>
+
+
+
+  <section>
+    <h1>GitHub Repos</h1>
+    <ul id="gh_repos">
+      <li class="loading">Status updating...</li>
+    </ul>
+      <a href="https://github.com/dclong">@dclong</a> on GitHub
+    <script type="text/javascript">
+      $.domReady(function(){
+          if (!window.jXHR){
+              var jxhr = document.createElement('script');
+              jxhr.type = 'text/javascript';
+              jxhr.src = 'http://www.legendu.net/misc/theme/js/jXHR.js';
+              var s = document.getElementsByTagName('script')[0];
+              s.parentNode.insertBefore(jxhr, s);
+          }
+
+          github.showRepos({
+              user: 'dclong',
+              count: 3,
+              skip_forks: true,
+              target: '#gh_repos'
+          });
+      });
+    </script>
+    <script src="http://www.legendu.net/misc/theme/js/github.js" type="text/javascript"> </script>
+  </section>
+
+    <section>
+        <h1>Social</h2>
+        <ul>
+            <li><a href="https://www.linkedin.com/in/ben-chuanlong-du-1239b221/" target="_blank">LinkedIn</a></li>
+            <li><a href="https://twitter.com/longendu" target="_blank">Twitter</a></li>
+            <li><a href="https://www.facebook.com/chuanlong.du" target="_blank">Facebook</a></li>
+        <!--
+            <li><a href="http://www.legendu.net/misc/" type="application/rss+xml" rel="alternate">RSS</a></li>
+            -->
+        </ul>
+    </section>
+</aside>    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Ben Chuanlong Du -
+  <span class="credit">Powered by <a href="http://getpelican.com">Pelican</a></span>
+</p></footer>
+    <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-30259661-1']);
+    _gaq.push(['_trackPageview']);
+    (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+    </script>
+	<script type="text/javascript">
+	  var disqus_shortname = 'dclong';
+	  (function() {
+	    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	    dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+	    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	   })();
+	</script>
+</body>
+</html>

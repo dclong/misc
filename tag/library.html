@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Ben Chuanlong Du's Blog - library</title>
+  <meta name="author" content="Ben Chuanlong Du">
+
+  <link href="http://www.legendu.net/misc/atom.xml" type="application/atom+xml" rel="alternate"
+        title="Ben Chuanlong Du's Blog Atom Feed" />
+
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link href="http://www.legendu.net/misc/favicon.png" rel="icon">
+  <link href="http://www.legendu.net/misc/theme/css/main_2.css" media="screen, projection"
+        rel="stylesheet" type="text/css">
+  <script src="http://www.legendu.net/misc/theme/js/modernizr-2.0.js"></script>
+  <script src="http://www.legendu.net/misc/theme/js/ender.js"></script>
+  <script src="http://www.legendu.net/misc/theme/js/octopress.js" type="text/javascript"></script>
+
+  <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <script data-ad-client="ca-pub-3836424032203369" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+</head>
+
+<body>
+  <header role="banner"><hgroup>
+  <h1><a href="http://www.legendu.net/misc/">Ben Chuanlong Du's Blog</a></h1>
+    <h2>It is never too late to learn.</h2>
+</hgroup></header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="http://www.legendu.net/misc/atom.xml" rel="subscribe-rss">RSS</a></li>
+</ul>
+
+<form name="search" action="https://www.bing.com/search" method="get" onSubmit="return build_query()">
+  <fieldset role="search">
+      <!--
+    <input type="hidden" name="q" value="site:http://www.legendu.net/misc" />
+        -->
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+
+<script type = "text/javascript">
+    function build_query() {
+        var query = document.forms["search"]["q"].value;
+        var prefix = "site:http://www.legendu.net/misc "
+        if (!query.startsWith(prefix)) {
+            query = prefix + query;
+            document.forms["search"]["q"].value = query;
+        }
+        return true;
+    }
+</script>
+
+<ul class="main-navigation">
+    <li><a href="http://www.legendu.net">Home</a></li>
+    <li><a href="http://www.legendu.net/misc">Blog</a></li>
+    <li><a href="http://www.legendu.net/misc/archives.html">Archives</a></li>
+    <li><a href="http://www.legendu.net/misc/pages/links.html">Links</a></li>
+</ul></nav>
+  <div id="main">
+    <div id="content">
+<div class="blog-index">
+  		<article>
+<header>
+      <h1 class="entry-title">
+        <a href="http://www.legendu.net/misc/blog/make-a-rust-project-both-a-library-and-a-binary/">Make a Rust Project Both a Library and a Binary</a>
+      </h1>
+      <p class="meta"><time datetime="2021-06-16T22:50:37-07:00" pubdate>Jun 16, 2021</time></p>
+</header>
+
+  <div class="entry-content"><p><strong>Things on this page are fragmentary and immature notes/thoughts of the author. Please read with your own judgement!</strong></p>
+<p>.
+├── Cargo.toml
+└── src
+    ├── main.rs
+    │ <br>
+    └── lib.rs</p>
+<div class="highlight"><pre><span></span><code><span class="k">[package]</span>
+<span class="na">name</span> <span class="o">=</span> <span class="s">&quot;package_name&quot;</span>
+<span class="na">version</span> <span class="o">=</span> <span class="s">&quot;0.0.1&quot;</span>
+<span class="na">authors</span> <span class="o">=</span> <span class="s">[&quot;me &lt;me@gmail.com&gt;&quot;]</span>
+
+<span class="k">[lib]</span>
+<span class="na">name</span> <span class="o">=</span> <span class="s">&quot;lib_name&quot;</span>
+<span class="na">path</span> <span class="o">=</span> <span class="s">&quot;src/lib.rs&quot;</span>
+
+<span class="k">[[bin]]</span>
+<span class="na">name</span> <span class="o">=</span> <span class="s">&quot;binary_name&quot;</span>
+<span class="na">path</span> <span class="o">=</span> <span class="s">&quot;src …</span></code></pre></div></div>
+  <footer>
+    <a rel="full-article" href="http://www.legendu.net/misc/blog/make-a-rust-project-both-a-library-and-a-binary/">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
+        <a href="http://www.legendu.net/misc/blog/python-modules-for-visualization/">Python Modules for Visualization</a>
+      </h1>
+      <p class="meta"><time datetime="2017-06-08T10:20:38-07:00" pubdate>Jun 08, 2017</time></p>
+</header>
+
+  <div class="entry-content"><p><strong>
+Things on this page are
+fragmentary and immature notes/thoughts of the author.
+Please read with your own judgement!
+</strong></p>
+<p>The website <a href="https://python-graph-gallery.com/">The Python Graph Gallery</a>
+displays hundreds of charts, always providing the reproducible python code! 
+It aims to showcase the awesome dataviz possibilities of python and to help you benefit …</p></div>
+  <footer>
+    <a rel="full-article" href="http://www.legendu.net/misc/blog/python-modules-for-visualization/">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
+        <a href="http://www.legendu.net/misc/blog/useful-java-libraries/">Useful Java Libraries</a>
+      </h1>
+      <p class="meta"><time datetime="2020-12-08T09:37:12-08:00" pubdate>Dec 08, 2020</time></p>
+</header>
+
+  <div class="entry-content"><p><strong>
+Things on this page are fragmentary and immature notes/thoughts of the author.
+Please read with your own judgement!
+</strong></p>
+<h2 id="picocli"><a href="https://github.com/remkop/picocli">picocli</a></h2>
+<p>Parser library and framework to easily build JVM command line applications (Java, Groovy, Kotlin, etc). 
+Usage help with ANSI colors. Autocomplete. Nested subcommands. Annotations and programmatic API. 
+Easy to include …</p></div>
+  <footer>
+    <a rel="full-article" href="http://www.legendu.net/misc/blog/useful-java-libraries/">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
+        <a href="http://www.legendu.net/misc/blog/structure-of-python-packages/">Structure of Python Packages</a>
+      </h1>
+      <p class="meta"><time datetime="2020-08-17T22:31:41-07:00" pubdate>Aug 17, 2020</time></p>
+</header>
+
+  <div class="entry-content"><p><strong>
+Things on this page are fragmentary and immature notes/thoughts of the author.
+Please read with your own judgement!
+</strong></p>
+<p><a href="https://blog.ionelmc.ro/2014/05/25/python-packaging/#the-structure">Packaging a python library</a></p></div>
+  <footer>
+    <a rel="full-article" href="http://www.legendu.net/misc/blog/structure-of-python-packages/">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
+        <a href="http://www.legendu.net/misc/blog/deep-learning-libraries-for-dialog-systems-and-chatbots/">Deep Learning Libraries for Dialog Systems and Chatbots</a>
+      </h1>
+      <p class="meta"><time datetime="2020-08-04T10:38:59-07:00" pubdate>Aug 04, 2020</time></p>
+</header>
+
+  <div class="entry-content"><p><strong>
+Things on this page are fragmentary and immature notes/thoughts of the author.
+Please read with your own judgement!
+</strong></p>
+<h2 id="references">References</h2>
+<p>https://github.com/deepmipt/DeepPavlov</p></div>
+  <footer>
+    <a rel="full-article" href="http://www.legendu.net/misc/blog/deep-learning-libraries-for-dialog-systems-and-chatbots/">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
+        <a href="http://www.legendu.net/misc/blog/data-structure-and-libraries-for-real-time-collaboration/">Data Structure and Libraries for Real-time Collaboration</a>
+      </h1>
+      <p class="meta"><time datetime="2020-05-06T14:23:02-07:00" pubdate>May 06, 2020</time></p>
+</header>
+
+  <div class="entry-content"><p><strong>
+Things on this page are fragmentary and immature notes/thoughts of the author.
+Please read with your own judgement!
+</strong></p>
+<p>https://en.wikipedia.org/wiki/Conflict-free_replicated_data_type</p></div>
+  <footer>
+    <a rel="full-article" href="http://www.legendu.net/misc/blog/data-structure-and-libraries-for-real-time-collaboration/">Read On &crarr;</a>
+  </footer>
+  		</article>
+<div class="pagination">
+    <a class="prev" href="http://www.legendu.net/misc/tag/library2.html">&larr; Older</a>
+
+  <br />
+</div></div>
+<aside class="sidebar">
+  <section>
+    <h1>Recent Posts</h1>
+    <ul id="recent_posts">
+      <li class="post">
+          <a href="http://www.legendu.net/misc/blog/make-a-rust-project-both-a-library-and-a-binary/">Make a Rust Project Both a Library and a Binary</a>
+      </li>
+      <li class="post">
+          <a href="http://www.legendu.net/misc/blog/python-modules-for-visualization/">Python Modules for Visualization</a>
+      </li>
+      <li class="post">
+          <a href="http://www.legendu.net/misc/blog/useful-java-libraries/">Useful Java Libraries</a>
+      </li>
+      <li class="post">
+          <a href="http://www.legendu.net/misc/blog/structure-of-python-packages/">Structure of Python Packages</a>
+      </li>
+      <li class="post">
+          <a href="http://www.legendu.net/misc/blog/deep-learning-libraries-for-dialog-systems-and-chatbots/">Deep Learning Libraries for Dialog Systems and Chatbots</a>
+      </li>
+    </ul>
+  </section>
+  <section>
+    <h1>Categories</h1>
+    <ul id="recent_posts">
+        <li><a href="http://www.legendu.net/misc/category/ai.html">AI</a></li>
+        <li><a href="http://www.legendu.net/misc/category/career.html">Career</a></li>
+        <li><a href="http://www.legendu.net/misc/category/cloud.html">Cloud</a></li>
+        <li><a href="http://www.legendu.net/misc/category/computer-science.html">Computer Science</a></li>
+        <li><a href="http://www.legendu.net/misc/category/finance.html">Finance</a></li>
+        <li><a href="http://www.legendu.net/misc/category/fun-problems.html">Fun Problems</a></li>
+        <li><a href="http://www.legendu.net/misc/category/hardware.html">Hardware</a></li>
+        <li><a href="http://www.legendu.net/misc/category/internet.html">Internet</a></li>
+        <li><a href="http://www.legendu.net/misc/category/life.html">Life</a></li>
+        <li><a href="http://www.legendu.net/misc/category/os.html">OS</a></li>
+        <li><a href="http://www.legendu.net/misc/category/people.html">People</a></li>
+        <li><a href="http://www.legendu.net/misc/category/philosophy.html">Philosophy</a></li>
+        <li><a href="http://www.legendu.net/misc/category/research.html">Research</a></li>
+        <li><a href="http://www.legendu.net/misc/category/soft-skills.html">soft skills</a></li>
+        <li><a href="http://www.legendu.net/misc/category/software.html">Software</a></li>
+        <li><a href="http://www.legendu.net/misc/category/tools.html">Tools</a></li>
+    </ul>
+  </section>
+ 
+
+  <section>
+  <h1>Tags</h1>
+  <ul class="tagcloud">
+  </ul>
+  </section>
+
+
+
+  <section>
+    <h1>GitHub Repos</h1>
+    <ul id="gh_repos">
+      <li class="loading">Status updating...</li>
+    </ul>
+      <a href="https://github.com/dclong">@dclong</a> on GitHub
+    <script type="text/javascript">
+      $.domReady(function(){
+          if (!window.jXHR){
+              var jxhr = document.createElement('script');
+              jxhr.type = 'text/javascript';
+              jxhr.src = 'http://www.legendu.net/misc/theme/js/jXHR.js';
+              var s = document.getElementsByTagName('script')[0];
+              s.parentNode.insertBefore(jxhr, s);
+          }
+
+          github.showRepos({
+              user: 'dclong',
+              count: 3,
+              skip_forks: true,
+              target: '#gh_repos'
+          });
+      });
+    </script>
+    <script src="http://www.legendu.net/misc/theme/js/github.js" type="text/javascript"> </script>
+  </section>
+
+    <section>
+        <h1>Social</h2>
+        <ul>
+            <li><a href="https://www.linkedin.com/in/ben-chuanlong-du-1239b221/" target="_blank">LinkedIn</a></li>
+            <li><a href="https://twitter.com/longendu" target="_blank">Twitter</a></li>
+            <li><a href="https://www.facebook.com/chuanlong.du" target="_blank">Facebook</a></li>
+        <!--
+            <li><a href="http://www.legendu.net/misc/" type="application/rss+xml" rel="alternate">RSS</a></li>
+            -->
+        </ul>
+    </section>
+</aside>    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Ben Chuanlong Du -
+  <span class="credit">Powered by <a href="http://getpelican.com">Pelican</a></span>
+</p></footer>
+    <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-30259661-1']);
+    _gaq.push(['_trackPageview']);
+    (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+    </script>
+	<script type="text/javascript">
+	  var disqus_shortname = 'dclong';
+	  (function() {
+	    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	    dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+	    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	   })();
+	</script>
+</body>
+</html>

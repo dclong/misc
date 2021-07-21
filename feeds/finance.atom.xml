@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Ben Chuanlong Du's Blog - Finance</title><link href="http://www.legendu.net/misc/" rel="alternate"></link><link href="http://www.legendu.net/misc/feeds/finance.atom.xml" rel="self"></link><id>http://www.legendu.net/misc/</id><updated>2021-06-18T11:17:08-07:00</updated><subtitle>It is never too late to learn.</subtitle><entry><title>Tips on eTrade</title><link href="http://www.legendu.net/misc/blog/tips-on-etrade/" rel="alternate"></link><published>2019-05-18T17:09:47-07:00</published><updated>2021-06-18T11:17:08-07:00</updated><author><name>Benjamin Du</name></author><id>tag:www.legendu.net,2019-05-18:/misc/blog/tips-on-etrade/</id><summary type="html">&lt;p&gt;&lt;strong&gt;
+Things on this page are fragmentary and immature notes/thoughts of the author.
+Please read with your own judgement!
+&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://us.etrade.com/etx/mm/movemoney/link-account"&gt;Add External Funding Account&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://us.etrade.com/etx/hw/customerservice/uploaddoc#!/upload"&gt;Upload Documents&lt;/a&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Wire transfer is made on the same business day but cost $25.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Transfering to a Linked External Funding Account takes about 3 business days but …&lt;/p&gt;&lt;/li&gt;&lt;/ol&gt;</summary><content type="html">&lt;p&gt;&lt;strong&gt;
+Things on this page are fragmentary and immature notes/thoughts of the author.
+Please read with your own judgement!
+&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://us.etrade.com/etx/mm/movemoney/link-account"&gt;Add External Funding Account&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://us.etrade.com/etx/hw/customerservice/uploaddoc#!/upload"&gt;Upload Documents&lt;/a&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Wire transfer is made on the same business day but cost $25.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Transfering to a Linked External Funding Account takes about 3 business days but is free. &lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Dividends you've earned stays in your eTrade account 
+  until you manually transferred them to your account.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;A Stock Plan (only) account cannot add External Funding Accounts. 
+  You must have a Complete Investment Account in order to add External Funding Accounts.
+  You can submit a Registration Change form to update your account to a Complete Investment Account. &lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="tax"&gt;Tax&lt;/h2&gt;
+&lt;h3 id="espp"&gt;ESPP&lt;/h3&gt;
+&lt;p&gt;Please refer to the section "US tax considerations" on the page 
+&lt;a href="https://us.etrade.com/knowledge/library/stock-plans/employee-stock-purchase-plan"&gt;Understanding employee stock purchase plans&lt;/a&gt;
+for details.
+In short, 
+you want to have qualifying dispositions which requires:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;The disposition occurs more than two years after the grant date, and&lt;/li&gt;
+&lt;li&gt;The disposition occurs more than one year after the purchase date&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="rsu"&gt;RSU&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;The way to cover tax for RSU can be updated at https://us.etrade.com/etx/sp/stockplan/#/myAccount/planElections/stockElections.
+    You might not be able to update it for 2 reasons.
+    First, 
+    some company use the default way (sell to cover) and does not allow employees to change it.
+    Second,
+    even if you company allows you to update the way to cover tax,
+    you have to wait for an open time window to update it.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;When RSU shares vest, 
+shares are withheld and sold to cover your tax commitment. 
+The percentage withheld is dictated by your employer typically to match how your bonus are taxed. 
+They deliver those instructions to us and we must comply. 
+You can view this for yourself in the Release of Confirmation 
+by going to "Stock Plans" &amp;gt;&amp;gt; "Holdings" and expanding the blue arrow next to the grant date. 
+You'll see "View Confirmation of Release" below the grant details. 
+Generally when you sell ESPP no tax is paid upon selling them. 
+However, 
+coming tax season we will provide you a tax form. Where you can then work with an accountant or tax advisor on how to report that.&lt;/p&gt;
+&lt;p&gt;https://us.etrade.com/app/taxcenter#/taxdoc?ploc=c-newnav-acct-tax&lt;/p&gt;
+&lt;p&gt;https://us.etrade.com/etx/sp/stockplan/#/myAccount/gainsLosses&lt;/p&gt;
+&lt;p&gt;https://content.etrade.com/etrade/optionslink/espptax.pdf&lt;/p&gt;
+&lt;p&gt;https://content.etrade.com/etrade/optionslink/oltaxexercise.pdf&lt;/p&gt;
+&lt;p&gt;https://content.etrade.com/etrade/optionslink/isotax.pdf&lt;/p&gt;
+&lt;p&gt;https://content.etrade.com/etrade/customer/invest/finalrestrictedstockfaqs.pdf&lt;/p&gt;
+&lt;p&gt;https://content.etrade.com/etrade/optionslink/sartax.pdf&lt;/p&gt;
+&lt;h2 id="questions"&gt;Questions&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;Can I withhold tax when I sell RSU shares and pay in the next tax season?&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="references"&gt;References&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://us.etrade.com/knowledge/library/stock-plans"&gt;Stock Plans&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</content><category term="Finance"></category><category term="finance"></category><category term="money"></category><category term="eTrade"></category><category term="stock"></category></entry><entry><title>Investment</title><link href="http://www.legendu.net/misc/blog/investment-tips/" rel="alternate"></link><published>2018-04-17T12:24:21-07:00</published><updated>2020-10-17T12:24:21-07:00</updated><author><name>Ben Chuanlong Du</name></author><id>tag:www.legendu.net,2018-04-17:/misc/blog/investment-tips/</id><summary type="html">&lt;p&gt;&lt;strong&gt;
+Things on this page are
+fragmentary and immature notes/thoughts of the author.
+Please read with your own judgement!
+&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id="general-tips"&gt;General Tips&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;Spend less money than you can make.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="a"&gt;A 股&lt;/h2&gt;
+&lt;p&gt;哪些股票值得持有 10 年？&lt;/p&gt;
+&lt;p&gt;更多详情: https://www.zhihu.com/question/28508092/answer/248795958&lt;/p&gt;
+&lt;p&gt;https://jingyan.baidu.com/article/49711c61858939fa441b7cd9.html&lt;/p&gt;
+&lt;h2 id="us-stocks"&gt;US …&lt;/h2&gt;</summary><content type="html">&lt;p&gt;&lt;strong&gt;
+Things on this page are
+fragmentary and immature notes/thoughts of the author.
+Please read with your own judgement!
+&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id="general-tips"&gt;General Tips&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;Spend less money than you can make.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="a"&gt;A 股&lt;/h2&gt;
+&lt;p&gt;哪些股票值得持有 10 年？&lt;/p&gt;
+&lt;p&gt;更多详情: https://www.zhihu.com/question/28508092/answer/248795958&lt;/p&gt;
+&lt;p&gt;https://jingyan.baidu.com/article/49711c61858939fa441b7cd9.html&lt;/p&gt;
+&lt;h2 id="us-stocks"&gt;US Stocks&lt;/h2&gt;
+&lt;p&gt;&lt;a href="https://www.youtube.com/channel/UCBUH38E0ngqvmTqdchWunwQ"&gt;美投讲美股&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id="good-wechat-official-accounts"&gt;Good WeChat Official Accounts&lt;/h2&gt;
+&lt;p&gt;投研帮&lt;/p&gt;
+&lt;p&gt;摩尔金融&lt;/p&gt;
+&lt;h2 id="references"&gt;References&lt;/h2&gt;
+&lt;p&gt;&lt;a href="https://www.youtube.com/channel/UCBUH38E0ngqvmTqdchWunwQ"&gt;美投讲美股&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://www.youtube.com/watch?v=PHe0bXAIuk0"&gt;How The Economic Machine Works by Ray Dalio&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://finance.yahoo.com/news/"&gt;Yahoo Finance&lt;/a&gt;&lt;/p&gt;</content><category term="Finance"></category><category term="finance"></category><category term="investment"></category><category term="WeChat official account"></category><category term="money"></category><category term="tips"></category><category term="economics"></category><category term="stock"></category></entry><entry><title>Quant Trading</title><link href="http://www.legendu.net/misc/blog/quant-trading/" rel="alternate"></link><published>2016-06-09T19:32:27-07:00</published><updated>2020-05-09T19:32:27-07:00</updated><author><name>Ben Chuanlong Du</name></author><id>tag:www.legendu.net,2016-06-09:/misc/blog/quant-trading/</id><summary type="html">&lt;p&gt;&lt;strong&gt;
+Things on this page are
+fragmentary and immature notes/thoughts of the author.
+Please read with your own judgement!
+&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id="open-source-trading-platformsprojects"&gt;Open Source Trading Platforms/Projects&lt;/h2&gt;
+&lt;p&gt;&lt;a href="https://ocw.mit.edu/search/ocwsearch.htm?q=trading"&gt;MIT Open Course Ware - Trading&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;quantos, kungfu, vnpy, RQAlpha2&lt;/p&gt;
+&lt;p&gt;https://zhuanlan.zhihu.com/p/34822731&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://github.com/quantopian"&gt;Quantopian&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://python.quantecon.org/"&gt;Quantitative Economics&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id="misc"&gt;Misc&lt;/h2&gt;
+&lt;p&gt;http://www.zhihu.com/question/28557233?from …&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;strong&gt;
+Things on this page are
+fragmentary and immature notes/thoughts of the author.
+Please read with your own judgement!
+&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id="open-source-trading-platformsprojects"&gt;Open Source Trading Platforms/Projects&lt;/h2&gt;
+&lt;p&gt;&lt;a href="https://ocw.mit.edu/search/ocwsearch.htm?q=trading"&gt;MIT Open Course Ware - Trading&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;quantos, kungfu, vnpy, RQAlpha2&lt;/p&gt;
+&lt;p&gt;https://zhuanlan.zhihu.com/p/34822731&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://github.com/quantopian"&gt;Quantopian&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://python.quantecon.org/"&gt;Quantitative Economics&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id="misc"&gt;Misc&lt;/h2&gt;
+&lt;p&gt;http://www.zhihu.com/question/28557233?from=profile_question_card&lt;/p&gt;
+&lt;p&gt;http://myquant.cn/&lt;/p&gt;
+&lt;p&gt;http://www.vnpy.org/quantlib-tutorial.html&lt;/p&gt;
+&lt;p&gt;http://www.vnpy.org/talib-tutorial.html&lt;/p&gt;
+&lt;p&gt;http://www.vnpy.org/basic-tutorial-4.html&lt;/p&gt;
+&lt;p&gt;http://www.zhihu.com/question/33555640/answer/56820093&lt;/p&gt;
+&lt;p&gt;https://www.zhihu.com/question/25074959/answer/31184123?from=profile_answer_card&lt;/p&gt;
+&lt;p&gt;https://www.zhihu.com/question/21789812/answer/22369809&lt;/p&gt;
+&lt;p&gt;https://zhuanlan.zhihu.com/p/20505282?refer=edwardfuna&lt;/p&gt;
+&lt;p&gt;https://zhuanlan.zhihu.com/p/20502027?refer=edwardfuna&lt;/p&gt;
+&lt;p&gt;https://www.zhihu.com/question/34868706/answer/106024559&lt;/p&gt;
+&lt;p&gt;https://www.zhihu.com/question/36532600/answer/68127964?from=profile_answer_card&lt;/p&gt;
+&lt;p&gt;https://www.zhihu.com/question/31817168/answer/53462153&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://www.zhihu.com/question/23667442/answer/28965906"&gt;Tow the Iceburg&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Prediction of Hidden Liquidity in the Limit Order Book of GLOBEX Futures&lt;/p&gt;
+&lt;p&gt;Mclean, R. David and Jeffrey Pontiff, 2016, Does Academic Research Destroy Stock Return Predictability, The Journal of Finance 71(1), 5-32.&lt;/p&gt;</content><category term="Finance"></category><category term="quantitative trading"></category><category term="investment"></category><category term="money"></category><category term="stock"></category><category term="ETF"></category></entry></feed>

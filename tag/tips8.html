@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Ben Chuanlong Du's Blog - tips</title>
+  <meta name="author" content="Ben Chuanlong Du">
+
+  <link href="http://www.legendu.net/misc/atom.xml" type="application/atom+xml" rel="alternate"
+        title="Ben Chuanlong Du's Blog Atom Feed" />
+
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link href="http://www.legendu.net/misc/favicon.png" rel="icon">
+  <link href="http://www.legendu.net/misc/theme/css/main_2.css" media="screen, projection"
+        rel="stylesheet" type="text/css">
+  <script src="http://www.legendu.net/misc/theme/js/modernizr-2.0.js"></script>
+  <script src="http://www.legendu.net/misc/theme/js/ender.js"></script>
+  <script src="http://www.legendu.net/misc/theme/js/octopress.js" type="text/javascript"></script>
+
+  <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <script data-ad-client="ca-pub-3836424032203369" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+</head>
+
+<body>
+  <header role="banner"><hgroup>
+  <h1><a href="http://www.legendu.net/misc/">Ben Chuanlong Du's Blog</a></h1>
+    <h2>It is never too late to learn.</h2>
+</hgroup></header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="http://www.legendu.net/misc/atom.xml" rel="subscribe-rss">RSS</a></li>
+</ul>
+
+<form name="search" action="https://www.bing.com/search" method="get" onSubmit="return build_query()">
+  <fieldset role="search">
+      <!--
+    <input type="hidden" name="q" value="site:http://www.legendu.net/misc" />
+        -->
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+
+<script type = "text/javascript">
+    function build_query() {
+        var query = document.forms["search"]["q"].value;
+        var prefix = "site:http://www.legendu.net/misc "
+        if (!query.startsWith(prefix)) {
+            query = prefix + query;
+            document.forms["search"]["q"].value = query;
+        }
+        return true;
+    }
+</script>
+
+<ul class="main-navigation">
+    <li><a href="http://www.legendu.net">Home</a></li>
+    <li><a href="http://www.legendu.net/misc">Blog</a></li>
+    <li><a href="http://www.legendu.net/misc/archives.html">Archives</a></li>
+    <li><a href="http://www.legendu.net/misc/pages/links.html">Links</a></li>
+</ul></nav>
+  <div id="main">
+    <div id="content">
+<div class="blog-index">
+  		<article>
+<header>
+      <h1 class="entry-title">
+        <a href="http://www.legendu.net/misc/blog/conda-tips/">Tips on Conda</a>
+      </h1>
+      <p class="meta"><time datetime="2018-04-22T09:36:27-07:00" pubdate>Apr 22, 2018</time></p>
+</header>
+
+  <div class="entry-content"><p><strong>
+Things on this page are
+fragmentary and immature notes/thoughts of the author.
+Please read with your own judgement!
+</strong></p>
+<ol>
+<li>
+<p>conda and executables installed by conda might not be able to run by sudo directly. 
+    If this happends, 
+    use the full path of the executable
+    or add the option <code>-E "PATH …</code></p></li></ol></div>
+  <footer>
+    <a rel="full-article" href="http://www.legendu.net/misc/blog/conda-tips/">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
+        <a href="http://www.legendu.net/misc/blog/outlook-tips/">Tips on Outlook</a>
+      </h1>
+      <p class="meta"><time datetime="2014-01-06T20:28:42-08:00" pubdate>Jan 06, 2014</time></p>
+</header>
+
+  <div class="entry-content"><p><strong>Things on this page are fragmentary and immature notes/thoughts of the author. 
+Please read with your own judgement!</strong></p>
+<h2 id="tip-and-traps">Tip and Traps</h2>
+<ol>
+<li>
+<p>Always be careful when yu use "Reply All". 
+    Make sure that the recipients are the right ones.
+    Avoid forward a large group meeting to people 
+    and have a …</p></li></ol></div>
+  <footer>
+    <a rel="full-article" href="http://www.legendu.net/misc/blog/outlook-tips/">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
+        <a href="http://www.legendu.net/misc/blog/tips-windows/">Windows Operating System</a>
+      </h1>
+      <p class="meta"><time datetime="2012-09-30T19:30:05-07:00" pubdate>Sep 30, 2012</time></p>
+</header>
+
+  <div class="entry-content"><p><img src="http://dclong.github.io/media/windows/windows.png" height="200" width="240" align="right"/></p>
+<p><a href="https://github.com/microsoft/winget-cli">winget</a>
+is the official Windows Package Manager CLI.</p>
+<p><a href="https://chocolatey.org/">Chocolatey</a> 
+is a cool community-driven software management tool for Windows.</p>
+<h2 id="tricky-problem">Tricky Problem</h2>
+<ol>
+<li>When Dropbox is synchronizing a file, 
+    it might be unaccessible temporarily. 
+    If this happens, 
+    you can simplify retry 
+    or you can quit Dropbox and try again.</li>
+</ol>
+<h2 id="tips">Tips</h2>
+<p>To add an …</p></div>
+  <footer>
+    <a rel="full-article" href="http://www.legendu.net/misc/blog/tips-windows/">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
+        <a href="http://www.legendu.net/misc/blog/tips-on-yaml/">Tips on YAML</a>
+      </h1>
+      <p class="meta"><time datetime="2019-08-27T21:35:35-07:00" pubdate>Aug 27, 2019</time></p>
+</header>
+
+  <div class="entry-content"><p><strong>
+Things on this page are fragmentary and immature notes/thoughts of the author.
+Please read with your own judgement!
+</strong></p>
+<p>https://yaml.org/</p>
+<p>https://yaml.org/spec/1.2/spec.html#directive/</p>
+<h2 id="yaml-in-python"><a href="http://www.legendu.net/misc/blog/tips-on-pyyaml">YAML in Python</a></h2>
+<p>Please refer to 
+<a href="http://www.legendu.net/misc/blog/tips-on-pyyaml">YAML in Python</a>
+for discussions.</p>
+<h2 id="ranges-in-yaml">Ranges in YAML</h2>
+<p>https://stackoverflow.com/questions/48199439 …</p></div>
+  <footer>
+    <a rel="full-article" href="http://www.legendu.net/misc/blog/tips-on-yaml/">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
+        <a href="http://www.legendu.net/misc/blog/mac-tips/">Tips on macOS</a>
+      </h1>
+      <p class="meta"><time datetime="2015-10-23T22:14:55-07:00" pubdate>Oct 23, 2015</time></p>
+</header>
+
+  <div class="entry-content"><p><strong>
+Things on this page are
+fragmentary and immature notes/thoughts of the author.
+Please read with your own judgement!
+</strong></p>
+<ol>
+<li>
+<p>Print Mac OS X operating system version information.</p>
+<div class="highlight"><pre><span></span><code>sw_vers -productName
+</code></pre></div>
+
+</li>
+<li>
+<p><code>iTerm2</code> is the best termimal application in Mac. </p>
+</li>
+<li>
+<p>You can use Homebrew to install applications in Mac
+    similar to the command …</p></li></ol></div>
+  <footer>
+    <a rel="full-article" href="http://www.legendu.net/misc/blog/mac-tips/">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
+        <a href="http://www.legendu.net/misc/blog/sed-tips/">Tips on "sed"</a>
+      </h1>
+      <p class="meta"><time datetime="2013-10-22T15:47:51-07:00" pubdate>Oct 22, 2013</time></p>
+</header>
+
+  <div class="entry-content"><p><strong>
+Things on this page are fragmentary and immature notes/thoughts of the author. 
+Please read with your own judgement!
+</strong></p>
+<p>It is suggested that you use Python script as an alternative to <code>sed</code> 
+for manipulating text files 
+unless you have to stick to shell script.</p>
+<ol>
+<li>
+<p>Add <code>#!/bin/bash</code> to the first …</p></li></ol></div>
+  <footer>
+    <a rel="full-article" href="http://www.legendu.net/misc/blog/sed-tips/">Read On &crarr;</a>
+  </footer>
+  		</article>
+<div class="pagination">
+    <a class="prev" href="http://www.legendu.net/misc/tag/tips9.html">&larr; Older</a>
+
+      <a class="next" href="http://www.legendu.net/misc/tag/tips7.html">Newer &rarr;</a>
+  <br />
+</div></div>
+<aside class="sidebar">
+  <section>
+    <h1>Recent Posts</h1>
+    <ul id="recent_posts">
+      <li class="post">
+          <a href="http://www.legendu.net/misc/blog/network-tips/">Tips on Network</a>
+      </li>
+      <li class="post">
+          <a href="http://www.legendu.net/misc/blog/AutoHotkey-tips/">Typing Automatically Using AutoHotkey</a>
+      </li>
+      <li class="post">
+          <a href="http://www.legendu.net/misc/blog/chicago-tips/">Living in Chicago</a>
+      </li>
+      <li class="post">
+          <a href="http://www.legendu.net/misc/blog/gpu-tips/">Tips on GPU Computing</a>
+      </li>
+      <li class="post">
+          <a href="http://www.legendu.net/misc/blog/spacevim-tips/">SpaceVim - A Modern Vim Distribution</a>
+      </li>
+    </ul>
+  </section>
+  <section>
+    <h1>Categories</h1>
+    <ul id="recent_posts">
+        <li><a href="http://www.legendu.net/misc/category/ai.html">AI</a></li>
+        <li><a href="http://www.legendu.net/misc/category/career.html">Career</a></li>
+        <li><a href="http://www.legendu.net/misc/category/cloud.html">Cloud</a></li>
+        <li><a href="http://www.legendu.net/misc/category/computer-science.html">Computer Science</a></li>
+        <li><a href="http://www.legendu.net/misc/category/finance.html">Finance</a></li>
+        <li><a href="http://www.legendu.net/misc/category/fun-problems.html">Fun Problems</a></li>
+        <li><a href="http://www.legendu.net/misc/category/hardware.html">Hardware</a></li>
+        <li><a href="http://www.legendu.net/misc/category/internet.html">Internet</a></li>
+        <li><a href="http://www.legendu.net/misc/category/life.html">Life</a></li>
+        <li><a href="http://www.legendu.net/misc/category/os.html">OS</a></li>
+        <li><a href="http://www.legendu.net/misc/category/people.html">People</a></li>
+        <li><a href="http://www.legendu.net/misc/category/philosophy.html">Philosophy</a></li>
+        <li><a href="http://www.legendu.net/misc/category/research.html">Research</a></li>
+        <li><a href="http://www.legendu.net/misc/category/soft-skills.html">soft skills</a></li>
+        <li><a href="http://www.legendu.net/misc/category/software.html">Software</a></li>
+        <li><a href="http://www.legendu.net/misc/category/tools.html">Tools</a></li>
+    </ul>
+  </section>
+ 
+
+  <section>
+  <h1>Tags</h1>
+  <ul class="tagcloud">
+  </ul>
+  </section>
+
+
+
+  <section>
+    <h1>GitHub Repos</h1>
+    <ul id="gh_repos">
+      <li class="loading">Status updating...</li>
+    </ul>
+      <a href="https://github.com/dclong">@dclong</a> on GitHub
+    <script type="text/javascript">
+      $.domReady(function(){
+          if (!window.jXHR){
+              var jxhr = document.createElement('script');
+              jxhr.type = 'text/javascript';
+              jxhr.src = 'http://www.legendu.net/misc/theme/js/jXHR.js';
+              var s = document.getElementsByTagName('script')[0];
+              s.parentNode.insertBefore(jxhr, s);
+          }
+
+          github.showRepos({
+              user: 'dclong',
+              count: 3,
+              skip_forks: true,
+              target: '#gh_repos'
+          });
+      });
+    </script>
+    <script src="http://www.legendu.net/misc/theme/js/github.js" type="text/javascript"> </script>
+  </section>
+
+    <section>
+        <h1>Social</h2>
+        <ul>
+            <li><a href="https://www.linkedin.com/in/ben-chuanlong-du-1239b221/" target="_blank">LinkedIn</a></li>
+            <li><a href="https://twitter.com/longendu" target="_blank">Twitter</a></li>
+            <li><a href="https://www.facebook.com/chuanlong.du" target="_blank">Facebook</a></li>
+        <!--
+            <li><a href="http://www.legendu.net/misc/" type="application/rss+xml" rel="alternate">RSS</a></li>
+            -->
+        </ul>
+    </section>
+</aside>    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Ben Chuanlong Du -
+  <span class="credit">Powered by <a href="http://getpelican.com">Pelican</a></span>
+</p></footer>
+    <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-30259661-1']);
+    _gaq.push(['_trackPageview']);
+    (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+    </script>
+	<script type="text/javascript">
+	  var disqus_shortname = 'dclong';
+	  (function() {
+	    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	    dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+	    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	   })();
+	</script>
+</body>
+</html>

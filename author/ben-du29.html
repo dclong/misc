@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Ben Chuanlong Du's Blog - Articles by Ben Du</title>
+  <meta name="author" content="Ben Chuanlong Du">
+
+  <link href="http://www.legendu.net/misc/atom.xml" type="application/atom+xml" rel="alternate"
+        title="Ben Chuanlong Du's Blog Atom Feed" />
+
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link href="http://www.legendu.net/misc/favicon.png" rel="icon">
+  <link href="http://www.legendu.net/misc/theme/css/main_2.css" media="screen, projection"
+        rel="stylesheet" type="text/css">
+  <script src="http://www.legendu.net/misc/theme/js/modernizr-2.0.js"></script>
+  <script src="http://www.legendu.net/misc/theme/js/ender.js"></script>
+  <script src="http://www.legendu.net/misc/theme/js/octopress.js" type="text/javascript"></script>
+
+  <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <script data-ad-client="ca-pub-3836424032203369" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+</head>
+
+<body>
+  <header role="banner"><hgroup>
+  <h1><a href="http://www.legendu.net/misc/">Ben Chuanlong Du's Blog</a></h1>
+    <h2>It is never too late to learn.</h2>
+</hgroup></header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="http://www.legendu.net/misc/atom.xml" rel="subscribe-rss">RSS</a></li>
+</ul>
+
+<form name="search" action="https://www.bing.com/search" method="get" onSubmit="return build_query()">
+  <fieldset role="search">
+      <!--
+    <input type="hidden" name="q" value="site:http://www.legendu.net/misc" />
+        -->
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+
+<script type = "text/javascript">
+    function build_query() {
+        var query = document.forms["search"]["q"].value;
+        var prefix = "site:http://www.legendu.net/misc "
+        if (!query.startsWith(prefix)) {
+            query = prefix + query;
+            document.forms["search"]["q"].value = query;
+        }
+        return true;
+    }
+</script>
+
+<ul class="main-navigation">
+    <li><a href="http://www.legendu.net">Home</a></li>
+    <li><a href="http://www.legendu.net/misc">Blog</a></li>
+    <li><a href="http://www.legendu.net/misc/archives.html">Archives</a></li>
+    <li><a href="http://www.legendu.net/misc/pages/links.html">Links</a></li>
+</ul></nav>
+  <div id="main">
+    <div id="content">
+<div class="blog-index">
+  		<article>
+<header>
+      <h1 class="entry-title">
+        <a href="http://www.legendu.net/misc/blog/broadcast-arrays-in-numpy/">Broadcast Arrays in Numpy</a>
+      </h1>
+      <p class="meta"><time datetime="2020-04-24T23:07:30-07:00" pubdate>Apr 24, 2020</time></p>
+</header>
+
+  <div class="entry-content"><div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Tips-and-Traps">Tips and Traps<a class="anchor-link" href="#Tips-and-Traps">&#182;</a></h2><ol>
+<li><a href="https://numpy.org/doc/stable/reference/generated/numpy.expand_dims.html?highlight=expand_dims#numpy.expand_dims">numpy.expand_dims</a>
+ expands the shape of an array and returns a veiw (no copy is made). 
+ It is very useful to help broadcasting arrays.</li>
+</ol>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="numpy.broadcast">numpy.broadcast<a class="anchor-link" href="#numpy.broadcast">&#182;</a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="numpy.broadcast_to"><a href="https://numpy.org/doc/stable/reference/generated/numpy.broadcast_to.html?highlight=broadcast_to">numpy.broadcast_to</a><a class="anchor-link" href="#numpy.broadcast_to">&#182;</a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="numpy.expand_dims"><a href="https://numpy.org/doc/stable/reference/generated/numpy.expand_dims.html?highlight=expand_dims#numpy.expand_dims">numpy.expand_dims</a><a class="anchor-link" href="#numpy.expand_dims">&#182;</a></h2><p><code>numpy.expand_dims</code> returns a view (no copy is made) to the expanded array.
+The example below illustrate this.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Create a 2-d array <code>a1</code>.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input"></div>
+  <footer>
+    <a rel="full-article" href="http://www.legendu.net/misc/blog/broadcast-arrays-in-numpy/">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
+        <a href="http://www.legendu.net/misc/blog/models-in-torchvision-and-ways-to-finetune-them/">Models in Torchvision and Ways to Finetune Them</a>
+      </h1>
+      <p class="meta"><time datetime="2020-04-21T13:26:15-07:00" pubdate>Apr 21, 2020</time></p>
+</header>
+
+  <div class="entry-content"><div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>inception_v3 requires an input of (299, 299)
+while other models requires an input of (224, 224).
+Due to adaptive pooling used in some of the models, 
+some of the models can handle varying sized input. 
+However, 
+it is suggested that you still resize/crop the input to be the best input size before feeding them to the model.</p></div>
+  <footer>
+    <a rel="full-article" href="http://www.legendu.net/misc/blog/models-in-torchvision-and-ways-to-finetune-them/">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
+        <a href="http://www.legendu.net/misc/blog/python-pytorch-tensor-device/">Move a Tensor to a Specific Device in PyTorch</a>
+      </h1>
+      <p class="meta"><time datetime="2020-04-21T11:51:30-07:00" pubdate>Apr 21, 2020</time></p>
+</header>
+
+  <div class="entry-content"><div class="cell border-box-sizing code_cell rendered">
+<div class="input"></div>
+  <footer>
+    <a rel="full-article" href="http://www.legendu.net/misc/blog/python-pytorch-tensor-device/">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
+        <a href="http://www.legendu.net/misc/blog/Kotlin-kernel-for-jupyterlab/">Kotlin Kernel for JupyterLab</a>
+      </h1>
+      <p class="meta"><time datetime="2020-04-20T13:15:09-07:00" pubdate>Apr 20, 2020</time></p>
+</header>
+
+  <div class="entry-content"><div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Tips-and-Traps">Tips and Traps<a class="anchor-link" href="#Tips-and-Traps">&#182;</a></h2><p>There are multiple Kotlin kernels for JupyterLab. 
+It is is suggested that you use official one released by JetBrains.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Jar-Dependencies">Jar Dependencies<a class="anchor-link" href="#Jar-Dependencies">&#182;</a></h2><p>You can add a JAR dependency using the following code.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input"></div>
+  <footer>
+    <a rel="full-article" href="http://www.legendu.net/misc/blog/Kotlin-kernel-for-jupyterlab/">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
+        <a href="http://www.legendu.net/misc/blog/adaptive-pooling-in-pytorch/">Adaptive Pooling in PyTorch</a>
+      </h1>
+      <p class="meta"><time datetime="2020-04-20T08:58:10-07:00" pubdate>Apr 20, 2020</time></p>
+</header>
+
+  <div class="entry-content"><div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Tips-and-Traps">Tips and Traps<a class="anchor-link" href="#Tips-and-Traps">&#182;</a></h2><ol>
+<li>Adpative pooling an generate fixed-sized output,
+ which enables a model to handle varying sized input. 
+ The models in torchvision are such examples.</li>
+</ol>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="AdaptiveMaxPool2d"><a href="https://pytorch.org/docs/stable/nn.html#torch.nn.AdaptiveMaxPool2d">AdaptiveMaxPool2d</a><a class="anchor-link" href="#AdaptiveMaxPool2d">&#182;</a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="References">References<a class="anchor-link" href="#References">&#182;</a></h2><p><a href="https://discuss.pytorch.org/t/torchvision-resnet-input-size/9405/3">Torchvision ResNet Input Size</a></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input"></div>
+  <footer>
+    <a rel="full-article" href="http://www.legendu.net/misc/blog/adaptive-pooling-in-pytorch/">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
+        <a href="http://www.legendu.net/misc/blog/ways-to-enable-and-disable-gradient-in-pytorch/">Ways to Enable and Disable Gradient in PyTorch</a>
+      </h1>
+      <p class="meta"><time datetime="2020-04-20T08:44:18-07:00" pubdate>Apr 20, 2020</time></p>
+</header>
+
+  <div class="entry-content"><div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="set_grad_enable">set_grad_enable<a class="anchor-link" href="#set_grad_enable">&#182;</a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input"></div>
+  <footer>
+    <a rel="full-article" href="http://www.legendu.net/misc/blog/ways-to-enable-and-disable-gradient-in-pytorch/">Read On &crarr;</a>
+  </footer>
+  		</article>
+<div class="pagination">
+    <a class="prev" href="http://www.legendu.net/misc/author/ben-du30.html">&larr; Older</a>
+
+      <a class="next" href="http://www.legendu.net/misc/author/ben-du28.html">Newer &rarr;</a>
+  <br />
+</div></div>
+<aside class="sidebar">
+  <section>
+    <h1>Recent Posts</h1>
+    <ul id="recent_posts">
+      <li class="post">
+          <a href="http://www.legendu.net/misc/blog/rust-collection-array/">Array in Rust</a>
+      </li>
+      <li class="post">
+          <a href="http://www.legendu.net/misc/blog/python-profile/">Profile Performance of Python Applications</a>
+      </li>
+      <li class="post">
+          <a href="http://www.legendu.net/misc/blog/hands-on-the-python-library-pdfplumber/">Hands on the Python Library Pdfplumber</a>
+      </li>
+      <li class="post">
+          <a href="http://www.legendu.net/misc/blog/python-numpy/">Numpy Arrays in Python</a>
+      </li>
+      <li class="post">
+          <a href="http://www.legendu.net/misc/blog/error-handling-in-rust/">Error Handling in Rust</a>
+      </li>
+    </ul>
+  </section>
+  <section>
+    <h1>Categories</h1>
+    <ul id="recent_posts">
+        <li><a href="http://www.legendu.net/misc/category/ai.html">AI</a></li>
+        <li><a href="http://www.legendu.net/misc/category/career.html">Career</a></li>
+        <li><a href="http://www.legendu.net/misc/category/cloud.html">Cloud</a></li>
+        <li><a href="http://www.legendu.net/misc/category/computer-science.html">Computer Science</a></li>
+        <li><a href="http://www.legendu.net/misc/category/finance.html">Finance</a></li>
+        <li><a href="http://www.legendu.net/misc/category/fun-problems.html">Fun Problems</a></li>
+        <li><a href="http://www.legendu.net/misc/category/hardware.html">Hardware</a></li>
+        <li><a href="http://www.legendu.net/misc/category/internet.html">Internet</a></li>
+        <li><a href="http://www.legendu.net/misc/category/life.html">Life</a></li>
+        <li><a href="http://www.legendu.net/misc/category/os.html">OS</a></li>
+        <li><a href="http://www.legendu.net/misc/category/people.html">People</a></li>
+        <li><a href="http://www.legendu.net/misc/category/philosophy.html">Philosophy</a></li>
+        <li><a href="http://www.legendu.net/misc/category/research.html">Research</a></li>
+        <li><a href="http://www.legendu.net/misc/category/soft-skills.html">soft skills</a></li>
+        <li><a href="http://www.legendu.net/misc/category/software.html">Software</a></li>
+        <li><a href="http://www.legendu.net/misc/category/tools.html">Tools</a></li>
+    </ul>
+  </section>
+ 
+
+  <section>
+  <h1>Tags</h1>
+  <ul class="tagcloud">
+  </ul>
+  </section>
+
+
+
+  <section>
+    <h1>GitHub Repos</h1>
+    <ul id="gh_repos">
+      <li class="loading">Status updating...</li>
+    </ul>
+      <a href="https://github.com/dclong">@dclong</a> on GitHub
+    <script type="text/javascript">
+      $.domReady(function(){
+          if (!window.jXHR){
+              var jxhr = document.createElement('script');
+              jxhr.type = 'text/javascript';
+              jxhr.src = 'http://www.legendu.net/misc/theme/js/jXHR.js';
+              var s = document.getElementsByTagName('script')[0];
+              s.parentNode.insertBefore(jxhr, s);
+          }
+
+          github.showRepos({
+              user: 'dclong',
+              count: 3,
+              skip_forks: true,
+              target: '#gh_repos'
+          });
+      });
+    </script>
+    <script src="http://www.legendu.net/misc/theme/js/github.js" type="text/javascript"> </script>
+  </section>
+
+    <section>
+        <h1>Social</h2>
+        <ul>
+            <li><a href="https://www.linkedin.com/in/ben-chuanlong-du-1239b221/" target="_blank">LinkedIn</a></li>
+            <li><a href="https://twitter.com/longendu" target="_blank">Twitter</a></li>
+            <li><a href="https://www.facebook.com/chuanlong.du" target="_blank">Facebook</a></li>
+        <!--
+            <li><a href="http://www.legendu.net/misc/" type="application/rss+xml" rel="alternate">RSS</a></li>
+            -->
+        </ul>
+    </section>
+</aside>    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Ben Chuanlong Du -
+  <span class="credit">Powered by <a href="http://getpelican.com">Pelican</a></span>
+</p></footer>
+    <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-30259661-1']);
+    _gaq.push(['_trackPageview']);
+    (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+    </script>
+	<script type="text/javascript">
+	  var disqus_shortname = 'dclong';
+	  (function() {
+	    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	    dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+	    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	   })();
+	</script>
+</body>
+</html>

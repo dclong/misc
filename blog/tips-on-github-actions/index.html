@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Tips on GitHub Actions</title>
+  <meta name="author" content="Ben Chuanlong Du">
+
+  <link href="http://www.legendu.net/misc/atom.xml" type="application/atom+xml" rel="alternate"
+        title="Ben Chuanlong Du's Blog Atom Feed" />
+
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link href="http://www.legendu.net/misc/favicon.png" rel="icon">
+  <link href="http://www.legendu.net/misc/theme/css/main_2.css" media="screen, projection"
+        rel="stylesheet" type="text/css">
+  <script src="http://www.legendu.net/misc/theme/js/modernizr-2.0.js"></script>
+  <script src="http://www.legendu.net/misc/theme/js/ender.js"></script>
+  <script src="http://www.legendu.net/misc/theme/js/octopress.js" type="text/javascript"></script>
+
+  <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <script data-ad-client="ca-pub-3836424032203369" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+</head>
+
+<body>
+  <header role="banner"><hgroup>
+  <h1><a href="http://www.legendu.net/misc/">Ben Chuanlong Du's Blog</a></h1>
+    <h2>It is never too late to learn.</h2>
+</hgroup></header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="http://www.legendu.net/misc/atom.xml" rel="subscribe-rss">RSS</a></li>
+</ul>
+
+<form name="search" action="https://www.bing.com/search" method="get" onSubmit="return build_query()">
+  <fieldset role="search">
+      <!--
+    <input type="hidden" name="q" value="site:http://www.legendu.net/misc" />
+        -->
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+
+<script type = "text/javascript">
+    function build_query() {
+        var query = document.forms["search"]["q"].value;
+        var prefix = "site:http://www.legendu.net/misc "
+        if (!query.startsWith(prefix)) {
+            query = prefix + query;
+            document.forms["search"]["q"].value = query;
+        }
+        return true;
+    }
+</script>
+
+<ul class="main-navigation">
+    <li><a href="http://www.legendu.net">Home</a></li>
+    <li><a href="http://www.legendu.net/misc">Blog</a></li>
+    <li><a href="http://www.legendu.net/misc/archives.html">Archives</a></li>
+    <li><a href="http://www.legendu.net/misc/pages/links.html">Links</a></li>
+</ul></nav>
+  <div id="main">
+    <div id="content">
+<div>
+  <article class="hentry" role="article">
+<header>
+      <h1 class="entry-title">Tips on GitHub Actions</h1>
+      <p class="meta"><time datetime="2020-09-01T12:42:15-07:00" pubdate>Sep 01, 2020</time></p>
+</header>
+
+  <div class="entry-content"><p><strong>
+Things on this page are fragmentary and immature notes/thoughts of the author.
+Please read with your own judgement!
+</strong></p>
+<h2 id="tips-and-traps">Tips and Traps</h2>
+<ol>
+<li>
+<p>You can use <code>sudo</code> without password in Linux and macOS when running GitHub Actions.</p>
+</li>
+<li>
+<p><code>GITHUB_TOKEN</code> is an automatically generated secret 
+    that lets you make authenticated calls to the GitHub API in your workflow runs. 
+    Actions generates a new token for each job and expires the token when a job completes.</p>
+</li>
+<li>
+<p>OS: ubuntu-latest, windows-latest, macOS-latest</p>
+</li>
+<li>
+<p>Docker container is available in Ubuntu and Windows but not macOS in GitHub Actions due to license issues.
+    To use Docker in macOS in GitHub Actions,
+    you have to install it manually.
+    Please refer to 
+    <a href="https://github.community/t/is-it-possible-to-install-and-configure-docker-on-macos-runner/16981">Is it possible to install and configure Docker on MacOS runner?</a>
+    for more details.</p>
+</li>
+</ol>
+<h2 id="branch-matching">Branch Matching</h2>
+<div class="highlight"><pre><span></span><code><span class="n">on</span><span class="o">:</span>
+<span class="n">push</span><span class="o">:</span>
+    <span class="n">branches</span><span class="o">:</span>    
+    <span class="o">-</span> <span class="s1">&#39;*&#39;</span>         <span class="err">#</span> <span class="n">matches</span> <span class="n">every</span> <span class="n">branch</span> <span class="n">that</span> <span class="n">doesn</span><span class="s1">&#39;t contain a &#39;</span><span class="o">/</span><span class="s1">&#39;</span>
+<span class="s1">    - &#39;</span><span class="o">*/*</span><span class="s1">&#39;       # matches every branch containing a single &#39;</span><span class="o">/</span><span class="s1">&#39;</span>
+<span class="s1">    - &#39;</span><span class="o">**</span><span class="s1">&#39;        # matches every branch</span>
+<span class="s1">    - &#39;</span><span class="o">!</span><span class="n">master</span><span class="err">&#39;</span>   <span class="err">#</span> <span class="n">excludes</span> <span class="n">master</span>
+</code></pre></div>
+
+<p>For more discussions,
+please refer to
+<a href="https://stackoverflow.com/questions/57699839/github-actions-how-to-target-all-branches-except-master">GitHub Actions: how to target all branches EXCEPT master?</a>
+and
+<a href="https://docs.github.com/en/free-pro-team@latest/actions/reference/workflow-syntax-for-github-actions">Workflow syntax for GitHub Actions</a>
+.</p>
+<h2 id="powershell-on-windows">PowerShell on Windows</h2>
+<h3 id="set-path">Set PATH</h3>
+<p>echo "::add-path::./swigwin-4.0.1"</p>
+<p>echo %programfiles%
+echo ::set-env name=ProgramFilesPath::%programfiles%</p>
+<p>https://stackoverflow.com/questions/60169752/how-to-update-the-path-in-a-github-action-workflow-file-for-a-windows-latest-hos</p>
+<p>https://docs.github.com/en/free-pro-team@latest/actions/reference/workflow-commands-for-github-actions#adding-a-system-path</p>
+<p>Prepends a directory to the system PATH variable for all subsequent actions in the current job. The currently running action cannot access the new path variable.</p>
+<h2 id="github-actions-for-python">GitHub Actions for Python</h2>
+<p>https://hynek.me/articles/python-github-actions/</p>
+<p>https://github.com/actions/setup-python</p>
+<h2 id="pull-request">Pull Request</h2>
+<p>https://github.com/peter-evans/create-pull-request</p>
+<p><a href="https://github.com/peter-evans/create-pull-request/issues/544">Create PR from push on a given branch</a></p>
+<h2 id="examples">Examples</h2>
+<p><a href="https://www.youtube.com/watch?v=rCXq86FOlzQ">Using semantic-release with GitHub Actions</a></p>
+<p><a href="https://github.com/pascalgn/automerge-action">automerge-action</a></p>
+<p><a href="https://www.youtube.com/watch?v=X3F3El_yvFg">Automatic Deployment With Github Actions</a></p>
+<p><a href="https://www.youtube.com/watch?v=yAkMgcfdok0">Zip Code Base with Github Actions for Releases</a></p>
+<p><a href="https://github.com/marketplace/actions/automatic-releases">GitHub Automatic Releases</a></p>
+<p><a href="https://www.youtube.com/watch?v=N_-Cu9_2YAA">Introducing GitHub Package Registry</a></p>
+<h2 id="references">References</h2>
+<p>https://www.youtube.com/watch?v=Ll50l3fsoYs&amp;feature=emb_logo</p>
+<p>https://www.youtube.com/watch?v=0ahRkhrOePo</p>
+<p>https://docs.github.com/en/actions/reference/virtual-environments-for-github-hosted-runners#about-virtual-environments</p>
+<p>https://stackoverflow.com/questions/57830375/github-actions-workflow-error-permission-denied</p>
+<p><a href="https://medium.com/inexdigital-fr/githubs-actions-v2-tips-and-tricks-c083ec6cfae0">GitHub’s Actions v2 — Tips and Tricks</a></p>
+<p><a href="https://github.community/t/questions-about-pr-workflows-and-actions-checkout-v2/122347">Questions about PR workflows and actions/checkout@v2</a></p></div>
+    <footer>
+<p class="meta">
+  <span class="byline author vcard">
+    Posted by <span class="fn">Benjamin Du</span>
+  </span>
+<time datetime="2020-09-01T12:42:15-07:00" pubdate>Sep 01, 2020</time>  <span class="categories">
+    <a class="category" href="http://www.legendu.net/misc/tag/computer-science.html">Computer Science</a>
+    <a class="category" href="http://www.legendu.net/misc/tag/github-actions.html">GitHub Actions</a>
+    <a class="category" href="http://www.legendu.net/misc/tag/cicd.html">CICD</a>
+  </span>
+</p>    </footer>
+  </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div>
+  </section>
+</div>
+<aside class="sidebar">
+  <section>
+    <h1>Recent Posts</h1>
+    <ul id="recent_posts">
+      <li class="post">
+          <a href="http://www.legendu.net/misc/blog/build-docker-images-using-kaniko/">Build Docker Images Using Kaniko</a>
+      </li>
+      <li class="post">
+          <a href="http://www.legendu.net/misc/blog/booting-to-the-boot-menu-and-bios/">Booting to the Boot Menu and BIOS</a>
+      </li>
+      <li class="post">
+          <a href="http://www.legendu.net/misc/blog/linux-network-tools/">Linux Network Tools</a>
+      </li>
+      <li class="post">
+          <a href="http://www.legendu.net/misc/blog/network-tips/">Tips on Network</a>
+      </li>
+      <li class="post">
+          <a href="http://www.legendu.net/misc/blog/useful-tools-linux/">Useful Tools in Linux</a>
+      </li>
+    </ul>
+  </section>
+  <section>
+    <h1>Categories</h1>
+    <ul id="recent_posts">
+        <li><a href="http://www.legendu.net/misc/category/ai.html">AI</a></li>
+        <li><a href="http://www.legendu.net/misc/category/career.html">Career</a></li>
+        <li><a href="http://www.legendu.net/misc/category/cloud.html">Cloud</a></li>
+        <li><a href="http://www.legendu.net/misc/category/computer-science.html">Computer Science</a></li>
+        <li><a href="http://www.legendu.net/misc/category/finance.html">Finance</a></li>
+        <li><a href="http://www.legendu.net/misc/category/fun-problems.html">Fun Problems</a></li>
+        <li><a href="http://www.legendu.net/misc/category/hardware.html">Hardware</a></li>
+        <li><a href="http://www.legendu.net/misc/category/internet.html">Internet</a></li>
+        <li><a href="http://www.legendu.net/misc/category/life.html">Life</a></li>
+        <li><a href="http://www.legendu.net/misc/category/os.html">OS</a></li>
+        <li><a href="http://www.legendu.net/misc/category/people.html">People</a></li>
+        <li><a href="http://www.legendu.net/misc/category/philosophy.html">Philosophy</a></li>
+        <li><a href="http://www.legendu.net/misc/category/research.html">Research</a></li>
+        <li><a href="http://www.legendu.net/misc/category/soft-skills.html">soft skills</a></li>
+        <li><a href="http://www.legendu.net/misc/category/software.html">Software</a></li>
+        <li><a href="http://www.legendu.net/misc/category/tools.html">Tools</a></li>
+    </ul>
+  </section>
+ 
+
+  <section>
+  <h1>Tags</h1>
+  <ul class="tagcloud">
+  </ul>
+  </section>
+
+
+
+  <section>
+    <h1>GitHub Repos</h1>
+    <ul id="gh_repos">
+      <li class="loading">Status updating...</li>
+    </ul>
+      <a href="https://github.com/dclong">@dclong</a> on GitHub
+    <script type="text/javascript">
+      $.domReady(function(){
+          if (!window.jXHR){
+              var jxhr = document.createElement('script');
+              jxhr.type = 'text/javascript';
+              jxhr.src = 'http://www.legendu.net/misc/theme/js/jXHR.js';
+              var s = document.getElementsByTagName('script')[0];
+              s.parentNode.insertBefore(jxhr, s);
+          }
+
+          github.showRepos({
+              user: 'dclong',
+              count: 3,
+              skip_forks: true,
+              target: '#gh_repos'
+          });
+      });
+    </script>
+    <script src="http://www.legendu.net/misc/theme/js/github.js" type="text/javascript"> </script>
+  </section>
+
+    <section>
+        <h1>Social</h2>
+        <ul>
+            <li><a href="https://www.linkedin.com/in/ben-chuanlong-du-1239b221/" target="_blank">LinkedIn</a></li>
+            <li><a href="https://twitter.com/longendu" target="_blank">Twitter</a></li>
+            <li><a href="https://www.facebook.com/chuanlong.du" target="_blank">Facebook</a></li>
+        <!--
+            <li><a href="http://www.legendu.net/misc/" type="application/rss+xml" rel="alternate">RSS</a></li>
+            -->
+        </ul>
+    </section>
+</aside>    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Ben Chuanlong Du -
+  <span class="credit">Powered by <a href="http://getpelican.com">Pelican</a></span>
+</p></footer>
+    <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-30259661-1']);
+    _gaq.push(['_trackPageview']);
+    (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+    </script>
+	<script type="text/javascript">
+	  var disqus_shortname = 'dclong';
+          var disqus_identifier = '/blog/tips-on-github-actions/';
+          var disqus_url = 'http://www.legendu.net/misc/blog/tips-on-github-actions/';
+          var disqus_title = 'Tips on GitHub Actions';
+	  (function() {
+	    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	    dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+	    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	   })();
+	</script>
+</body>
+</html>

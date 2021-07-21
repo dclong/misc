@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Ben Chuanlong Du's Blog - Ubuntu</title>
+  <meta name="author" content="Ben Chuanlong Du">
+
+  <link href="http://www.legendu.net/misc/atom.xml" type="application/atom+xml" rel="alternate"
+        title="Ben Chuanlong Du's Blog Atom Feed" />
+
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link href="http://www.legendu.net/misc/favicon.png" rel="icon">
+  <link href="http://www.legendu.net/misc/theme/css/main_2.css" media="screen, projection"
+        rel="stylesheet" type="text/css">
+  <script src="http://www.legendu.net/misc/theme/js/modernizr-2.0.js"></script>
+  <script src="http://www.legendu.net/misc/theme/js/ender.js"></script>
+  <script src="http://www.legendu.net/misc/theme/js/octopress.js" type="text/javascript"></script>
+
+  <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <script data-ad-client="ca-pub-3836424032203369" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+</head>
+
+<body>
+  <header role="banner"><hgroup>
+  <h1><a href="http://www.legendu.net/misc/">Ben Chuanlong Du's Blog</a></h1>
+    <h2>It is never too late to learn.</h2>
+</hgroup></header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="http://www.legendu.net/misc/atom.xml" rel="subscribe-rss">RSS</a></li>
+</ul>
+
+<form name="search" action="https://www.bing.com/search" method="get" onSubmit="return build_query()">
+  <fieldset role="search">
+      <!--
+    <input type="hidden" name="q" value="site:http://www.legendu.net/misc" />
+        -->
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+
+<script type = "text/javascript">
+    function build_query() {
+        var query = document.forms["search"]["q"].value;
+        var prefix = "site:http://www.legendu.net/misc "
+        if (!query.startsWith(prefix)) {
+            query = prefix + query;
+            document.forms["search"]["q"].value = query;
+        }
+        return true;
+    }
+</script>
+
+<ul class="main-navigation">
+    <li><a href="http://www.legendu.net">Home</a></li>
+    <li><a href="http://www.legendu.net/misc">Blog</a></li>
+    <li><a href="http://www.legendu.net/misc/archives.html">Archives</a></li>
+    <li><a href="http://www.legendu.net/misc/pages/links.html">Links</a></li>
+</ul></nav>
+  <div id="main">
+    <div id="content">
+<div class="blog-index">
+  		<article>
+<header>
+      <h1 class="entry-title">
+        <a href="http://www.legendu.net/misc/blog/upgrade-release-of-ubuntu/">Upgrade Release of Ubuntu</a>
+      </h1>
+      <p class="meta"><time datetime="2020-05-06T14:42:01-07:00" pubdate>May 06, 2020</time></p>
+</header>
+
+  <div class="entry-content"><p><strong>
+Things on this page are fragmentary and immature notes/thoughts of the author.
+Please read with your own judgement!
+</strong></p>
+<p>https://help.ubuntu.com/community/EOLUpgrades</p></div>
+  <footer>
+    <a rel="full-article" href="http://www.legendu.net/misc/blog/upgrade-release-of-ubuntu/">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
+        <a href="http://www.legendu.net/misc/blog/install-nodejs-on-ubuntu/">Install NodeJS on Ubuntu</a>
+      </h1>
+      <p class="meta"><time datetime="2017-07-07T12:12:37-07:00" pubdate>Jul 07, 2017</time></p>
+</header>
+
+  <div class="entry-content"><p><strong>
+Things on this page are
+fragmentary and immature notes/thoughts of the author.
+Please read with your own judgement!
+</strong></p>
+<div class="highlight"><pre><span></span><code>wajig install nodejs npm
+sudo ln -s /usr/bin/nodejs /usr/bin/node
+</code></pre></div>
+
+<p>Notice that it is necessary to create a symbolic link for node, 
+as many Node.js tools use …</p></div>
+  <footer>
+    <a rel="full-article" href="http://www.legendu.net/misc/blog/install-nodejs-on-ubuntu/">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
+        <a href="http://www.legendu.net/misc/blog/tips-on-multipass/">Tips on Multipass</a>
+      </h1>
+      <p class="meta"><time datetime="2020-03-03T17:27:18-08:00" pubdate>Mar 03, 2020</time></p>
+</header>
+
+  <div class="entry-content"><p><strong>
+Things on this page are fragmentary and immature notes/thoughts of the author.
+Please read with your own judgement!
+</strong></p>
+<p>It is suggested that you use LXD instead of Multipass.
+LXD is more lightweight than Multipass and does not require a CPU 
+which supports virtualization.</p>
+<h2 id="general-tips">General Tips</h2>
+<ol>
+<li>You can consider Multipass …</li></ol></div>
+  <footer>
+    <a rel="full-article" href="http://www.legendu.net/misc/blog/tips-on-multipass/">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
+        <a href="http://www.legendu.net/misc/blog/tips-on-kerberos/">Tips on Kerberos</a>
+      </h1>
+      <p class="meta"><time datetime="2019-06-05T13:11:06-07:00" pubdate>Jun 05, 2019</time></p>
+</header>
+
+  <div class="entry-content"><p><strong>
+Things on this page are fragmentary and immature notes/thoughts of the author.
+Please read with your own judgement!
+</strong></p>
+<h2 id="installation">Installation</h2>
+<h3 id="ubuntu">Ubuntu</h3>
+<p>apt-get install krb5-user</p>
+<h3 id="centos">CentOS</h3>
+<p>yum install -y ntp
+yum install krb5-workstation krb5-libs krb5-auth-dialog</p>
+<h2 id="issues">Issues</h2>
+<h3 id="kinit-permission-denied-while-initializing-kerberos-5-library">kinit: Permission denied while initializing Kerberos 5 library</h3>
+<p>It is likely due to the fact …</p></div>
+  <footer>
+    <a rel="full-article" href="http://www.legendu.net/misc/blog/tips-on-kerberos/">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
+        <a href="http://www.legendu.net/misc/blog/instal-the-latest-version-of-python-in-ubuntu/">Instal the Latest Version of Python in Ubuntu</a>
+      </h1>
+      <p class="meta"><time datetime="2019-03-27T02:26:33-07:00" pubdate>Mar 27, 2019</time></p>
+</header>
+
+  <div class="entry-content"><p><strong>
+Things on this page are fragmentary and immature notes/thoughts of the author.
+Please read with your own judgement!
+</strong></p>
+<h2 id="through-ppa">Through PPA</h2>
+<div class="highlight"><pre><span></span><code>sudo add-apt-repository ppa:deadsnakes/ppa
+sudo apt-get update
+sudo apt-get install python3.7
+</code></pre></div>
+
+<h2 id="linuxbrew">Linuxbrew</h2>
+<ol>
+<li>
+<p>Install Linux brew. </p>
+</li>
+<li>
+<p><code>brew install python3</code></p>
+</li>
+</ol>
+<h2 id="anaconda-python">Anaconda Python</h2>
+<h2 id="references">References</h2>
+<p>https://websiteforstudents.com/installing-the-latest-python-3-7-on-ubuntu-16-04-18-04/</p>
+<p>http://ubuntuhandbook …</p></div>
+  <footer>
+    <a rel="full-article" href="http://www.legendu.net/misc/blog/instal-the-latest-version-of-python-in-ubuntu/">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
+        <a href="http://www.legendu.net/misc/blog/docker-images-for-OS/">Docker Images for OS</a>
+      </h1>
+      <p class="meta"><time datetime="2018-10-27T08:29:44-07:00" pubdate>Oct 27, 2018</time></p>
+</header>
+
+  <div class="entry-content"><p><strong>
+Things on this page are
+fragmentary and immature notes/thoughts of the author.
+Please read with your own judgement!
+</strong></p>
+<h2 id="ubuntu"><a href="https://hub.docker.com/_/ubuntu/">ubuntu</a></h2>
+<p>This is the default/offical Ubuntu Docker image.</p>
+<h2 id="phusionbaseimage"><a href="https://hub.docker.com/r/phusion/baseimage/">phusion/baseimage</a></h2>
+<p>It cliams to be better than the default/official Ubuntu Docker image. </p>
+<h2 id="centos"><a href="https://hub.docker.com/r/_/centos/">CentOS</a></h2>
+<h2 id="linux-deepin"><a href="https://hub.docker.com/r/bestwu/deepin/">Linux Deepin</a></h2>
+<p>https://hub.docker.com/r …</p></div>
+  <footer>
+    <a rel="full-article" href="http://www.legendu.net/misc/blog/docker-images-for-OS/">Read On &crarr;</a>
+  </footer>
+  		</article>
+<div class="pagination">
+    <a class="prev" href="http://www.legendu.net/misc/tag/ubuntu3.html">&larr; Older</a>
+
+      <a class="next" href="http://www.legendu.net/misc/tag/ubuntu.html">Newer &rarr;</a>
+  <br />
+</div></div>
+<aside class="sidebar">
+  <section>
+    <h1>Recent Posts</h1>
+    <ul id="recent_posts">
+      <li class="post">
+          <a href="http://www.legendu.net/misc/blog/repository-is-not-signed-in-docker-build/">Docker Issue: Repository Is Not Signed in Docker Build</a>
+      </li>
+      <li class="post">
+          <a href="http://www.legendu.net/misc/blog/chinese-locale/">Chinese Locale in Linux</a>
+      </li>
+      <li class="post">
+          <a href="http://www.legendu.net/misc/blog/my-configuration-script-for-docker-jupyterhub-ds/">My Configuration Script for Docker Containers Based on dclong/jupyterhub-ds</a>
+      </li>
+      <li class="post">
+          <a href="http://www.legendu.net/misc/blog/my-configuration-script-for-a-new-ubuntu-machine/">My Configuration Script for a New Ubuntu Machine</a>
+      </li>
+      <li class="post">
+          <a href="http://www.legendu.net/misc/blog/qt5-tips/">Developing GUI Applications Using Qt5</a>
+      </li>
+    </ul>
+  </section>
+  <section>
+    <h1>Categories</h1>
+    <ul id="recent_posts">
+        <li><a href="http://www.legendu.net/misc/category/ai.html">AI</a></li>
+        <li><a href="http://www.legendu.net/misc/category/career.html">Career</a></li>
+        <li><a href="http://www.legendu.net/misc/category/cloud.html">Cloud</a></li>
+        <li><a href="http://www.legendu.net/misc/category/computer-science.html">Computer Science</a></li>
+        <li><a href="http://www.legendu.net/misc/category/finance.html">Finance</a></li>
+        <li><a href="http://www.legendu.net/misc/category/fun-problems.html">Fun Problems</a></li>
+        <li><a href="http://www.legendu.net/misc/category/hardware.html">Hardware</a></li>
+        <li><a href="http://www.legendu.net/misc/category/internet.html">Internet</a></li>
+        <li><a href="http://www.legendu.net/misc/category/life.html">Life</a></li>
+        <li><a href="http://www.legendu.net/misc/category/os.html">OS</a></li>
+        <li><a href="http://www.legendu.net/misc/category/people.html">People</a></li>
+        <li><a href="http://www.legendu.net/misc/category/philosophy.html">Philosophy</a></li>
+        <li><a href="http://www.legendu.net/misc/category/research.html">Research</a></li>
+        <li><a href="http://www.legendu.net/misc/category/soft-skills.html">soft skills</a></li>
+        <li><a href="http://www.legendu.net/misc/category/software.html">Software</a></li>
+        <li><a href="http://www.legendu.net/misc/category/tools.html">Tools</a></li>
+    </ul>
+  </section>
+ 
+
+  <section>
+  <h1>Tags</h1>
+  <ul class="tagcloud">
+  </ul>
+  </section>
+
+
+
+  <section>
+    <h1>GitHub Repos</h1>
+    <ul id="gh_repos">
+      <li class="loading">Status updating...</li>
+    </ul>
+      <a href="https://github.com/dclong">@dclong</a> on GitHub
+    <script type="text/javascript">
+      $.domReady(function(){
+          if (!window.jXHR){
+              var jxhr = document.createElement('script');
+              jxhr.type = 'text/javascript';
+              jxhr.src = 'http://www.legendu.net/misc/theme/js/jXHR.js';
+              var s = document.getElementsByTagName('script')[0];
+              s.parentNode.insertBefore(jxhr, s);
+          }
+
+          github.showRepos({
+              user: 'dclong',
+              count: 3,
+              skip_forks: true,
+              target: '#gh_repos'
+          });
+      });
+    </script>
+    <script src="http://www.legendu.net/misc/theme/js/github.js" type="text/javascript"> </script>
+  </section>
+
+    <section>
+        <h1>Social</h2>
+        <ul>
+            <li><a href="https://www.linkedin.com/in/ben-chuanlong-du-1239b221/" target="_blank">LinkedIn</a></li>
+            <li><a href="https://twitter.com/longendu" target="_blank">Twitter</a></li>
+            <li><a href="https://www.facebook.com/chuanlong.du" target="_blank">Facebook</a></li>
+        <!--
+            <li><a href="http://www.legendu.net/misc/" type="application/rss+xml" rel="alternate">RSS</a></li>
+            -->
+        </ul>
+    </section>
+</aside>    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Ben Chuanlong Du -
+  <span class="credit">Powered by <a href="http://getpelican.com">Pelican</a></span>
+</p></footer>
+    <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-30259661-1']);
+    _gaq.push(['_trackPageview']);
+    (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+    </script>
+	<script type="text/javascript">
+	  var disqus_shortname = 'dclong';
+	  (function() {
+	    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	    dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+	    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	   })();
+	</script>
+</body>
+</html>

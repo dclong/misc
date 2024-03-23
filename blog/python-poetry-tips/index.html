@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Manage Your Python Project Using Poetry</title>
+  <meta name="author" content="Ben Chuanlong Du">
+
+  <link href="https://misc.legendu.net/atom.xml" type="application/atom+xml" rel="alternate"
+        title="Ben Chuanlong Du's Blog Atom Feed" />
+
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link href="https://misc.legendu.net/favicon.png" rel="icon">
+  <link href="https://misc.legendu.net/theme/css/main_2.css" media="screen, projection"
+        rel="stylesheet" type="text/css">
+  <script src="https://misc.legendu.net/theme/js/modernizr-2.0.js"></script>
+  <script src="https://misc.legendu.net/theme/js/ender.js"></script>
+  <script src="https://misc.legendu.net/theme/js/octopress.js" type="text/javascript"></script>
+
+  <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <script data-ad-client="ca-pub-3836424032203369" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+</head>
+
+<body>
+  <header role="banner"><hgroup>
+  <h1><a href="https://misc.legendu.net/">Ben Chuanlong Du's Blog</a></h1>
+    <h2>It is never too late to learn.</h2>
+</hgroup></header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="https://misc.legendu.net/atom.xml" rel="subscribe-rss">RSS</a></li>
+</ul>
+
+<form name="search" action="https://www.bing.com/search" method="get" onSubmit="return build_query()">
+  <fieldset role="search">
+      <!--
+    <input type="hidden" name="q" value="site:https://misc.legendu.net" />
+        -->
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+
+<script type = "text/javascript">
+    function build_query() {
+        var query = document.forms["search"]["q"].value;
+        var prefix = "site:https://misc.legendu.net "
+        if (!query.startsWith(prefix)) {
+            query = prefix + query;
+            document.forms["search"]["q"].value = query;
+        }
+        return true;
+    }
+</script>
+
+<ul class="main-navigation">
+    <li><a href="https://www.legendu.net">Home</a></li>
+    <li><a href="https://misc.legendu.net">Blog</a></li>
+    <li><a href="https://misc.legendu.net/archives.html">Archives</a></li>
+    <li><a href="https://misc.legendu.net/categories.html">Categories</a></li>
+    <li><a href="https://misc.legendu.net/tags.html">Tags</a></li>
+    <li><a href="https://www.legendu.net/pages/about">About</a></li>
+</ul></nav>
+  <div id="main">
+    <div id="content">
+<div>
+  <article class="hentry" role="article">
+<header>
+      <h1 class="entry-title">Manage Your Python Project Using Poetry</h1>
+      <p class="meta"><time datetime="2019-03-02T11:17:44-08:00" pubdate>Mar 02, 2019</time></p>
+</header>
+
+  <div class="entry-content"><p><strong>Things on this page are fragmentary and immature notes/thoughts of the author. Please read with your own judgement!</strong></p>
+<h2 id="tips-and-traps">Tips and Traps</h2>
+<ol>
+<li>
+<p>Python Poetry is current the best project management tool for Python!</p>
+</li>
+<li>
+<p>Python Poetry supports Python package dependencies on GitHub.
+    For example,
+    if a Python package depends on https://github.com/dclong/dsutil,
+    then you can add it using the following.</p>
+<div class="highlight"><pre><span></span><code>poetry<span class="w"> </span>add<span class="w"> </span>git+https://github.com/dclong/dsutil.git
+</code></pre></div>
+
+<p>Or</p>
+<div class="highlight"><pre><span></span><code>poetry<span class="w"> </span>add<span class="w"> </span>git+ssh://git@github.com/dclong/dsutil.git
+</code></pre></div>
+
+<p>For more details,
+please refer to
+<a href="https://python-poetry.org/docs/cli/#add.">poetry add</a>
+and
+<a href="https://python-poetry.org/docs/dependency-specification/#git-dependencies">git dependencies</a>
+.</p>
+</li>
+<li>
+<p><code>poetry install</code> removes non needed libraries. 
+    A tricky situation is that if you have dependency A 
+    which depends on dependency B,
+    and you have specified both A and B in <code>pyproject.toml</code>.
+    Removing dependency B from <code>pyrpoject.toml</code> and then running <code>poetry install</code> 
+    won't remove the library B from the virtual environment as B is still needed by A.</p>
+</li>
+<li>
+<p>Poetry has lots of issues in Windows currently.
+    It is suggested that you avoid using poetry in Windows.</p>
+</li>
+<li>
+<p>If you encounter the following error message
+    when running <code>poetry install</code>,</p>
+<blockquote>
+<p>[Errno 2] No such file or directory: '/path/to/readme.md'</p>
+</blockquote>
+<p>it means that you have specified <code>tool.poetry.readme</code> 
+to be <code>readme.md</code> in <code>pyproject.toml</code>
+but <code>readme.md</code> does not exists under root directory of the project.</p>
+</li>
+</ol>
+<h2 id="install-python-poetry">Install Python Poetry</h2>
+<ol>
+<li>
+<p>Follow the <a href="https://python-poetry.org/docs/#installation">official tutorial</a>.</p>
+</li>
+<li>
+<p>Using xinstall.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># install xinstall if it hasn&#39;t been installed</span>
+sudo<span class="w"> </span>pip3<span class="w"> </span>install<span class="w"> </span>-U<span class="w"> </span>git+https://github.com/dclong/xinstall@master
+<span class="c1"># install poetry using xinstall</span>
+xinstall<span class="w"> </span>pt<span class="w"> </span>-ic
+</code></pre></div>
+
+</li>
+</ol>
+<h2 id="updating-python-poetry">Updating Python Poetry</h2>
+<p>Updating poetry to the latest stable version is as simple as calling the self:update command.</p>
+<div class="highlight"><pre><span></span><code>poetry<span class="w"> </span>self:update
+</code></pre></div>
+
+<p>If you want to install prerelease versions, you can use the --preview option.</p>
+<div class="highlight"><pre><span></span><code>poetry<span class="w"> </span>self:update<span class="w"> </span>--preview
+</code></pre></div>
+
+<h2 id="usage">Usage</h2>
+<h3 id="createinitialize-a-new-project">Create/Initialize a New Project</h3>
+<ol>
+<li>
+<p>Create a new Python project using poetry.</p>
+<div class="highlight"><pre><span></span><code>poetry<span class="w"> </span>new<span class="w"> </span>proj
+</code></pre></div>
+
+</li>
+<li>
+<p>Initialize an existing Python project using poetry.</p>
+<div class="highlight"><pre><span></span><code>poetry<span class="w"> </span>init
+</code></pre></div>
+
+</li>
+</ol>
+<h3 id="install-dependencies">Install Dependencies</h3>
+<ol>
+<li>
+<p>Installl all dependencies.</p>
+<div class="highlight"><pre><span></span><code>poetry<span class="w"> </span>install
+</code></pre></div>
+
+</li>
+<li>
+<p>Installl all but dev dependencies.</p>
+<div class="highlight"><pre><span></span><code>poetry<span class="w"> </span>install<span class="w">  </span>--no-dev
+</code></pre></div>
+
+</li>
+</ol>
+<h3 id="export-dependencies">Export Dependencies</h3>
+<ol>
+<li>Export the lock file to <code>requirements.txt</code> 
+    so that the dependency can be installed using <code>pip</code>.<div class="highlight"><pre><span></span><code>poetry<span class="w"> </span><span class="nb">export</span><span class="w"> </span>-f<span class="w"> </span>requirements.txt<span class="w"> </span>&gt;<span class="w"> </span>requirements.txt
+</code></pre></div>
+
+</li>
+</ol>
+<h3 id="run-commands-in-the-virtual-environment">Run Commands in the Virtual Environment</h3>
+<p><code>peotry run cmd</code> is a quick to run <code>cmd</code> using the virtual environment managed by <code>poetry.
+Another way is to manually set</code>PATH<code>before you invoke</code>cmd`. 
+For example,</p>
+<div class="highlight"><pre><span></span><code><span class="nv">PATH</span><span class="o">=</span>.venv/bin:<span class="nv">$PATH</span><span class="w"> </span>cmd
+</code></pre></div>
+
+<ol>
+<li>
+<p>Run test suits using pytest.</p>
+<div class="highlight"><pre><span></span><code>poetry<span class="w"> </span>run<span class="w"> </span>pytest
+</code></pre></div>
+
+<p>Or if you want to make it specific to collect test suits from the <code>test</code> directory 
+under the root directory of the project.</p>
+<div class="highlight"><pre><span></span><code>poetry<span class="w"> </span>run<span class="w"> </span>pytest<span class="w"> </span><span class="nb">test</span>
+</code></pre></div>
+
+</li>
+<li>
+<p>Run pytype.</p>
+<div class="highlight"><pre><span></span><code>poetry<span class="w"> </span>run<span class="w"> </span>pytype<span class="w"> </span>.
+</code></pre></div>
+
+</li>
+</ol>
+<h2 id="user-tasks">User Tasks</h2>
+<p>https://github.com/sdispater/poetry/pull/591</p>
+<p>https://github.com/sdispater/poetry/issues/241</p>
+<h2 id="configuration">Configuration</h2>
+<p>https://python-poetry.org/docs/cli/#config</p>
+<p>https://python-poetry.org/docs/configuration/</p>
+<p>Pleaser refer to
+<a href="https://github.com/dclong/pyproject.toml">pyproject.toml</a>
+for examples of configuration for Python Poetry.</p>
+<h2 id="restrict-operating-systems-in-python-poetry">Restrict Operating Systems in Python Poetry</h2>
+<p><a href="https://stackoverflow.com/questions/64094979/how-can-i-specify-dependencies-on-operating-system-in-python-poetry/68968188#68968188">How can I specify dependencies on operating system in Python Poetry?</a></p>
+<div class="highlight"><pre><span></span><code><span class="k">[tool.poetry]</span>
+<span class="c1"># ...</span>
+<span class="na">classifiers</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">[</span>
+<span class="w">    </span><span class="na">&quot;Operating System</span><span class="w"> </span><span class="o">:</span><span class="s">: POSIX :: Linux&quot;,</span>
+<span class="na">]</span>
+</code></pre></div>
+
+<p>https://python-poetry.org/docs/pyproject/#classifiers</p>
+<p>https://pypi.org/classifiers/</p>
+<p>https://github.com/python-poetry/poetry/issues/738</p>
+<p>https://github.com/python-poetry/poetry/issues/3356</p>
+<h2 id="references">References</h2>
+<p>https://github.com/sdispater/poetry/issues/522</p>
+<p>https://github.com/sdispater/poetry/issues/655</p>
+<p>https://github.com/sdispater/poetry/issues/621</p>
+<p><a href="https://poetry.eustace.io/docs/">Poetry Documentation</a></p>
+<p>https://codingdose.info/2018/08/02/develop-and-publish-with-poetry/</p>
+<p>https://hackersandslackers.com/poetic-python-project-packaging/</p></div>
+    <footer>
+<p class="meta">
+  <span class="byline author vcard">
+    Posted by <span class="fn">Benjamin Du</span>
+  </span>
+<time datetime="2019-03-02T11:17:44-08:00" pubdate>Mar 02, 2019</time>  <span class="categories">
+    <a class="category" href="https://misc.legendu.net/tag/programming.html">programming</a>
+    <a class="category" href="https://misc.legendu.net/tag/python.html">Python</a>
+    <a class="category" href="https://misc.legendu.net/tag/poetry.html">poetry</a>
+    <a class="category" href="https://misc.legendu.net/tag/build-tool.html">build tool</a>
+    <a class="category" href="https://misc.legendu.net/tag/dependency-management.html">dependency management</a>
+  </span>
+</p>    </footer>
+  </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div>
+  </section>
+</div>
+<aside class="sidebar">
+  <section>
+    <h1>Recent Posts</h1>
+    <ul id="recent_posts">
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/tips-on-the-alpaca-trading-platform/">Tips on the Alpaca Trading Platform</a>
+      </li>
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/hands-on-pandas_market_calendars/">Hands on pandas_market_calendars</a>
+      </li>
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/tips-on-charles-schwab/">Tips on Charles Schwab</a>
+      </li>
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/foreign-currency-investment/">Foreign Currency Investment</a>
+      </li>
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/tips-on-yaml/">Tips on YAML</a>
+      </li>
+    </ul>
+  </section>
+  <section>
+    <h1>Categories</h1>
+    <ul id="recent_posts">
+        <li><a href="https://misc.legendu.net/category/ai.html">AI</a></li>
+        <li><a href="https://misc.legendu.net/category/career.html">Career</a></li>
+        <li><a href="https://misc.legendu.net/category/cloud.html">Cloud</a></li>
+        <li><a href="https://misc.legendu.net/category/computer-science.html">Computer Science</a></li>
+        <li><a href="https://misc.legendu.net/category/finance.html">Finance</a></li>
+        <li><a href="https://misc.legendu.net/category/fun-problems.html">Fun Problems</a></li>
+        <li><a href="https://misc.legendu.net/category/hardware.html">Hardware</a></li>
+        <li><a href="https://misc.legendu.net/category/internet.html">Internet</a></li>
+        <li><a href="https://misc.legendu.net/category/investment.html">Investment</a></li>
+        <li><a href="https://misc.legendu.net/category/life.html">Life</a></li>
+        <li><a href="https://misc.legendu.net/category/linux.html">Linux</a></li>
+        <li><a href="https://misc.legendu.net/category/os.html">OS</a></li>
+        <li><a href="https://misc.legendu.net/category/people.html">People</a></li>
+        <li><a href="https://misc.legendu.net/category/philosophy.html">Philosophy</a></li>
+        <li><a href="https://misc.legendu.net/category/research.html">Research</a></li>
+        <li><a href="https://misc.legendu.net/category/shopping.html">Shopping</a></li>
+        <li><a href="https://misc.legendu.net/category/soft-skills.html">soft skills</a></li>
+        <li><a href="https://misc.legendu.net/category/software.html">Software</a></li>
+        <li><a href="https://misc.legendu.net/category/statistics.html">Statistics</a></li>
+        <li><a href="https://misc.legendu.net/category/tools.html">Tools</a></li>
+    </ul>
+  </section>
+ 
+
+  <section>
+  <h1>Tags</h1>
+  <ul class="tagcloud">
+  </ul>
+  </section>
+
+
+
+  <section>
+    <h1>GitHub Repos</h1>
+    <ul id="gh_repos">
+      <li class="loading">Status updating...</li>
+    </ul>
+      <a href="https://github.com/legendu-net">@legendu-net</a> on GitHub
+    <script type="text/javascript">
+      $.domReady(function(){
+          if (!window.jXHR){
+              var jxhr = document.createElement('script');
+              jxhr.type = 'text/javascript';
+              jxhr.src = 'https://misc.legendu.net/theme/js/jXHR.js';
+              var s = document.getElementsByTagName('script')[0];
+              s.parentNode.insertBefore(jxhr, s);
+          }
+
+          github.showRepos({
+              user: 'legendu-net',
+              count: 5,
+              skip_forks: true,
+              target: '#gh_repos'
+          });
+      });
+    </script>
+    <script src="https://misc.legendu.net/theme/js/github.js" type="text/javascript"> </script>
+  </section>
+
+    <section>
+        <h1>Social</h2>
+        <ul>
+            <li><a href="https://www.linkedin.com/in/ben-chuanlong-du-1239b221/" target="_blank">LinkedIn</a></li>
+            <li><a href="https://hub.docker.com/u/dclong" target="_blank">Docker Hub</a></li>
+            <li><a href="https://stackoverflow.com/users/7808204/benjamin-du?tab=profile" target="_blank">Stack Overflow</a></li>
+            <li><a href="https://twitter.com/longendu" target="_blank">Twitter</a></li>
+        <!--
+            <li><a href="https://misc.legendu.net/" type="application/rss+xml" rel="alternate">RSS</a></li>
+            -->
+        </ul>
+    </section>
+</aside>    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Ben Chuanlong Du -
+  <span class="credit">Powered by <a href="http://getpelican.com">Pelican</a></span>
+</p></footer>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-3STS9BVPF6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-3STS9BVPF6');
+</script>
+	<script type="text/javascript">
+	  var disqus_shortname = 'dclong';
+          var disqus_identifier = '/blog/python-poetry-tips/';
+          var disqus_url = 'https://misc.legendu.net/blog/python-poetry-tips/';
+          var disqus_title = 'Manage Your Python Project Using Poetry';
+	  (function() {
+	    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	    dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+	    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	   })();
+	</script>
+</body>
+</html>

@@ -1,0 +1,322 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Ben Chuanlong Du's Blog - Internet</title><link href="https://misc.legendu.net/" rel="alternate"></link><link href="https://misc.legendu.net/feeds/internet.atom.xml" rel="self"></link><id>https://misc.legendu.net/</id><updated>2021-12-24T10:12:50-08:00</updated><subtitle>It is never too late to learn.</subtitle><entry><title>Tips on Network</title><link href="https://misc.legendu.net/blog/network-tips/" rel="alternate"></link><published>2014-03-03T11:41:59-08:00</published><updated>2021-12-24T10:12:50-08:00</updated><author><name>Ben Chuanlong Du</name></author><id>tag:misc.legendu.net,2014-03-03:/blog/network-tips/</id><summary type="html">&lt;p&gt;&lt;strong&gt;Things on this page are fragmentary and immature notes/thoughts of the author. Please read with your own judgement!&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id="improve-network-speed"&gt;Improve Network Speed&lt;/h2&gt;
+&lt;p&gt;&lt;a href="https://www.youtube.com/watch?v=WqSCkr8DuRI"&gt;软路由让你的翻墙速度快十倍！LEDE软路由v2ray对比梅林固件(v2ray/LEDE/谷歌云)&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;https://zhuanlan.zhihu.com/p/129139369&lt;/p&gt;
+&lt;p&gt;https://www.zhihu …&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;strong&gt;Things on this page are fragmentary and immature notes/thoughts of the author. Please read with your own judgement!&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id="improve-network-speed"&gt;Improve Network Speed&lt;/h2&gt;
+&lt;p&gt;&lt;a href="https://www.youtube.com/watch?v=WqSCkr8DuRI"&gt;软路由让你的翻墙速度快十倍！LEDE软路由v2ray对比梅林固件(v2ray/LEDE/谷歌云)&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;https://zhuanlan.zhihu.com/p/129139369&lt;/p&gt;
+&lt;p&gt;https://www.zhihu.com/question/332524152&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://www.youtube.com/watch?v=FeRgNwa0eOA"&gt;一个U盘优盘就翻墙 免费拥有VPN翻墙路由器的两种方法 Openwrt/LEDE软路由U盘优盘的制作 ButterflyVPN评测&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id="qr-code-for-wifi"&gt;QR Code for WiFi&lt;/h2&gt;
+&lt;p&gt;&lt;a href="https://github.com/bndw/wifi-card"&gt;WiFi Card&lt;/a&gt;
+print a QR code for connecting to your WiFi (wificard.io)&lt;/p&gt;
+&lt;h2 id="vpnproxy"&gt;VPN/Proxy&lt;/h2&gt;
+&lt;p&gt;https://www.youtube.com/watch?v=F6yh4b7ML5g&lt;/p&gt;
+&lt;h2 id="reverse-proxy"&gt;Reverse Proxy&lt;/h2&gt;
+&lt;p&gt;&lt;a href="https://github.com/nginx/nginx"&gt;nginx&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://github.com/caddyserver/caddy"&gt;caddy&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;https://engineering.hashnode.com/after-4-years-with-nginx-we-switched-to-caddy-here-is-why-cjxbv8eb2001ke8s1yl7ndroz&lt;/p&gt;
+&lt;h2 id="expose-local-web-services-to-public"&gt;Expose Local Web Services to Public&lt;/h2&gt;
+&lt;p&gt;Please refer to
+&lt;a href="https://www.legendu.net/misc/blog/expose-local-service-to-public"&gt;Expose Local Service to Public&lt;/a&gt;
+or detailed discussions.&lt;/p&gt;
+&lt;h2 id="general-tips"&gt;General Tips&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;Use the same wireless network name and password 
+    so that your laptop and phone recognize it automatically.
+    This makes things much more convenient.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="debugging-network-issues"&gt;Debugging Network Issues&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Check whether you have block some services in /etc/hosts.allow or iptables, etc.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;http://192.168.0.1/ is the router address&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Turn off wireless router and moderm. 
+    Start wireless router and wait for 30 seconds,
+    and then start the moderm.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="permanent-change-to-the-file-etcresolvconf"&gt;Permanent Change to the File /etc/resolv.conf&lt;/h2&gt;
+&lt;p&gt;Notice that the content of &lt;code&gt;/etc/resolv.conf&lt;/code&gt; is dynamically managed. 
+Content of the file might change after the host machine is rebooted. 
+Below are some ways to make changes to the file &lt;code&gt;/etc/resolv.conf&lt;/code&gt; permanent.
+(Notice that below are solutions for Linux machines only.
+Do NOT use any of the solutions below when you are building a Docker image
+as Docker has its own way of handling DNS.)&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Make &lt;code&gt;/etc/resolv.conf&lt;/code&gt; immutable. &lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Update the file &lt;code&gt;/etc/dhcp/dhclient.conf&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;use &lt;code&gt;resolvconf&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;more ...&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;https://kb.isc.org/docs/isc-dhcp-44-manual-pages-dhclientconf&lt;/p&gt;
+&lt;p&gt;https://www.techrepublic.com/article/how-to-set-dns-nameservers-in-ubuntu-server-18-04/&lt;/p&gt;
+&lt;p&gt;https://unix.stackexchange.com/questions/128220/how-do-i-set-my-dns-when-resolv-conf-is-being-overwritten&lt;/p&gt;
+&lt;p&gt;https://unix.stackexchange.com/questions/128220/how-do-i-set-my-dns-when-resolv-conf-is-being-overwritten/163506#163506&lt;/p&gt;
+&lt;p&gt;https://wiki.debian.org/resolv.conf&lt;/p&gt;
+&lt;p&gt;https://itsfoss.com/resolvconf-permanent-ubuntu/&lt;/p&gt;
+&lt;p&gt;https://askubuntu.com/questions/623940/network-manager-how-to-stop-nm-updating-etc-resolv-conf/623956#623956&lt;/p&gt;
+&lt;p&gt;https://askubuntu.com/questions/157154/how-do-i-include-lines-in-resolv-conf-that-wont-get-lost-on-reboot&lt;/p&gt;
+&lt;p&gt;https://www.linuxquestions.org/questions/linux-software-2/i-can%27t-change-file-permission-via-chattr-4175553888/&lt;/p&gt;
+&lt;p&gt;https://stackoverflow.com/questions/48578108/what-the-differences-between-chattr-i-file-and-chmod-w-file&lt;/p&gt;
+&lt;p&gt;https://askubuntu.com/questions/1006741/what-is-the-difference-between-chmod-and-chattr&lt;/p&gt;
+&lt;h2 id="list-network-cards"&gt;List Network Cards&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;lspci | egrep -i --color &amp;#39;network|ethernet&amp;#39;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Or you can use &lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;lshw -class network
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h2 id="ip-address"&gt;IP Address&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;To get the your public ip address, use the following simple command.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;curl&lt;span class="w"&gt; &lt;/span&gt;ifconfig.me
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Or you can use https://www.ipify.org/ 
+which provides A Simple Public IP Address API.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;curl&lt;span class="w"&gt; &lt;/span&gt;https://api.ipify.org?format&lt;span class="o"&gt;=&lt;/span&gt;json
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;To scan for all ips in a local network, you can use the following command.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;arp-scan -l
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;You can specify an device to scan by the option &lt;code&gt;-I&lt;/code&gt;.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;arp-scan -l -I dev
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;where "dev" is the device name of your net card. 
+For example, 
+if you use wireless network, "dev" is probably "wlan0".&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="network-monitoring"&gt;Network Monitoring&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;vnStat&lt;/code&gt; is a console-based tool for monitoring network traffic bandwidth usage. 
+    It uses the network interface statistics provided by the kernel as information source. 
+    This means that vnStat won't actually be sniffing any traffic 
+    and also ensures light use of system resources. &lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Tcpdump is a network sniffer tool.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="references"&gt;References&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="http://www.legendu.net/misc/blog/linux-network-tools"&gt;Linux Network Tips&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://wiki.archlinux.org/index.php/NetworkManager"&gt;Arch Linux Doc - NetworkManager&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.cyberciti.biz/faq/linux-list-network-cards-command/"&gt;List Network Cards on Linux&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;http://www.linuxandubuntu.com/home/best-network-monitoring-tools-for-linux&lt;/p&gt;
+&lt;p&gt;https://www.ittsystems.com/linux-network-monitor-tools-and-software/&lt;/p&gt;
+&lt;p&gt;https://techtalk.gfi.com/the-top-20-free-network-monitoring-and-analysis-tools-for-sys-admins/&lt;/p&gt;
+&lt;p&gt;https://www.tecmint.com/20-netstat-commands-for-linux-network-management/&lt;/p&gt;
+&lt;p&gt;https://www.tecmint.com/12-tcpdump-commands-a-network-sniffer-tool/&lt;/p&gt;</content><category term="Internet"></category><category term="internet"></category><category term="web"></category><category term="network"></category><category term="tips"></category></entry><entry><title>Baidu Yun Tips</title><link href="https://misc.legendu.net/blog/baidu-cloud-tips/" rel="alternate"></link><published>2014-04-13T11:27:14-07:00</published><updated>2021-09-08T23:54:24-07:00</updated><author><name>Ben Chuanlong Du</name></author><id>tag:misc.legendu.net,2014-04-13:/blog/baidu-cloud-tips/</id><summary type="html">&lt;p&gt;&lt;strong&gt;Things on this page are fragmentary and immature notes/thoughts of the author. Please read with your own judgement!&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Baidu cloud is a good backup solution but not a good synchronization solution.
+    Do not try to synchronize your devices via Baidu cloud.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="alternatives"&gt;Alternatives&lt;/h2&gt;
+&lt;h3 id="tampermonkey-greasy-fork"&gt;Tampermonkey + Greasy Fork&lt;/h3&gt;
+&lt;h2 id="references"&gt;References&lt;/h2&gt;
+&lt;p&gt;https://github.com …&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;strong&gt;Things on this page are fragmentary and immature notes/thoughts of the author. Please read with your own judgement!&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Baidu cloud is a good backup solution but not a good synchronization solution.
+    Do not try to synchronize your devices via Baidu cloud.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="alternatives"&gt;Alternatives&lt;/h2&gt;
+&lt;h3 id="tampermonkey-greasy-fork"&gt;Tampermonkey + Greasy Fork&lt;/h3&gt;
+&lt;h2 id="references"&gt;References&lt;/h2&gt;
+&lt;p&gt;https://github.com/Kyle-Kyle/baidudl&lt;/p&gt;
+&lt;p&gt;https://github.com/iikira/BaiduPCS-Go&lt;/p&gt;
+&lt;p&gt;https://github.com/liuzhuoling2011/baidupcs-web&lt;/p&gt;
+&lt;p&gt;https://hub.docker.com/r/auska/docker-baidupcs&lt;/p&gt;
+&lt;p&gt;https://hub.docker.com/r/oldiy/baidupcs&lt;/p&gt;
+&lt;p&gt;Use BaiduExporter (Chrome plugin) to get the link &lt;/p&gt;</content><category term="Internet"></category><category term="internet"></category><category term="web"></category><category term="Baidu Yun"></category><category term="cloud"></category><category term="tips"></category><category term="Tampermonkey"></category><category term="Greasy Fork"></category></entry><entry><title>Tips on NFS</title><link href="https://misc.legendu.net/blog/nfs-tips/" rel="alternate"></link><published>2014-03-10T16:03:04-07:00</published><updated>2021-01-10T16:03:04-08:00</updated><author><name>Ben Chuanlong Du</name></author><id>tag:misc.legendu.net,2014-03-10:/blog/nfs-tips/</id><summary type="html">&lt;p&gt;&lt;strong&gt;Things on this page are fragmentary and immature notes/thoughts of the author. Please read with your own judgement!&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Make sure nfs service is not blocked. 
+    Check iptables and "/etc/hosts.allow".&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Make sure nfs service is running on the server.&lt;/p&gt;
+&lt;p&gt;sudo service nfs-kernel-server start&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;You can choose the version …&lt;/p&gt;&lt;/li&gt;&lt;/ol&gt;</summary><content type="html">&lt;p&gt;&lt;strong&gt;Things on this page are fragmentary and immature notes/thoughts of the author. Please read with your own judgement!&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Make sure nfs service is not blocked. 
+    Check iptables and "/etc/hosts.allow".&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Make sure nfs service is running on the server.&lt;/p&gt;
+&lt;p&gt;sudo service nfs-kernel-server start&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;You can choose the version of nfs using the option &lt;code&gt;-o nfsvers=n&lt;/code&gt;
+    while mounting directories.
+    It seems to me on Debian you have to use &lt;code&gt;-o nfsvers=3&lt;/code&gt; (based on a previous experience).
+        mount -t nfs -o nfsvers=3 192.168.0.8:/home/dclong/downloads mnt/nfsshare
+    Generally speaking, you do not have to choose a specific version manually.
+    I tried on Ubuntu (server) and Linux Mint (client) and it works well with the default version (4). &lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;You can choose to change the ownership of a shared file/directory to &lt;code&gt;nobody/nogroup&lt;/code&gt;
+    to make it easier to access files,
+    but this is not required 
+    and you will probably only have read access unless the option &lt;code&gt;no_root_squash&lt;/code&gt;
+    is specified in the server settings 
+    or your user name is the name on the client as on the server.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;You can use wildcard in the &lt;code&gt;/etc/exports&lt;/code&gt; settings. 
+    For example,&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;/nfs&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;192&lt;/span&gt;.168.*.*&lt;span class="o"&gt;(&lt;/span&gt;ro,sync&lt;span class="o"&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;shares /nfs with all local network devices with ready-only access.
+more examples&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;*&lt;span class="o"&gt;(&lt;/span&gt;ro,sync&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;all&lt;span class="w"&gt; &lt;/span&gt;ips
+*.iastate.edu&lt;span class="o"&gt;(&lt;/span&gt;ro,sync&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;all&lt;span class="w"&gt; &lt;/span&gt;iastate.edu&lt;span class="w"&gt; &lt;/span&gt;ips
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;You can use net mask in the &lt;code&gt;/etc/exports&lt;/code&gt; settings.
+    for example,&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;/nfs&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;192&lt;/span&gt;.168.1.0/24&lt;span class="o"&gt;(&lt;/span&gt;ro,sync&lt;span class="o"&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;shares &lt;code&gt;/nfs&lt;/code&gt; with local ip address 192.168.1.1 to 192.168.1.254. 
+It is equivalent to &lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;/nfs&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;192&lt;/span&gt;.168.1.*&lt;span class="o"&gt;(&lt;/span&gt;ro,sync&lt;span class="o"&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="etcexports"&gt;/etc/exports&lt;/h2&gt;
+&lt;p&gt;Below is an example of &lt;code&gt;/etc/exports&lt;/code&gt;.
+    :::text
+    # /etc/exports: the access control list for filesystems which may be exported
+    #       to NFS clients.  See exports(5).
+    #
+    # Example for NFSv2 and NFSv3:
+    # /srv/homes       hostname1(rw,sync,no_subtree_check) hostname2(ro,sync,no_subtree_check)
+    #
+    # Example for NFSv4:
+    # /srv/nfs4        gss/krb5i(rw,sync,fsid=0,crossmnt,no_subtree_check)
+    # /srv/nfs4/homes  gss/krb5i(rw,sync,no_subtree_check)
+    #&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;/wwwroot        *(rw,sync,fsid=0,crossmnt,no_subtree_check)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h2 id="mount-nfs"&gt;Mount NFS&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="c1"&gt;#mount on Linux&lt;/span&gt;
+sudo&lt;span class="w"&gt; &lt;/span&gt;mount&lt;span class="w"&gt; &lt;/span&gt;-t&lt;span class="w"&gt; &lt;/span&gt;nfs4&lt;span class="w"&gt; &lt;/span&gt;-o&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;proto&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;tcp,port&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;2049&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;10&lt;/span&gt;.148.179.93:/&lt;span class="w"&gt; &lt;/span&gt;/wwwroot
+
+:::bash&lt;span class="w"&gt; &lt;/span&gt;
+&lt;span class="c1"&gt;# mount on macOS&lt;/span&gt;
+sudo&lt;span class="w"&gt; &lt;/span&gt;mount&lt;span class="w"&gt; &lt;/span&gt;-t&lt;span class="w"&gt; &lt;/span&gt;nfs&lt;span class="w"&gt; &lt;/span&gt;-o&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;vers&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;4&lt;/span&gt;,resvport&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;10&lt;/span&gt;.148.179.93:/&lt;span class="w"&gt; &lt;/span&gt;mnt
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h2 id="references"&gt;References&lt;/h2&gt;
+&lt;p&gt;http://cworld.wikidot.com/mac-os-x-automount-resvport-option&lt;/p&gt;</content><category term="Internet"></category><category term="Linux"></category><category term="internet"></category><category term="web"></category><category term="NFS"></category><category term="file system"></category><category term="tips"></category></entry><entry><title>Tips on httpd</title><link href="https://misc.legendu.net/blog/httpd-tips/" rel="alternate"></link><published>2018-05-27T01:25:32-07:00</published><updated>2020-07-27T01:25:32-07:00</updated><author><name>Ben Chuanlong Du</name></author><id>tag:misc.legendu.net,2018-05-27:/blog/httpd-tips/</id><summary type="html">&lt;p&gt;&lt;strong&gt;Things on this page are fragmentary and immature notes/thoughts of the author. Please read with your own judgement!&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;A directory must be executable by others in order to show up.
+    Even if a directory show up,
+    it does NOT mean that you can access it.
+    It must be readable …&lt;/p&gt;&lt;/li&gt;&lt;/ol&gt;</summary><content type="html">&lt;p&gt;&lt;strong&gt;Things on this page are fragmentary and immature notes/thoughts of the author. Please read with your own judgement!&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;A directory must be executable by others in order to show up.
+    Even if a directory show up,
+    it does NOT mean that you can access it.
+    It must be readable by others (at the same)
+    so that it can be accessed using HTTP.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;A directory/file must be readable by others on the host
+    so that it can be accessed using HTTP,
+    otherwise you will encounter error messages like the one below.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;You don't have permission to access /wwwroot/somedir/ on this server.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="docker-image"&gt;Docker Image&lt;/h2&gt;
+&lt;p&gt;The Docker image &lt;a href="https://hub.docker.com/_/httpd/"&gt;httpd&lt;/a&gt;
+is a good one.&lt;/p&gt;
+&lt;p&gt;Pull the image. &lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;docker&lt;span class="w"&gt; &lt;/span&gt;pull&lt;span class="w"&gt; &lt;/span&gt;httpd
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Start a docker container.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;docker&lt;span class="w"&gt; &lt;/span&gt;run&lt;span class="w"&gt; &lt;/span&gt;--hostname&lt;span class="w"&gt; &lt;/span&gt;httpd&lt;span class="w"&gt; &lt;/span&gt;-dit&lt;span class="w"&gt; &lt;/span&gt;-p&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;80&lt;/span&gt;:80&lt;span class="w"&gt; &lt;/span&gt;-v&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;$(&lt;/span&gt;&lt;span class="nb"&gt;pwd&lt;/span&gt;&lt;span class="k"&gt;)&lt;/span&gt;:/usr/local/apache2/htdocs/&lt;span class="w"&gt; &lt;/span&gt;httpd
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</content><category term="Internet"></category><category term="software"></category><category term="httpd"></category><category term="HTTP"></category><category term="tips"></category><category term="web"></category><category term="internet"></category></entry><entry><title>Managing Blog Comments Using Disqus</title><link href="https://misc.legendu.net/blog/disqus-tips/" rel="alternate"></link><published>2015-06-22T14:06:31-07:00</published><updated>2020-05-22T14:06:31-07:00</updated><author><name>Ben Chuanlong Du</name></author><id>tag:misc.legendu.net,2015-06-22:/blog/disqus-tips/</id><summary type="html">&lt;p&gt;&lt;strong&gt;Things on this page are fragmentary and immature notes/thoughts of the author. Please read with your own judgement!&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;When migrating urls, only migrate these that are needed.
+    this will make your work much simpler and make it much faster to migrate
+    And you might have to iterate a few …&lt;/li&gt;&lt;/ol&gt;</summary><content type="html">&lt;p&gt;&lt;strong&gt;Things on this page are fragmentary and immature notes/thoughts of the author. Please read with your own judgement!&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;When migrating urls, only migrate these that are needed.
+    this will make your work much simpler and make it much faster to migrate
+    And you might have to iterate a few times ...&lt;/li&gt;
+&lt;/ol&gt;</content><category term="Internet"></category><category term="internet"></category><category term="web"></category><category term="forum"></category><category term="discussion"></category><category term="comment"></category></entry><entry><title>Escape from the Great Firewall of China</title><link href="https://misc.legendu.net/blog/escape-from-the-great-firewall-of-china/" rel="alternate"></link><published>2019-05-17T03:29:44-07:00</published><updated>2019-05-17T03:29:44-07:00</updated><author><name>Benjamin Du</name></author><id>tag:misc.legendu.net,2019-05-17:/blog/escape-from-the-great-firewall-of-china/</id><summary type="html">&lt;p&gt;&lt;strong&gt;Things on this page are fragmentary and immature notes/thoughts of the author. Please read with your own judgement!&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id="proxy"&gt;Proxy&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="http://www.qttc.net/201211247.html"&gt;国外SSH账号+MyEnTunnel+Firefox翻墙&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://blog.163.com/koumm@126/blog/static/95403837200921993156900/"&gt; linux squid 代理服务器实例配置&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://www.proxy360.cn/default.aspx"&gt;免费代理服务器&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://www.youbiyao.net/"&gt;有必要 - 上网代理 …&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;</summary><content type="html">&lt;p&gt;&lt;strong&gt;Things on this page are fragmentary and immature notes/thoughts of the author. Please read with your own judgement!&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id="proxy"&gt;Proxy&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="http://www.qttc.net/201211247.html"&gt;国外SSH账号+MyEnTunnel+Firefox翻墙&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://blog.163.com/koumm@126/blog/static/95403837200921993156900/"&gt; linux squid 代理服务器实例配置&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://www.proxy360.cn/default.aspx"&gt;免费代理服务器&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://www.youbiyao.net/"&gt;有必要 - 上网代理&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="vpn"&gt;VPN&lt;/h2&gt;
+&lt;h3 id="_1"&gt;&lt;a href="http://www.doorss.com/"&gt;旗鱼&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;Unfortunately does not support Linux. Using PPTP/L2TP on Linux does not work. &lt;/p&gt;
+&lt;h3 id="greenvpn"&gt;GreenVPN&lt;/h3&gt;
+&lt;h3 id="vpn_1"&gt;&lt;a href="http://www.sfvpn.com.cn/"&gt;速飞VPN&lt;/a&gt;&lt;/h3&gt;
+&lt;h3 id="vpn_2"&gt;&lt;a href="http://www.williamlong.info/blog/archives/397.html"&gt;免费VPN账号&lt;/a&gt;&lt;/h3&gt;
+&lt;h3 id="loco"&gt;&lt;a href="http://vp.locovpn.com/"&gt;LoCo加速器&lt;/a&gt;&lt;/h3&gt;
+&lt;h2 id="tips-about-vpn"&gt;Tips about VPN&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="http://vp.locovpn.com/mannul/5855.html"&gt;Linux / Ubuntu PPTP设置教程&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://www.tuicool.com/articles/7zEJ7v"&gt;自己搭建智能翻墙服务器&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://hivenkay.me/2015/06/27/使用阿里云构建vpn服务器访问国外网站/"&gt;使用阿里云构建VPN服务器访问国外网站&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://vpn.ac/knowledgebase/36/PPTP-vs-L2TP-vs-OpenVPN-which-one-to-use.html"&gt;PPTP vs. L2TP vs. OpenVPN: which one to use?&lt;/a&gt;
+The bottom line is avoid using PPTP.&lt;/li&gt;
+&lt;/ul&gt;</content><category term="Internet"></category><category term="network"></category><category term="internet"></category><category term="great firewall of China"></category><category term="proxy"></category><category term="VPN"></category></entry><entry><title>WebRTC</title><link href="https://misc.legendu.net/blog/webrtc/" rel="alternate"></link><published>2017-04-03T18:45:15-07:00</published><updated>2017-04-03T18:45:15-07:00</updated><author><name>Ben Chuanlong Du</name></author><id>tag:misc.legendu.net,2017-04-03:/blog/webrtc/</id><summary type="html">&lt;p&gt;&lt;strong&gt;Things on this page are fragmentary and immature notes/thoughts of the author. Please read with your own judgement!&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Appear.in seems to be a good one and easy to use.&lt;/p&gt;
+&lt;p&gt;Talky: Provides both video and screen sharing using WebRTC.
+Cisco Spark: Create rooms for video calling, group messaging and …&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;strong&gt;Things on this page are fragmentary and immature notes/thoughts of the author. Please read with your own judgement!&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Appear.in seems to be a good one and easy to use.&lt;/p&gt;
+&lt;p&gt;Talky: Provides both video and screen sharing using WebRTC.
+Cisco Spark: Create rooms for video calling, group messaging and sharing.
+Appear.in: Group video calling for up to eight people.
+Jitsi Meet: Group video calling and screen sharing using WebRTC. &lt;/p&gt;</content><category term="Internet"></category><category term="network"></category><category term="WebRTC"></category></entry></feed>

@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Ben Chuanlong Du's Blog - code</title>
+  <meta name="author" content="Ben Chuanlong Du">
+
+  <link href="https://misc.legendu.net/atom.xml" type="application/atom+xml" rel="alternate"
+        title="Ben Chuanlong Du's Blog Atom Feed" />
+
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link href="https://misc.legendu.net/favicon.png" rel="icon">
+  <link href="https://misc.legendu.net/theme/css/main_2.css" media="screen, projection"
+        rel="stylesheet" type="text/css">
+  <script src="https://misc.legendu.net/theme/js/modernizr-2.0.js"></script>
+  <script src="https://misc.legendu.net/theme/js/ender.js"></script>
+  <script src="https://misc.legendu.net/theme/js/octopress.js" type="text/javascript"></script>
+
+  <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <script data-ad-client="ca-pub-3836424032203369" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+</head>
+
+<body>
+  <header role="banner"><hgroup>
+  <h1><a href="https://misc.legendu.net/">Ben Chuanlong Du's Blog</a></h1>
+    <h2>It is never too late to learn.</h2>
+</hgroup></header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="https://misc.legendu.net/atom.xml" rel="subscribe-rss">RSS</a></li>
+</ul>
+
+<form name="search" action="https://www.bing.com/search" method="get" onSubmit="return build_query()">
+  <fieldset role="search">
+      <!--
+    <input type="hidden" name="q" value="site:https://misc.legendu.net" />
+        -->
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+
+<script type = "text/javascript">
+    function build_query() {
+        var query = document.forms["search"]["q"].value;
+        var prefix = "site:https://misc.legendu.net "
+        if (!query.startsWith(prefix)) {
+            query = prefix + query;
+            document.forms["search"]["q"].value = query;
+        }
+        return true;
+    }
+</script>
+
+<ul class="main-navigation">
+    <li><a href="https://www.legendu.net">Home</a></li>
+    <li><a href="https://misc.legendu.net">Blog</a></li>
+    <li><a href="https://misc.legendu.net/archives.html">Archives</a></li>
+    <li><a href="https://misc.legendu.net/categories.html">Categories</a></li>
+    <li><a href="https://misc.legendu.net/tags.html">Tags</a></li>
+    <li><a href="https://www.legendu.net/pages/about">About</a></li>
+</ul></nav>
+  <div id="main">
+    <div id="content">
+<div class="blog-index">
+  		<article>
+<header>
+      <h1 class="entry-title">
+        <a href="https://misc.legendu.net/blog/github-alternatives/">GitHub Alternatives</a>
+      </h1>
+      <p class="meta"><time datetime="2023-04-11T17:28:17-07:00" pubdate>Apr 11, 2023</time></p>
+</header>
+
+  <div class="entry-content"><p><strong>Things on this page are fragmentary and immature notes/thoughts of the author. Please read with your own judgement!</strong></p>
+<h2 id="gitea"><a href="https://github.com/go-gitea/gitea">gitea</a></h2>
+<p><a href="https://github.com/go-gitea/gitea">Gitea</a>
+is a painless self-hosted all-in-one software development service, 
+includes Git hosting, code review, team collaboration, package registry and CI/CD
+.</p>
+<h2 id="gitlab"><a href="gitlab.com">gitlab</a></h2>
+<p><a href="gitlab.com">GitLab</a>
+is a DevOps platform that provides a …</p></div>
+  <footer>
+    <a rel="full-article" href="https://misc.legendu.net/blog/github-alternatives/">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
+        <a href="https://misc.legendu.net/blog/tips-on-refactoring-rust-code/">Tips on Refactoring Rust Code</a>
+      </h1>
+      <p class="meta"><time datetime="2023-02-02T14:15:04-08:00" pubdate>Feb 02, 2023</time></p>
+</header>
+
+  <div class="entry-content"><p><strong>Things on this page are fragmentary and immature notes/thoughts of the author. Please read with your own judgement!</strong></p>
+<p>https://rust-analyzer.github.io/manual.html#structural-search-and-replace</p>
+<p>cargo clippy fix</p>
+<h2 id="general-approach-for-auto-refactoring">General Approach for Auto Refactoring</h2>
+<ol>
+<li>use <code>cargo build</code> or <code>cargo clippy</code> to generate error msgs for a specific kind of issue …</li></ol></div>
+  <footer>
+    <a rel="full-article" href="https://misc.legendu.net/blog/tips-on-refactoring-rust-code/">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
+        <a href="https://misc.legendu.net/blog/format-python-code-using-black/">Format Python Code Using Black</a>
+      </h1>
+      <p class="meta"><time datetime="2023-01-09T16:46:31-08:00" pubdate>Jan 09, 2023</time></p>
+</header>
+
+  <div class="entry-content"><p><strong>Things on this page are fragmentary and immature notes/thoughts of the author. Please read with your own judgement!</strong></p>
+<h2 id="installation">Installation</h2>
+<div class="highlight"><pre><span></span><code><span class="n">pip3</span><span class="w"> </span><span class="n">install</span><span class="w"> </span><span class="o">-</span><span class="n">U</span><span class="w"> </span><span class="n">black</span><span class="o">[</span><span class="n">jupter</span><span class="o">]</span>
+</code></pre></div>
+
+<h2 id="usage">Usage</h2>
+<p>The following code formats Python files and Jupyter/Lab Notebooks 
+under the current directory.</p>
+<div class="highlight"><pre><span></span><code>black ./
+</code></pre></div>
+
+<h2 id="references">References</h2>
+<ul>
+<li>
+<p><a href="https://github.com/psf/black">Black @ GitHub</a></p>
+</li>
+<li>
+<p><a href="https://black.readthedocs.io/en/stable/index.html">Black Official Doc</a></p>
+</li>
+</ul></div>
+  <footer>
+    <a rel="full-article" href="https://misc.legendu.net/blog/format-python-code-using-black/">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
+        <a href="https://misc.legendu.net/blog/verify-rust-code/">Verify Rust Code</a>
+      </h1>
+      <p class="meta"><time datetime="2022-12-23T20:48:59-08:00" pubdate>Dec 23, 2022</time></p>
+</header>
+
+  <div class="entry-content"><p><strong>Things on this page are fragmentary and immature notes/thoughts of the author. Please read with your own judgement!</strong></p>
+<p><a href="https://model-checking.github.io/kani-verifier-blog/2022/12/21/easily-verify-your-rust-in-ci-with-kani.html">Easily verify your Rust in CI with Kani and Github Actions</a></p>
+<p><a href="https://model-checking.github.io/kani-verifier-blog/2022/10/27/using-kani-with-the-bolero-property-testing-framework.html">From Fuzzing to Proof: Using Kani with the Bolero Property-Testing Framework</a></p>
+<h2 id="references">References</h2>
+<ul>
+<li>
+<p><a href="https://github.com/model-checking/kani">kani @ GitHub</a></p>
+</li>
+<li>
+<p><a href="https://model-checking.github.io/kani-verifier-blog/2022/12/21/easily-verify-your-rust-in-ci-with-kani.html">Easily verify your Rust in CI …</a></p></li></ul></div>
+  <footer>
+    <a rel="full-article" href="https://misc.legendu.net/blog/verify-rust-code/">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
+        <a href="https://misc.legendu.net/blog/tips-on-code-design/">Tips on Code Design</a>
+      </h1>
+      <p class="meta"><time datetime="2022-11-25T11:52:35-08:00" pubdate>Nov 25, 2022</time></p>
+</header>
+
+  <div class="entry-content"><p><strong>Things on this page are fragmentary and immature notes/thoughts of the author. Please read with your own judgement!</strong></p>
+<p><a href="https://sourcemaking.com/">Source Making</a></p>
+<p><a href="https://medium.com/swlh/shared-mutability-in-rust-part-1-of-3-21dc9803c623">Shared Mutability in Rust</a></p></div>
+  <footer>
+    <a rel="full-article" href="https://misc.legendu.net/blog/tips-on-code-design/">Read On &crarr;</a>
+  </footer>
+  		</article>
+<div class="pagination">
+
+  <br />
+</div></div>
+<aside class="sidebar">
+  <section>
+    <h1>Recent Posts</h1>
+    <ul id="recent_posts">
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/github-alternatives/">GitHub Alternatives</a>
+      </li>
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/tips-on-refactoring-rust-code/">Tips on Refactoring Rust Code</a>
+      </li>
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/format-python-code-using-black/">Format Python Code Using Black</a>
+      </li>
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/verify-rust-code/">Verify Rust Code</a>
+      </li>
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/tips-on-code-design/">Tips on Code Design</a>
+      </li>
+    </ul>
+  </section>
+  <section>
+    <h1>Categories</h1>
+    <ul id="recent_posts">
+        <li><a href="https://misc.legendu.net/category/ai.html">AI</a></li>
+        <li><a href="https://misc.legendu.net/category/career.html">Career</a></li>
+        <li><a href="https://misc.legendu.net/category/cloud.html">Cloud</a></li>
+        <li><a href="https://misc.legendu.net/category/computer-science.html">Computer Science</a></li>
+        <li><a href="https://misc.legendu.net/category/fiannce.html">Fiannce</a></li>
+        <li><a href="https://misc.legendu.net/category/finance.html">Finance</a></li>
+        <li><a href="https://misc.legendu.net/category/fun-problems.html">Fun Problems</a></li>
+        <li><a href="https://misc.legendu.net/category/hardware.html">Hardware</a></li>
+        <li><a href="https://misc.legendu.net/category/health.html">Health</a></li>
+        <li><a href="https://misc.legendu.net/category/house.html">House</a></li>
+        <li><a href="https://misc.legendu.net/category/internet.html">Internet</a></li>
+        <li><a href="https://misc.legendu.net/category/investment.html">Investment</a></li>
+        <li><a href="https://misc.legendu.net/category/life.html">life</a></li>
+        <li><a href="https://misc.legendu.net/category/linux.html">Linux</a></li>
+        <li><a href="https://misc.legendu.net/category/os.html">OS</a></li>
+        <li><a href="https://misc.legendu.net/category/people.html">People</a></li>
+        <li><a href="https://misc.legendu.net/category/philosophy.html">Philosophy</a></li>
+        <li><a href="https://misc.legendu.net/category/research.html">Research</a></li>
+        <li><a href="https://misc.legendu.net/category/shopping.html">Shopping</a></li>
+        <li><a href="https://misc.legendu.net/category/soft-skills.html">soft skills</a></li>
+        <li><a href="https://misc.legendu.net/category/software.html">Software</a></li>
+        <li><a href="https://misc.legendu.net/category/statistics.html">Statistics</a></li>
+        <li><a href="https://misc.legendu.net/category/tools.html">Tools</a></li>
+    </ul>
+  </section>
+ 
+
+  <section>
+  <h1>Tags</h1>
+  <ul class="tagcloud">
+  </ul>
+  </section>
+
+
+
+  <section>
+    <h1>GitHub Repos</h1>
+    <ul id="gh_repos">
+      <li class="loading">Status updating...</li>
+    </ul>
+      <a href="https://github.com/legendu-net">@legendu-net</a> on GitHub
+    <script type="text/javascript">
+      $.domReady(function(){
+          if (!window.jXHR){
+              var jxhr = document.createElement('script');
+              jxhr.type = 'text/javascript';
+              jxhr.src = 'https://misc.legendu.net/theme/js/jXHR.js';
+              var s = document.getElementsByTagName('script')[0];
+              s.parentNode.insertBefore(jxhr, s);
+          }
+
+          github.showRepos({
+              user: 'legendu-net',
+              count: 5,
+              skip_forks: true,
+              target: '#gh_repos'
+          });
+      });
+    </script>
+    <script src="https://misc.legendu.net/theme/js/github.js" type="text/javascript"> </script>
+  </section>
+
+    <section>
+        <h1>Social</h2>
+        <ul>
+            <li><a href="https://www.linkedin.com/in/ben-chuanlong-du-1239b221/" target="_blank">LinkedIn</a></li>
+            <li><a href="https://hub.docker.com/u/dclong" target="_blank">Docker Hub</a></li>
+            <li><a href="https://stackoverflow.com/users/7808204/benjamin-du?tab=profile" target="_blank">Stack Overflow</a></li>
+            <li><a href="https://twitter.com/longendu" target="_blank">Twitter</a></li>
+        <!--
+            <li><a href="https://misc.legendu.net/" type="application/rss+xml" rel="alternate">RSS</a></li>
+            -->
+        </ul>
+    </section>
+</aside>    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Ben Chuanlong Du -
+  <span class="credit">Powered by <a href="http://getpelican.com">Pelican</a></span>
+</p></footer>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-3STS9BVPF6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-3STS9BVPF6');
+</script>
+	<script type="text/javascript">
+	  var disqus_shortname = 'dclong';
+	  (function() {
+	    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	    dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+	    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	   })();
+	</script>
+</body>
+</html>

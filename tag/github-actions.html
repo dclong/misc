@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Ben Chuanlong Du's Blog - GitHub Actions</title>
+  <meta name="author" content="Ben Chuanlong Du">
+
+  <link href="https://misc.legendu.net/atom.xml" type="application/atom+xml" rel="alternate"
+        title="Ben Chuanlong Du's Blog Atom Feed" />
+
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link href="https://misc.legendu.net/favicon.png" rel="icon">
+  <link href="https://misc.legendu.net/theme/css/main_2.css" media="screen, projection"
+        rel="stylesheet" type="text/css">
+  <script src="https://misc.legendu.net/theme/js/modernizr-2.0.js"></script>
+  <script src="https://misc.legendu.net/theme/js/ender.js"></script>
+  <script src="https://misc.legendu.net/theme/js/octopress.js" type="text/javascript"></script>
+
+  <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <script data-ad-client="ca-pub-3836424032203369" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+</head>
+
+<body>
+  <header role="banner"><hgroup>
+  <h1><a href="https://misc.legendu.net/">Ben Chuanlong Du's Blog</a></h1>
+    <h2>It is never too late to learn.</h2>
+</hgroup></header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="https://misc.legendu.net/atom.xml" rel="subscribe-rss">RSS</a></li>
+</ul>
+
+<form name="search" action="https://www.bing.com/search" method="get" onSubmit="return build_query()">
+  <fieldset role="search">
+      <!--
+    <input type="hidden" name="q" value="site:https://misc.legendu.net" />
+        -->
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+
+<script type = "text/javascript">
+    function build_query() {
+        var query = document.forms["search"]["q"].value;
+        var prefix = "site:https://misc.legendu.net "
+        if (!query.startsWith(prefix)) {
+            query = prefix + query;
+            document.forms["search"]["q"].value = query;
+        }
+        return true;
+    }
+</script>
+
+<ul class="main-navigation">
+    <li><a href="https://www.legendu.net">Home</a></li>
+    <li><a href="https://misc.legendu.net">Blog</a></li>
+    <li><a href="https://misc.legendu.net/archives.html">Archives</a></li>
+    <li><a href="https://misc.legendu.net/categories.html">Categories</a></li>
+    <li><a href="https://misc.legendu.net/tags.html">Tags</a></li>
+    <li><a href="https://www.legendu.net/pages/about">About</a></li>
+</ul></nav>
+  <div id="main">
+    <div id="content">
+<div class="blog-index">
+  		<article>
+<header>
+      <h1 class="entry-title">
+        <a href="https://misc.legendu.net/blog/tips-on-github-actions/">Tips on GitHub Actions</a>
+      </h1>
+      <p class="meta"><time datetime="2020-09-01T12:42:15-07:00" pubdate>Sep 01, 2020</time></p>
+</header>
+
+  <div class="entry-content"><p><strong>Things on this page are fragmentary and immature notes/thoughts of the author. Please read with your own judgement!</strong></p>
+<h2 id="tips-and-traps">Tips and Traps</h2>
+<ol>
+<li>
+<p>You can use <code>sudo</code> without password in Linux and macOS when running GitHub Actions.</p>
+</li>
+<li>
+<p>GitHub Actions supports <a href="https://github.blog/changelog/2020-07-06-github-actions-manual-triggers-with-workflow_dispatch/">manual triggers with workflow_dispatch</a>.
+    Workflow parameters are supported in manually triggers …</p></li></ol></div>
+  <footer>
+    <a rel="full-article" href="https://misc.legendu.net/blog/tips-on-github-actions/">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
+        <a href="https://misc.legendu.net/blog/github-tips/">Tips on GitHub</a>
+      </h1>
+      <p class="meta"><time datetime="2019-02-08T13:41:56-08:00" pubdate>Feb 08, 2019</time></p>
+</header>
+
+  <div class="entry-content"><p><strong>Things on this page are fragmentary and immature notes/thoughts of the author. Please read with your own judgement!</strong></p>
+<p><a href="https://github.com/notifications/subscriptions">GitHub Subscriptions</a></p>
+<h2 id="tips-and-traps">Tips and Traps</h2>
+<ol>
+<li>
+<p>Have at least 2 branches master and dev.
+    Reserve the master branch for releasing purpose 
+    and the dev banch for development.
+    Protect the master branch on …</p></li></ol></div>
+  <footer>
+    <a rel="full-article" href="https://misc.legendu.net/blog/github-tips/">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
+        <a href="https://misc.legendu.net/blog/cicd-tools-and-frameworks/">CICD Tools and Frameworks</a>
+      </h1>
+      <p class="meta"><time datetime="2023-05-10T11:59:14-07:00" pubdate>May 10, 2023</time></p>
+</header>
+
+  <div class="entry-content"><p><strong>Things on this page are fragmentary and immature notes/thoughts of the author. Please read with your own judgement!</strong></p>
+<h2 id="earthly"><a href="https://github.com/earthly/earthly">earthly</a></h2>
+<p><a href="https://github.com/earthly/earthly">Earthly</a>
+is a versatile, approachable CI/CD framework that runs every pipeline inside containers, 
+giving you repeatable builds that you write once and run anywhere. 
+It has a super simple …</p></div>
+  <footer>
+    <a rel="full-article" href="https://misc.legendu.net/blog/cicd-tools-and-frameworks/">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
+        <a href="https://misc.legendu.net/blog/ci-cd-tools-and-frameworks/">CI/CD Tools and Frameworks</a>
+      </h1>
+      <p class="meta"><time datetime="2021-04-07T10:03:06-07:00" pubdate>Apr 07, 2021</time></p>
+</header>
+
+  <div class="entry-content"><p><strong>Things on this page are fragmentary and immature notes/thoughts of the author. Please read with your own judgement!</strong></p>
+<h2 id="tools">Tools</h2>
+<h3 id="github-actions">GitHub Actions</h3>
+<h3 id="travis-ci">Travis CI</h3>
+<h3 id="jenkins">Jenkins</h3>
+<h2 id="frameworks">FrameWorks</h2>
+<h3 id="buildbot"><a href="https://github.com/buildbot/buildbot">buildbot</a></h3>
+<h3 id="act"><a href="https://github.com/nektos/act">act</a></h3>
+<p>Run your GitHub Actions locally.</p>
+<h2 id="references">References</h2>
+<p><a href="https://cloud.google.com/solutions/machine-learning/mlops-continuous-delivery-and-automation-pipelines-in-machine-learning">MLOps: Continuous delivery and automation pipelines in machine learning</a></p></div>
+  <footer>
+    <a rel="full-article" href="https://misc.legendu.net/blog/ci-cd-tools-and-frameworks/">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
+        <a href="https://misc.legendu.net/blog/CI-CD-for-machine-learning/">CI/CD for Machine Learning</a>
+      </h1>
+      <p class="meta"><time datetime="2020-06-05T08:07:47-07:00" pubdate>Jun 05, 2020</time></p>
+</header>
+
+  <div class="entry-content"><p><strong>Things on this page are fragmentary and immature notes/thoughts of the author. Please read with your own judgement!</strong></p>
+<h2 id="github-actions">GitHub Actions</h2>
+<h2 id="travis-ci">Travis CI</h2>
+<h2 id="jenkins">Jenkins</h2>
+<h2 id="act"><a href="https://github.com/nektos/act">act</a></h2>
+<p>Run your GitHub Actions locally.</p>
+<h2 id="references">References</h2>
+<p><a href="https://cloud.google.com/solutions/machine-learning/mlops-continuous-delivery-and-automation-pipelines-in-machine-learning">MLOps: Continuous delivery and automation pipelines in machine learning</a></p></div>
+  <footer>
+    <a rel="full-article" href="https://misc.legendu.net/blog/CI-CD-for-machine-learning/">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
+        <a href="https://misc.legendu.net/blog/tips-on-pre-commit/">Tips on pre-commit</a>
+      </h1>
+      <p class="meta"><time datetime="2020-09-09T12:03:21-07:00" pubdate>Sep 09, 2020</time></p>
+</header>
+
+  <div class="entry-content"><p><strong>Things on this page are fragmentary and immature notes/thoughts of the author. Please read with your own judgement!</strong></p>
+<p>It is suggested that you leverage CICD tools (e.g., GitHub Actions)
+instead of Git Hooks which happens locally.
+However, 
+Git hooks can be useful for simple and fast local code …</p></div>
+  <footer>
+    <a rel="full-article" href="https://misc.legendu.net/blog/tips-on-pre-commit/">Read On &crarr;</a>
+  </footer>
+  		</article>
+<div class="pagination">
+
+  <br />
+</div></div>
+<aside class="sidebar">
+  <section>
+    <h1>Recent Posts</h1>
+    <ul id="recent_posts">
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/tips-on-github-actions/">Tips on GitHub Actions</a>
+      </li>
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/github-tips/">Tips on GitHub</a>
+      </li>
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/cicd-tools-and-frameworks/">CICD Tools and Frameworks</a>
+      </li>
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/ci-cd-tools-and-frameworks/">CI/CD Tools and Frameworks</a>
+      </li>
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/CI-CD-for-machine-learning/">CI/CD for Machine Learning</a>
+      </li>
+    </ul>
+  </section>
+  <section>
+    <h1>Categories</h1>
+    <ul id="recent_posts">
+        <li><a href="https://misc.legendu.net/category/ai.html">AI</a></li>
+        <li><a href="https://misc.legendu.net/category/career.html">Career</a></li>
+        <li><a href="https://misc.legendu.net/category/cloud.html">Cloud</a></li>
+        <li><a href="https://misc.legendu.net/category/computer-science.html">Computer Science</a></li>
+        <li><a href="https://misc.legendu.net/category/fiannce.html">Fiannce</a></li>
+        <li><a href="https://misc.legendu.net/category/finance.html">Finance</a></li>
+        <li><a href="https://misc.legendu.net/category/fun-problems.html">Fun Problems</a></li>
+        <li><a href="https://misc.legendu.net/category/hardware.html">Hardware</a></li>
+        <li><a href="https://misc.legendu.net/category/health.html">Health</a></li>
+        <li><a href="https://misc.legendu.net/category/house.html">House</a></li>
+        <li><a href="https://misc.legendu.net/category/internet.html">Internet</a></li>
+        <li><a href="https://misc.legendu.net/category/investment.html">Investment</a></li>
+        <li><a href="https://misc.legendu.net/category/life.html">life</a></li>
+        <li><a href="https://misc.legendu.net/category/linux.html">Linux</a></li>
+        <li><a href="https://misc.legendu.net/category/os.html">OS</a></li>
+        <li><a href="https://misc.legendu.net/category/people.html">People</a></li>
+        <li><a href="https://misc.legendu.net/category/philosophy.html">Philosophy</a></li>
+        <li><a href="https://misc.legendu.net/category/research.html">Research</a></li>
+        <li><a href="https://misc.legendu.net/category/shopping.html">Shopping</a></li>
+        <li><a href="https://misc.legendu.net/category/soft-skills.html">soft skills</a></li>
+        <li><a href="https://misc.legendu.net/category/software.html">Software</a></li>
+        <li><a href="https://misc.legendu.net/category/statistics.html">Statistics</a></li>
+        <li><a href="https://misc.legendu.net/category/tools.html">Tools</a></li>
+    </ul>
+  </section>
+ 
+
+  <section>
+  <h1>Tags</h1>
+  <ul class="tagcloud">
+  </ul>
+  </section>
+
+
+
+  <section>
+    <h1>GitHub Repos</h1>
+    <ul id="gh_repos">
+      <li class="loading">Status updating...</li>
+    </ul>
+      <a href="https://github.com/legendu-net">@legendu-net</a> on GitHub
+    <script type="text/javascript">
+      $.domReady(function(){
+          if (!window.jXHR){
+              var jxhr = document.createElement('script');
+              jxhr.type = 'text/javascript';
+              jxhr.src = 'https://misc.legendu.net/theme/js/jXHR.js';
+              var s = document.getElementsByTagName('script')[0];
+              s.parentNode.insertBefore(jxhr, s);
+          }
+
+          github.showRepos({
+              user: 'legendu-net',
+              count: 5,
+              skip_forks: true,
+              target: '#gh_repos'
+          });
+      });
+    </script>
+    <script src="https://misc.legendu.net/theme/js/github.js" type="text/javascript"> </script>
+  </section>
+
+    <section>
+        <h1>Social</h2>
+        <ul>
+            <li><a href="https://www.linkedin.com/in/ben-chuanlong-du-1239b221/" target="_blank">LinkedIn</a></li>
+            <li><a href="https://hub.docker.com/u/dclong" target="_blank">Docker Hub</a></li>
+            <li><a href="https://stackoverflow.com/users/7808204/benjamin-du?tab=profile" target="_blank">Stack Overflow</a></li>
+            <li><a href="https://twitter.com/longendu" target="_blank">Twitter</a></li>
+        <!--
+            <li><a href="https://misc.legendu.net/" type="application/rss+xml" rel="alternate">RSS</a></li>
+            -->
+        </ul>
+    </section>
+</aside>    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Ben Chuanlong Du -
+  <span class="credit">Powered by <a href="http://getpelican.com">Pelican</a></span>
+</p></footer>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-3STS9BVPF6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-3STS9BVPF6');
+</script>
+	<script type="text/javascript">
+	  var disqus_shortname = 'dclong';
+	  (function() {
+	    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	    dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+	    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	   })();
+	</script>
+</body>
+</html>

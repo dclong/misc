@@ -1,0 +1,426 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Ben Chuanlong Du's Blog - Finance</title><link href="https://misc.legendu.net/" rel="alternate"></link><link href="https://misc.legendu.net/feeds/finance.atom.xml" rel="self"></link><id>https://misc.legendu.net/</id><updated>2025-03-10T23:49:49-07:00</updated><subtitle>It is never too late to learn.</subtitle><entry><title>Tips on Empower</title><link href="https://misc.legendu.net/blog/tips-on-empower/" rel="alternate"></link><published>2025-03-10T23:49:49-07:00</published><updated>2025-03-10T23:49:49-07:00</updated><author><name>Benjamin Du</name></author><id>tag:misc.legendu.net,2025-03-10:/blog/tips-on-empower/</id><content type="html">&lt;p&gt;&lt;strong&gt;Things on this page are fragmentary and immature notes/thoughts of the author. Please read with your own judgement!&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id="app-specific-password"&gt;App-specific Password&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;WealthFront&lt;/li&gt;
+&lt;/ul&gt;</content><category term="Finance"></category><category term="finance"></category><category term="empower"></category><category term="WealthFront"></category></entry><entry><title>Quant Trading</title><link href="https://misc.legendu.net/blog/quant-trading/" rel="alternate"></link><published>2016-06-09T19:32:27-07:00</published><updated>2024-09-11T17:20:47-07:00</updated><author><name>Ben Chuanlong Du</name></author><id>tag:misc.legendu.net,2016-06-09:/blog/quant-trading/</id><summary type="html">&lt;p&gt;&lt;strong&gt;Things on this page are fragmentary and immature notes/thoughts of the author. Please read with your own judgement!&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;https://www.quantstart.com/&lt;/p&gt;
+&lt;p&gt;https://github.com/edtechre/pybroker&lt;/p&gt;
+&lt;p&gt;https://github.com/whittlem/pycryptobot&lt;/p&gt;
+&lt;p&gt;https://github.com/asavinov/intelligent-trading-bot&lt;/p&gt;
+&lt;h2 id="forums-discussions"&gt;Forums &amp;amp; Discussions&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://www.ml-quant.com/public"&gt;ML-Quant&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="quant-trading-libraries"&gt;Quant Trading Libraries&lt;/h2&gt;
+&lt;h2 id="general"&gt;General&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="https://github.com/avhz/RustQuant"&gt;RustQuant&lt;/a&gt;
+    is a Rust library …&lt;/p&gt;&lt;/li&gt;&lt;/ol&gt;</summary><content type="html">&lt;p&gt;&lt;strong&gt;Things on this page are fragmentary and immature notes/thoughts of the author. Please read with your own judgement!&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;https://www.quantstart.com/&lt;/p&gt;
+&lt;p&gt;https://github.com/edtechre/pybroker&lt;/p&gt;
+&lt;p&gt;https://github.com/whittlem/pycryptobot&lt;/p&gt;
+&lt;p&gt;https://github.com/asavinov/intelligent-trading-bot&lt;/p&gt;
+&lt;h2 id="forums-discussions"&gt;Forums &amp;amp; Discussions&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://www.ml-quant.com/public"&gt;ML-Quant&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="quant-trading-libraries"&gt;Quant Trading Libraries&lt;/h2&gt;
+&lt;h2 id="general"&gt;General&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="https://github.com/avhz/RustQuant"&gt;RustQuant&lt;/a&gt;
+    is a Rust library for quantitative finance.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="https://github.com/zvtvz/zvt"&gt;zvt&lt;/a&gt;
+    is a modular quant framework.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id="technical-analysis"&gt;Technical Analysis&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="https://github.com/TA-Lib/ta-lib"&gt;TA-Lib&lt;/a&gt;
+    is an open-source technical analysis library for financial applications. 
+    It provides a wide range of technical indicators and functions for analyzing financial market data.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="https://github.com/lballabio/quantlib"&gt;QuantLib&lt;/a&gt;
+    is aimed at providing a comprehensive software framework for quantitative finance. 
+    QuantLib is a free/open-source library for modeling, trading, and risk management in real-life.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="https://github.com/pmorissette/ffn"&gt;ffn&lt;/a&gt;
+    is a library that contains many useful functions 
+    for those who work in quantitative finance. 
+    It stands on the shoulders of giants (Pandas, Numpy, Scipy, etc.) 
+    and provides a vast array of utilities, 
+    from performance measurement and evaluation to graphing and common data transformations.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="https://github.com/convexfi/riskparity.py"&gt;riskparity.py&lt;/a&gt;
+    riskparityportfolio provides solvers to design risk parity portfolios. 
+    In its simplest form, we consider the convex formulation with a unique solution proposed by Spinu (2013) and use cyclical methods inspired by Griveau-Billion et al. (2013) and Choi &amp;amp; Chen (2022). 
+    For more general formulations, which are usually nonconvex, 
+    we implement the successive convex approximation method proposed by Feng &amp;amp; Palomar (2015).&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id="indicators"&gt;Indicators&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="https://github.com/TA-Lib/ta-lib"&gt;TA-Lib&lt;/a&gt;
+    is an open-source technical analysis library for financial applications. 
+    It provides a wide range of technical indicators and functions for analyzing financial market data.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="https://github.com/cinar/indicator"&gt;indicator&lt;/a&gt;
+    is a Golang module providing various stock technical analysis indicators for trading.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="https://github.com/facioquo/stock-indicators-python"&gt;stock-indicators-python&lt;/a&gt;
+    is a PyPI library package that produces financial market technical indicators. 
+    Send in historical price quotes and get back desired indicators 
+    such as moving averages, Relative Strength Index, Stochastic Oscillator, Parabolic SAR, etc. Nothing more.
+    &lt;a href="https://github.com/facioquo/stock-indicators-python"&gt;stock-indicators-python&lt;/a&gt;
+    is based on
+    &lt;a href="https://github.com/DaveSkender/Stock.Indicators"&gt;Stock.Indicators&lt;/a&gt;
+    which is implemented in C#.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="https://tulipindicators.org/"&gt;Tulip Indicators&lt;/a&gt;
+    is a library of functions for technical analysis of financial time series data. 
+    It is written in ANSI C for speed and portability. 
+    Bindings are available for many other programming languages too.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="https://github.com/MathisWellmann/trade_aggregation-rs"&gt;trade_aggregation-rs&lt;/a&gt;
+    is a high performance, modular and flexible trade aggregation crate, producing Candle data, 
+    suitable for low-latency applications and incremental updates. 
+    It allows the user to choose the rule dictating how a new candle is created through the AggregationRule trait, e.g: Time, Volume based or some other information driven rule. 
+    It also allows the user to choose which type of candle will be created from the aggregation process through the ModularCandle trait. 
+    Combined with the Candle macro, it enables the user to flexibly create any type of Candle as long as each component implements the CandleComponent trait. 
+    The aggregation process is also generic over the type of input trade data as long as it implements the TakerTrade trait, allowing for greater flexibility for downstream projects.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="https://github.com/MathisWellmann/sliding_features-rs"&gt;sliding_features-rs&lt;/a&gt;
+    provides modular, chainable sliding windows with various signal processing functions and technical indicators.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id="calendar"&gt;Calendar&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;[python-bizdays] (https://github.com/wilsonfreitas/python-bizdays)
+    offers business days calculations and utilities.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id="backtesting"&gt;Backtesting&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="https://github.com/pmorissette/bt"&gt;bt&lt;/a&gt;
+    is a flexible backtesting framework 
+    for Python used to test quantitative trading strategies. 
+    Backtesting is the process of testing a strategy over a given data set. 
+    This framework allows you to easily create strategies that mix and match different Algos. 
+    It aims to foster the creation of easily testable, 
+    re-usable and flexible blocks of strategy logic 
+    to facilitate the rapid development of complex trading strategies.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="https://github.com/polakowo/vectorbt"&gt;vectorbt&lt;/a&gt;
+    is a powerful Python library that enables easy backtesting 
+    of trading strategies, financial data analysis, and visualization. 
+    It provides a fast and efficient engine for quantitative finance research and algorithmic trading.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="https://github.com/mhallsmoore/qstrader"&gt;qstrader&lt;/a&gt;
+    is a free Python-based open-source modular schedule-driven backtesting framework 
+    for long-short equities and ETF based systematic trading strategies.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id="deep-learning"&gt;Deep Learning&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;a href="https://github.com/AI4Finance-Foundation/FinRL"&gt;FinRL&lt;/a&gt;
+    is an open-source framework for financial reinforcement learning. 
+    It aims to revolutionize FinTech by providing a comprehensive ecosystem 
+    for developing and deploying reinforcement learning-based trading strategies.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="good-platfroms"&gt;Good Platfroms&lt;/h2&gt;
+&lt;p&gt;&lt;a href="https://alpaca.markets/learn/algo-trading-landscape/"&gt;API Algo Trading Landscape&lt;/a&gt;
+has a good summary.&lt;/p&gt;
+&lt;p&gt;Charles Schwab supports algo trading via the thinkorswim® platform (thinkScript).
+For more details,
+please refer to
+&lt;a href="https://www.schwab.com/learn/story/coding-traders-building-your-own-indicator"&gt;Coding for Traders: Building Your Own Indicator&lt;/a&gt;
+.
+Charles Schwab is currently developing Trade APIs 
+(both for commercial and individual)
+.&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://alpaca.markets/"&gt;Alpaca&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://medium.com/hackernoon/9-great-tools-for-algo-trading-e0938a6856cd"&gt;9 Great Tools for Algo Trading&lt;/a&gt;
+has a good summary &lt;/p&gt;
+&lt;p&gt;In terms of cost to get started,
+&lt;a href="https://alpaca.markets/"&gt;Alpaca&lt;/a&gt; &amp;lt; &lt;a href="https://www.quantconnect.com/pricing"&gt;QuantConnect&lt;/a&gt; &amp;lt; &lt;a href="https://www.quantrocket.com/pricing/"&gt;QuantRocket&lt;/a&gt;
+&amp;lt; &lt;a href="https://www.interactivebrokers.com/en/home.php"&gt;IteractiveBrokers&lt;/a&gt;
+.&lt;/p&gt;
+&lt;h2 id="open-source-trading-platformsprojects"&gt;Open Source Trading Platforms/Projects&lt;/h2&gt;
+&lt;p&gt;&lt;a href="https://ocw.mit.edu/search/ocwsearch.htm?q=trading"&gt;MIT Open Course Ware - Trading&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;quantos, kungfu, vnpy, RQAlpha2&lt;/p&gt;
+&lt;p&gt;https://zhuanlan.zhihu.com/p/34822731&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://github.com/quantopian"&gt;Quantopian&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://python.quantecon.org/"&gt;Quantitative Economics&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id="data-source"&gt;Data Source&lt;/h2&gt;
+&lt;h3 id="polygonio"&gt;&lt;a href="https://polygon.io/pricing"&gt;polygon.io&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;&lt;a href="https://polygon.io/pricing"&gt;polygon.io&lt;/a&gt;
+is great data source with free plans available.&lt;/p&gt;
+&lt;h2 id="taxes"&gt;Taxes&lt;/h2&gt;
+&lt;h3 id="short-term-taxes"&gt;Short-term taxes&lt;/h3&gt;
+&lt;h3 id="wash-sale"&gt;Wash Sale&lt;/h3&gt;
+&lt;p&gt;Please refer to 
+&lt;a href="https://www.legendu.net/misc/blog/tips-on-wash-sale"&gt;Tips on Wash Sale&lt;/a&gt;&lt;br&gt;
+for detailed discussions.&lt;/p&gt;
+&lt;h2 id="order-types"&gt;Order Types&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://www.schwab.com/learn/story/trailing-stop-orders-mastering-order-types"&gt;Trailing Stop Orders&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="misc"&gt;Misc&lt;/h2&gt;
+&lt;p&gt;http://www.zhihu.com/question/28557233?from=profile_question_card&lt;/p&gt;
+&lt;p&gt;http://myquant.cn/&lt;/p&gt;
+&lt;p&gt;http://www.vnpy.org/quantlib-tutorial.html&lt;/p&gt;
+&lt;p&gt;http://www.vnpy.org/talib-tutorial.html&lt;/p&gt;
+&lt;p&gt;http://www.vnpy.org/basic-tutorial-4.html&lt;/p&gt;
+&lt;p&gt;http://www.zhihu.com/question/33555640/answer/56820093&lt;/p&gt;
+&lt;p&gt;https://www.zhihu.com/question/25074959/answer/31184123?from=profile_answer_card&lt;/p&gt;
+&lt;p&gt;https://www.zhihu.com/question/21789812/answer/22369809&lt;/p&gt;
+&lt;p&gt;https://zhuanlan.zhihu.com/p/20505282?refer=edwardfuna&lt;/p&gt;
+&lt;p&gt;https://zhuanlan.zhihu.com/p/20502027?refer=edwardfuna&lt;/p&gt;
+&lt;p&gt;https://www.zhihu.com/question/34868706/answer/106024559&lt;/p&gt;
+&lt;p&gt;https://www.zhihu.com/question/36532600/answer/68127964?from=profile_answer_card&lt;/p&gt;
+&lt;p&gt;https://www.zhihu.com/question/31817168/answer/53462153&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://www.zhihu.com/question/23667442/answer/28965906"&gt;Tow the Iceburg&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Prediction of Hidden Liquidity in the Limit Order Book of GLOBEX Futures&lt;/p&gt;
+&lt;p&gt;Mclean, R. David and Jeffrey Pontiff, 2016, Does Academic Research Destroy Stock Return Predictability, The Journal of Finance 71(1), 5-32.&lt;/p&gt;
+&lt;h2 id="references"&gt;References&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="https://misc.legendu.net/blog/investment-tips/"&gt;Investment&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="https://github.com/wilsonfreitas/awesome-quant"&gt;awesome-quant&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="https://www.nerdwallet.com/m/investing/how-to-buy-stocks-cs?bucket_id=Without+Chase&amp;amp;gad_source=1&amp;amp;gclid=CjwKCAiAgeeqBhBAEiwAoDDhn-ZlWJMKfNxBXeHm5f7iTKol0KmclBRNnVBNIbOUYG_KFIesxDvyVhoCNegQAvD_BwE&amp;amp;gclsrc=aw.ds&amp;amp;mktg_body=2989&amp;amp;mktg_hline=19335&amp;amp;mktg_place=aud-2205081372215%3Akwd-21866581&amp;amp;model_execution_id=D27E7BC4-58F9-46C0-B087-21293245805C&amp;amp;nw_campaign_id=154950223590786600&amp;amp;utm_campaign=in_mktg_paid_072023_stocks_upper-funnel_broad_desktop&amp;amp;utm_content=ta&amp;amp;utm_medium=cpc&amp;amp;utm_source=goog&amp;amp;utm_term=learn+about+stocks"&gt;The first-timer’s guide to buying stocks&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;</content><category term="Finance"></category><category term="quant"></category><category term="quantitative"></category><category term="trading"></category><category term="investment"></category><category term="money"></category><category term="stock"></category><category term="ETF"></category><category term="Alpaca"></category><category term="QuantConnect"></category><category term="QuantRocket"></category></entry><entry><title>Investment</title><link href="https://misc.legendu.net/blog/investment-tips/" rel="alternate"></link><published>2018-04-17T12:24:21-07:00</published><updated>2024-02-17T10:32:38-08:00</updated><author><name>Ben Chuanlong Du</name></author><id>tag:misc.legendu.net,2018-04-17:/blog/investment-tips/</id><summary type="html">&lt;p&gt;&lt;strong&gt;Things on this page are fragmentary and immature notes/thoughts of the author. Please read with your own judgement!&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id="general-tips"&gt;General Tips&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;Spend less money than you can make.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="low-risk-investment"&gt;Low Risk Investment&lt;/h2&gt;
+&lt;p&gt;Please refer to
+&lt;a href="https://www.legendu.net/misc/blog/low-risk-investments"&gt;Low Risk Investments&lt;/a&gt; 
+for detailed discussions.&lt;/p&gt;
+&lt;h2 id="diversified-investment"&gt;Diversified Investment&lt;/h2&gt;
+&lt;p&gt;Please refer to 
+&lt;a href="https://www.legendu.net/misc/blog/diversified-investment"&gt;Diversified Investment&lt;/a&gt;
+for detailed discussions …&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;strong&gt;Things on this page are fragmentary and immature notes/thoughts of the author. Please read with your own judgement!&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id="general-tips"&gt;General Tips&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;Spend less money than you can make.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="low-risk-investment"&gt;Low Risk Investment&lt;/h2&gt;
+&lt;p&gt;Please refer to
+&lt;a href="https://www.legendu.net/misc/blog/low-risk-investments"&gt;Low Risk Investments&lt;/a&gt; 
+for detailed discussions.&lt;/p&gt;
+&lt;h2 id="diversified-investment"&gt;Diversified Investment&lt;/h2&gt;
+&lt;p&gt;Please refer to 
+&lt;a href="https://www.legendu.net/misc/blog/diversified-investment"&gt;Diversified Investment&lt;/a&gt;
+for detailed discussions.&lt;/p&gt;
+&lt;h2 id="important-resources"&gt;Important Resources&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="https://valueinvesting.io/"&gt;ValueInvesting.io&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="https://altindex.com/"&gt;AltIndex&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="https://www.columbia.edu/~tmd2142/6-best-investing-websites.html#:~:text=1.,ValueInvesting.io&amp;amp;text=You%20can%20also%20find%20other,you%20follow%20this%20investing%20philosophy."&gt;6 Best Investing Websites&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm"&gt;Fed Reserve Policy Meeting Calendars, Statements and Minutes&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="strategy-for-bear-market"&gt;Strategy for Bear Market&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="https://www.youtube.com/watch?v=ja1509UzY2o"&gt;什么是熊市思维？熊市中，如果打开方式错了，做什么都不对！&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="https://www.youtube.com/watch?v=krMO0e9WhnI"&gt;渡過10個熊市的美國投資冠軍 這次熊市下的建議｜瓦特股市 Marching Park STOCK【股市知識】&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="tools"&gt;Tools&lt;/h2&gt;
+&lt;p&gt;https://www.sec.gov&lt;/p&gt;
+&lt;p&gt;https://www.sec.gov/edgar/searchedgar/companysearch.html&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://www.nasdaq.com/"&gt;NasDaq&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://www.nyse.com/index"&gt;NYSE&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://tech.sina.com.cn/focus/finance_report/"&gt;China Concept Stock - Earning Report&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://finviz.com/screener.ashx"&gt;FinViz Screener&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://finance.yahoo.com/screener"&gt;Yahoo Finance Screener&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id="good-forums-for-investment"&gt;Good Forums for Investment&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="https://www.barrons.com/?mod=BOL_LOGO"&gt;Barrons&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="https://money.usnews.com/investing?int=top_nav_Investing"&gt;USNews - Money&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="https://www.cnbc.com/"&gt;CNBC News&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="https://www.reddit.com/r/wallstreetbets/"&gt;Reddit - WallStreetBets&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="https://www.reddit.com/r/personalfinance/"&gt;Reddit - Personal Finance&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="https://valueinvestorsclub.com/"&gt;Value Investor Club&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="https://thecobf.com/"&gt;Corner Of Berkshire &amp;amp; Fairfax&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="https://www.bogleheads.org/forum/index.php"&gt;BogleHeads.org&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;The Motley Fool - CAPS Community&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="https://seekingalpha.com/"&gt;SeekingAlpha&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="https://www.etfreplay.com/"&gt;ETFReplay&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="https://etfdb.com/"&gt;ETFdb&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="https://www.etf.com/"&gt;ETF.com&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Yahoo! Finance&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Stockaholics.net&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;StockTwits&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;TheLion.com&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="good-forums-wechat-official-accounts-for-a-shares"&gt;Good Forums / WeChat Official Accounts for A-shares&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;新闻联播&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="https://cn.chinadaily.com.cn/"&gt;人民日报&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;新华社&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;a href="https://www.zhihu.com/question/62023711"&gt;美国投资界常逛的网站或论坛有哪些（比如某些优质的博客）？&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://xueqiu.com/"&gt;雪球&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;投研帮&lt;/p&gt;
+&lt;p&gt;摩尔金融&lt;/p&gt;
+&lt;h2 id="technical-analysis"&gt;Technical Analysis&lt;/h2&gt;
+&lt;p&gt;&lt;a href="https://alpha2phi.medium.com/data-wrangling-for-fundamental-stock-analysis-d9f5a3d36056"&gt;Data Wrangling for Fundamental Stock Analysis&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id="good-talks-tutorials"&gt;Good Talks / Tutorials&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://www.youtube.com/channel/UCBUH38E0ngqvmTqdchWunwQ"&gt;美投讲美股&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=krMO0e9WhnI"&gt;渡過10個熊市的美國投資冠軍 這次熊市下的建議｜瓦特股市 Marching Park STOCK【股市知識】&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="references"&gt;References&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="https://www.legendu.net/misc/blog/taxes-on-investment-gains"&gt;Taxes on Investment Gains&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="https://www.legendu.net/misc/blog/big-figures-to-follow-in-investment"&gt;Big Figures to Follow in Investment&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="https://www.legendu.net/misc/blog/good-tutorials-for-investment"&gt;Good Tutorials for Investment&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="https://www.legendu.net/misc/blog/ways-to-invest-in-real-estate"&gt;Ways to Invest in Real Estate&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="https://www.youtube.com/watch?v=krMO0e9WhnI"&gt;渡過10個熊市的美國投資冠軍 這次熊市下的建議｜瓦特股市 Marching Park STOCK【股市知識】&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="https://www.youtube.com/watch?v=PHe0bXAIuk0"&gt;How The Economic Machine Works by Ray Dalio&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="https://money.usnews.com/investing/stock-market-news/slideshows/reddit-esque-stock-market-forums"&gt;7 Reddit-Esque Stock Message Boards&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="https://www.youtube.com/channel/UCBUH38E0ngqvmTqdchWunwQ"&gt;美投讲美股&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="https://finance.yahoo.com/news/"&gt;Yahoo Finance&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;</content><category term="Finance"></category><category term="finance"></category><category term="investment"></category><category term="WeChat official account"></category><category term="money"></category><category term="tips"></category><category term="economics"></category><category term="stock"></category><category term="bond"></category><category term="CD"></category><category term="savings"></category><category term="structure notes"></category></entry><entry><title>Tips on eTrade</title><link href="https://misc.legendu.net/blog/tips-on-etrade/" rel="alternate"></link><published>2019-05-18T17:09:47-07:00</published><updated>2023-12-15T07:06:01-08:00</updated><author><name>Benjamin Du</name></author><id>tag:misc.legendu.net,2019-05-18:/blog/tips-on-etrade/</id><summary type="html">&lt;p&gt;&lt;strong&gt;Things on this page are fragmentary and immature notes/thoughts of the author. Please read with your own judgement!&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://us.etrade.com/etx/mm/movemoney/link-account"&gt;Add External Funding Account&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://us.etrade.com/etx/hw/customerservice/uploaddoc#!/upload"&gt;Upload Documents&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id="general-tips"&gt;General Tips&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Wire transfer is made on the same business day but cost $25;
+    transfering to a Linked External Funding Account takes about 3 business …&lt;/p&gt;&lt;/li&gt;&lt;/ol&gt;</summary><content type="html">&lt;p&gt;&lt;strong&gt;Things on this page are fragmentary and immature notes/thoughts of the author. Please read with your own judgement!&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://us.etrade.com/etx/mm/movemoney/link-account"&gt;Add External Funding Account&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://us.etrade.com/etx/hw/customerservice/uploaddoc#!/upload"&gt;Upload Documents&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id="general-tips"&gt;General Tips&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Wire transfer is made on the same business day but cost $25;
+    transfering to a Linked External Funding Account takes about 3 business days but is free. &lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Dividends you've earned stays in your eTrade account 
+  until you manually transferred them to your account.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;A Stock Plan (only) account cannot add External Funding Accounts. 
+  You must have a Complete Investment Account in order to add External Funding Accounts.
+  You can submit a Registration Change form to update your account to a Complete Investment Account. &lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="https://us.etrade.com/platforms/power-etrade"&gt;Power eTrade&lt;/a&gt;
+    is the preferred trading platform for active traders.
+    &lt;img alt="Power eTrade" src="https://private-user-images.githubusercontent.com/824507/290857023-f0c0830a-6504-4df1-a5c6-37403e37b1f0.png?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTEiLCJleHAiOjE3MDI2NTI1ODQsIm5iZiI6MTcwMjY1MjI4NCwicGF0aCI6Ii84MjQ1MDcvMjkwODU3MDIzLWYwYzA4MzBhLTY1MDQtNGRmMS1hNWM2LTM3NDAzZTM3YjFmMC5wbmc_WC1BbXotQWxnb3JpdGhtPUFXUzQtSE1BQy1TSEEyNTYmWC1BbXotQ3JlZGVudGlhbD1BS0lBSVdOSllBWDRDU1ZFSDUzQSUyRjIwMjMxMjE1JTJGdXMtZWFzdC0xJTJGczMlMkZhd3M0X3JlcXVlc3QmWC1BbXotRGF0ZT0yMDIzMTIxNVQxNDU4MDRaJlgtQW16LUV4cGlyZXM9MzAwJlgtQW16LVNpZ25hdHVyZT00M2MzMjc4YjZkYTU4MDBkMTZlOGRlZjU1MmZjNTgyNjE3NzNhMTE3NDhhM2RkMzRjM2VhMTFiMTA0MzBjODg0JlgtQW16LVNpZ25lZEhlYWRlcnM9aG9zdCZhY3Rvcl9pZD0wJmtleV9pZD0wJnJlcG9faWQ9MCJ9.hqhodF9qpSFimDEyqZnUJMCJ-JV-wtgtCzbjDEJ9CGA"&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="questions"&gt;Questions&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;Can I withhold tax when I sell RSU shares and pay in the next tax season?&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="references"&gt;References&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="https://us.etrade.com/e/t/accounts/servicecenterhome"&gt;eTrade Online Customer Service&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="https://us.etrade.com/knowledge/library/stock-plans"&gt;Stock Plans&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;</content><category term="Finance"></category><category term="finance"></category><category term="money"></category><category term="eTrade"></category><category term="stock"></category></entry><entry><title>Tips on Certified Deposit</title><link href="https://misc.legendu.net/blog/tips-on-certified-deposit/" rel="alternate"></link><published>2023-12-08T21:01:50-08:00</published><updated>2023-12-08T21:01:50-08:00</updated><author><name>Benjamin Du</name></author><id>tag:misc.legendu.net,2023-12-08:/blog/tips-on-certified-deposit/</id><summary type="html">&lt;p&gt;&lt;strong&gt;Things on this page are fragmentary and immature notes/thoughts of the author. Please read with your own judgement!&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;You might only have seven to 10 days to withdraw penalty-free from a CD after it matures, 
+depending on your bank's policy. 
+If you don't withdraw, 
+your bank might automatically renew …&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;strong&gt;Things on this page are fragmentary and immature notes/thoughts of the author. Please read with your own judgement!&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;You might only have seven to 10 days to withdraw penalty-free from a CD after it matures, 
+depending on your bank's policy. 
+If you don't withdraw, 
+your bank might automatically renew your CD for the same or similar term but at the bank's current rate.&lt;/p&gt;</content><category term="Finance"></category><category term="Finance"></category><category term="money"></category><category term="investment"></category><category term="CD"></category><category term="certified deposit"></category></entry></feed>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0"><channel><title>Ben Chuanlong Du's Blog - Ben Du- Date: 2020-04-24 00:55:18</title><link>https://misc.legendu.net/</link><description>It is never too late to learn.</description><lastBuildDate>Tue, 28 Apr 2020 21:35:36 -0700</lastBuildDate><item><title>Speed up Python Using Native Code</title><link>https://misc.legendu.net/blog/python-bindings-for-native-code/</link><description>&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h2 id="Tips-and-Traps"&gt;Tips and Traps&lt;a class="anchor-link" href="#Tips-and-Traps"&gt;&amp;#182;&lt;/a&gt;&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;It is never a good idea to do pre-mature optimization. 
+ Always profile 
+ (please refer to &lt;a href="http://www.legendu.net/misc/blog/python-profile/"&gt;Profile Performance of Python Applications&lt;/a&gt;
+  and &lt;a href="http://www.legendu.net/misc/blog/python-profile-notebook/"&gt;Python Profiler for JupyterLab Notebooks&lt;/a&gt;) 
+ your code before you optimize it.
+ If you do decide to optimize you Python code,
+ there are multiple approaches. 
+ First, 
+ think about whether you can improve your algorithm.
+ Please refer to 
+ &lt;a href="https://wiki.python.org/moin/PythonSpeed/PerformanceTips"&gt;Python Performance Tips&lt;/a&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Ben Du- Date: 2020-04-24 00:55:18</dc:creator><pubDate>Tue, 28 Apr 2020 21:35:36 -0700</pubDate><guid isPermaLink="false">tag:misc.legendu.net,2020-04-28:/blog/python-bindings-for-native-code/</guid><category>Computer Science</category><category>Computer Science</category><category>Python</category><category>language bindings</category><category>Rust</category><category>C++</category><category>cpp</category><category>C</category><category>numba</category><category>PyO3</category><category>ctypes</category><category>pybind11</category></item></channel></rss>

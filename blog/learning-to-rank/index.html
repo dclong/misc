@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Learning to Rank</title>
+  <meta name="author" content="Ben Chuanlong Du">
+
+  <link href="https://misc.legendu.net/atom.xml" type="application/atom+xml" rel="alternate"
+        title="Ben Chuanlong Du's Blog Atom Feed" />
+
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link href="https://misc.legendu.net/favicon.png" rel="icon">
+  <link href="https://misc.legendu.net/theme/css/main_2.css" media="screen, projection"
+        rel="stylesheet" type="text/css">
+  <script src="https://misc.legendu.net/theme/js/modernizr-2.0.js"></script>
+  <script src="https://misc.legendu.net/theme/js/ender.js"></script>
+  <script src="https://misc.legendu.net/theme/js/octopress.js" type="text/javascript"></script>
+
+  <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <script data-ad-client="ca-pub-3836424032203369" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+</head>
+
+<body>
+  <header role="banner"><hgroup>
+  <h1><a href="https://misc.legendu.net/">Ben Chuanlong Du's Blog</a></h1>
+    <h2>It is never too late to learn.</h2>
+</hgroup></header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="https://misc.legendu.net/atom.xml" rel="subscribe-rss">RSS</a></li>
+</ul>
+
+<form name="search" action="https://www.bing.com/search" method="get" onSubmit="return build_query()">
+  <fieldset role="search">
+      <!--
+    <input type="hidden" name="q" value="site:https://misc.legendu.net" />
+        -->
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+
+<script type = "text/javascript">
+    function build_query() {
+        var query = document.forms["search"]["q"].value;
+        var prefix = "site:https://misc.legendu.net "
+        if (!query.startsWith(prefix)) {
+            query = prefix + query;
+            document.forms["search"]["q"].value = query;
+        }
+        return true;
+    }
+</script>
+
+<ul class="main-navigation">
+    <li><a href="https://www.legendu.net">Home</a></li>
+    <li><a href="https://misc.legendu.net">Blog</a></li>
+    <li><a href="https://misc.legendu.net/archives.html">Archives</a></li>
+    <li><a href="https://misc.legendu.net/categories.html">Categories</a></li>
+    <li><a href="https://misc.legendu.net/tags.html">Tags</a></li>
+    <li><a href="https://www.legendu.net/pages/about">About</a></li>
+</ul></nav>
+  <div id="main">
+    <div id="content">
+<div>
+  <article class="hentry" role="article">
+<header>
+      <h1 class="entry-title">Learning to Rank</h1>
+      <p class="meta"><time datetime="2019-12-10T14:27:43-08:00" pubdate>Dec 10, 2019</time></p>
+</header>
+
+  <div class="entry-content"><p><strong>Things on this page are fragmentary and immature notes/thoughts of the author. Please read with your own judgement!</strong></p>
+<p>https://www.kaggle.com/c/home-credit-default-risk/discussion/61613</p>
+<p>https://studylib.net/doc/18339870/yetirank--everybody-lies</p>
+<p>http://proceedings.mlr.press/v14/gulin11a/gulin11a.pdf</p>
+<table style="width:100%">
+  <tr>
+    <th> Model </th>
+    <th> Architecture </th>
+    <th> Ranking Category </th>
+    <th> SOTA </th>
+    <th> Comments </th>
+    <th> Paper </th>
+  </tr>
+  <tr>
+    <td> RankNet </td>
+    <td> NN </td>
+    <th> Pairwise </th>
+    <td> </td>
+    <td> ? </td>
+    <td> ? </td>
+  </tr>
+  <tr>
+    <td> LambdaRank </td>
+    <td> NN </td>
+    <th> Pairwise </th>
+    <td> </td>
+    <td> ? </td>
+    <td> ? </td>
+  </tr>
+  <tr>
+    <td> LambdaMART </td>
+    <td> boosted decision trees </td>
+    <th> Listwise </th>
+    <td> 2010 </td>
+    <td> ? </td>
+    <td> ? </td>
+  </tr>
+</table>
+
+<p><a href="https://practicaldatascience.co.uk/machine-learning/a-quick-guide-to-learning-to-rank-models">A quick guide to Learning to Rank models</a></p>
+<h2 id="tutorials">Tutorials</h2>
+<p>https://github.com/sophwats/learning-to-rank</p>
+<h2 id="neural-network-based-approaches">Neural Network Based Approaches</h2>
+<p><a href="https://arxiv.org/pdf/2008.13368.pdf">PT-RANKING: A BENCHMARKING PLATFORM FOR NEURAL LEARNING-TO-RANK</a></p>
+<p><a href="https://dial.uclouvain.be/memoire/ucl/fr/object/thesis:4596/datastream/PDF_01/view">Learning to Rank with Deep Neural Networks</a></p>
+<p><a href="https://openreview.net/pdf?id=BJgxzlSFvr">AN ATTENTION-BASED DEEP NET FOR LEARNING TO RANK</a></p>
+<p><a href="https://www.researchgate.net/publication/322489214_Ranking_with_Deep_Neural_Networks">Ranking with Deep Neural Networks</a></p>
+<p><a href="https://icml.cc/2015/wp-content/uploads/2015/06/icml_ranking.pdf">Learning to Rank using Gradient Descent</a></p>
+<p><a href="https://storage.googleapis.com/pub-tools-public-publication-data/pdf/1e34e05e5e4bf2d12f41eb9ff29ac3da9fdb4de3.pdf">The LambdaLoss Framework for Ranking Metric Optimization</a></p>
+<p><a href="https://ecmlpkdd2019.org/downloads/paper/400.pdf">Pairwise Learning to Rank by Neural Networks Revisited: Reconstruction, Theoretical Analysis and Practical Performance</a></p>
+<p><a href="https://ris.utwente.nl/ws/portalfiles/portal/6420086/ipm2015-preprint.pdf">A cross-benchmark comparison of 87 learning to rank methods</a></p>
+<p><a href="https://dl.acm.org/doi/abs/10.1145/3404835.3462904">Fast Attention-based Learning-To-Rank Model for Structured Map Search</a></p>
+<p><a href="https://aclanthology.org/C16-1163.pdf">Neural Attention for Learning to Rank Questions in Community Question Answering</a></p>
+<p>https://arxiv.org/pdf/1702.06106.pdf#:~:text=For%20learning%20to%20rank%2C%20neural,search%20results%20as%20the%20input.</p>
+<h2 id="learning-to-rank-in-lightgbm">Learning to Rank in LightGBM</h2>
+<p>https://mlexplained.com/2019/05/27/learning-to-rank-explained-with-code/</p>
+<p>https://github.com/microsoft/LightGBM/tree/master/examples/xendcg</p>
+<p>https://github.com/microsoft/LightGBM/tree/master/examples/lambdarank</p>
+<h2 id="learning-to-rank-in-xgboost">Learning to Rank in XGBoost</h2>
+<p>Use the objective <code>rank:pairwise</code></p>
+<p>https://www.jianshu.com/p/9caef967ec0a</p>
+<p>https://tech.olx.com/ranking-ads-with-machine-learning-ee03d7734bf4</p>
+<h2 id="benchmark">Benchmark</h2>
+<p><a href="http://www.bigdatalab.ac.cn/benchmark/bm/Domain?domain=Learning%20to%20Rank">Domain: Learning to Rank</a></p>
+<h2 id="references">References</h2>
+<ul>
+<li>
+<p><a href="http://www.legendu.net/misc/blog/data-for-learning-to-rank">Data for Learning to Rank</a></p>
+</li>
+<li>
+<p><a href="https://www.microsoft.com/en-us/research/wp-content/uploads/2016/02/MSR-TR-2010-82.pdf">From RankNet to LambdaRank to LambdaMART: An Overview</a></p>
+</li>
+<li>
+<p><a href="https://www.quora.com/What-is-the-intuitive-explanation-of-Learning-to-Rank-and-algorithms-like-RankNet-LambdaRank-and-LambdaMART-In-what-types-of-data-variables-can-these-techniques-be-used-What-are-their-strengths-and-limitations">What is the intuitive explanation of Learning to Rank and algorithms like RankNet, LambdaRank and LambdaMART? In what types of data/variables can these techniques be used? What are their strengths and limitations?
+</a></p>
+</li>
+<li>
+<p>https://mlexplained.com/2019/05/27/learning-to-rank-explained-with-code/</p>
+</li>
+<li>
+<p>https://medium.com/@nikhilbd/intuitive-explanation-of-learning-to-rank-and-ranknet-lambdarank-and-lambdamart-fe1e17fac418</p>
+</li>
+<li>
+<p>https://en.wikipedia.org/wiki/Learning_to_rank</p>
+</li>
+<li>
+<p>https://www.microsoft.com/en-us/research/wp-content/uploads/2016/02/MSR-TR-2010-82.pdf</p>
+</li>
+<li>
+<p>http://times.cs.uiuc.edu/course/598f14/l2r.pdf</p>
+</li>
+</ul></div>
+    <footer>
+<p class="meta">
+  <span class="byline author vcard">
+    Posted by <span class="fn">Benjamin Du</span>
+  </span>
+<time datetime="2019-12-10T14:27:43-08:00" pubdate>Dec 10, 2019</time>  <span class="categories">
+    <a class="category" href="https://misc.legendu.net/tag/ai.html">AI</a>
+    <a class="category" href="https://misc.legendu.net/tag/data-science.html">data science</a>
+    <a class="category" href="https://misc.legendu.net/tag/machine-learning.html">machine learning</a>
+    <a class="category" href="https://misc.legendu.net/tag/learning-to-rank.html">learning to rank</a>
+    <a class="category" href="https://misc.legendu.net/tag/machine-learned-ranking.html">machine learned ranking</a>
+    <a class="category" href="https://misc.legendu.net/tag/mlr.html">MLR</a>
+  </span>
+</p>    </footer>
+  </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div>
+  </section>
+</div>
+<aside class="sidebar">
+  <section>
+    <h1>Recent Posts</h1>
+    <ul id="recent_posts">
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/tips-on-health/">Tips on Health</a>
+      </li>
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/tips-on-child-education/">Tips on Child Education</a>
+      </li>
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/tips-on-fd/">Tips on fd</a>
+      </li>
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/the-fzf-command-is-a-great-alternative-to-find/">The fzf Command Is a Great Alternative to find</a>
+      </li>
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/ruff-is-an-extremely-fast-python-linter-written-in-rust/">Ruff Is An Extremely Fast Python Linter Written in Rust</a>
+      </li>
+    </ul>
+  </section>
+  <section>
+    <h1>Categories</h1>
+    <ul id="recent_posts">
+        <li><a href="https://misc.legendu.net/category/ai.html">AI</a></li>
+        <li><a href="https://misc.legendu.net/category/career.html">Career</a></li>
+        <li><a href="https://misc.legendu.net/category/cloud.html">Cloud</a></li>
+        <li><a href="https://misc.legendu.net/category/computer-science.html">Computer Science</a></li>
+        <li><a href="https://misc.legendu.net/category/fiannce.html">Fiannce</a></li>
+        <li><a href="https://misc.legendu.net/category/finance.html">Finance</a></li>
+        <li><a href="https://misc.legendu.net/category/fun-problems.html">Fun Problems</a></li>
+        <li><a href="https://misc.legendu.net/category/hardware.html">Hardware</a></li>
+        <li><a href="https://misc.legendu.net/category/health.html">Health</a></li>
+        <li><a href="https://misc.legendu.net/category/house.html">House</a></li>
+        <li><a href="https://misc.legendu.net/category/internet.html">Internet</a></li>
+        <li><a href="https://misc.legendu.net/category/investment.html">Investment</a></li>
+        <li><a href="https://misc.legendu.net/category/life.html">life</a></li>
+        <li><a href="https://misc.legendu.net/category/linux.html">Linux</a></li>
+        <li><a href="https://misc.legendu.net/category/os.html">OS</a></li>
+        <li><a href="https://misc.legendu.net/category/people.html">People</a></li>
+        <li><a href="https://misc.legendu.net/category/philosophy.html">Philosophy</a></li>
+        <li><a href="https://misc.legendu.net/category/research.html">Research</a></li>
+        <li><a href="https://misc.legendu.net/category/shopping.html">Shopping</a></li>
+        <li><a href="https://misc.legendu.net/category/soft-skills.html">soft skills</a></li>
+        <li><a href="https://misc.legendu.net/category/software.html">Software</a></li>
+        <li><a href="https://misc.legendu.net/category/statistics.html">Statistics</a></li>
+        <li><a href="https://misc.legendu.net/category/tools.html">Tools</a></li>
+    </ul>
+  </section>
+ 
+
+  <section>
+  <h1>Tags</h1>
+  <ul class="tagcloud">
+  </ul>
+  </section>
+
+
+
+  <section>
+    <h1>GitHub Repos</h1>
+    <ul id="gh_repos">
+      <li class="loading">Status updating...</li>
+    </ul>
+      <a href="https://github.com/legendu-net">@legendu-net</a> on GitHub
+    <script type="text/javascript">
+      $.domReady(function(){
+          if (!window.jXHR){
+              var jxhr = document.createElement('script');
+              jxhr.type = 'text/javascript';
+              jxhr.src = 'https://misc.legendu.net/theme/js/jXHR.js';
+              var s = document.getElementsByTagName('script')[0];
+              s.parentNode.insertBefore(jxhr, s);
+          }
+
+          github.showRepos({
+              user: 'legendu-net',
+              count: 5,
+              skip_forks: true,
+              target: '#gh_repos'
+          });
+      });
+    </script>
+    <script src="https://misc.legendu.net/theme/js/github.js" type="text/javascript"> </script>
+  </section>
+
+    <section>
+        <h1>Social</h2>
+        <ul>
+            <li><a href="https://www.linkedin.com/in/ben-chuanlong-du-1239b221/" target="_blank">LinkedIn</a></li>
+            <li><a href="https://hub.docker.com/u/dclong" target="_blank">Docker Hub</a></li>
+            <li><a href="https://stackoverflow.com/users/7808204/benjamin-du?tab=profile" target="_blank">Stack Overflow</a></li>
+            <li><a href="https://twitter.com/longendu" target="_blank">Twitter</a></li>
+        <!--
+            <li><a href="https://misc.legendu.net/" type="application/rss+xml" rel="alternate">RSS</a></li>
+            -->
+        </ul>
+    </section>
+</aside>    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Ben Chuanlong Du -
+  <span class="credit">Powered by <a href="http://getpelican.com">Pelican</a></span>
+</p></footer>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-3STS9BVPF6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-3STS9BVPF6');
+</script>
+	<script type="text/javascript">
+	  var disqus_shortname = 'dclong';
+          var disqus_identifier = '/blog/learning-to-rank/';
+          var disqus_url = 'https://misc.legendu.net/blog/learning-to-rank/';
+          var disqus_title = 'Learning to Rank';
+	  (function() {
+	    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	    dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+	    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	   })();
+	</script>
+</body>
+</html>

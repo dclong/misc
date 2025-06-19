@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Spark Issue: Container Killed by Yarn for Exceeding Memory Limits</title>
+  <meta name="author" content="Ben Chuanlong Du">
+
+  <link href="https://misc.legendu.net/atom.xml" type="application/atom+xml" rel="alternate"
+        title="Ben Chuanlong Du's Blog Atom Feed" />
+
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link href="https://misc.legendu.net/favicon.png" rel="icon">
+  <link href="https://misc.legendu.net/theme/css/main_2.css" media="screen, projection"
+        rel="stylesheet" type="text/css">
+  <script src="https://misc.legendu.net/theme/js/modernizr-2.0.js"></script>
+  <script src="https://misc.legendu.net/theme/js/ender.js"></script>
+  <script src="https://misc.legendu.net/theme/js/octopress.js" type="text/javascript"></script>
+
+  <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <script data-ad-client="ca-pub-3836424032203369" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+</head>
+
+<body>
+  <header role="banner"><hgroup>
+  <h1><a href="https://misc.legendu.net/">Ben Chuanlong Du's Blog</a></h1>
+    <h2>It is never too late to learn.</h2>
+</hgroup></header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="https://misc.legendu.net/atom.xml" rel="subscribe-rss">RSS</a></li>
+</ul>
+
+<form name="search" action="https://www.bing.com/search" method="get" onSubmit="return build_query()">
+  <fieldset role="search">
+      <!--
+    <input type="hidden" name="q" value="site:https://misc.legendu.net" />
+        -->
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+
+<script type = "text/javascript">
+    function build_query() {
+        var query = document.forms["search"]["q"].value;
+        var prefix = "site:https://misc.legendu.net "
+        if (!query.startsWith(prefix)) {
+            query = prefix + query;
+            document.forms["search"]["q"].value = query;
+        }
+        return true;
+    }
+</script>
+
+<ul class="main-navigation">
+    <li><a href="https://www.legendu.net">Home</a></li>
+    <li><a href="https://misc.legendu.net">Blog</a></li>
+    <li><a href="https://misc.legendu.net/archives.html">Archives</a></li>
+    <li><a href="https://misc.legendu.net/categories.html">Categories</a></li>
+    <li><a href="https://misc.legendu.net/tags.html">Tags</a></li>
+    <li><a href="https://www.legendu.net/pages/about">About</a></li>
+</ul></nav>
+  <div id="main">
+    <div id="content">
+<div>
+  <article class="hentry" role="article">
+<header>
+      <h1 class="entry-title">Spark Issue: Container Killed by Yarn for Exceeding Memory Limits</h1>
+      <p class="meta"><time datetime="2020-11-24T14:55:43-08:00" pubdate>Nov 24, 2020</time></p>
+</header>
+
+  <div class="entry-content"><p><strong>Things on this page are fragmentary and immature notes/thoughts of the author. Please read with your own judgement!</strong></p>
+<h2 id="symptoms">Symptoms</h2>
+<h3 id="symptom-1">Symptom 1</h3>
+<p>Container killed by YARN for exceeding memory limits.<br>
+22.0 GB of 19 GB physical memory used. 
+Consider boosting <code>spark.yarn.executor.memoryOverhead</code> 
+or disabling <code>yarn.nodemanager.vmem-check-enabled</code> 
+because of <a href="https://issues.apache.org/jira/browse/YARN-4714">YARN-4714</a>.</p>
+<h3 id="symptom-2">Symptom 2</h3>
+<p>Job aborted due to stage failure: Task 110 in stage 68.0 failed 1 times, 
+most recent failure: Lost task 110.0 in stage 68.0:
+ExecutorLostFailure (executor 35 exited caused by one of the running tasks) 
+Reason: Container killed by YARN for exceeding memory limits. 40.6 GB of 40 GB physical memory used. 
+Consider boosting spark.yarn.executor.memoryOverhead.</p>
+<h3 id="symptom-3">Symptom 3</h3>
+<p>16/04/22 04:27:18 WARN yarn.YarnAllocator: Container marked as failed: container_1459803563374_223497_02_000067 on host.
+Exit status: 143. Diagnostics: Container [pid=30502,containerID=container_1459803563374_223497_02_000067] is running beyond physical memory limits. 
+Current usage: 13.8 GB of 13.8 GB physical memory used; 14.6 GB of 28.9 GB virtual memory used. Killing container.
+Dump of the process-tree for container_1459803563374_223497_02_000067 :
+- PID PPID PGRPID SESSID CMD_NAME USER_MODE_TIME(MILLIS) SYSTEM_TIME(MILLIS) VMEM_USAGE(BYTES) RSSMEM_USAGE(PAGES) FULL_CMD_LINE
+- 30502 18022 30502 30502 (bash) 0 0 22773760 347 /bin/bash -c LD_LIBRARY_PATH=/apache/hadoop/lib/native:/apache/hadoop/lib/native/Linux-amd64-64: 
+/usr/java/latest/bin/java -server -XX:OnOutOfMemoryError='kill %p' 
+...
+container_1459803563374_223497_02_000067/stderr
+...
+Container killed on request. Exit code is 143
+Container exited with a non-zero exit code 143</p>
+<h2 id="possible-causes">Possible Causes</h2>
+<p><a href="https://a-ghorbani.github.io/2016/12/23/spark-on-yarn-and-java-8-and-virtual-memory-error">Spark on Yarn and virtual memory error</a>
+and
+<a href="https://www.cnblogs.com/zz-ksw/p/11403622.html">Container killed by YARN for exceeding memory limits</a>
+have good discussions on solutions to fix the issue including some low-level explanation of the issue.</p>
+<ol>
+<li>
+<p>A bug (<a href="https://issues.apache.org/jira/browse/YARN-4714">YARN-4714</a>) in YARN.</p>
+</li>
+<li>
+<p>Too much usage of <strong>off-heap</strong> memory. 
+  Spark Tungsten leverages off-heap memory a lot to boost performance. 
+  Some Java operations (especially IO related) also levarages off-heap memory.
+  Usage of off-heap memory in Spark 2 (this has been changed in Spark 3) 
+  is control by <code>spark.yarn.executor.memoryOverhead</code>.
+  Generally speaking,
+  it is hard to control the usage of off-heap memory 
+  unless the corresponding Java operations provide such options.
+  The JVM option <code>MaxDirectMemorySize</code> specifies the maximum total size of <code>java.nio</code> (New I/O package) direct buffer allocations (off-heap memory),
+  which is used with network data transfer and serialization activity.</p>
+</li>
+<li>
+<p>data skew (e.g., big data table but not partitioned)</p>
+</li>
+<li>
+<p>Some tables in joins are too large.</p>
+</li>
+</ol>
+<h2 id="possible-solutions">Possible Solutions</h2>
+<ol>
+<li>
+<p>Increase memory overhead.
+    For example,
+    the below configuration set memory overhead to 8G.</p>
+<div class="highlight"><pre><span></span><code>--conf<span class="w"> </span>spark.yarn.executor.memoryOverhead<span class="o">=</span>8G
+</code></pre></div>
+
+</li>
+<li>
+<p>Reducing the number of executor cores (which helps reducing memory consumption).
+    For example,
+    change <code>--execuor-cores=4</code> to <code>--execuor-cores=2</code>.</p>
+</li>
+<li>
+<p>Increase the number of partitions (which makes each task smaller and helps reducing memory consumption).</p>
+<div class="highlight"><pre><span></span><code>--conf<span class="w"> </span>spark.sql.shuffle.partitions<span class="o">=</span><span class="m">2000</span>
+</code></pre></div>
+
+</li>
+<li>
+<p>Configure the JVM option <code>MaxDirectMemorySize</code> 
+    if your Spark application involves reading Parquet files and/or encoding/decoding BASE64 string, etc.   <br>
+    By default,
+    <code>MaxDirectMemorySize</code> is close to the size of heap memory size.
+    So, if <code>MaxDirectoryMemorySize</code> is not set, 
+    Spark containers might use too much off-heap memory.</p>
+<div class="highlight"><pre><span></span><code>--conf<span class="w"> </span>spark.executor.extraJavaOptions<span class="o">=</span>-XX:MaxDirectMemorySize<span class="o">=</span>8G
+</code></pre></div>
+
+</li>
+</ol>
+<h2 id="references">References</h2>
+<p><a href="https://medium.com/analytics-vidhya/solving-container-killed-by-yarn-for-exceeding-memory-limits-exception-in-apache-spark-b3349685df16">Solving “Container Killed by Yarn For Exceeding Memory Limits” Exception in Apache Spark</a></p>
+<p><a href="https://aws.amazon.com/premiumsupport/knowledge-center/emr-spark-yarn-memory-limit/#:~:text=Memory%20overhead%20is%20the%20amount,libraries%2C%20or%20memory%20mapped%20files.">How do I resolve the error "Container killed by YARN for exceeding memory limits" in Spark on Amazon EMR?</a></p>
+<p><a href="https://stackoverflow.com/questions/40781354/container-killed-by-yarn-for-exceeding-memory-limits-10-4-gb-of-10-4-gb-physic">“Container killed by YARN for exceeding memory limits. 10.4 GB of 10.4 GB physical memory used” on an EMR cluster with 75GB of memory</a></p>
+<p><a href="How do I resolve the error Container killed by YARN for exceeding memory limits in Spark on EMR?">https://www.youtube.com/watch?v=t97VJtPAL2s</a></p>
+<p><a href="https://issues.apache.org/jira/browse/YARN-2225">Turn the virtual memory check to be off by default</a></p>
+<p><a href="https://issues.apache.org/jira/browse/YARN-4714">[Java 8] Over usage of virtual memory</a></p>
+<p><a href="https://www.xspdf.com/resolution/50926958.html">Yarn memory limit</a></p>
+<p>https://stackoverflow.com/questions/37505638/understanding-spark-physical-plan</p>
+<p>https://community.hortonworks.com/questions/36266/spark-physical-plan-doubts-tungstenaggregate-tungs.html</p>
+<p><a href="https://www.waitingforcode.com/apache-spark/apache-spark-off-heap-memory/read#off-heap_memory_and_Project_Tungsten">Apache Spark and off-heap memory</a></p>
+<p><a href="https://medium.com/walmartglobaltech/decoding-memory-in-spark-parameters-that-are-often-confused-c11be7488a24">Decoding Memory in Spark — Parameters that are often confused</a></p>
+<p>http://stackoverflow.com/questions/29850784/what-are-the-likely-causes-of-org-apache-spark-shuffle-metadatafetchfailedexcept </p>
+<p>http://apache-spark-developers-list.1001551.n3.nabble.com/Lost-executor-on-YARN-ALS-iterations-td7916.html </p>
+<p>https://issues.apache.org/jira/browse/SPARK-4516?focusedCommentId=14220157&amp;page=com.atlassian.jira.plugin.system.issuetabpanels:comment-tabpanel#comment-14220157</p></div>
+    <footer>
+<p class="meta">
+  <span class="byline author vcard">
+    Posted by <span class="fn">Benjamin Du</span>
+  </span>
+<time datetime="2020-11-24T14:55:43-08:00" pubdate>Nov 24, 2020</time>  <span class="categories">
+    <a class="category" href="https://misc.legendu.net/tag/computer-science.html">Computer Science</a>
+    <a class="category" href="https://misc.legendu.net/tag/spark.html">Spark</a>
+    <a class="category" href="https://misc.legendu.net/tag/big-data.html">big data</a>
+    <a class="category" href="https://misc.legendu.net/tag/yarn.html">YARN</a>
+    <a class="category" href="https://misc.legendu.net/tag/memory.html">memory</a>
+    <a class="category" href="https://misc.legendu.net/tag/vmem.html">vmem</a>
+    <a class="category" href="https://misc.legendu.net/tag/pmem.html">pmem</a>
+    <a class="category" href="https://misc.legendu.net/tag/virtual-memory.html">virtual memory</a>
+    <a class="category" href="https://misc.legendu.net/tag/spark-issue.html">Spark issue</a>
+  </span>
+</p>    </footer>
+  </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div>
+  </section>
+</div>
+<aside class="sidebar">
+  <section>
+    <h1>Recent Posts</h1>
+    <ul id="recent_posts">
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/tips-on-health/">Tips on Health</a>
+      </li>
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/tips-on-child-education/">Tips on Child Education</a>
+      </li>
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/tips-on-fd/">Tips on fd</a>
+      </li>
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/the-fzf-command-is-a-great-alternative-to-find/">The fzf Command Is a Great Alternative to find</a>
+      </li>
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/ruff-is-an-extremely-fast-python-linter-written-in-rust/">Ruff Is An Extremely Fast Python Linter Written in Rust</a>
+      </li>
+    </ul>
+  </section>
+  <section>
+    <h1>Categories</h1>
+    <ul id="recent_posts">
+        <li><a href="https://misc.legendu.net/category/ai.html">AI</a></li>
+        <li><a href="https://misc.legendu.net/category/career.html">Career</a></li>
+        <li><a href="https://misc.legendu.net/category/cloud.html">Cloud</a></li>
+        <li><a href="https://misc.legendu.net/category/computer-science.html">Computer Science</a></li>
+        <li><a href="https://misc.legendu.net/category/fiannce.html">Fiannce</a></li>
+        <li><a href="https://misc.legendu.net/category/finance.html">Finance</a></li>
+        <li><a href="https://misc.legendu.net/category/fun-problems.html">Fun Problems</a></li>
+        <li><a href="https://misc.legendu.net/category/hardware.html">Hardware</a></li>
+        <li><a href="https://misc.legendu.net/category/health.html">Health</a></li>
+        <li><a href="https://misc.legendu.net/category/house.html">House</a></li>
+        <li><a href="https://misc.legendu.net/category/internet.html">Internet</a></li>
+        <li><a href="https://misc.legendu.net/category/investment.html">Investment</a></li>
+        <li><a href="https://misc.legendu.net/category/life.html">life</a></li>
+        <li><a href="https://misc.legendu.net/category/linux.html">Linux</a></li>
+        <li><a href="https://misc.legendu.net/category/os.html">OS</a></li>
+        <li><a href="https://misc.legendu.net/category/people.html">People</a></li>
+        <li><a href="https://misc.legendu.net/category/philosophy.html">Philosophy</a></li>
+        <li><a href="https://misc.legendu.net/category/research.html">Research</a></li>
+        <li><a href="https://misc.legendu.net/category/shopping.html">Shopping</a></li>
+        <li><a href="https://misc.legendu.net/category/soft-skills.html">soft skills</a></li>
+        <li><a href="https://misc.legendu.net/category/software.html">Software</a></li>
+        <li><a href="https://misc.legendu.net/category/statistics.html">Statistics</a></li>
+        <li><a href="https://misc.legendu.net/category/tools.html">Tools</a></li>
+    </ul>
+  </section>
+ 
+
+  <section>
+  <h1>Tags</h1>
+  <ul class="tagcloud">
+  </ul>
+  </section>
+
+
+
+  <section>
+    <h1>GitHub Repos</h1>
+    <ul id="gh_repos">
+      <li class="loading">Status updating...</li>
+    </ul>
+      <a href="https://github.com/legendu-net">@legendu-net</a> on GitHub
+    <script type="text/javascript">
+      $.domReady(function(){
+          if (!window.jXHR){
+              var jxhr = document.createElement('script');
+              jxhr.type = 'text/javascript';
+              jxhr.src = 'https://misc.legendu.net/theme/js/jXHR.js';
+              var s = document.getElementsByTagName('script')[0];
+              s.parentNode.insertBefore(jxhr, s);
+          }
+
+          github.showRepos({
+              user: 'legendu-net',
+              count: 5,
+              skip_forks: true,
+              target: '#gh_repos'
+          });
+      });
+    </script>
+    <script src="https://misc.legendu.net/theme/js/github.js" type="text/javascript"> </script>
+  </section>
+
+    <section>
+        <h1>Social</h2>
+        <ul>
+            <li><a href="https://www.linkedin.com/in/ben-chuanlong-du-1239b221/" target="_blank">LinkedIn</a></li>
+            <li><a href="https://hub.docker.com/u/dclong" target="_blank">Docker Hub</a></li>
+            <li><a href="https://stackoverflow.com/users/7808204/benjamin-du?tab=profile" target="_blank">Stack Overflow</a></li>
+            <li><a href="https://twitter.com/longendu" target="_blank">Twitter</a></li>
+        <!--
+            <li><a href="https://misc.legendu.net/" type="application/rss+xml" rel="alternate">RSS</a></li>
+            -->
+        </ul>
+    </section>
+</aside>    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Ben Chuanlong Du -
+  <span class="credit">Powered by <a href="http://getpelican.com">Pelican</a></span>
+</p></footer>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-3STS9BVPF6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-3STS9BVPF6');
+</script>
+	<script type="text/javascript">
+	  var disqus_shortname = 'dclong';
+          var disqus_identifier = '/blog/spark-issue-Container-killed-by-YARN-for-exceeding-memory-limits/';
+          var disqus_url = 'https://misc.legendu.net/blog/spark-issue-Container-killed-by-YARN-for-exceeding-memory-limits/';
+          var disqus_title = 'Spark Issue: Container Killed by Yarn for Exceeding Memory Limits';
+	  (function() {
+	    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	    dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+	    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	   })();
+	</script>
+</body>
+</html>

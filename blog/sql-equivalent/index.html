@@ -1,0 +1,2503 @@
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>SQL Equivalent</title>
+  <meta name="author" content="Ben Chuanlong Du">
+
+  <link href="https://misc.legendu.net/atom.xml" type="application/atom+xml" rel="alternate"
+        title="Ben Chuanlong Du's Blog Atom Feed" />
+
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link href="https://misc.legendu.net/favicon.png" rel="icon">
+  <link href="https://misc.legendu.net/theme/css/main_2.css" media="screen, projection"
+        rel="stylesheet" type="text/css">
+  <script src="https://misc.legendu.net/theme/js/modernizr-2.0.js"></script>
+  <script src="https://misc.legendu.net/theme/js/ender.js"></script>
+  <script src="https://misc.legendu.net/theme/js/octopress.js" type="text/javascript"></script>
+
+  <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <script data-ad-client="ca-pub-3836424032203369" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+</head>
+
+<body>
+  <header role="banner"><hgroup>
+  <h1><a href="https://misc.legendu.net/">Ben Chuanlong Du's Blog</a></h1>
+    <h2>It is never too late to learn.</h2>
+</hgroup></header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="https://misc.legendu.net/atom.xml" rel="subscribe-rss">RSS</a></li>
+</ul>
+
+<form name="search" action="https://www.bing.com/search" method="get" onSubmit="return build_query()">
+  <fieldset role="search">
+      <!--
+    <input type="hidden" name="q" value="site:https://misc.legendu.net" />
+        -->
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+
+<script type = "text/javascript">
+    function build_query() {
+        var query = document.forms["search"]["q"].value;
+        var prefix = "site:https://misc.legendu.net "
+        if (!query.startsWith(prefix)) {
+            query = prefix + query;
+            document.forms["search"]["q"].value = query;
+        }
+        return true;
+    }
+</script>
+
+<ul class="main-navigation">
+    <li><a href="https://www.legendu.net">Home</a></li>
+    <li><a href="https://misc.legendu.net">Blog</a></li>
+    <li><a href="https://misc.legendu.net/archives.html">Archives</a></li>
+    <li><a href="https://misc.legendu.net/categories.html">Categories</a></li>
+    <li><a href="https://misc.legendu.net/tags.html">Tags</a></li>
+    <li><a href="https://www.legendu.net/pages/about">About</a></li>
+</ul></nav>
+  <div id="main">
+    <div id="content">
+<div>
+  <article class="hentry" role="article">
+<header>
+      <h1 class="entry-title">SQL Equivalent</h1>
+      <p class="meta"><time datetime="2015-05-20T11:48:36-07:00" pubdate>May 20, 2015</time></p>
+</header>
+
+  <div class="entry-content"><p><strong>Things on this page are fragmentary and immature notes/thoughts of the author. Please read with your own judgement!</strong></p>
+<p><a href="https://www.jooq.org/translate/">SQL translation</a>
+is a great tool that transalte any SQL statement(s) to a different dialetc using the JOOQ Parser.</p>
+<div style="overflow-x:auto;">
+<style>
+    tr:nth-child(even) {background-color: #A3E4D7}
+</style>
+<table style="width:100%">
+  <tr>
+    <th> </th>
+    <th> SQL Variant </th>
+    <th> Code </th>
+  </tr>
+  <tr>
+    <td rowspan="9"> List <br> databases <a href="#footnote1">[1]</a> </td>
+    <td> SQLite 3 </td>
+    <td> <code> 
+        .DATABASES
+    </code> </td>
+  </tr>
+  <tr>
+    <td> MySQL </td>
+    <td> <code> 
+        SHOW DATABASES
+    </code> </td>
+  </tr>
+  <tr>
+    <td rowspan="4"> Spark/Hive </td>
+    <td> <code> 
+        SHOW DATABASES
+    </code> </td>
+  </tr>
+  <tr>
+    <td> <code> 
+        SHOW DATABASES LIKE "*user*"
+    </code> </td>
+  </tr>
+  <tr>
+    <td> <code> 
+        hdfs dfs -ls /path/to/hive/warehouse
+    </code> </td>
+  </tr>
+  <tr>
+    <td> <code> 
+        /* <br>
+        You can query the Hive Metastore DB <br>
+        if you have access. <br>
+        */
+    </code> </td>
+  </tr>
+  <tr>
+    <td> Teradata </td>
+    <td> <code> 
+        SHOW DATABASES
+    </code> </td>
+  </tr>
+  <tr>
+    <td> Oracle </td>
+    <td> <code> 
+        SHOW DATABASES
+    </code> </td>
+  </tr>
+  <tr>
+    <td> MS SQL Server </td>
+    <td> <code> 
+        SHOW DATABASES
+    </code> </td>
+  </tr>
+
+  <tr>
+    <td rowspan="6"> Use a <br> databases <a href="#footnote1">[1]</a> </td>
+    <td> SQLite 3 </td>
+    <td> <code> 
+    </code> </td>
+  </tr>
+  <tr>
+    <td> MySQL </td>
+    <td> <code> 
+        USE database_name
+    </code> </td>
+  </tr>
+  <tr>
+    <td> Spark/Hive </td>
+    <td> <code> 
+    </code> </td>
+  </tr>
+  <tr>
+    <td> Teradata </td>
+    <td rowspan="1"> <code> 
+        USE database_name
+    </code> </td>
+  </tr>
+  <tr>
+    <td> Oracle </td>
+    <td> <code> 
+        USE database_name
+    </code> </td>
+  </tr>
+  <tr>
+    <td> MS SQL Server </td>
+    <td> <code> 
+        USE database_name
+    </code> </td>
+  </tr>
+
+  <tr>
+    <td rowspan="12"> List all <br> tables <br>in the <br> current <br> database <a href="#footnote1">[1]</a> </td>
+    <td> SQLite 3 </td>
+    <td> <code> 
+        .TABLES <br>
+        SELECT name 
+        FROM db.sqlite_master 
+        WHERE type='table'
+    </code> </td>
+  </tr>
+  <tr>
+    <td> MySQL </td>
+    <td> <code> 
+        SHOW TABLES
+    </code> </td>
+  </tr>
+  <tr>
+    <td rowspan="4"> Spark/Hive </td>
+    <td> <code> 
+        SHOW TABLES
+    </code> </td>
+  </tr>
+  <tr>
+    <td> <code> 
+        SHOW TABLES in db_name
+    </code> </td>
+  </tr>
+  <tr>
+    <td> <code> 
+        SHOW TABLES in db_name like '*cust*'
+    </code> </td>
+  </tr>
+  <tr>
+    <td> <code> 
+        SHOW TABLE EXTENDED in db_name like '*cust*'
+    </code> </td>
+  </tr>
+  <tr>
+    <td> Teradata </td>
+    <td rowspan="1"> <code> 
+        SHOW TABLES
+    </code> </td>
+  </tr>
+  <tr>
+    <td rowspan="4"> Oracle </td>
+    <td> <code> 
+        /* All tables in a database */ <br>
+        SELECT * <br>
+        FROM dba_tables <br>
+        WHERE table_schema = 'current database name'<br>
+    </code> </td>
+  </tr>
+  <tr>
+    <td> <code> 
+        /* The table all_tab_cols contains information <br>
+        about tables and their columns */
+    </code> </td>
+  </tr>
+  <tr>
+    <td> <code> 
+        /* List all tables owned by the current user */ <br>
+        select * from user_tables
+    </code> </td>
+  </tr>
+  <tr>
+    <td> <code> 
+        /* List all tables accessible to the current user */ <br>
+        select * from all_tables
+    </code> </td>
+  <tr>
+    <td> MS SQL Server </td>
+    <td> <code> 
+        SELECT table_name <br> 
+        FROM information_schema.tables <br>
+        WHERE table_type = 'BASE TABLE' <br>
+        AND table_catalog = 'current database name' 
+    </code> </td>
+  </tr>
+
+  <tr>
+    <td rowspan="7"> Describe <br> a table </td>
+    <td> SQLite 3 </td>
+    <td> <code> 
+        .SCHEMA table_name
+    </code> </td>
+  </tr>
+  <tr>
+    <td> MySQL </td>
+    <td> <code> 
+        DESCRIBE table_name
+    </code> </td>
+  </tr>
+  <tr>
+    <td> Spark/Hive </td>
+    <td> <code> 
+        DESCRIBE [EXTENDED] table_name
+    </code> </td>
+  </tr>
+  <tr>
+    <td rowspan="2"> Teradata </td>
+    <td> <code> 
+        HELP TABLE table_name
+    </code> </td>
+  </tr>
+  <tr>
+    <td> <code> 
+        HELP COLUMN table_name.*
+    </code> </td>
+  </tr>
+  <tr>
+    <td> Oracle </td>
+    <td> <code> 
+        DESCRIBE table_name
+    </code> </td>
+  </tr>
+  <tr>
+    <td> MS SQL Server </td>
+    <td> <code> 
+        DESCRIBE table_name
+    </code> </td>
+  </tr>
+
+  <tr>
+    <td rowspan="7"> Source code <br> of a table </td>
+    <td> SQLite 3 </td>
+    <td> <code> 
+    </code> </td>
+  </tr>
+  <tr>
+    <td> MySQL </td>
+    <td> <code> 
+    </code> </td>
+  </tr>
+  <tr>
+    <td> Spark/Hive </td>
+    <td> <code> 
+        SHOW CREATE table_name
+    </code> </td>
+  </tr>
+  <tr>
+    <td rowspan="2"> Teradata </td>
+    <td> <code> 
+    </code> </td>
+  </tr>
+  <tr>
+    <td> <code> 
+    </code> </td>
+  </tr>
+  <tr>
+    <td> Oracle </td>
+    <td> <code> 
+    </code> </td>
+  </tr>
+  <tr>
+    <td> MS SQL Server </td>
+    <td> <code> 
+    </code> </td>
+  </tr>
+
+  <tr>
+    <td rowspan="8"> List all <br> tables <br> owned <br> by the <br> current <br> user </td>
+    <td> SQLite 3 </td>
+    <td> <code> 
+    </code> </td>
+  </tr>
+  <tr>
+    <td> MySQL </td>
+    <td> <code> 
+    </code> </td>
+  </tr>
+  <tr>
+    <td> Spark/Hive </td>
+    <td> <code> 
+    </code> </td>
+  </tr>
+  <tr>
+    <td> Teradata </td>
+    <td rowspan="1"> <code> 
+    </code> </td>
+  </tr>
+  <tr>
+    <td rowspan="3"> Oracle </td>
+    <td> <code> 
+        /* there is no "owner" column in user_tables, <br>
+           since all tables in user_tables are owned by the current user <br>
+         */ <br>
+        SELECT * <br>
+        FROM user_tables
+    </code> </td>
+  </tr>
+  <tr>
+    <td> <code> 
+        SELECT * <br>
+        FROM all_tables <br> 
+        WHERE owner = "current_user_name"
+    </code> </td>
+  </tr>
+  <tr>
+    <td> <code> 
+        SELECT * <br>
+        FROM dba_tables <br> 
+        WHERE owner = "curent_user_name"
+    </code> </td>
+  </tr>
+  <tr>
+    <td> MS SQL Server </td>
+    <td> <code> 
+    </code> </td>
+  </tr>
+
+  <tr>
+    <td rowspan="6"> List all <br> tables <br> accessible <br> by the <br> current <br> user </td>
+    <td> SQLite 3 </td>
+    <td> <code> 
+    </code> </td>
+  </tr>
+  <tr>
+    <td> MySQL </td>
+    <td> <code> 
+    </code> </td>
+  </tr>
+  <tr>
+    <td> Spark/Hive </td>
+    <td> <code> 
+    </code> </td>
+  </tr>
+  <tr>
+    <td> Teradata </td>
+    <td rowspan="1"> <code> 
+    </code> </td>
+  </tr>
+  <tr>
+    <td> Oracle </td>
+    <td> <code> 
+        SELECT * <br>
+        FROM all_tables
+    </code> </td>
+  </tr>
+  <tr>
+    <td> MS SQL Server </td>
+    <td> <code> 
+    </code> </td>
+  </tr>
+
+  <tr>
+    <td rowspan="6"> List all <br> tables <br> in the <br> system </td>
+    <td> SQLite 3 </td>
+    <td> <code> 
+    </code> </td>
+  </tr>
+  <tr>
+    <td> MySQL </td>
+    <td> <code> 
+    </code> </td>
+  </tr>
+  <tr>
+    <td> Spark/Hive </td>
+    <td> <code> 
+    </code> </td>
+  </tr>
+  <tr>
+    <td> Teradata </td>
+    <td rowspan="1"> <code> 
+    </code> </td>
+  </tr>
+  <tr>
+    <td> Oracle </td>
+    <td> <code> 
+        SELECT * FROM dba_tables
+    </code> </td>
+  </tr>
+  <tr>
+    <td> MS SQL Server </td>
+    <td> <code> 
+    </code> </td>
+  </tr>
+
+  <tr>
+    <td rowspan="6"> Create <br> a <br> table </td>
+    <td> SQLite 3 </td>
+    <td> <code> 
+    CREATE TABLE IF NOT EXISTS queries ( <br> &nbsp; &nbsp;
+        query Text NOT NULL PRIMARY KEY, <br> &nbsp; &nbsp;
+        timestamp Real NOT NULL, <br> &nbsp; &nbsp;
+        data Blob NOT NULL <br> 
+    )
+    </code> </td>
+  </tr>
+  <tr>
+    <td> MySQL </td>
+    <td> <code> 
+    CREATE TABLE IF NOT EXISTS queries ( <br> &nbsp; &nbsp;
+        query VarChar NOT NULL PRIMARY KEY, <br> &nbsp; &nbsp;
+        timestamp Decimal(18, 3) NOT NULL, <br> &nbsp; &nbsp;
+        data Blob NOT NULL <br> 
+    )
+    </code> </td>
+  </tr>
+  <tr>
+    <td> 
+        <a href="http://www.legendu.net/misc/blog/spark-sql-tips/"> Spark/Hive </a>
+    </td>
+    <td> <code> 
+    CREATE TABLE IF NOT EXISTS queries ( <br> &nbsp; &nbsp;
+        query String NOT NULL, <br> &nbsp; &nbsp;
+        timestamp Double NOT NULL, <br> &nbsp; &nbsp;
+        data Binary NOT NULL <br> 
+    )
+    </code> </td>
+  </tr>
+  <tr>
+    <td> Teradata </td>
+    <td> <code> 
+    CREATE TABLE IF NOT EXISTS queries ( <br> &nbsp; &nbsp;
+        query VarChar NOT NULL PRIMARY KEY, <br> &nbsp; &nbsp;
+        timestamp Number NOT NULL, <br> &nbsp; &nbsp;
+        data Blob NOT NULL <br> 
+    )
+    </code> </td>
+  </tr>
+  <tr>
+    <td> Oracle </td>
+    <td> <code> 
+    CREATE TABLE IF NOT EXISTS queries ( <br> &nbsp; &nbsp;
+        query Text NOT NULL PRIMARY KEY, <br> &nbsp; &nbsp;
+        timestamp Decimal(18, 3) NOT NULL, <br> &nbsp; &nbsp;
+        data Blob NOT NULL <br> 
+    )
+    </code> </td>
+  </tr>
+  <tr>
+    <td> MS SQL Server </td>
+    <td> <code> 
+    CREATE TABLE IF NOT EXISTS queries ( <br> &nbsp; &nbsp;
+        query VarChar NOT NULL PRIMARY KEY, <br> &nbsp; &nbsp;
+        timestamp Decimal(18, 3) NOT NULL, <br> &nbsp; &nbsp;
+        data Blob NOT NULL <br> 
+    )
+    </code> </td>
+  </tr>
+
+  <tr>
+    <td rowspan="6"> Drop a <br> table <br> if exists </td>
+    <td> SQLite 3 </td>
+    <td> <code> 
+    </code> </td>
+  </tr>
+  <tr>
+    <td> MySQL </td>
+    <td> <code> 
+    </code> </td>
+  </tr>
+  <tr>
+    <td> Spark/Hive </td>
+    <td> <code> 
+    </code> </td>
+  </tr>
+  <tr>
+    <td> Teradata </td>
+    <td rowspan="1"> <code> 
+        DROP TABEL IF EXISTS table_name
+    </code> </td>
+  </tr>
+  <tr>
+    <td> Oracle </td>
+    <td> <code> 
+        IF object_id(table_name) IS NOT NULL THEN <br>
+            DROP TABLE table_name
+    </code> </td>
+  </tr>
+  <tr>
+    <td> MS SQL Server </td>
+    <td> <code> 
+    </code> </td>
+  </tr>
+
+  <tr>
+    <td rowspan="7"> Limit <br> number <br> of <br> returned <br> rows </td>
+    <td> SQLite 3 </td>
+    <td> <code> 
+        SELECT * <br>
+        FROM table <br>
+        LIMIT 5
+    </code> </td>
+  </tr>
+  <tr>
+    <td> MySQL </td>
+    <td> <code> 
+        SELECT * <br>
+        FROM table_name <br> 
+        LIMIT 5
+    </code> </td>
+  </tr>
+  <tr>
+    <td> Spark/Hive </td>
+    <td> <code> 
+        SELECT * <br>
+        FROM table_name <br> 
+        LIMIT 5
+    </code> </td>
+  </tr>
+  <tr>
+    <td> Teradata </td>
+    <td> <code> 
+        SELECT TOP 5 * <br>
+        FROM table
+    </code> </td>
+  </tr>
+  <tr>
+    <td> Oracle </td>
+    <td> <code> 
+        SELECT * <br>
+        FROM table <br>
+        LIMIT 5
+    </code> </td>
+  </tr>
+  <tr>
+    <td rowspan="2"> MS SQL Server </td>
+    <td> <code> 
+        SELECT TOP 5 * <br> 
+        FROM table
+    </code> </td>
+  </tr>
+  <tr>
+    <td> <code> 
+        SELECT TOP 50 PERCENT * <br> 
+        FROM table
+    </code> </td>
+  </tr>
+
+  <tr>
+    <td rowspan="8"> Randomly <br> sample <br> 100 rows </td>
+    <td> SQLite 3 </td>
+    <td> <code> 
+        SELECT * <br>
+        FROM table <br> 
+        ORDER BY random() <br> 
+        LIMIT 100
+    </code> </td>
+  </tr>
+  <tr>
+    <td> MySQL </td>
+    <td> <code> 
+    </code> </td>
+  </tr>
+  <tr>
+    <td rowspan="3"> Spark/Hive </td>
+    <td> <code> 
+    SELECT * <br>
+    FROM table <br>
+    TABLESAMPLE (1 PERCENT) <br>
+    LIMIT 100
+    </code> </td>
+  </tr>
+  <tr>
+    <td> <code> 
+    SELECT * <br>
+    FROM table <br>
+    ORDER BY random() <br>
+    LIMIT 100
+    </code> </td>
+  </tr>
+  <tr>
+    <td> <code> 
+    /* NOTE: the following does NOT work!!! <br>
+    It is equivalent to `LIMIT 100`
+    */ <br>
+    SELECT * FROM table <br>
+    TABLESAMPLE (100 ROWS)
+    </code> </td>
+  </tr>
+  <tr>
+    <td rowspan="1"> 
+        <a href="https://docs.teradata.com/reader/2_MC9vCtAJRlKle2Rpb0mA/XTSw8n_~xbTDRIHwHyUiWA"> Teradata </a>
+      </td>
+    <td> <code> 
+        SELECT * <br>
+        FROM table <br>
+        SAMPLE 100
+    </code> </td>
+  </tr>
+  <tr>
+    <td> Oracle </td>
+    <td> <code> 
+    </code> </td>
+  </tr>
+  <tr>
+    <td> MS SQL Server </td>
+    <td> <code> 
+    </code> </td>
+  </tr>
+
+  <tr>
+    <td rowspan="6"> Randomly sample <br> rows with <br> acceptance <br> ratio 0.1 </td>
+    <td> SQLite 3 </td>
+    <td> <code> 
+        /* <br>
+        Note that `random()` generates a pseudo-random integer <br>
+        between -9223372036854775808 and +9223372036854775807. <br>
+        */ <br>
+        SELECT * <br>
+        FROM table <br> 
+        WHERE random() % 10 = 0
+    </code> </td>
+  </tr>
+  <tr>
+    <td> MySQL </td>
+    <td> <code> 
+    </code> </td>
+  </tr>
+  <tr>
+    <td> Spark/Hive </td>
+    <td> <code> 
+    SELECT * FROM table <br>
+    TABLESAMPLE (10 PERCENT)
+    </code> </td>
+  </tr>
+  <tr>
+    <td> Teradata </td>
+    <td> <code> 
+        SELECT * <br>
+        FROM table <br>
+        SAMPLE 0.1
+    </code> </td>
+  </tr>
+  <tr>
+    <td> Oracle </td>
+    <td> <code> 
+    </code> </td>
+  </tr>
+  <tr>
+    <td> MS SQL Server </td>
+    <td> <code> 
+    </code> </td>
+  </tr>
+
+
+ <tr>
+    <td rowspan="6"> Randomly <br> sample <br> buckets </td>
+    <td> SQLite 3 </td>
+    <td> <code> 
+    </code> </td>
+  </tr>
+  <tr>
+    <td> MySQL </td>
+    <td> <code> 
+    </code> </td>
+  </tr>
+  <tr>
+    <td> 
+    <a href="http://spark.apache.org/docs/latest/sql-ref-syntax-qry-select-sampling.html"> Spark/Hive </a>
+     </td>
+    <td> <code> 
+    SELECT * FROM table <br>
+    TABLESAMPLE (BUCKET 4 out of 10)
+    </code> </td>
+  </tr>
+  <tr>
+    <td> Teradata </td>
+    <td> <code> 
+    </code> </td>
+  </tr>
+  <tr>
+    <td> Oracle </td>
+    <td> <code> 
+    </code> </td>
+  </tr>
+  <tr>
+    <td> MS SQL Server </td>
+    <td> <code> 
+    </code> </td>
+  </tr>
+
+
+
+  <tr>
+    <td rowspan="7"> Insert <br> multiple <br> rows in <br> one <br> statement </td>
+    <td> SQLite 3 </td>
+    <td> <code> 
+    </code> </td>
+  </tr>
+  <tr>
+    <td> MySQL </td>
+    <td> <code> 
+    </code> </td>
+  </tr>
+  <tr>
+    <td> 
+        <a href="http://www.legendu.net/misc/blog/spark-sql-tips/"> Spark/Hive </a>
+    </td>
+    <td> <code> 
+    INSERT INTO tablel_name PARTITION ( <br> &nbsp; &nbsp;
+        par_col_1 = pv1, <br> &nbsp; &nbsp;
+        par_col_2 = pv2 <br>
+    ) VALUES ( <br> &nbsp; &nbsp;
+        v11, v12, ... <br>
+    ), ( <br> &nbsp; &nbsp;
+        v21, v22, ... <br>
+    )
+    </code> </td>
+  </tr>
+  <tr>
+    <td> Teradata </td>
+    <td> <code> 
+        INSERT INTO table_name ( <br> &nbsp; &nbsp;
+            first_name, <br> &nbsp; &nbsp;
+            last_name <br>
+        ) VALUES  <br> &nbsp; &nbsp;
+            ('Fred', 'Smith'), <br> &nbsp; &nbsp;
+            ('John', 'Smith'), <br> &nbsp; &nbsp;
+            ('Michael', 'Smith'), <br> &nbsp; &nbsp;
+            ('Robert', 'Smith') <br>
+    </code> </td>
+  </tr>
+  <tr>
+    <td rowspan="2"> Oracle </td>
+    <td> <code> 
+        INSERT INTO pager ( <br> &nbsp; &nbsp;
+            pag_id, <br> &nbsp; &nbsp;
+            pag_parent, <br> &nbsp; &nbsp;
+            pag_name, <br> &nbsp; &nbsp;
+            pag_active <br> 
+        ) <br>
+        SELECT 8000, 0, 'Multi 8000', 1 FROM dual <br>
+        UNION ALL  <br>
+        SELECT 8001, 0, 'Multi 8001', 1 FROM dual <br>
+    </code> </td>
+  </tr>
+  <tr>
+    <td> <code> 
+        INSERT ALL <br>
+        INTO t (col1, col2, col3) VALUES ('val1_1', 'val1_2', 'val1_3') <br>
+        INTO t (col1, col2, col3) VALUES ('val2_1', 'val2_2', 'val2_3') <br>
+        INTO t (col1, col2, col3) VALUES ('val3_1', 'val3_2', 'val3_3')
+    </code> </td>
+  </tr>
+  <tr>
+    <td> MS SQL Server </td>
+    <td> <code> 
+    </code> </td>
+  </tr>
+
+  <tr>
+    <td rowspan="7"> Update </td>
+    <td> SQLite 3 </td>
+    <td> <code> 
+    </code> </td>
+  </tr>
+  <tr>
+    <td> MySQL </td>
+    <td> <code> 
+    </code> </td>
+  </tr>
+  <tr>
+    <td> Spark </td>
+    <td> <code> 
+    - not supported as of Spark 2.4.5 <br>
+    - Spark SQL 3.0.0 has update/delete APIs but not implemented <br>
+    - Update/delete is feasible using Detal Lake
+    </code> </td>
+  </tr>
+  <tr>
+    <td> Hive </td>
+    <td> <code> 
+    </code> </td>
+  </tr>
+  <tr>
+    <td> Teradata </td>
+    <td> <code> 
+    </code> </td>
+  </tr>
+  <tr>
+    <td> Oracle </td>
+    <td> <code> 
+    </code> </td>
+  </tr>
+  <tr>
+    <td> MS SQL Server </td>
+    <td> <code> 
+    </code> </td>
+  </tr>
+
+  <tr>
+    <td rowspan="7"> Insert <br> or <br> Replace </td>
+    <td> 
+    <a href="https://www.sqlitetutorial.net/sqlite-replace-statement/"> SQLite 3 </a> 
+    </td>
+    <td> <code> 
+    REPLACE INTO phonebook ( <br> &nbsp; &nbsp;
+        name, phonenumber, validdate <br>
+    ) VALUES ( <br> &nbsp; &nbsp;
+        'Alice', '704-555-1212', '2018-05-08' <br>
+    )
+    </code> </td>
+  </tr>
+  <tr>
+    <td> MySQL </td>
+    <td> <code> 
+    </code> </td>
+  </tr>
+  <tr>
+    <td> Spark </td>
+    <td> <code> 
+    - not supported as of Spark 2.4.5 <br>
+    - Spark SQL 3.0.0 has update/delete APIs but not implemented <br>
+    - Update/delete is feasible using Detal Lake
+    </code> </td>
+  </tr>
+  <tr>
+    <td> Hive </td>
+    <td> <code> 
+    </code> </td>
+  </tr>
+  <tr>
+    <td> Teradata </td>
+    <td> <code> 
+    </code> </td>
+  </tr>
+  <tr>
+    <td> Oracle </td>
+    <td> <code> 
+    </code> </td>
+  </tr>
+  <tr>
+    <td> MS SQL Server </td>
+    <td> <code> 
+    </code> </td>
+  </tr>
+
+   <tr>
+    <td rowspan="7"> Upsert </td>
+    <td> 
+    <a href="https://sqlite.org/lang_UPSERT.html"> SQLite 3 </a> 
+    </td>
+    <td> <code> 
+    INSERT INTO phonebook ( <br> &nbsp; &nbsp;
+        name, phonenumber, validDate <br>
+    ) VALUES ( <br> &nbsp; &nbsp;
+        'Alice', '704-555-1212', '2018-05-08' <br>
+    ) ON CONFLICT (name) DO UPDATE <br>
+    SET <br> &nbsp; &nbsp;
+        phonenumber=excluded.phonenumber, <br> &nbsp; &nbsp;
+        validDate=excluded.validDate <br>
+    WHERE <br> &nbsp; &nbsp;
+        excluded.validDate > phonebook.validDate
+    </code> </td>
+  </tr>
+  <tr>
+    <td> MySQL </td>
+    <td> <code> 
+    </code> </td>
+  </tr>
+  <tr>
+    <td> Spark </td>
+    <td> <code> 
+    - not supported as of Spark 2.4.5 <br>
+    - Spark SQL 3.0.0 has update/delete APIs but not implemented <br>
+    - Update/delete is feasible using Detal Lake
+    </code> </td>
+  </tr>
+  <tr>
+    <td> Hive </td>
+    <td> <code> 
+    </code> </td>
+  </tr>
+  <tr>
+    <td> Teradata </td>
+    <td> <code> 
+    </code> </td>
+  </tr>
+  <tr>
+    <td> Oracle </td>
+    <td> <code> 
+    </code> </td>
+  </tr>
+  <tr>
+    <td> MS SQL Server </td>
+    <td> <code> 
+    </code> </td>
+  </tr>
+
+  <tr>
+    <td rowspan="7"> Delete </td>
+    <td> SQLite 3 </td>
+    <td> <code> 
+    </code> </td>
+  </tr>
+  <tr>
+    <td> MySQL </td>
+    <td> <code> 
+    </code> </td>
+  </tr>
+  <tr>
+    <td> Spark </td>
+    <td> <code> 
+    - not supported as of Spark 2.4.5 <br>
+    - Spark SQL 3.0.0 has update/delete APIs but not implemented <br>
+    - Update/delete is feasible using Detal Lake
+    </code> </td>
+  </tr>
+  <tr>
+    <td> Hive </td>
+    <td> <code> 
+    </code> </td>
+  </tr>
+  <tr>
+    <td> Teradata </td>
+    <td> <code> 
+    </code> </td>
+  </tr>
+  <tr>
+    <td> Oracle </td>
+    <td> <code> 
+    </code> </td>
+  </tr>
+  <tr>
+    <td> MS SQL Server </td>
+    <td> <code> 
+    </code> </td>
+  </tr>
+
+  <tr>
+    <td rowspan="6"> Insert </td>
+    <td> SQLite 3 </td>
+    <td> <code> 
+    </code> </td>
+  </tr>
+  <tr>
+    <td> MySQL </td>
+    <td> <code> 
+    </code> </td>
+  </tr>
+  <tr>
+    <td> Spark/Hive </td>
+    <td> <code> 
+    </code> </td>
+  </tr>
+  <tr>
+    <td> Teradata </td>
+    <td> <code> 
+    INSERT INTO some_table <br>
+    SELECT * FROM another_table
+    </code> </td>
+  </tr>
+  <tr>
+    <td> Oracle </td>
+    <td> <code> 
+    </code> </td>
+  </tr>
+  <tr>
+    <td> MS SQL Server </td>
+    <td> <code> 
+    </code> </td>
+  </tr>
+
+  <tr>
+    <td rowspan="6"> Refresh <br> Table <br> Cache </td>
+    <td> SQLite 3 </td>
+    <td> <code> 
+    </code> </td>
+  </tr>
+  <tr>
+    <td> MySQL </td>
+    <td> <code> 
+    </code> </td>
+  </tr>
+  <tr>
+    <td> Spark/Hive </td>
+    <td> <code> 
+    REFRESH TABLE table_name
+    </code> </td>
+  </tr>
+  <tr>
+    <td> Teradata </td>
+    <td> <code> 
+    </code> </td>
+  </tr>
+  <tr>
+    <td> Oracle </td>
+    <td> <code> 
+    </code> </td>
+  </tr>
+  <tr>
+    <td> MS SQL Server </td>
+    <td> <code> 
+    </code> </td>
+  </tr>
+
+
+  <tr>
+    <td rowspan="6"> Concatenate <br> Strings </td>
+    <td> SQLite 3 </td>
+    <td> <code> 
+    </code> </td>
+  </tr>
+  <tr>
+    <td> MySQL </td>
+    <td> <code> 
+    </code> </td>
+  </tr>
+  <tr>
+    <td> 
+        <a href="http://www.legendu.net/misc/blog/pyspark-func-string/"> Spark/Hive </a>
+    </td>
+    <td> <code> 
+    SELECT concat('Spark', 'SQL') <br>
+    FROM table
+    </code> </td>
+  </tr>
+  <tr>
+    <td> Teradata </td>
+    <td> <code> 
+    </code> </td>
+  </tr>
+  <tr>
+    <td> Oracle </td>
+    <td> <code> 
+    </code> </td>
+  </tr>
+  <tr>
+    <td> MS SQL Server </td>
+    <td> <code> 
+    </code> </td>
+  </tr>
+
+  <tr>
+    <td rowspan="8"> Substring </td>
+    <td> SQLite 3 </td>
+    <td> <code> 
+    </code> </td>
+  </tr>
+  <tr>
+    <td> MySQL </td>
+    <td> <code> 
+    </code> </td>
+  </tr>
+  <tr>
+    <td rowspan="3"> 
+        <a href="http://www.legendu.net/misc/blog/pyspark-func-string/"> Spark/Hive </a>
+    </td>
+    <td> <code> 
+    /* substr and substring are equivalent in Spark/Hive SQL */ <br>
+    SELECT <br> &nbsp; &nbsp; 
+        substr('Spark SQL', 5, 1) -- resulting 'k' <br>
+    FROM <br> &nbsp; &nbsp;
+        table <br>
+    </code> </td>
+  </tr>
+  <tr>
+    <td> <code> 
+    left
+    </code> </td>
+  </tr>
+  <tr>
+    <td> <code> 
+    right
+    </code> </td>
+  </tr>
+  <tr>
+    <td> Teradata </td>
+    <td> <code> 
+    substr
+    </code> </td>
+  </tr>
+  <tr>
+    <td> Oracle </td>
+    <td> <code> 
+    </code> </td>
+  </tr>
+  <tr>
+    <td> MS SQL Server </td>
+    <td> <code> 
+    </code> </td>
+  </tr>
+
+  <tr>
+    <td rowspan="6"> trim </td>
+    <td> SQLite 3 </td>
+    <td> <code> 
+    </code> </td>
+  </tr>
+  <tr>
+    <td> MySQL </td>
+    <td> <code> 
+    </code> </td>
+  </tr>
+  <tr>
+    <td> 
+        <a href="http://www.legendu.net/misc/blog/pyspark-func-string/"> Spark/Hive </a>
+    </td>
+    <td> <code> 
+    ltrim/rtrim/trim
+    </code> </td>
+  </tr>
+  <tr>
+    <td> Teradata </td>
+    <td> <code> 
+    trim
+    </code> </td>
+  </tr>
+  <tr>
+    <td> Oracle </td>
+    <td> <code> 
+    </code> </td>
+  </tr>
+  <tr>
+    <td> MS SQL Server </td>
+    <td> <code> 
+    </code> </td>
+  </tr>
+
+  <tr>
+    <td rowspan="6"> substitute </td>
+    <td> SQLite 3 </td>
+    <td> <code> 
+    </code> </td>
+  </tr>
+  <tr>
+    <td> MySQL </td>
+    <td> <code> 
+    </code> </td>
+  </tr>
+  <tr>
+    <td> 
+        <a href="http://www.legendu.net/misc/blog/pyspark-func-string/"> Spark/Hive </a>
+    </td>
+    <td> <code> 
+    replace/translate/regexp_replace
+    </code> </td>
+  </tr>
+  <tr>
+    <td> Teradata </td>
+    <td> <code> 
+    oreplace, otranslate
+    </code> </td>
+  </tr>
+  <tr>
+    <td> Oracle </td>
+    <td> <code> 
+    </code> </td>
+  </tr>
+  <tr>
+    <td> MS SQL Server </td>
+    <td> <code> 
+    </code> </td>
+  </tr>
+
+  <tr>
+    <td rowspan="6"> length of string </td>
+    <td> SQLite 3 </td>
+    <td> <code> 
+    </code> </td>
+  </tr>
+  <tr>
+    <td> MySQL </td>
+    <td> <code> 
+    </code> </td>
+  </tr>
+  <tr>
+    <td> 
+        <a href="http://www.legendu.net/misc/blog/pyspark-func-string/"> Spark/Hive </a>
+    </td>
+    <td> <code> 
+    </code> </td>
+  </tr>
+  <tr>
+    <td> Teradata </td>
+    <td> <code> 
+    char_length
+    </code> </td>
+  </tr>
+  <tr>
+    <td> Oracle </td>
+    <td> <code> 
+    </code> </td>
+  </tr>
+  <tr>
+    <td> MS SQL Server </td>
+    <td> <code> 
+    </code> </td>
+  </tr>
+
+  <tr>
+    <td rowspan="7"> Index of substring </td>
+    <td> SQLite 3 </td>
+    <td> <code> 
+    </code> </td>
+  </tr>
+  <tr>
+    <td> MySQL </td>
+    <td> <code> 
+    </code> </td>
+  </tr>
+  <tr>
+    <td> 
+        <a href="http://www.legendu.net/misc/blog/pyspark-func-string/"> Spark/Hive </a>
+    </td>
+    <td> <code> 
+    substring_index
+    </code> </td>
+  </tr>
+  <tr>
+    <td rowspan="2"> Teradata </td>
+    <td> <code> 
+    position('de' IN 'abcdefg') <br>
+    </code> </td>
+  </tr>
+  <tr>
+    <td> <code> 
+    regexp_instr('abc', 'a') <br>
+    -- 1-base index
+    </code> </td>
+  </tr>
+  <tr>
+    <td> Oracle </td>
+    <td> <code> 
+    </code> </td>
+  </tr>
+  <tr>
+    <td> MS SQL Server </td>
+    <td> <code> 
+    </code> </td>
+  </tr>
+
+  <tr>
+    <td rowspan="6"> upper case </td>
+    <td> SQLite 3 </td>
+    <td> <code> 
+    </code> </td>
+  </tr>
+  <tr>
+    <td> MySQL </td>
+    <td> <code> 
+    </code> </td>
+  </tr>
+  <tr>
+    <td> 
+        <a href="http://www.legendu.net/misc/blog/pyspark-func-string/"> Spark/Hive </a>
+    </td>
+    <td> <code> 
+    ucase/upper
+    </code> </td>
+  </tr>
+  <tr>
+    <td> Teradata </td>
+    <td> <code> 
+    </code> </td>
+  </tr>
+  <tr>
+    <td> Oracle </td>
+    <td> <code> 
+    </code> </td>
+  </tr>
+  <tr>
+    <td> MS SQL Server </td>
+    <td> <code> 
+    </code> </td>
+  </tr>
+
+  <tr>
+    <td rowspan="6"> decode base64 </td>
+    <td> SQLite 3 </td>
+    <td> <code> 
+    </code> </td>
+  </tr>
+  <tr>
+    <td> MySQL </td>
+    <td> <code> 
+    </code> </td>
+  </tr>
+  <tr>
+    <td> 
+        <a href="http://www.legendu.net/misc/blog/pyspark-func-string/"> Spark/Hive </a>
+    </td>
+    <td> <code> 
+    unbase64
+    </code> </td>
+  </tr>
+  <tr>
+    <td> Teradata </td>
+    <td> <code> 
+    </code> </td>
+  </tr>
+  <tr>
+    <td> Oracle </td>
+    <td> <code> 
+    </code> </td>
+  </tr>
+  <tr>
+    <td> MS SQL Server </td>
+    <td> <code> 
+    </code> </td>
+  </tr>
+
+  <tr>
+    <td rowspan="6"> decode hex </td>
+    <td> SQLite 3 </td>
+    <td> <code> 
+    </code> </td>
+  </tr>
+  <tr>
+    <td> MySQL </td>
+    <td> <code> 
+    </code> </td>
+  </tr>
+  <tr>
+    <td> 
+        <a href="http://www.legendu.net/misc/blog/pyspark-func-string/"> Spark/Hive </a>
+    </td>
+    <td> <code> 
+    unhex
+    </code> </td>
+  </tr>
+  <tr>
+    <td> Teradata </td>
+    <td> <code> 
+    </code> </td>
+  </tr>
+  <tr>
+    <td> Oracle </td>
+    <td> <code> 
+    </code> </td>
+  </tr>
+  <tr>
+    <td> MS SQL Server </td>
+    <td> <code> 
+    </code> </td>
+  </tr>
+
+  <tr>
+    <td rowspan="6"> generate an uuid </td>
+    <td> SQLite 3 </td>
+    <td> <code> 
+    </code> </td>
+  </tr>
+  <tr>
+    <td> MySQL </td>
+    <td> <code> 
+    </code> </td>
+  </tr>
+  <tr>
+    <td> 
+        <a href="http://www.legendu.net/misc/blog/pyspark-func-string/"> Spark/Hive </a>
+    </td>
+    <td> <code> 
+    uuid
+    </code> </td>
+  </tr>
+  <tr>
+    <td> Teradata </td>
+    <td> <code> 
+    </code> </td>
+  </tr>
+  <tr>
+    <td> Oracle </td>
+    <td> <code> 
+    </code> </td>
+  </tr>
+  <tr>
+    <td> MS SQL Server </td>
+    <td> <code> 
+    </code> </td>
+  </tr>
+
+  <tr>
+    <td rowspan="6"> reverse a string </td>
+    <td> SQLite 3 </td>
+    <td> <code> 
+    </code> </td>
+  </tr>
+  <tr>
+    <td> MySQL </td>
+    <td> <code> 
+    </code> </td>
+  </tr>
+  <tr>
+    <td> 
+        <a href="http://www.legendu.net/misc/blog/pyspark-func-string/"> Spark/Hive </a>
+    </td>
+    <td> <code> 
+    reverse
+    </code> </td>
+  </tr>
+  <tr>
+    <td> Teradata </td>
+    <td> <code> 
+    </code> </td>
+  </tr>
+  <tr>
+    <td> Oracle </td>
+    <td> <code> 
+    </code> </td>
+  </tr>
+  <tr>
+    <td> MS SQL Server </td>
+    <td> <code> 
+    </code> </td>
+  </tr>
+
+  <tr>
+    <td rowspan="8"> string matching </td>
+    <td> SQLite 3 </td>
+    <td> <code> 
+    </code> </td>
+  </tr>
+  <tr>
+    <td> MySQL </td>
+    <td> <code> 
+    </code> </td>
+  </tr>
+  <tr>
+    <td rowspan="2"> 
+        <a href="http://www.legendu.net/misc/blog/pyspark-func-string/"> Spark/Hive </a>
+    </td>
+    <td> <code> 
+    /* like is Case sensitive */ <br>
+    like
+    </code> </td>
+  </tr>
+  <tr>
+    <td> <code> 
+    rlike
+    </code> </td>
+  </tr>
+  <tr>
+    <td> Teradata </td>
+    <td> <code> 
+    /* Like is case-insensitive by default. <br> 
+    You can specify the keyword CaseSpecific <br>
+    to make it case-sensitive.
+    */ <br>
+    SELECT empname <br>
+    FROM tbl_emp  <br>
+    WHERE empname (CaseSpecific) like '%JO%’
+    </code> </td>
+  </tr>
+  <tr>
+    <td rowspan="2"> Oracle </td>
+    <td> <code> 
+    /*like is case sensitive*/ <br>
+    like
+    </code> </td>
+  </tr>
+  <tr>
+    <td> <code> 
+    regexp_like(name, 'string$', 'i')
+    </code> </td>
+  </tr>
+  <tr>
+    <td> MS SQL Server </td>
+    <td> <code> 
+    </code> </td>
+  </tr>
+
+  <tr>
+    <td rowspan="7"> shift string </td>
+    <td> SQLite 3 </td>
+    <td> <code> 
+    </code> </td>
+  </tr>
+  <tr>
+    <td> MySQL </td>
+    <td> <code> 
+    </code> </td>
+  </tr>
+  <tr>
+    <td rowspan="2"> 
+        <a href="http://www.legendu.net/misc/blog/pyspark-func-string/"> Spark/Hive </a>
+    </td>
+    <td> <code> 
+    shiftleft
+    </code> </td>
+  </tr>
+  <tr>
+    <td> <code> 
+    shiftright
+    </code> </td>
+  </tr>
+  <tr>
+    <td> Teradata </td>
+    <td> <code> 
+    </code> </td>
+  </tr>
+  <tr>
+    <td> Oracle </td>
+    <td> <code> 
+    </code> </td>
+  </tr>
+  <tr>
+    <td> MS SQL Server </td>
+    <td> <code> 
+    </code> </td>
+  </tr>
+
+  <tr>
+    <td rowspan="6"> ocurrence of char </td>
+    <td> SQLite 3 </td>
+    <td> <code> 
+    </code> </td>
+  </tr>
+  <tr>
+    <td> MySQL </td>
+    <td> <code> 
+    </code> </td>
+  </tr>
+  <tr>
+    <td> 
+        <a href="http://www.legendu.net/misc/blog/pyspark-func-string/"> Spark/Hive </a>
+    </td>
+    <td> <code> 
+    </code> </td>
+  </tr>
+  <tr>
+    <td> Teradata </td>
+    <td> <code> 
+    char_length('Teradata is Relational Database') - char_length(Oreplace('Teradata is Relational Database', 'a', ''))
+    </code> </td>
+  </tr>
+  <tr>
+    <td> Oracle </td>
+    <td> <code> 
+    </code> </td>
+  </tr>
+  <tr>
+    <td> MS SQL Server </td>
+    <td> <code> 
+    </code> </td>
+  </tr>
+
+  <tr>
+    <td rowspan="6"> Cast to date </td>
+    <td> SQLite 3 </td>
+    <td> <code> 
+    </code> </td>
+  </tr>
+  <tr>
+    <td> MySQL </td>
+    <td> <code> 
+    </code> </td>
+  </tr>
+  <tr>
+    <td> 
+        <a href="http://www.legendu.net/misc/blog/pyspark-func-date/"> Spark/Hive </a>
+    </td>
+    <td> <code> 
+    SELECT <br> &nbsp; &nbsp;
+        to_date("2000-01-01") AS date <br>
+    FROM <br> &nbsp; &nbsp;
+        table
+    </code> </td>
+  </tr>
+  <tr>
+    <td> Teradata </td>
+    <td> <code> 
+    cast(str_col as date format 'YYYY-MM-DD')
+    </code> </td>
+  </tr>
+  <tr>
+    <td> Oracle </td>
+    <td> <code> 
+    </code> </td>
+  </tr>
+  <tr>
+    <td> MS SQL Server </td>
+    <td> <code> 
+    </code> </td>
+  </tr>
+
+  <tr>
+    <td rowspan="7"> Cast to timestamp </td>
+    <td> SQLite 3 </td>
+    <td> <code> 
+    </code> </td>
+  </tr>
+  <tr>
+    <td> MySQL </td>
+    <td> <code> 
+    </code> </td>
+  </tr>
+  <tr>
+    <td> 
+        <a href="http://www.legendu.net/misc/blog/pyspark-func-date/"> Spark/Hive </a>
+    </td>
+    <td> <code> 
+    SELECT 
+        <br> &nbsp; &nbsp;
+        to_timestamp("2000-01-01") AS date 
+        <br>
+    FROM  
+        <br> &nbsp; &nbsp; 
+        table
+    </code> </td>
+  </tr>
+  <tr>
+    <td> <code> 
+    SELECT
+        <br> &nbsp; &nbsp;
+        to_timestamp("2000-01-01") AS date
+        <br>
+    FROM 
+        <br> &nbsp; &nbsp;
+        table
+    </code> </td>
+  </tr>
+  <tr>
+    <td> Teradata </td>
+    <td> <code> 
+    </code> </td>
+  </tr>
+  <tr>
+    <td> Oracle </td>
+    <td> <code> 
+    </code> </td>
+  </tr>
+  <tr>
+    <td> MS SQL Server </td>
+    <td> <code> 
+    </code> </td>
+  </tr>
+
+  <tr>
+    <td rowspan="6"> Cast to UTC timestamp </td>
+    <td> SQLite 3 </td>
+    <td> <code> 
+    </code> </td>
+  </tr>
+  <tr>
+    <td> MySQL </td>
+    <td> <code> 
+    </code> </td>
+  </tr>
+  <tr>
+    <td> 
+        <a href="http://www.legendu.net/misc/blog/pyspark-func-date/"> Spark/Hive </a>
+    </td>
+    <td> <code> 
+    SELECT
+        <br> &nbsp; &nbsp;
+        to_utc_timestamp("2000-01-01") AS date
+        <br>
+    FROM 
+        <br> &nbsp; &nbsp;
+        table
+    </code> </td>
+  </tr>
+  <tr>
+    <td> Teradata </td>
+    <td> <code> 
+    </code> </td>
+  </tr>
+  <tr>
+    <td> Oracle </td>
+    <td> <code> 
+    </code> </td>
+  </tr>
+  <tr>
+    <td> MS SQL Server </td>
+    <td> <code> 
+    </code> </td>
+  </tr>
+
+  <tr>
+    <td rowspan="6"> Cast to Unix timestamp </td>
+    <td> SQLite 3 </td>
+    <td> <code> 
+    </code> </td>
+  </tr>
+  <tr>
+    <td> MySQL </td>
+    <td> <code> 
+    </code> </td>
+  </tr>
+  <tr>
+    <td> 
+        <a href="http://www.legendu.net/misc/blog/pyspark-func-date/"> Spark/Hive </a>
+    </td>
+    <td> <code> 
+    SELECT
+        <br> &nbsp; &nbsp;
+        to_unix_timestamp("2000-01-01") AS date
+        <br>
+    FROM 
+        <br> &nbsp; &nbsp;
+        table
+    </code> </td>
+  </tr>
+  <tr>
+    <td> Teradata </td>
+    <td> <code> 
+    </code> </td>
+  </tr>
+  <tr>
+    <td> Oracle </td>
+    <td> <code> 
+    </code> </td>
+  </tr>
+  <tr>
+    <td> MS SQL Server </td>
+    <td> <code> 
+    </code> </td>
+  </tr>
+
+  <tr>
+    <td rowspan="6"> Extract year </td>
+    <td> SQLite 3 </td>
+    <td> <code> 
+    </code> </td>
+  </tr>
+  <tr>
+    <td> MySQL </td>
+    <td> <code> 
+    </code> </td>
+  </tr>
+  <tr>
+    <td> 
+        <a href="http://www.legendu.net/misc/blog/pyspark-func-date/"> Spark/Hive </a>
+    </td>
+    <td> <code> 
+    SELECT
+        <br> &nbsp; &nbsp;
+        year("2000-01-01") AS date
+        <br>
+    FROM 
+        <br> &nbsp; &nbsp;
+        table
+    </code> </td>
+  </tr>
+  <tr>
+    <td> Teradata </td>
+    <td> <code> 
+    </code> </td>
+  </tr>
+  <tr>
+    <td> Oracle </td>
+    <td> <code> 
+    </code> </td>
+  </tr>
+  <tr>
+    <td> MS SQL Server </td>
+    <td> <code> 
+    </code> </td>
+  </tr>
+
+  <tr>
+    <td rowspan="6"> Extract quarter </td>
+    <td> SQLite 3 </td>
+    <td> <code> 
+    </code> </td>
+  </tr>
+  <tr>
+    <td> MySQL </td>
+    <td> <code> 
+    </code> </td>
+  </tr>
+  <tr>
+    <td> 
+        <a href="http://www.legendu.net/misc/blog/pyspark-func-date/"> Spark/Hive </a>
+    </td>
+    <td> <code> 
+    SELECT
+        <br> &nbsp; &nbsp;
+        quarter("2000-01-01") AS date
+        <br>
+    FROM 
+        <br> &nbsp; &nbsp;
+        table
+    </code> </td>
+  </tr>
+  <tr>
+    <td> Teradata </td>
+    <td> <code> 
+    </code> </td>
+  </tr>
+  <tr>
+    <td> Oracle </td>
+    <td> <code> 
+    </code> </td>
+  </tr>
+  <tr>
+    <td> MS SQL Server </td>
+    <td> <code> 
+    </code> </td>
+  </tr>
+
+  <tr>
+    <td rowspan="6"> Extract month </td>
+    <td> SQLite 3 </td>
+    <td> <code> 
+    </code> </td>
+  </tr>
+  <tr>
+    <td> MySQL </td>
+    <td> <code> 
+    </code> </td>
+  </tr>
+  <tr>
+    <td> 
+        <a href="http://www.legendu.net/misc/blog/pyspark-func-date/"> Spark/Hive </a>
+    </td>
+    <td> <code> 
+    SELECT
+        <br> &nbsp; &nbsp;
+        montofyearh("2000-01-01") AS date
+        <br>
+    FROM 
+        <br> &nbsp; &nbsp;
+        table
+    </code> </td>
+  </tr>
+  <tr>
+    <td> Teradata </td>
+    <td> <code> 
+    </code> </td>
+  </tr>
+  <tr>
+    <td> Oracle </td>
+    <td> <code> 
+    </code> </td>
+  </tr>
+  <tr>
+    <td> MS SQL Server </td>
+    <td> <code> 
+    </code> </td>
+  </tr>
+
+  <tr>
+    <td rowspan="7"> Extract day </td>
+    <td> SQLite 3 </td>
+    <td> <code> 
+    </code> </td>
+  </tr>
+  <tr>
+    <td> MySQL </td>
+    <td> <code> 
+    </code> </td>
+  </tr>
+  <tr>
+    <td> 
+        <a href="http://www.legendu.net/misc/blog/pyspark-func-date/"> Spark/Hive </a>
+    </td>
+    <td> <code> 
+    SELECT
+        <br> &nbsp; &nbsp;
+        day("2000-01-01") AS date
+        <br>
+    FROM 
+        <br> &nbsp; &nbsp;
+        table
+    </code> </td>
+  </tr>
+  <tr>
+    <td> <code> 
+    SELECT
+        <br> &nbsp; &nbsp;
+        dayofmonth("2000-01-01") AS date
+        <br>
+    FROM 
+        <br> &nbsp; &nbsp;
+        table
+    </code> </td>
+  </tr>
+  <tr>
+    <td> Teradata </td>
+    <td> <code> 
+    </code> </td>
+  </tr>
+  <tr>
+    <td> Oracle </td>
+    <td> <code> 
+    </code> </td>
+  </tr>
+  <tr>
+    <td> MS SQL Server </td>
+    <td> <code> 
+    </code> </td>
+  </tr>
+
+  <tr>
+    <td rowspan="6"> Extract minute </td>
+    <td> SQLite 3 </td>
+    <td> <code> 
+    </code> </td>
+  </tr>
+  <tr>
+    <td> MySQL </td>
+    <td> <code> 
+    </code> </td>
+  </tr>
+  <tr>
+    <td> 
+        <a href="http://www.legendu.net/misc/blog/pyspark-func-date/"> Spark/Hive </a>
+    </td>
+    <td> <code> 
+    SELECT
+        <br> &nbsp; &nbsp;
+        minute("2000-01-01") AS date
+        <br>
+    FROM 
+        <br> &nbsp; &nbsp;
+        table
+    </code> </td>
+  </tr>
+  <tr>
+    <td> Teradata </td>
+    <td> <code> 
+    </code> </td>
+  </tr>
+  <tr>
+    <td> Oracle </td>
+    <td> <code> 
+    </code> </td>
+  </tr>
+  <tr>
+    <td> MS SQL Server </td>
+    <td> <code> 
+    </code> </td>
+  </tr>
+
+  <tr>
+    <td rowspan="6"> Extract second </td>
+    <td> SQLite 3 </td>
+    <td> <code> 
+    </code> </td>
+  </tr>
+  <tr>
+    <td> MySQL </td>
+    <td> <code> 
+    </code> </td>
+  </tr>
+  <tr>
+    <td> 
+        <a href="http://www.legendu.net/misc/blog/pyspark-func-date/"> Spark/Hive </a>
+    </td>
+    <td> <code> 
+    SELECT
+        <br> &nbsp; &nbsp;
+        second("2000-01-01") AS date
+        <br>
+    FROM 
+        <br> &nbsp; &nbsp;
+        table
+    </code> </td>
+  </tr>
+  <tr>
+    <td> Teradata </td>
+    <td> <code> 
+    </code> </td>
+  </tr>
+  <tr>
+    <td> Oracle </td>
+    <td> <code> 
+    </code> </td>
+  </tr>
+  <tr>
+    <td> MS SQL Server </td>
+    <td> <code> 
+    </code> </td>
+  </tr>
+
+  <tr>
+    <td rowspan="7"> Add days to a date </td>
+    <td> SQLite 3 </td>
+    <td> <code> 
+    </code> </td>
+  </tr>
+  <tr>
+    <td> MySQL </td>
+    <td> <code> 
+    </code> </td>
+  </tr>
+  <tr>
+    <td> 
+        <a href="http://www.legendu.net/misc/blog/pyspark-func-date/"> Spark/Hive </a>
+    </td>
+    <td> <code> 
+    SELECT
+        <br> &nbsp; &nbsp;
+        date_add(current_date, 3) AS date3
+        <br>
+    FROM 
+        <br> &nbsp; &nbsp;
+        table
+    </code> </td>
+  </tr>
+  <tr>
+    <td> <code> 
+    /* The + operator for date and int <br>
+    is support since Spark 3 */ <br>
+    SELECT
+        <br> &nbsp; &nbsp;
+        current_date + 3 AS date3
+        <br>
+    FROM 
+        <br> &nbsp; &nbsp;
+        table
+    </code> </td>
+  </tr>
+  <tr>
+    <td> Teradata </td>
+    <td> <code> 
+    </code> </td>
+  </tr>
+  <tr>
+    <td> Oracle </td>
+    <td> <code> 
+    </code> </td>
+  </tr>
+  <tr>
+    <td> MS SQL Server </td>
+    <td> <code> 
+    </code> </td>
+  </tr>
+
+  <tr>
+    <td rowspan="6"> Add months to a date </td>
+    <td> SQLite 3 </td>
+    <td> <code> 
+    </code> </td>
+  </tr>
+  <tr>
+    <td> MySQL </td>
+    <td> <code> 
+    </code> </td>
+  </tr>
+  <tr>
+    <td> 
+        <a href="http://www.legendu.net/misc/blog/pyspark-func-date/"> Spark/Hive </a>
+    </td>
+    <td> <code> 
+    SELECT
+        <br> &nbsp; &nbsp;
+        add_months(current_date, 3) AS date3
+        <br>
+    FROM 
+        <br> &nbsp; &nbsp;
+        table
+    </code> </td>
+  </tr>
+  <tr>
+    <td> Teradata </td>
+    <td> <code> 
+    </code> </td>
+  </tr>
+  <tr>
+    <td> Oracle </td>
+    <td> <code> 
+    </code> </td>
+  </tr>
+  <tr>
+    <td> MS SQL Server </td>
+    <td> <code> 
+    </code> </td>
+  </tr>
+
+  <tr>
+    <td rowspan="7"> Subtract days from a date </td>
+    <td> SQLite 3 </td>
+    <td> <code> 
+    </code> </td>
+  </tr>
+  <tr>
+    <td> MySQL </td>
+    <td> <code> 
+    </code> </td>
+  </tr>
+  <tr>
+    <td> 
+        <a href="http://www.legendu.net/misc/blog/pyspark-func-date/"> Spark/Hive </a>
+    </td>
+    <td> <code> 
+    SELECT
+        <br> &nbsp; &nbsp;
+        date_sub(current_date, 3) AS date3
+        <br>
+    FROM 
+        <br> &nbsp; &nbsp;
+        table
+    </code> </td>
+  </tr>
+  <tr>
+    <td> <code> 
+    /* The - operator for date and int <br>
+    is supported since Spark 3 */
+    <br>
+    SELECT
+        <br> &nbsp; &nbsp;
+        current_date - 3 AS date3
+        <br>
+    FROM 
+        <br> &nbsp; &nbsp;
+        table
+    </code> </td>
+  </tr>
+  <tr>
+    <td> Teradata </td>
+    <td> <code> 
+    </code> </td>
+  </tr>
+  <tr>
+    <td> Oracle </td>
+    <td> <code> 
+    </code> </td>
+  </tr>
+  <tr>
+    <td> MS SQL Server </td>
+    <td> <code> 
+    </code> </td>
+  </tr>
+
+  <tr>
+    <td rowspan="6"> Diff between two dates </td>
+    <td> SQLite 3 </td>
+    <td> <code> 
+    </code> </td>
+  </tr>
+  <tr>
+    <td> MySQL </td>
+    <td> <code> 
+    </code> </td>
+  </tr>
+  <tr>
+    <td> 
+        <a href="http://www.legendu.net/misc/blog/pyspark-func-date/"> Spark/Hive </a>
+    </td>
+    <td> <code> 
+    SELECT
+        <br> &nbsp; &nbsp;
+        datediff(date1, date2) AS diff
+        <br>
+    FROM 
+        <br> &nbsp; &nbsp;
+        table
+    </code> </td>
+  </tr>
+  <tr>
+    <td> Teradata </td>
+    <td> <code> 
+    </code> </td>
+  </tr>
+  <tr>
+    <td> Oracle </td>
+    <td> <code> 
+    </code> </td>
+  </tr>
+  <tr>
+    <td> MS SQL Server </td>
+    <td> <code> 
+    </code> </td>
+  </tr>
+
+  <tr>
+    <td rowspan="11"> truncate date </td>
+    <td> SQLite 3 </td>
+    <td> <code> 
+    </code> </td>
+  </tr>
+  <tr>
+    <td> MySQL </td>
+    <td> <code> 
+    </code> </td>
+  </tr>
+  <tr>
+    <td rowspan="6"> 
+        <a href="http://www.legendu.net/misc/blog/pyspark-func-date/"> Spark/Hive </a>
+    </td>
+    <td> <code> 
+    SELECT date_trunc('2015-03-05T09:32:05.359', 'YEAR') <br>
+    -- 2015-01-01T00:00:00
+    </code> </td>
+  </tr>
+  <tr>
+    <td> <code> 
+    SELECT date_trunc('2015-03-05T09:32:05.359', 'MM') <br>
+    -- 2015-03-01T00:00:00
+    </code> </td>
+  </tr>
+  <tr>
+    <td> <code> 
+    SELECT date_trunc('2015-03-05T09:32:05.359', 'DD') <br>
+    -- 2015-03-05T00:00:00
+    </code> </td>
+  </tr>
+  <tr>
+    <td> <code> 
+    SELECT date_trunc('2015-03-05T09:32:05.359', 'HOUR') <br>
+    -- 2015-03-05T09:00:00
+    </code> </td>
+  <tr>
+    <td> <code> 
+    SELECT trunc('2009-02-12', 'MM') <br>
+    -- 2009-02-01
+    </code> </td>
+  </tr>
+  <tr>
+    <td> <code> 
+    SELECT trunc('2015-10-27', 'YEAR') <br>
+    -- 2015-01-01
+    </code> </td>
+  </tr>
+  <tr>
+    <td> Teradata </td>
+    <td> <code> 
+    </code> </td>
+  </tr>
+  <tr>
+    <td> Oracle </td>
+    <td> <code> 
+    </code> </td>
+  </tr>
+  <tr>
+    <td> MS SQL Server </td>
+    <td> <code> 
+    </code> </td>
+  </tr>
+
+  <tr>
+    <td rowspan="6"> sth </td>
+    <td> SQLite 3 </td>
+    <td> <code> 
+    </code> </td>
+  </tr>
+  <tr>
+    <td> MySQL </td>
+    <td> <code> 
+    </code> </td>
+  </tr>
+  <tr>
+    <td> 
+        <a href="http://www.legendu.net/misc/blog/pyspark-func-date/"> Spark/Hive </a>
+    </td>
+    <td> <code> 
+    </code> </td>
+  </tr>
+  <tr>
+    <td> Teradata </td>
+    <td> <code> 
+    </code> </td>
+  </tr>
+  <tr>
+    <td> Oracle </td>
+    <td> <code> 
+    </code> </td>
+  </tr>
+  <tr>
+    <td> MS SQL Server </td>
+    <td> <code> 
+    </code> </td>
+  </tr>
+
+</table>
+</div>
+
+<p id="footnote1">
+[1] The terminology (database, schema or namespace) might be different for differennt databases.
+</p>
+
+<p>A [NOT] LIKE B¶
+NULL if A or B is NULL, TRUE if string A matches the SQL simple regular expression B, otherwise FALSE. The comparison is done character by character. The character in B matches any character in A (similar to . in posix regular expressions) while the % character in B matches an arbitrary number of characters in A (similar to .* in posix regular expressions). For example, 'foobar' like 'foo' evaluates to FALSE whereas 'foobar' like 'foo ' evaluates to TRUE and so does 'foobar' like 'foo%'.</p>
+<p>A RLIKE B
+NULL if A or B is NULL, TRUE if any (possibly empty) substring of A matches the Java regular expression B, otherwise FALSE. For example, 'foobar' RLIKE 'foo' evaluates to TRUE and so does 'foobar' RLIKE '^f.*r$'.</p>
+<p>A REGEXP B
+Same as RLIKE.</p>
+<p>A || B
+Concatenate A and B (as of Hive 2.2.0).</p>
+<h2 id="references">References</h2>
+<p><a href="https://www.youtube.com/watch?v=mgipNdAgQ3o">Ten SQL Tricks that You Didn’t Think Were Possible (Lukas Eder)</a></p>
+<p><a href="http://www.legendu.net/misc/blog/column-alias-in-sql">Column Alias in SQL</a></p>
+<p>http://www.legendu.net/misc/blog/Use-tablesample-in-sql</p>
+<p>http://www.legendu.net/misc/blog/spark-dataframe-func-date</p>
+<p>http://www.legendu.net/misc/blog/spark-dataframe-func-string</p>
+<p>https://www.oreilly.com/library/view/high-performance-mysql/9780596101718/ch04.html</p>
+<p>https://cwiki.apache.org/confluence/display/Hive/LanguageManual+UDF#LanguageManualUDF-StringFunctions</p>
+<p>https://cwiki.apache.org/confluence/display/Hive/LanguageManual+UDF#LanguageManualUDF-StringOperators</p>
+<p>https://cwiki.apache.org/confluence/display/Hive/LanguageManual+UDF#LanguageManualUDF-RelationalOperators</p></div>
+    <footer>
+<p class="meta">
+  <span class="byline author vcard">
+    Posted by <span class="fn">Ben Chuanlong Du</span>
+  </span>
+<time datetime="2015-05-20T11:48:36-07:00" pubdate>May 20, 2015</time>  <span class="categories">
+    <a class="category" href="https://misc.legendu.net/tag/programming.html">programming</a>
+    <a class="category" href="https://misc.legendu.net/tag/sql.html">SQL</a>
+    <a class="category" href="https://misc.legendu.net/tag/database.html">database</a>
+    <a class="category" href="https://misc.legendu.net/tag/equivalent.html">equivalent</a>
+    <a class="category" href="https://misc.legendu.net/tag/querying.html">querying</a>
+  </span>
+</p>    </footer>
+  </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div>
+  </section>
+</div>
+<aside class="sidebar">
+  <section>
+    <h1>Recent Posts</h1>
+    <ul id="recent_posts">
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/tips-on-health/">Tips on Health</a>
+      </li>
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/tips-on-child-education/">Tips on Child Education</a>
+      </li>
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/tips-on-fd/">Tips on fd</a>
+      </li>
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/the-fzf-command-is-a-great-alternative-to-find/">The fzf Command Is a Great Alternative to find</a>
+      </li>
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/ruff-is-an-extremely-fast-python-linter-written-in-rust/">Ruff Is An Extremely Fast Python Linter Written in Rust</a>
+      </li>
+    </ul>
+  </section>
+  <section>
+    <h1>Categories</h1>
+    <ul id="recent_posts">
+        <li><a href="https://misc.legendu.net/category/ai.html">AI</a></li>
+        <li><a href="https://misc.legendu.net/category/career.html">Career</a></li>
+        <li><a href="https://misc.legendu.net/category/cloud.html">Cloud</a></li>
+        <li><a href="https://misc.legendu.net/category/computer-science.html">Computer Science</a></li>
+        <li><a href="https://misc.legendu.net/category/fiannce.html">Fiannce</a></li>
+        <li><a href="https://misc.legendu.net/category/finance.html">Finance</a></li>
+        <li><a href="https://misc.legendu.net/category/fun-problems.html">Fun Problems</a></li>
+        <li><a href="https://misc.legendu.net/category/hardware.html">Hardware</a></li>
+        <li><a href="https://misc.legendu.net/category/health.html">Health</a></li>
+        <li><a href="https://misc.legendu.net/category/house.html">House</a></li>
+        <li><a href="https://misc.legendu.net/category/internet.html">Internet</a></li>
+        <li><a href="https://misc.legendu.net/category/investment.html">Investment</a></li>
+        <li><a href="https://misc.legendu.net/category/life.html">life</a></li>
+        <li><a href="https://misc.legendu.net/category/linux.html">Linux</a></li>
+        <li><a href="https://misc.legendu.net/category/os.html">OS</a></li>
+        <li><a href="https://misc.legendu.net/category/people.html">People</a></li>
+        <li><a href="https://misc.legendu.net/category/philosophy.html">Philosophy</a></li>
+        <li><a href="https://misc.legendu.net/category/research.html">Research</a></li>
+        <li><a href="https://misc.legendu.net/category/shopping.html">Shopping</a></li>
+        <li><a href="https://misc.legendu.net/category/soft-skills.html">soft skills</a></li>
+        <li><a href="https://misc.legendu.net/category/software.html">Software</a></li>
+        <li><a href="https://misc.legendu.net/category/statistics.html">Statistics</a></li>
+        <li><a href="https://misc.legendu.net/category/tools.html">Tools</a></li>
+    </ul>
+  </section>
+ 
+
+  <section>
+  <h1>Tags</h1>
+  <ul class="tagcloud">
+  </ul>
+  </section>
+
+
+
+  <section>
+    <h1>GitHub Repos</h1>
+    <ul id="gh_repos">
+      <li class="loading">Status updating...</li>
+    </ul>
+      <a href="https://github.com/legendu-net">@legendu-net</a> on GitHub
+    <script type="text/javascript">
+      $.domReady(function(){
+          if (!window.jXHR){
+              var jxhr = document.createElement('script');
+              jxhr.type = 'text/javascript';
+              jxhr.src = 'https://misc.legendu.net/theme/js/jXHR.js';
+              var s = document.getElementsByTagName('script')[0];
+              s.parentNode.insertBefore(jxhr, s);
+          }
+
+          github.showRepos({
+              user: 'legendu-net',
+              count: 5,
+              skip_forks: true,
+              target: '#gh_repos'
+          });
+      });
+    </script>
+    <script src="https://misc.legendu.net/theme/js/github.js" type="text/javascript"> </script>
+  </section>
+
+    <section>
+        <h1>Social</h2>
+        <ul>
+            <li><a href="https://www.linkedin.com/in/ben-chuanlong-du-1239b221/" target="_blank">LinkedIn</a></li>
+            <li><a href="https://hub.docker.com/u/dclong" target="_blank">Docker Hub</a></li>
+            <li><a href="https://stackoverflow.com/users/7808204/benjamin-du?tab=profile" target="_blank">Stack Overflow</a></li>
+            <li><a href="https://twitter.com/longendu" target="_blank">Twitter</a></li>
+        <!--
+            <li><a href="https://misc.legendu.net/" type="application/rss+xml" rel="alternate">RSS</a></li>
+            -->
+        </ul>
+    </section>
+</aside>    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Ben Chuanlong Du -
+  <span class="credit">Powered by <a href="http://getpelican.com">Pelican</a></span>
+</p></footer>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-3STS9BVPF6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-3STS9BVPF6');
+</script>
+	<script type="text/javascript">
+	  var disqus_shortname = 'dclong';
+          var disqus_identifier = '/blog/sql-equivalent/';
+          var disqus_url = 'https://misc.legendu.net/blog/sql-equivalent/';
+          var disqus_title = 'SQL Equivalent';
+	  (function() {
+	    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	    dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+	    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	   })();
+	</script>
+</body>
+</html>

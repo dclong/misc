@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Proxy, Reverse Proxy, Load Balancer, VPN and DNS</title>
+  <meta name="author" content="Ben Chuanlong Du">
+
+  <link href="https://misc.legendu.net/atom.xml" type="application/atom+xml" rel="alternate"
+        title="Ben Chuanlong Du's Blog Atom Feed" />
+
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link href="https://misc.legendu.net/favicon.png" rel="icon">
+  <link href="https://misc.legendu.net/theme/css/main_2.css" media="screen, projection"
+        rel="stylesheet" type="text/css">
+  <script src="https://misc.legendu.net/theme/js/modernizr-2.0.js"></script>
+  <script src="https://misc.legendu.net/theme/js/ender.js"></script>
+  <script src="https://misc.legendu.net/theme/js/octopress.js" type="text/javascript"></script>
+
+  <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <script data-ad-client="ca-pub-3836424032203369" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+</head>
+
+<body>
+  <header role="banner"><hgroup>
+  <h1><a href="https://misc.legendu.net/">Ben Chuanlong Du's Blog</a></h1>
+    <h2>It is never too late to learn.</h2>
+</hgroup></header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="https://misc.legendu.net/atom.xml" rel="subscribe-rss">RSS</a></li>
+</ul>
+
+<form name="search" action="https://www.bing.com/search" method="get" onSubmit="return build_query()">
+  <fieldset role="search">
+      <!--
+    <input type="hidden" name="q" value="site:https://misc.legendu.net" />
+        -->
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+
+<script type = "text/javascript">
+    function build_query() {
+        var query = document.forms["search"]["q"].value;
+        var prefix = "site:https://misc.legendu.net "
+        if (!query.startsWith(prefix)) {
+            query = prefix + query;
+            document.forms["search"]["q"].value = query;
+        }
+        return true;
+    }
+</script>
+
+<ul class="main-navigation">
+    <li><a href="https://www.legendu.net">Home</a></li>
+    <li><a href="https://misc.legendu.net">Blog</a></li>
+    <li><a href="https://misc.legendu.net/archives.html">Archives</a></li>
+    <li><a href="https://misc.legendu.net/categories.html">Categories</a></li>
+    <li><a href="https://misc.legendu.net/tags.html">Tags</a></li>
+    <li><a href="https://www.legendu.net/pages/about">About</a></li>
+</ul></nav>
+  <div id="main">
+    <div id="content">
+<div>
+  <article class="hentry" role="article">
+<header>
+      <h1 class="entry-title">Proxy, Reverse Proxy, Load Balancer, VPN and DNS</h1>
+      <p class="meta"><time datetime="2020-10-03T10:47:34-07:00" pubdate>Oct 03, 2020</time></p>
+</header>
+
+  <div class="entry-content"><p><strong>Things on this page are fragmentary and immature notes/thoughts of the author. Please read with your own judgement!</strong></p>
+<ol>
+<li>
+<p>socks proxy </p>
+</li>
+<li>
+<p>sshuttle is a poor man's VPN.</p>
+</li>
+</ol>
+<p><a href="https://www.legendu.net/misc/blog/expose-local-service-to-public">  Expose Local Service to Public  </a></p>
+<p><a href="https://www.legendu.net/misc/blog/good-choices-of-reverse-proxies">  Good Choices of Reverse Proxies  </a></p>
+<h2 id="proxy-vs-vpn">Proxy vs VPN</h2>
+<ol>
+<li>
+<p>When you connect to a VPN,
+    all traffic will be routed through the VPN.
+    You don't have the option to route part of the traffic through the VPN. 
+    On the other hand,
+    a proxy server is more flexible.
+    It is easy to route some specific traffic through a proxy server.
+    As a matter of fact,
+    there are many different types of proxy corresponding to different traffic type,
+    e.g., http proxy, socks proxy, ftp proxy, etc.
+    Generally speaking, 
+    a specific type of traffic can only be visisted using the right type of proxy server.
+    For example,
+    a FTP server can only be visited with a FTP proxy.</p>
+</li>
+<li>
+<p>A proxy server is not as secure as a VPN.
+    However,
+    a proxy server can be used to visit web sites anonymously.</p>
+</li>
+</ol>
+<h2 id="proxy-vs-reverse-proxy">Proxy vs Reverse Proxy</h2>
+<ol>
+<li>
+<p>When a client C visits a server S using proxy P,
+    the server S knows the proxy P (but not the client C) who visists it.
+    When a client C visits a server S which uses a reverse proxy R 
+    that balancing traffic to servers S1 and S2 (load balancing),
+    the client C know only knows the server S but does not know underlying servers S1 and S2. </p>
+</li>
+<li>
+<p>A proxy can be used for caching, anonymity, logging, blocking sites and microservices
+    while a reverse proxy can be used for 
+    caching, load balancing, ingress, canary deployment and miroservices.</p>
+</li>
+<li>
+<p>Proxy and Reverse Proxy can be used together.</p>
+</li>
+</ol>
+<p>For more discussions,
+please refer to 
+<a href="https://www.youtube.com/watch?v=SqqrOspasag">Proxy vs Reverse Proxy Server Explained</a>
+.</p>
+<h2 id="load-balancer-vs-reverse-proxy">Load Balancer vs Reverse Proxy</h2>
+<p>Load Balancing is one application (special case) of reverse proxy.
+For more discussions,
+please refer to
+<a href="https://www.youtube.com/watch?v=S8J2fkN2FeI">Load Balancer vs Reverse Proxy (Explained by Example)</a>
+.</p>
+<h2 id="references">References</h2>
+<ul>
+<li>
+<p><a href="https://www.legendu.net/misc/blog/good-choices-of-reverse-proxies">Good Choices of Reverse Proxies</a></p>
+</li>
+<li>
+<p><a href="https://www.youtube.com/watch?v=SqqrOspasag">Proxy vs Reverse Proxy Server Explained</a></p>
+</li>
+</ul></div>
+    <footer>
+<p class="meta">
+  <span class="byline author vcard">
+    Posted by <span class="fn">Benjamin Du</span>
+  </span>
+<time datetime="2020-10-03T10:47:34-07:00" pubdate>Oct 03, 2020</time>  <span class="categories">
+    <a class="category" href="https://misc.legendu.net/tag/computer-science.html">Computer Science</a>
+    <a class="category" href="https://misc.legendu.net/tag/proxy.html">proxy</a>
+    <a class="category" href="https://misc.legendu.net/tag/reverse-proxy.html">reverse proxy</a>
+    <a class="category" href="https://misc.legendu.net/tag/dns.html">DNS</a>
+    <a class="category" href="https://misc.legendu.net/tag/vpn.html">VPN</a>
+    <a class="category" href="https://misc.legendu.net/tag/network.html">network</a>
+    <a class="category" href="https://misc.legendu.net/tag/internet.html">internet</a>
+    <a class="category" href="https://misc.legendu.net/tag/web.html">web</a>
+    <a class="category" href="https://misc.legendu.net/tag/load-balancing.html">load balancing</a>
+  </span>
+</p>    </footer>
+  </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div>
+  </section>
+</div>
+<aside class="sidebar">
+  <section>
+    <h1>Recent Posts</h1>
+    <ul id="recent_posts">
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/tips-on-health/">Tips on Health</a>
+      </li>
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/tips-on-child-education/">Tips on Child Education</a>
+      </li>
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/tips-on-fd/">Tips on fd</a>
+      </li>
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/the-fzf-command-is-a-great-alternative-to-find/">The fzf Command Is a Great Alternative to find</a>
+      </li>
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/ruff-is-an-extremely-fast-python-linter-written-in-rust/">Ruff Is An Extremely Fast Python Linter Written in Rust</a>
+      </li>
+    </ul>
+  </section>
+  <section>
+    <h1>Categories</h1>
+    <ul id="recent_posts">
+        <li><a href="https://misc.legendu.net/category/ai.html">AI</a></li>
+        <li><a href="https://misc.legendu.net/category/career.html">Career</a></li>
+        <li><a href="https://misc.legendu.net/category/cloud.html">Cloud</a></li>
+        <li><a href="https://misc.legendu.net/category/computer-science.html">Computer Science</a></li>
+        <li><a href="https://misc.legendu.net/category/fiannce.html">Fiannce</a></li>
+        <li><a href="https://misc.legendu.net/category/finance.html">Finance</a></li>
+        <li><a href="https://misc.legendu.net/category/fun-problems.html">Fun Problems</a></li>
+        <li><a href="https://misc.legendu.net/category/hardware.html">Hardware</a></li>
+        <li><a href="https://misc.legendu.net/category/health.html">Health</a></li>
+        <li><a href="https://misc.legendu.net/category/house.html">House</a></li>
+        <li><a href="https://misc.legendu.net/category/internet.html">Internet</a></li>
+        <li><a href="https://misc.legendu.net/category/investment.html">Investment</a></li>
+        <li><a href="https://misc.legendu.net/category/life.html">life</a></li>
+        <li><a href="https://misc.legendu.net/category/linux.html">Linux</a></li>
+        <li><a href="https://misc.legendu.net/category/os.html">OS</a></li>
+        <li><a href="https://misc.legendu.net/category/people.html">People</a></li>
+        <li><a href="https://misc.legendu.net/category/philosophy.html">Philosophy</a></li>
+        <li><a href="https://misc.legendu.net/category/research.html">Research</a></li>
+        <li><a href="https://misc.legendu.net/category/shopping.html">Shopping</a></li>
+        <li><a href="https://misc.legendu.net/category/soft-skills.html">soft skills</a></li>
+        <li><a href="https://misc.legendu.net/category/software.html">Software</a></li>
+        <li><a href="https://misc.legendu.net/category/statistics.html">Statistics</a></li>
+        <li><a href="https://misc.legendu.net/category/tools.html">Tools</a></li>
+    </ul>
+  </section>
+ 
+
+  <section>
+  <h1>Tags</h1>
+  <ul class="tagcloud">
+  </ul>
+  </section>
+
+
+
+  <section>
+    <h1>GitHub Repos</h1>
+    <ul id="gh_repos">
+      <li class="loading">Status updating...</li>
+    </ul>
+      <a href="https://github.com/legendu-net">@legendu-net</a> on GitHub
+    <script type="text/javascript">
+      $.domReady(function(){
+          if (!window.jXHR){
+              var jxhr = document.createElement('script');
+              jxhr.type = 'text/javascript';
+              jxhr.src = 'https://misc.legendu.net/theme/js/jXHR.js';
+              var s = document.getElementsByTagName('script')[0];
+              s.parentNode.insertBefore(jxhr, s);
+          }
+
+          github.showRepos({
+              user: 'legendu-net',
+              count: 5,
+              skip_forks: true,
+              target: '#gh_repos'
+          });
+      });
+    </script>
+    <script src="https://misc.legendu.net/theme/js/github.js" type="text/javascript"> </script>
+  </section>
+
+    <section>
+        <h1>Social</h2>
+        <ul>
+            <li><a href="https://www.linkedin.com/in/ben-chuanlong-du-1239b221/" target="_blank">LinkedIn</a></li>
+            <li><a href="https://hub.docker.com/u/dclong" target="_blank">Docker Hub</a></li>
+            <li><a href="https://stackoverflow.com/users/7808204/benjamin-du?tab=profile" target="_blank">Stack Overflow</a></li>
+            <li><a href="https://twitter.com/longendu" target="_blank">Twitter</a></li>
+        <!--
+            <li><a href="https://misc.legendu.net/" type="application/rss+xml" rel="alternate">RSS</a></li>
+            -->
+        </ul>
+    </section>
+</aside>    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Ben Chuanlong Du -
+  <span class="credit">Powered by <a href="http://getpelican.com">Pelican</a></span>
+</p></footer>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-3STS9BVPF6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-3STS9BVPF6');
+</script>
+	<script type="text/javascript">
+	  var disqus_shortname = 'dclong';
+          var disqus_identifier = '/blog/proxy-vpn-dns-reverse-proxy/';
+          var disqus_url = 'https://misc.legendu.net/blog/proxy-vpn-dns-reverse-proxy/';
+          var disqus_title = 'Proxy, Reverse Proxy, Load Balancer, VPN and DNS';
+	  (function() {
+	    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	    dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+	    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	   })();
+	</script>
+</body>
+</html>

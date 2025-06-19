@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Tips on JupyterLab</title>
+  <meta name="author" content="Ben Chuanlong Du">
+
+  <link href="https://misc.legendu.net/atom.xml" type="application/atom+xml" rel="alternate"
+        title="Ben Chuanlong Du's Blog Atom Feed" />
+
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link href="https://misc.legendu.net/favicon.png" rel="icon">
+  <link href="https://misc.legendu.net/theme/css/main_2.css" media="screen, projection"
+        rel="stylesheet" type="text/css">
+  <script src="https://misc.legendu.net/theme/js/modernizr-2.0.js"></script>
+  <script src="https://misc.legendu.net/theme/js/ender.js"></script>
+  <script src="https://misc.legendu.net/theme/js/octopress.js" type="text/javascript"></script>
+
+  <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <script data-ad-client="ca-pub-3836424032203369" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+</head>
+
+<body>
+  <header role="banner"><hgroup>
+  <h1><a href="https://misc.legendu.net/">Ben Chuanlong Du's Blog</a></h1>
+    <h2>It is never too late to learn.</h2>
+</hgroup></header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="https://misc.legendu.net/atom.xml" rel="subscribe-rss">RSS</a></li>
+</ul>
+
+<form name="search" action="https://www.bing.com/search" method="get" onSubmit="return build_query()">
+  <fieldset role="search">
+      <!--
+    <input type="hidden" name="q" value="site:https://misc.legendu.net" />
+        -->
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+
+<script type = "text/javascript">
+    function build_query() {
+        var query = document.forms["search"]["q"].value;
+        var prefix = "site:https://misc.legendu.net "
+        if (!query.startsWith(prefix)) {
+            query = prefix + query;
+            document.forms["search"]["q"].value = query;
+        }
+        return true;
+    }
+</script>
+
+<ul class="main-navigation">
+    <li><a href="https://www.legendu.net">Home</a></li>
+    <li><a href="https://misc.legendu.net">Blog</a></li>
+    <li><a href="https://misc.legendu.net/archives.html">Archives</a></li>
+    <li><a href="https://misc.legendu.net/categories.html">Categories</a></li>
+    <li><a href="https://misc.legendu.net/tags.html">Tags</a></li>
+    <li><a href="https://www.legendu.net/pages/about">About</a></li>
+</ul></nav>
+  <div id="main">
+    <div id="content">
+<div>
+  <article class="hentry" role="article">
+<header>
+      <h1 class="entry-title">Tips on JupyterLab</h1>
+      <p class="meta"><time datetime="2016-12-10T10:12:31-08:00" pubdate>Dec 10, 2016</time></p>
+</header>
+
+  <div class="entry-content"><p><strong>Things on this page are fragmentary and immature notes/thoughts of the author. Please read with your own judgement!</strong></p>
+<h2 id="general-tips">General Tips</h2>
+<ol>
+<li>
+<p>You might lose data if you edit a notebook in multiple places 
+    (e.g., in different browsers or on different machines)!
+    If you do have to work on the same notebook across multiple machine at the same time,
+    a simple trick is to always close the tab of a notebook after you have updated it.
+    This ensures that you sync the changes of the notebook to JupyterLab server.</p>
+</li>
+<li>
+<p>If you have a notebook open on a machine 
+    but have it edited before on another machine, 
+    the changes might not be synchronized automatically.
+    If you jump to edit the notebook on the current machine without refreshing it, 
+    you might loss data.
+    Even if JupyterLab do warn you about the notebook is changed on the disk,
+    it is a hassle to go back to figure out new changes you've made.
+    To avoid data loss,
+    you'd better close notebook tabs and reopen them
+    if you switch to another machine to use JupyterLab. </p>
+</li>
+<li>
+<p>If you work across multiple machines, 
+    the resolution of a terminal might not be messed up when you use Vim in it.
+    A simple way to resolve the issue is create a new terminal.</p>
+</li>
+<li>
+<p>If a notebook is running and outputing results, 
+    disconnecting and reconnecting to it will lose future outputs
+    even if the notebook continues to run.
+    And what is even trickier is that the kernel icon won't display itself as busy,
+    which can confuse users that the notebook was iterrupted or has finished running.
+    This issue is being tracked at 
+    <a href="https://github.com/jupyterlab/jupyterlab/issues/6003">issue 6003</a>
+    and
+    <a href="https://github.com/jupyterlab/jupyterlab/issues/5382">issue 5382</a>.
+    Be cautions about it before it is fixed.</p>
+</li>
+<li>
+<p>Shutdown a kernel will kill the kernel associated with a notebook
+    but it won't affect content in the notebook if no code is running. 
+    After shutdowning the kernel, 
+    a notebook behaves like a pure text editor.</p>
+</li>
+<li>
+<p><code>find.scala | xargs vim</code> makes terminal fail to display correctly.
+    <code>reset</code> resolves the issue.</p>
+</li>
+<li>
+<p>hard to do interactive UI in JupyterLab right now ...
+    many interactive UI pacakges in R relies on RStudio to work.</p>
+</li>
+<li>
+<p>Convert Jupyter Notebook to another format.</p>
+<div class="highlight"><pre><span></span><code>jupyter<span class="w"> </span>nbconvert<span class="w"> </span>--to<span class="w"> </span>FORMAT<span class="w"> </span>notebook.ipynb
+</code></pre></div>
+
+</li>
+<li>
+<p>Notice that you'd better turn off proxies while using JupyterLab. </p>
+</li>
+<li>
+<p>If a JupyerLab notebook doesn't render well due to trust issues, 
+    you can rerun everything in the notebook and save it. 
+    This will usually resolve the trust issue.</p>
+</li>
+</ol>
+<h2 id="lauch-a-jupyterlab-server">Lauch a JupyterLab Server</h2>
+<div class="highlight"><pre><span></span><code>jupyter-lab<span class="w"> </span>--allow-root<span class="w"> </span>--ip<span class="o">=</span><span class="s1">&#39;0.0.0.0&#39;</span><span class="w"> </span>--port<span class="o">=</span><span class="m">8888</span><span class="w"> </span>--no-browser<span class="w"> </span>--notebook-dir<span class="o">=</span><span class="nv">$HOME</span>
+</code></pre></div>
+
+<h2 id="list-running-jupyterlab-servers">List Running JupyterLab Servers</h2>
+<div class="highlight"><pre><span></span><code>jupyter<span class="w"> </span>server<span class="w"> </span>list
+</code></pre></div>
+
+<p>Or you can use the following Python script. </p>
+<div class="highlight"><pre><span></span><code><span class="ch">#!/usr/bin/env python3</span>
+<span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">from</span> <span class="nn">jupyter_server</span> <span class="kn">import</span> <span class="n">serverapp</span>
+
+<span class="n">servers</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">serverapp</span><span class="o">.</span><span class="n">list_running_servers</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">servers</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">))</span>
+</code></pre></div>
+
+<p>For more details on how to use the Python script,
+please refer to
+<a href="https://www.legendu.net/en/blog/my-docker-images/#get-information-of-running-jupyterlab-servers">Get Information of Running Jupyter/Lab Servers</a>
+.</p>
+<h2 id="format-a-jupyterlab-notebook">Format a Jupyter/Lab Notebook</h2>
+<p>https://github.com/krassowski/jupyterlab-lsp/blob/master/scripts/nblint.py</p>
+<p>https://github.com/dclong/dsutil/blob/dev/dsutil/filesystem.py#L266</p>
+<h2 id="find-replace">Find &amp; Replace</h2>
+<p><a href="https://stackoverflow.com/questions/59498649/how-to-find-replace-in-jupyter-lab">How to Find &amp; Replace in Jupyter Lab</a></p>
+<h2 id="more-tips-on-ipython-and-jupyterlab">More Tips on IPython and Jupyter/Lab</h2>
+<ul>
+<li>
+<p><a href="http://www.legendu.net/misc/blog/ipython-tips/">Tips on IPython</a></p>
+</li>
+<li>
+<p><a href="https://www.dataquest.io/blog/jupyter-notebook-tips-tricks-shortcuts/">28 Jupyter Notebook tips, tricks and shortcuts</a></p>
+</li>
+<li>
+<p><a href="https://ep2019.europython.eu/media/conference/slides/cBeHNyZ-wait-ipython-can-do-that.pdf">Wait, IPython Can Do That?!</a></p>
+</li>
+</ul>
+<h2 id="jupyterlab-extenions"><a href="http://www.legendu.net/misc/blog/useful-tools-extensions-for-jupyterlab/">JupyterLab Extenions</a></h2>
+<p>Please refer to
+<a href="http://www.legendu.net/misc/blog/useful-tools-extensions-for-jupyterlab/">JupyterLab Extenions</a>
+for more details.</p>
+<h2 id="references">References</h2>
+<ul>
+<li>
+<p><a href="https://www.legendu.net/misc/blog/jupyter-notebook-kernels/">Jupyter Notebook Kernels</a></p>
+</li>
+<li>
+<p><a href="https://jupyterlab.readthedocs.io/en/stable/getting_started/changelog.html">JupyterLab Change Log</a></p>
+</li>
+<li>
+<p><a href="https://www.youtube.com/watch?v=VQBZ2MqWBZI">IPython and Jupyter in Depth: High productivity, interactive Python - PyCon 2017</a></p>
+</li>
+<li>
+<p>https://blog.dominodatalab.com/lesser-known-ways-of-using-notebooks/</p>
+</li>
+<li>
+<p>http://arogozhnikov.github.io/2016/09/10/jupyter-features.html</p>
+</li>
+<li>
+<p><a href="http://jupyter-notebook.readthedocs.io/en/latest/public_server.html">Running a notebook server</a></p>
+</li>
+<li>
+<p><a href="https://forums.fast.ai/t/jupyter-notebook-enhancements-tips-and-tricks/17064">Jupyter Notebook Enhancements, Tips And Tricks</a></p>
+</li>
+<li>
+<p>https://datascience.berkeley.edu/10-data-science-newsletters-subscribe/ </p>
+</li>
+<li>https://github.com/jupyter-incubator/declarativewidgets</li>
+<li>https://github.com/jupyter-incubator/dashboards</li>
+<li>http://people.duke.edu/~ccc14/sta-663-2016/Customizing_Jupyter.html</li>
+<li>http://ramhiser.com/2015/02/01/configuring-ipython-notebook-support-for-pyspark/</li>
+<li>https://groups.google.com/forum/#!topic/jupyter/iaaKOeRwyjs</li>
+<li>https://toree.incubator.apache.org/documentation/user/installation.html</li>
+<li>https://github.com/michhar/useR2016-tutorial-jupyter/blob/master/INSTALLATIONS.md</li>
+<li>http://stackoverflow.com/questions/31855794/whats-the-best-way-to-share-jupyter-notebooks-with-non-programmers</li>
+<li>https://www.polymer-project.org/1.0/</li>
+<li>https://github.com/jupyter-incubator/declarativewidgets</li>
+<li>http://nbgrader.readthedocs.io/en/stable/</li>
+<li>http://webcomponents.org/</li>
+</ul></div>
+    <footer>
+<p class="meta">
+  <span class="byline author vcard">
+    Posted by <span class="fn">Ben Chuanlong Du</span>
+  </span>
+<time datetime="2016-12-10T10:12:31-08:00" pubdate>Dec 10, 2016</time>  <span class="categories">
+    <a class="category" href="https://misc.legendu.net/tag/software.html">software</a>
+    <a class="category" href="https://misc.legendu.net/tag/jupyterlab.html">JupyterLab</a>
+    <a class="category" href="https://misc.legendu.net/tag/jupyter.html">Jupyter</a>
+    <a class="category" href="https://misc.legendu.net/tag/tips.html">tips</a>
+  </span>
+</p>    </footer>
+  </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div>
+  </section>
+</div>
+<aside class="sidebar">
+  <section>
+    <h1>Recent Posts</h1>
+    <ul id="recent_posts">
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/tips-on-health/">Tips on Health</a>
+      </li>
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/tips-on-child-education/">Tips on Child Education</a>
+      </li>
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/tips-on-fd/">Tips on fd</a>
+      </li>
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/the-fzf-command-is-a-great-alternative-to-find/">The fzf Command Is a Great Alternative to find</a>
+      </li>
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/ruff-is-an-extremely-fast-python-linter-written-in-rust/">Ruff Is An Extremely Fast Python Linter Written in Rust</a>
+      </li>
+    </ul>
+  </section>
+  <section>
+    <h1>Categories</h1>
+    <ul id="recent_posts">
+        <li><a href="https://misc.legendu.net/category/ai.html">AI</a></li>
+        <li><a href="https://misc.legendu.net/category/career.html">Career</a></li>
+        <li><a href="https://misc.legendu.net/category/cloud.html">Cloud</a></li>
+        <li><a href="https://misc.legendu.net/category/computer-science.html">Computer Science</a></li>
+        <li><a href="https://misc.legendu.net/category/fiannce.html">Fiannce</a></li>
+        <li><a href="https://misc.legendu.net/category/finance.html">Finance</a></li>
+        <li><a href="https://misc.legendu.net/category/fun-problems.html">Fun Problems</a></li>
+        <li><a href="https://misc.legendu.net/category/hardware.html">Hardware</a></li>
+        <li><a href="https://misc.legendu.net/category/health.html">Health</a></li>
+        <li><a href="https://misc.legendu.net/category/house.html">House</a></li>
+        <li><a href="https://misc.legendu.net/category/internet.html">Internet</a></li>
+        <li><a href="https://misc.legendu.net/category/investment.html">Investment</a></li>
+        <li><a href="https://misc.legendu.net/category/life.html">life</a></li>
+        <li><a href="https://misc.legendu.net/category/linux.html">Linux</a></li>
+        <li><a href="https://misc.legendu.net/category/os.html">OS</a></li>
+        <li><a href="https://misc.legendu.net/category/people.html">People</a></li>
+        <li><a href="https://misc.legendu.net/category/philosophy.html">Philosophy</a></li>
+        <li><a href="https://misc.legendu.net/category/research.html">Research</a></li>
+        <li><a href="https://misc.legendu.net/category/shopping.html">Shopping</a></li>
+        <li><a href="https://misc.legendu.net/category/soft-skills.html">soft skills</a></li>
+        <li><a href="https://misc.legendu.net/category/software.html">Software</a></li>
+        <li><a href="https://misc.legendu.net/category/statistics.html">Statistics</a></li>
+        <li><a href="https://misc.legendu.net/category/tools.html">Tools</a></li>
+    </ul>
+  </section>
+ 
+
+  <section>
+  <h1>Tags</h1>
+  <ul class="tagcloud">
+  </ul>
+  </section>
+
+
+
+  <section>
+    <h1>GitHub Repos</h1>
+    <ul id="gh_repos">
+      <li class="loading">Status updating...</li>
+    </ul>
+      <a href="https://github.com/legendu-net">@legendu-net</a> on GitHub
+    <script type="text/javascript">
+      $.domReady(function(){
+          if (!window.jXHR){
+              var jxhr = document.createElement('script');
+              jxhr.type = 'text/javascript';
+              jxhr.src = 'https://misc.legendu.net/theme/js/jXHR.js';
+              var s = document.getElementsByTagName('script')[0];
+              s.parentNode.insertBefore(jxhr, s);
+          }
+
+          github.showRepos({
+              user: 'legendu-net',
+              count: 5,
+              skip_forks: true,
+              target: '#gh_repos'
+          });
+      });
+    </script>
+    <script src="https://misc.legendu.net/theme/js/github.js" type="text/javascript"> </script>
+  </section>
+
+    <section>
+        <h1>Social</h2>
+        <ul>
+            <li><a href="https://www.linkedin.com/in/ben-chuanlong-du-1239b221/" target="_blank">LinkedIn</a></li>
+            <li><a href="https://hub.docker.com/u/dclong" target="_blank">Docker Hub</a></li>
+            <li><a href="https://stackoverflow.com/users/7808204/benjamin-du?tab=profile" target="_blank">Stack Overflow</a></li>
+            <li><a href="https://twitter.com/longendu" target="_blank">Twitter</a></li>
+        <!--
+            <li><a href="https://misc.legendu.net/" type="application/rss+xml" rel="alternate">RSS</a></li>
+            -->
+        </ul>
+    </section>
+</aside>    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Ben Chuanlong Du -
+  <span class="credit">Powered by <a href="http://getpelican.com">Pelican</a></span>
+</p></footer>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-3STS9BVPF6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-3STS9BVPF6');
+</script>
+	<script type="text/javascript">
+	  var disqus_shortname = 'dclong';
+          var disqus_identifier = '/blog/jupyterlab-tips/';
+          var disqus_url = 'https://misc.legendu.net/blog/jupyterlab-tips/';
+          var disqus_title = 'Tips on JupyterLab';
+	  (function() {
+	    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	    dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+	    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	   })();
+	</script>
+</body>
+</html>

@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Ben Chuanlong Du's Blog - programming</title>
+  <meta name="author" content="Ben Chuanlong Du">
+
+  <link href="https://misc.legendu.net/atom.xml" type="application/atom+xml" rel="alternate"
+        title="Ben Chuanlong Du's Blog Atom Feed" />
+
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link href="https://misc.legendu.net/favicon.png" rel="icon">
+  <link href="https://misc.legendu.net/theme/css/main_2.css" media="screen, projection"
+        rel="stylesheet" type="text/css">
+  <script src="https://misc.legendu.net/theme/js/modernizr-2.0.js"></script>
+  <script src="https://misc.legendu.net/theme/js/ender.js"></script>
+  <script src="https://misc.legendu.net/theme/js/octopress.js" type="text/javascript"></script>
+
+  <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <script data-ad-client="ca-pub-3836424032203369" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+</head>
+
+<body>
+  <header role="banner"><hgroup>
+  <h1><a href="https://misc.legendu.net/">Ben Chuanlong Du's Blog</a></h1>
+    <h2>It is never too late to learn.</h2>
+</hgroup></header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="https://misc.legendu.net/atom.xml" rel="subscribe-rss">RSS</a></li>
+</ul>
+
+<form name="search" action="https://www.bing.com/search" method="get" onSubmit="return build_query()">
+  <fieldset role="search">
+      <!--
+    <input type="hidden" name="q" value="site:https://misc.legendu.net" />
+        -->
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+
+<script type = "text/javascript">
+    function build_query() {
+        var query = document.forms["search"]["q"].value;
+        var prefix = "site:https://misc.legendu.net "
+        if (!query.startsWith(prefix)) {
+            query = prefix + query;
+            document.forms["search"]["q"].value = query;
+        }
+        return true;
+    }
+</script>
+
+<ul class="main-navigation">
+    <li><a href="https://www.legendu.net">Home</a></li>
+    <li><a href="https://misc.legendu.net">Blog</a></li>
+    <li><a href="https://misc.legendu.net/archives.html">Archives</a></li>
+    <li><a href="https://misc.legendu.net/categories.html">Categories</a></li>
+    <li><a href="https://misc.legendu.net/tags.html">Tags</a></li>
+    <li><a href="https://www.legendu.net/pages/about">About</a></li>
+</ul></nav>
+  <div id="main">
+    <div id="content">
+<div class="blog-index">
+  		<article>
+<header>
+      <h1 class="entry-title">
+        <a href="https://misc.legendu.net/blog/useful-rust-crates-for-filesystem/">Useful Rust Crates for Filesystem</a>
+      </h1>
+      <p class="meta"><time datetime="2023-01-13T15:40:23-08:00" pubdate>Jan 13, 2023</time></p>
+</header>
+
+  <div class="entry-content"><p><strong>Things on this page are fragmentary and immature notes/thoughts of the author. Please read with your own judgement!</strong></p>
+<h2 id="stdfs"><a href="https://doc.rust-lang.org/std/fs/">std::fs</a></h2>
+<h2 id="camino"><a href="https://crates.io/crates/camino">camino</a></h2>
+<p><a href="https://crates.io/crates/camino">Camino</a>
+is an extension of the std::path module that adds new Utf8PathBuf and Utf8Path types.</p>
+<h2 id="glob"><a href="https://www.legendu.net/misc/blog/hands-on-the-glob-crate-in-rust">glob</a></h2>
+<p><a href="https://www.legendu.net/misc/blog/hands-on-the-glob-crate-in-rust">glob</a> 
+supports matching file paths against Unix shell style patterns.</p>
+<h2 id="jwalk"><a href="https://crates.io/crates/jwalk">jwalk …</a></h2></div>
+  <footer>
+    <a rel="full-article" href="https://misc.legendu.net/blog/useful-rust-crates-for-filesystem/">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
+        <a href="https://misc.legendu.net/blog/unit-test-in-rust/">Unit Test in Rust</a>
+      </h1>
+      <p class="meta"><time datetime="2022-06-16T15:34:08-07:00" pubdate>Jun 16, 2022</time></p>
+</header>
+
+  <div class="entry-content"><p><strong>Things on this page are fragmentary and immature notes/thoughts of the author. Please read with your own judgement!</strong></p>
+<p>https://crates.io/crates/test-with</p>
+<h2 id="tips-and-traps">Tips and Traps</h2>
+<ol>
+<li>
+<p><a href="https://doc.rust-lang.org/std/macro.assert.html">std::assert!</a>
+    and
+    <a href="https://doc.rust-lang.org/std/macro.assert_eq.html">std::assert_eq!</a>
+    can be used to assert whether certain conditions are met.
+    They are typically used for testing
+    but they …</p></li></ol></div>
+  <footer>
+    <a rel="full-article" href="https://misc.legendu.net/blog/unit-test-in-rust/">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
+        <a href="https://misc.legendu.net/blog/use-of-mock-values-in-rust/">Use of Mock Values in Rust</a>
+      </h1>
+      <p class="meta"><time datetime="2021-12-11T22:41:34-08:00" pubdate>Dec 11, 2021</time></p>
+</header>
+
+  <div class="entry-content"><div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><strong>Things on this page are fragmentary and immature notes/thoughts of the author. Please read with your own judgement!</strong></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Mocking">Mocking<a class="anchor-link" href="#Mocking">&#182;</a></h2><p><a href="https://crates.io/crates/mailtutan">https://crates.io/crates/mailtutan</a></p>
+<ul>
+<li><p><a href="https://blog.logrocket.com/mocking-rust-mockall-alternatives">Mocking in Rust: Mockall and alternatives</a></p>
+</li>
+<li><p><a href="https://crates.io/crates/mockall">mockall</a></p>
+</li>
+<li><p><a href="https://crates.io/crates/mockers">mockers</a></p>
+</li>
+<li><p><a href="https://crates.io/crates/turmoil">turmoil</a>
+<a href="https://crates.io/crates/turmoil">Turmoil</a>
+is a framework for testing distributed systems. 
+It provides deterministic execution by running multiple concurrent hosts within a single thread. 
+It introduces "hardship" into the system via changes in the simulated network. 
+The network can be controlled manually or with a seeded rng.</p></div>
+  <footer>
+    <a rel="full-article" href="https://misc.legendu.net/blog/use-of-mock-values-in-rust/">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
+        <a href="https://misc.legendu.net/blog/linked-list-in-rust/">Linked List in Rust</a>
+      </h1>
+      <p class="meta"><time datetime="2021-11-27T12:59:49-08:00" pubdate>Nov 27, 2021</time></p>
+</header>
+
+  <div class="entry-content"><p><strong>Things on this page are fragmentary and immature notes/thoughts of the author. Please read with your own judgement!</strong></p>
+<p>The std library of Rust has an implementation of 
+<a href="https://doc.rust-lang.org/std/collections/struct.LinkedList.html">linked list</a>
+,
+however,
+it is not useful 
+as it does not give users the flexibility of manipulating raw pointers
+(which is the …</p></div>
+  <footer>
+    <a rel="full-article" href="https://misc.legendu.net/blog/linked-list-in-rust/">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
+        <a href="https://misc.legendu.net/blog/sorting-at-compile-time-in-rust/">Sorting At Compile Time in Rust</a>
+      </h1>
+      <p class="meta"><time datetime="2023-06-20T00:23:43-07:00" pubdate>Jun 20, 2023</time></p>
+</header>
+
+  <div class="entry-content"><p><strong>Things on this page are fragmentary and immature notes/thoughts of the author. Please read with your own judgement!</strong></p>
+<h2 id="references">References</h2>
+<ul>
+<li>
+<p><a href="https://www.reddit.com/r/rust/comments/qw18oa/can_i_sort_an_array_at_compile_time/">Can I sort an array at compile time?</a></p>
+</li>
+<li>
+<p><a href="https://users.rust-lang.org/t/ensuring-a-sorted-constant-array-at-compile-time/63575">Ensuring a sorted constant array at compile time</a></p>
+</li>
+<li>
+<p><a href="https://github.com/rust-lang/rust/issues/102307">Tracking Issue for unstable sorting in const context</a></p>
+</li>
+<li>
+<p><a href="https://crates.io/crates/staticsort">Rust Crate - staticsort</a></p>
+</li>
+</ul></div>
+  <footer>
+    <a rel="full-article" href="https://misc.legendu.net/blog/sorting-at-compile-time-in-rust/">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
+        <a href="https://misc.legendu.net/blog/OOM-in-Rust/">OOM in Rust</a>
+      </h1>
+      <p class="meta"><time datetime="2023-03-05T13:39:51-08:00" pubdate>Mar 05, 2023</time></p>
+</header>
+
+  <div class="entry-content"><p><strong>Things on this page are fragmentary and immature notes/thoughts of the author. Please read with your own judgement!</strong></p>
+<p>SIGKILL (signal 9)</p>
+<p>The following error message will be generated if rustc runs out of memory.</p>
+<p>signal: 9, SIGKILL: kill</p>
+<h2 id="references">References</h2>
+<ul>
+<li>
+<p><a href="https://www.crowdstrike.com/blog/dealing-with-out-of-memory-conditions-in-rust/">Dealing with Out-of-memory Conditions in Rust</a></p>
+</li>
+<li>
+<p><a href="https://rustcc.cn/article?id=00936d90-6190-4e68-8b11-f9da18665267">逃离编译 …</a></p></li></ul></div>
+  <footer>
+    <a rel="full-article" href="https://misc.legendu.net/blog/OOM-in-Rust/">Read On &crarr;</a>
+  </footer>
+  		</article>
+<div class="pagination">
+    <a class="prev" href="https://misc.legendu.net/tag/programming23.html">&larr; Older</a>
+
+      <a class="next" href="https://misc.legendu.net/tag/programming21.html">Newer &rarr;</a>
+  <br />
+</div></div>
+<aside class="sidebar">
+  <section>
+    <h1>Recent Posts</h1>
+    <ul id="recent_posts">
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/the-fzf-command-is-a-great-alternative-to-find/">The fzf Command Is a Great Alternative to find</a>
+      </li>
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/ruff-is-an-extremely-fast-python-linter-written-in-rust/">Ruff Is An Extremely Fast Python Linter Written in Rust</a>
+      </li>
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/useful-tools-for-python-developing/">Useful Tools for Python Developing</a>
+      </li>
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/tips-on-pyrefly/">Tips on Pyrefly</a>
+      </li>
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/ty-is-a-new-modern-static-type-checking-and-language-server-for-python/">ty Is a New Modern Static Type Checking and Language Server for Python</a>
+      </li>
+    </ul>
+  </section>
+  <section>
+    <h1>Categories</h1>
+    <ul id="recent_posts">
+        <li><a href="https://misc.legendu.net/category/ai.html">AI</a></li>
+        <li><a href="https://misc.legendu.net/category/career.html">Career</a></li>
+        <li><a href="https://misc.legendu.net/category/cloud.html">Cloud</a></li>
+        <li><a href="https://misc.legendu.net/category/computer-science.html">Computer Science</a></li>
+        <li><a href="https://misc.legendu.net/category/fiannce.html">Fiannce</a></li>
+        <li><a href="https://misc.legendu.net/category/finance.html">Finance</a></li>
+        <li><a href="https://misc.legendu.net/category/fun-problems.html">Fun Problems</a></li>
+        <li><a href="https://misc.legendu.net/category/hardware.html">Hardware</a></li>
+        <li><a href="https://misc.legendu.net/category/health.html">Health</a></li>
+        <li><a href="https://misc.legendu.net/category/house.html">House</a></li>
+        <li><a href="https://misc.legendu.net/category/internet.html">Internet</a></li>
+        <li><a href="https://misc.legendu.net/category/investment.html">Investment</a></li>
+        <li><a href="https://misc.legendu.net/category/life.html">life</a></li>
+        <li><a href="https://misc.legendu.net/category/linux.html">Linux</a></li>
+        <li><a href="https://misc.legendu.net/category/os.html">OS</a></li>
+        <li><a href="https://misc.legendu.net/category/people.html">People</a></li>
+        <li><a href="https://misc.legendu.net/category/philosophy.html">Philosophy</a></li>
+        <li><a href="https://misc.legendu.net/category/research.html">Research</a></li>
+        <li><a href="https://misc.legendu.net/category/shopping.html">Shopping</a></li>
+        <li><a href="https://misc.legendu.net/category/soft-skills.html">soft skills</a></li>
+        <li><a href="https://misc.legendu.net/category/software.html">Software</a></li>
+        <li><a href="https://misc.legendu.net/category/statistics.html">Statistics</a></li>
+        <li><a href="https://misc.legendu.net/category/tools.html">Tools</a></li>
+    </ul>
+  </section>
+ 
+
+  <section>
+  <h1>Tags</h1>
+  <ul class="tagcloud">
+  </ul>
+  </section>
+
+
+
+  <section>
+    <h1>GitHub Repos</h1>
+    <ul id="gh_repos">
+      <li class="loading">Status updating...</li>
+    </ul>
+      <a href="https://github.com/legendu-net">@legendu-net</a> on GitHub
+    <script type="text/javascript">
+      $.domReady(function(){
+          if (!window.jXHR){
+              var jxhr = document.createElement('script');
+              jxhr.type = 'text/javascript';
+              jxhr.src = 'https://misc.legendu.net/theme/js/jXHR.js';
+              var s = document.getElementsByTagName('script')[0];
+              s.parentNode.insertBefore(jxhr, s);
+          }
+
+          github.showRepos({
+              user: 'legendu-net',
+              count: 5,
+              skip_forks: true,
+              target: '#gh_repos'
+          });
+      });
+    </script>
+    <script src="https://misc.legendu.net/theme/js/github.js" type="text/javascript"> </script>
+  </section>
+
+    <section>
+        <h1>Social</h2>
+        <ul>
+            <li><a href="https://www.linkedin.com/in/ben-chuanlong-du-1239b221/" target="_blank">LinkedIn</a></li>
+            <li><a href="https://hub.docker.com/u/dclong" target="_blank">Docker Hub</a></li>
+            <li><a href="https://stackoverflow.com/users/7808204/benjamin-du?tab=profile" target="_blank">Stack Overflow</a></li>
+            <li><a href="https://twitter.com/longendu" target="_blank">Twitter</a></li>
+        <!--
+            <li><a href="https://misc.legendu.net/" type="application/rss+xml" rel="alternate">RSS</a></li>
+            -->
+        </ul>
+    </section>
+</aside>    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Ben Chuanlong Du -
+  <span class="credit">Powered by <a href="http://getpelican.com">Pelican</a></span>
+</p></footer>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-3STS9BVPF6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-3STS9BVPF6');
+</script>
+	<script type="text/javascript">
+	  var disqus_shortname = 'dclong';
+	  (function() {
+	    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	    dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+	    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	   })();
+	</script>
+</body>
+</html>

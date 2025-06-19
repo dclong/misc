@@ -1,0 +1,2304 @@
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Hands on the Standard Library HTTP in Golang</title>
+  <meta name="author" content="Ben Chuanlong Du">
+
+  <link href="https://misc.legendu.net/atom.xml" type="application/atom+xml" rel="alternate"
+        title="Ben Chuanlong Du's Blog Atom Feed" />
+
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link href="https://misc.legendu.net/favicon.png" rel="icon">
+  <link href="https://misc.legendu.net/theme/css/main_2.css" media="screen, projection"
+        rel="stylesheet" type="text/css">
+  <script src="https://misc.legendu.net/theme/js/modernizr-2.0.js"></script>
+  <script src="https://misc.legendu.net/theme/js/ender.js"></script>
+  <script src="https://misc.legendu.net/theme/js/octopress.js" type="text/javascript"></script>
+
+  <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <script data-ad-client="ca-pub-3836424032203369" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+</head>
+
+<body>
+  <header role="banner"><hgroup>
+  <h1><a href="https://misc.legendu.net/">Ben Chuanlong Du's Blog</a></h1>
+    <h2>It is never too late to learn.</h2>
+</hgroup></header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="https://misc.legendu.net/atom.xml" rel="subscribe-rss">RSS</a></li>
+</ul>
+
+<form name="search" action="https://www.bing.com/search" method="get" onSubmit="return build_query()">
+  <fieldset role="search">
+      <!--
+    <input type="hidden" name="q" value="site:https://misc.legendu.net" />
+        -->
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+
+<script type = "text/javascript">
+    function build_query() {
+        var query = document.forms["search"]["q"].value;
+        var prefix = "site:https://misc.legendu.net "
+        if (!query.startsWith(prefix)) {
+            query = prefix + query;
+            document.forms["search"]["q"].value = query;
+        }
+        return true;
+    }
+</script>
+
+<ul class="main-navigation">
+    <li><a href="https://www.legendu.net">Home</a></li>
+    <li><a href="https://misc.legendu.net">Blog</a></li>
+    <li><a href="https://misc.legendu.net/archives.html">Archives</a></li>
+    <li><a href="https://misc.legendu.net/categories.html">Categories</a></li>
+    <li><a href="https://misc.legendu.net/tags.html">Tags</a></li>
+    <li><a href="https://www.legendu.net/pages/about">About</a></li>
+</ul></nav>
+  <div id="main">
+    <div id="content">
+<div>
+  <article class="hentry" role="article">
+<header>
+      <h1 class="entry-title">Hands on the Standard Library HTTP in Golang</h1>
+      <p class="meta"><time datetime="2022-06-26T13:25:56-07:00" pubdate>Jun 26, 2022</time></p>
+</header>
+
+  <div class="entry-content"><style type="text/css">/*!
+*
+* IPython notebook
+*
+*/
+/* CSS font colors for translated ANSI escape sequences */
+/* The color values are a mix of
+   http://www.xcolors.net/dl/baskerville-ivorylight and
+   http://www.xcolors.net/dl/euphrasia */
+.ansi-black-fg {
+  color: #3E424D;
+}
+.ansi-black-bg {
+  background-color: #3E424D;
+}
+.ansi-black-intense-fg {
+  color: #282C36;
+}
+.ansi-black-intense-bg {
+  background-color: #282C36;
+}
+.ansi-red-fg {
+  color: #E75C58;
+}
+.ansi-red-bg {
+  background-color: #E75C58;
+}
+.ansi-red-intense-fg {
+  color: #B22B31;
+}
+.ansi-red-intense-bg {
+  background-color: #B22B31;
+}
+.ansi-green-fg {
+  color: #00A250;
+}
+.ansi-green-bg {
+  background-color: #00A250;
+}
+.ansi-green-intense-fg {
+  color: #007427;
+}
+.ansi-green-intense-bg {
+  background-color: #007427;
+}
+.ansi-yellow-fg {
+  color: #DDB62B;
+}
+.ansi-yellow-bg {
+  background-color: #DDB62B;
+}
+.ansi-yellow-intense-fg {
+  color: #B27D12;
+}
+.ansi-yellow-intense-bg {
+  background-color: #B27D12;
+}
+.ansi-blue-fg {
+  color: #208FFB;
+}
+.ansi-blue-bg {
+  background-color: #208FFB;
+}
+.ansi-blue-intense-fg {
+  color: #0065CA;
+}
+.ansi-blue-intense-bg {
+  background-color: #0065CA;
+}
+.ansi-magenta-fg {
+  color: #D160C4;
+}
+.ansi-magenta-bg {
+  background-color: #D160C4;
+}
+.ansi-magenta-intense-fg {
+  color: #A03196;
+}
+.ansi-magenta-intense-bg {
+  background-color: #A03196;
+}
+.ansi-cyan-fg {
+  color: #60C6C8;
+}
+.ansi-cyan-bg {
+  background-color: #60C6C8;
+}
+.ansi-cyan-intense-fg {
+  color: #258F8F;
+}
+.ansi-cyan-intense-bg {
+  background-color: #258F8F;
+}
+.ansi-white-fg {
+  color: #C5C1B4;
+}
+.ansi-white-bg {
+  background-color: #C5C1B4;
+}
+.ansi-white-intense-fg {
+  color: #A1A6B2;
+}
+.ansi-white-intense-bg {
+  background-color: #A1A6B2;
+}
+.ansi-default-inverse-fg {
+  color: #FFFFFF;
+}
+.ansi-default-inverse-bg {
+  background-color: #000000;
+}
+.ansi-bold {
+  font-weight: bold;
+}
+.ansi-underline {
+  text-decoration: underline;
+}
+/* The following styles are deprecated an will be removed in a future version */
+.ansibold {
+  font-weight: bold;
+}
+.ansi-inverse {
+  outline: 0.5px dotted;
+}
+/* use dark versions for foreground, to improve visibility */
+.ansiblack {
+  color: black;
+}
+.ansired {
+  color: darkred;
+}
+.ansigreen {
+  color: darkgreen;
+}
+.ansiyellow {
+  color: #c4a000;
+}
+.ansiblue {
+  color: darkblue;
+}
+.ansipurple {
+  color: darkviolet;
+}
+.ansicyan {
+  color: steelblue;
+}
+.ansigray {
+  color: gray;
+}
+/* and light for background, for the same reason */
+.ansibgblack {
+  background-color: black;
+}
+.ansibgred {
+  background-color: red;
+}
+.ansibggreen {
+  background-color: green;
+}
+.ansibgyellow {
+  background-color: yellow;
+}
+.ansibgblue {
+  background-color: blue;
+}
+.ansibgpurple {
+  background-color: magenta;
+}
+.ansibgcyan {
+  background-color: cyan;
+}
+.ansibggray {
+  background-color: gray;
+}
+div.cell {
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: vertical;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: vertical;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  border-radius: 2px;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  border-width: 1px;
+  border-style: solid;
+  border-color: transparent;
+  width: 100%;
+  padding: 5px;
+  /* This acts as a spacer between cells, that is outside the border */
+  margin: 0px;
+  outline: none;
+  position: relative;
+  overflow: visible;
+}
+div.cell:before {
+  position: absolute;
+  display: block;
+  top: -1px;
+  left: -1px;
+  width: 5px;
+  height: calc(100% +  2px);
+  content: '';
+  background: transparent;
+}
+div.cell.jupyter-soft-selected {
+  border-left-color: #E3F2FD;
+  border-left-width: 1px;
+  padding-left: 5px;
+  border-right-color: #E3F2FD;
+  border-right-width: 1px;
+  background: #E3F2FD;
+}
+@media print {
+  div.cell.jupyter-soft-selected {
+    border-color: transparent;
+  }
+}
+div.cell.selected,
+div.cell.selected.jupyter-soft-selected {
+  border-color: #ababab;
+}
+div.cell.selected:before,
+div.cell.selected.jupyter-soft-selected:before {
+  position: absolute;
+  display: block;
+  top: -1px;
+  left: -1px;
+  width: 5px;
+  height: calc(100% +  2px);
+  content: '';
+  background: #42A5F5;
+}
+@media print {
+  div.cell.selected,
+  div.cell.selected.jupyter-soft-selected {
+    border-color: transparent;
+  }
+}
+.edit_mode div.cell.selected {
+  border-color: #66BB6A;
+}
+.edit_mode div.cell.selected:before {
+  position: absolute;
+  display: block;
+  top: -1px;
+  left: -1px;
+  width: 5px;
+  height: calc(100% +  2px);
+  content: '';
+  background: #66BB6A;
+}
+@media print {
+  .edit_mode div.cell.selected {
+    border-color: transparent;
+  }
+}
+.prompt {
+  /* This needs to be wide enough for 3 digit prompt numbers: In[100]: */
+  min-width: 14ex;
+  /* This padding is tuned to match the padding on the CodeMirror editor. */
+  padding: 0.4em;
+  margin: 0px;
+  font-family: monospace;
+  text-align: right;
+  /* This has to match that of the the CodeMirror class line-height below */
+  line-height: 1.21429em;
+  /* Don't highlight prompt number selection */
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  /* Use default cursor */
+  cursor: default;
+}
+@media (max-width: 540px) {
+  .prompt {
+    text-align: left;
+  }
+}
+div.inner_cell {
+  min-width: 0;
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: vertical;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: vertical;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  /* Old browsers */
+  -webkit-box-flex: 1;
+  -moz-box-flex: 1;
+  box-flex: 1;
+  /* Modern browsers */
+  flex: 1;
+}
+/* input_area and input_prompt must match in top border and margin for alignment */
+div.input_area {
+  border: 1px solid #cfcfcf;
+  border-radius: 2px;
+  background: #f7f7f7;
+  line-height: 1.21429em;
+}
+/* This is needed so that empty prompt areas can collapse to zero height when there
+   is no content in the output_subarea and the prompt. The main purpose of this is
+   to make sure that empty JavaScript output_subareas have no height. */
+div.prompt:empty {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+div.unrecognized_cell {
+  padding: 5px 5px 5px 0px;
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: horizontal;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: horizontal;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: horizontal;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+}
+div.unrecognized_cell .inner_cell {
+  border-radius: 2px;
+  padding: 5px;
+  font-weight: bold;
+  color: red;
+  border: 1px solid #cfcfcf;
+  background: #eaeaea;
+}
+div.unrecognized_cell .inner_cell a {
+  color: inherit;
+  text-decoration: none;
+}
+div.unrecognized_cell .inner_cell a:hover {
+  color: inherit;
+  text-decoration: none;
+}
+@media (max-width: 540px) {
+  div.unrecognized_cell > div.prompt {
+    display: none;
+  }
+}
+div.code_cell {
+  /* avoid page breaking on code cells when printing */
+}
+@media print {
+  div.code_cell {
+    page-break-inside: avoid;
+  }
+}
+/* any special styling for code cells that are currently running goes here */
+div.input {
+  page-break-inside: avoid;
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: horizontal;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: horizontal;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: horizontal;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+}
+@media (max-width: 540px) {
+  div.input {
+    /* Old browsers */
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-box-align: stretch;
+    display: -moz-box;
+    -moz-box-orient: vertical;
+    -moz-box-align: stretch;
+    display: box;
+    box-orient: vertical;
+    box-align: stretch;
+    /* Modern browsers */
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+/* input_area and input_prompt must match in top border and margin for alignment */
+div.input_prompt {
+  color: #303F9F;
+  border-top: 1px solid transparent;
+}
+div.input_area > div.highlight {
+  margin: 0.4em;
+  border: none;
+  padding: 0px;
+  background-color: transparent;
+}
+div.input_area > div.highlight > pre {
+  margin: 0px;
+  border: none;
+  padding: 0px;
+  background-color: transparent;
+}
+/* The following gets added to the <head> if it is detected that the user has a
+ * monospace font with inconsistent normal/bold/italic height.  See
+ * notebookmain.js.  Such fonts will have keywords vertically offset with
+ * respect to the rest of the text.  The user should select a better font.
+ * See: https://github.com/ipython/ipython/issues/1503
+ *
+ * .CodeMirror span {
+ *      vertical-align: bottom;
+ * }
+ */
+.CodeMirror {
+  line-height: 1.21429em;
+  /* Changed from 1em to our global default */
+  font-size: 14px;
+  height: auto;
+  /* Changed to auto to autogrow */
+  background: none;
+  /* Changed from white to allow our bg to show through */
+}
+.CodeMirror-scroll {
+  /*  The CodeMirror docs are a bit fuzzy on if overflow-y should be hidden or visible.*/
+  /*  We have found that if it is visible, vertical scrollbars appear with font size changes.*/
+  overflow-y: hidden;
+  overflow-x: auto;
+}
+.CodeMirror-lines {
+  /* In CM2, this used to be 0.4em, but in CM3 it went to 4px. We need the em value because */
+  /* we have set a different line-height and want this to scale with that. */
+  /* Note that this should set vertical padding only, since CodeMirror assumes
+       that horizontal padding will be set on CodeMirror pre */
+  padding: 0.4em 0;
+}
+.CodeMirror-linenumber {
+  padding: 0 8px 0 4px;
+}
+.CodeMirror-gutters {
+  border-bottom-left-radius: 2px;
+  border-top-left-radius: 2px;
+}
+.CodeMirror pre {
+  /* In CM3 this went to 4px from 0 in CM2. This sets horizontal padding only,
+    use .CodeMirror-lines for vertical */
+  padding: 0 0.4em;
+  border: 0;
+  border-radius: 0;
+}
+.CodeMirror-cursor {
+  border-left: 1.4px solid black;
+}
+@media screen and (min-width: 2138px) and (max-width: 4319px) {
+  .CodeMirror-cursor {
+    border-left: 2px solid black;
+  }
+}
+@media screen and (min-width: 4320px) {
+  .CodeMirror-cursor {
+    border-left: 4px solid black;
+  }
+}
+/*
+
+Original style from softwaremaniacs.org (c) Ivan Sagalaev <Maniac@SoftwareManiacs.Org>
+Adapted from GitHub theme
+
+*/
+.highlight-base {
+  color: #000;
+}
+.highlight-variable {
+  color: #000;
+}
+.highlight-variable-2 {
+  color: #1a1a1a;
+}
+.highlight-variable-3 {
+  color: #333333;
+}
+.highlight-string {
+  color: #BA2121;
+}
+.highlight-comment {
+  color: #408080;
+  font-style: italic;
+}
+.highlight-number {
+  color: #080;
+}
+.highlight-atom {
+  color: #88F;
+}
+.highlight-keyword {
+  color: #008000;
+  font-weight: bold;
+}
+.highlight-builtin {
+  color: #008000;
+}
+.highlight-error {
+  color: #f00;
+}
+.highlight-operator {
+  color: #AA22FF;
+  font-weight: bold;
+}
+.highlight-meta {
+  color: #AA22FF;
+}
+/* previously not defined, copying from default codemirror */
+.highlight-def {
+  color: #00f;
+}
+.highlight-string-2 {
+  color: #f50;
+}
+.highlight-qualifier {
+  color: #555;
+}
+.highlight-bracket {
+  color: #997;
+}
+.highlight-tag {
+  color: #170;
+}
+.highlight-attribute {
+  color: #00c;
+}
+.highlight-header {
+  color: blue;
+}
+.highlight-quote {
+  color: #090;
+}
+.highlight-link {
+  color: #00c;
+}
+/* apply the same style to codemirror */
+.cm-s-ipython span.cm-keyword {
+  color: #008000;
+  font-weight: bold;
+}
+.cm-s-ipython span.cm-atom {
+  color: #88F;
+}
+.cm-s-ipython span.cm-number {
+  color: #080;
+}
+.cm-s-ipython span.cm-def {
+  color: #00f;
+}
+.cm-s-ipython span.cm-variable {
+  color: #000;
+}
+.cm-s-ipython span.cm-operator {
+  color: #AA22FF;
+  font-weight: bold;
+}
+.cm-s-ipython span.cm-variable-2 {
+  color: #1a1a1a;
+}
+.cm-s-ipython span.cm-variable-3 {
+  color: #333333;
+}
+.cm-s-ipython span.cm-comment {
+  color: #408080;
+  font-style: italic;
+}
+.cm-s-ipython span.cm-string {
+  color: #BA2121;
+}
+.cm-s-ipython span.cm-string-2 {
+  color: #f50;
+}
+.cm-s-ipython span.cm-meta {
+  color: #AA22FF;
+}
+.cm-s-ipython span.cm-qualifier {
+  color: #555;
+}
+.cm-s-ipython span.cm-builtin {
+  color: #008000;
+}
+.cm-s-ipython span.cm-bracket {
+  color: #997;
+}
+.cm-s-ipython span.cm-tag {
+  color: #170;
+}
+.cm-s-ipython span.cm-attribute {
+  color: #00c;
+}
+.cm-s-ipython span.cm-header {
+  color: blue;
+}
+.cm-s-ipython span.cm-quote {
+  color: #090;
+}
+.cm-s-ipython span.cm-link {
+  color: #00c;
+}
+.cm-s-ipython span.cm-error {
+  color: #f00;
+}
+.cm-s-ipython span.cm-tab {
+  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAMCAYAAAAkuj5RAAAAAXNSR0IArs4c6QAAAGFJREFUSMft1LsRQFAQheHPowAKoACx3IgEKtaEHujDjORSgWTH/ZOdnZOcM/sgk/kFFWY0qV8foQwS4MKBCS3qR6ixBJvElOobYAtivseIE120FaowJPN75GMu8j/LfMwNjh4HUpwg4LUAAAAASUVORK5CYII=);
+  background-position: right;
+  background-repeat: no-repeat;
+}
+div.output_wrapper {
+  /* this position must be relative to enable descendents to be absolute within it */
+  position: relative;
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: vertical;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: vertical;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  z-index: 1;
+}
+/* class for the output area when it should be height-limited */
+div.output_scroll {
+  /* ideally, this would be max-height, but FF barfs all over that */
+  height: 24em;
+  /* FF needs this *and the wrapper* to specify full width, or it will shrinkwrap */
+  width: 100%;
+  overflow: auto;
+  border-radius: 2px;
+  -webkit-box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.8);
+  box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.8);
+  display: block;
+}
+/* output div while it is collapsed */
+div.output_collapsed {
+  margin: 0px;
+  padding: 0px;
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: vertical;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: vertical;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+div.out_prompt_overlay {
+  height: 100%;
+  padding: 0px 0.4em;
+  position: absolute;
+  border-radius: 2px;
+}
+div.out_prompt_overlay:hover {
+  /* use inner shadow to get border that is computed the same on WebKit/FF */
+  -webkit-box-shadow: inset 0 0 1px #000;
+  box-shadow: inset 0 0 1px #000;
+  background: rgba(240, 240, 240, 0.5);
+}
+div.output_prompt {
+  color: #D84315;
+}
+/* This class is the outer container of all output sections. */
+div.output_area {
+  padding: 0px;
+  page-break-inside: avoid;
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: horizontal;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: horizontal;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: horizontal;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+}
+div.output_area .MathJax_Display {
+  text-align: left !important;
+}
+div.output_area 
+div.output_area 
+div.output_area img,
+div.output_area svg {
+  max-width: 100%;
+  height: auto;
+}
+div.output_area img.unconfined,
+div.output_area svg.unconfined {
+  max-width: none;
+}
+div.output_area .mglyph > img {
+  max-width: none;
+}
+/* This is needed to protect the pre formating from global settings such
+   as that of bootstrap */
+.output {
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: vertical;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: vertical;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+@media (max-width: 540px) {
+  div.output_area {
+    /* Old browsers */
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-box-align: stretch;
+    display: -moz-box;
+    -moz-box-orient: vertical;
+    -moz-box-align: stretch;
+    display: box;
+    box-orient: vertical;
+    box-align: stretch;
+    /* Modern browsers */
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+div.output_area pre {
+  margin: 0;
+  padding: 1px 0 1px 0;
+  border: 0;
+  vertical-align: baseline;
+  color: black;
+  background-color: transparent;
+  border-radius: 0;
+}
+/* This class is for the output subarea inside the output_area and after
+   the prompt div. */
+div.output_subarea {
+  overflow-x: auto;
+  padding: 0.4em;
+  /* Old browsers */
+  -webkit-box-flex: 1;
+  -moz-box-flex: 1;
+  box-flex: 1;
+  /* Modern browsers */
+  flex: 1;
+  max-width: calc(100% - 14ex);
+}
+div.output_scroll div.output_subarea {
+  overflow-x: visible;
+}
+/* The rest of the output_* classes are for special styling of the different
+   output types */
+/* all text output has this class: */
+div.output_text {
+  text-align: left;
+  color: #000;
+  /* This has to match that of the the CodeMirror class line-height below */
+  line-height: 1.21429em;
+}
+/* stdout/stderr are 'text' as well as 'stream', but execute_result/error are *not* streams */
+div.output_stderr {
+  background: #fdd;
+  /* very light red background for stderr */
+}
+div.output_latex {
+  text-align: left;
+}
+/* Empty output_javascript divs should have no height */
+div.output_javascript:empty {
+  padding: 0;
+}
+.js-error {
+  color: darkred;
+}
+/* raw_input styles */
+div.raw_input_container {
+  line-height: 1.21429em;
+  padding-top: 5px;
+}
+pre.raw_input_prompt {
+  /* nothing needed here. */
+}
+input.raw_input {
+  font-family: monospace;
+  font-size: inherit;
+  color: inherit;
+  width: auto;
+  /* make sure input baseline aligns with prompt */
+  vertical-align: baseline;
+  /* padding + margin = 0.5em between prompt and cursor */
+  padding: 0em 0.25em;
+  margin: 0em 0.25em;
+}
+input.raw_input:focus {
+  box-shadow: none;
+}
+p.p-space {
+  margin-bottom: 10px;
+}
+div.output_unrecognized {
+  padding: 5px;
+  font-weight: bold;
+  color: red;
+}
+div.output_unrecognized a {
+  color: inherit;
+  text-decoration: none;
+}
+div.output_unrecognized a:hover {
+  color: inherit;
+  text-decoration: none;
+}
+.rendered_html {
+  color: #000;
+  /* any extras will just be numbers: */
+}
+
+
+
+.rendered_html :link {
+  text-decoration: underline;
+}
+.rendered_html :visited {
+  text-decoration: underline;
+}
+
+
+
+
+
+
+.rendered_html h1:first-child {
+  margin-top: 0.538em;
+}
+.rendered_html h2:first-child {
+  margin-top: 0.636em;
+}
+.rendered_html h3:first-child {
+  margin-top: 0.777em;
+}
+.rendered_html h4:first-child {
+  margin-top: 1em;
+}
+.rendered_html h5:first-child {
+  margin-top: 1em;
+}
+.rendered_html h6:first-child {
+  margin-top: 1em;
+}
+.rendered_html ul:not(.list-inline),
+.rendered_html ol:not(.list-inline) {
+  padding-left: 2em;
+}
+
+
+
+
+
+
+
+
+.rendered_html * + ul {
+  margin-top: 1em;
+}
+.rendered_html * + ol {
+  margin-top: 1em;
+}
+
+
+
+
+
+.rendered_html pre,
+
+
+
+
+.rendered_html tr,
+.rendered_html th,
+
+
+.rendered_html tbody tr:nth-child(odd) {
+  background: #f5f5f5;
+}
+.rendered_html tbody tr:hover {
+  background: rgba(66, 165, 245, 0.2);
+}
+.rendered_html * + table {
+  margin-top: 1em;
+}
+
+.rendered_html * + p {
+  margin-top: 1em;
+}
+
+.rendered_html * + img {
+  margin-top: 1em;
+}
+.rendered_html img,
+
+.rendered_html img.unconfined,
+
+
+.rendered_html * + .alert {
+  margin-top: 1em;
+}
+[dir="rtl"] 
+div.text_cell {
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: horizontal;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: horizontal;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: horizontal;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+}
+@media (max-width: 540px) {
+  div.text_cell > div.prompt {
+    display: none;
+  }
+}
+div.text_cell_render {
+  /*font-family: "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;*/
+  outline: none;
+  resize: none;
+  width: inherit;
+  border-style: none;
+  padding: 0.5em 0.5em 0.5em 0.4em;
+  color: #000;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+}
+a.anchor-link:link {
+  text-decoration: none;
+  padding: 0px 20px;
+  visibility: hidden;
+}
+h1:hover .anchor-link,
+h2:hover .anchor-link,
+h3:hover .anchor-link,
+h4:hover .anchor-link,
+h5:hover .anchor-link,
+h6:hover .anchor-link {
+  visibility: visible;
+}
+.text_cell.rendered .input_area {
+  display: none;
+}
+.text_cell.rendered 
+.text_cell.rendered .rendered_html tr,
+.text_cell.rendered .rendered_html th,
+.text_cell.rendered 
+.text_cell.unrendered .text_cell_render {
+  display: none;
+}
+.text_cell .dropzone .input_area {
+  border: 2px dashed #bababa;
+  margin: -1px;
+}
+.cm-header-1,
+.cm-header-2,
+.cm-header-3,
+.cm-header-4,
+.cm-header-5,
+.cm-header-6 {
+  font-weight: bold;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+.cm-header-1 {
+  font-size: 185.7%;
+}
+.cm-header-2 {
+  font-size: 157.1%;
+}
+.cm-header-3 {
+  font-size: 128.6%;
+}
+.cm-header-4 {
+  font-size: 110%;
+}
+.cm-header-5 {
+  font-size: 100%;
+  font-style: italic;
+}
+.cm-header-6 {
+  font-size: 100%;
+  font-style: italic;
+}
+</style>
+<style type="text/css">pre { line-height: 125%; }
+td.linenos .normal { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+span.linenos { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+td.linenos .special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+ .highlight pre  .hll { background-color: #ffffcc }
+ .highlight pre  { background: #f8f8f8; }
+ .highlight pre  .c { color: #3D7B7B; font-style: italic } /* Comment */
+ .highlight pre  .err { border: 1px solid #FF0000 } /* Error */
+ .highlight pre  .k { color: #008000; font-weight: bold } /* Keyword */
+ .highlight pre  .o { color: #666666 } /* Operator */
+ .highlight pre  .ch { color: #3D7B7B; font-style: italic } /* Comment.Hashbang */
+ .highlight pre  .cm { color: #3D7B7B; font-style: italic } /* Comment.Multiline */
+ .highlight pre  .cp { color: #9C6500 } /* Comment.Preproc */
+ .highlight pre  .cpf { color: #3D7B7B; font-style: italic } /* Comment.PreprocFile */
+ .highlight pre  .c1 { color: #3D7B7B; font-style: italic } /* Comment.Single */
+ .highlight pre  .cs { color: #3D7B7B; font-style: italic } /* Comment.Special */
+ .highlight pre  .gd { color: #A00000 } /* Generic.Deleted */
+ .highlight pre  .ge { font-style: italic } /* Generic.Emph */
+ .highlight pre  .gr { color: #E40000 } /* Generic.Error */
+ .highlight pre  .gh { color: #000080; font-weight: bold } /* Generic.Heading */
+ .highlight pre  .gi { color: #008400 } /* Generic.Inserted */
+ .highlight pre  .go { color: #717171 } /* Generic.Output */
+ .highlight pre  .gp { color: #000080; font-weight: bold } /* Generic.Prompt */
+ .highlight pre  .gs { font-weight: bold } /* Generic.Strong */
+ .highlight pre  .gu { color: #800080; font-weight: bold } /* Generic.Subheading */
+ .highlight pre  .gt { color: #0044DD } /* Generic.Traceback */
+ .highlight pre  .kc { color: #008000; font-weight: bold } /* Keyword.Constant */
+ .highlight pre  .kd { color: #008000; font-weight: bold } /* Keyword.Declaration */
+ .highlight pre  .kn { color: #008000; font-weight: bold } /* Keyword.Namespace */
+ .highlight pre  .kp { color: #008000 } /* Keyword.Pseudo */
+ .highlight pre  .kr { color: #008000; font-weight: bold } /* Keyword.Reserved */
+ .highlight pre  .kt { color: #B00040 } /* Keyword.Type */
+ .highlight pre  .m { color: #666666 } /* Literal.Number */
+ .highlight pre  .s { color: #BA2121 } /* Literal.String */
+ .highlight pre  .na { color: #687822 } /* Name.Attribute */
+ .highlight pre  .nb { color: #008000 } /* Name.Builtin */
+ .highlight pre  .nc { color: #0000FF; font-weight: bold } /* Name.Class */
+ .highlight pre  .no { color: #880000 } /* Name.Constant */
+ .highlight pre  .nd { color: #AA22FF } /* Name.Decorator */
+ .highlight pre  .ni { color: #717171; font-weight: bold } /* Name.Entity */
+ .highlight pre  .ne { color: #CB3F38; font-weight: bold } /* Name.Exception */
+ .highlight pre  .nf { color: #0000FF } /* Name.Function */
+ .highlight pre  .nl { color: #767600 } /* Name.Label */
+ .highlight pre  .nn { color: #0000FF; font-weight: bold } /* Name.Namespace */
+ .highlight pre  .nt { color: #008000; font-weight: bold } /* Name.Tag */
+ .highlight pre  .nv { color: #19177C } /* Name.Variable */
+ .highlight pre  .ow { color: #AA22FF; font-weight: bold } /* Operator.Word */
+ .highlight pre  .w { color: #bbbbbb } /* Text.Whitespace */
+ .highlight pre  .mb { color: #666666 } /* Literal.Number.Bin */
+ .highlight pre  .mf { color: #666666 } /* Literal.Number.Float */
+ .highlight pre  .mh { color: #666666 } /* Literal.Number.Hex */
+ .highlight pre  .mi { color: #666666 } /* Literal.Number.Integer */
+ .highlight pre  .mo { color: #666666 } /* Literal.Number.Oct */
+ .highlight pre  .sa { color: #BA2121 } /* Literal.String.Affix */
+ .highlight pre  .sb { color: #BA2121 } /* Literal.String.Backtick */
+ .highlight pre  .sc { color: #BA2121 } /* Literal.String.Char */
+ .highlight pre  .dl { color: #BA2121 } /* Literal.String.Delimiter */
+ .highlight pre  .sd { color: #BA2121; font-style: italic } /* Literal.String.Doc */
+ .highlight pre  .s2 { color: #BA2121 } /* Literal.String.Double */
+ .highlight pre  .se { color: #AA5D1F; font-weight: bold } /* Literal.String.Escape */
+ .highlight pre  .sh { color: #BA2121 } /* Literal.String.Heredoc */
+ .highlight pre  .si { color: #A45A77; font-weight: bold } /* Literal.String.Interpol */
+ .highlight pre  .sx { color: #008000 } /* Literal.String.Other */
+ .highlight pre  .sr { color: #A45A77 } /* Literal.String.Regex */
+ .highlight pre  .s1 { color: #BA2121 } /* Literal.String.Single */
+ .highlight pre  .ss { color: #19177C } /* Literal.String.Symbol */
+ .highlight pre  .bp { color: #008000 } /* Name.Builtin.Pseudo */
+ .highlight pre  .fm { color: #0000FF } /* Name.Function.Magic */
+ .highlight pre  .vc { color: #19177C } /* Name.Variable.Class */
+ .highlight pre  .vg { color: #19177C } /* Name.Variable.Global */
+ .highlight pre  .vi { color: #19177C } /* Name.Variable.Instance */
+ .highlight pre  .vm { color: #19177C } /* Name.Variable.Magic */
+ .highlight pre  .il { color: #666666 } /* Literal.Number.Integer.Long */</style><body><div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><strong>Things on this page are fragmentary and immature notes/thoughts of the author. Please read with your own judgement!</strong></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[2]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="s2">&quot;io/ioutil&quot;</span>
+<span class="kn">import</span> <span class="s2">&quot;io&quot;</span>
+<span class="kn">import</span> <span class="s2">&quot;net/http&quot;</span>
+<span class="kn">import</span> <span class="s2">&quot;strings&quot;</span>
+<span class="kn">import</span> <span class="s2">&quot;os&quot;</span>
+<span class="kn">import</span> <span class="s2">&quot;log&quot;</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[10]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">resp</span><span class="p">,</span> <span class="n">err</span> <span class="o">:=</span> <span class="n">http</span><span class="o">.</span><span class="n">Get</span><span class="p">(</span><span class="s2">&quot;https://www.apache.org/dyn/closer.lua/spark/spark-3.3.0/spark-3.3.0-bin-hadoop3.tgz&quot;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[11]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">if</span> <span class="n">err</span> <span class="o">!=</span> <span class="n">nil</span> <span class="p">{</span>
+    <span class="n">log</span><span class="o">.</span><span class="n">Fatal</span><span class="p">(</span><span class="n">err</span><span class="p">)</span>
+<span class="p">}</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[12]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">resp</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[12]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>&amp;{200 OK 200 HTTP/2.0 2 0 map[Accept-Ranges:[bytes] Cache-Control:[private, max-age=3600] Content-Type:[text/html] Date:[Sun, 26 Jun 2022 20:38:53 GMT] Expires:[Sun, 26 Jun 2022 21:38:53 GMT] Server:[Apache] Vary:[Accept-Encoding] Via:[1.1 varnish, 1.1 varnish] X-Cache:[MISS, MISS] X-Cache-Hits:[0, 0] X-Served-By:[cache-hel1410025-HEL, cache-bfi-krnt7300035-BFI] X-Timer:[S1656275934.713944,VS0,VE165]] 0xc0001744b0 -1 [] false true map[] 0xc000296000 0xc0000ea370}</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[13]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">body</span><span class="p">,</span> <span class="n">err</span> <span class="o">:=</span> <span class="n">ioutil</span><span class="o">.</span><span class="n">ReadAll</span><span class="p">(</span><span class="n">resp</span><span class="o">.</span><span class="n">Body</span><span class="p">)</span>
+<span class="n">resp</span><span class="o">.</span><span class="n">Body</span><span class="o">.</span><span class="n">Close</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[16]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">resp</span><span class="o">.</span><span class="n">StatusCode</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[16]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>200</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[17]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">if</span> <span class="n">err</span> <span class="o">!=</span> <span class="n">nil</span> <span class="p">{</span>
+    <span class="n">log</span><span class="o">.</span><span class="n">Fatal</span><span class="p">(</span><span class="n">err</span><span class="p">)</span>
+<span class="p">}</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[20]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">html</span> <span class="o">:=</span> <span class="n">string</span><span class="p">(</span><span class="n">body</span><span class="p">)</span>
+<span class="n">html</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[20]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>&lt;!DOCTYPE html&gt;
+&lt;html lang=&#34;en&#34;&gt;
+&lt;head&gt;
+  &lt;meta charset=&#34;utf-8&#34;&gt;
+  &lt;meta http-equiv=&#34;X-UA-Compatible&#34; content=&#34;IE=edge&#34;&gt;
+  &lt;meta name=&#34;viewport&#34; content=&#34;width=device-width, initial-scale=1&#34;&gt;
+  &lt;meta name=&#34;description&#34; content=&#34;Home page of The Apache Software Foundation&#34;&gt;
+  &lt;base href=&#34;https://www.apache.org/dyn/closer.cgi&#34; /&gt;
+  &lt;link rel=&#34;apple-touch-icon&#34; sizes=&#34;57x57&#34; href=&#34;/favicons/apple-touch-icon-57x57.png&#34;&gt;
+  &lt;link rel=&#34;apple-touch-icon&#34; sizes=&#34;60x60&#34; href=&#34;/favicons/apple-touch-icon-60x60.png&#34;&gt;
+  &lt;link rel=&#34;apple-touch-icon&#34; sizes=&#34;72x72&#34; href=&#34;/favicons/apple-touch-icon-72x72.png&#34;&gt;
+  &lt;link rel=&#34;apple-touch-icon&#34; sizes=&#34;76x76&#34; href=&#34;/favicons/apple-touch-icon-76x76.png&#34;&gt;
+  &lt;link rel=&#34;apple-touch-icon&#34; sizes=&#34;114x114&#34; href=&#34;/favicons/apple-touch-icon-114x114.png&#34;&gt;
+  &lt;link rel=&#34;apple-touch-icon&#34; sizes=&#34;120x120&#34; href=&#34;/favicons/apple-touch-icon-120x120.png&#34;&gt;
+  &lt;link rel=&#34;apple-touch-icon&#34; sizes=&#34;144x144&#34; href=&#34;/favicons/apple-touch-icon-144x144.png&#34;&gt;
+  &lt;link rel=&#34;apple-touch-icon&#34; sizes=&#34;152x152&#34; href=&#34;/favicons/apple-touch-icon-152x152.png&#34;&gt;
+  &lt;link rel=&#34;apple-touch-icon&#34; sizes=&#34;180x180&#34; href=&#34;/favicons/apple-touch-icon-180x180.png&#34;&gt;
+  &lt;link rel=&#34;icon&#34; type=&#34;image/png&#34; href=&#34;/favicons/favicon-32x32.png&#34; sizes=&#34;32x32&#34;&gt;
+  &lt;link rel=&#34;icon&#34; type=&#34;image/png&#34; href=&#34;/favicons/favicon-194x194.png&#34; sizes=&#34;194x194&#34;&gt;
+  &lt;link rel=&#34;icon&#34; type=&#34;image/png&#34; href=&#34;/favicons/favicon-96x96.png&#34; sizes=&#34;96x96&#34;&gt;
+  &lt;link rel=&#34;icon&#34; type=&#34;image/png&#34; href=&#34;/favicons/android-chrome-192x192.png&#34; sizes=&#34;192x192&#34;&gt;
+  &lt;link rel=&#34;icon&#34; type=&#34;image/png&#34; href=&#34;/favicons/favicon-16x16.png&#34; sizes=&#34;16x16&#34;&gt;
+  &lt;link rel=&#34;manifest&#34; href=&#34;/favicons/manifest.json&#34;&gt;
+  &lt;link rel=&#34;shortcut icon&#34; href=&#34;/favicons/favicon.ico&#34;&gt;
+  &lt;meta name=&#34;msapplication-TileColor&#34; content=&#34;#603cba&#34;&gt;
+  &lt;meta name=&#34;msapplication-TileImage&#34; content=&#34;/favicons/mstile-144x144.png&#34;&gt;
+  &lt;meta name=&#34;msapplication-config&#34; content=&#34;/favicons/browserconfig.xml&#34;&gt;
+  &lt;meta name=&#34;theme-color&#34; content=&#34;#282661&#34;&gt;
+
+  &lt;title&gt;Apache Downloads&lt;/title&gt;
+  &lt;link href=&#34;https://fonts.googleapis.com/css?family=Montserrat:300,600&#34; rel=&#34;stylesheet&#34;&gt;
+  &lt;link href=&#34;/css/min.bootstrap.css&#34; rel=&#34;stylesheet&#34;&gt;
+  &lt;link href=&#34;/css/styles.css&#34; rel=&#34;stylesheet&#34;&gt;
+  
+
+  &lt;!-- Licensed to the Apache Software Foundation (ASF) under one or more contributor license agreements.  See the NOTICE file distributed with this work for additional information regarding copyright ownership.  The ASF licenses this file to you under the Apache License, Version 2.0 (the &amp;quot;License&amp;quot;); you may not use this file except in compliance with the License.  You may obtain a copy of the License at . http://www.apache.org/licenses/LICENSE-2.0 . Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an &amp;quot;AS IS&amp;quot; BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.  See the License for the specific language governing permissions and limitations under the License. --&gt;
+
+&lt;/head&gt;
+
+&lt;body&gt;
+  &lt;!-- Navigation --&gt;
+  &lt;header&gt;
+	&lt;div id=&#34;skiptocontent&#34;&gt;
+		&lt;a href=&#34;#maincontent&#34;&gt;Skip to Main Content&lt;/a&gt;
+	&lt;/div&gt;
+    &lt;nav class=&#34;navbar navbar-inverse navbar-fixed-top mainmenu&#34;&gt;
+      &lt;div class=&#34;container&#34;&gt;
+        &lt;div class=&#34;navbar-header&#34;&gt;
+          &lt;button class=&#34;navbar-toggle&#34; type=&#34;button&#34; data-toggle=&#34;collapse&#34; data-target=&#34;#mainnav-collapse&#34;&gt;
+            &lt;span class=&#34;sr-only&#34;&gt;Toggle navigation&lt;/span&gt;
+            &lt;span class=&#34;icon-bar&#34;&gt;&lt;/span&gt;
+            &lt;span class=&#34;icon-bar&#34;&gt;&lt;/span&gt;
+            &lt;span class=&#34;icon-bar&#34;&gt;&lt;/span&gt;
+          &lt;/button&gt;
+        &lt;/div&gt;
+        &lt;div class=&#34;collapse navbar-collapse&#34; id=&#34;mainnav-collapse&#34;&gt;
+          &lt;ul class=&#34;nav navbar-nav navbar-justified&#34;&gt;
+            &lt;li&gt;
+              &lt;form class=&#34;visible-xs&#34;&gt;
+                &lt;div class=&#34;input-group&#34; style=&#34;width: 100%;&#34;&gt;
+                  &lt;script&gt;
+                    (function() {
+                    var cx = &#39;005703438322411770421:5mgshgrgx2u&#39;;
+                    var gcse = document.createElement(&#39;script&#39;);
+                    gcse.type = &#39;text/javascript&#39;;
+                    gcse.async = true;
+                    gcse.src = (document.location.protocol == &#39;https:&#39; ? &#39;https:&#39; : &#39;http:&#39;) +
+                    &#39;//cse.google.com/cse.js?cx=&#39; + cx;
+                    var s = document.getElementsByTagName(&#39;script&#39;)[0];
+                    s.parentNode.insertBefore(gcse, s);
+                    })();
+                  &lt;/script&gt;
+                  &lt;gcse:searchbox-only&gt;&lt;/gcse:searchbox-only&gt;
+                &lt;/div&gt;
+              &lt;/form&gt;
+            &lt;/li&gt;
+            &lt;li&gt;&lt;a href=&#34;/index.html#news&#34;&gt;News&lt;/a&gt;&lt;/li&gt;
+            &lt;li class=&#34;dropdown&#34;&gt;
+              &lt;a href=&#34;#&#34; class=&#34;dropdown-toggle&#34; data-toggle=&#34;dropdown&#34; role=&#34;button&#34;&gt;About&amp;nbsp;&lt;span class=&#34;caret&#34;&gt;&lt;/span&gt;&lt;/a&gt;
+              &lt;ul class=&#34;dropdown-menu&#34; role=&#34;menu&#34;&gt;
+                &lt;li&gt;&lt;a href=&#34;/foundation&#34;&gt;Overview&lt;/a&gt;&lt;/li&gt;
+                &lt;li&gt;&lt;a href=&#34;/foundation/how-it-works.html&#34;&gt;Process&lt;/a&gt;&lt;/li&gt;
+                &lt;li&gt;&lt;a href=&#34;/foundation/governance/&#34;&gt;Governance&lt;/a&gt;&lt;/li&gt;
+                &lt;li&gt;&lt;a href=&#34;/theapacheway/index.html&#34;&gt;The Apache Way&lt;/a&gt;&lt;/li&gt;
+                &lt;li&gt;&lt;a href=&#34;/foundation/governance/members.html&#34;&gt;Membership&lt;/a&gt;&lt;/li&gt;
+                &lt;li&gt;&lt;a href=&#34;https://community.apache.org/&#34;&gt;Community&lt;/a&gt;&lt;/li&gt;
+                &lt;li&gt;&lt;a href=&#34;https://diversity.apache.org/&#34;&gt;Diversity &amp; Inclusion&lt;/a&gt;&lt;/li&gt;
+                &lt;li&gt;&lt;a href=&#34;/foundation/policies/conduct&#34;&gt;Code of Conduct&lt;/a&gt;&lt;/li&gt;
+                &lt;li&gt;&lt;a href=&#34;/foundation/glossary.html&#34;&gt;Glossary&lt;/a&gt;&lt;/li&gt;
+				  &lt;li&gt;&lt;a href=&#34;/apache-name&#34;&gt;About Our Name&lt;/a&gt;&lt;/li&gt;
+                &lt;li&gt;&lt;a href=&#34;/foundation/preFAQ.html&#34;&gt;FAQ&lt;/a&gt;&lt;/li&gt;
+                &lt;li&gt;&lt;a href=&#34;/foundation/contributing.html&#34;&gt;Support Apache&lt;/a&gt;&lt;/li&gt;
+                &lt;li&gt;&lt;a href=&#34;/press/&#34;&gt;Media/Analysts&lt;/a&gt;&lt;/li&gt;
+                &lt;li&gt;&lt;a href=&#34;/foundation/contact.html&#34;&gt;Contact&lt;/a&gt;&lt;/li&gt;
+              &lt;/ul&gt;
+            &lt;/li&gt;
+            &lt;li class=&#34;dropdown&#34;&gt;
+              &lt;a href=&#34;#&#34; class=&#34;dropdown-toggle&#34; data-toggle=&#34;dropdown&#34; role=&#34;button&#34;&gt;Make a Donation&amp;nbsp;&lt;span class=&#34;caret&#34;&gt;&lt;/span&gt;&lt;/a&gt;
+              &lt;ul class=&#34;dropdown-menu&#34; role=&#34;menu&#34;&gt;
+                &lt;li&gt;&lt;a href=&#34;/foundation/contributing.html&#34;&gt;Donate Now&lt;/a&gt;&lt;/li&gt;
+                &lt;li&gt;&lt;a href=&#34;https://donate.apache.org/&#34;&gt;&amp;nbsp;&amp;nbsp;Via Credit Card&lt;/a&gt;&lt;/li&gt;
+                &lt;li&gt;&lt;a href=&#34;https://donate.apache.org/&#34;&gt;&amp;nbsp;&amp;nbsp;Via ACH&lt;/a&gt;&lt;/li&gt;
+                &lt;li&gt;&lt;a href=&#34;https://donate.apache.org/&#34;&gt;&amp;nbsp;&amp;nbsp;Via PayPal&lt;/a&gt;&lt;/li&gt;
+                &lt;li&gt;&lt;a href=&#34;https://www.redbubble.com/people/comdev&#34;&gt;Buy Swag&lt;/a&gt;&lt;/li&gt;
+                &lt;li&gt;&lt;a href=&#34;https://smile.amazon.com/gp/chpf/homepage/ref=smi_se_scyc_srch_stsr?q=apache+software+foundation&amp;orig=%2F&#34;&gt;Shop smile.amazon.com&lt;/a&gt;&lt;/li&gt;
+                &lt;li&gt;&lt;a href=&#34;/foundation/sponsorship.html&#34;&gt;ASF Sponsorship&lt;/a&gt;&lt;/li&gt;
+                &lt;li&gt;&lt;a href=&#34;/foundation/thanks#targeted-sponsors&#34;&gt;Targeted Sponsorship&lt;/a&gt;&lt;/li&gt;
+                &lt;li&gt;&lt;a href=&#34;/foundation/contributing.html#CorporateGiving&#34;&gt;Corporate Giving&lt;/a&gt;&lt;/li&gt;
+              &lt;/ul&gt;
+            &lt;/li&gt;
+            &lt;li class=&#34;dropdown&#34;&gt;
+              &lt;a href=&#34;#&#34; class=&#34;dropdopwn-toggle&#34; data-toggle=&#34;dropdown&#34;&gt;The Apache Way&amp;nbsp;&lt;span class=&#34;caret&#34;&gt;&lt;/span&gt;&lt;/a&gt;
+              &lt;ul class=&#34;dropdown-menu&#34; role=&#34;menu&#34;&gt;
+                &lt;li&gt;&lt;a href=&#34;/theapacheway/index.html&#34;&gt;The Apache Way&lt;/a&gt;&lt;/li&gt;
+                &lt;li&gt;&lt;a href=&#34;https://s.apache.org/GhnI&#34;&gt;Sustainable Open Source&lt;/a&gt;&lt;/li&gt;
+                &lt;li&gt;&lt;a href=&#34;/foundation/how-it-works.html&#34;&gt;How it Works&lt;/a&gt;&lt;/li&gt;
+                &lt;li&gt;&lt;a href=&#34;/foundation/how-it-works.html#meritocracy&#34;&gt;Merit&lt;/a&gt;&lt;/li&gt;
+                &lt;li&gt;&lt;a href=&#34;https://blogs.apache.org/foundation/category/SuccessAtApache&#34;&gt;Success at Apache&lt;/a&gt;&lt;/li&gt;
+              &lt;/ul&gt;
+            &lt;/li&gt;
+            &lt;li class=&#34;dropdown&#34;&gt;
+              &lt;a href=&#34;#&#34; class=&#34;dropdopwn-toggle&#34; data-toggle=&#34;dropdown&#34;&gt;Join Us&amp;nbsp;&lt;span class=&#34;caret&#34;&gt;&lt;/span&gt;&lt;/a&gt;
+              &lt;ul class=&#34;dropdown-menu&#34; role=&#34;menu&#34;&gt;
+                &lt;li&gt;&lt;a href=&#34;https://community.apache.org/gettingStarted/101.html&#34;&gt;Getting Started&lt;/a&gt;&lt;/li&gt;
+                &lt;li&gt;&lt;a href=&#34;https://helpwanted.apache.org/&#34;&gt;Help Wanted&lt;/a&gt;&lt;/li&gt;
+                &lt;li&gt;&lt;a href=&#34;https://www.apachecon.com/&#34;&gt;ApacheCon&lt;/a&gt;&lt;/li&gt;
+                &lt;li&gt;&lt;a href=&#34;http://community.apache.org/calendars/&#34;&gt;Community Events&lt;/a&gt;&lt;/li&gt;
+                &lt;li&gt;&lt;a href=&#34;/travel/&#34;&gt;Travel Assistance&lt;/a&gt;&lt;/li&gt;
+                &lt;li&gt;&lt;a href=&#34;https://community.apache.org/gsoc.html&#34;&gt;Summer of Code&lt;/a&gt;&lt;/li&gt;
+                &lt;li&gt;&lt;a href=&#34;/foundation/policies/conduct&#34;&gt;Code of Conduct&lt;/a&gt;&lt;/li&gt;
+                &lt;li&gt;&lt;a href=&#34;https://community.apache.org/contributors/etiquette&#34;&gt;Etiquette&lt;/a&gt;&lt;/li&gt;
+                &lt;li class=&#34;dropdown dropdown-submenu visible-xs&#34;&gt;
+                  &lt;a href=&#34;#&#34; class=&#34;dropdown-toggle&#34; data-toggle=&#34;dropdown&#34; role=&#34;button&#34;&gt;Projects&amp;nbsp;&lt;span class=&#34;caret&#34;&gt;&lt;/span&gt;&lt;/a&gt;
+                  &lt;ul class=&#34;dropdown-menu&#34; role=&#34;menu&#34;&gt;
+                    &lt;li&gt;&lt;a href=&#34;/index.html#projects-list&#34;&gt;Project List&lt;/a&gt;&lt;/li&gt;
+                    &lt;li&gt;&lt;a href=&#34;/foundation/how-it-works.html#management&#34;&gt;How they work&lt;/a&gt;&lt;/li&gt;
+                    &lt;li&gt;&lt;a href=&#34;https://community.apache.org/projectIndependence.html&#34;&gt;Independence&lt;/a&gt;&lt;/li&gt;
+                    &lt;li&gt;&lt;a href=&#34;https://projects.apache.org/committees.html?date&#34;&gt;Date Founded&lt;/a&gt;&lt;/li&gt;
+                    &lt;li&gt;&lt;a href=&#34;https://projects.apache.org/projects.html?name&#34;&gt;Names&lt;/a&gt;&lt;/li&gt;
+                    &lt;li&gt;&lt;a href=&#34;https://projects.apache.org/projects.html?category&#34;&gt;Categories&lt;/a&gt;&lt;/li&gt;
+                    &lt;li&gt;&lt;a href=&#34;https://projects.apache.org/projects.html?language&#34;&gt;Languages&lt;/a&gt;&lt;/li&gt;
+                    &lt;li&gt;&lt;a href=&#34;https://projects.apache.org/statistics.html&#34;&gt;Statistics&lt;/a&gt;&lt;/li&gt;
+                    &lt;li&gt;&lt;a href=&#34;https://incubator.apache.org/&#34;&gt;Apache Incubator&lt;/a&gt;&lt;/li&gt;
+                    &lt;li&gt;&lt;a href=&#34;https://helpwanted.apache.org/&#34;&gt;Help Wanted&lt;/a&gt;&lt;/li&gt;
+                    &lt;li&gt;&lt;a href=&#34;/foundation/marks/&#34;&gt;Brand Management&lt;/a&gt;&lt;/li&gt;
+                  &lt;/ul&gt;
+                &lt;/li&gt;
+                &lt;li class=&#34;drowpdown dropdown-submenu visible-xs&#34;&gt;
+                  &lt;a href=&#34;#&#34; class=&#34;dropdown-toggle&#34; data-toggle=&#34;dropdown&#34; role=&#34;button&#34;&gt;People&amp;nbsp;&lt;span class=&#34;caret&#34;&gt;&lt;/span&gt;&lt;/a&gt;
+                  &lt;ul class=&#34;dropdown-menu&#34; role=&#34;menu&#34;&gt;
+                    &lt;li&gt;&lt;a href=&#34;/foundation/how-it-works.html#roles&#34;&gt;Roles&lt;/a&gt;&lt;/li&gt;
+                    &lt;li&gt;&lt;a href=&#34;/foundation/members.html&#34;&gt;Members&lt;/a&gt;&lt;/li&gt;
+                    &lt;li&gt;&lt;a href=&#34;https://community.apache.org/contributors/&#34;&gt;Committers&lt;/a&gt;&lt;/li&gt;
+                    &lt;li&gt;&lt;a href=&#34;/foundation/#who-runs-the-asf&#34;&gt;Board of Directors&lt;/a&gt;&lt;/li&gt;
+                    &lt;li&gt;&lt;a href=&#34;/foundation/#who-runs-the-asf&#34;&gt;Officers  &amp;amp; Project VPs&lt;/a&gt;&lt;/li&gt;
+                    &lt;li&gt;&lt;a href=&#34;https://community.zones.apache.org/map.html&#34;&gt;Location Map&lt;/a&gt;&lt;/li&gt;
+                    &lt;li&gt;&lt;a href=&#34;/foundation/policies/conduct&#34;&gt;Code of Conduct&lt;/a&gt;&lt;/li&gt;
+                    &lt;li&gt;&lt;a href=&#34;https://people.apache.org/&#34;&gt;Committer Directory&lt;/a&gt;&lt;/li&gt;
+                  &lt;/ul&gt;
+                &lt;/li&gt;
+                &lt;li class=&#34;drowpdown dropdown-submenu visible-xs&#34;&gt;
+                  &lt;a href=&#34;#&#34; class=&#34;dropdown-toggle&#34; data-toggle=&#34;dropdown&#34; role=&#34;button&#34;&gt;Community&amp;nbsp;&lt;span class=&#34;caret&#34;&gt;&lt;/span&gt;&lt;/a&gt;
+                  &lt;ul class=&#34;dropdown-menu&#34; role=&#34;menu&#34;&gt;
+                    &lt;li&gt;&lt;a href=&#34;https://community.apache.org/about/&#34;&gt;Community Development&lt;/a&gt;&lt;/li&gt;
+                    &lt;li&gt;&lt;a href=&#34;/foundation/policies/conduct&#34;&gt;Code of Conduct&lt;/a&gt;&lt;/li&gt;
+                    &lt;li&gt;&lt;a href=&#34;https://community.apache.org/&#34;&gt;Get Involved&lt;/a&gt;&lt;/li&gt;
+                    &lt;li&gt;&lt;a href=&#34;https://community.apache.org/mentoringprogramme.html&#34;&gt;Mentoring&lt;/a&gt;&lt;/li&gt;
+                    &lt;li&gt;&lt;a href=&#34;https://helpwanted.apache.org/&#34;&gt;Help Wanted&lt;/a&gt;&lt;/li&gt;
+                    &lt;li&gt;&lt;a href=&#34;https://community.apache.org/calendars/&#34;&gt;Community Events&lt;/a&gt;&lt;/li&gt;
+                    &lt;li&gt;&lt;a href=&#34;https://community.apache.org/newbiefaq.html&#34;&gt;FAQ&lt;/a&gt;&lt;/li&gt;
+                    &lt;li&gt;&lt;a href=&#34;https://community.apache.org/lists.html&#34;&gt;Mailing Lists&lt;/a&gt;&lt;/li&gt;
+                  &lt;/ul&gt;
+                &lt;/li&gt;
+                &lt;li class=&#34;drowpdown dropdown-submenu visible-xs&#34;&gt;
+                  &lt;a href=&#34;#&#34; class=&#34;dropdown-toggle&#34; data-toggle=&#34;dropdown&#34; role=&#34;button&#34;&gt;License&amp;nbsp;&lt;span class=&#34;caret&#34;&gt;&lt;/span&gt;&lt;/a&gt;
+                  &lt;ul class=&#34;dropdown-menu&#34; role=&#34;menu&#34;&gt;
+                    &lt;li&gt;&lt;a href=&#34;/licenses/LICENSE-2.0&#34;&gt;Apache License 2.0&lt;/a&gt;&lt;/li&gt;
+                    &lt;li&gt;&lt;a href=&#34;/foundation/license-faq.html&#34;&gt;Licensing FAQ&lt;/a&gt;&lt;/li&gt;
+                    &lt;li&gt;&lt;a href=&#34;/licenses/contributor-agreements.html&#34;&gt;Contributor License Agreements&lt;/a&gt;&lt;/li&gt;
+                    &lt;li&gt;&lt;a href=&#34;/licenses/contributor-agreements.html#grants&#34;&gt;Software Grants&lt;/a&gt;&lt;/li&gt;
+                    &lt;li&gt;&lt;a href=&#34;/foundation/marks/list/&#34;&gt;Trademarks&lt;/a&gt;&lt;/li&gt;
+                    &lt;li&gt;&lt;a href=&#34;/licenses/exports/&#34;&gt;Exports&lt;/a&gt;&lt;/li&gt;
+                  &lt;/ul&gt;
+                &lt;/li&gt;
+                &lt;li class=&#34;drowpdown dropdown-submenu visible-xs&#34;&gt;
+                  &lt;a href=&#34;#&#34; class=&#34;dropdown-toggle&#34; data-toggle=&#34;dropdown&#34; role=&#34;button&#34;&gt;Sponsors&amp;nbsp;&lt;span class=&#34;caret&#34;&gt;&lt;/span&gt;&lt;/a&gt;
+                  &lt;ul class=&#34;dropdown-menu&#34; role=&#34;menu&#34;&gt;
+                    &lt;li&gt;&lt;a href=&#34;/foundation/sponsorship.html&#34;&gt;Sponsor the ASF&lt;/a&gt;&lt;/li&gt;
+                    &lt;li&gt;&lt;a href=&#34;/foundation/thanks&#34;&gt;Sponsor Thanks&lt;/a&gt;&lt;/li&gt;
+                    &lt;li&gt;&lt;a href=&#34;/foundation/contributing.html#CorporateGiving&#34;&gt;Corporate Giving&lt;/a&gt;&lt;/li&gt;
+                    &lt;li&gt;&lt;a href=&#34;/foundation/contributing.html&#34;&gt;Individual Donations&lt;/a&gt;&lt;/li&gt;
+                    &lt;li&gt;&lt;a href=&#34;https://www.redbubble.com/people/comdev/&#34;&gt;Buy Stuff&lt;/a&gt;&lt;/li&gt;
+                  &lt;/ul&gt;
+                &lt;/li&gt;
+              &lt;/ul&gt;
+            &lt;/li&gt;
+            &lt;li class=&#34;dropdown&#34;&gt;
+              &lt;a href=&#34;#&#34; class=&#34;dropdown-toggle&#34; data-toggle=&#34;dropdown&#34; role=&#34;button&#34;&gt;Downloads&amp;nbsp;&lt;span class=&#34;caret&#34;&gt;&lt;/span&gt;&lt;/a&gt;
+              &lt;ul class=&#34;dropdown-menu&#34; role=&#34;menu&#34;&gt;
+                &lt;li&gt;&lt;a href=&#34;https://downloads.apache.org/&#34;&gt;Distribution&lt;/a&gt;&lt;/li&gt;
+                &lt;li&gt;&lt;a href=&#34;https://projects.apache.org/releases.html&#34;&gt;Releases&lt;/a&gt;&lt;/li&gt;
+                &lt;li&gt;&lt;a href=&#34;https://status.apache.org/&#34;&gt;Infrastructure Status&lt;/a&gt;&lt;/li&gt;
+                &lt;li&gt;&lt;a href=&#34;/uptime/&#34;&gt;Infrastructure Statistics&lt;/a&gt;&lt;/li&gt;
+              &lt;/ul&gt;
+            &lt;/li&gt;
+            &lt;li class=&#34;dropdown hidden-xs&#34;&gt;
+              &lt;a href=&#34;#&#34; class=&#34;dropdown-toggle&#34; data-toggle=&#34;dropdown&#34; role=&#34;button&#34;&gt;&lt;span class=&#34;glyphicon glyphicon-search&#34;
+                  aria-hidden=&#34;true&#34;&gt;&lt;/span&gt;&lt;span class=&#34;sr-only&#34;&gt;Search&lt;/span&gt;&lt;/a&gt;
+              &lt;ul class=&#34;dropdown-menu search-form&#34; role=&#34;search&#34;&gt;
+                &lt;li&gt;
+                  &lt;div class=&#34;input-group&#34; style=&#34;width: 100%; padding: 0 5px;&#34;&gt;
+                    &lt;script async src=&#34;https://cse.google.com/cse.js?cx=cb41d2753d228d8b7&#34;&gt;&lt;/script&gt;
+                    &lt;div class=&#34;gcse-search&#34;&gt;&lt;/div&gt;
+                  &lt;/div&gt;
+                &lt;/li&gt;
+              &lt;/ul&gt;
+            &lt;/li&gt;
+          &lt;/ul&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/nav&gt;
+  &lt;/header&gt;
+  &lt;!-- / Navigation --&gt;
+  &lt;header id=&#34;main-header&#34; class=&#34;container&#34;&gt;
+    &lt;div class=&#34;sideImg&#34;&gt;
+      &lt;a class=&#34;visible-home&#34; href=&#34;http://apachecon.com/&#34;&gt;&lt;img class=&#34;img-responsive&#34; src=&#34;/img/ApacheCon-PROMO-2019.gif&#34; alt=&#34;ApacheCon is Coming 9-12 Sept. 2019 - Las Vegas&#34;&gt;&lt;/a&gt;
+      &lt;a class=&#34;hidden-home&#34; href=&#34;/&#34;&gt;&lt;img class=&#34;img-responsive&#34; src=&#34;/img/asf-estd-1999-logo.jpg&#34; alt=&#34;The Apache Software Foundation&#34;&gt;&lt;/a&gt;
+    &lt;/div&gt;
+    &lt;div class=&#34;main&#34;&gt;
+      &lt;img class=&#34;img-responsive center-block visible-home&#34; src=&#34;/img/asf-estd-1999-logo.jpg&#34; alt=&#34;Apache 20th Anniversary Logo&#34;&gt;
+      &lt;h2 class=&#34;text-center&#34;&gt;Community-led development &#34;The&amp;nbsp;Apache&amp;nbsp;Way&#34;&lt;/h2&gt;
+      &lt;ul class=&#34;nav navbar-nav navbar-justified&#34;&gt;
+        &lt;li class=&#34;drowpdown&#34;&gt;
+          &lt;a href=&#34;#&#34; class=&#34;dropdown-toggle&#34; data-toggle=&#34;dropdown&#34; role=&#34;button&#34;&gt;Projects&amp;nbsp;&lt;span class=&#34;caret hidden-sm&#34;&gt;&lt;/span&gt;&lt;/a&gt;
+          &lt;ul class=&#34;dropdown-menu&#34; role=&#34;menu&#34;&gt;
+            &lt;li&gt;&lt;a href=&#34;/index.html#projects-list&#34;&gt;Project List&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&#34;/foundation/how-it-works.html#management&#34;&gt;How they work&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&#34;https://community.apache.org/projectIndependence.html&#34;&gt;Independence&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&#34;https://projects.apache.org/committees.html?date&#34;&gt;Date Founded&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&#34;https://projects.apache.org/projects.html?name&#34;&gt;Names&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&#34;https://projects.apache.org/projects.html?category&#34;&gt;Categories&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&#34;https://projects.apache.org/projects.html?language&#34;&gt;Languages&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&#34;https://projects.apache.org/statistics.html&#34;&gt;Statistics&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&#34;https://incubator.apache.org/&#34;&gt;Apache Incubator&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&#34;https://helpwanted.apache.org/&#34;&gt;Help Wanted&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&#34;/foundation/marks/&#34;&gt;Brand Management&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&#34;/foundation/glossary.html&#34;&gt;Glossary of Terms&lt;/a&gt;&lt;/li&gt;
+          &lt;/ul&gt;
+        &lt;/li&gt;
+        &lt;li class=&#34;dropdown&#34;&gt;
+          &lt;a href=&#34;#&#34; class=&#34;dropdown-toggle&#34; data-toggle=&#34;dropdown&#34; role=&#34;button&#34;&gt;People&amp;nbsp;&lt;span class=&#34;caret hidden-sm&#34;&gt;&lt;/span&gt;&lt;/a&gt;
+          &lt;ul class=&#34;dropdown-menu&#34; role=&#34;menu&#34;&gt;
+            &lt;li&gt;&lt;a href=&#34;/foundation/how-it-works.html#roles&#34;&gt;Roles&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&#34;/foundation/members.html&#34;&gt;Members&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&#34;https://community.apache.org/contributors/&#34;&gt;Committers&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&#34;/foundation/#who-runs-the-asf&#34;&gt;Board of Directors&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&#34;/foundation/#who-runs-the-asf&#34;&gt;Officers &amp;amp; Project VPs&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&#34;https://diversity.apache.org/&#34;&gt;Diversity &amp; Inclusion&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&#34;/foundation/policies/conduct&#34;&gt;Code of Conduct&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&#34;https://people.apache.org/&#34;&gt;Committer Directory&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&#34;https://community.zones.apache.org/map.html&#34;&gt;Heat Map&lt;/a&gt;&lt;/li&gt;
+          &lt;/ul&gt;
+        &lt;/li&gt;
+        &lt;li class=&#34;dropdown&#34;&gt;
+          &lt;a href=&#34;#&#34; class=&#34;dropdown-toggle&#34; data-toggle=&#34;dropdown&#34; role=&#34;button&#34;&gt;Community&amp;nbsp;&lt;span class=&#34;caret hidden-sm&#34;&gt;&lt;/span&gt;&lt;/a&gt;
+          &lt;ul class=&#34;dropdown-menu&#34; role=&#34;menu&#34;&gt;
+            &lt;li&gt;&lt;a href=&#34;https://community.apache.org/about/&#34;&gt;Community Development&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&#34;/foundation/policies/conduct&#34;&gt;Code of Conduct&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&#34;https://community.apache.org/&#34;&gt;Get Involved&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&#34;https://community.apache.org/mentoringprogramme.html&#34;&gt;Mentoring&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&#34;https://helpwanted.apache.org/&#34;&gt;Help Wanted&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&#34;https://community.apache.org/calendars/&#34;&gt;Community Events&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&#34;https://community.apache.org/newbiefaq.html&#34;&gt;FAQ&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&#34;https://community.apache.org/lists.html&#34;&gt;Mailing Lists&lt;/a&gt;&lt;/li&gt;
+          &lt;/ul&gt;
+        &lt;/li&gt;
+        &lt;li class=&#34;dropdown&#34;&gt;
+          &lt;a href=&#34;#&#34; class=&#34;dropdown-toggle&#34; data-toggle=&#34;dropdown&#34; role=&#34;button&#34;&gt;License&amp;nbsp;&lt;span class=&#34;caret hidden-sm&#34;&gt;&lt;/span&gt;&lt;/a&gt;
+          &lt;ul class=&#34;dropdown-menu&#34; role=&#34;menu&#34;&gt;
+            &lt;li&gt;&lt;a href=&#34;/licenses/LICENSE-2.0&#34;&gt;Apache License 2.0&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&#34;/foundation/license-faq.html&#34;&gt;Licensing FAQ&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&#34;/licenses/contributor-agreements.html&#34;&gt;Contributor License Agreements&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&#34;/licenses/contributor-agreements.html#grants&#34;&gt;Software Grants&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&#34;/foundation/marks/list/&#34;&gt;Trademarks&lt;/a&gt;&lt;/li&gt;
+			&lt;li&gt;&lt;a href=&#34;/licenses/exports/&#34;&gt;Exports&lt;/a&gt;&lt;/li&gt;
+          &lt;/ul&gt;
+        &lt;/li&gt;
+        &lt;li class=&#34;dropdown&#34;&gt;
+          &lt;a href=&#34;#&#34; class=&#34;dropdown-toggle&#34; data-toggle=&#34;dropdown&#34; role=&#34;button&#34;&gt;Sponsors&amp;nbsp;&lt;span class=&#34;caret hidden-sm&#34;&gt;&lt;/span&gt;&lt;/a&gt;
+          &lt;ul class=&#34;dropdown-menu&#34; role=&#34;menu&#34;&gt;
+            &lt;li&gt;&lt;a href=&#34;/foundation/sponsorship.html&#34;&gt;Sponsor the ASF&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&#34;/foundation/thanks&#34;&gt;Sponsor Thanks&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&#34;/foundation/contributing.html#CorporateGiving&#34;&gt;Corporate Giving&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&#34;/foundation/contributing.html&#34;&gt;Individual Donations&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&#34;https://www.redbubble.com/people/comdev/&#34;&gt;Buy Stuff&lt;/a&gt;&lt;/li&gt;
+          &lt;/ul&gt;
+        &lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/div&gt;
+    &lt;div class=&#34;sideImg&#34;&gt;
+      &lt;a href=&#34;/foundation/contributing.html&#34;&gt;&lt;img class=&#34;img-responsive&#34; src=&#34;/img/support-apache.jpg&#34; alt=&#34;Apache Support Logo&#34; /&gt;&lt;/a&gt;
+    &lt;/div&gt;
+  &lt;/header&gt;
+	&lt;main id=&#34;maincontent&#34;&gt;
+  &lt;div class=&#34;container&#34;&gt;&lt;style type=&#34;text/css&#34;&gt;
+/* The following code is added by mdx_elementid.py
+   It was originally lifted from http://subversion.apache.org/style/site.css */
+/*
+ * Hide class=&#34;elementid-permalink&#34;, except when an enclosing heading
+ * has the :hover property.
+ */
+.headerlink, .elementid-permalink {
+  visibility: hidden;
+}
+h2:hover &gt; .headerlink, h3:hover &gt; .headerlink, h1:hover &gt; .headerlink, h6:hover &gt; .headerlink, h4:hover &gt; .headerlink, h5:hover &gt; .headerlink, dt:hover &gt; .elementid-permalink { visibility: visible }&lt;/style&gt;
+&lt;p&gt; We suggest the following
+site for your download:&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://dlcdn.apache.org/spark/spark-3.3.0/spark-3.3.0-bin-hadoop3.tgz&#34;&gt;&lt;strong&gt;https://dlcdn.apache.org/spark/spark-3.3.0/spark-3.3.0-bin-hadoop3.tgz&lt;/strong&gt;&lt;/a&gt; &lt;/p&gt;
+&lt;p&gt;Alternate download locations are suggested below.&lt;/p&gt;
+&lt;p&gt;It is essential that you &lt;a href=&#34;#verify&#34;&gt;verify the integrity&lt;/a&gt; of the downloaded file using
+the PGP signature (&lt;code&gt;.asc&lt;/code&gt; file) or a hash (&lt;code&gt;.md5&lt;/code&gt; or &lt;code&gt;.sha*&lt;/code&gt; file).&lt;/p&gt;
+&lt;p&gt;&lt;/p&gt;
+&lt;h1 id=&#34;http&#34;&gt;HTTP&lt;a class=&#34;headerlink&#34; href=&#34;#http&#34; title=&#34;Permanent link&#34;&gt;&amp;para;&lt;/a&gt;&lt;/h1&gt;
+&lt;p&gt; &lt;a href=&#34;https://dlcdn.apache.org/spark/spark-3.3.0/spark-3.3.0-bin-hadoop3.tgz&#34;&gt;&lt;strong&gt;https://dlcdn.apache.org/spark/spark-3.3.0/spark-3.3.0-bin-hadoop3.tgz&lt;/strong&gt;&lt;/a&gt; &lt;br&gt;&lt;/br&gt;&lt;/p&gt;
+&lt;p&gt;&lt;/p&gt;
+&lt;p&gt;&lt;/p&gt;
+&lt;h1 id=&#34;backup&#34;&gt;Backup Site&lt;a class=&#34;headerlink&#34; href=&#34;#backup&#34; title=&#34;Permanent link&#34;&gt;&amp;para;&lt;/a&gt;&lt;/h1&gt;
+&lt;p&gt; &lt;a href=&#34;https://dlcdn.apache.org/spark/spark-3.3.0/spark-3.3.0-bin-hadoop3.tgz&#34;&gt;&lt;strong&gt;https://dlcdn.apache.org/spark/spark-3.3.0/spark-3.3.0-bin-hadoop3.tgz&lt;/strong&gt;&lt;/a&gt; &lt;br&gt;&lt;/br&gt;&lt;/p&gt;
+&lt;h1 id=&#34;verify&#34;&gt;Verify the integrity of the files&lt;a class=&#34;headerlink&#34; href=&#34;#verify&#34; title=&#34;Permanent link&#34;&gt;&amp;para;&lt;/a&gt;&lt;/h1&gt;
+&lt;p&gt;It is essential that you verify the integrity of the downloaded file using
+the PGP signature (&lt;code&gt;.asc&lt;/code&gt; file) or a hash (&lt;code&gt;.md5&lt;/code&gt; or &lt;code&gt;.sha*&lt;/code&gt; file). Please read &lt;a href=&#34;/info/verification.html&#34;&gt;Verifying Apache Software
+Foundation Releases&lt;/a&gt; for more information on why
+you should verify our releases.&lt;/p&gt;
+&lt;p&gt;The PGP signature can be verified using PGP or GPG. First download the
+&lt;code&gt;KEYS&lt;/code&gt; as well as the &lt;code&gt;asc&lt;/code&gt; signature file for the relevant distribution.
+&lt;/p&gt;
+&lt;div class=&#34;codehilite&#34;&gt;&lt;pre&gt;&lt;span class=&#34;c&#34;&gt;% gpg --import KEYS&lt;/span&gt;
+&lt;span class=&#34;c&#34;&gt;% gpg --verify downloaded_file.asc downloaded_file&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;&lt;em&gt;or&lt;/em&gt;&lt;/p&gt;
+&lt;div class=&#34;codehilite&#34;&gt;&lt;pre&gt;&lt;span class=&#34;c&#34;&gt;% pgpk -a KEYS&lt;/span&gt;
+&lt;span class=&#34;c&#34;&gt;% pgpv downloaded_file.asc&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;&lt;em&gt;or&lt;/em&gt;&lt;/p&gt;
+&lt;div class=&#34;codehilite&#34;&gt;&lt;pre&gt;&lt;span class=&#34;c&#34;&gt;% pgp -ka KEYS&lt;/span&gt;
+&lt;span class=&#34;c&#34;&gt;% pgp downloaded_file.asc&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Alternatively, you can verify the hash on the file.&lt;/p&gt;
+&lt;p&gt;Hashes can be calculated using GPG:&lt;/p&gt;
+&lt;div class=&#34;codehilite&#34;&gt;&lt;pre&gt;&lt;span class=&#34;c&#34;&gt;% gpg --print-md SHA256 downloaded_file&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;The output should be compared with the contents of the SHA256 file.
+Similarly for other hashes (SHA512, SHA1, MD5 etc) which may be provided.&lt;/p&gt;
+&lt;p&gt;Windows 7 and later systems should all now have certUtil:&lt;/p&gt;
+&lt;div class=&#34;codehilite&#34;&gt;&lt;pre&gt;&lt;span class=&#34;c&#34;&gt;% certUtil -hashfile pathToFileToCheck &lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;HashAlgorithm choices: MD2 MD4 MD5 SHA1 SHA256 SHA384 SHA512&lt;/p&gt;
+&lt;p&gt;Unix-like systems (and macOS) will have a utility called
+md5, md5sum or shasum&lt;/p&gt;&lt;/div&gt;
+  &lt;/main&gt;
+  &lt;!-- Footer --&gt;
+  
+  &lt;footer class=&#34;bg-primary&#34;&gt;
+    &lt;div class=&#34;container&#34;&gt;
+      &lt;div class=&#34;row&#34;&gt;
+        &lt;br /&gt;
+        &lt;div class=&#34;col-sm-1&#34;&gt;
+
+        &lt;/div&gt;
+        &lt;div class=&#34;col-sm-2&#34;&gt;
+          &lt;h5 class=&#34;white&#34;&gt;Community&lt;/h5&gt;
+          &lt;ul class=&#34;list-unstyled white&#34; role=&#34;menu&#34;&gt;
+            &lt;li&gt;&lt;a href=&#34;http://community.apache.org/&#34;&gt;Overview&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&#34;/foundation/conferences.html&#34;&gt;Conferences&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&#34;http://community.apache.org/gsoc.html&#34;&gt;Summer of Code&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&#34;http://community.apache.org/newcomers/&#34;&gt;Getting Started&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&#34;/foundation/how-it-works.html&#34;&gt;The Apache Way&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&#34;/travel/&#34;&gt;Travel Assistance&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&#34;/foundation/getinvolved.html&#34;&gt;Get Involved&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&#34;/foundation/policies/conduct.html&#34;&gt;Code of Conduct&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&#34;http://community.apache.org/newbiefaq.html&#34;&gt;Community FAQ&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&#34;/memorials/&#34;&gt;Memorials&lt;/a&gt;&lt;/li&gt;
+          &lt;/ul&gt;
+        &lt;/div&gt;
+
+        &lt;div class=&#34;col-sm-2&#34;&gt;
+          &lt;h5 class=&#34;white&#34;&gt;Innovation&lt;/h5&gt;
+          &lt;ul class=&#34;list-unstyled white&#34; role=&#34;menu&#34;&gt;
+            &lt;li&gt;&lt;a href=&#34;http://incubator.apache.org/&#34;&gt;Incubator&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&#34;http://labs.apache.org/&#34;&gt;Labs&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&#34;/licenses/&#34;&gt;Licensing&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&#34;/foundation/license-faq.html&#34;&gt;Licensing FAQ&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&#34;/foundation/marks/&#34;&gt;Trademark Policy&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&#34;/foundation/contact.html&#34;&gt;Contacts&lt;/a&gt;&lt;/li&gt;
+          &lt;/ul&gt;
+        &lt;/div&gt;
+
+        &lt;div class=&#34;col-sm-2&#34;&gt;
+          &lt;h5 class=&#34;white&#34;&gt;Tech Operations&lt;/h5&gt;
+          &lt;ul class=&#34;list-unstyled white&#34; role=&#34;menu&#34;&gt;
+            &lt;li&gt;&lt;a href=&#34;/dev/&#34;&gt;Developer Information&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&#34;/dev/infrastructure.html&#34;&gt;Infrastructure&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&#34;/security/&#34;&gt;Security&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&#34;http://status.apache.org&#34;&gt;Status&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&#34;/foundation/contact.html&#34;&gt;Contacts&lt;/a&gt;&lt;/li&gt;
+          &lt;/ul&gt;
+        &lt;/div&gt;
+
+        &lt;div class=&#34;col-sm-2&#34;&gt;
+          &lt;h5 class=&#34;white&#34;&gt;Press&lt;/h5&gt;
+          &lt;ul class=&#34;list-unstyled white&#34; role=&#34;menu&#34;&gt;
+            &lt;li&gt;&lt;a href=&#34;/press/&#34;&gt;Overview&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&#34;https://blogs.apache.org/&#34;&gt;ASF News&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&#34;https://blogs.apache.org/foundation/&#34;&gt;Announcements&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&#34;https://twitter.com/TheASF&#34;&gt;Twitter Feed&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&#34;/press/#contact&#34;&gt;Contacts&lt;/a&gt;&lt;/li&gt;
+          &lt;/ul&gt;
+        &lt;/div&gt;
+
+        &lt;div class=&#34;col-sm-2&#34;&gt;
+          &lt;h5 class=&#34;white&#34;&gt;Legal&lt;/h5&gt;
+          &lt;ul class=&#34;list-unstyled white&#34; role=&#34;menu&#34;&gt;
+            &lt;li&gt;&lt;a href=&#34;/legal/&#34;&gt;Legal Affairs&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&#34;/legal/dmca.html&#34;&gt;DMCA&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&#34;/licenses/&#34;&gt;Licensing&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&#34;/foundation/marks/&#34;&gt;Trademark Policy&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&#34;/foundation/records/&#34;&gt;Public Records&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&#34;/foundation/policies/privacy.html&#34;&gt;Privacy Policy&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&#34;/licenses/exports/&#34;&gt;Export Information&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&#34;/foundation/license-faq.html&#34;&gt;Licensing FAQ&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&#34;/foundation/contact.html&#34;&gt;Contacts&lt;/a&gt;&lt;/li&gt;
+          &lt;/ul&gt;
+        &lt;/div&gt;
+
+        &lt;div class=&#34;col-sm-1&#34;&gt;
+        &lt;/div&gt;
+
+      &lt;/div&gt;
+      &lt;hr class=&#34;col-lg-12 hr-white&#34; /&gt;
+      &lt;div class=&#34;row&#34;&gt;
+        &lt;div class=&#34;col-lg-12&#34;&gt;
+          &lt;p class=&#34;text-center&#34;&gt;Copyright &amp;#169; 2022 The Apache Software Foundation, Licensed under the &lt;a class=&#34;white&#34; href=&#34;/licenses/LICENSE-2.0&#34;&gt;Apache License, Version 2.0&lt;/a&gt;.&lt;/p&gt;
+          &lt;p class=&#34;text-center&#34;&gt;Apache and the Apache feather logo are trademarks of The Apache Software Foundation. &lt;/p&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+
+  &lt;/footer&gt;
+
+  &lt;!-- / Footer --&gt;
+
+  &lt;script src=&#34;/js/jquery-2.1.1.min.js&#34;&gt;&lt;/script&gt;
+  &lt;script src=&#34;/js/bootstrap.js&#34;&gt;&lt;/script&gt;
+  &lt;script&gt;
+    (function($){
+    $(document).ready(function(){
+    &lt;!-- N.B. the spaces around the value in square brackets are required to ensure EZT does not process it --&gt;
+    $(&#39;ul.dropdown-menu [ data-toggle=dropdown ]&#39;).on(&#39;click&#39;, function(event) {
+    event.preventDefault();
+    event.stopPropagation();
+    $(this).parent().siblings().removeClass(&#39;open&#39;);
+    $(this).parent().toggleClass(&#39;open&#39;);
+    console.log(&#39;WOrked&#39;);
+    });
+    });
+    })(jQuery);
+  &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+&lt;!-- backup --&gt;</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[27]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">strings</span><span class="o">.</span><span class="n">Index</span><span class="p">(</span><span class="n">html</span><span class="p">,</span> <span class="s2">&quot;&lt;strong&gt;&quot;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[27]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>21399</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[28]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">strings</span><span class="o">.</span><span class="n">Index</span><span class="p">(</span><span class="n">html</span><span class="p">,</span> <span class="s2">&quot;&lt;/strong&gt;&quot;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[28]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>21477</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[30]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">html</span><span class="p">[</span><span class="mi">21399</span><span class="p">:</span><span class="mi">21477</span><span class="p">]</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[30]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>&lt;strong&gt;https://dlcdn.apache.org/spark/spark-3.3.0/spark-3.3.0-bin-hadoop3.tgz</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[35]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">url</span> <span class="o">:=</span> <span class="n">html</span><span class="p">[</span><span class="mi">21399</span><span class="o">+</span><span class="mi">8</span><span class="p">:</span><span class="mi">21477</span><span class="p">]</span>
+<span class="n">url</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[35]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>https://dlcdn.apache.org/spark/spark-3.3.0/spark-3.3.0-bin-hadoop3.tgz</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[6]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">func</span> <span class="n">httpGetAsString</span><span class="p">(</span><span class="n">url</span> <span class="n">string</span><span class="p">)</span> <span class="n">string</span> <span class="p">{</span>
+	<span class="n">resp</span><span class="p">,</span> <span class="n">err</span> <span class="o">:=</span> <span class="n">http</span><span class="o">.</span><span class="n">Get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+	<span class="k">if</span> <span class="n">err</span> <span class="o">!=</span> <span class="n">nil</span> <span class="p">{</span>
+		<span class="n">log</span><span class="o">.</span><span class="n">Fatal</span><span class="p">(</span><span class="n">err</span><span class="p">)</span>
+	<span class="p">}</span>
+	<span class="n">body</span><span class="p">,</span> <span class="n">err</span> <span class="o">:=</span> <span class="n">ioutil</span><span class="o">.</span><span class="n">ReadAll</span><span class="p">(</span><span class="n">resp</span><span class="o">.</span><span class="n">Body</span><span class="p">)</span>
+	<span class="n">resp</span><span class="o">.</span><span class="n">Body</span><span class="o">.</span><span class="n">Close</span><span class="p">()</span>
+	<span class="k">if</span> <span class="n">err</span> <span class="o">!=</span> <span class="n">nil</span> <span class="p">{</span>
+		<span class="n">log</span><span class="o">.</span><span class="n">Fatal</span><span class="p">(</span><span class="n">err</span><span class="p">)</span>
+	<span class="p">}</span>
+	<span class="k">if</span> <span class="n">resp</span><span class="o">.</span><span class="n">StatusCode</span> <span class="o">&gt;</span> <span class="mi">399</span> <span class="p">{</span>
+		<span class="n">log</span><span class="o">.</span><span class="n">Fatal</span><span class="p">(</span><span class="s2">&quot;HTTP request got an error response with the status code &quot;</span><span class="p">,</span> <span class="n">resp</span><span class="o">.</span><span class="n">StatusCode</span><span class="p">)</span>
+	<span class="p">}</span>
+    <span class="k">return</span> <span class="n">string</span><span class="p">(</span><span class="n">body</span><span class="p">)</span>
+<span class="p">}</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[7]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">url</span> <span class="o">:=</span> <span class="s2">&quot;https://api.github.com/repos/legendu-net/icon/releases/tags/v0.6.0&quot;</span>
+<span class="n">httpGetAsString</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[7]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>{&#34;url&#34;:&#34;https://api.github.com/repos/legendu-net/icon/releases/72107224&#34;,&#34;assets_url&#34;:&#34;https://api.github.com/repos/legendu-net/icon/releases/72107224/assets&#34;,&#34;upload_url&#34;:&#34;https://uploads.github.com/repos/legendu-net/icon/releases/72107224/assets{?name,label}&#34;,&#34;html_url&#34;:&#34;https://github.com/legendu-net/icon/releases/tag/v0.6.0&#34;,&#34;id&#34;:72107224,&#34;author&#34;:{&#34;login&#34;:&#34;dclong&#34;,&#34;id&#34;:824507,&#34;node_id&#34;:&#34;MDQ6VXNlcjgyNDUwNw==&#34;,&#34;avatar_url&#34;:&#34;https://avatars.githubusercontent.com/u/824507?v=4&#34;,&#34;gravatar_id&#34;:&#34;&#34;,&#34;url&#34;:&#34;https://api.github.com/users/dclong&#34;,&#34;html_url&#34;:&#34;https://github.com/dclong&#34;,&#34;followers_url&#34;:&#34;https://api.github.com/users/dclong/followers&#34;,&#34;following_url&#34;:&#34;https://api.github.com/users/dclong/following{/other_user}&#34;,&#34;gists_url&#34;:&#34;https://api.github.com/users/dclong/gists{/gist_id}&#34;,&#34;starred_url&#34;:&#34;https://api.github.com/users/dclong/starred{/owner}{/repo}&#34;,&#34;subscriptions_url&#34;:&#34;https://api.github.com/users/dclong/subscriptions&#34;,&#34;organizations_url&#34;:&#34;https://api.github.com/users/dclong/orgs&#34;,&#34;repos_url&#34;:&#34;https://api.github.com/users/dclong/repos&#34;,&#34;events_url&#34;:&#34;https://api.github.com/users/dclong/events{/privacy}&#34;,&#34;received_events_url&#34;:&#34;https://api.github.com/users/dclong/received_events&#34;,&#34;type&#34;:&#34;User&#34;,&#34;site_admin&#34;:false},&#34;node_id&#34;:&#34;RE_kwDOHkKAZc4ETETY&#34;,&#34;tag_name&#34;:&#34;v0.6.0&#34;,&#34;target_commitish&#34;:&#34;main&#34;,&#34;name&#34;:&#34;icon v0.6.0&#34;,&#34;draft&#34;:false,&#34;prerelease&#34;:false,&#34;created_at&#34;:&#34;2022-07-15T16:17:03Z&#34;,&#34;published_at&#34;:&#34;2022-07-15T16:17:30Z&#34;,&#34;assets&#34;:[{&#34;url&#34;:&#34;https://api.github.com/repos/legendu-net/icon/releases/assets/71690405&#34;,&#34;id&#34;:71690405,&#34;node_id&#34;:&#34;RA_kwDOHkKAZc4EReil&#34;,&#34;name&#34;:&#34;icon-v0.6.0-darwin-amd64.tar.gz&#34;,&#34;label&#34;:&#34;&#34;,&#34;uploader&#34;:{&#34;login&#34;:&#34;github-actions[bot]&#34;,&#34;id&#34;:41898282,&#34;node_id&#34;:&#34;MDM6Qm90NDE4OTgyODI=&#34;,&#34;avatar_url&#34;:&#34;https://avatars.githubusercontent.com/in/15368?v=4&#34;,&#34;gravatar_id&#34;:&#34;&#34;,&#34;url&#34;:&#34;https://api.github.com/users/github-actions%5Bbot%5D&#34;,&#34;html_url&#34;:&#34;https://github.com/apps/github-actions&#34;,&#34;followers_url&#34;:&#34;https://api.github.com/users/github-actions%5Bbot%5D/followers&#34;,&#34;following_url&#34;:&#34;https://api.github.com/users/github-actions%5Bbot%5D/following{/other_user}&#34;,&#34;gists_url&#34;:&#34;https://api.github.com/users/github-actions%5Bbot%5D/gists{/gist_id}&#34;,&#34;starred_url&#34;:&#34;https://api.github.com/users/github-actions%5Bbot%5D/starred{/owner}{/repo}&#34;,&#34;subscriptions_url&#34;:&#34;https://api.github.com/users/github-actions%5Bbot%5D/subscriptions&#34;,&#34;organizations_url&#34;:&#34;https://api.github.com/users/github-actions%5Bbot%5D/orgs&#34;,&#34;repos_url&#34;:&#34;https://api.github.com/users/github-actions%5Bbot%5D/repos&#34;,&#34;events_url&#34;:&#34;https://api.github.com/users/github-actions%5Bbot%5D/events{/privacy}&#34;,&#34;received_events_url&#34;:&#34;https://api.github.com/users/github-actions%5Bbot%5D/received_events&#34;,&#34;type&#34;:&#34;Bot&#34;,&#34;site_admin&#34;:false},&#34;content_type&#34;:&#34;application/gzip&#34;,&#34;state&#34;:&#34;uploaded&#34;,&#34;size&#34;:4991511,&#34;download_count&#34;:1,&#34;created_at&#34;:&#34;2022-07-15T16:18:13Z&#34;,&#34;updated_at&#34;:&#34;2022-07-15T16:18:13Z&#34;,&#34;browser_download_url&#34;:&#34;https://github.com/legendu-net/icon/releases/download/v0.6.0/icon-v0.6.0-darwin-amd64.tar.gz&#34;},{&#34;url&#34;:&#34;https://api.github.com/repos/legendu-net/icon/releases/assets/71690408&#34;,&#34;id&#34;:71690408,&#34;node_id&#34;:&#34;RA_kwDOHkKAZc4EReio&#34;,&#34;name&#34;:&#34;icon-v0.6.0-darwin-amd64.tar.gz.md5&#34;,&#34;label&#34;:&#34;&#34;,&#34;uploader&#34;:{&#34;login&#34;:&#34;github-actions[bot]&#34;,&#34;id&#34;:41898282,&#34;node_id&#34;:&#34;MDM6Qm90NDE4OTgyODI=&#34;,&#34;avatar_url&#34;:&#34;https://avatars.githubusercontent.com/in/15368?v=4&#34;,&#34;gravatar_id&#34;:&#34;&#34;,&#34;url&#34;:&#34;https://api.github.com/users/github-actions%5Bbot%5D&#34;,&#34;html_url&#34;:&#34;https://github.com/apps/github-actions&#34;,&#34;followers_url&#34;:&#34;https://api.github.com/users/github-actions%5Bbot%5D/followers&#34;,&#34;following_url&#34;:&#34;https://api.github.com/users/github-actions%5Bbot%5D/following{/other_user}&#34;,&#34;gists_url&#34;:&#34;https://api.github.com/users/github-actions%5Bbot%5D/gists{/gist_id}&#34;,&#34;starred_url&#34;:&#34;https://api.github.com/users/github-actions%5Bbot%5D/starred{/owner}{/repo}&#34;,&#34;subscriptions_url&#34;:&#34;https://api.github.com/users/github-actions%5Bbot%5D/subscriptions&#34;,&#34;organizations_url&#34;:&#34;https://api.github.com/users/github-actions%5Bbot%5D/orgs&#34;,&#34;repos_url&#34;:&#34;https://api.github.com/users/github-actions%5Bbot%5D/repos&#34;,&#34;events_url&#34;:&#34;https://api.github.com/users/github-actions%5Bbot%5D/events{/privacy}&#34;,&#34;received_events_url&#34;:&#34;https://api.github.com/users/github-actions%5Bbot%5D/received_events&#34;,&#34;type&#34;:&#34;Bot&#34;,&#34;site_admin&#34;:false},&#34;content_type&#34;:&#34;text/plain&#34;,&#34;state&#34;:&#34;uploaded&#34;,&#34;size&#34;:33,&#34;download_count&#34;:0,&#34;created_at&#34;:&#34;2022-07-15T16:18:14Z&#34;,&#34;updated_at&#34;:&#34;2022-07-15T16:18:14Z&#34;,&#34;browser_download_url&#34;:&#34;https://github.com/legendu-net/icon/releases/download/v0.6.0/icon-v0.6.0-darwin-amd64.tar.gz.md5&#34;},{&#34;url&#34;:&#34;https://api.github.com/repos/legendu-net/icon/releases/assets/71690400&#34;,&#34;id&#34;:71690400,&#34;node_id&#34;:&#34;RA_kwDOHkKAZc4EReig&#34;,&#34;name&#34;:&#34;icon-v0.6.0-darwin-arm64.tar.gz&#34;,&#34;label&#34;:&#34;&#34;,&#34;uploader&#34;:{&#34;login&#34;:&#34;github-actions[bot]&#34;,&#34;id&#34;:41898282,&#34;node_id&#34;:&#34;MDM6Qm90NDE4OTgyODI=&#34;,&#34;avatar_url&#34;:&#34;https://avatars.githubusercontent.com/in/15368?v=4&#34;,&#34;gravatar_id&#34;:&#34;&#34;,&#34;url&#34;:&#34;https://api.github.com/users/github-actions%5Bbot%5D&#34;,&#34;html_url&#34;:&#34;https://github.com/apps/github-actions&#34;,&#34;followers_url&#34;:&#34;https://api.github.com/users/github-actions%5Bbot%5D/followers&#34;,&#34;following_url&#34;:&#34;https://api.github.com/users/github-actions%5Bbot%5D/following{/other_user}&#34;,&#34;gists_url&#34;:&#34;https://api.github.com/users/github-actions%5Bbot%5D/gists{/gist_id}&#34;,&#34;starred_url&#34;:&#34;https://api.github.com/users/github-actions%5Bbot%5D/starred{/owner}{/repo}&#34;,&#34;subscriptions_url&#34;:&#34;https://api.github.com/users/github-actions%5Bbot%5D/subscriptions&#34;,&#34;organizations_url&#34;:&#34;https://api.github.com/users/github-actions%5Bbot%5D/orgs&#34;,&#34;repos_url&#34;:&#34;https://api.github.com/users/github-actions%5Bbot%5D/repos&#34;,&#34;events_url&#34;:&#34;https://api.github.com/users/github-actions%5Bbot%5D/events{/privacy}&#34;,&#34;received_events_url&#34;:&#34;https://api.github.com/users/github-actions%5Bbot%5D/received_events&#34;,&#34;type&#34;:&#34;Bot&#34;,&#34;site_admin&#34;:false},&#34;content_type&#34;:&#34;application/gzip&#34;,&#34;state&#34;:&#34;uploaded&#34;,&#34;size&#34;:4811713,&#34;download_count&#34;:1,&#34;created_at&#34;:&#34;2022-07-15T16:18:11Z&#34;,&#34;updated_at&#34;:&#34;2022-07-15T16:18:11Z&#34;,&#34;browser_download_url&#34;:&#34;https://github.com/legendu-net/icon/releases/download/v0.6.0/icon-v0.6.0-darwin-arm64.tar.gz&#34;},{&#34;url&#34;:&#34;https://api.github.com/repos/legendu-net/icon/releases/assets/71690403&#34;,&#34;id&#34;:71690403,&#34;node_id&#34;:&#34;RA_kwDOHkKAZc4EReij&#34;,&#34;name&#34;:&#34;icon-v0.6.0-darwin-arm64.tar.gz.md5&#34;,&#34;label&#34;:&#34;&#34;,&#34;uploader&#34;:{&#34;login&#34;:&#34;github-actions[bot]&#34;,&#34;id&#34;:41898282,&#34;node_id&#34;:&#34;MDM6Qm90NDE4OTgyODI=&#34;,&#34;avatar_url&#34;:&#34;https://avatars.githubusercontent.com/in/15368?v=4&#34;,&#34;gravatar_id&#34;:&#34;&#34;,&#34;url&#34;:&#34;https://api.github.com/users/github-actions%5Bbot%5D&#34;,&#34;html_url&#34;:&#34;https://github.com/apps/github-actions&#34;,&#34;followers_url&#34;:&#34;https://api.github.com/users/github-actions%5Bbot%5D/followers&#34;,&#34;following_url&#34;:&#34;https://api.github.com/users/github-actions%5Bbot%5D/following{/other_user}&#34;,&#34;gists_url&#34;:&#34;https://api.github.com/users/github-actions%5Bbot%5D/gists{/gist_id}&#34;,&#34;starred_url&#34;:&#34;https://api.github.com/users/github-actions%5Bbot%5D/starred{/owner}{/repo}&#34;,&#34;subscriptions_url&#34;:&#34;https://api.github.com/users/github-actions%5Bbot%5D/subscriptions&#34;,&#34;organizations_url&#34;:&#34;https://api.github.com/users/github-actions%5Bbot%5D/orgs&#34;,&#34;repos_url&#34;:&#34;https://api.github.com/users/github-actions%5Bbot%5D/repos&#34;,&#34;events_url&#34;:&#34;https://api.github.com/users/github-actions%5Bbot%5D/events{/privacy}&#34;,&#34;received_events_url&#34;:&#34;https://api.github.com/users/github-actions%5Bbot%5D/received_events&#34;,&#34;type&#34;:&#34;Bot&#34;,&#34;site_admin&#34;:false},&#34;content_type&#34;:&#34;text/plain&#34;,&#34;state&#34;:&#34;uploaded&#34;,&#34;size&#34;:33,&#34;download_count&#34;:0,&#34;created_at&#34;:&#34;2022-07-15T16:18:12Z&#34;,&#34;updated_at&#34;:&#34;2022-07-15T16:18:12Z&#34;,&#34;browser_download_url&#34;:&#34;https://github.com/legendu-net/icon/releases/download/v0.6.0/icon-v0.6.0-darwin-arm64.tar.gz.md5&#34;},{&#34;url&#34;:&#34;https://api.github.com/repos/legendu-net/icon/releases/assets/71690355&#34;,&#34;id&#34;:71690355,&#34;node_id&#34;:&#34;RA_kwDOHkKAZc4ERehz&#34;,&#34;name&#34;:&#34;icon-v0.6.0-linux-amd64.tar.gz&#34;,&#34;label&#34;:&#34;&#34;,&#34;uploader&#34;:{&#34;login&#34;:&#34;github-actions[bot]&#34;,&#34;id&#34;:41898282,&#34;node_id&#34;:&#34;MDM6Qm90NDE4OTgyODI=&#34;,&#34;avatar_url&#34;:&#34;https://avatars.githubusercontent.com/in/15368?v=4&#34;,&#34;gravatar_id&#34;:&#34;&#34;,&#34;url&#34;:&#34;https://api.github.com/users/github-actions%5Bbot%5D&#34;,&#34;html_url&#34;:&#34;https://github.com/apps/github-actions&#34;,&#34;followers_url&#34;:&#34;https://api.github.com/users/github-actions%5Bbot%5D/followers&#34;,&#34;following_url&#34;:&#34;https://api.github.com/users/github-actions%5Bbot%5D/following{/other_user}&#34;,&#34;gists_url&#34;:&#34;https://api.github.com/users/github-actions%5Bbot%5D/gists{/gist_id}&#34;,&#34;starred_url&#34;:&#34;https://api.github.com/users/github-actions%5Bbot%5D/starred{/owner}{/repo}&#34;,&#34;subscriptions_url&#34;:&#34;https://api.github.com/users/github-actions%5Bbot%5D/subscriptions&#34;,&#34;organizations_url&#34;:&#34;https://api.github.com/users/github-actions%5Bbot%5D/orgs&#34;,&#34;repos_url&#34;:&#34;https://api.github.com/users/github-actions%5Bbot%5D/repos&#34;,&#34;events_url&#34;:&#34;https://api.github.com/users/github-actions%5Bbot%5D/events{/privacy}&#34;,&#34;received_events_url&#34;:&#34;https://api.github.com/users/github-actions%5Bbot%5D/received_events&#34;,&#34;type&#34;:&#34;Bot&#34;,&#34;site_admin&#34;:false},&#34;content_type&#34;:&#34;application/gzip&#34;,&#34;state&#34;:&#34;uploaded&#34;,&#34;size&#34;:5186711,&#34;download_count&#34;:8,&#34;created_at&#34;:&#34;2022-07-15T16:18:05Z&#34;,&#34;updated_at&#34;:&#34;2022-07-15T16:18:05Z&#34;,&#34;browser_download_url&#34;:&#34;https://github.com/legendu-net/icon/releases/download/v0.6.0/icon-v0.6.0-linux-amd64.tar.gz&#34;},{&#34;url&#34;:&#34;https://api.github.com/repos/legendu-net/icon/releases/assets/71690359&#34;,&#34;id&#34;:71690359,&#34;node_id&#34;:&#34;RA_kwDOHkKAZc4EReh3&#34;,&#34;name&#34;:&#34;icon-v0.6.0-linux-amd64.tar.gz.md5&#34;,&#34;label&#34;:&#34;&#34;,&#34;uploader&#34;:{&#34;login&#34;:&#34;github-actions[bot]&#34;,&#34;id&#34;:41898282,&#34;node_id&#34;:&#34;MDM6Qm90NDE4OTgyODI=&#34;,&#34;avatar_url&#34;:&#34;https://avatars.githubusercontent.com/in/15368?v=4&#34;,&#34;gravatar_id&#34;:&#34;&#34;,&#34;url&#34;:&#34;https://api.github.com/users/github-actions%5Bbot%5D&#34;,&#34;html_url&#34;:&#34;https://github.com/apps/github-actions&#34;,&#34;followers_url&#34;:&#34;https://api.github.com/users/github-actions%5Bbot%5D/followers&#34;,&#34;following_url&#34;:&#34;https://api.github.com/users/github-actions%5Bbot%5D/following{/other_user}&#34;,&#34;gists_url&#34;:&#34;https://api.github.com/users/github-actions%5Bbot%5D/gists{/gist_id}&#34;,&#34;starred_url&#34;:&#34;https://api.github.com/users/github-actions%5Bbot%5D/starred{/owner}{/repo}&#34;,&#34;subscriptions_url&#34;:&#34;https://api.github.com/users/github-actions%5Bbot%5D/subscriptions&#34;,&#34;organizations_url&#34;:&#34;https://api.github.com/users/github-actions%5Bbot%5D/orgs&#34;,&#34;repos_url&#34;:&#34;https://api.github.com/users/github-actions%5Bbot%5D/repos&#34;,&#34;events_url&#34;:&#34;https://api.github.com/users/github-actions%5Bbot%5D/events{/privacy}&#34;,&#34;received_events_url&#34;:&#34;https://api.github.com/users/github-actions%5Bbot%5D/received_events&#34;,&#34;type&#34;:&#34;Bot&#34;,&#34;site_admin&#34;:false},&#34;content_type&#34;:&#34;text/plain&#34;,&#34;state&#34;:&#34;uploaded&#34;,&#34;size&#34;:33,&#34;download_count&#34;:0,&#34;created_at&#34;:&#34;2022-07-15T16:18:06Z&#34;,&#34;updated_at&#34;:&#34;2022-07-15T16:18:06Z&#34;,&#34;browser_download_url&#34;:&#34;https://github.com/legendu-net/icon/releases/download/v0.6.0/icon-v0.6.0-linux-amd64.tar.gz.md5&#34;},{&#34;url&#34;:&#34;https://api.github.com/repos/legendu-net/icon/releases/assets/71690414&#34;,&#34;id&#34;:71690414,&#34;node_id&#34;:&#34;RA_kwDOHkKAZc4EReiu&#34;,&#34;name&#34;:&#34;icon-v0.6.0-linux-arm64.tar.gz&#34;,&#34;label&#34;:&#34;&#34;,&#34;uploader&#34;:{&#34;login&#34;:&#34;github-actions[bot]&#34;,&#34;id&#34;:41898282,&#34;node_id&#34;:&#34;MDM6Qm90NDE4OTgyODI=&#34;,&#34;avatar_url&#34;:&#34;https://avatars.githubusercontent.com/in/15368?v=4&#34;,&#34;gravatar_id&#34;:&#34;&#34;,&#34;url&#34;:&#34;https://api.github.com/users/github-actions%5Bbot%5D&#34;,&#34;html_url&#34;:&#34;https://github.com/apps/github-actions&#34;,&#34;followers_url&#34;:&#34;https://api.github.com/users/github-actions%5Bbot%5D/followers&#34;,&#34;following_url&#34;:&#34;https://api.github.com/users/github-actions%5Bbot%5D/following{/other_user}&#34;,&#34;gists_url&#34;:&#34;https://api.github.com/users/github-actions%5Bbot%5D/gists{/gist_id}&#34;,&#34;starred_url&#34;:&#34;https://api.github.com/users/github-actions%5Bbot%5D/starred{/owner}{/repo}&#34;,&#34;subscriptions_url&#34;:&#34;https://api.github.com/users/github-actions%5Bbot%5D/subscriptions&#34;,&#34;organizations_url&#34;:&#34;https://api.github.com/users/github-actions%5Bbot%5D/orgs&#34;,&#34;repos_url&#34;:&#34;https://api.github.com/users/github-actions%5Bbot%5D/repos&#34;,&#34;events_url&#34;:&#34;https://api.github.com/users/github-actions%5Bbot%5D/events{/privacy}&#34;,&#34;received_events_url&#34;:&#34;https://api.github.com/users/github-actions%5Bbot%5D/received_events&#34;,&#34;type&#34;:&#34;Bot&#34;,&#34;site_admin&#34;:false},&#34;content_type&#34;:&#34;application/gzip&#34;,&#34;state&#34;:&#34;uploaded&#34;,&#34;size&#34;:4843937,&#34;download_count&#34;:0,&#34;created_at&#34;:&#34;2022-07-15T16:18:22Z&#34;,&#34;updated_at&#34;:&#34;2022-07-15T16:18:23Z&#34;,&#34;browser_download_url&#34;:&#34;https://github.com/legendu-net/icon/releases/download/v0.6.0/icon-v0.6.0-linux-arm64.tar.gz&#34;}],&#34;tarball_url&#34;:&#34;https://api.github.com/repos/legendu-net/icon/tarball/v0.6.0&#34;,&#34;zipball_url&#34;:&#34;https://api.github.com/repos/legendu-net/icon/zipball/v0.6.0&#34;,&#34;body&#34;:&#34;&#34;}</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Download-Files-Using-&quot;net/http&quot;">Download Files Using "net/http"<a class="anchor-link" href="#Download-Files-Using-&quot;net/http&quot;">&#182;</a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[45]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">resp</span><span class="p">,</span> <span class="n">err</span> <span class="o">:=</span> <span class="n">http</span><span class="o">.</span><span class="n">Get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">err</span> <span class="o">!=</span> <span class="n">nil</span> <span class="p">{</span>
+    <span class="n">log</span><span class="o">.</span><span class="n">Fatal</span><span class="p">(</span><span class="n">err</span><span class="p">)</span>
+<span class="p">}</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[46]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">//</span> <span class="n">Create</span> <span class="n">the</span> <span class="n">file</span>
+<span class="n">out</span><span class="p">,</span> <span class="n">err</span> <span class="o">:=</span> <span class="n">os</span><span class="o">.</span><span class="n">Create</span><span class="p">(</span><span class="s2">&quot;spark.tgz&quot;</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">err</span> <span class="o">!=</span> <span class="n">nil</span> <span class="p">{</span>
+    <span class="n">log</span><span class="o">.</span><span class="n">Fatal</span><span class="p">(</span><span class="n">err</span><span class="p">)</span>
+<span class="p">}</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[47]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">//</span> <span class="n">Write</span> <span class="n">the</span> <span class="n">body</span> <span class="n">to</span> <span class="n">file</span>
+<span class="n">_</span><span class="p">,</span> <span class="n">err</span> <span class="o">=</span> <span class="n">io</span><span class="o">.</span><span class="n">Copy</span><span class="p">(</span><span class="n">out</span><span class="p">,</span> <span class="n">resp</span><span class="o">.</span><span class="n">Body</span><span class="p">)</span>
+<span class="n">err</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="References">References<a class="anchor-link" href="#References">&#182;</a></h2><p><a href="https://pkg.go.dev/net/http">https://pkg.go.dev/net/http</a></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span> 
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+ 
+
+</body>
+<script type="text/javascript">if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
+    var mathjaxscript = document.createElement('script');
+    mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
+    mathjaxscript.type = 'text/javascript';
+    mathjaxscript.src = '//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML';
+    mathjaxscript[(window.opera ? "innerHTML" : "text")] =
+        "MathJax.Hub.Config({" +
+        "    config: ['MMLorHTML.js']," +
+        "    TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'AMS' } }," +
+        "    jax: ['input/TeX','input/MathML','output/HTML-CSS']," +
+        "    extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']," +
+        "    displayAlign: 'center'," +
+        "    displayIndent: '0em'," +
+        "    showMathMenu: true," +
+        "    tex2jax: { " +
+        "        inlineMath: [ ['$','$'] ], " +
+        "        displayMath: [ ['$$','$$'] ]," +
+        "        processEscapes: true," +
+        "        preview: 'TeX'," +
+        "    }, " +
+        "    'HTML-CSS': { " +
+        " linebreaks: { automatic: true, width: '95% container' }, " +
+        "        styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: 'black ! important'} }" +
+        "    } " +
+        "}); ";
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
+}
+</script>
+</div>
+    <footer>
+<p class="meta">
+  <span class="byline author vcard">
+    Posted by <span class="fn">Benjamin Du</span>
+  </span>
+<time datetime="2022-06-26T13:25:56-07:00" pubdate>Jun 26, 2022</time>  <span class="categories">
+    <a class="category" href="https://misc.legendu.net/tag/computer-science.html">Computer Science</a>
+    <a class="category" href="https://misc.legendu.net/tag/programming.html">programming</a>
+    <a class="category" href="https://misc.legendu.net/tag/golang.html">Golang</a>
+    <a class="category" href="https://misc.legendu.net/tag/http.html">HTTP</a>
+    <a class="category" href="https://misc.legendu.net/tag/http.html">http</a>
+  </span>
+</p>    </footer>
+  </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div>
+  </section>
+</div>
+<aside class="sidebar">
+  <section>
+    <h1>Recent Posts</h1>
+    <ul id="recent_posts">
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/tips-on-health/">Tips on Health</a>
+      </li>
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/tips-on-child-education/">Tips on Child Education</a>
+      </li>
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/tips-on-fd/">Tips on fd</a>
+      </li>
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/the-fzf-command-is-a-great-alternative-to-find/">The fzf Command Is a Great Alternative to find</a>
+      </li>
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/ruff-is-an-extremely-fast-python-linter-written-in-rust/">Ruff Is An Extremely Fast Python Linter Written in Rust</a>
+      </li>
+    </ul>
+  </section>
+  <section>
+    <h1>Categories</h1>
+    <ul id="recent_posts">
+        <li><a href="https://misc.legendu.net/category/ai.html">AI</a></li>
+        <li><a href="https://misc.legendu.net/category/career.html">Career</a></li>
+        <li><a href="https://misc.legendu.net/category/cloud.html">Cloud</a></li>
+        <li><a href="https://misc.legendu.net/category/computer-science.html">Computer Science</a></li>
+        <li><a href="https://misc.legendu.net/category/fiannce.html">Fiannce</a></li>
+        <li><a href="https://misc.legendu.net/category/finance.html">Finance</a></li>
+        <li><a href="https://misc.legendu.net/category/fun-problems.html">Fun Problems</a></li>
+        <li><a href="https://misc.legendu.net/category/hardware.html">Hardware</a></li>
+        <li><a href="https://misc.legendu.net/category/health.html">Health</a></li>
+        <li><a href="https://misc.legendu.net/category/house.html">House</a></li>
+        <li><a href="https://misc.legendu.net/category/internet.html">Internet</a></li>
+        <li><a href="https://misc.legendu.net/category/investment.html">Investment</a></li>
+        <li><a href="https://misc.legendu.net/category/life.html">life</a></li>
+        <li><a href="https://misc.legendu.net/category/linux.html">Linux</a></li>
+        <li><a href="https://misc.legendu.net/category/os.html">OS</a></li>
+        <li><a href="https://misc.legendu.net/category/people.html">People</a></li>
+        <li><a href="https://misc.legendu.net/category/philosophy.html">Philosophy</a></li>
+        <li><a href="https://misc.legendu.net/category/research.html">Research</a></li>
+        <li><a href="https://misc.legendu.net/category/shopping.html">Shopping</a></li>
+        <li><a href="https://misc.legendu.net/category/soft-skills.html">soft skills</a></li>
+        <li><a href="https://misc.legendu.net/category/software.html">Software</a></li>
+        <li><a href="https://misc.legendu.net/category/statistics.html">Statistics</a></li>
+        <li><a href="https://misc.legendu.net/category/tools.html">Tools</a></li>
+    </ul>
+  </section>
+ 
+
+  <section>
+  <h1>Tags</h1>
+  <ul class="tagcloud">
+  </ul>
+  </section>
+
+
+
+  <section>
+    <h1>GitHub Repos</h1>
+    <ul id="gh_repos">
+      <li class="loading">Status updating...</li>
+    </ul>
+      <a href="https://github.com/legendu-net">@legendu-net</a> on GitHub
+    <script type="text/javascript">
+      $.domReady(function(){
+          if (!window.jXHR){
+              var jxhr = document.createElement('script');
+              jxhr.type = 'text/javascript';
+              jxhr.src = 'https://misc.legendu.net/theme/js/jXHR.js';
+              var s = document.getElementsByTagName('script')[0];
+              s.parentNode.insertBefore(jxhr, s);
+          }
+
+          github.showRepos({
+              user: 'legendu-net',
+              count: 5,
+              skip_forks: true,
+              target: '#gh_repos'
+          });
+      });
+    </script>
+    <script src="https://misc.legendu.net/theme/js/github.js" type="text/javascript"> </script>
+  </section>
+
+    <section>
+        <h1>Social</h2>
+        <ul>
+            <li><a href="https://www.linkedin.com/in/ben-chuanlong-du-1239b221/" target="_blank">LinkedIn</a></li>
+            <li><a href="https://hub.docker.com/u/dclong" target="_blank">Docker Hub</a></li>
+            <li><a href="https://stackoverflow.com/users/7808204/benjamin-du?tab=profile" target="_blank">Stack Overflow</a></li>
+            <li><a href="https://twitter.com/longendu" target="_blank">Twitter</a></li>
+        <!--
+            <li><a href="https://misc.legendu.net/" type="application/rss+xml" rel="alternate">RSS</a></li>
+            -->
+        </ul>
+    </section>
+</aside>    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Ben Chuanlong Du -
+  <span class="credit">Powered by <a href="http://getpelican.com">Pelican</a></span>
+</p></footer>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-3STS9BVPF6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-3STS9BVPF6');
+</script>
+	<script type="text/javascript">
+	  var disqus_shortname = 'dclong';
+          var disqus_identifier = '/blog/hands-on-the-standard-library-http-in-golang/';
+          var disqus_url = 'https://misc.legendu.net/blog/hands-on-the-standard-library-http-in-golang/';
+          var disqus_title = 'Hands on the Standard Library HTTP in Golang';
+	  (function() {
+	    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	    dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+	    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	   })();
+	</script>
+</body>
+</html>

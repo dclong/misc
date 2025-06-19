@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Tips on Kaggle</title>
+  <meta name="author" content="Ben Chuanlong Du">
+
+  <link href="https://misc.legendu.net/atom.xml" type="application/atom+xml" rel="alternate"
+        title="Ben Chuanlong Du's Blog Atom Feed" />
+
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link href="https://misc.legendu.net/favicon.png" rel="icon">
+  <link href="https://misc.legendu.net/theme/css/main_2.css" media="screen, projection"
+        rel="stylesheet" type="text/css">
+  <script src="https://misc.legendu.net/theme/js/modernizr-2.0.js"></script>
+  <script src="https://misc.legendu.net/theme/js/ender.js"></script>
+  <script src="https://misc.legendu.net/theme/js/octopress.js" type="text/javascript"></script>
+
+  <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <script data-ad-client="ca-pub-3836424032203369" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+</head>
+
+<body>
+  <header role="banner"><hgroup>
+  <h1><a href="https://misc.legendu.net/">Ben Chuanlong Du's Blog</a></h1>
+    <h2>It is never too late to learn.</h2>
+</hgroup></header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="https://misc.legendu.net/atom.xml" rel="subscribe-rss">RSS</a></li>
+</ul>
+
+<form name="search" action="https://www.bing.com/search" method="get" onSubmit="return build_query()">
+  <fieldset role="search">
+      <!--
+    <input type="hidden" name="q" value="site:https://misc.legendu.net" />
+        -->
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+
+<script type = "text/javascript">
+    function build_query() {
+        var query = document.forms["search"]["q"].value;
+        var prefix = "site:https://misc.legendu.net "
+        if (!query.startsWith(prefix)) {
+            query = prefix + query;
+            document.forms["search"]["q"].value = query;
+        }
+        return true;
+    }
+</script>
+
+<ul class="main-navigation">
+    <li><a href="https://www.legendu.net">Home</a></li>
+    <li><a href="https://misc.legendu.net">Blog</a></li>
+    <li><a href="https://misc.legendu.net/archives.html">Archives</a></li>
+    <li><a href="https://misc.legendu.net/categories.html">Categories</a></li>
+    <li><a href="https://misc.legendu.net/tags.html">Tags</a></li>
+    <li><a href="https://www.legendu.net/pages/about">About</a></li>
+</ul></nav>
+  <div id="main">
+    <div id="content">
+<div>
+  <article class="hentry" role="article">
+<header>
+      <h1 class="entry-title">Tips on Kaggle</h1>
+      <p class="meta"><time datetime="2019-12-04T10:37:03-08:00" pubdate>Dec 04, 2019</time></p>
+</header>
+
+  <div class="entry-content"><p><strong>Things on this page are fragmentary and immature notes/thoughts of the author. Please read with your own judgement!</strong></p>
+<h2 id="general-tips">General Tips</h2>
+<ol>
+<li>By default,
+    internet access from a Kaggle notebook/kernel is turned off.
+    You have to manually turn it on from the right-side panel 
+    in order to visit access internet.</li>
+</ol>
+<h2 id="tips-for-competition-on-kaggle">Tips for Competition on Kaggle</h2>
+<h2 id="choose-the-right-competitions">Choose the Right Competitions</h2>
+<p>If you are a beginner, 
+tackle the "Getting Started" competitions.
+You can try "Research" and "Feature" competitions when you become experienced.</p>
+<h2 id="set-incremental-goals">Set incremental goals</h2>
+<h2 id="review-most-voted-kernels">Review most voted kernels</h2>
+<h2 id="ask-questions-on-the-forums">Ask questions on the forums</h2>
+<h3 id="keep-a-logbook-or-use-a-model-versioning-tool">Keep a logbook or use a model versioning tool</h3>
+<p>It is a good to keep a logbook or use a model versioning tool 
+since you will typically have many iterations of models.
+If you like a simple tool, use a spreadsheet or markdown doc.
+Otherwise, find a model versioning tool.</p>
+<ol>
+<li>
+<p>Establish a single baseline model to compare all future changes to.</p>
+</li>
+<li>
+<p>Come up with a bunch of tweaks you want to try 
+    and run modified versions of the baseline 
+    for each tweak independently rather than in a cumulative fashion.</p>
+</li>
+<li>
+<p>Maintain the same (and smallest) CNN Architecture for as long as possible 
+    as it will make iteration quicker and with some look many of the hyper-parameters 
+    should transfer decently to larger more complex models.</p>
+</li>
+</ol>
+<h2 id="get-more-data">Get More Data</h2>
+<p>If you are doing a image, voice or text related competition,
+do some research before you start coding 
+and see if a similar competition has been run before 
+or if there are any databases of similar labelled training sets you can use. 
+More data is never really harmful to your model (assuming the quality of labelling is decent), 
+so get as much of it as you can, 
+but just don't forget to keep your validation 
+and test sets from the original dataset provided to you 
+or you may end up with a train-test mismatch.</p>
+<h3 id="leveraging-existing-kernels">Leveraging Existing Kernels</h3>
+<p>It is always good practice to learn from others
+and leverage existing work.</p>
+<p>Note: If a kernel suggests a bunch of techniques to use for your model 
+you should check if they state the resultant performance gains, 
+otherwise be skeptical and conduct tests yourself 
+before blindly incorporating them into your own models :)</p>
+<h3 id="preprocessing-data">Preprocessing Data</h3>
+<h4 id="images">Images</h4>
+<p>Cropping &amp; Other Augmentations</p>
+<h3 id="transfer-learning">Transfer Learning</h3>
+<h3 id="start-from-easysimplesmall-models">Start from Easy/Simple/Small Models</h3>
+<h2 id="download-datasets-from-kaggle-using-kaggle-api">Download Datasets from Kaggle Using Kaggle API</h2>
+<ol>
+<li>
+<p>Install the Python package kaggle. </p>
+</li>
+<li>
+<p>Generate a token file <code>kaggle.json</code> and place it into your directory <code>$HOME/.kaggle</code>.
+    www.kaggle.com -&gt; Your Account -&gt; Create New API token. </p>
+</li>
+<li>
+<p>Make sure that <code>$HOME/.kaggle/kaggle.json</code> is readable only by you.</p>
+<div class="highlight"><pre><span></span><code>chmod<span class="w"> </span><span class="m">600</span><span class="w"> </span><span class="nv">$HOME</span>/.kaggle/kaggle.json
+</code></pre></div>
+
+</li>
+<li>
+<p>Search for datasets on Kaggle using the following command.</p>
+<div class="highlight"><pre><span></span><code>kaggle<span class="w"> </span>datasets<span class="w"> </span>list<span class="w"> </span>-s<span class="w"> </span><span class="o">[</span>keywords<span class="o">]</span>
+</code></pre></div>
+
+</li>
+<li>
+<p>Download a dataset using the command below.</p>
+<div class="highlight"><pre><span></span><code>kaggle<span class="w"> </span>datasets<span class="w"> </span>download<span class="w"> </span>user/dataset
+</code></pre></div>
+
+</li>
+</ol>
+<p>For more details, 
+please refer to <a href="https://www.kaggle.com/docs/api">Kaggle Public API</a>
+and
+<a href="https://www.kaggle.com/general/51898">Easy way to use Kaggle datasets in Google Colab</a>
+.</p>
+<h2 id="useful-datasets-for-learning">Useful Datasets for Learning</h2>
+<p><a href="https://www.kaggle.com/annavictoria/ml-friendly-public-datasets">ML-friendly Public Datasets</a></p>
+<p>There are lots of machine learning ready datasets available to use for fun or practice 
+on Kaggle's <a href="https://www.kaggle.com/datasets">Public Datasets platform</a>. 
+Here is a short list of some of our favorites that we've already had the chance to review. 
+They're all (mostly) cleaned and ready for analysis!</p>
+<h3 id="binary-classification">Binary Classification</h3>
+<ul>
+<li><a href="https://www.kaggle.com/uciml/indian-liver-patient-records">Indian Liver Patient Records</a></li>
+<li><a href="https://www.kaggle.com/ntnu-testimon/paysim1">Synthetic Financial Data for Fraud Detection</a></li>
+<li><a href="https://www.kaggle.com/census/business-and-industry-reports">Business and Industry Reports</a></li>
+<li><a href="https://www.kaggle.com/tiredgeek/predict-bo-trial">Can You Predict Product Backorders?</a></li>
+<li><a href="https://www.kaggle.com/keplersmachines/kepler-labelled-time-series-data">Exoplanet Hunting in Deep Space</a></li>
+<li><a href="https://www.kaggle.com/uciml/adult-census-income">Adult Census Income</a></li>
+</ul>
+<h3 id="multiclass-classification">Multiclass Classification</h3>
+<ul>
+<li><a href="https://www.kaggle.com/uciml/iris">Iris Species</a></li>
+<li><a href="https://www.kaggle.com/pitasr/falldata">Fall Detection Data from China</a></li>
+<li><a href="https://www.kaggle.com/uciml/biomechanical-features-of-orthopedic-patients">Biomechanical Features of Orthopedic Patients</a></li>
+</ul>
+<h3 id="regression">Regression</h3>
+<ul>
+<li><a href="https://www.kaggle.com/rush4ratio/video-game-sales-with-ratings">Video Game Sales with Ratings</a></li>
+<li><a href="https://www.kaggle.com/new-york-city/nyc-property-sales">NYC Property Sales</a></li>
+<li><a href="https://www.kaggle.com/uciml/gas-sensor-array-under-dynamic-gas-mixtures">Gas Sensor Array Under Dynamic Gas Mixtures</a></li>
+</ul>
+<h3 id="nlp">NLP</h3>
+<ul>
+<li><a href="https://www.kaggle.com/wcukierski/enron-email-dataset">The Enron Email Dataset</a></li>
+<li><a href="https://www.kaggle.com/rtatman/ubuntu-dialogue-corpus">Ubuntu Dialogue Corpus</a></li>
+<li><a href="https://www.kaggle.com/alvations/old-newspapers">Old Newspapers: A cleaned subset of HC Corpora newspapers</a></li>
+<li><a href="https://www.kaggle.com/rtatman/speech-accent-archive">Speech Accent Archive</a></li>
+<li><a href="https://www.kaggle.com/rtatman/blog-authorship-corpus">Blog Authorship Corpus</a></li>
+</ul>
+<h3 id="time-series-analysis">Time Series Analysis</h3>
+<ul>
+<li><a href="https://www.kaggle.com/sudalairajkumar/cryptocurrencypricehistory">Cryptocurrency Historical Prices</a></li>
+<li><a href="https://www.kaggle.com/keplersmachines/kepler-labelled-time-series-data">Exoplanet Hunting in Deep Space</a></li>
+</ul>
+<h3 id="image-processing">Image Processing</h3>
+<ul>
+<li><a href="https://www.kaggle.com/selfishgene/youtube-faces-with-facial-keypoints">YouTube Faces with Facial Keypoints</a></li>
+<li><a href="https://www.kaggle.com/zalando-research/fashionmnist">Fashion MNIST</a></li>
+</ul>
+<h3 id="mapping-and-prediction">Mapping and Prediction</h3>
+<ul>
+<li><a href="https://www.kaggle.com/sohier/seattle-police-department-911-incident-response">Seattle Police Department 911 Incident Response</a></li>
+<li><a href="https://www.kaggle.com/sohier/baltimore-911-calls">Baltimore 911 Calls</a></li>
+<li><a href="https://www.kaggle.com/currie32/crimes-in-chicago">Crimes in Chicago</a></li>
+<li><a href="https://www.kaggle.com/mchirico/philadelphiacrimedata">Philadelphia Crime Data</a></li>
+<li><a href="https://www.kaggle.com/jboysen/london-crime">London Crime</a></li>
+</ul>
+<h3 id="large-datasets">Large Datasets</h3>
+<ul>
+<li><a href="https://www.kaggle.com/residentmario/iowa-liquor-sales">Iowa Liquor Sales</a></li>
+<li><a href="https://www.kaggle.com/seattle-public-library/seattle-library-checkout-records">Seattle Library Checkout Records</a></li>
+</ul>
+<h2 id="misc">Misc</h2>
+<p><a href="https://elitedatascience.com/beginner-kaggle">The Beginner’s Guide to Kaggle</a></p>
+<p><a href="https://dnc1994.com/2016/04/rank-10-percent-in-first-kaggle-competition/">如何在 Kaggle 首战中进入前 10%</a></p>
+<p>https://www.kaggle.com/getting-started/44919</p>
+<p>https://towardsdatascience.com/how-to-improve-your-kaggle-competition-leaderboard-ranking-bcd16643eddf</p>
+<p>https://www.kdnuggets.com/2016/11/rank-ten-precent-first-kaggle-competition.html</p>
+<p>https://towardsdatascience.com/how-to-improve-your-kaggle-competition-leaderboard-ranking-bcd16643eddf</p>
+<p>https://towardsdatascience.com/how-i-got-in-the-top-1-on-kaggle-79ddd7c07f1c</p></div>
+    <footer>
+<p class="meta">
+  <span class="byline author vcard">
+    Posted by <span class="fn">Benjamin Du</span>
+  </span>
+<time datetime="2019-12-04T10:37:03-08:00" pubdate>Dec 04, 2019</time>  <span class="categories">
+    <a class="category" href="https://misc.legendu.net/tag/programming.html">programming</a>
+  </span>
+</p>    </footer>
+  </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div>
+  </section>
+</div>
+<aside class="sidebar">
+  <section>
+    <h1>Recent Posts</h1>
+    <ul id="recent_posts">
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/tips-on-health/">Tips on Health</a>
+      </li>
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/tips-on-child-education/">Tips on Child Education</a>
+      </li>
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/tips-on-fd/">Tips on fd</a>
+      </li>
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/the-fzf-command-is-a-great-alternative-to-find/">The fzf Command Is a Great Alternative to find</a>
+      </li>
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/ruff-is-an-extremely-fast-python-linter-written-in-rust/">Ruff Is An Extremely Fast Python Linter Written in Rust</a>
+      </li>
+    </ul>
+  </section>
+  <section>
+    <h1>Categories</h1>
+    <ul id="recent_posts">
+        <li><a href="https://misc.legendu.net/category/ai.html">AI</a></li>
+        <li><a href="https://misc.legendu.net/category/career.html">Career</a></li>
+        <li><a href="https://misc.legendu.net/category/cloud.html">Cloud</a></li>
+        <li><a href="https://misc.legendu.net/category/computer-science.html">Computer Science</a></li>
+        <li><a href="https://misc.legendu.net/category/fiannce.html">Fiannce</a></li>
+        <li><a href="https://misc.legendu.net/category/finance.html">Finance</a></li>
+        <li><a href="https://misc.legendu.net/category/fun-problems.html">Fun Problems</a></li>
+        <li><a href="https://misc.legendu.net/category/hardware.html">Hardware</a></li>
+        <li><a href="https://misc.legendu.net/category/health.html">Health</a></li>
+        <li><a href="https://misc.legendu.net/category/house.html">House</a></li>
+        <li><a href="https://misc.legendu.net/category/internet.html">Internet</a></li>
+        <li><a href="https://misc.legendu.net/category/investment.html">Investment</a></li>
+        <li><a href="https://misc.legendu.net/category/life.html">life</a></li>
+        <li><a href="https://misc.legendu.net/category/linux.html">Linux</a></li>
+        <li><a href="https://misc.legendu.net/category/os.html">OS</a></li>
+        <li><a href="https://misc.legendu.net/category/people.html">People</a></li>
+        <li><a href="https://misc.legendu.net/category/philosophy.html">Philosophy</a></li>
+        <li><a href="https://misc.legendu.net/category/research.html">Research</a></li>
+        <li><a href="https://misc.legendu.net/category/shopping.html">Shopping</a></li>
+        <li><a href="https://misc.legendu.net/category/soft-skills.html">soft skills</a></li>
+        <li><a href="https://misc.legendu.net/category/software.html">Software</a></li>
+        <li><a href="https://misc.legendu.net/category/statistics.html">Statistics</a></li>
+        <li><a href="https://misc.legendu.net/category/tools.html">Tools</a></li>
+    </ul>
+  </section>
+ 
+
+  <section>
+  <h1>Tags</h1>
+  <ul class="tagcloud">
+  </ul>
+  </section>
+
+
+
+  <section>
+    <h1>GitHub Repos</h1>
+    <ul id="gh_repos">
+      <li class="loading">Status updating...</li>
+    </ul>
+      <a href="https://github.com/legendu-net">@legendu-net</a> on GitHub
+    <script type="text/javascript">
+      $.domReady(function(){
+          if (!window.jXHR){
+              var jxhr = document.createElement('script');
+              jxhr.type = 'text/javascript';
+              jxhr.src = 'https://misc.legendu.net/theme/js/jXHR.js';
+              var s = document.getElementsByTagName('script')[0];
+              s.parentNode.insertBefore(jxhr, s);
+          }
+
+          github.showRepos({
+              user: 'legendu-net',
+              count: 5,
+              skip_forks: true,
+              target: '#gh_repos'
+          });
+      });
+    </script>
+    <script src="https://misc.legendu.net/theme/js/github.js" type="text/javascript"> </script>
+  </section>
+
+    <section>
+        <h1>Social</h2>
+        <ul>
+            <li><a href="https://www.linkedin.com/in/ben-chuanlong-du-1239b221/" target="_blank">LinkedIn</a></li>
+            <li><a href="https://hub.docker.com/u/dclong" target="_blank">Docker Hub</a></li>
+            <li><a href="https://stackoverflow.com/users/7808204/benjamin-du?tab=profile" target="_blank">Stack Overflow</a></li>
+            <li><a href="https://twitter.com/longendu" target="_blank">Twitter</a></li>
+        <!--
+            <li><a href="https://misc.legendu.net/" type="application/rss+xml" rel="alternate">RSS</a></li>
+            -->
+        </ul>
+    </section>
+</aside>    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Ben Chuanlong Du -
+  <span class="credit">Powered by <a href="http://getpelican.com">Pelican</a></span>
+</p></footer>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-3STS9BVPF6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-3STS9BVPF6');
+</script>
+	<script type="text/javascript">
+	  var disqus_shortname = 'dclong';
+          var disqus_identifier = '/blog/tips-on-kaggle/';
+          var disqus_url = 'https://misc.legendu.net/blog/tips-on-kaggle/';
+          var disqus_title = 'Tips on Kaggle';
+	  (function() {
+	    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	    dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+	    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	   })();
+	</script>
+</body>
+</html>

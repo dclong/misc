@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Use Tkinter to Build GUI Applications in Python</title>
+  <meta name="author" content="Ben Chuanlong Du">
+
+  <link href="https://misc.legendu.net/atom.xml" type="application/atom+xml" rel="alternate"
+        title="Ben Chuanlong Du's Blog Atom Feed" />
+
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link href="https://misc.legendu.net/favicon.png" rel="icon">
+  <link href="https://misc.legendu.net/theme/css/main_2.css" media="screen, projection"
+        rel="stylesheet" type="text/css">
+  <script src="https://misc.legendu.net/theme/js/modernizr-2.0.js"></script>
+  <script src="https://misc.legendu.net/theme/js/ender.js"></script>
+  <script src="https://misc.legendu.net/theme/js/octopress.js" type="text/javascript"></script>
+
+  <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <script data-ad-client="ca-pub-3836424032203369" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+</head>
+
+<body>
+  <header role="banner"><hgroup>
+  <h1><a href="https://misc.legendu.net/">Ben Chuanlong Du's Blog</a></h1>
+    <h2>It is never too late to learn.</h2>
+</hgroup></header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="https://misc.legendu.net/atom.xml" rel="subscribe-rss">RSS</a></li>
+</ul>
+
+<form name="search" action="https://www.bing.com/search" method="get" onSubmit="return build_query()">
+  <fieldset role="search">
+      <!--
+    <input type="hidden" name="q" value="site:https://misc.legendu.net" />
+        -->
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+
+<script type = "text/javascript">
+    function build_query() {
+        var query = document.forms["search"]["q"].value;
+        var prefix = "site:https://misc.legendu.net "
+        if (!query.startsWith(prefix)) {
+            query = prefix + query;
+            document.forms["search"]["q"].value = query;
+        }
+        return true;
+    }
+</script>
+
+<ul class="main-navigation">
+    <li><a href="https://www.legendu.net">Home</a></li>
+    <li><a href="https://misc.legendu.net">Blog</a></li>
+    <li><a href="https://misc.legendu.net/archives.html">Archives</a></li>
+    <li><a href="https://misc.legendu.net/categories.html">Categories</a></li>
+    <li><a href="https://misc.legendu.net/tags.html">Tags</a></li>
+    <li><a href="https://www.legendu.net/pages/about">About</a></li>
+</ul></nav>
+  <div id="main">
+    <div id="content">
+<div>
+  <article class="hentry" role="article">
+<header>
+      <h1 class="entry-title">Use Tkinter to Build GUI Applications in Python</h1>
+      <p class="meta"><time datetime="2020-03-09T09:41:03-07:00" pubdate>Mar 09, 2020</time></p>
+</header>
+
+  <div class="entry-content"><p><strong>Things on this page are fragmentary and immature notes/thoughts of the author. Please read with your own judgement!</strong></p>
+<h2 id="installation">Installation</h2>
+<p>Tkinter should be available by default after Python is installed.
+However,
+please continue read if you encounter the following error.</p>
+<blockquote>
+<p>import _tkinter # If this fails your Python may not be configured for Tk
+ImportError: No module named _tkinter</p>
+</blockquote>
+<ol>
+<li>On macOS, 
+    installing python-tk might fix the issue. <div class="highlight"><pre><span></span><code>brew<span class="w"> </span>install<span class="w"> </span>python-tk
+</code></pre></div>
+
+</li>
+</ol>
+<h2 id="general-tips">General Tips</h2>
+<ol>
+<li>
+<p>You need to use multithreading to make GUI application more responsive
+    if any event triggers a long-run task.
+    Please refer to 
+    <a href="http://www.legendu.net/misc/blog/python-concurrency-parallel-computing/">Concurrency and Parallel Computing in Python</a>
+    for more discussions. </p>
+</li>
+<li>
+<p>When you develop a GUI application using Tkinter in Python, 
+    <code>root = tk.Tk()</code> must be the first statement after imports.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">tkinter</span> <span class="k">as</span> <span class="nn">tk</span>
+<span class="kn">import</span> <span class="nn">...</span>
+<span class="n">root</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Tk</span><span class="p">()</span>
+<span class="o">...</span>
+</code></pre></div>
+
+</li>
+<li>
+<p>It is suggested that you use the <code>ttk</code> module (Tk Themed Widgets) when possible. 
+    It has more advanced and better looking widgets. 
+    However, the <code>Text</code> widget is only available in <code>tk</code>.</p>
+</li>
+<li>
+<p>It is suggested that you name a widget using the <code>name</code> option 
+    when creating it,
+    and use the name to refer to the widget later. 
+    Avoid keeping referencing to widgets by yourself!</p>
+<div class="highlight"><pre><span></span><code><span class="n">root</span><span class="o">.</span><span class="n">nametowidget</span><span class="p">(</span><span class="s2">&quot;name1.name2.name3&quot;</span><span class="p">)</span>
+</code></pre></div>
+
+</li>
+<li>
+<p>A Button object has the option <code>command</code> to set a callback function when clicked
+    while a Label object does not have this option.</p>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">button_click</span><span class="p">():</span>
+    <span class="o">...</span>
+
+<span class="n">Button</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="s2">&quot;Scrrenshot&quot;</span><span class="p">,</span> <span class="n">command</span><span class="o">=</span><span class="n">button_click</span><span class="p">)</span>
+</code></pre></div>
+
+<p>Nevertheless, 
+you can bind a callback function to any widget using the method <code>widget_obj.bind</code>.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">tkinter</span> <span class="k">as</span> <span class="nn">tk</span>
+<span class="n">root</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Tk</span><span class="p">()</span>
+
+<span class="k">def</span> <span class="nf">label_left_click</span><span class="p">(</span><span class="n">event</span><span class="p">):</span>
+    <span class="o">...</span>
+
+<span class="n">label</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Label</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="s2">&quot;my label&quot;</span><span class="p">)</span>
+<span class="n">label</span><span class="o">.</span><span class="n">bind</span><span class="p">(</span><span class="s2">&quot;&lt;Button-1&gt;&quot;</span><span class="p">,</span> <span class="n">label_left_click</span><span class="p">)</span>
+</code></pre></div>
+
+<p>A few things to keep in mind. 
+When you bind a callback function using the <code>command</code> option,
+the callback function takes no argument. 
+However, 
+when you bind a call back function using the method <code>widget_obj.bind</code>,
+the callback function takes an <code>Event</code> object as argument.</p>
+</li>
+<li>
+<p>To make a label visible no matter there are text/image in it or not,
+    you can set a border to it.</p>
+<div class="highlight"><pre><span></span><code><span class="n">label</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Label</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">bd</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</code></pre></div>
+
+<p>You can ke it even more visible by giving a sunken effect.</p>
+<div class="highlight"><pre><span></span><code><span class="n">label</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Label</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">bd</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">relief</span><span class="o">=</span><span class="n">tk</span><span class="o">.</span><span class="n">SUNKEN</span><span class="p">)</span>
+</code></pre></div>
+
+</li>
+<li>
+<p>A Frame object has its own grid.
+    This makes frames and grid the best combinations to manage the layout of your GUI application.
+    You can use frames to group components.
+    Inside each frame, 
+    use grid to control the layout of widgets. </p>
+</li>
+<li>
+<p>It seems to me that you must keep a reference to a PhotoImage object
+    in order to use it for a label. 
+    A temporary PhotoImage object does not work.
+    The image object can then be used wherever an image option is supported by some widget (e.g. labels, buttons, menus). In these cases, Tk will not keep a reference to the image. When the last Python reference to the image object is deleted, the image data is deleted as well, and Tk will display an empty box wherever the image was used.</p>
+</li>
+<li>
+<p>There are 2 kinds of PhotoImage objects that you can use with Tkinter.
+    The first is <code>Tkinter.PhotoImage</code> 
+    while the second is <code>PIL.ImageTk.PhotoImage</code>.
+    The latter is preferred as it is more flexible,
+    supports more data format,
+    and is easier to use.
+    <code>Tkinter.PhotoImage</code> supports only GIF pictures 
+    if you use the <code>file</code> option to load an image,
+    and it seems to me that it does not accept <code>PIL.Image</code>.</p>
+</li>
+</ol>
+<h3 id="size-of-widgets">Size of Widgets</h3>
+<p>https://stackoverflow.com/questions/17398926/how-to-set-a-widgets-size-in-tkinter/17399180</p>
+<h2 id="grid">Grid</h2>
+<p>Set minimum size of rows and columns of the grid.</p>
+<div class="highlight"><pre><span></span><code><span class="n">col_count</span><span class="p">,</span> <span class="n">row_count</span> <span class="o">=</span> <span class="n">root</span><span class="o">.</span><span class="n">grid_size</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">xrange</span><span class="p">(</span><span class="n">col_count</span><span class="p">):</span>
+    <span class="n">root</span><span class="o">.</span><span class="n">grid_columnconfigure</span><span class="p">(</span><span class="n">col</span><span class="p">,</span> <span class="n">minsize</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">xrange</span><span class="p">(</span><span class="n">row_count</span><span class="p">):</span>
+    <span class="n">root</span><span class="o">.</span><span class="n">grid_rowconfigure</span><span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="n">minsize</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+</code></pre></div>
+
+<p>https://stackoverflow.com/questions/28019402/tkinter-grid-spacing-options</p>
+<h2 id="bind-keys">Bind Keys</h2>
+<p>https://effbot.org/tkinterbook/tkinter-events-and-bindings.htm</p>
+<p>Keyboard events are sent to the focused widget.</p>
+<div class="highlight"><pre><span></span><code><span class="n">widget</span><span class="o">.</span><span class="n">bind</span><span class="p">(</span><span class="s2">&quot;&lt;Key&gt;&quot;</span><span class="p">,</span> <span class="n">callback_func</span><span class="p">)</span>
+</code></pre></div>
+
+<h2 id="tutorials">Tutorials</h2>
+<p>https://www.youtube.com/playlist?list=PL6gx4Cwl9DGBwibXFtPtflztSNPGuIB_d</p>
+<h2 id="references">References</h2>
+<ul>
+<li>
+<p><a href="http://www.legendu.net/misc/blog/the-checkbutton-widget-in-tkinter/">The Checkbutton Widget in Tkinter</a></p>
+</li>
+<li>
+<p><a href="http://www.legendu.net/misc/blog/the-entry-widget-in-tkinter/">The Entry Widget in Tkinter</a></p>
+</li>
+<li>
+<p><a href="http://www.legendu.net/misc/blog/tkinter-label-tips/">The Label Widget in Tkinter</a></p>
+</li>
+<li>
+<p><a href="https://stackoverflow.com/questions/5459444/tkinter-python-may-not-be-configured-for-tk">Tkinter: “Python may not be configured for Tk”</a></p>
+</li>
+<li>
+<p>https://docs.python.org/3/library/tkinter.html</p>
+</li>
+<li>
+<p>https://docs.python.org/3/library/tk.html</p>
+</li>
+<li>
+<p>http://effbot.org/tkinterbook/</p>
+</li>
+<li>
+<p>http://stupidpythonideas.blogspot.com/2013/10/why-your-gui-app-freezes.html</p>
+</li>
+<li>
+<p>https://www.reddit.com/r/Python/comments/7rp4xj/threading_a_tkinter_gui_is_hell_my_least_favorite/</p>
+</li>
+</ul></div>
+    <footer>
+<p class="meta">
+  <span class="byline author vcard">
+    Posted by <span class="fn">Benjamin Du</span>
+  </span>
+<time datetime="2020-03-09T09:41:03-07:00" pubdate>Mar 09, 2020</time>  <span class="categories">
+    <a class="category" href="https://misc.legendu.net/tag/computer-science.html">Computer Science</a>
+    <a class="category" href="https://misc.legendu.net/tag/python.html">Python</a>
+    <a class="category" href="https://misc.legendu.net/tag/tkinter.html">Tkinter</a>
+    <a class="category" href="https://misc.legendu.net/tag/gui.html">GUI</a>
+  </span>
+</p>    </footer>
+  </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div>
+  </section>
+</div>
+<aside class="sidebar">
+  <section>
+    <h1>Recent Posts</h1>
+    <ul id="recent_posts">
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/tips-on-health/">Tips on Health</a>
+      </li>
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/tips-on-child-education/">Tips on Child Education</a>
+      </li>
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/tips-on-fd/">Tips on fd</a>
+      </li>
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/the-fzf-command-is-a-great-alternative-to-find/">The fzf Command Is a Great Alternative to find</a>
+      </li>
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/ruff-is-an-extremely-fast-python-linter-written-in-rust/">Ruff Is An Extremely Fast Python Linter Written in Rust</a>
+      </li>
+    </ul>
+  </section>
+  <section>
+    <h1>Categories</h1>
+    <ul id="recent_posts">
+        <li><a href="https://misc.legendu.net/category/ai.html">AI</a></li>
+        <li><a href="https://misc.legendu.net/category/career.html">Career</a></li>
+        <li><a href="https://misc.legendu.net/category/cloud.html">Cloud</a></li>
+        <li><a href="https://misc.legendu.net/category/computer-science.html">Computer Science</a></li>
+        <li><a href="https://misc.legendu.net/category/fiannce.html">Fiannce</a></li>
+        <li><a href="https://misc.legendu.net/category/finance.html">Finance</a></li>
+        <li><a href="https://misc.legendu.net/category/fun-problems.html">Fun Problems</a></li>
+        <li><a href="https://misc.legendu.net/category/hardware.html">Hardware</a></li>
+        <li><a href="https://misc.legendu.net/category/health.html">Health</a></li>
+        <li><a href="https://misc.legendu.net/category/house.html">House</a></li>
+        <li><a href="https://misc.legendu.net/category/internet.html">Internet</a></li>
+        <li><a href="https://misc.legendu.net/category/investment.html">Investment</a></li>
+        <li><a href="https://misc.legendu.net/category/life.html">life</a></li>
+        <li><a href="https://misc.legendu.net/category/linux.html">Linux</a></li>
+        <li><a href="https://misc.legendu.net/category/os.html">OS</a></li>
+        <li><a href="https://misc.legendu.net/category/people.html">People</a></li>
+        <li><a href="https://misc.legendu.net/category/philosophy.html">Philosophy</a></li>
+        <li><a href="https://misc.legendu.net/category/research.html">Research</a></li>
+        <li><a href="https://misc.legendu.net/category/shopping.html">Shopping</a></li>
+        <li><a href="https://misc.legendu.net/category/soft-skills.html">soft skills</a></li>
+        <li><a href="https://misc.legendu.net/category/software.html">Software</a></li>
+        <li><a href="https://misc.legendu.net/category/statistics.html">Statistics</a></li>
+        <li><a href="https://misc.legendu.net/category/tools.html">Tools</a></li>
+    </ul>
+  </section>
+ 
+
+  <section>
+  <h1>Tags</h1>
+  <ul class="tagcloud">
+  </ul>
+  </section>
+
+
+
+  <section>
+    <h1>GitHub Repos</h1>
+    <ul id="gh_repos">
+      <li class="loading">Status updating...</li>
+    </ul>
+      <a href="https://github.com/legendu-net">@legendu-net</a> on GitHub
+    <script type="text/javascript">
+      $.domReady(function(){
+          if (!window.jXHR){
+              var jxhr = document.createElement('script');
+              jxhr.type = 'text/javascript';
+              jxhr.src = 'https://misc.legendu.net/theme/js/jXHR.js';
+              var s = document.getElementsByTagName('script')[0];
+              s.parentNode.insertBefore(jxhr, s);
+          }
+
+          github.showRepos({
+              user: 'legendu-net',
+              count: 5,
+              skip_forks: true,
+              target: '#gh_repos'
+          });
+      });
+    </script>
+    <script src="https://misc.legendu.net/theme/js/github.js" type="text/javascript"> </script>
+  </section>
+
+    <section>
+        <h1>Social</h2>
+        <ul>
+            <li><a href="https://www.linkedin.com/in/ben-chuanlong-du-1239b221/" target="_blank">LinkedIn</a></li>
+            <li><a href="https://hub.docker.com/u/dclong" target="_blank">Docker Hub</a></li>
+            <li><a href="https://stackoverflow.com/users/7808204/benjamin-du?tab=profile" target="_blank">Stack Overflow</a></li>
+            <li><a href="https://twitter.com/longendu" target="_blank">Twitter</a></li>
+        <!--
+            <li><a href="https://misc.legendu.net/" type="application/rss+xml" rel="alternate">RSS</a></li>
+            -->
+        </ul>
+    </section>
+</aside>    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Ben Chuanlong Du -
+  <span class="credit">Powered by <a href="http://getpelican.com">Pelican</a></span>
+</p></footer>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-3STS9BVPF6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-3STS9BVPF6');
+</script>
+	<script type="text/javascript">
+	  var disqus_shortname = 'dclong';
+          var disqus_identifier = '/blog/use-tkinter-to-build-gui-applications-in-python/';
+          var disqus_url = 'https://misc.legendu.net/blog/use-tkinter-to-build-gui-applications-in-python/';
+          var disqus_title = 'Use Tkinter to Build GUI Applications in Python';
+	  (function() {
+	    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	    dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+	    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	   })();
+	</script>
+</body>
+</html>

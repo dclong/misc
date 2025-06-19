@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Tips on Rust</title>
+  <meta name="author" content="Ben Chuanlong Du">
+
+  <link href="https://misc.legendu.net/atom.xml" type="application/atom+xml" rel="alternate"
+        title="Ben Chuanlong Du's Blog Atom Feed" />
+
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link href="https://misc.legendu.net/favicon.png" rel="icon">
+  <link href="https://misc.legendu.net/theme/css/main_2.css" media="screen, projection"
+        rel="stylesheet" type="text/css">
+  <script src="https://misc.legendu.net/theme/js/modernizr-2.0.js"></script>
+  <script src="https://misc.legendu.net/theme/js/ender.js"></script>
+  <script src="https://misc.legendu.net/theme/js/octopress.js" type="text/javascript"></script>
+
+  <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <script data-ad-client="ca-pub-3836424032203369" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+</head>
+
+<body>
+  <header role="banner"><hgroup>
+  <h1><a href="https://misc.legendu.net/">Ben Chuanlong Du's Blog</a></h1>
+    <h2>It is never too late to learn.</h2>
+</hgroup></header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="https://misc.legendu.net/atom.xml" rel="subscribe-rss">RSS</a></li>
+</ul>
+
+<form name="search" action="https://www.bing.com/search" method="get" onSubmit="return build_query()">
+  <fieldset role="search">
+      <!--
+    <input type="hidden" name="q" value="site:https://misc.legendu.net" />
+        -->
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+
+<script type = "text/javascript">
+    function build_query() {
+        var query = document.forms["search"]["q"].value;
+        var prefix = "site:https://misc.legendu.net "
+        if (!query.startsWith(prefix)) {
+            query = prefix + query;
+            document.forms["search"]["q"].value = query;
+        }
+        return true;
+    }
+</script>
+
+<ul class="main-navigation">
+    <li><a href="https://www.legendu.net">Home</a></li>
+    <li><a href="https://misc.legendu.net">Blog</a></li>
+    <li><a href="https://misc.legendu.net/archives.html">Archives</a></li>
+    <li><a href="https://misc.legendu.net/categories.html">Categories</a></li>
+    <li><a href="https://misc.legendu.net/tags.html">Tags</a></li>
+    <li><a href="https://www.legendu.net/pages/about">About</a></li>
+</ul></nav>
+  <div id="main">
+    <div id="content">
+<div>
+  <article class="hentry" role="article">
+<header>
+      <h1 class="entry-title">Tips on Rust</h1>
+      <p class="meta"><time datetime="2019-04-10T12:17:46-07:00" pubdate>Apr 10, 2019</time></p>
+</header>
+
+  <div class="entry-content"><p><strong>Things on this page are fragmentary and immature notes/thoughts of the author. Please read with your own judgement!</strong></p>
+<p>https://lib.rs/</p>
+<p><a href="https://blessed.rs/crates">Rust Blessed</a>
+is an unofficial guide to the Rust ecosystem.</p>
+<h2 id="installation">Installation</h2>
+<p>Please refer to
+<a href="http://www.legendu.net/misc/blog/tips-on-rustup">Tips on rustup</a>
+for installing Rust using rustup (the recommended way for most users),
+and
+<a href="https://www.legendu.net/en/blog/install-a-standalone-version-of-rust">Install a Standalone Version of Rust in Linux</a>
+for installing a global standalone version of Rust.</p>
+<h3 id="install-a-newer-version-of-rust-via-ppa-on-ubuntu">Install a Newer Version of Rust via PPA on Ubuntu</h3>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>apt-add-repository<span class="w"> </span>ppa:ubuntu-mozilla-security/rust-updates
+sudo<span class="w"> </span>apt-get<span class="w"> </span>update
+sudo<span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>rustc
+</code></pre></div>
+
+<p>For details of the PPA ubuntu-mozilla-security/rust-updates,
+please refer to
+<a href="https://launchpad.net/~ubuntu-mozilla-security/+archive/ubuntu/rust-updates">PPA for preparing rust toolchain updates for Firefox</a>
+.</p>
+<h2 id="rust-toolchains">Rust Toolchains</h2>
+<ul>
+<li>
+<p><a href="http://www.legendu.net/misc/blog/tips-on-cargo">cargo</a>: package manager for Rust</p>
+</li>
+<li>
+<p>rustup: version manager for Rust</p>
+</li>
+<li>
+<p><a href="http://www.legendu.net/misc/blog/tips-on-rustc">rustc</a>: compiler for Rust</p>
+</li>
+<li>
+<p>clippy</p>
+</li>
+<li>
+<p>rustfmt</p>
+</li>
+</ul>
+<h2 id="conditional-compilation-in-rust">Conditional Compilation in Rust</h2>
+<p><a href="https://users.rust-lang.org/t/conditional-compilation-for-debug-release/1098">Conditional compilation for debug/release</a></p>
+<div class="highlight"><pre><span></span><code><span class="c1">#[cfg(debug_assertions)]</span>
+...
+</code></pre></div>
+
+<h2 id="key-concepts-in-rust">Key Concepts in Rust</h2>
+<p><a href="https://hashrust.com/blog/moves-copies-and-clones-in-rust/">Moves, copies and clones in Rust</a></p>
+<h2 id="general-tips-and-traps">General Tips and Traps</h2>
+<ol>
+<li>
+<p><a href="https://users.rust-lang.org/t/common-newbie-mistakes-or-bad-practices/64821">Common newbie mistakes or bad practices</a>
+    <a href="https://adventures.michaelfbryan.com/posts/rust-best-practices/bad-habits/">Common Newbie Mistakes and Bad Practices in Rust: Bad Habits</a></p>
+</li>
+<li>
+<p><code>Iterator::for_each</code> is preferred over a <code>for</code> loop;
+    <code>Range</code> (<code>..</code>) is preferred over <code>RangeInclusive</code> (<code>..=</code>).
+    For detailed discussions,
+    please refer to
+    <a href="https://github.com/rust-lang/rust/issues/45222">Big performance problem with closed intervals looping #45222</a>
+    ,
+    <a href="https://users.rust-lang.org/t/performance-difference-among-range-rangeinclusive-and-reversed/20283">Performance difference among Range, RangeInclusive and reversed</a>
+    ,
+    <a href="https://www.reddit.com/r/rust/comments/eiwhkn/why_is_iterator_so_much_faster/">Why is iterator so much faster?</a>
+    and
+    <a href="https://stackoverflow.com/questions/70672533/why-does-iteration-over-an-inclusive-range-generate-longer-assembly-in-rust">Why does iteration over an inclusive range generate longer assembly in Rust?</a>
+    .</p>
+</li>
+</ol>
+<h2 id="pattern-matching-in-rust"><a href="https://www.legendu.net/misc/blog/pattern-matching-in-rust">Pattern Matching in Rust</a></h2>
+<h2 id="popular-rust-libraries">Popular Rust Libraries</h2>
+<p>Please refer to 
+<a href="http://www.legendu.net/misc/blog/useful-rust-crates">Useful Rust Crates</a>
+for detailed discussions.</p>
+<h2 id="machine-learning">Machine Learning</h2>
+<p>Please refer to
+<a href="http://www.legendu.net/misc/blog/rust-for-machine-learning">Rust for Machine Learning</a>
+for detailed discussions.</p>
+<h2 id="parallel-multithreading-and-concurrency-in-rust">Parallel, Multithreading and Concurrency in Rust</h2>
+<h3 id="loom"><a href="https://github.com/tokio-rs/loom">loom</a></h3>
+<p>is a concurrency permutation testing tool for Rust.</p>
+<h3 id="sanitizers"><a href="https://github.com/google/sanitizers">sanitizers</a></h3>
+<p>This project is the home for Sanitizers: AddressSanitizer, MemorySanitizer, ThreadSanitizer, LeakSanitizer, 
+and more The actual code resides in the LLVM repository. Here we keep extended documentation, bugfixes and some helper code.</p>
+<p><a href="https://github.com/rayon-rs/rayon">rayon</a>
+A data parallelism library for Rust.</p>
+<p>http://worthe-it.co.za/programming/2018/10/03/going-four-times-faster-with-multithreading.html</p>
+<p>https://skipworth.io/posts/rust-wc-threads/</p>
+<p>https://crates.io/crates/scoped-threadpool</p>
+<h2 id="rust-gui"><a href="http://www.legendu.net/misc/blog/develop-a-gui-application-in-rust">Rust GUI</a></h2>
+<h2 id="optimize-compiling-of-rust-projects">Optimize Compiling of Rust Projects</h2>
+<p><a href="https://matklad.github.io/2021/09/04/fast-rust-builds.html">Fast Rust Builds</a>
+has a detailed discuss on how to optimize the compiling time of rust projects.</p>
+<h2 id="cool-rust-projects">Cool Rust Projects</h2>
+<p>https://github.com/rajasekarv/native_spark</p>
+<p>https://github.com/andygrove/ballista</p>
+<p>https://github.com/weld-project/weld</p>
+<p>https://github.com/rbatis/rbatis</p>
+<p>https://github.com/dclong?language=rust&amp;tab=stars</p>
+<p>https://github.com/rust-unofficial/awesome-rust</p>
+<p>https://github.com/yewstack/yew</p>
+<p>https://github.com/valeriansaliou/sonic</p>
+<h2 id="good-blogging-on-rust">Good Blogging on Rust</h2>
+<ul>
+<li>
+<p><a href="http://smallcultfollowing.com/babysteps/">Baby Steps</a></p>
+</li>
+<li>
+<p><a href="https://www.eventhelix.com/rust/">EventHelix - Rust</a></p>
+</li>
+<li>
+<p><a href="https://yoshuawuyts.com/">YOSHUA WUYTS</a></p>
+</li>
+</ul>
+<h2 id="good-forums">Good Forums</h2>
+<p><a href="https://rustmagazine.org/">Rust Magazine</a></p>
+<h2 id="tutorials">Tutorials</h2>
+<p><a href="https://cheats.rs/">Rust Language Cheat Sheet</a></p>
+<p><a href="https://github.com/joaocarvalhoopen/How_to_learn_modern_Rust">How to learn modern Rust</a></p>
+<p><a href="https://www.youtube.com/channel/UC_iD0xppBwwsrM9DegC5cQQ">Jon Gjengset's Video Tutorials (Medium to Advanced)</a></p>
+<p><a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA">Rust on YouTube</a></p>
+<p><a href="https://www.youtube.com/watch?v=zF34dRivLOw">Rust Crash Course | Rustlang</a></p>
+<p>https://github.com/rust-unofficial/awesome-rust</p>
+<p>https://kerkour.com/</p>
+<h2 id="references">References</h2>
+<ul>
+<li>
+<p><a href="https://foundation.rust-lang.org/events/">Rust Events</a></p>
+</li>
+<li>
+<p><a href="https://federicoterzi.com/blog/12-rust-tips-and-tricks-you-might-not-know-yet/">12 Rust Tips and Tricks you might not know yet</a></p>
+</li>
+<li>
+<p><a href="https://users.rust-lang.org/">Rust Programming Language Users Forum</a></p>
+</li>
+<li>
+<p><a href="https://doc.rust-lang.org/stable/reference/">Rust Reference</a></p>
+</li>
+<li>
+<p><a href="https://cheats.rs/">Rust Language Cheat Sheet</a></p>
+</li>
+<li>
+<p><a href="https://doc.rust-lang.org/book/title-page.html">The Rust Programming Language</a></p>
+</li>
+<li>
+<p><a href="https://doc.rust-lang.org/nomicon/">The Rustonomicon : The Dark Arts of Unsafe Rust</a></p>
+</li>
+<li>
+<p><a href="https://areweasyncyet.rs/">Are we async yet?</a></p>
+</li>
+<li>
+<p><a href="https://doc.rust-lang.org/stable/std/">The Rust Standard Library</a></p>
+</li>
+<li>
+<p><a href="https://blog.rust-lang.org/">Rust Blog</a></p>
+</li>
+<li>
+<p><a href="https://rust.godbolt.org/">Rust Compiler Explorer</a></p>
+</li>
+<li>
+<p>https://users.rust-lang.org/</p>
+</li>
+<li>
+<p>https://internals.rust-lang.org/</p>
+</li>
+<li>
+<p>https://play.rust-lang.org/</p>
+</li>
+<li>
+<p><a href="http://www.arewewebyet.org/">Are We Web Yet</a></p>
+</li>
+<li>
+<p><a href="https://arewegameyet.rss">Are we game yet?</a></p>
+</li>
+<li>
+<p><a href="https://blog.logrocket.com/the-best-rust-frameworks-to-check-out-in-2019/">The Best Rust Frameworks to Check out in 2019</a></p>
+</li>
+<li>
+<p><a href="https://www.infinyon.com/blog/">InfinyOn Blog</a></p>
+</li>
+</ul></div>
+    <footer>
+<p class="meta">
+  <span class="byline author vcard">
+    Posted by <span class="fn">Benjamin Du</span>
+  </span>
+<time datetime="2019-04-10T12:17:46-07:00" pubdate>Apr 10, 2019</time>  <span class="categories">
+    <a class="category" href="https://misc.legendu.net/tag/programming.html">programming</a>
+    <a class="category" href="https://misc.legendu.net/tag/rust.html">Rust</a>
+    <a class="category" href="https://misc.legendu.net/tag/tips.html">tips</a>
+    <a class="category" href="https://misc.legendu.net/tag/cargo.html">Cargo</a>
+    <a class="category" href="https://misc.legendu.net/tag/rustup.html">rustup</a>
+  </span>
+</p>    </footer>
+  </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div>
+  </section>
+</div>
+<aside class="sidebar">
+  <section>
+    <h1>Recent Posts</h1>
+    <ul id="recent_posts">
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/tips-on-health/">Tips on Health</a>
+      </li>
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/tips-on-child-education/">Tips on Child Education</a>
+      </li>
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/tips-on-fd/">Tips on fd</a>
+      </li>
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/the-fzf-command-is-a-great-alternative-to-find/">The fzf Command Is a Great Alternative to find</a>
+      </li>
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/ruff-is-an-extremely-fast-python-linter-written-in-rust/">Ruff Is An Extremely Fast Python Linter Written in Rust</a>
+      </li>
+    </ul>
+  </section>
+  <section>
+    <h1>Categories</h1>
+    <ul id="recent_posts">
+        <li><a href="https://misc.legendu.net/category/ai.html">AI</a></li>
+        <li><a href="https://misc.legendu.net/category/career.html">Career</a></li>
+        <li><a href="https://misc.legendu.net/category/cloud.html">Cloud</a></li>
+        <li><a href="https://misc.legendu.net/category/computer-science.html">Computer Science</a></li>
+        <li><a href="https://misc.legendu.net/category/fiannce.html">Fiannce</a></li>
+        <li><a href="https://misc.legendu.net/category/finance.html">Finance</a></li>
+        <li><a href="https://misc.legendu.net/category/fun-problems.html">Fun Problems</a></li>
+        <li><a href="https://misc.legendu.net/category/hardware.html">Hardware</a></li>
+        <li><a href="https://misc.legendu.net/category/health.html">Health</a></li>
+        <li><a href="https://misc.legendu.net/category/house.html">House</a></li>
+        <li><a href="https://misc.legendu.net/category/internet.html">Internet</a></li>
+        <li><a href="https://misc.legendu.net/category/investment.html">Investment</a></li>
+        <li><a href="https://misc.legendu.net/category/life.html">life</a></li>
+        <li><a href="https://misc.legendu.net/category/linux.html">Linux</a></li>
+        <li><a href="https://misc.legendu.net/category/os.html">OS</a></li>
+        <li><a href="https://misc.legendu.net/category/people.html">People</a></li>
+        <li><a href="https://misc.legendu.net/category/philosophy.html">Philosophy</a></li>
+        <li><a href="https://misc.legendu.net/category/research.html">Research</a></li>
+        <li><a href="https://misc.legendu.net/category/shopping.html">Shopping</a></li>
+        <li><a href="https://misc.legendu.net/category/soft-skills.html">soft skills</a></li>
+        <li><a href="https://misc.legendu.net/category/software.html">Software</a></li>
+        <li><a href="https://misc.legendu.net/category/statistics.html">Statistics</a></li>
+        <li><a href="https://misc.legendu.net/category/tools.html">Tools</a></li>
+    </ul>
+  </section>
+ 
+
+  <section>
+  <h1>Tags</h1>
+  <ul class="tagcloud">
+  </ul>
+  </section>
+
+
+
+  <section>
+    <h1>GitHub Repos</h1>
+    <ul id="gh_repos">
+      <li class="loading">Status updating...</li>
+    </ul>
+      <a href="https://github.com/legendu-net">@legendu-net</a> on GitHub
+    <script type="text/javascript">
+      $.domReady(function(){
+          if (!window.jXHR){
+              var jxhr = document.createElement('script');
+              jxhr.type = 'text/javascript';
+              jxhr.src = 'https://misc.legendu.net/theme/js/jXHR.js';
+              var s = document.getElementsByTagName('script')[0];
+              s.parentNode.insertBefore(jxhr, s);
+          }
+
+          github.showRepos({
+              user: 'legendu-net',
+              count: 5,
+              skip_forks: true,
+              target: '#gh_repos'
+          });
+      });
+    </script>
+    <script src="https://misc.legendu.net/theme/js/github.js" type="text/javascript"> </script>
+  </section>
+
+    <section>
+        <h1>Social</h2>
+        <ul>
+            <li><a href="https://www.linkedin.com/in/ben-chuanlong-du-1239b221/" target="_blank">LinkedIn</a></li>
+            <li><a href="https://hub.docker.com/u/dclong" target="_blank">Docker Hub</a></li>
+            <li><a href="https://stackoverflow.com/users/7808204/benjamin-du?tab=profile" target="_blank">Stack Overflow</a></li>
+            <li><a href="https://twitter.com/longendu" target="_blank">Twitter</a></li>
+        <!--
+            <li><a href="https://misc.legendu.net/" type="application/rss+xml" rel="alternate">RSS</a></li>
+            -->
+        </ul>
+    </section>
+</aside>    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Ben Chuanlong Du -
+  <span class="credit">Powered by <a href="http://getpelican.com">Pelican</a></span>
+</p></footer>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-3STS9BVPF6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-3STS9BVPF6');
+</script>
+	<script type="text/javascript">
+	  var disqus_shortname = 'dclong';
+          var disqus_identifier = '/blog/rust-tips/';
+          var disqus_url = 'https://misc.legendu.net/blog/rust-tips/';
+          var disqus_title = 'Tips on Rust';
+	  (function() {
+	    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	    dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+	    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	   })();
+	</script>
+</body>
+</html>

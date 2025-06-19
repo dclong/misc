@@ -1,0 +1,5759 @@
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Hands on Dulwich</title>
+  <meta name="author" content="Ben Chuanlong Du">
+
+  <link href="https://misc.legendu.net/atom.xml" type="application/atom+xml" rel="alternate"
+        title="Ben Chuanlong Du's Blog Atom Feed" />
+
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link href="https://misc.legendu.net/favicon.png" rel="icon">
+  <link href="https://misc.legendu.net/theme/css/main_2.css" media="screen, projection"
+        rel="stylesheet" type="text/css">
+  <script src="https://misc.legendu.net/theme/js/modernizr-2.0.js"></script>
+  <script src="https://misc.legendu.net/theme/js/ender.js"></script>
+  <script src="https://misc.legendu.net/theme/js/octopress.js" type="text/javascript"></script>
+
+  <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <script data-ad-client="ca-pub-3836424032203369" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+</head>
+
+<body>
+  <header role="banner"><hgroup>
+  <h1><a href="https://misc.legendu.net/">Ben Chuanlong Du's Blog</a></h1>
+    <h2>It is never too late to learn.</h2>
+</hgroup></header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="https://misc.legendu.net/atom.xml" rel="subscribe-rss">RSS</a></li>
+</ul>
+
+<form name="search" action="https://www.bing.com/search" method="get" onSubmit="return build_query()">
+  <fieldset role="search">
+      <!--
+    <input type="hidden" name="q" value="site:https://misc.legendu.net" />
+        -->
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+
+<script type = "text/javascript">
+    function build_query() {
+        var query = document.forms["search"]["q"].value;
+        var prefix = "site:https://misc.legendu.net "
+        if (!query.startsWith(prefix)) {
+            query = prefix + query;
+            document.forms["search"]["q"].value = query;
+        }
+        return true;
+    }
+</script>
+
+<ul class="main-navigation">
+    <li><a href="https://www.legendu.net">Home</a></li>
+    <li><a href="https://misc.legendu.net">Blog</a></li>
+    <li><a href="https://misc.legendu.net/archives.html">Archives</a></li>
+    <li><a href="https://misc.legendu.net/categories.html">Categories</a></li>
+    <li><a href="https://misc.legendu.net/tags.html">Tags</a></li>
+    <li><a href="https://www.legendu.net/pages/about">About</a></li>
+</ul></nav>
+  <div id="main">
+    <div id="content">
+<div>
+  <article class="hentry" role="article">
+<header>
+      <h1 class="entry-title">Hands on Dulwich</h1>
+      <p class="meta"><time datetime="2020-11-29T21:13:47-08:00" pubdate>Nov 29, 2020</time></p>
+</header>
+
+  <div class="entry-content"><style type="text/css">/*!
+*
+* IPython notebook
+*
+*/
+/* CSS font colors for translated ANSI escape sequences */
+/* The color values are a mix of
+   http://www.xcolors.net/dl/baskerville-ivorylight and
+   http://www.xcolors.net/dl/euphrasia */
+.ansi-black-fg {
+  color: #3E424D;
+}
+.ansi-black-bg {
+  background-color: #3E424D;
+}
+.ansi-black-intense-fg {
+  color: #282C36;
+}
+.ansi-black-intense-bg {
+  background-color: #282C36;
+}
+.ansi-red-fg {
+  color: #E75C58;
+}
+.ansi-red-bg {
+  background-color: #E75C58;
+}
+.ansi-red-intense-fg {
+  color: #B22B31;
+}
+.ansi-red-intense-bg {
+  background-color: #B22B31;
+}
+.ansi-green-fg {
+  color: #00A250;
+}
+.ansi-green-bg {
+  background-color: #00A250;
+}
+.ansi-green-intense-fg {
+  color: #007427;
+}
+.ansi-green-intense-bg {
+  background-color: #007427;
+}
+.ansi-yellow-fg {
+  color: #DDB62B;
+}
+.ansi-yellow-bg {
+  background-color: #DDB62B;
+}
+.ansi-yellow-intense-fg {
+  color: #B27D12;
+}
+.ansi-yellow-intense-bg {
+  background-color: #B27D12;
+}
+.ansi-blue-fg {
+  color: #208FFB;
+}
+.ansi-blue-bg {
+  background-color: #208FFB;
+}
+.ansi-blue-intense-fg {
+  color: #0065CA;
+}
+.ansi-blue-intense-bg {
+  background-color: #0065CA;
+}
+.ansi-magenta-fg {
+  color: #D160C4;
+}
+.ansi-magenta-bg {
+  background-color: #D160C4;
+}
+.ansi-magenta-intense-fg {
+  color: #A03196;
+}
+.ansi-magenta-intense-bg {
+  background-color: #A03196;
+}
+.ansi-cyan-fg {
+  color: #60C6C8;
+}
+.ansi-cyan-bg {
+  background-color: #60C6C8;
+}
+.ansi-cyan-intense-fg {
+  color: #258F8F;
+}
+.ansi-cyan-intense-bg {
+  background-color: #258F8F;
+}
+.ansi-white-fg {
+  color: #C5C1B4;
+}
+.ansi-white-bg {
+  background-color: #C5C1B4;
+}
+.ansi-white-intense-fg {
+  color: #A1A6B2;
+}
+.ansi-white-intense-bg {
+  background-color: #A1A6B2;
+}
+.ansi-default-inverse-fg {
+  color: #FFFFFF;
+}
+.ansi-default-inverse-bg {
+  background-color: #000000;
+}
+.ansi-bold {
+  font-weight: bold;
+}
+.ansi-underline {
+  text-decoration: underline;
+}
+/* The following styles are deprecated an will be removed in a future version */
+.ansibold {
+  font-weight: bold;
+}
+.ansi-inverse {
+  outline: 0.5px dotted;
+}
+/* use dark versions for foreground, to improve visibility */
+.ansiblack {
+  color: black;
+}
+.ansired {
+  color: darkred;
+}
+.ansigreen {
+  color: darkgreen;
+}
+.ansiyellow {
+  color: #c4a000;
+}
+.ansiblue {
+  color: darkblue;
+}
+.ansipurple {
+  color: darkviolet;
+}
+.ansicyan {
+  color: steelblue;
+}
+.ansigray {
+  color: gray;
+}
+/* and light for background, for the same reason */
+.ansibgblack {
+  background-color: black;
+}
+.ansibgred {
+  background-color: red;
+}
+.ansibggreen {
+  background-color: green;
+}
+.ansibgyellow {
+  background-color: yellow;
+}
+.ansibgblue {
+  background-color: blue;
+}
+.ansibgpurple {
+  background-color: magenta;
+}
+.ansibgcyan {
+  background-color: cyan;
+}
+.ansibggray {
+  background-color: gray;
+}
+div.cell {
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: vertical;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: vertical;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  border-radius: 2px;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  border-width: 1px;
+  border-style: solid;
+  border-color: transparent;
+  width: 100%;
+  padding: 5px;
+  /* This acts as a spacer between cells, that is outside the border */
+  margin: 0px;
+  outline: none;
+  position: relative;
+  overflow: visible;
+}
+div.cell:before {
+  position: absolute;
+  display: block;
+  top: -1px;
+  left: -1px;
+  width: 5px;
+  height: calc(100% +  2px);
+  content: '';
+  background: transparent;
+}
+div.cell.jupyter-soft-selected {
+  border-left-color: #E3F2FD;
+  border-left-width: 1px;
+  padding-left: 5px;
+  border-right-color: #E3F2FD;
+  border-right-width: 1px;
+  background: #E3F2FD;
+}
+@media print {
+  div.cell.jupyter-soft-selected {
+    border-color: transparent;
+  }
+}
+div.cell.selected,
+div.cell.selected.jupyter-soft-selected {
+  border-color: #ababab;
+}
+div.cell.selected:before,
+div.cell.selected.jupyter-soft-selected:before {
+  position: absolute;
+  display: block;
+  top: -1px;
+  left: -1px;
+  width: 5px;
+  height: calc(100% +  2px);
+  content: '';
+  background: #42A5F5;
+}
+@media print {
+  div.cell.selected,
+  div.cell.selected.jupyter-soft-selected {
+    border-color: transparent;
+  }
+}
+.edit_mode div.cell.selected {
+  border-color: #66BB6A;
+}
+.edit_mode div.cell.selected:before {
+  position: absolute;
+  display: block;
+  top: -1px;
+  left: -1px;
+  width: 5px;
+  height: calc(100% +  2px);
+  content: '';
+  background: #66BB6A;
+}
+@media print {
+  .edit_mode div.cell.selected {
+    border-color: transparent;
+  }
+}
+.prompt {
+  /* This needs to be wide enough for 3 digit prompt numbers: In[100]: */
+  min-width: 14ex;
+  /* This padding is tuned to match the padding on the CodeMirror editor. */
+  padding: 0.4em;
+  margin: 0px;
+  font-family: monospace;
+  text-align: right;
+  /* This has to match that of the the CodeMirror class line-height below */
+  line-height: 1.21429em;
+  /* Don't highlight prompt number selection */
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  /* Use default cursor */
+  cursor: default;
+}
+@media (max-width: 540px) {
+  .prompt {
+    text-align: left;
+  }
+}
+div.inner_cell {
+  min-width: 0;
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: vertical;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: vertical;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  /* Old browsers */
+  -webkit-box-flex: 1;
+  -moz-box-flex: 1;
+  box-flex: 1;
+  /* Modern browsers */
+  flex: 1;
+}
+/* input_area and input_prompt must match in top border and margin for alignment */
+div.input_area {
+  border: 1px solid #cfcfcf;
+  border-radius: 2px;
+  background: #f7f7f7;
+  line-height: 1.21429em;
+}
+/* This is needed so that empty prompt areas can collapse to zero height when there
+   is no content in the output_subarea and the prompt. The main purpose of this is
+   to make sure that empty JavaScript output_subareas have no height. */
+div.prompt:empty {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+div.unrecognized_cell {
+  padding: 5px 5px 5px 0px;
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: horizontal;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: horizontal;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: horizontal;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+}
+div.unrecognized_cell .inner_cell {
+  border-radius: 2px;
+  padding: 5px;
+  font-weight: bold;
+  color: red;
+  border: 1px solid #cfcfcf;
+  background: #eaeaea;
+}
+div.unrecognized_cell .inner_cell a {
+  color: inherit;
+  text-decoration: none;
+}
+div.unrecognized_cell .inner_cell a:hover {
+  color: inherit;
+  text-decoration: none;
+}
+@media (max-width: 540px) {
+  div.unrecognized_cell > div.prompt {
+    display: none;
+  }
+}
+div.code_cell {
+  /* avoid page breaking on code cells when printing */
+}
+@media print {
+  div.code_cell {
+    page-break-inside: avoid;
+  }
+}
+/* any special styling for code cells that are currently running goes here */
+div.input {
+  page-break-inside: avoid;
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: horizontal;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: horizontal;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: horizontal;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+}
+@media (max-width: 540px) {
+  div.input {
+    /* Old browsers */
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-box-align: stretch;
+    display: -moz-box;
+    -moz-box-orient: vertical;
+    -moz-box-align: stretch;
+    display: box;
+    box-orient: vertical;
+    box-align: stretch;
+    /* Modern browsers */
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+/* input_area and input_prompt must match in top border and margin for alignment */
+div.input_prompt {
+  color: #303F9F;
+  border-top: 1px solid transparent;
+}
+div.input_area > div.highlight {
+  margin: 0.4em;
+  border: none;
+  padding: 0px;
+  background-color: transparent;
+}
+div.input_area > div.highlight > pre {
+  margin: 0px;
+  border: none;
+  padding: 0px;
+  background-color: transparent;
+}
+/* The following gets added to the <head> if it is detected that the user has a
+ * monospace font with inconsistent normal/bold/italic height.  See
+ * notebookmain.js.  Such fonts will have keywords vertically offset with
+ * respect to the rest of the text.  The user should select a better font.
+ * See: https://github.com/ipython/ipython/issues/1503
+ *
+ * .CodeMirror span {
+ *      vertical-align: bottom;
+ * }
+ */
+.CodeMirror {
+  line-height: 1.21429em;
+  /* Changed from 1em to our global default */
+  font-size: 14px;
+  height: auto;
+  /* Changed to auto to autogrow */
+  background: none;
+  /* Changed from white to allow our bg to show through */
+}
+.CodeMirror-scroll {
+  /*  The CodeMirror docs are a bit fuzzy on if overflow-y should be hidden or visible.*/
+  /*  We have found that if it is visible, vertical scrollbars appear with font size changes.*/
+  overflow-y: hidden;
+  overflow-x: auto;
+}
+.CodeMirror-lines {
+  /* In CM2, this used to be 0.4em, but in CM3 it went to 4px. We need the em value because */
+  /* we have set a different line-height and want this to scale with that. */
+  /* Note that this should set vertical padding only, since CodeMirror assumes
+       that horizontal padding will be set on CodeMirror pre */
+  padding: 0.4em 0;
+}
+.CodeMirror-linenumber {
+  padding: 0 8px 0 4px;
+}
+.CodeMirror-gutters {
+  border-bottom-left-radius: 2px;
+  border-top-left-radius: 2px;
+}
+.CodeMirror pre {
+  /* In CM3 this went to 4px from 0 in CM2. This sets horizontal padding only,
+    use .CodeMirror-lines for vertical */
+  padding: 0 0.4em;
+  border: 0;
+  border-radius: 0;
+}
+.CodeMirror-cursor {
+  border-left: 1.4px solid black;
+}
+@media screen and (min-width: 2138px) and (max-width: 4319px) {
+  .CodeMirror-cursor {
+    border-left: 2px solid black;
+  }
+}
+@media screen and (min-width: 4320px) {
+  .CodeMirror-cursor {
+    border-left: 4px solid black;
+  }
+}
+/*
+
+Original style from softwaremaniacs.org (c) Ivan Sagalaev <Maniac@SoftwareManiacs.Org>
+Adapted from GitHub theme
+
+*/
+.highlight-base {
+  color: #000;
+}
+.highlight-variable {
+  color: #000;
+}
+.highlight-variable-2 {
+  color: #1a1a1a;
+}
+.highlight-variable-3 {
+  color: #333333;
+}
+.highlight-string {
+  color: #BA2121;
+}
+.highlight-comment {
+  color: #408080;
+  font-style: italic;
+}
+.highlight-number {
+  color: #080;
+}
+.highlight-atom {
+  color: #88F;
+}
+.highlight-keyword {
+  color: #008000;
+  font-weight: bold;
+}
+.highlight-builtin {
+  color: #008000;
+}
+.highlight-error {
+  color: #f00;
+}
+.highlight-operator {
+  color: #AA22FF;
+  font-weight: bold;
+}
+.highlight-meta {
+  color: #AA22FF;
+}
+/* previously not defined, copying from default codemirror */
+.highlight-def {
+  color: #00f;
+}
+.highlight-string-2 {
+  color: #f50;
+}
+.highlight-qualifier {
+  color: #555;
+}
+.highlight-bracket {
+  color: #997;
+}
+.highlight-tag {
+  color: #170;
+}
+.highlight-attribute {
+  color: #00c;
+}
+.highlight-header {
+  color: blue;
+}
+.highlight-quote {
+  color: #090;
+}
+.highlight-link {
+  color: #00c;
+}
+/* apply the same style to codemirror */
+.cm-s-ipython span.cm-keyword {
+  color: #008000;
+  font-weight: bold;
+}
+.cm-s-ipython span.cm-atom {
+  color: #88F;
+}
+.cm-s-ipython span.cm-number {
+  color: #080;
+}
+.cm-s-ipython span.cm-def {
+  color: #00f;
+}
+.cm-s-ipython span.cm-variable {
+  color: #000;
+}
+.cm-s-ipython span.cm-operator {
+  color: #AA22FF;
+  font-weight: bold;
+}
+.cm-s-ipython span.cm-variable-2 {
+  color: #1a1a1a;
+}
+.cm-s-ipython span.cm-variable-3 {
+  color: #333333;
+}
+.cm-s-ipython span.cm-comment {
+  color: #408080;
+  font-style: italic;
+}
+.cm-s-ipython span.cm-string {
+  color: #BA2121;
+}
+.cm-s-ipython span.cm-string-2 {
+  color: #f50;
+}
+.cm-s-ipython span.cm-meta {
+  color: #AA22FF;
+}
+.cm-s-ipython span.cm-qualifier {
+  color: #555;
+}
+.cm-s-ipython span.cm-builtin {
+  color: #008000;
+}
+.cm-s-ipython span.cm-bracket {
+  color: #997;
+}
+.cm-s-ipython span.cm-tag {
+  color: #170;
+}
+.cm-s-ipython span.cm-attribute {
+  color: #00c;
+}
+.cm-s-ipython span.cm-header {
+  color: blue;
+}
+.cm-s-ipython span.cm-quote {
+  color: #090;
+}
+.cm-s-ipython span.cm-link {
+  color: #00c;
+}
+.cm-s-ipython span.cm-error {
+  color: #f00;
+}
+.cm-s-ipython span.cm-tab {
+  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAMCAYAAAAkuj5RAAAAAXNSR0IArs4c6QAAAGFJREFUSMft1LsRQFAQheHPowAKoACx3IgEKtaEHujDjORSgWTH/ZOdnZOcM/sgk/kFFWY0qV8foQwS4MKBCS3qR6ixBJvElOobYAtivseIE120FaowJPN75GMu8j/LfMwNjh4HUpwg4LUAAAAASUVORK5CYII=);
+  background-position: right;
+  background-repeat: no-repeat;
+}
+div.output_wrapper {
+  /* this position must be relative to enable descendents to be absolute within it */
+  position: relative;
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: vertical;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: vertical;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  z-index: 1;
+}
+/* class for the output area when it should be height-limited */
+div.output_scroll {
+  /* ideally, this would be max-height, but FF barfs all over that */
+  height: 24em;
+  /* FF needs this *and the wrapper* to specify full width, or it will shrinkwrap */
+  width: 100%;
+  overflow: auto;
+  border-radius: 2px;
+  -webkit-box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.8);
+  box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.8);
+  display: block;
+}
+/* output div while it is collapsed */
+div.output_collapsed {
+  margin: 0px;
+  padding: 0px;
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: vertical;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: vertical;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+div.out_prompt_overlay {
+  height: 100%;
+  padding: 0px 0.4em;
+  position: absolute;
+  border-radius: 2px;
+}
+div.out_prompt_overlay:hover {
+  /* use inner shadow to get border that is computed the same on WebKit/FF */
+  -webkit-box-shadow: inset 0 0 1px #000;
+  box-shadow: inset 0 0 1px #000;
+  background: rgba(240, 240, 240, 0.5);
+}
+div.output_prompt {
+  color: #D84315;
+}
+/* This class is the outer container of all output sections. */
+div.output_area {
+  padding: 0px;
+  page-break-inside: avoid;
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: horizontal;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: horizontal;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: horizontal;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+}
+div.output_area .MathJax_Display {
+  text-align: left !important;
+}
+div.output_area 
+div.output_area 
+div.output_area img,
+div.output_area svg {
+  max-width: 100%;
+  height: auto;
+}
+div.output_area img.unconfined,
+div.output_area svg.unconfined {
+  max-width: none;
+}
+div.output_area .mglyph > img {
+  max-width: none;
+}
+/* This is needed to protect the pre formating from global settings such
+   as that of bootstrap */
+.output {
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: vertical;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: vertical;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+@media (max-width: 540px) {
+  div.output_area {
+    /* Old browsers */
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-box-align: stretch;
+    display: -moz-box;
+    -moz-box-orient: vertical;
+    -moz-box-align: stretch;
+    display: box;
+    box-orient: vertical;
+    box-align: stretch;
+    /* Modern browsers */
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+div.output_area pre {
+  margin: 0;
+  padding: 1px 0 1px 0;
+  border: 0;
+  vertical-align: baseline;
+  color: black;
+  background-color: transparent;
+  border-radius: 0;
+}
+/* This class is for the output subarea inside the output_area and after
+   the prompt div. */
+div.output_subarea {
+  overflow-x: auto;
+  padding: 0.4em;
+  /* Old browsers */
+  -webkit-box-flex: 1;
+  -moz-box-flex: 1;
+  box-flex: 1;
+  /* Modern browsers */
+  flex: 1;
+  max-width: calc(100% - 14ex);
+}
+div.output_scroll div.output_subarea {
+  overflow-x: visible;
+}
+/* The rest of the output_* classes are for special styling of the different
+   output types */
+/* all text output has this class: */
+div.output_text {
+  text-align: left;
+  color: #000;
+  /* This has to match that of the the CodeMirror class line-height below */
+  line-height: 1.21429em;
+}
+/* stdout/stderr are 'text' as well as 'stream', but execute_result/error are *not* streams */
+div.output_stderr {
+  background: #fdd;
+  /* very light red background for stderr */
+}
+div.output_latex {
+  text-align: left;
+}
+/* Empty output_javascript divs should have no height */
+div.output_javascript:empty {
+  padding: 0;
+}
+.js-error {
+  color: darkred;
+}
+/* raw_input styles */
+div.raw_input_container {
+  line-height: 1.21429em;
+  padding-top: 5px;
+}
+pre.raw_input_prompt {
+  /* nothing needed here. */
+}
+input.raw_input {
+  font-family: monospace;
+  font-size: inherit;
+  color: inherit;
+  width: auto;
+  /* make sure input baseline aligns with prompt */
+  vertical-align: baseline;
+  /* padding + margin = 0.5em between prompt and cursor */
+  padding: 0em 0.25em;
+  margin: 0em 0.25em;
+}
+input.raw_input:focus {
+  box-shadow: none;
+}
+p.p-space {
+  margin-bottom: 10px;
+}
+div.output_unrecognized {
+  padding: 5px;
+  font-weight: bold;
+  color: red;
+}
+div.output_unrecognized a {
+  color: inherit;
+  text-decoration: none;
+}
+div.output_unrecognized a:hover {
+  color: inherit;
+  text-decoration: none;
+}
+.rendered_html {
+  color: #000;
+  /* any extras will just be numbers: */
+}
+
+
+
+.rendered_html :link {
+  text-decoration: underline;
+}
+.rendered_html :visited {
+  text-decoration: underline;
+}
+
+
+
+
+
+
+.rendered_html h1:first-child {
+  margin-top: 0.538em;
+}
+.rendered_html h2:first-child {
+  margin-top: 0.636em;
+}
+.rendered_html h3:first-child {
+  margin-top: 0.777em;
+}
+.rendered_html h4:first-child {
+  margin-top: 1em;
+}
+.rendered_html h5:first-child {
+  margin-top: 1em;
+}
+.rendered_html h6:first-child {
+  margin-top: 1em;
+}
+.rendered_html ul:not(.list-inline),
+.rendered_html ol:not(.list-inline) {
+  padding-left: 2em;
+}
+
+
+
+
+
+
+
+
+.rendered_html * + ul {
+  margin-top: 1em;
+}
+.rendered_html * + ol {
+  margin-top: 1em;
+}
+
+
+
+
+
+.rendered_html pre,
+
+
+
+
+.rendered_html tr,
+.rendered_html th,
+
+
+.rendered_html tbody tr:nth-child(odd) {
+  background: #f5f5f5;
+}
+.rendered_html tbody tr:hover {
+  background: rgba(66, 165, 245, 0.2);
+}
+.rendered_html * + table {
+  margin-top: 1em;
+}
+
+.rendered_html * + p {
+  margin-top: 1em;
+}
+
+.rendered_html * + img {
+  margin-top: 1em;
+}
+.rendered_html img,
+
+.rendered_html img.unconfined,
+
+
+.rendered_html * + .alert {
+  margin-top: 1em;
+}
+[dir="rtl"] 
+div.text_cell {
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: horizontal;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: horizontal;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: horizontal;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+}
+@media (max-width: 540px) {
+  div.text_cell > div.prompt {
+    display: none;
+  }
+}
+div.text_cell_render {
+  /*font-family: "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;*/
+  outline: none;
+  resize: none;
+  width: inherit;
+  border-style: none;
+  padding: 0.5em 0.5em 0.5em 0.4em;
+  color: #000;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+}
+a.anchor-link:link {
+  text-decoration: none;
+  padding: 0px 20px;
+  visibility: hidden;
+}
+h1:hover .anchor-link,
+h2:hover .anchor-link,
+h3:hover .anchor-link,
+h4:hover .anchor-link,
+h5:hover .anchor-link,
+h6:hover .anchor-link {
+  visibility: visible;
+}
+.text_cell.rendered .input_area {
+  display: none;
+}
+.text_cell.rendered 
+.text_cell.rendered .rendered_html tr,
+.text_cell.rendered .rendered_html th,
+.text_cell.rendered 
+.text_cell.unrendered .text_cell_render {
+  display: none;
+}
+.text_cell .dropzone .input_area {
+  border: 2px dashed #bababa;
+  margin: -1px;
+}
+.cm-header-1,
+.cm-header-2,
+.cm-header-3,
+.cm-header-4,
+.cm-header-5,
+.cm-header-6 {
+  font-weight: bold;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+.cm-header-1 {
+  font-size: 185.7%;
+}
+.cm-header-2 {
+  font-size: 157.1%;
+}
+.cm-header-3 {
+  font-size: 128.6%;
+}
+.cm-header-4 {
+  font-size: 110%;
+}
+.cm-header-5 {
+  font-size: 100%;
+  font-style: italic;
+}
+.cm-header-6 {
+  font-size: 100%;
+  font-style: italic;
+}
+</style>
+<style type="text/css">pre { line-height: 125%; }
+td.linenos .normal { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+span.linenos { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+td.linenos .special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+ .highlight pre  .hll { background-color: #ffffcc }
+ .highlight pre  { background: #f8f8f8; }
+ .highlight pre  .c { color: #3D7B7B; font-style: italic } /* Comment */
+ .highlight pre  .err { border: 1px solid #FF0000 } /* Error */
+ .highlight pre  .k { color: #008000; font-weight: bold } /* Keyword */
+ .highlight pre  .o { color: #666666 } /* Operator */
+ .highlight pre  .ch { color: #3D7B7B; font-style: italic } /* Comment.Hashbang */
+ .highlight pre  .cm { color: #3D7B7B; font-style: italic } /* Comment.Multiline */
+ .highlight pre  .cp { color: #9C6500 } /* Comment.Preproc */
+ .highlight pre  .cpf { color: #3D7B7B; font-style: italic } /* Comment.PreprocFile */
+ .highlight pre  .c1 { color: #3D7B7B; font-style: italic } /* Comment.Single */
+ .highlight pre  .cs { color: #3D7B7B; font-style: italic } /* Comment.Special */
+ .highlight pre  .gd { color: #A00000 } /* Generic.Deleted */
+ .highlight pre  .ge { font-style: italic } /* Generic.Emph */
+ .highlight pre  .gr { color: #E40000 } /* Generic.Error */
+ .highlight pre  .gh { color: #000080; font-weight: bold } /* Generic.Heading */
+ .highlight pre  .gi { color: #008400 } /* Generic.Inserted */
+ .highlight pre  .go { color: #717171 } /* Generic.Output */
+ .highlight pre  .gp { color: #000080; font-weight: bold } /* Generic.Prompt */
+ .highlight pre  .gs { font-weight: bold } /* Generic.Strong */
+ .highlight pre  .gu { color: #800080; font-weight: bold } /* Generic.Subheading */
+ .highlight pre  .gt { color: #0044DD } /* Generic.Traceback */
+ .highlight pre  .kc { color: #008000; font-weight: bold } /* Keyword.Constant */
+ .highlight pre  .kd { color: #008000; font-weight: bold } /* Keyword.Declaration */
+ .highlight pre  .kn { color: #008000; font-weight: bold } /* Keyword.Namespace */
+ .highlight pre  .kp { color: #008000 } /* Keyword.Pseudo */
+ .highlight pre  .kr { color: #008000; font-weight: bold } /* Keyword.Reserved */
+ .highlight pre  .kt { color: #B00040 } /* Keyword.Type */
+ .highlight pre  .m { color: #666666 } /* Literal.Number */
+ .highlight pre  .s { color: #BA2121 } /* Literal.String */
+ .highlight pre  .na { color: #687822 } /* Name.Attribute */
+ .highlight pre  .nb { color: #008000 } /* Name.Builtin */
+ .highlight pre  .nc { color: #0000FF; font-weight: bold } /* Name.Class */
+ .highlight pre  .no { color: #880000 } /* Name.Constant */
+ .highlight pre  .nd { color: #AA22FF } /* Name.Decorator */
+ .highlight pre  .ni { color: #717171; font-weight: bold } /* Name.Entity */
+ .highlight pre  .ne { color: #CB3F38; font-weight: bold } /* Name.Exception */
+ .highlight pre  .nf { color: #0000FF } /* Name.Function */
+ .highlight pre  .nl { color: #767600 } /* Name.Label */
+ .highlight pre  .nn { color: #0000FF; font-weight: bold } /* Name.Namespace */
+ .highlight pre  .nt { color: #008000; font-weight: bold } /* Name.Tag */
+ .highlight pre  .nv { color: #19177C } /* Name.Variable */
+ .highlight pre  .ow { color: #AA22FF; font-weight: bold } /* Operator.Word */
+ .highlight pre  .w { color: #bbbbbb } /* Text.Whitespace */
+ .highlight pre  .mb { color: #666666 } /* Literal.Number.Bin */
+ .highlight pre  .mf { color: #666666 } /* Literal.Number.Float */
+ .highlight pre  .mh { color: #666666 } /* Literal.Number.Hex */
+ .highlight pre  .mi { color: #666666 } /* Literal.Number.Integer */
+ .highlight pre  .mo { color: #666666 } /* Literal.Number.Oct */
+ .highlight pre  .sa { color: #BA2121 } /* Literal.String.Affix */
+ .highlight pre  .sb { color: #BA2121 } /* Literal.String.Backtick */
+ .highlight pre  .sc { color: #BA2121 } /* Literal.String.Char */
+ .highlight pre  .dl { color: #BA2121 } /* Literal.String.Delimiter */
+ .highlight pre  .sd { color: #BA2121; font-style: italic } /* Literal.String.Doc */
+ .highlight pre  .s2 { color: #BA2121 } /* Literal.String.Double */
+ .highlight pre  .se { color: #AA5D1F; font-weight: bold } /* Literal.String.Escape */
+ .highlight pre  .sh { color: #BA2121 } /* Literal.String.Heredoc */
+ .highlight pre  .si { color: #A45A77; font-weight: bold } /* Literal.String.Interpol */
+ .highlight pre  .sx { color: #008000 } /* Literal.String.Other */
+ .highlight pre  .sr { color: #A45A77 } /* Literal.String.Regex */
+ .highlight pre  .s1 { color: #BA2121 } /* Literal.String.Single */
+ .highlight pre  .ss { color: #19177C } /* Literal.String.Symbol */
+ .highlight pre  .bp { color: #008000 } /* Name.Builtin.Pseudo */
+ .highlight pre  .fm { color: #0000FF } /* Name.Function.Magic */
+ .highlight pre  .vc { color: #19177C } /* Name.Variable.Class */
+ .highlight pre  .vg { color: #19177C } /* Name.Variable.Global */
+ .highlight pre  .vi { color: #19177C } /* Name.Variable.Instance */
+ .highlight pre  .vm { color: #19177C } /* Name.Variable.Magic */
+ .highlight pre  .il { color: #666666 } /* Literal.Number.Integer.Long */</style><body><div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Note: dulwich is not feature complete yet 
+and the development of the project is extremely slow.
+It is suggested that you use other Python packages instead.
+For more discussions,
+please refer to
+<a href="http://www.legendu.net/misc/blog/git-implementations-and-bindings-in-python/">Git Implementations and Bindings in Python</a>
+.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Tips-and-Traps">Tips and Traps<a class="anchor-link" href="#Tips-and-Traps">&#182;</a></h2><ol>
+<li>The <code>git</code> command (and thus Dulwich) accepts URLs both with and without the trailing <code>.git</code>. </li>
+</ol>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[1]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span>pip3<span class="w"> </span>install<span class="w"> </span>dulwich
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Defaulting to user installation because normal site-packages is not writeable
+Requirement already satisfied: dulwich in /usr/local/lib/python3.10/dist-packages (0.21.5)
+Requirement already satisfied: urllib3&gt;=1.25 in /usr/local/lib/python3.10/dist-packages (from dulwich) (2.0.3)
+
+<span class="ansi-bold">[</span><span class="ansi-blue-fg">notice</span><span class="ansi-bold">]</span> A new release of pip is available: <span class="ansi-red-fg">23.2</span> -&gt; <span class="ansi-green-fg">23.2.1</span>
+<span class="ansi-bold">[</span><span class="ansi-blue-fg">notice</span><span class="ansi-bold">]</span> To update, run: <span class="ansi-green-fg">python3 -m pip install --upgrade pip</span>
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[30]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">dulwich.repo</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[31]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">dulwich.repo</span> <span class="kn">import</span> <span class="n">Repo</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[32]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">dulwich.porcelain</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[6]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;https://github.com/dclong/test_dulwich&quot;</span>
+<span class="n">dir_local</span> <span class="o">=</span> <span class="s2">&quot;/tmp/test_dulwich&quot;</span>
+<span class="o">!</span>rm<span class="w"> </span>-rf<span class="w"> </span><span class="o">{</span>dir_local<span class="o">}</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="git-clone">git clone<a class="anchor-link" href="#git-clone">&#182;</a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[7]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">repo</span> <span class="o">=</span> <span class="n">dulwich</span><span class="o">.</span><span class="n">porcelain</span><span class="o">.</span><span class="n">clone</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">dir_local</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[77]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">repo</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[77]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>&lt;Repo at &#39;/tmp/test_dulwich&#39;&gt;</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[9]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span>ls<span class="w"> </span><span class="o">{</span>dir_local<span class="o">}</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>abc  build.sh  readme.md
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Clone the local repository to another location 
+(which is not very useful as you can directly copy the directory to the new location).</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">?</span>repo.clone
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+
+
+<div class="output_text output_subarea ">
+<pre><span class="ansi-red-fg">Signature:</span>
+repo<span class="ansi-blue-fg">.</span>clone<span class="ansi-blue-fg">(</span>
+    target_path<span class="ansi-blue-fg">,</span>
+    <span class="ansi-blue-fg">*</span><span class="ansi-blue-fg">,</span>
+    mkdir<span class="ansi-blue-fg">=</span><span class="ansi-green-fg">True</span><span class="ansi-blue-fg">,</span>
+    bare<span class="ansi-blue-fg">=</span><span class="ansi-green-fg">False</span><span class="ansi-blue-fg">,</span>
+    origin<span class="ansi-blue-fg">=</span><span class="ansi-blue-fg">b&#39;origin&#39;</span><span class="ansi-blue-fg">,</span>
+    checkout<span class="ansi-blue-fg">=</span><span class="ansi-green-fg">None</span><span class="ansi-blue-fg">,</span>
+    branch<span class="ansi-blue-fg">=</span><span class="ansi-green-fg">None</span><span class="ansi-blue-fg">,</span>
+    progress<span class="ansi-blue-fg">=</span><span class="ansi-green-fg">None</span><span class="ansi-blue-fg">,</span>
+    depth<span class="ansi-blue-fg">=</span><span class="ansi-green-fg">None</span><span class="ansi-blue-fg">,</span>
+    symlinks<span class="ansi-blue-fg">=</span><span class="ansi-green-fg">None</span><span class="ansi-blue-fg">,</span>
+<span class="ansi-blue-fg">)</span> <span class="ansi-blue-fg">-&gt;</span> <span class="ansi-blue-fg">&#39;Repo&#39;</span>
+<span class="ansi-red-fg">Docstring:</span>
+Clone this repository.
+
+Args:
+  target_path: Target path
+  mkdir: Create the target directory
+  bare: Whether to create a bare repository
+  checkout: Whether or not to check-out HEAD after cloning
+  origin: Base name for refs in target repository
+    cloned from this repository
+  branch: Optional branch or tag to be used as HEAD in the new repository
+    instead of this repository&#39;s HEAD.
+  progress: Optional progress function
+  depth: Depth at which to fetch
+  symlinks: Symlinks setting (default to autodetect)
+Returns: Created repository as `Repo`
+<span class="ansi-red-fg">File:</span>      /usr/local/lib/python3.10/dist-packages/dulwich/repo.py
+<span class="ansi-red-fg">Type:</span>      method</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="dulwich.repo.Repo">dulwich.repo.Repo<a class="anchor-link" href="#dulwich.repo.Repo">&#182;</a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[20]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">type</span><span class="p">(</span><span class="n">repo</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[20]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>dulwich.repo.Repo</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Create a repo from a local directory.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[11]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">repo2</span> <span class="o">=</span> <span class="n">Repo</span><span class="p">(</span><span class="s2">&quot;/tmp/test_dulwich&quot;</span><span class="p">)</span>
+<span class="n">repo2</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[11]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>&lt;Repo at &#39;/tmp/test_dulwich&#39;&gt;</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[21]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">dir</span><span class="p">(</span><span class="n">repo</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[21]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>[&#39;__class__&#39;,
+ &#39;__contains__&#39;,
+ &#39;__delattr__&#39;,
+ &#39;__delitem__&#39;,
+ &#39;__dict__&#39;,
+ &#39;__dir__&#39;,
+ &#39;__doc__&#39;,
+ &#39;__enter__&#39;,
+ &#39;__eq__&#39;,
+ &#39;__exit__&#39;,
+ &#39;__format__&#39;,
+ &#39;__ge__&#39;,
+ &#39;__getattribute__&#39;,
+ &#39;__getitem__&#39;,
+ &#39;__gt__&#39;,
+ &#39;__hash__&#39;,
+ &#39;__init__&#39;,
+ &#39;__init_subclass__&#39;,
+ &#39;__le__&#39;,
+ &#39;__lt__&#39;,
+ &#39;__module__&#39;,
+ &#39;__ne__&#39;,
+ &#39;__new__&#39;,
+ &#39;__reduce__&#39;,
+ &#39;__reduce_ex__&#39;,
+ &#39;__repr__&#39;,
+ &#39;__setattr__&#39;,
+ &#39;__setitem__&#39;,
+ &#39;__sizeof__&#39;,
+ &#39;__str__&#39;,
+ &#39;__subclasshook__&#39;,
+ &#39;__weakref__&#39;,
+ &#39;_add_graftpoints&#39;,
+ &#39;_commondir&#39;,
+ &#39;_controldir&#39;,
+ &#39;_del_named_file&#39;,
+ &#39;_determine_file_mode&#39;,
+ &#39;_get_object&#39;,
+ &#39;_get_user_identity&#39;,
+ &#39;_graftpoints&#39;,
+ &#39;_init_files&#39;,
+ &#39;_init_maybe_bare&#39;,
+ &#39;_init_new_working_directory&#39;,
+ &#39;_put_named_file&#39;,
+ &#39;_read_heads&#39;,
+ &#39;_remove_graftpoints&#39;,
+ &#39;_write_reflog&#39;,
+ &#39;bare&#39;,
+ &#39;clone&#39;,
+ &#39;close&#39;,
+ &#39;commondir&#39;,
+ &#39;controldir&#39;,
+ &#39;create&#39;,
+ &#39;discover&#39;,
+ &#39;do_commit&#39;,
+ &#39;fetch&#39;,
+ &#39;fetch_objects&#39;,
+ &#39;fetch_pack_data&#39;,
+ &#39;generate_pack_data&#39;,
+ &#39;get_blob_normalizer&#39;,
+ &#39;get_config&#39;,
+ &#39;get_config_stack&#39;,
+ &#39;get_description&#39;,
+ &#39;get_graph_walker&#39;,
+ &#39;get_named_file&#39;,
+ &#39;get_object&#39;,
+ &#39;get_parents&#39;,
+ &#39;get_peeled&#39;,
+ &#39;get_refs&#39;,
+ &#39;get_shallow&#39;,
+ &#39;get_walker&#39;,
+ &#39;has_index&#39;,
+ &#39;head&#39;,
+ &#39;hooks&#39;,
+ &#39;index_path&#39;,
+ &#39;init&#39;,
+ &#39;init_bare&#39;,
+ &#39;object_store&#39;,
+ &#39;open_index&#39;,
+ &#39;parents_provider&#39;,
+ &#39;path&#39;,
+ &#39;refs&#39;,
+ &#39;reset_index&#39;,
+ &#39;set_description&#39;,
+ &#39;stage&#39;,
+ &#39;update_shallow&#39;]</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="git-status">git status<a class="anchor-link" href="#git-status">&#182;</a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[44]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">s</span> <span class="o">=</span> <span class="n">dulwich</span><span class="o">.</span><span class="n">porcelain</span><span class="o">.</span><span class="n">status</span><span class="p">(</span><span class="n">repo</span><span class="p">)</span>
+<span class="nb">dir</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[44]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>[&#39;__add__&#39;,
+ &#39;__class__&#39;,
+ &#39;__class_getitem__&#39;,
+ &#39;__contains__&#39;,
+ &#39;__delattr__&#39;,
+ &#39;__dir__&#39;,
+ &#39;__doc__&#39;,
+ &#39;__eq__&#39;,
+ &#39;__format__&#39;,
+ &#39;__ge__&#39;,
+ &#39;__getattribute__&#39;,
+ &#39;__getitem__&#39;,
+ &#39;__getnewargs__&#39;,
+ &#39;__gt__&#39;,
+ &#39;__hash__&#39;,
+ &#39;__init__&#39;,
+ &#39;__init_subclass__&#39;,
+ &#39;__iter__&#39;,
+ &#39;__le__&#39;,
+ &#39;__len__&#39;,
+ &#39;__lt__&#39;,
+ &#39;__match_args__&#39;,
+ &#39;__module__&#39;,
+ &#39;__mul__&#39;,
+ &#39;__ne__&#39;,
+ &#39;__new__&#39;,
+ &#39;__reduce__&#39;,
+ &#39;__reduce_ex__&#39;,
+ &#39;__repr__&#39;,
+ &#39;__rmul__&#39;,
+ &#39;__setattr__&#39;,
+ &#39;__sizeof__&#39;,
+ &#39;__slots__&#39;,
+ &#39;__str__&#39;,
+ &#39;__subclasshook__&#39;,
+ &#39;_asdict&#39;,
+ &#39;_field_defaults&#39;,
+ &#39;_fields&#39;,
+ &#39;_make&#39;,
+ &#39;_replace&#39;,
+ &#39;count&#39;,
+ &#39;index&#39;,
+ &#39;staged&#39;,
+ &#39;unstaged&#39;,
+ &#39;untracked&#39;]</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[47]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">s</span><span class="o">.</span><span class="n">staged</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[47]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>{&#39;add&#39;: [], &#39;delete&#39;: [], &#39;modify&#39;: []}</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[48]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">s</span><span class="o">.</span><span class="n">unstaged</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[48]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>[]</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[49]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">s</span><span class="o">.</span><span class="n">untracked</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[49]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>[]</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[76]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span>git<span class="w"> </span>-C<span class="w"> </span><span class="o">{</span>dir_local<span class="o">}</span><span class="w"> </span>status
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>On branch main
+Changes not staged for commit:
+  (use &#34;git add &lt;file&gt;...&#34; to update what will be committed)
+  (use &#34;git restore &lt;file&gt;...&#34; to discard changes in working directory)
+	<span class="ansi-red-fg">modified:   test1.txt</span>
+
+no changes added to commit (use &#34;git add&#34; and/or &#34;git commit -a&#34;)
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[78]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">dulwich</span><span class="o">.</span><span class="n">porcelain</span><span class="o">.</span><span class="n">get_tree_changes</span><span class="p">(</span><span class="n">repo</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[78]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>{&#39;add&#39;: [], &#39;delete&#39;: [], &#39;modify&#39;: []}</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[56]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span>git<span class="w"> </span>-C<span class="w"> </span><span class="o">{</span>dir_local<span class="o">}</span><span class="w"> </span>diff
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre><span class="ansi-bold">diff --git a/test1.txt b/test1.txt</span>
+<span class="ansi-bold">index 9daeafb..a5f96b1 100644</span>
+<span class="ansi-bold">--- a/test1.txt</span>
+<span class="ansi-bold">+++ b/test1.txt</span>
+<span class="ansi-cyan-fg">@@ -1 +1,3 @@</span>
+ test
+<span class="ansi-green-fg">+</span><span class="ansi-green-fg">add a new line</span>
+<span class="ansi-red-bg">+</span>
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[64]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">repo</span><span class="p">[</span><span class="sa">b</span><span class="s2">&quot;head&quot;</span><span class="p">]</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_text output_error">
+<pre>
+<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg">KeyError</span>                                  Traceback (most recent call last)
+Cell <span class="ansi-green-fg">In[64], line 1</span>
+<span class="ansi-green-fg">----&gt; 1</span> <span class="ansi-yellow-bg">repo</span><span class="ansi-yellow-bg">[</span><span class="ansi-yellow-bg" style="color: rgb(175,0,0)">b</span><span class="ansi-yellow-bg" style="color: rgb(175,0,0)">&#34;</span><span class="ansi-yellow-bg" style="color: rgb(175,0,0)">head</span><span class="ansi-yellow-bg" style="color: rgb(175,0,0)">&#34;</span><span class="ansi-yellow-bg">]</span>
+
+File <span class="ansi-green-fg">/usr/local/lib/python3.10/dist-packages/dulwich/repo.py:783</span>, in <span class="ansi-cyan-fg">BaseRepo.__getitem__</span><span class="ansi-blue-fg">(self, name)</span>
+<span class="ansi-green-intense-fg ansi-bold">    781</span>         <span class="ansi-bold" style="color: rgb(0,135,0)">pass</span>
+<span class="ansi-green-intense-fg ansi-bold">    782</span> <span class="ansi-bold" style="color: rgb(0,135,0)">try</span>:
+<span class="ansi-green-fg">--&gt; 783</span>     <span class="ansi-bold" style="color: rgb(0,135,0)">return</span> <span style="color: rgb(0,135,0)">self</span><span style="color: rgb(98,98,98)">.</span>object_store[<span class="ansi-yellow-bg" style="color: rgb(0,135,0)">self</span><span class="ansi-yellow-bg" style="color: rgb(98,98,98)">.</span><span class="ansi-yellow-bg">refs</span><span class="ansi-yellow-bg">[</span><span class="ansi-yellow-bg">name</span><span class="ansi-yellow-bg">]</span>]
+<span class="ansi-green-intense-fg ansi-bold">    784</span> <span class="ansi-bold" style="color: rgb(0,135,0)">except</span> RefFormatError <span class="ansi-bold" style="color: rgb(0,135,0)">as</span> exc:
+<span class="ansi-green-intense-fg ansi-bold">    785</span>     <span class="ansi-bold" style="color: rgb(0,135,0)">raise</span> <span class="ansi-bold" style="color: rgb(215,95,95)">KeyError</span>(name) <span class="ansi-bold" style="color: rgb(0,135,0)">from</span> <span class="ansi-bold" style="color: rgb(0,0,255)">exc</span>
+
+File <span class="ansi-green-fg">/usr/local/lib/python3.10/dist-packages/dulwich/refs.py:326</span>, in <span class="ansi-cyan-fg">RefsContainer.__getitem__</span><span class="ansi-blue-fg">(self, name)</span>
+<span class="ansi-green-intense-fg ansi-bold">    324</span> _, sha <span style="color: rgb(98,98,98)">=</span> <span style="color: rgb(0,135,0)">self</span><span style="color: rgb(98,98,98)">.</span>follow(name)
+<span class="ansi-green-intense-fg ansi-bold">    325</span> <span class="ansi-bold" style="color: rgb(0,135,0)">if</span> sha <span class="ansi-bold" style="color: rgb(175,0,255)">is</span> <span class="ansi-bold" style="color: rgb(0,135,0)">None</span>:
+<span class="ansi-green-fg">--&gt; 326</span>     <span class="ansi-bold" style="color: rgb(0,135,0)">raise</span> <span class="ansi-bold" style="color: rgb(215,95,95)">KeyError</span>(name)
+<span class="ansi-green-intense-fg ansi-bold">    327</span> <span class="ansi-bold" style="color: rgb(0,135,0)">return</span> sha
+
+<span class="ansi-red-fg">KeyError</span>: b&#39;head&#39;</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[65]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">dir</span><span class="p">(</span><span class="n">repo</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[65]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>[&#39;__annotations__&#39;,
+ &#39;__class__&#39;,
+ &#39;__contains__&#39;,
+ &#39;__delattr__&#39;,
+ &#39;__delitem__&#39;,
+ &#39;__dict__&#39;,
+ &#39;__dir__&#39;,
+ &#39;__doc__&#39;,
+ &#39;__enter__&#39;,
+ &#39;__eq__&#39;,
+ &#39;__exit__&#39;,
+ &#39;__format__&#39;,
+ &#39;__ge__&#39;,
+ &#39;__getattribute__&#39;,
+ &#39;__getitem__&#39;,
+ &#39;__gt__&#39;,
+ &#39;__hash__&#39;,
+ &#39;__init__&#39;,
+ &#39;__init_subclass__&#39;,
+ &#39;__le__&#39;,
+ &#39;__lt__&#39;,
+ &#39;__module__&#39;,
+ &#39;__ne__&#39;,
+ &#39;__new__&#39;,
+ &#39;__reduce__&#39;,
+ &#39;__reduce_ex__&#39;,
+ &#39;__repr__&#39;,
+ &#39;__setattr__&#39;,
+ &#39;__setitem__&#39;,
+ &#39;__sizeof__&#39;,
+ &#39;__str__&#39;,
+ &#39;__subclasshook__&#39;,
+ &#39;__weakref__&#39;,
+ &#39;_add_graftpoints&#39;,
+ &#39;_commondir&#39;,
+ &#39;_controldir&#39;,
+ &#39;_del_named_file&#39;,
+ &#39;_determine_file_mode&#39;,
+ &#39;_determine_symlinks&#39;,
+ &#39;_get_object&#39;,
+ &#39;_get_user_identity&#39;,
+ &#39;_graftpoints&#39;,
+ &#39;_init_files&#39;,
+ &#39;_init_maybe_bare&#39;,
+ &#39;_init_new_working_directory&#39;,
+ &#39;_put_named_file&#39;,
+ &#39;_read_heads&#39;,
+ &#39;_remove_graftpoints&#39;,
+ &#39;_write_reflog&#39;,
+ &#39;bare&#39;,
+ &#39;clone&#39;,
+ &#39;close&#39;,
+ &#39;commondir&#39;,
+ &#39;controldir&#39;,
+ &#39;create&#39;,
+ &#39;discover&#39;,
+ &#39;do_commit&#39;,
+ &#39;fetch&#39;,
+ &#39;fetch_pack_data&#39;,
+ &#39;find_missing_objects&#39;,
+ &#39;generate_pack_data&#39;,
+ &#39;get_blob_normalizer&#39;,
+ &#39;get_config&#39;,
+ &#39;get_config_stack&#39;,
+ &#39;get_description&#39;,
+ &#39;get_graph_walker&#39;,
+ &#39;get_named_file&#39;,
+ &#39;get_object&#39;,
+ &#39;get_parents&#39;,
+ &#39;get_peeled&#39;,
+ &#39;get_refs&#39;,
+ &#39;get_shallow&#39;,
+ &#39;get_walker&#39;,
+ &#39;get_worktree_config&#39;,
+ &#39;has_index&#39;,
+ &#39;head&#39;,
+ &#39;hooks&#39;,
+ &#39;index_path&#39;,
+ &#39;init&#39;,
+ &#39;init_bare&#39;,
+ &#39;object_store&#39;,
+ &#39;open_index&#39;,
+ &#39;parents_provider&#39;,
+ &#39;path&#39;,
+ &#39;refs&#39;,
+ &#39;reset_index&#39;,
+ &#39;set_description&#39;,
+ &#39;stage&#39;,
+ &#39;unstage&#39;,
+ &#39;update_shallow&#39;]</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[66]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">repo</span><span class="o">.</span><span class="n">head</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[66]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>&lt;bound method BaseRepo.head of &lt;Repo at &#39;/tmp/test_dulwich&#39;&gt;&gt;</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[68]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">repo</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[68]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>b&#39;729bb376c018f068548c574a9fa05764432ef33a&#39;</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[72]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">repo</span><span class="p">[</span><span class="n">repo</span><span class="o">.</span><span class="n">head</span><span class="p">()]</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[72]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>&lt;Commit b&#39;729bb376c018f068548c574a9fa05764432ef33a&#39;&gt;</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[73]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">repo</span><span class="o">.</span><span class="n">object_store</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[73]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>&lt;DiskObjectStore(&#39;/tmp/test_dulwich/.git/objects&#39;)&gt;</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[74]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">sys</span>
+
+<span class="kn">from</span> <span class="nn">dulwich.patch</span> <span class="kn">import</span> <span class="n">write_tree_diff</span>
+
+<span class="n">outstream</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="p">,</span> <span class="s1">&#39;buffer&#39;</span><span class="p">,</span> <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="p">)</span>
+<span class="n">write_tree_diff</span><span class="p">(</span><span class="n">outstream</span><span class="p">,</span> <span class="n">repo</span><span class="o">.</span><span class="n">object_store</span><span class="p">,</span> <span class="n">repo</span><span class="p">[</span><span class="n">repo</span><span class="o">.</span><span class="n">head</span><span class="p">()],</span> <span class="n">commit</span><span class="o">.</span><span class="n">tree</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_text output_error">
+<pre>
+<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg">NameError</span>                                 Traceback (most recent call last)
+Cell <span class="ansi-green-fg">In[74], line 6</span>
+<span class="ansi-green-intense-fg ansi-bold">      3</span> <span class="ansi-bold" style="color: rgb(0,135,0)">from</span> <span class="ansi-bold" style="color: rgb(0,0,255)">dulwich</span><span class="ansi-bold" style="color: rgb(0,0,255)">.</span><span class="ansi-bold" style="color: rgb(0,0,255)">patch</span> <span class="ansi-bold" style="color: rgb(0,135,0)">import</span> write_tree_diff
+<span class="ansi-green-intense-fg ansi-bold">      5</span> outstream <span style="color: rgb(98,98,98)">=</span> <span style="color: rgb(0,135,0)">getattr</span>(sys<span style="color: rgb(98,98,98)">.</span>stdout, <span style="color: rgb(175,0,0)">&#39;</span><span style="color: rgb(175,0,0)">buffer</span><span style="color: rgb(175,0,0)">&#39;</span>, sys<span style="color: rgb(98,98,98)">.</span>stdout)
+<span class="ansi-green-fg">----&gt; 6</span> write_tree_diff(outstream, repo<span style="color: rgb(98,98,98)">.</span>object_store, repo[repo<span style="color: rgb(98,98,98)">.</span>head()], <span class="ansi-yellow-bg">commit</span><span style="color: rgb(98,98,98)">.</span>tree)
+
+<span class="ansi-red-fg">NameError</span>: name &#39;commit&#39; is not defined</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">sys</span>
+
+<span class="kn">from</span> <span class="nn">dulwich.patch</span> <span class="kn">import</span> <span class="n">write_tree_diff</span>
+<span class="kn">from</span> <span class="nn">dulwich.repo</span> <span class="kn">import</span> <span class="n">Repo</span>
+
+<span class="n">repo_path</span> <span class="o">=</span> <span class="s2">&quot;.&quot;</span>
+<span class="n">commit_id</span> <span class="o">=</span> <span class="sa">b</span><span class="s2">&quot;a6602654997420bcfd0bee2a0563d9416afe34b4&quot;</span>
+
+<span class="n">r</span> <span class="o">=</span> <span class="n">Repo</span><span class="p">(</span><span class="n">repo_path</span><span class="p">)</span>
+
+<span class="n">commit</span> <span class="o">=</span> <span class="n">r</span><span class="p">[</span><span class="n">commit_id</span><span class="p">]</span>
+<span class="n">parent_commit</span> <span class="o">=</span> <span class="n">r</span><span class="p">[</span><span class="n">commit</span><span class="o">.</span><span class="n">parents</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
+<span class="n">outstream</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="p">,</span> <span class="s1">&#39;buffer&#39;</span><span class="p">,</span> <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="p">)</span>
+<span class="n">write_tree_diff</span><span class="p">(</span><span class="n">outstream</span><span class="p">,</span> <span class="n">r</span><span class="o">.</span><span class="n">object_store</span><span class="p">,</span> <span class="n">parent_commit</span><span class="o">.</span><span class="n">tree</span><span class="p">,</span> <span class="n">commit</span><span class="o">.</span><span class="n">tree</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="git-add">git add<a class="anchor-link" href="#git-add">&#182;</a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[33]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span>touch<span class="w"> </span>/tmp/test_dulwich/abc2
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[34]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span>ls<span class="w"> </span>/tmp/test_dulwich/
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>abc  abc2  build.sh  Dockerfile  LICENSE  readme.md  scripts
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[35]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span>git<span class="w"> </span>-C<span class="w"> </span>/tmp/test_dulwich/<span class="w"> </span>status
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>On branch dev
+Changes to be committed:
+  (use &#34;git restore --staged &lt;file&gt;...&#34; to unstage)
+	<span class="ansi-green-fg">new file:   abc</span>
+
+Untracked files:
+  (use &#34;git add &lt;file&gt;...&#34; to include in what will be committed)
+	<span class="ansi-red-fg">abc2</span>
+
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[29]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">?</span>dulwich.porcelain.add
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+
+
+<div class="output_text output_subarea ">
+<pre><span class="ansi-red-fg">Signature:</span> dulwich<span class="ansi-blue-fg">.</span>porcelain<span class="ansi-blue-fg">.</span>add<span class="ansi-blue-fg">(</span>repo<span class="ansi-blue-fg">=</span><span class="ansi-blue-fg">&#39;.&#39;</span><span class="ansi-blue-fg">,</span> paths<span class="ansi-blue-fg">=</span><span class="ansi-green-fg">None</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-red-fg">Docstring:</span>
+Add files to the staging area.
+
+Args:
+  repo: Repository for the files
+  paths: Paths to add.  No value passed stages all modified files.
+Returns: Tuple with set of added files and ignored files
+
+If the repository contains ignored directories, the returned set will
+contain the path to an ignored directory (with trailing slash). Individual
+files within ignored directories will not be returned.
+<span class="ansi-red-fg">File:</span>      ~/.local/lib/python3.8/site-packages/dulwich/porcelain.py
+<span class="ansi-red-fg">Type:</span>      function
+</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[32]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">dulwich</span><span class="o">.</span><span class="n">porcelain</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s2">&quot;/tmp/test_dulwich&quot;</span><span class="p">,</span> <span class="n">paths</span><span class="o">=</span><span class="s2">&quot;/tmp/test_dulwich/abc&quot;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[32]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>([&#39;abc&#39;], set())</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>By default,
+dulwich adds all files in the current working directory,
+which is not the right behavior!
+I have submitted <a href="https://github.com/dulwich/dulwich/issues/895">a ticket</a> to fix the issue.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[54]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">dulwich</span><span class="o">.</span><span class="n">porcelain</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s2">&quot;/tmp/test_dulwich&quot;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_text output_error">
+<pre>
+<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg">ValueError</span>                                Traceback (most recent call last)
+<span class="ansi-green-fg">/tmp/ipykernel_300/40685537.py</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span>
+<span class="ansi-green-fg">----&gt; 1</span><span class="ansi-red-fg"> </span>dulwich<span class="ansi-blue-fg">.</span>porcelain<span class="ansi-blue-fg">.</span>add<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">&#34;/tmp/test_dulwich&#34;</span><span class="ansi-blue-fg">)</span>
+
+<span class="ansi-green-fg">~/.local/lib/python3.8/site-packages/dulwich/porcelain.py</span> in <span class="ansi-cyan-fg">add</span><span class="ansi-blue-fg">(repo, paths)</span>
+<span class="ansi-green-intense-fg ansi-bold">    512</span>         ignore_manager <span class="ansi-blue-fg">=</span> IgnoreFilterManager<span class="ansi-blue-fg">.</span>from_repo<span class="ansi-blue-fg">(</span>r<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">    513</span>         <span class="ansi-green-fg">if</span> <span class="ansi-green-fg">not</span> paths<span class="ansi-blue-fg">:</span>
+<span class="ansi-green-fg">--&gt; 514</span><span class="ansi-red-fg">             paths = list(
+</span><span class="ansi-green-intense-fg ansi-bold">    515</span>                 get_untracked_paths(
+<span class="ansi-green-intense-fg ansi-bold">    516</span>                     str<span class="ansi-blue-fg">(</span>Path<span class="ansi-blue-fg">(</span>os<span class="ansi-blue-fg">.</span>getcwd<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">.</span>resolve<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">,</span>
+
+<span class="ansi-green-fg">~/.local/lib/python3.8/site-packages/dulwich/porcelain.py</span> in <span class="ansi-cyan-fg">get_untracked_paths</span><span class="ansi-blue-fg">(frompath, basepath, index, exclude_ignored)</span>
+<span class="ansi-green-intense-fg ansi-bold">   1291</span>     ):
+<span class="ansi-green-intense-fg ansi-bold">   1292</span>         <span class="ansi-green-fg">if</span> <span class="ansi-green-fg">not</span> is_dir<span class="ansi-blue-fg">:</span>
+<span class="ansi-green-fg">-&gt; 1293</span><span class="ansi-red-fg">             </span>ip <span class="ansi-blue-fg">=</span> path_to_tree_path<span class="ansi-blue-fg">(</span>basepath<span class="ansi-blue-fg">,</span> ap<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">   1294</span>             <span class="ansi-green-fg">if</span> ip <span class="ansi-green-fg">not</span> <span class="ansi-green-fg">in</span> index<span class="ansi-blue-fg">:</span>
+<span class="ansi-green-intense-fg ansi-bold">   1295</span>                 if (
+
+<span class="ansi-green-fg">~/.local/lib/python3.8/site-packages/dulwich/porcelain.py</span> in <span class="ansi-cyan-fg">path_to_tree_path</span><span class="ansi-blue-fg">(repopath, path, tree_encoding)</span>
+<span class="ansi-green-intense-fg ansi-bold">    252</span> 
+<span class="ansi-green-intense-fg ansi-bold">    253</span>         <span class="ansi-green-fg">try</span><span class="ansi-blue-fg">:</span>
+<span class="ansi-green-fg">--&gt; 254</span><span class="ansi-red-fg">             </span>relpath <span class="ansi-blue-fg">=</span> resolved_path<span class="ansi-blue-fg">.</span>relative_to<span class="ansi-blue-fg">(</span>repopath<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">    255</span>         <span class="ansi-green-fg">except</span> ValueError<span class="ansi-blue-fg">:</span>
+<span class="ansi-green-intense-fg ansi-bold">    256</span>             <span class="ansi-red-fg"># If path is a symlink that points to a file outside the repo, we</span>
+
+<span class="ansi-green-fg">/usr/lib/python3.8/pathlib.py</span> in <span class="ansi-cyan-fg">relative_to</span><span class="ansi-blue-fg">(self, *other)</span>
+<span class="ansi-green-intense-fg ansi-bold">    906</span>         <span class="ansi-green-fg">if</span> <span class="ansi-blue-fg">(</span>root <span class="ansi-green-fg">or</span> drv<span class="ansi-blue-fg">)</span> <span class="ansi-green-fg">if</span> n <span class="ansi-blue-fg">==</span> <span class="ansi-cyan-fg">0</span> <span class="ansi-green-fg">else</span> cf<span class="ansi-blue-fg">(</span>abs_parts<span class="ansi-blue-fg">[</span><span class="ansi-blue-fg">:</span>n<span class="ansi-blue-fg">]</span><span class="ansi-blue-fg">)</span> <span class="ansi-blue-fg">!=</span> cf<span class="ansi-blue-fg">(</span>to_abs_parts<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
+<span class="ansi-green-intense-fg ansi-bold">    907</span>             formatted <span class="ansi-blue-fg">=</span> self<span class="ansi-blue-fg">.</span>_format_parsed_parts<span class="ansi-blue-fg">(</span>to_drv<span class="ansi-blue-fg">,</span> to_root<span class="ansi-blue-fg">,</span> to_parts<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-fg">--&gt; 908</span><span class="ansi-red-fg">             raise ValueError(&#34;{!r} does not start with {!r}&#34;
+</span><span class="ansi-green-intense-fg ansi-bold">    909</span>                              .format(str(self), str(formatted)))
+<span class="ansi-green-intense-fg ansi-bold">    910</span>         return self._from_parsed_parts(&#39;&#39;, root if n == 1 else &#39;&#39;,
+
+<span class="ansi-red-fg">ValueError</span>: &#39;/workdir/archives/blog/misc/content/2020/11/hands-on-dulwich/hands-on-dulwich.ipynb&#39; does not start with &#39;/tmp/test_dulwich&#39;</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[67]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">dulwich</span><span class="o">.</span><span class="n">porcelain</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s2">&quot;/tmp/test_dulwich&quot;</span><span class="p">,</span> <span class="n">paths</span><span class="o">=</span><span class="s2">&quot;/tmp/test_dulwich/.&quot;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[67]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>([&#39;./&#39;], set())</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[71]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">status</span> <span class="o">=</span> <span class="n">dulwich</span><span class="o">.</span><span class="n">porcelain</span><span class="o">.</span><span class="n">status</span><span class="p">(</span><span class="s2">&quot;/tmp/test_dulwich&quot;</span><span class="p">)</span>
+<span class="n">status</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[71]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>GitStatus(staged={&#39;add&#39;: [], &#39;delete&#39;: [], &#39;modify&#39;: []}, unstaged=[], untracked=[&#39;abc2&#39;])</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[72]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">status</span><span class="o">.</span><span class="n">unstaged</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[72]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>[]</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[73]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">status</span><span class="o">.</span><span class="n">untracked</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[73]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>[&#39;abc2&#39;]</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="git-commit">git commit<a class="anchor-link" href="#git-commit">&#182;</a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[48]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">?</span>dulwich.porcelain.commit
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+
+
+<div class="output_text output_subarea ">
+<pre><span class="ansi-red-fg">Signature:</span>
+dulwich<span class="ansi-blue-fg">.</span>porcelain<span class="ansi-blue-fg">.</span>commit<span class="ansi-blue-fg">(</span>
+    repo<span class="ansi-blue-fg">=</span><span class="ansi-blue-fg">&#39;.&#39;</span><span class="ansi-blue-fg">,</span>
+    message<span class="ansi-blue-fg">=</span><span class="ansi-green-fg">None</span><span class="ansi-blue-fg">,</span>
+    author<span class="ansi-blue-fg">=</span><span class="ansi-green-fg">None</span><span class="ansi-blue-fg">,</span>
+    committer<span class="ansi-blue-fg">=</span><span class="ansi-green-fg">None</span><span class="ansi-blue-fg">,</span>
+    encoding<span class="ansi-blue-fg">=</span><span class="ansi-green-fg">None</span><span class="ansi-blue-fg">,</span>
+    no_verify<span class="ansi-blue-fg">=</span><span class="ansi-green-fg">False</span><span class="ansi-blue-fg">,</span>
+<span class="ansi-blue-fg">)</span>
+<span class="ansi-red-fg">Docstring:</span>
+Create a new commit.
+
+Args:
+  repo: Path to repository
+  message: Optional commit message
+  author: Optional author name and email
+  committer: Optional committer name and email
+  no_verify: Skip pre-commit and commit-msg hooks
+Returns: SHA1 of the new commit
+<span class="ansi-red-fg">File:</span>      ~/.local/lib/python3.8/site-packages/dulwich/porcelain.py
+<span class="ansi-red-fg">Type:</span>      function
+</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[50]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">dulwich</span><span class="o">.</span><span class="n">porcelain</span><span class="o">.</span><span class="n">commit</span><span class="p">(</span><span class="s2">&quot;/tmp/test_dulwich/&quot;</span><span class="p">,</span> <span class="n">message</span><span class="o">=</span><span class="s2">&quot;add abc&quot;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[50]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>b&#39;11fb9f18f9d211c93175e898faa731584b8be368&#39;</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[51]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span>git<span class="w"> </span>-C<span class="w"> </span>/tmp/test_dulwich/<span class="w"> </span>status
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>On branch dev
+Untracked files:
+  (use &#34;git add &lt;file&gt;...&#34; to include in what will be committed)
+	<span class="ansi-red-fg">abc2</span>
+
+nothing added to commit but untracked files present (use &#34;git add&#34; to track)
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[53]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span>git<span class="w"> </span>-C<span class="w"> </span>/tmp/test_dulwich/<span class="w"> </span>log<span class="w"> </span><span class="p">|</span><span class="w"> </span>head
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>commit 11fb9f18f9d211c93175e898faa731584b8be368
+Author: Benjamin Du &lt;longendu@yahoo.com&gt;
+Date:   Sat Aug 7 01:33:45 2021 +0000
+
+    add abc
+
+commit 2fd55f0a653bf8ec2e7ffda16c7b2d601167da06
+Author: Ben Chuanlong Du &lt;dclong@users.noreply.github.com&gt;
+Date:   Fri Jul 16 09:53:00 2021 -0700
+
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="ConfigFile">ConfigFile<a class="anchor-link" href="#ConfigFile">&#182;</a></h2><p>ConfigFile inherits ConfigDict which means that you operate on a ConfiFile like a <code>dict</code>.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[14]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">config</span> <span class="o">=</span> <span class="n">repo</span><span class="o">.</span><span class="n">get_config</span><span class="p">()</span>
+<span class="n">config</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[14]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>ConfigFile(CaseInsensitiveDict([((b&#39;core&#39;,), CaseInsensitiveDict([(b&#39;repositoryformatversion&#39;, b&#39;0&#39;), (b&#39;filemode&#39;, b&#39;true&#39;), (b&#39;bare&#39;, b&#39;false&#39;), (b&#39;logallrefupdates&#39;, b&#39;true&#39;)])), ((b&#39;remote&#39;, b&#39;origin&#39;), CaseInsensitiveDict([(b&#39;url&#39;, b&#39;https://github.com/dclong/docker-ubuntu_b&#39;), (b&#39;fetch&#39;, b&#39;+refs/heads/*:refs/remotes/origin/*&#39;)])), ((b&#39;remote&#39;, b&#39;nima&#39;), CaseInsensitiveDict([(b&#39;url&#39;, b&#39;https://github.com/dclong/docker-ubuntu_b&#39;), (b&#39;fetch&#39;, b&#39;+refs/heads/*:refs/remotes/nima/*&#39;)]))]))</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[37]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">config</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[37]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>KeysView(ConfigFile(CaseInsensitiveDict([((b&#39;core&#39;,), CaseInsensitiveDict([(b&#39;repositoryformatversion&#39;, b&#39;0&#39;), (b&#39;filemode&#39;, b&#39;true&#39;), (b&#39;bare&#39;, b&#39;false&#39;), (b&#39;logallrefupdates&#39;, b&#39;true&#39;)])), ((b&#39;remote&#39;, b&#39;origin&#39;), CaseInsensitiveDict([(b&#39;url&#39;, b&#39;https://github.com/dclong/docker-ubuntu_b&#39;), (b&#39;fetch&#39;, b&#39;+refs/heads/*:refs/remotes/origin/*&#39;)])), ((b&#39;remote&#39;, b&#39;nima&#39;), CaseInsensitiveDict([(b&#39;url&#39;, b&#39;https://github.com/dclong/docker-ubuntu_b&#39;), (b&#39;fetch&#39;, b&#39;+refs/heads/*:refs/remotes/nima/*&#39;)]))])))</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[38]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">config</span><span class="o">.</span><span class="n">values</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[38]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>ValuesView(ConfigFile(CaseInsensitiveDict([((b&#39;core&#39;,), CaseInsensitiveDict([(b&#39;repositoryformatversion&#39;, b&#39;0&#39;), (b&#39;filemode&#39;, b&#39;true&#39;), (b&#39;bare&#39;, b&#39;false&#39;), (b&#39;logallrefupdates&#39;, b&#39;true&#39;)])), ((b&#39;remote&#39;, b&#39;origin&#39;), CaseInsensitiveDict([(b&#39;url&#39;, b&#39;https://github.com/dclong/docker-ubuntu_b&#39;), (b&#39;fetch&#39;, b&#39;+refs/heads/*:refs/remotes/origin/*&#39;)])), ((b&#39;remote&#39;, b&#39;nima&#39;), CaseInsensitiveDict([(b&#39;url&#39;, b&#39;https://github.com/dclong/docker-ubuntu_b&#39;), (b&#39;fetch&#39;, b&#39;+refs/heads/*:refs/remotes/nima/*&#39;)]))])))</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[40]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">config</span><span class="p">[(</span><span class="sa">b</span><span class="s2">&quot;remote&quot;</span><span class="p">,</span> <span class="sa">b</span><span class="s2">&quot;origin&quot;</span><span class="p">)]</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[40]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>CaseInsensitiveDict([(b&#39;url&#39;, b&#39;https://github.com/dclong/docker-ubuntu_b&#39;),
+                     (b&#39;fetch&#39;, b&#39;+refs/heads/*:refs/remotes/origin/*&#39;)])</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[27]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">((</span><span class="sa">b</span><span class="s2">&quot;remote&quot;</span><span class="p">,</span> <span class="sa">b</span><span class="s2">&quot;origin&quot;</span><span class="p">),</span> <span class="sa">b</span><span class="s2">&quot;url&quot;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[27]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>b&#39;https://github.com/dclong/docker-ubuntu_b&#39;</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[31]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">dict</span><span class="p">(</span><span class="n">config</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[31]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>{(b&#39;core&#39;,): CaseInsensitiveDict([(b&#39;repositoryformatversion&#39;, b&#39;0&#39;),
+                      (b&#39;filemode&#39;, b&#39;true&#39;),
+                      (b&#39;bare&#39;, b&#39;false&#39;),
+                      (b&#39;logallrefupdates&#39;, b&#39;true&#39;)]),
+ (b&#39;remote&#39;,
+  b&#39;origin&#39;): CaseInsensitiveDict([(b&#39;url&#39;,
+                       b&#39;https://github.com/dclong/docker-ubuntu_b&#39;),
+                      (b&#39;fetch&#39;, b&#39;+refs/heads/*:refs/remotes/origin/*&#39;)]),
+ (b&#39;remote&#39;,
+  b&#39;nima&#39;): CaseInsensitiveDict([(b&#39;url&#39;,
+                       b&#39;https://github.com/dclong/docker-ubuntu_b&#39;),
+                      (b&#39;fetch&#39;, b&#39;+refs/heads/*:refs/remotes/nima/*&#39;)])}</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="git-remote--v">git remote -v<a class="anchor-link" href="#git-remote--v">&#182;</a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[31]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="p">[</span><span class="n">m</span> <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="nb">dir</span><span class="p">(</span><span class="n">dulwich</span><span class="o">.</span><span class="n">porcelain</span><span class="p">)</span> <span class="k">if</span> <span class="s1">&#39;remote&#39;</span> <span class="ow">in</span> <span class="n">m</span><span class="p">]</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[31]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>[&#39;_import_remote_refs&#39;,
+ &#39;get_branch_remote&#39;,
+ &#39;get_remote_repo&#39;,
+ &#39;ls_remote&#39;,
+ &#39;remote_add&#39;,
+ &#39;remote_remove&#39;]</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[34]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">dulwich</span><span class="o">.</span><span class="n">porcelain</span><span class="o">.</span><span class="n">get_branch_remote</span><span class="p">(</span><span class="n">repo</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[34]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>b&#39;origin&#39;</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[36]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">dulwich</span><span class="o">.</span><span class="n">porcelain</span><span class="o">.</span><span class="n">get_remote_repo</span><span class="p">(</span><span class="n">repo</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[36]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>(&#39;origin&#39;, &#39;https://github.com/dclong/docker-ubuntu_b&#39;)</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[39]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">dulwich</span><span class="o">.</span><span class="n">porcelain</span><span class="o">.</span><span class="n">ls_remote</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[39]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>{b&#39;HEAD&#39;: b&#39;4996e93a5f24c375b1d56deddda1cd9cfddd14f6&#39;,
+ b&#39;refs/heads/centos7&#39;: b&#39;d7a6f672771be1fc33ddd1006b3318901c914b19&#39;,
+ b&#39;refs/heads/debian&#39;: b&#39;c7fc15b52f4c76faa4ba487a113b5c987ac3b371&#39;,
+ b&#39;refs/heads/dev&#39;: b&#39;4996e93a5f24c375b1d56deddda1cd9cfddd14f6&#39;,
+ b&#39;refs/heads/main&#39;: b&#39;925dd68d39ea943f1c387e4906e72aebc765c4bf&#39;,
+ b&#39;refs/pull/1/head&#39;: b&#39;b90bd029b4707a94640957cbfae73a631a9d83e0&#39;,
+ b&#39;refs/pull/1/merge&#39;: b&#39;c767a6a929e599c245a4241477093554c1ab0d10&#39;,
+ b&#39;refs/pull/10/head&#39;: b&#39;ea5b60d7fc34fce65ec4a503c20536d3e0d4587a&#39;,
+ b&#39;refs/pull/100/head&#39;: b&#39;b514f4d74dd93b237cb72a91e992a0480393b546&#39;,
+ b&#39;refs/pull/101/head&#39;: b&#39;b514f4d74dd93b237cb72a91e992a0480393b546&#39;,
+ b&#39;refs/pull/102/head&#39;: b&#39;f2f28a5809657930caa51d2606dc62c3e74d2e27&#39;,
+ b&#39;refs/pull/103/head&#39;: b&#39;f2f28a5809657930caa51d2606dc62c3e74d2e27&#39;,
+ b&#39;refs/pull/104/head&#39;: b&#39;43863e528cbd069b8f095f8eade79ae990fbe916&#39;,
+ b&#39;refs/pull/105/head&#39;: b&#39;43863e528cbd069b8f095f8eade79ae990fbe916&#39;,
+ b&#39;refs/pull/106/head&#39;: b&#39;238b7db8c24f6ed43125696405f56cbd33302ad1&#39;,
+ b&#39;refs/pull/107/head&#39;: b&#39;238b7db8c24f6ed43125696405f56cbd33302ad1&#39;,
+ b&#39;refs/pull/108/head&#39;: b&#39;2e5bec99f5b0bfcb5e74ad8b9c0ff4c36827a295&#39;,
+ b&#39;refs/pull/109/head&#39;: b&#39;4996e93a5f24c375b1d56deddda1cd9cfddd14f6&#39;,
+ b&#39;refs/pull/11/head&#39;: b&#39;0d7e63476077d2ed51728823f3ce54b57a8287e6&#39;,
+ b&#39;refs/pull/110/head&#39;: b&#39;4996e93a5f24c375b1d56deddda1cd9cfddd14f6&#39;,
+ b&#39;refs/pull/12/head&#39;: b&#39;d2fcee067c4f003084950799f8cb408625d8c610&#39;,
+ b&#39;refs/pull/13/head&#39;: b&#39;5d29d66bdadfb7e265b0f895ca1bf6f26f7bad39&#39;,
+ b&#39;refs/pull/14/head&#39;: b&#39;114a4a2af63270ea69f08b5801cf1bdfa1c29222&#39;,
+ b&#39;refs/pull/15/head&#39;: b&#39;ffe1f38e3a91ef69b784b867ad5d7729bf17499f&#39;,
+ b&#39;refs/pull/16/head&#39;: b&#39;1b2ee6dbbe96435009ef96a80776ebc30e74b082&#39;,
+ b&#39;refs/pull/17/head&#39;: b&#39;b1d52163d2170c1b7a8fe9a0d05bf15a7c4dfcb0&#39;,
+ b&#39;refs/pull/18/head&#39;: b&#39;ac8a2c93c8c93985eb7a6e2742e2a3e5aa4786d8&#39;,
+ b&#39;refs/pull/19/head&#39;: b&#39;2363a9a27b3223553f87ce2607a431b0b6ac9510&#39;,
+ b&#39;refs/pull/2/head&#39;: b&#39;044c475cbccd47aad5dfbc3aa672ef37dc401fbc&#39;,
+ b&#39;refs/pull/20/head&#39;: b&#39;163eadfc89d1e2a19ef87b979cd3f912b2606a31&#39;,
+ b&#39;refs/pull/21/head&#39;: b&#39;d265b2309d471cb6edbcf349259837bd7401be10&#39;,
+ b&#39;refs/pull/22/head&#39;: b&#39;4a7b4e9f3ab3b38abbf300c4c7ea216d804bf768&#39;,
+ b&#39;refs/pull/23/head&#39;: b&#39;b3d3e249c98848e3f94cd266fcec31677cf51ba7&#39;,
+ b&#39;refs/pull/24/head&#39;: b&#39;c6a5918b051d30688bf70f7113bc097d44f97353&#39;,
+ b&#39;refs/pull/25/head&#39;: b&#39;cdc7a8a78d0344207a701370fe64452b8a32cbaa&#39;,
+ b&#39;refs/pull/26/head&#39;: b&#39;cdc7a8a78d0344207a701370fe64452b8a32cbaa&#39;,
+ b&#39;refs/pull/27/head&#39;: b&#39;40fee483349643993e1aa807b6bb92e70f8d0026&#39;,
+ b&#39;refs/pull/28/head&#39;: b&#39;7fbbc778dbcf88f57ac70a1c8c47f51dcc7c044a&#39;,
+ b&#39;refs/pull/29/head&#39;: b&#39;e3bd34e88a215a96d79dc362c3bda22966d1a159&#39;,
+ b&#39;refs/pull/3/head&#39;: b&#39;f05bb4e34974fe56bde6329b65917eb6c13bb492&#39;,
+ b&#39;refs/pull/30/head&#39;: b&#39;8f9f426f13d70b21f573f7c50bbe01e8ce38f158&#39;,
+ b&#39;refs/pull/31/head&#39;: b&#39;8f9f426f13d70b21f573f7c50bbe01e8ce38f158&#39;,
+ b&#39;refs/pull/32/head&#39;: b&#39;5e8e2a3d76050131a74e943045ce370cf05c8a5a&#39;,
+ b&#39;refs/pull/33/head&#39;: b&#39;2fd55f0a653bf8ec2e7ffda16c7b2d601167da06&#39;,
+ b&#39;refs/pull/34/head&#39;: b&#39;2fd55f0a653bf8ec2e7ffda16c7b2d601167da06&#39;,
+ b&#39;refs/pull/35/head&#39;: b&#39;01394b26a91cbfdcdea7ceccf87b1d57dc8d954a&#39;,
+ b&#39;refs/pull/36/head&#39;: b&#39;01394b26a91cbfdcdea7ceccf87b1d57dc8d954a&#39;,
+ b&#39;refs/pull/37/head&#39;: b&#39;9329115eba6048db7972381ecb86bbc897d3f977&#39;,
+ b&#39;refs/pull/38/head&#39;: b&#39;9329115eba6048db7972381ecb86bbc897d3f977&#39;,
+ b&#39;refs/pull/39/head&#39;: b&#39;2922709aaef766e633d29ad29b559b3597ebce5f&#39;,
+ b&#39;refs/pull/4/head&#39;: b&#39;4ced0ff539deaed8c0550d8b9375964cf4f301ea&#39;,
+ b&#39;refs/pull/40/head&#39;: b&#39;2922709aaef766e633d29ad29b559b3597ebce5f&#39;,
+ b&#39;refs/pull/41/head&#39;: b&#39;2922709aaef766e633d29ad29b559b3597ebce5f&#39;,
+ b&#39;refs/pull/42/head&#39;: b&#39;a80543f6271e23effee307d9b1e43ae0346ed32c&#39;,
+ b&#39;refs/pull/43/head&#39;: b&#39;a80543f6271e23effee307d9b1e43ae0346ed32c&#39;,
+ b&#39;refs/pull/44/head&#39;: b&#39;2e6645a55e1a665b42880d10fa731909ca2cbc62&#39;,
+ b&#39;refs/pull/45/head&#39;: b&#39;2e6645a55e1a665b42880d10fa731909ca2cbc62&#39;,
+ b&#39;refs/pull/46/head&#39;: b&#39;2e6645a55e1a665b42880d10fa731909ca2cbc62&#39;,
+ b&#39;refs/pull/47/head&#39;: b&#39;5701b39fa080dc72d44bb8ab3748272535a1f555&#39;,
+ b&#39;refs/pull/48/head&#39;: b&#39;5701b39fa080dc72d44bb8ab3748272535a1f555&#39;,
+ b&#39;refs/pull/49/head&#39;: b&#39;5701b39fa080dc72d44bb8ab3748272535a1f555&#39;,
+ b&#39;refs/pull/5/head&#39;: b&#39;f1f7d2da22ebd871b40633480bbcf65c6e359183&#39;,
+ b&#39;refs/pull/50/head&#39;: b&#39;abee9488b95fe174d8c70eaf81481ff75e6a0aeb&#39;,
+ b&#39;refs/pull/51/head&#39;: b&#39;abee9488b95fe174d8c70eaf81481ff75e6a0aeb&#39;,
+ b&#39;refs/pull/52/head&#39;: b&#39;abee9488b95fe174d8c70eaf81481ff75e6a0aeb&#39;,
+ b&#39;refs/pull/53/head&#39;: b&#39;5c9060d676990842910378026a54f76159f14af1&#39;,
+ b&#39;refs/pull/54/head&#39;: b&#39;5c9060d676990842910378026a54f76159f14af1&#39;,
+ b&#39;refs/pull/55/head&#39;: b&#39;5c9060d676990842910378026a54f76159f14af1&#39;,
+ b&#39;refs/pull/56/head&#39;: b&#39;4772475351cda80b6417c70faf574e2b129ae3ce&#39;,
+ b&#39;refs/pull/57/head&#39;: b&#39;4772475351cda80b6417c70faf574e2b129ae3ce&#39;,
+ b&#39;refs/pull/58/head&#39;: b&#39;4772475351cda80b6417c70faf574e2b129ae3ce&#39;,
+ b&#39;refs/pull/59/head&#39;: b&#39;6c22d07d89bb18e3085ba95855c3e57f78b4efd9&#39;,
+ b&#39;refs/pull/6/head&#39;: b&#39;09c70147a2697351b54ab4c6fa963674ebfaf762&#39;,
+ b&#39;refs/pull/60/head&#39;: b&#39;6a35b22ac59b05e838bc6c2541f6a43fb0aad0f1&#39;,
+ b&#39;refs/pull/61/head&#39;: b&#39;1ca56d99216ea8e12ee32e40131c54c85473531d&#39;,
+ b&#39;refs/pull/62/head&#39;: b&#39;140948d0e0f9e93242643485667db698b91ca84b&#39;,
+ b&#39;refs/pull/63/head&#39;: b&#39;e26ef132b990841aa0d5fcb4d1172519d7f47540&#39;,
+ b&#39;refs/pull/64/head&#39;: b&#39;140948d0e0f9e93242643485667db698b91ca84b&#39;,
+ b&#39;refs/pull/65/head&#39;: b&#39;feac3d41c796fce059cf555730ec274b8b850687&#39;,
+ b&#39;refs/pull/66/head&#39;: b&#39;feac3d41c796fce059cf555730ec274b8b850687&#39;,
+ b&#39;refs/pull/67/head&#39;: b&#39;feac3d41c796fce059cf555730ec274b8b850687&#39;,
+ b&#39;refs/pull/68/head&#39;: b&#39;feac3d41c796fce059cf555730ec274b8b850687&#39;,
+ b&#39;refs/pull/69/head&#39;: b&#39;7b952d878baa72b3f1a07b7ea5ee2836f7fdb4ba&#39;,
+ b&#39;refs/pull/7/head&#39;: b&#39;204624e13a9e07770997f95bdf45af179f27e9c4&#39;,
+ b&#39;refs/pull/70/head&#39;: b&#39;7b952d878baa72b3f1a07b7ea5ee2836f7fdb4ba&#39;,
+ b&#39;refs/pull/71/head&#39;: b&#39;7b952d878baa72b3f1a07b7ea5ee2836f7fdb4ba&#39;,
+ b&#39;refs/pull/72/head&#39;: b&#39;da4c00f7e53abceeb80efc9baae8d5a836d32f30&#39;,
+ b&#39;refs/pull/73/head&#39;: b&#39;da4c00f7e53abceeb80efc9baae8d5a836d32f30&#39;,
+ b&#39;refs/pull/74/head&#39;: b&#39;bd0515a6b4b6e6266013920694598ae113d48b2c&#39;,
+ b&#39;refs/pull/75/head&#39;: b&#39;4372406c65f3e11d0138123d45aaa774c27fbe76&#39;,
+ b&#39;refs/pull/76/head&#39;: b&#39;1f997c23eab00214e49b2def58b6a6e86bdf1cc2&#39;,
+ b&#39;refs/pull/77/head&#39;: b&#39;4372406c65f3e11d0138123d45aaa774c27fbe76&#39;,
+ b&#39;refs/pull/78/head&#39;: b&#39;bf346d6742f6558d1bc5c34cd71c63e4eadf22bd&#39;,
+ b&#39;refs/pull/79/head&#39;: b&#39;6beaaa4db5fb1705f2468462bb40ff2c46341786&#39;,
+ b&#39;refs/pull/8/head&#39;: b&#39;4546786737d692063b9c175b2e2b5035649e7aaa&#39;,
+ b&#39;refs/pull/80/head&#39;: b&#39;4df4e6289e4644f21e400d8e148649e9881b4adc&#39;,
+ b&#39;refs/pull/81/head&#39;: b&#39;2ba920d2d2c834f3fd9c570d2150a0f5dd9dc200&#39;,
+ b&#39;refs/pull/82/head&#39;: b&#39;d3880bf360b7e36e8cd1ad2c0ee588ffd30611f4&#39;,
+ b&#39;refs/pull/83/head&#39;: b&#39;f13f3bfd7e4ad3e7084b89b94d789e4e4a9c8e0b&#39;,
+ b&#39;refs/pull/84/head&#39;: b&#39;7ddf22fdb933da4734fac522287c2c99105b8ced&#39;,
+ b&#39;refs/pull/85/head&#39;: b&#39;4b7fd4e6cb22afc01020d2464be022ed4b055395&#39;,
+ b&#39;refs/pull/86/head&#39;: b&#39;80fb1308d9d7576f2d04526f3ce72e197f9ae7de&#39;,
+ b&#39;refs/pull/87/head&#39;: b&#39;11f32203327e26fd9bcd26c0d7af0c2ebe6266de&#39;,
+ b&#39;refs/pull/88/head&#39;: b&#39;5961f169e5cd94319fc32ff3d4888469d4a9a293&#39;,
+ b&#39;refs/pull/89/head&#39;: b&#39;4415bf6ee68993eca9ea6c81d978d5d9f541a8d4&#39;,
+ b&#39;refs/pull/9/head&#39;: b&#39;24763e5554012f97af5e9926673bdf9cccdc79dc&#39;,
+ b&#39;refs/pull/90/head&#39;: b&#39;4415bf6ee68993eca9ea6c81d978d5d9f541a8d4&#39;,
+ b&#39;refs/pull/91/head&#39;: b&#39;cdd4da987285797630230d68d871395a3e59f563&#39;,
+ b&#39;refs/pull/92/head&#39;: b&#39;c3f9f83ef09dfe6cf221302cc3cb5e601d419fe2&#39;,
+ b&#39;refs/pull/93/head&#39;: b&#39;cdd4da987285797630230d68d871395a3e59f563&#39;,
+ b&#39;refs/pull/94/head&#39;: b&#39;8df5667732c0040b0c5f472568e1c5ef2a514170&#39;,
+ b&#39;refs/pull/95/head&#39;: b&#39;8df5667732c0040b0c5f472568e1c5ef2a514170&#39;,
+ b&#39;refs/pull/96/head&#39;: b&#39;8ee75013f768869f5e7b15e48dc69937d49de1ec&#39;,
+ b&#39;refs/pull/97/head&#39;: b&#39;8ee75013f768869f5e7b15e48dc69937d49de1ec&#39;,
+ b&#39;refs/pull/98/head&#39;: b&#39;7d46e2e2574cbfb575f32206468e3d0c9ad04231&#39;,
+ b&#39;refs/pull/99/head&#39;: b&#39;7d46e2e2574cbfb575f32206468e3d0c9ad04231&#39;}</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[36]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="p">[</span><span class="n">key</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">decode</span><span class="p">()</span> <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">config</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span> <span class="k">if</span> <span class="n">key</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="sa">b</span><span class="s2">&quot;remote&quot;</span><span class="p">]</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[36]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>[&#39;origin&#39;, &#39;nima&#39;]</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="dulwich.porcelain.ls_remote">dulwich.porcelain.ls_remote<a class="anchor-link" href="#dulwich.porcelain.ls_remote">&#182;</a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[79]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">dulwich</span><span class="o">.</span><span class="n">porcelain</span><span class="o">.</span><span class="n">ls_remote</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[79]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>{b&#39;HEAD&#39;: b&#39;2fd55f0a653bf8ec2e7ffda16c7b2d601167da06&#39;,
+ b&#39;refs/heads/debian&#39;: b&#39;618389f8300615ba7d31c4ba7b75fb94770391e1&#39;,
+ b&#39;refs/heads/dev&#39;: b&#39;2fd55f0a653bf8ec2e7ffda16c7b2d601167da06&#39;,
+ b&#39;refs/heads/main&#39;: b&#39;71f2b1d96cfa8596319686a5a98514ad4ac85506&#39;,
+ b&#39;refs/pull/1/head&#39;: b&#39;b90bd029b4707a94640957cbfae73a631a9d83e0&#39;,
+ b&#39;refs/pull/1/merge&#39;: b&#39;c767a6a929e599c245a4241477093554c1ab0d10&#39;,
+ b&#39;refs/pull/10/head&#39;: b&#39;ea5b60d7fc34fce65ec4a503c20536d3e0d4587a&#39;,
+ b&#39;refs/pull/11/head&#39;: b&#39;0d7e63476077d2ed51728823f3ce54b57a8287e6&#39;,
+ b&#39;refs/pull/12/head&#39;: b&#39;d2fcee067c4f003084950799f8cb408625d8c610&#39;,
+ b&#39;refs/pull/13/head&#39;: b&#39;5d29d66bdadfb7e265b0f895ca1bf6f26f7bad39&#39;,
+ b&#39;refs/pull/14/head&#39;: b&#39;114a4a2af63270ea69f08b5801cf1bdfa1c29222&#39;,
+ b&#39;refs/pull/15/head&#39;: b&#39;ffe1f38e3a91ef69b784b867ad5d7729bf17499f&#39;,
+ b&#39;refs/pull/16/head&#39;: b&#39;1b2ee6dbbe96435009ef96a80776ebc30e74b082&#39;,
+ b&#39;refs/pull/17/head&#39;: b&#39;b1d52163d2170c1b7a8fe9a0d05bf15a7c4dfcb0&#39;,
+ b&#39;refs/pull/18/head&#39;: b&#39;ac8a2c93c8c93985eb7a6e2742e2a3e5aa4786d8&#39;,
+ b&#39;refs/pull/19/head&#39;: b&#39;2363a9a27b3223553f87ce2607a431b0b6ac9510&#39;,
+ b&#39;refs/pull/2/head&#39;: b&#39;044c475cbccd47aad5dfbc3aa672ef37dc401fbc&#39;,
+ b&#39;refs/pull/20/head&#39;: b&#39;163eadfc89d1e2a19ef87b979cd3f912b2606a31&#39;,
+ b&#39;refs/pull/21/head&#39;: b&#39;d265b2309d471cb6edbcf349259837bd7401be10&#39;,
+ b&#39;refs/pull/22/head&#39;: b&#39;4a7b4e9f3ab3b38abbf300c4c7ea216d804bf768&#39;,
+ b&#39;refs/pull/23/head&#39;: b&#39;b3d3e249c98848e3f94cd266fcec31677cf51ba7&#39;,
+ b&#39;refs/pull/24/head&#39;: b&#39;c6a5918b051d30688bf70f7113bc097d44f97353&#39;,
+ b&#39;refs/pull/25/head&#39;: b&#39;cdc7a8a78d0344207a701370fe64452b8a32cbaa&#39;,
+ b&#39;refs/pull/26/head&#39;: b&#39;cdc7a8a78d0344207a701370fe64452b8a32cbaa&#39;,
+ b&#39;refs/pull/27/head&#39;: b&#39;40fee483349643993e1aa807b6bb92e70f8d0026&#39;,
+ b&#39;refs/pull/28/head&#39;: b&#39;7fbbc778dbcf88f57ac70a1c8c47f51dcc7c044a&#39;,
+ b&#39;refs/pull/29/head&#39;: b&#39;e3bd34e88a215a96d79dc362c3bda22966d1a159&#39;,
+ b&#39;refs/pull/3/head&#39;: b&#39;f05bb4e34974fe56bde6329b65917eb6c13bb492&#39;,
+ b&#39;refs/pull/30/head&#39;: b&#39;8f9f426f13d70b21f573f7c50bbe01e8ce38f158&#39;,
+ b&#39;refs/pull/31/head&#39;: b&#39;8f9f426f13d70b21f573f7c50bbe01e8ce38f158&#39;,
+ b&#39;refs/pull/32/head&#39;: b&#39;5e8e2a3d76050131a74e943045ce370cf05c8a5a&#39;,
+ b&#39;refs/pull/33/head&#39;: b&#39;2fd55f0a653bf8ec2e7ffda16c7b2d601167da06&#39;,
+ b&#39;refs/pull/34/head&#39;: b&#39;2fd55f0a653bf8ec2e7ffda16c7b2d601167da06&#39;,
+ b&#39;refs/pull/4/head&#39;: b&#39;4ced0ff539deaed8c0550d8b9375964cf4f301ea&#39;,
+ b&#39;refs/pull/5/head&#39;: b&#39;f1f7d2da22ebd871b40633480bbcf65c6e359183&#39;,
+ b&#39;refs/pull/6/head&#39;: b&#39;09c70147a2697351b54ab4c6fa963674ebfaf762&#39;,
+ b&#39;refs/pull/7/head&#39;: b&#39;204624e13a9e07770997f95bdf45af179f27e9c4&#39;,
+ b&#39;refs/pull/8/head&#39;: b&#39;4546786737d692063b9c175b2e2b5035649e7aaa&#39;,
+ b&#39;refs/pull/9/head&#39;: b&#39;24763e5554012f97af5e9926673bdf9cccdc79dc&#39;}</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="dulwich.objects.Commit">dulwich.objects.Commit<a class="anchor-link" href="#dulwich.objects.Commit">&#182;</a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[43]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">repo</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[43]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>b&#39;2fd55f0a653bf8ec2e7ffda16c7b2d601167da06&#39;</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[45]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">commit</span> <span class="o">=</span> <span class="n">repo</span><span class="p">[</span><span class="n">repo</span><span class="o">.</span><span class="n">head</span><span class="p">()]</span>
+<span class="n">commit</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[45]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>&lt;Commit b&#39;2fd55f0a653bf8ec2e7ffda16c7b2d601167da06&#39;&gt;</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[46]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">type</span><span class="p">(</span><span class="n">commit</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[46]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>dulwich.objects.Commit</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[39]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">commit</span><span class="o">.</span><span class="n">message</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[39]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>b&#39;Update etc.sh&#39;</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[40]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">dir</span><span class="p">(</span><span class="n">commit</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[40]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>[&#39;__bytes__&#39;,
+ &#39;__class__&#39;,
+ &#39;__cmp__&#39;,
+ &#39;__delattr__&#39;,
+ &#39;__dir__&#39;,
+ &#39;__doc__&#39;,
+ &#39;__eq__&#39;,
+ &#39;__format__&#39;,
+ &#39;__ge__&#39;,
+ &#39;__getattribute__&#39;,
+ &#39;__gt__&#39;,
+ &#39;__hash__&#39;,
+ &#39;__init__&#39;,
+ &#39;__init_subclass__&#39;,
+ &#39;__le__&#39;,
+ &#39;__lt__&#39;,
+ &#39;__module__&#39;,
+ &#39;__ne__&#39;,
+ &#39;__new__&#39;,
+ &#39;__reduce__&#39;,
+ &#39;__reduce_ex__&#39;,
+ &#39;__repr__&#39;,
+ &#39;__setattr__&#39;,
+ &#39;__sizeof__&#39;,
+ &#39;__slots__&#39;,
+ &#39;__str__&#39;,
+ &#39;__subclasshook__&#39;,
+ &#39;_author&#39;,
+ &#39;_author_time&#39;,
+ &#39;_author_timezone&#39;,
+ &#39;_author_timezone_neg_utc&#39;,
+ &#39;_check_has_member&#39;,
+ &#39;_chunked_text&#39;,
+ &#39;_commit_time&#39;,
+ &#39;_commit_timezone&#39;,
+ &#39;_commit_timezone_neg_utc&#39;,
+ &#39;_committer&#39;,
+ &#39;_deserialize&#39;,
+ &#39;_encoding&#39;,
+ &#39;_extra&#39;,
+ &#39;_get_extra&#39;,
+ &#39;_get_parents&#39;,
+ &#39;_gpgsig&#39;,
+ &#39;_header&#39;,
+ &#39;_is_legacy_object&#39;,
+ &#39;_mergetag&#39;,
+ &#39;_message&#39;,
+ &#39;_needs_serialization&#39;,
+ &#39;_parents&#39;,
+ &#39;_parse_file&#39;,
+ &#39;_parse_legacy_object&#39;,
+ &#39;_parse_legacy_object_header&#39;,
+ &#39;_parse_object&#39;,
+ &#39;_parse_object_header&#39;,
+ &#39;_serialize&#39;,
+ &#39;_set_parents&#39;,
+ &#39;_sha&#39;,
+ &#39;_tree&#39;,
+ &#39;as_legacy_object&#39;,
+ &#39;as_legacy_object_chunks&#39;,
+ &#39;as_pretty_string&#39;,
+ &#39;as_raw_chunks&#39;,
+ &#39;as_raw_string&#39;,
+ &#39;author&#39;,
+ &#39;author_time&#39;,
+ &#39;author_timezone&#39;,
+ &#39;check&#39;,
+ &#39;commit_time&#39;,
+ &#39;commit_timezone&#39;,
+ &#39;committer&#39;,
+ &#39;copy&#39;,
+ &#39;encoding&#39;,
+ &#39;extra&#39;,
+ &#39;from_file&#39;,
+ &#39;from_path&#39;,
+ &#39;from_raw_chunks&#39;,
+ &#39;from_raw_string&#39;,
+ &#39;from_string&#39;,
+ &#39;get_type&#39;,
+ &#39;gpgsig&#39;,
+ &#39;id&#39;,
+ &#39;mergetag&#39;,
+ &#39;message&#39;,
+ &#39;parents&#39;,
+ &#39;raw_length&#39;,
+ &#39;set_raw_chunks&#39;,
+ &#39;set_raw_string&#39;,
+ &#39;set_type&#39;,
+ &#39;sha&#39;,
+ &#39;tree&#39;,
+ &#39;type&#39;,
+ &#39;type_name&#39;,
+ &#39;type_num&#39;]</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[41]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">main</span> <span class="o">=</span> <span class="n">heads</span><span class="o">.</span><span class="n">main</span>
+<span class="n">main</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_text output_error">
+<pre>
+<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg">NameError</span>                                 Traceback (most recent call last)
+<span class="ansi-green-fg">/tmp/ipykernel_300/3703271362.py</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span>
+<span class="ansi-green-fg">----&gt; 1</span><span class="ansi-red-fg"> </span>main <span class="ansi-blue-fg">=</span> heads<span class="ansi-blue-fg">.</span>main
+<span class="ansi-green-intense-fg ansi-bold">      2</span> main
+
+<span class="ansi-red-fg">NameError</span>: name &#39;heads&#39; is not defined</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Get the commit pointed to by head called master.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[17]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">main</span><span class="o">.</span><span class="n">commit</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[17]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>&lt;git.Commit &#34;95ed236bd715a06320ee85d519fb79a0adffe072&#34;&gt;</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[18]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">main</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="s2">&quot;main2&quot;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[18]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>&lt;git.Head &#34;refs/heads/main2&#34;&gt;</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Verify that the <code>main</code> branch has been renamed to <code>main2</code>.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[19]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span><span class="nb">cd</span><span class="w"> </span><span class="o">{</span>dir_local<span class="o">}</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>git<span class="w"> </span>branch
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>* <span class="ansi-green-fg">main2</span>
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Get-the-Active-Branch">Get the Active Branch<a class="anchor-link" href="#Get-the-Active-Branch">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[19]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="p">[</span><span class="n">m</span> <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="nb">dir</span><span class="p">(</span><span class="n">dulwich</span><span class="o">.</span><span class="n">porcelain</span><span class="p">)</span> <span class="k">if</span> <span class="s2">&quot;br&quot;</span> <span class="ow">in</span> <span class="n">m</span><span class="p">]</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[19]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>[&#39;_make_branch_ref&#39;,
+ &#39;_update_head_during_checkout_branch&#39;,
+ &#39;active_branch&#39;,
+ &#39;branch_create&#39;,
+ &#39;branch_delete&#39;,
+ &#39;branch_list&#39;,
+ &#39;checkout_branch&#39;,
+ &#39;find_unique_abbrev&#39;,
+ &#39;get_branch_remote&#39;]</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[20]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">dulwich</span><span class="o">.</span><span class="n">porcelain</span><span class="o">.</span><span class="n">active_branch</span><span class="p">(</span><span class="n">repo</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[20]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>b&#39;main&#39;</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Get-All-Branches">Get All Branches<a class="anchor-link" href="#Get-All-Branches">&#182;</a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[21]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">dulwich</span><span class="o">.</span><span class="n">porcelain</span><span class="o">.</span><span class="n">branch_list</span><span class="p">(</span><span class="n">repo</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[21]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>{b&#39;main&#39;}</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Changed-Files">Changed Files<a class="anchor-link" href="#Changed-Files">&#182;</a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Update a file.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[23]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;# add a line of comment&quot;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span><span class="o">{</span>dir_local<span class="o">}</span>/build.sh
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Staged-Files">Staged Files<a class="anchor-link" href="#Staged-Files">&#182;</a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The file <code>build.sh</code> is now staged.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Commit the change.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Push-the-Commits">Push the Commits<a class="anchor-link" href="#Push-the-Commits">&#182;</a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Push the local <code>main2</code> branch to the remote <code>main2</code> branch.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The above is equivalent to the following more detailed specification.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Push the local <code>main2</code> branch to the remote <code>main</code> branch.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="git-pull">git pull<a class="anchor-link" href="#git-pull">&#182;</a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[11]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span>ls<span class="w"> </span><span class="o">{</span>dir_local<span class="o">}</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>abc  build.sh  readme.md
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[12]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">dulwich</span><span class="o">.</span><span class="n">porcelain</span><span class="o">.</span><span class="n">pull</span><span class="p">(</span><span class="n">repo</span><span class="p">,</span> <span class="n">refspecs</span><span class="o">=</span><span class="s2">&quot;main&quot;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[13]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span>ls<span class="w"> </span><span class="o">{</span>dir_local<span class="o">}</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>abc  build.sh  readme.md  test1.txt
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="git-checkout">git checkout<a class="anchor-link" href="#git-checkout">&#182;</a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[12]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="p">[</span><span class="n">m</span> <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="nb">dir</span><span class="p">(</span><span class="n">dulwich</span><span class="o">.</span><span class="n">porcelain</span><span class="p">)</span> <span class="k">if</span> <span class="s1">&#39;checkout&#39;</span> <span class="ow">in</span> <span class="n">m</span><span class="p">]</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[12]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>[&#39;_update_head_during_checkout_branch&#39;, &#39;checkout_branch&#39;]</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[18]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span>git<span class="w"> </span>-C<span class="w"> </span><span class="o">{</span>dir_local<span class="o">}</span><span class="w"> </span>status
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>On branch dev
+nothing to commit, working tree clean
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[26]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span>git<span class="w"> </span>-C<span class="w"> </span><span class="o">{</span>dir_local<span class="o">}</span><span class="w"> </span>branch
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>* <span class="ansi-green-fg">dev</span>
+  main
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[27]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">dulwich</span><span class="o">.</span><span class="n">porcelain</span><span class="o">.</span><span class="n">checkout_branch</span><span class="p">(</span><span class="n">repo</span><span class="p">,</span> <span class="s2">&quot;main&quot;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[28]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span>git<span class="w"> </span>-C<span class="w"> </span><span class="o">{</span>dir_local<span class="o">}</span><span class="w"> </span>branch
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>  dev
+* <span class="ansi-green-fg">main</span>
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="git-tag">git tag<a class="anchor-link" href="#git-tag">&#182;</a></h2><p>List all tags.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[27]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span>git<span class="w"> </span>-C<span class="w"> </span><span class="o">{</span>dir_local<span class="o">}</span><span class="w"> </span>tag<span class="w"> </span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>v1.0.0
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[24]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="p">[</span><span class="n">m</span> <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="nb">dir</span><span class="p">(</span><span class="n">dulwich</span><span class="o">.</span><span class="n">porcelain</span><span class="p">)</span> <span class="k">if</span> <span class="s2">&quot;tag&quot;</span> <span class="ow">in</span> <span class="n">m</span><span class="p">]</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[24]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>[&#39;_make_tag_ref&#39;,
+ &#39;get_unstaged_changes&#39;,
+ &#39;print_tag&#39;,
+ &#39;show_tag&#39;,
+ &#39;tag_create&#39;,
+ &#39;tag_delete&#39;,
+ &#39;tag_list&#39;]</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[37]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">dulwich</span><span class="o">.</span><span class="n">porcelain</span><span class="o">.</span><span class="n">tag_list</span><span class="p">(</span><span class="n">repo</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[37]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>[b&#39;v1.0.0&#39;, b&#39;v2.0.0&#39;]</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="git-tag-tag_name">git tag tag_name<a class="anchor-link" href="#git-tag-tag_name">&#182;</a></h2><p>Create a new tag.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[38]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">dulwich</span><span class="o">.</span><span class="n">porcelain</span><span class="o">.</span><span class="n">tag_create</span><span class="p">(</span><span class="n">repo</span><span class="p">,</span> <span class="s2">&quot;v2.0.0&quot;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[40]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">dulwich</span><span class="o">.</span><span class="n">porcelain</span><span class="o">.</span><span class="n">push</span><span class="p">(</span><span class="n">repo</span><span class="p">,</span> <span class="n">refspecs</span><span class="o">=</span><span class="s2">&quot;v2.0.0&quot;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_text output_error">
+<pre>
+<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg">HTTPUnauthorized</span>                          Traceback (most recent call last)
+Cell <span class="ansi-green-fg">In[40], line 1</span>
+<span class="ansi-green-fg">----&gt; 1</span> <span class="ansi-yellow-bg">dulwich</span><span class="ansi-yellow-bg" style="color: rgb(98,98,98)">.</span><span class="ansi-yellow-bg">porcelain</span><span class="ansi-yellow-bg" style="color: rgb(98,98,98)">.</span><span class="ansi-yellow-bg">push</span><span class="ansi-yellow-bg">(</span><span class="ansi-yellow-bg">repo</span><span class="ansi-yellow-bg">,</span><span class="ansi-yellow-bg"> </span><span class="ansi-yellow-bg">refspecs</span><span class="ansi-yellow-bg" style="color: rgb(98,98,98)">=</span><span class="ansi-yellow-bg" style="color: rgb(175,0,0)">&#34;</span><span class="ansi-yellow-bg" style="color: rgb(175,0,0)">v2.0.0</span><span class="ansi-yellow-bg" style="color: rgb(175,0,0)">&#34;</span><span class="ansi-yellow-bg">)</span>
+
+File <span class="ansi-green-fg">/usr/local/lib/python3.10/dist-packages/dulwich/porcelain.py:1181</span>, in <span class="ansi-cyan-fg">push</span><span class="ansi-blue-fg">(repo, remote_location, refspecs, outstream, errstream, force, **kwargs)</span>
+<span class="ansi-green-intense-fg ansi-bold">   1179</span> remote_location <span style="color: rgb(98,98,98)">=</span> client<span style="color: rgb(98,98,98)">.</span>get_url(path)
+<span class="ansi-green-intense-fg ansi-bold">   1180</span> <span class="ansi-bold" style="color: rgb(0,135,0)">try</span>:
+<span class="ansi-green-fg">-&gt; 1181</span>     result <span style="color: rgb(98,98,98)">=</span> <span class="ansi-yellow-bg">client</span><span class="ansi-yellow-bg" style="color: rgb(98,98,98)">.</span><span class="ansi-yellow-bg">send_pack</span><span class="ansi-yellow-bg">(</span>
+<span class="ansi-green-intense-fg ansi-bold">   1182</span> <span class="ansi-yellow-bg">        </span><span class="ansi-yellow-bg">path</span><span class="ansi-yellow-bg">,</span>
+<span class="ansi-green-intense-fg ansi-bold">   1183</span> <span class="ansi-yellow-bg">        </span><span class="ansi-yellow-bg">update_refs</span><span class="ansi-yellow-bg">,</span>
+<span class="ansi-green-intense-fg ansi-bold">   1184</span> <span class="ansi-yellow-bg">        </span><span class="ansi-yellow-bg">generate_pack_data</span><span class="ansi-yellow-bg" style="color: rgb(98,98,98)">=</span><span class="ansi-yellow-bg">r</span><span class="ansi-yellow-bg" style="color: rgb(98,98,98)">.</span><span class="ansi-yellow-bg">generate_pack_data</span><span class="ansi-yellow-bg">,</span>
+<span class="ansi-green-intense-fg ansi-bold">   1185</span> <span class="ansi-yellow-bg">        </span><span class="ansi-yellow-bg">progress</span><span class="ansi-yellow-bg" style="color: rgb(98,98,98)">=</span><span class="ansi-yellow-bg">errstream</span><span class="ansi-yellow-bg" style="color: rgb(98,98,98)">.</span><span class="ansi-yellow-bg">write</span><span class="ansi-yellow-bg">,</span>
+<span class="ansi-green-intense-fg ansi-bold">   1186</span> <span class="ansi-yellow-bg">    </span><span class="ansi-yellow-bg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">   1187</span> <span class="ansi-bold" style="color: rgb(0,135,0)">except</span> SendPackError <span class="ansi-bold" style="color: rgb(0,135,0)">as</span> exc:
+<span class="ansi-green-intense-fg ansi-bold">   1188</span>     <span class="ansi-bold" style="color: rgb(0,135,0)">raise</span> Error(
+<span class="ansi-green-intense-fg ansi-bold">   1189</span>         <span style="color: rgb(175,0,0)">&#34;</span><span style="color: rgb(175,0,0)">Push to </span><span style="color: rgb(175,0,0)">&#34;</span> <span style="color: rgb(98,98,98)">+</span> remote_location <span style="color: rgb(98,98,98)">+</span> <span style="color: rgb(175,0,0)">&#34;</span><span style="color: rgb(175,0,0)"> failed -&gt; </span><span style="color: rgb(175,0,0)">&#34;</span> <span style="color: rgb(98,98,98)">+</span> exc<span style="color: rgb(98,98,98)">.</span>args[<span style="color: rgb(98,98,98)">0</span>]<span style="color: rgb(98,98,98)">.</span>decode(),
+<span class="ansi-green-intense-fg ansi-bold">   1190</span>     ) <span class="ansi-bold" style="color: rgb(0,135,0)">from</span> <span class="ansi-bold" style="color: rgb(0,0,255)">exc</span>
+
+File <span class="ansi-green-fg">/usr/local/lib/python3.10/dist-packages/dulwich/client.py:2015</span>, in <span class="ansi-cyan-fg">AbstractHttpGitClient.send_pack</span><span class="ansi-blue-fg">(self, path, update_refs, generate_pack_data, progress)</span>
+<span class="ansi-green-intense-fg ansi-bold">   1996</span> <span style="color: rgb(175,0,0)">&#34;&#34;&#34;Upload a pack to a remote repository.</span>
+<span class="ansi-green-intense-fg ansi-bold">   1997</span> 
+<span class="ansi-green-intense-fg ansi-bold">   1998</span> <span style="color: rgb(175,0,0)">Args:</span>
+<span class="ansi-green-fg">   (...)</span>
+<span class="ansi-green-intense-fg ansi-bold">   2012</span> 
+<span class="ansi-green-intense-fg ansi-bold">   2013</span> <span style="color: rgb(175,0,0)">&#34;&#34;&#34;</span>
+<span class="ansi-green-intense-fg ansi-bold">   2014</span> url <span style="color: rgb(98,98,98)">=</span> <span style="color: rgb(0,135,0)">self</span><span style="color: rgb(98,98,98)">.</span>_get_url(path)
+<span class="ansi-green-fg">-&gt; 2015</span> old_refs, server_capabilities, url <span style="color: rgb(98,98,98)">=</span> <span class="ansi-yellow-bg" style="color: rgb(0,135,0)">self</span><span class="ansi-yellow-bg" style="color: rgb(98,98,98)">.</span><span class="ansi-yellow-bg">_discover_references</span><span class="ansi-yellow-bg">(</span>
+<span class="ansi-green-intense-fg ansi-bold">   2016</span> <span class="ansi-yellow-bg">    </span><span class="ansi-yellow-bg" style="color: rgb(175,0,0)">b</span><span class="ansi-yellow-bg" style="color: rgb(175,0,0)">&#34;</span><span class="ansi-yellow-bg" style="color: rgb(175,0,0)">git-receive-pack</span><span class="ansi-yellow-bg" style="color: rgb(175,0,0)">&#34;</span><span class="ansi-yellow-bg">,</span><span class="ansi-yellow-bg"> </span><span class="ansi-yellow-bg">url</span>
+<span class="ansi-green-intense-fg ansi-bold">   2017</span> <span class="ansi-yellow-bg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">   2018</span> (
+<span class="ansi-green-intense-fg ansi-bold">   2019</span>     negotiated_capabilities,
+<span class="ansi-green-intense-fg ansi-bold">   2020</span>     agent,
+<span class="ansi-green-intense-fg ansi-bold">   2021</span> ) <span style="color: rgb(98,98,98)">=</span> <span style="color: rgb(0,135,0)">self</span><span style="color: rgb(98,98,98)">.</span>_negotiate_receive_pack_capabilities(server_capabilities)
+<span class="ansi-green-intense-fg ansi-bold">   2022</span> negotiated_capabilities<span style="color: rgb(98,98,98)">.</span>add(capability_agent())
+
+File <span class="ansi-green-fg">/usr/local/lib/python3.10/dist-packages/dulwich/client.py:1940</span>, in <span class="ansi-cyan-fg">AbstractHttpGitClient._discover_references</span><span class="ansi-blue-fg">(self, service, base_url)</span>
+<span class="ansi-green-intense-fg ansi-bold">   1938</span>     tail <span style="color: rgb(98,98,98)">+</span><span style="color: rgb(98,98,98)">=</span> <span style="color: rgb(175,0,0)">&#34;</span><span style="color: rgb(175,0,0)">?service=</span><span class="ansi-bold" style="color: rgb(175,95,135)">%s</span><span style="color: rgb(175,0,0)">&#34;</span> <span style="color: rgb(98,98,98)">%</span> service<span style="color: rgb(98,98,98)">.</span>decode(<span style="color: rgb(175,0,0)">&#34;</span><span style="color: rgb(175,0,0)">ascii</span><span style="color: rgb(175,0,0)">&#34;</span>)
+<span class="ansi-green-intense-fg ansi-bold">   1939</span> url <span style="color: rgb(98,98,98)">=</span> urljoin(base_url, tail)
+<span class="ansi-green-fg">-&gt; 1940</span> resp, read <span style="color: rgb(98,98,98)">=</span> <span class="ansi-yellow-bg" style="color: rgb(0,135,0)">self</span><span class="ansi-yellow-bg" style="color: rgb(98,98,98)">.</span><span class="ansi-yellow-bg">_http_request</span><span class="ansi-yellow-bg">(</span><span class="ansi-yellow-bg">url</span><span class="ansi-yellow-bg">,</span><span class="ansi-yellow-bg"> </span><span class="ansi-yellow-bg">headers</span><span class="ansi-yellow-bg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">   1942</span> <span class="ansi-bold" style="color: rgb(0,135,0)">if</span> resp<span style="color: rgb(98,98,98)">.</span>redirect_location:
+<span class="ansi-green-intense-fg ansi-bold">   1943</span>     <span style="color: rgb(95,135,135)"># Something changed (redirect!), so let&#39;s update the base URL</span>
+<span class="ansi-green-intense-fg ansi-bold">   1944</span>     <span class="ansi-bold" style="color: rgb(0,135,0)">if</span> <span class="ansi-bold" style="color: rgb(175,0,255)">not</span> resp<span style="color: rgb(98,98,98)">.</span>redirect_location<span style="color: rgb(98,98,98)">.</span>endswith(tail):
+
+File <span class="ansi-green-fg">/usr/local/lib/python3.10/dist-packages/dulwich/client.py:2218</span>, in <span class="ansi-cyan-fg">Urllib3HttpGitClient._http_request</span><span class="ansi-blue-fg">(self, url, headers, data)</span>
+<span class="ansi-green-intense-fg ansi-bold">   2216</span>     <span class="ansi-bold" style="color: rgb(0,135,0)">raise</span> NotGitRepository()
+<span class="ansi-green-intense-fg ansi-bold">   2217</span> <span class="ansi-bold" style="color: rgb(0,135,0)">if</span> resp<span style="color: rgb(98,98,98)">.</span>status <span style="color: rgb(98,98,98)">==</span> <span style="color: rgb(98,98,98)">401</span>:
+<span class="ansi-green-fg">-&gt; 2218</span>     <span class="ansi-bold" style="color: rgb(0,135,0)">raise</span> HTTPUnauthorized(resp<span style="color: rgb(98,98,98)">.</span>headers<span style="color: rgb(98,98,98)">.</span>get(<span style="color: rgb(175,0,0)">&#34;</span><span style="color: rgb(175,0,0)">WWW-Authenticate</span><span style="color: rgb(175,0,0)">&#34;</span>), url)
+<span class="ansi-green-intense-fg ansi-bold">   2219</span> <span class="ansi-bold" style="color: rgb(0,135,0)">if</span> resp<span style="color: rgb(98,98,98)">.</span>status <span style="color: rgb(98,98,98)">==</span> <span style="color: rgb(98,98,98)">407</span>:
+<span class="ansi-green-intense-fg ansi-bold">   2220</span>     <span class="ansi-bold" style="color: rgb(0,135,0)">raise</span> HTTPProxyUnauthorized(resp<span style="color: rgb(98,98,98)">.</span>headers<span style="color: rgb(98,98,98)">.</span>get(<span style="color: rgb(175,0,0)">&#34;</span><span style="color: rgb(175,0,0)">Proxy-Authenticate</span><span style="color: rgb(175,0,0)">&#34;</span>), url)
+
+<span class="ansi-red-fg">HTTPUnauthorized</span>: No valid credentials provided</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="git-diff">git diff<a class="anchor-link" href="#git-diff">&#182;</a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[16]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">help</span><span class="p">(</span><span class="n">repo</span><span class="o">.</span><span class="n">refs</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span><span class="o">.</span><span class="n">commit</span><span class="o">.</span><span class="n">diff</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Help on method diff in module git.diff:
+
+diff(other: Union[Type[git.diff.Diffable.Index], Type[ForwardRef(&#39;Tree&#39;)], object, NoneType, str] = &lt;class &#39;git.diff.Diffable.Index&#39;&gt;, paths: Union[str, List[str], Tuple[str, ...], NoneType] = None, create_patch: bool = False, **kwargs: Any) -&gt; &#39;DiffIndex&#39; method of git.objects.commit.Commit instance
+    Creates diffs between two items being trees, trees and index or an
+    index and the working tree. It will detect renames automatically.
+    
+    :param other:
+        Is the item to compare us with.
+        If None, we will be compared to the working tree.
+        If Treeish, it will be compared against the respective tree
+        If Index ( type ), it will be compared against the index.
+        If git.NULL_TREE, it will compare against the empty tree.
+        It defaults to Index to assure the method will not by-default fail
+        on bare repositories.
+    
+    :param paths:
+        is a list of paths or a single path to limit the diff to.
+        It will only include at least one of the given path or paths.
+    
+    :param create_patch:
+        If True, the returned Diff contains a detailed patch that if applied
+        makes the self to other. Patches are somewhat costly as blobs have to be read
+        and diffed.
+    
+    :param kwargs:
+        Additional arguments passed to git-diff, such as
+        R=True to swap both sides of the diff.
+    
+    :return: git.DiffIndex
+    
+    :note:
+        On a bare repository, &#39;other&#39; needs to be provided as Index or as
+        as Tree/Commit, or a git command error will occur
+
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[3]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;https://github.com/dclong/docker-ubuntu_b.git&quot;</span>
+<span class="n">dir_local</span> <span class="o">=</span> <span class="s2">&quot;/tmp/&quot;</span> <span class="o">+</span> <span class="n">url</span><span class="p">[(</span><span class="n">url</span><span class="o">.</span><span class="n">rindex</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="p">:]</span>
+<span class="o">!</span>rm<span class="w"> </span>-rf<span class="w"> </span><span class="o">{</span>dir_local<span class="o">}</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[4]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">repo</span> <span class="o">=</span> <span class="n">git</span><span class="o">.</span><span class="n">Repo</span><span class="o">.</span><span class="n">clone_from</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">dir_local</span><span class="p">,</span> <span class="n">branch</span><span class="o">=</span><span class="s2">&quot;main&quot;</span><span class="p">)</span>
+<span class="n">repo</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[4]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>&lt;git.repo.base.Repo &#39;/tmp/docker-ubuntu_b.git/.git&#39;&gt;</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[25]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">repo</span><span class="o">.</span><span class="n">refs</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[25]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>[&lt;git.Head &#34;refs/heads/debian&#34;&gt;,
+ &lt;git.Head &#34;refs/heads/dev&#34;&gt;,
+ &lt;git.Head &#34;refs/heads/main&#34;&gt;,
+ &lt;git.RemoteReference &#34;refs/remotes/origin/HEAD&#34;&gt;,
+ &lt;git.RemoteReference &#34;refs/remotes/origin/debian&#34;&gt;,
+ &lt;git.RemoteReference &#34;refs/remotes/origin/dev&#34;&gt;,
+ &lt;git.RemoteReference &#34;refs/remotes/origin/main&#34;&gt;]</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[6]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">diffs</span> <span class="o">=</span> <span class="n">repo</span><span class="o">.</span><span class="n">refs</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span><span class="o">.</span><span class="n">commit</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">repo</span><span class="o">.</span><span class="n">refs</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">commit</span><span class="p">)</span>
+<span class="n">diffs</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[6]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>[]</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[21]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">diffs</span> <span class="o">=</span> <span class="n">repo</span><span class="o">.</span><span class="n">refs</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span><span class="o">.</span><span class="n">commit</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">repo</span><span class="o">.</span><span class="n">refs</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">commit</span><span class="p">)</span>
+<span class="n">diffs</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[21]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>[&lt;git.diff.Diff at 0x7f0eb05d1a60&gt;, &lt;git.diff.Diff at 0x7f0eb05d1af0&gt;]</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[13]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">str</span><span class="p">(</span><span class="n">diffs</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[13]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>&#39;Dockerfile\n=======================================================\nlhs: 100644 | 8ae5c7650a8c031a8e176d896a3665bbe7e2aae8\nrhs: 100644 | 9f2304d9a97aa1279ad1938b3bb74790172c9d8b&#39;</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[12]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">repo</span><span class="o">.</span><span class="n">refs</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span><span class="o">.</span><span class="n">name</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[12]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>&#39;origin/main&#39;</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[6]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">repo</span><span class="o">.</span><span class="n">git</span><span class="o">.</span><span class="n">status</span><span class="p">())</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>On branch main
+Your branch is up to date with &#39;origin/main&#39;.
+
+nothing to commit, working tree clean
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[6]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">repo</span><span class="o">.</span><span class="n">git</span><span class="o">.</span><span class="n">checkout</span><span class="p">(</span><span class="s2">&quot;debian&quot;</span><span class="p">,</span> <span class="n">force</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[6]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>&#34;Your branch is up to date with &#39;origin/debian&#39;.&#34;</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[8]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">repo</span><span class="o">.</span><span class="n">git</span><span class="o">.</span><span class="n">checkout</span><span class="p">(</span><span class="n">b</span><span class="o">=</span><span class="s2">&quot;a_new_branch&quot;</span><span class="p">,</span> <span class="n">force</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[8]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>&#39;&#39;</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">nima</span> <span class="o">=</span> <span class="n">repo</span><span class="o">.</span><span class="n">refs</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span><span class="o">.</span><span class="n">checkout</span><span class="p">(</span><span class="n">force</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="s2">&quot;nima&quot;</span><span class="p">)</span>
+<span class="n">nima</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[50]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">diffs</span> <span class="o">=</span> <span class="n">nima</span><span class="o">.</span><span class="n">commit</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">repo</span><span class="o">.</span><span class="n">refs</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">commit</span><span class="p">)</span>
+<span class="n">diffs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">diff</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[50]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>&#39;&#39;</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Diff the <code>dev</code> and the <code>main</code> branch,
+which is equivalent to the Git command 
+<code>git diff dev..main</code>.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[30]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">repo</span><span class="o">.</span><span class="n">refs</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">commit</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">repo</span><span class="o">.</span><span class="n">refs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">commit</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[30]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>[]</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[32]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">diffs</span> <span class="o">=</span> <span class="n">repo</span><span class="o">.</span><span class="n">refs</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">commit</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">repo</span><span class="o">.</span><span class="n">refs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">commit</span><span class="p">)</span>
+<span class="n">diffs</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[32]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>[&lt;git.diff.Diff at 0x128ca3a60&gt;]</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[33]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">diffs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[33]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>&lt;git.diff.Diff at 0x128ca3a60&gt;</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[24]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">diffs</span> <span class="o">=</span> <span class="n">repo</span><span class="o">.</span><span class="n">refs</span><span class="p">[</span><span class="mi">6</span><span class="p">]</span><span class="o">.</span><span class="n">commit</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">repo</span><span class="o">.</span><span class="n">refs</span><span class="p">[</span><span class="mi">7</span><span class="p">]</span><span class="o">.</span><span class="n">commit</span><span class="p">)</span>
+<span class="n">diffs</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[24]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>[]</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[25]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">diffs</span> <span class="o">=</span> <span class="n">repo</span><span class="o">.</span><span class="n">refs</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span><span class="o">.</span><span class="n">commit</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">repo</span><span class="o">.</span><span class="n">refs</span><span class="p">[</span><span class="mi">7</span><span class="p">]</span><span class="o">.</span><span class="n">commit</span><span class="p">)</span>
+<span class="n">diffs</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[25]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>[&lt;git.diff.Diff at 0x128ca3790&gt;]</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[26]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">diffs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">diff</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[26]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>&#39;&#39;</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[27]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">diffs</span> <span class="o">=</span> <span class="n">repo</span><span class="o">.</span><span class="n">refs</span><span class="p">[</span><span class="mi">7</span><span class="p">]</span><span class="o">.</span><span class="n">commit</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">repo</span><span class="o">.</span><span class="n">refs</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span><span class="o">.</span><span class="n">commit</span><span class="p">)</span>
+<span class="n">diffs</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[27]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>[&lt;git.diff.Diff at 0x128ca3820&gt;]</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[28]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">diffs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">diff</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[28]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>&#39;&#39;</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[19]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">any</span><span class="p">(</span><span class="n">ele</span> <span class="k">for</span> <span class="n">ele</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;&quot;</span><span class="p">])</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[19]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>False</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[23]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">repo</span><span class="o">.</span><span class="n">branches</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">name</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[23]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>&#39;dev&#39;</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">for</span> <span class="n">branch</span> <span class="ow">in</span> <span class="n">repo</span><span class="o">.</span><span class="n">branches</span><span class="p">:</span>
+    <span class="n">branch</span><span class="o">.</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[12]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">commit</span> <span class="o">=</span> <span class="n">repo</span><span class="o">.</span><span class="n">head</span><span class="o">.</span><span class="n">commit</span>
+<span class="n">commit</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[12]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>&lt;git.Commit &#34;6716bb0d016bd63ba543f3d9c67a65dadecd152e&#34;&gt;</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[15]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">type</span><span class="p">(</span><span class="n">repo</span><span class="o">.</span><span class="n">branches</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[15]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>git.refs.head.Head</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[17]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">repo</span><span class="o">.</span><span class="n">refs</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span><span class="o">.</span><span class="n">commit</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">repo</span><span class="o">.</span><span class="n">refs</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">commit</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[17]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>[]</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[9]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">repo</span><span class="o">.</span><span class="n">refs</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span><span class="o">.</span><span class="n">commit</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">repo</span><span class="o">.</span><span class="n">refs</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">commit</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[9]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>[&lt;git.diff.Diff at 0x127370310&gt;]</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[20]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">help</span><span class="p">(</span><span class="n">repo</span><span class="o">.</span><span class="n">git</span><span class="o">.</span><span class="n">branch</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Help on function &lt;lambda&gt; in module git.cmd:
+
+&lt;lambda&gt; lambda *args, **kwargs
+
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[28]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">repo</span><span class="o">.</span><span class="n">heads</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[28]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>[&lt;git.Head &#34;refs/heads/dev&#34;&gt;, &lt;git.Head &#34;refs/heads/main&#34;&gt;]</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Diff the <code>debian</code> and the <code>main</code> branches but limit diff to specified paths 
+(via the <code>paths</code> parameter).</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[24]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">diffs</span> <span class="o">=</span> <span class="n">repo</span><span class="o">.</span><span class="n">refs</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span><span class="o">.</span><span class="n">commit</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">repo</span><span class="o">.</span><span class="n">refs</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">commit</span><span class="p">,</span> <span class="n">paths</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;build.sh&quot;</span><span class="p">,</span> <span class="s2">&quot;scripts&quot;</span><span class="p">])</span>
+<span class="n">diffs</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[24]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>[]</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="References">References<a class="anchor-link" href="#References">&#182;</a></h2><p><a href="https://github.com/dulwich/dulwich">https://github.com/dulwich/dulwich</a></p>
+<p><a href="https://www.dulwich.io/docs/api/">https://www.dulwich.io/docs/api/</a></p>
+
+</div>
+</div>
+</div>
+ 
+
+</body>
+<script type="text/javascript">if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
+    var mathjaxscript = document.createElement('script');
+    mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
+    mathjaxscript.type = 'text/javascript';
+    mathjaxscript.src = '//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML';
+    mathjaxscript[(window.opera ? "innerHTML" : "text")] =
+        "MathJax.Hub.Config({" +
+        "    config: ['MMLorHTML.js']," +
+        "    TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'AMS' } }," +
+        "    jax: ['input/TeX','input/MathML','output/HTML-CSS']," +
+        "    extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']," +
+        "    displayAlign: 'center'," +
+        "    displayIndent: '0em'," +
+        "    showMathMenu: true," +
+        "    tex2jax: { " +
+        "        inlineMath: [ ['$','$'] ], " +
+        "        displayMath: [ ['$$','$$'] ]," +
+        "        processEscapes: true," +
+        "        preview: 'TeX'," +
+        "    }, " +
+        "    'HTML-CSS': { " +
+        " linebreaks: { automatic: true, width: '95% container' }, " +
+        "        styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: 'black ! important'} }" +
+        "    } " +
+        "}); ";
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
+}
+</script>
+</div>
+    <footer>
+<p class="meta">
+  <span class="byline author vcard">
+    Posted by <span class="fn">Ben Du</span>
+  </span>
+<time datetime="2020-11-29T21:13:47-08:00" pubdate>Nov 29, 2020</time>  <span class="categories">
+    <a class="category" href="https://misc.legendu.net/tag/computer-science.html">Computer Science</a>
+    <a class="category" href="https://misc.legendu.net/tag/programming.html">programming</a>
+    <a class="category" href="https://misc.legendu.net/tag/python.html">Python</a>
+    <a class="category" href="https://misc.legendu.net/tag/git.html">Git</a>
+    <a class="category" href="https://misc.legendu.net/tag/dulwicch.html">Dulwicch</a>
+    <a class="category" href="https://misc.legendu.net/tag/version-control.html">version control</a>
+  </span>
+</p>    </footer>
+  </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div>
+  </section>
+</div>
+<aside class="sidebar">
+  <section>
+    <h1>Recent Posts</h1>
+    <ul id="recent_posts">
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/tips-on-health/">Tips on Health</a>
+      </li>
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/tips-on-child-education/">Tips on Child Education</a>
+      </li>
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/tips-on-fd/">Tips on fd</a>
+      </li>
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/the-fzf-command-is-a-great-alternative-to-find/">The fzf Command Is a Great Alternative to find</a>
+      </li>
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/ruff-is-an-extremely-fast-python-linter-written-in-rust/">Ruff Is An Extremely Fast Python Linter Written in Rust</a>
+      </li>
+    </ul>
+  </section>
+  <section>
+    <h1>Categories</h1>
+    <ul id="recent_posts">
+        <li><a href="https://misc.legendu.net/category/ai.html">AI</a></li>
+        <li><a href="https://misc.legendu.net/category/career.html">Career</a></li>
+        <li><a href="https://misc.legendu.net/category/cloud.html">Cloud</a></li>
+        <li><a href="https://misc.legendu.net/category/computer-science.html">Computer Science</a></li>
+        <li><a href="https://misc.legendu.net/category/fiannce.html">Fiannce</a></li>
+        <li><a href="https://misc.legendu.net/category/finance.html">Finance</a></li>
+        <li><a href="https://misc.legendu.net/category/fun-problems.html">Fun Problems</a></li>
+        <li><a href="https://misc.legendu.net/category/hardware.html">Hardware</a></li>
+        <li><a href="https://misc.legendu.net/category/health.html">Health</a></li>
+        <li><a href="https://misc.legendu.net/category/house.html">House</a></li>
+        <li><a href="https://misc.legendu.net/category/internet.html">Internet</a></li>
+        <li><a href="https://misc.legendu.net/category/investment.html">Investment</a></li>
+        <li><a href="https://misc.legendu.net/category/life.html">life</a></li>
+        <li><a href="https://misc.legendu.net/category/linux.html">Linux</a></li>
+        <li><a href="https://misc.legendu.net/category/os.html">OS</a></li>
+        <li><a href="https://misc.legendu.net/category/people.html">People</a></li>
+        <li><a href="https://misc.legendu.net/category/philosophy.html">Philosophy</a></li>
+        <li><a href="https://misc.legendu.net/category/research.html">Research</a></li>
+        <li><a href="https://misc.legendu.net/category/shopping.html">Shopping</a></li>
+        <li><a href="https://misc.legendu.net/category/soft-skills.html">soft skills</a></li>
+        <li><a href="https://misc.legendu.net/category/software.html">Software</a></li>
+        <li><a href="https://misc.legendu.net/category/statistics.html">Statistics</a></li>
+        <li><a href="https://misc.legendu.net/category/tools.html">Tools</a></li>
+    </ul>
+  </section>
+ 
+
+  <section>
+  <h1>Tags</h1>
+  <ul class="tagcloud">
+  </ul>
+  </section>
+
+
+
+  <section>
+    <h1>GitHub Repos</h1>
+    <ul id="gh_repos">
+      <li class="loading">Status updating...</li>
+    </ul>
+      <a href="https://github.com/legendu-net">@legendu-net</a> on GitHub
+    <script type="text/javascript">
+      $.domReady(function(){
+          if (!window.jXHR){
+              var jxhr = document.createElement('script');
+              jxhr.type = 'text/javascript';
+              jxhr.src = 'https://misc.legendu.net/theme/js/jXHR.js';
+              var s = document.getElementsByTagName('script')[0];
+              s.parentNode.insertBefore(jxhr, s);
+          }
+
+          github.showRepos({
+              user: 'legendu-net',
+              count: 5,
+              skip_forks: true,
+              target: '#gh_repos'
+          });
+      });
+    </script>
+    <script src="https://misc.legendu.net/theme/js/github.js" type="text/javascript"> </script>
+  </section>
+
+    <section>
+        <h1>Social</h2>
+        <ul>
+            <li><a href="https://www.linkedin.com/in/ben-chuanlong-du-1239b221/" target="_blank">LinkedIn</a></li>
+            <li><a href="https://hub.docker.com/u/dclong" target="_blank">Docker Hub</a></li>
+            <li><a href="https://stackoverflow.com/users/7808204/benjamin-du?tab=profile" target="_blank">Stack Overflow</a></li>
+            <li><a href="https://twitter.com/longendu" target="_blank">Twitter</a></li>
+        <!--
+            <li><a href="https://misc.legendu.net/" type="application/rss+xml" rel="alternate">RSS</a></li>
+            -->
+        </ul>
+    </section>
+</aside>    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Ben Chuanlong Du -
+  <span class="credit">Powered by <a href="http://getpelican.com">Pelican</a></span>
+</p></footer>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-3STS9BVPF6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-3STS9BVPF6');
+</script>
+	<script type="text/javascript">
+	  var disqus_shortname = 'dclong';
+          var disqus_identifier = '/blog/hands-on-Dulwich/';
+          var disqus_url = 'https://misc.legendu.net/blog/hands-on-Dulwich/';
+          var disqus_title = 'Hands on Dulwich';
+	  (function() {
+	    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	    dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+	    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	   })();
+	</script>
+</body>
+</html>

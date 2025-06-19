@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Deploy Apache Ray</title>
+  <meta name="author" content="Ben Chuanlong Du">
+
+  <link href="https://misc.legendu.net/atom.xml" type="application/atom+xml" rel="alternate"
+        title="Ben Chuanlong Du's Blog Atom Feed" />
+
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link href="https://misc.legendu.net/favicon.png" rel="icon">
+  <link href="https://misc.legendu.net/theme/css/main_2.css" media="screen, projection"
+        rel="stylesheet" type="text/css">
+  <script src="https://misc.legendu.net/theme/js/modernizr-2.0.js"></script>
+  <script src="https://misc.legendu.net/theme/js/ender.js"></script>
+  <script src="https://misc.legendu.net/theme/js/octopress.js" type="text/javascript"></script>
+
+  <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <script data-ad-client="ca-pub-3836424032203369" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+</head>
+
+<body>
+  <header role="banner"><hgroup>
+  <h1><a href="https://misc.legendu.net/">Ben Chuanlong Du's Blog</a></h1>
+    <h2>It is never too late to learn.</h2>
+</hgroup></header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="https://misc.legendu.net/atom.xml" rel="subscribe-rss">RSS</a></li>
+</ul>
+
+<form name="search" action="https://www.bing.com/search" method="get" onSubmit="return build_query()">
+  <fieldset role="search">
+      <!--
+    <input type="hidden" name="q" value="site:https://misc.legendu.net" />
+        -->
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+
+<script type = "text/javascript">
+    function build_query() {
+        var query = document.forms["search"]["q"].value;
+        var prefix = "site:https://misc.legendu.net "
+        if (!query.startsWith(prefix)) {
+            query = prefix + query;
+            document.forms["search"]["q"].value = query;
+        }
+        return true;
+    }
+</script>
+
+<ul class="main-navigation">
+    <li><a href="https://www.legendu.net">Home</a></li>
+    <li><a href="https://misc.legendu.net">Blog</a></li>
+    <li><a href="https://misc.legendu.net/archives.html">Archives</a></li>
+    <li><a href="https://misc.legendu.net/categories.html">Categories</a></li>
+    <li><a href="https://misc.legendu.net/tags.html">Tags</a></li>
+    <li><a href="https://www.legendu.net/pages/about">About</a></li>
+</ul></nav>
+  <div id="main">
+    <div id="content">
+<div>
+  <article class="hentry" role="article">
+<header>
+      <h1 class="entry-title">Deploy Apache Ray</h1>
+      <p class="meta"><time datetime="2020-02-10T09:39:25-08:00" pubdate>Feb 10, 2020</time></p>
+</header>
+
+  <div class="entry-content"><p><strong>Things on this page are fragmentary and immature notes/thoughts of the author. Please read with your own judgement!</strong></p>
+<h2 id="manual-cluster-setup"><a href="https://ray.readthedocs.io/en/latest/using-ray-on-a-cluster.html">Manual Cluster Setup</a></h2>
+<p>It is very easy to set up Apache Ray on a small cluster manually.
+The instructions at
+<a href="https://ray.readthedocs.io/en/latest/using-ray-on-a-cluster.html">Manual Cluster Setup</a>
+is very clear.
+Just one comment.
+You do not need to configure SSH keys for nodes in the cluster for manual configuration.
+When you start the master node manually (using the command <code>ray start --head</code>), 
+it will print a command to add new nodes into the cluster.
+The command 
+(e.g., <code>ray start --address='10.148.186.18:12030' --redis-password='5241590000000000'</code>)
+includes the Redis password for authentication to join the cluster.</p>
+<p>By default, 
+the Ray dashboard is visitable only on the head node.
+To make it visitable by public IP,
+you can include the option <code>--webui-host=0.0.0.0</code> when starting Ray on the head node.</p>
+<h2 id="private-cluster">Private Cluster</h2>
+<p>https://github.com/ray-project/ray/blob/master/python/ray/autoscaler/local/example-full.yaml</p>
+<ol>
+<li>The Ray autoscaler installs Ray on the head and worker nodes by default.
+    That is if you don't set values for the fileds <code>head_setup_commands</code> and <code>setup_commands</code>,
+    Ray is automatically installed/updated on the head and worker nodes.
+    You can disable this behavior by set a dummy command (e.g., <code>echo "Starting Ray ..."</code>) for the 2 fileds.</li>
+</ol>
+<p>https://github.com/ray-project/ray/issues/4902</p>
+<p>https://github.com/ray-project/ray/issues/4559</p>
+<p>https://github.com/ray-project/ray/issues/3408</p>
+<p>https://github.com/ray-project/ray/issues/4811</p>
+<p>https://github.com/ray-project/ray/issues/5326</p>
+<p>https://github.com/ray-project/ray/issues/5437</p>
+<p>https://github.com/ray-project/ray/issues/5442</p>
+<p>https://github.com/ray-project/ray/issues/3190</p>
+<p>https://ray.readthedocs.io/en/latest/using-ray-on-a-cluster.html</p>
+<p>https://ray.readthedocs.io/en/latest/autoscaling.html</p>
+<p>https://ray.readthedocs.io/en/latest/autoscaling.html#quick-start-private-cluster</p>
+<p>https://ray.readthedocs.io/en/latest/using-ray-on-a-cluster.html</p>
+<h2 id="gcp">GCP</h2>
+<p>https://github.com/ray-project/ray/issues/2660</p>
+<h2 id="aws">AWS</h2>
+<p>https://gist.github.com/edoakes/0f7f62b7d9aa5481482bca23be5f622a</p>
+<h2 id="kubernetes">Kubernetes</h2>
+<p><a href="https://ray.readthedocs.io/en/latest/deploy-on-kubernetes.html">Deploying on Kubernetes</a></p>
+<p>https://github.com/ray-project/ray/tree/master/doc/kubernetes</p>
+<p>https://ray.readthedocs.io/en/latest/autoscaling.html#kubernetes</p>
+<p>https://github.com/ray-project/ray/blob/master/python/ray/autoscaler/kubernetes/example-full.yaml</p>
+<h2 id="ray-with-spark">Ray with Spark</h2>
+<h2 id="references">References</h2>
+<p>https://github.com/ray-project/ray/issues/7025</p></div>
+    <footer>
+<p class="meta">
+  <span class="byline author vcard">
+    Posted by <span class="fn">Benjamin Du</span>
+  </span>
+<time datetime="2020-02-10T09:39:25-08:00" pubdate>Feb 10, 2020</time>  <span class="categories">
+    <a class="category" href="https://misc.legendu.net/tag/programming.html">programming</a>
+    <a class="category" href="https://misc.legendu.net/tag/apache-ray.html">Apache Ray</a>
+    <a class="category" href="https://misc.legendu.net/tag/distributed-computing.html">distributed computing</a>
+    <a class="category" href="https://misc.legendu.net/tag/deploy.html">deploy</a>
+    <a class="category" href="https://misc.legendu.net/tag/deployment.html">deployment</a>
+    <a class="category" href="https://misc.legendu.net/tag/setup.html">setup</a>
+    <a class="category" href="https://misc.legendu.net/tag/configure.html">configure</a>
+    <a class="category" href="https://misc.legendu.net/tag/kubernetes.html">Kubernetes</a>
+    <a class="category" href="https://misc.legendu.net/tag/k8s.html">k8s</a>
+    <a class="category" href="https://misc.legendu.net/tag/spark.html">Spark</a>
+    <a class="category" href="https://misc.legendu.net/tag/cluster.html">cluster</a>
+  </span>
+</p>    </footer>
+  </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div>
+  </section>
+</div>
+<aside class="sidebar">
+  <section>
+    <h1>Recent Posts</h1>
+    <ul id="recent_posts">
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/tips-on-health/">Tips on Health</a>
+      </li>
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/tips-on-child-education/">Tips on Child Education</a>
+      </li>
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/tips-on-fd/">Tips on fd</a>
+      </li>
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/the-fzf-command-is-a-great-alternative-to-find/">The fzf Command Is a Great Alternative to find</a>
+      </li>
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/ruff-is-an-extremely-fast-python-linter-written-in-rust/">Ruff Is An Extremely Fast Python Linter Written in Rust</a>
+      </li>
+    </ul>
+  </section>
+  <section>
+    <h1>Categories</h1>
+    <ul id="recent_posts">
+        <li><a href="https://misc.legendu.net/category/ai.html">AI</a></li>
+        <li><a href="https://misc.legendu.net/category/career.html">Career</a></li>
+        <li><a href="https://misc.legendu.net/category/cloud.html">Cloud</a></li>
+        <li><a href="https://misc.legendu.net/category/computer-science.html">Computer Science</a></li>
+        <li><a href="https://misc.legendu.net/category/fiannce.html">Fiannce</a></li>
+        <li><a href="https://misc.legendu.net/category/finance.html">Finance</a></li>
+        <li><a href="https://misc.legendu.net/category/fun-problems.html">Fun Problems</a></li>
+        <li><a href="https://misc.legendu.net/category/hardware.html">Hardware</a></li>
+        <li><a href="https://misc.legendu.net/category/health.html">Health</a></li>
+        <li><a href="https://misc.legendu.net/category/house.html">House</a></li>
+        <li><a href="https://misc.legendu.net/category/internet.html">Internet</a></li>
+        <li><a href="https://misc.legendu.net/category/investment.html">Investment</a></li>
+        <li><a href="https://misc.legendu.net/category/life.html">life</a></li>
+        <li><a href="https://misc.legendu.net/category/linux.html">Linux</a></li>
+        <li><a href="https://misc.legendu.net/category/os.html">OS</a></li>
+        <li><a href="https://misc.legendu.net/category/people.html">People</a></li>
+        <li><a href="https://misc.legendu.net/category/philosophy.html">Philosophy</a></li>
+        <li><a href="https://misc.legendu.net/category/research.html">Research</a></li>
+        <li><a href="https://misc.legendu.net/category/shopping.html">Shopping</a></li>
+        <li><a href="https://misc.legendu.net/category/soft-skills.html">soft skills</a></li>
+        <li><a href="https://misc.legendu.net/category/software.html">Software</a></li>
+        <li><a href="https://misc.legendu.net/category/statistics.html">Statistics</a></li>
+        <li><a href="https://misc.legendu.net/category/tools.html">Tools</a></li>
+    </ul>
+  </section>
+ 
+
+  <section>
+  <h1>Tags</h1>
+  <ul class="tagcloud">
+  </ul>
+  </section>
+
+
+
+  <section>
+    <h1>GitHub Repos</h1>
+    <ul id="gh_repos">
+      <li class="loading">Status updating...</li>
+    </ul>
+      <a href="https://github.com/legendu-net">@legendu-net</a> on GitHub
+    <script type="text/javascript">
+      $.domReady(function(){
+          if (!window.jXHR){
+              var jxhr = document.createElement('script');
+              jxhr.type = 'text/javascript';
+              jxhr.src = 'https://misc.legendu.net/theme/js/jXHR.js';
+              var s = document.getElementsByTagName('script')[0];
+              s.parentNode.insertBefore(jxhr, s);
+          }
+
+          github.showRepos({
+              user: 'legendu-net',
+              count: 5,
+              skip_forks: true,
+              target: '#gh_repos'
+          });
+      });
+    </script>
+    <script src="https://misc.legendu.net/theme/js/github.js" type="text/javascript"> </script>
+  </section>
+
+    <section>
+        <h1>Social</h2>
+        <ul>
+            <li><a href="https://www.linkedin.com/in/ben-chuanlong-du-1239b221/" target="_blank">LinkedIn</a></li>
+            <li><a href="https://hub.docker.com/u/dclong" target="_blank">Docker Hub</a></li>
+            <li><a href="https://stackoverflow.com/users/7808204/benjamin-du?tab=profile" target="_blank">Stack Overflow</a></li>
+            <li><a href="https://twitter.com/longendu" target="_blank">Twitter</a></li>
+        <!--
+            <li><a href="https://misc.legendu.net/" type="application/rss+xml" rel="alternate">RSS</a></li>
+            -->
+        </ul>
+    </section>
+</aside>    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Ben Chuanlong Du -
+  <span class="credit">Powered by <a href="http://getpelican.com">Pelican</a></span>
+</p></footer>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-3STS9BVPF6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-3STS9BVPF6');
+</script>
+	<script type="text/javascript">
+	  var disqus_shortname = 'dclong';
+          var disqus_identifier = '/blog/deploy-apache-ray/';
+          var disqus_url = 'https://misc.legendu.net/blog/deploy-apache-ray/';
+          var disqus_title = 'Deploy Apache Ray';
+	  (function() {
+	    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	    dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+	    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	   })();
+	</script>
+</body>
+</html>

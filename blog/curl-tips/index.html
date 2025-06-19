@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Tips on cURL and Wget</title>
+  <meta name="author" content="Ben Chuanlong Du">
+
+  <link href="https://misc.legendu.net/atom.xml" type="application/atom+xml" rel="alternate"
+        title="Ben Chuanlong Du's Blog Atom Feed" />
+
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link href="https://misc.legendu.net/favicon.png" rel="icon">
+  <link href="https://misc.legendu.net/theme/css/main_2.css" media="screen, projection"
+        rel="stylesheet" type="text/css">
+  <script src="https://misc.legendu.net/theme/js/modernizr-2.0.js"></script>
+  <script src="https://misc.legendu.net/theme/js/ender.js"></script>
+  <script src="https://misc.legendu.net/theme/js/octopress.js" type="text/javascript"></script>
+
+  <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <script data-ad-client="ca-pub-3836424032203369" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+</head>
+
+<body>
+  <header role="banner"><hgroup>
+  <h1><a href="https://misc.legendu.net/">Ben Chuanlong Du's Blog</a></h1>
+    <h2>It is never too late to learn.</h2>
+</hgroup></header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="https://misc.legendu.net/atom.xml" rel="subscribe-rss">RSS</a></li>
+</ul>
+
+<form name="search" action="https://www.bing.com/search" method="get" onSubmit="return build_query()">
+  <fieldset role="search">
+      <!--
+    <input type="hidden" name="q" value="site:https://misc.legendu.net" />
+        -->
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+
+<script type = "text/javascript">
+    function build_query() {
+        var query = document.forms["search"]["q"].value;
+        var prefix = "site:https://misc.legendu.net "
+        if (!query.startsWith(prefix)) {
+            query = prefix + query;
+            document.forms["search"]["q"].value = query;
+        }
+        return true;
+    }
+</script>
+
+<ul class="main-navigation">
+    <li><a href="https://www.legendu.net">Home</a></li>
+    <li><a href="https://misc.legendu.net">Blog</a></li>
+    <li><a href="https://misc.legendu.net/archives.html">Archives</a></li>
+    <li><a href="https://misc.legendu.net/categories.html">Categories</a></li>
+    <li><a href="https://misc.legendu.net/tags.html">Tags</a></li>
+    <li><a href="https://www.legendu.net/pages/about">About</a></li>
+</ul></nav>
+  <div id="main">
+    <div id="content">
+<div>
+  <article class="hentry" role="article">
+<header>
+      <h1 class="entry-title">Tips on cURL and Wget</h1>
+      <p class="meta"><time datetime="2013-10-26T13:02:55-07:00" pubdate>Oct 26, 2013</time></p>
+</header>
+
+  <div class="entry-content"><p><strong>Things on this page are fragmentary and immature notes/thoughts of the author. Please read with your own judgement!</strong></p>
+<h2 id="curl-vs-wget">cURL vs Wget</h2>
+<p><a href="https://daniel.haxx.se/docs/curl-vs-wget.html">curl vs wget</a>
+has a detailed comparison between curl and wget.
+In short, 
+curl is more powerful and flexible and thus is preferred to wget
+unless you want to download content recursively from a site 
+(which curl does not support currently).</p>
+<h2 id="alternatives-to-curl">Alternatives to <code>curl</code></h2>
+<p><a href="https://curl.trillworks.com/">Convert curl syntax to Python, Node.js, R, PHP, Strest, Go, JSON, Rust</a></p>
+<p>The postman plugin for Google Chrome can also convert curl command to other programming languages.</p>
+<h2 id="proxy">Proxy</h2>
+<p>A general way (works for most other command-line tools too) is set the environment variables <code>http_proxy</code> and <code>https_proxy</code>
+(and <code>ftp_proxy</code>, etc. if need them).
+This way is preferred if your command/script to run has dependencies which also requires proxy to work.</p>
+<div class="highlight"><pre><span></span><code><span class="nb">export</span><span class="w"> </span><span class="nv">http_proxy</span><span class="o">=</span>http://your.proxy.server:port
+<span class="nb">export</span><span class="w"> </span><span class="nv">https_proxy</span><span class="o">=</span>http://your.proxy.server:port
+</code></pre></div>
+
+<p>Another simple way is to use the option <code>--proxy</code> directly.
+This way is preferred if your command/script does not have other dependencies which also requires proxy to work.</p>
+<div class="highlight"><pre><span></span><code>curl<span class="w"> </span>--proxy<span class="w"> </span>http://your.proxy.server:port<span class="w"> </span>...
+</code></pre></div>
+
+<h2 id="tricks-and-traps">Tricks and Traps</h2>
+<ol>
+<li>Use the <code>-L</code> option to follow redirect URLs. 
+    This is a really useful trick to use curl to download things from GitHub.</li>
+</ol>
+<h2 id="curl-examples">cURL Examples</h2>
+<ol>
+<li>
+<p>Get redirected URL.</p>
+<div class="highlight"><pre><span></span><code>curl<span class="w"> </span>-sSL<span class="w"> </span>-o<span class="w"> </span>/dev/null<span class="w"> </span>-w<span class="w"> </span>%<span class="o">{</span>url_effective<span class="o">}</span><span class="w"> </span>https://github.com/legendu-net/icon/releases/latest
+</code></pre></div>
+
+</li>
+<li>
+<p>Use browser cookie.</p>
+<div class="highlight"><pre><span></span><code>curl<span class="w"> </span>-v<span class="w"> </span>--cookie-jar<span class="w"> </span>cjar<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--output<span class="w"> </span>/dev/null<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>http://cos.name/cn/
+
+curl<span class="w"> </span>-v<span class="w"> </span>--cookie<span class="w"> </span>cjar<span class="w"> </span>--cookie-jar<span class="w"> </span>cjar<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--data<span class="w"> </span><span class="s1">&#39;user_login={username}&#39;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--data<span class="w"> </span><span class="s1">&#39;password={password}&#39;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--data<span class="w"> </span><span class="s1">&#39;form_id=login&#39;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--output<span class="w"> </span>cos.html<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>http://cos.name/cn/
+
+:::bash
+curl<span class="w"> </span>-v<span class="w"> </span>--cookie-jar<span class="w"> </span>cjar<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--output<span class="w"> </span>/dev/null<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>https://www.economy.com/home/login/a_login.asp
+
+curl<span class="w"> </span>-v<span class="w"> </span>--cookie<span class="w"> </span>cjar<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--cookie-jar<span class="w"> </span>cjar<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--data<span class="w"> </span><span class="s1">&#39;email={user_email@some.com}&#39;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--data<span class="w"> </span><span class="s1">&#39;password={password}&#39;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--data<span class="w"> </span><span class="s1">&#39;form_id=frmMain&#39;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--output<span class="w"> </span>moody.html<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>https://www.economy.com/home/login/a_login.asp
+
+:::bash
+curl<span class="w"> </span>-v<span class="w"> </span>--cookie-jar<span class="w"> </span>cjar<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--output<span class="w"> </span>/dev/null<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>https://www.ncreif.org/login.aspx
+
+curl<span class="w"> </span>-v<span class="w"> </span>--cookie<span class="w"> </span>cjar<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--cookie-jar<span class="w"> </span>cjar<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--data<span class="w"> </span><span class="s1">&#39;username={user_name}&#39;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--data<span class="w"> </span><span class="s1">&#39;password={password}&#39;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--data<span class="w"> </span><span class="s1">&#39;form_id=form1&#39;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--output<span class="w"> </span>ncreif.html<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>https://www.ncreif.org/login.aspx
+
+:::bash
+wget<span class="w"> </span>--no-check-certificate<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--load-cookies<span class="o">=</span>ff_cookies.txt<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-p<span class="w"> </span>https://bitbucket.org/dclong/config/get/
+</code></pre></div>
+
+</li>
+</ol>
+<p>The easy way: login with your browser,
+and give the cookies to wget</p>
+<p>Easiest method: in general,
+you need to provide wget or <code>cURL</code> with the (logged-in) cookies
+from a particular website for them to fetch pages as if you were logged in.</p>
+<p>If you are using Firefox,
+it's easy to do via the Export Cookies add-on.
+Install the add-on, and:</p>
+<p>Go to Tools...Export Cookies,
+and save the cookies.txt file (you can change the filename/destination).</p>
+<p>Open up a terminal,
+and use wget with the <code>--load-cookies=FILENAME</code> option, e.g.</p>
+<div class="highlight"><pre><span></span><code>wget<span class="w"> </span>--load-cookies<span class="o">=</span>cookies.txt<span class="w"> </span>http://en.wikipedia.org/wiki/User:A
+</code></pre></div>
+
+<p>For <code>cURL</code>, it's</p>
+<div class="highlight"><pre><span></span><code>curl<span class="w"> </span>--cookie<span class="w"> </span>cookies.txt<span class="w"> </span>...
+</code></pre></div>
+
+<p>The hard way: use <code>cURL</code> (preferably) or <code>wget</code> to manage the entire session</p>
+<p>A detailed how-to is beyond the scope of this answer,
+but you use <code>cURL</code> with the --cookie-jar or <code>wget</code>
+with the --save-cookies --keep-session-cookiesoptions,
+along with the HTTP/S PUT method to log in to a site,
+save the login cookies, and then use them to simulate a browser.
+Needless to say,
+this requires going through the HTML source for the login page (get input field names, etc.),
+and is often difficult to get to work for sites
+using anything beyond simple login/password authentication.</p>
+<p>Tip: if you go this route,
+it is often much simpler to deal with the mobile version of a website (if available),
+at least for the authentication step.</p>
+<h2 id="tricks-and-traps_1">Tricks and Traps</h2>
+<p><code>-q</code>/<code>--quiet</code>: quiet mode which turns off wget's output.
+This option is helpful if you want to have the downloaded content as output only.
+<code>curl</code> by default is in quiet mode.
+You can force it (or overwrite other non-quiet options) using <code>-s</code>/<code>--silent</code>.</p>
+<h2 id="wget-examples">Wget Examples</h2>
+<p>To filter for specific file extensions:</p>
+<div class="highlight"><pre><span></span><code>wget<span class="w"> </span>-A<span class="w"> </span>pdf,jpg<span class="w"> </span>-m<span class="w"> </span>-p<span class="w"> </span>-E<span class="w"> </span>-k<span class="w"> </span>-K<span class="w"> </span>-np<span class="w"> </span>http://site/PATH/
+</code></pre></div>
+
+<p>This will mirror the site, but the files without jpg or pdf extension will be automatically removed.</p>
+<p>Download all contents under the link.</p>
+<div class="highlight"><pre><span></span><code>wget<span class="w"> </span>-r<span class="w"> </span>--no-parent<span class="w"> </span>-e<span class="w"> </span><span class="nv">robots</span><span class="o">=</span>off<span class="w"> </span>http://site/PATH/
+</code></pre></div>
+
+<p>Download all contents except HTML files under the link.</p>
+<div class="highlight"><pre><span></span><code>wget<span class="w"> </span>-r<span class="w"> </span>--no-parent<span class="w"> </span>-e<span class="w"> </span><span class="nv">robots</span><span class="o">=</span>off<span class="w"> </span>-R<span class="w"> </span><span class="s2">&quot;*.html&quot;</span>
+wget<span class="w"> </span>--no-check-certificate
+wget<span class="w"> </span>--random-wait<span class="w"> </span>-r<span class="w"> </span>-p<span class="w"> </span>-e<span class="w"> </span><span class="nv">robots</span><span class="o">=</span>off<span class="w"> </span>-U<span class="w"> </span>mozilla
+</code></pre></div>
+
+<h2 id="references">References</h2>
+<ul>
+<li>
+<p>https://stackoverflow.com/questions/9445489/performing-http-requests-with-curl-using-proxy</p>
+</li>
+<li>
+<p><a href="https://stackoverflow.com/questions/3074288/get-final-url-after-curl-is-redirected">Get final URL after curl is redirected</a></p>
+</li>
+</ul></div>
+    <footer>
+<p class="meta">
+  <span class="byline author vcard">
+    Posted by <span class="fn">Ben Chuanlong Du</span>
+  </span>
+<time datetime="2013-10-26T13:02:55-07:00" pubdate>Oct 26, 2013</time>  <span class="categories">
+    <a class="category" href="https://misc.legendu.net/tag/tips.html">tips</a>
+    <a class="category" href="https://misc.legendu.net/tag/curl.html">cURL</a>
+    <a class="category" href="https://misc.legendu.net/tag/downloading.html">downloading</a>
+    <a class="category" href="https://misc.legendu.net/tag/web.html">web</a>
+    <a class="category" href="https://misc.legendu.net/tag/wget.html">wget</a>
+  </span>
+</p>    </footer>
+  </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div>
+  </section>
+</div>
+<aside class="sidebar">
+  <section>
+    <h1>Recent Posts</h1>
+    <ul id="recent_posts">
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/tips-on-health/">Tips on Health</a>
+      </li>
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/tips-on-child-education/">Tips on Child Education</a>
+      </li>
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/tips-on-fd/">Tips on fd</a>
+      </li>
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/the-fzf-command-is-a-great-alternative-to-find/">The fzf Command Is a Great Alternative to find</a>
+      </li>
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/ruff-is-an-extremely-fast-python-linter-written-in-rust/">Ruff Is An Extremely Fast Python Linter Written in Rust</a>
+      </li>
+    </ul>
+  </section>
+  <section>
+    <h1>Categories</h1>
+    <ul id="recent_posts">
+        <li><a href="https://misc.legendu.net/category/ai.html">AI</a></li>
+        <li><a href="https://misc.legendu.net/category/career.html">Career</a></li>
+        <li><a href="https://misc.legendu.net/category/cloud.html">Cloud</a></li>
+        <li><a href="https://misc.legendu.net/category/computer-science.html">Computer Science</a></li>
+        <li><a href="https://misc.legendu.net/category/fiannce.html">Fiannce</a></li>
+        <li><a href="https://misc.legendu.net/category/finance.html">Finance</a></li>
+        <li><a href="https://misc.legendu.net/category/fun-problems.html">Fun Problems</a></li>
+        <li><a href="https://misc.legendu.net/category/hardware.html">Hardware</a></li>
+        <li><a href="https://misc.legendu.net/category/health.html">Health</a></li>
+        <li><a href="https://misc.legendu.net/category/house.html">House</a></li>
+        <li><a href="https://misc.legendu.net/category/internet.html">Internet</a></li>
+        <li><a href="https://misc.legendu.net/category/investment.html">Investment</a></li>
+        <li><a href="https://misc.legendu.net/category/life.html">life</a></li>
+        <li><a href="https://misc.legendu.net/category/linux.html">Linux</a></li>
+        <li><a href="https://misc.legendu.net/category/os.html">OS</a></li>
+        <li><a href="https://misc.legendu.net/category/people.html">People</a></li>
+        <li><a href="https://misc.legendu.net/category/philosophy.html">Philosophy</a></li>
+        <li><a href="https://misc.legendu.net/category/research.html">Research</a></li>
+        <li><a href="https://misc.legendu.net/category/shopping.html">Shopping</a></li>
+        <li><a href="https://misc.legendu.net/category/soft-skills.html">soft skills</a></li>
+        <li><a href="https://misc.legendu.net/category/software.html">Software</a></li>
+        <li><a href="https://misc.legendu.net/category/statistics.html">Statistics</a></li>
+        <li><a href="https://misc.legendu.net/category/tools.html">Tools</a></li>
+    </ul>
+  </section>
+ 
+
+  <section>
+  <h1>Tags</h1>
+  <ul class="tagcloud">
+  </ul>
+  </section>
+
+
+
+  <section>
+    <h1>GitHub Repos</h1>
+    <ul id="gh_repos">
+      <li class="loading">Status updating...</li>
+    </ul>
+      <a href="https://github.com/legendu-net">@legendu-net</a> on GitHub
+    <script type="text/javascript">
+      $.domReady(function(){
+          if (!window.jXHR){
+              var jxhr = document.createElement('script');
+              jxhr.type = 'text/javascript';
+              jxhr.src = 'https://misc.legendu.net/theme/js/jXHR.js';
+              var s = document.getElementsByTagName('script')[0];
+              s.parentNode.insertBefore(jxhr, s);
+          }
+
+          github.showRepos({
+              user: 'legendu-net',
+              count: 5,
+              skip_forks: true,
+              target: '#gh_repos'
+          });
+      });
+    </script>
+    <script src="https://misc.legendu.net/theme/js/github.js" type="text/javascript"> </script>
+  </section>
+
+    <section>
+        <h1>Social</h2>
+        <ul>
+            <li><a href="https://www.linkedin.com/in/ben-chuanlong-du-1239b221/" target="_blank">LinkedIn</a></li>
+            <li><a href="https://hub.docker.com/u/dclong" target="_blank">Docker Hub</a></li>
+            <li><a href="https://stackoverflow.com/users/7808204/benjamin-du?tab=profile" target="_blank">Stack Overflow</a></li>
+            <li><a href="https://twitter.com/longendu" target="_blank">Twitter</a></li>
+        <!--
+            <li><a href="https://misc.legendu.net/" type="application/rss+xml" rel="alternate">RSS</a></li>
+            -->
+        </ul>
+    </section>
+</aside>    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Ben Chuanlong Du -
+  <span class="credit">Powered by <a href="http://getpelican.com">Pelican</a></span>
+</p></footer>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-3STS9BVPF6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-3STS9BVPF6');
+</script>
+	<script type="text/javascript">
+	  var disqus_shortname = 'dclong';
+          var disqus_identifier = '/blog/curl-tips/';
+          var disqus_url = 'https://misc.legendu.net/blog/curl-tips/';
+          var disqus_title = 'Tips on cURL and Wget';
+	  (function() {
+	    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	    dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+	    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	   })();
+	</script>
+</body>
+</html>

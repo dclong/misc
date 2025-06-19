@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Python Modules for Visualization</title>
+  <meta name="author" content="Ben Chuanlong Du">
+
+  <link href="https://misc.legendu.net/atom.xml" type="application/atom+xml" rel="alternate"
+        title="Ben Chuanlong Du's Blog Atom Feed" />
+
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link href="https://misc.legendu.net/favicon.png" rel="icon">
+  <link href="https://misc.legendu.net/theme/css/main_2.css" media="screen, projection"
+        rel="stylesheet" type="text/css">
+  <script src="https://misc.legendu.net/theme/js/modernizr-2.0.js"></script>
+  <script src="https://misc.legendu.net/theme/js/ender.js"></script>
+  <script src="https://misc.legendu.net/theme/js/octopress.js" type="text/javascript"></script>
+
+  <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <script data-ad-client="ca-pub-3836424032203369" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+</head>
+
+<body>
+  <header role="banner"><hgroup>
+  <h1><a href="https://misc.legendu.net/">Ben Chuanlong Du's Blog</a></h1>
+    <h2>It is never too late to learn.</h2>
+</hgroup></header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="https://misc.legendu.net/atom.xml" rel="subscribe-rss">RSS</a></li>
+</ul>
+
+<form name="search" action="https://www.bing.com/search" method="get" onSubmit="return build_query()">
+  <fieldset role="search">
+      <!--
+    <input type="hidden" name="q" value="site:https://misc.legendu.net" />
+        -->
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+
+<script type = "text/javascript">
+    function build_query() {
+        var query = document.forms["search"]["q"].value;
+        var prefix = "site:https://misc.legendu.net "
+        if (!query.startsWith(prefix)) {
+            query = prefix + query;
+            document.forms["search"]["q"].value = query;
+        }
+        return true;
+    }
+</script>
+
+<ul class="main-navigation">
+    <li><a href="https://www.legendu.net">Home</a></li>
+    <li><a href="https://misc.legendu.net">Blog</a></li>
+    <li><a href="https://misc.legendu.net/archives.html">Archives</a></li>
+    <li><a href="https://misc.legendu.net/categories.html">Categories</a></li>
+    <li><a href="https://misc.legendu.net/tags.html">Tags</a></li>
+    <li><a href="https://www.legendu.net/pages/about">About</a></li>
+</ul></nav>
+  <div id="main">
+    <div id="content">
+<div>
+  <article class="hentry" role="article">
+<header>
+      <h1 class="entry-title">Python Modules for Visualization</h1>
+      <p class="meta"><time datetime="2017-06-08T10:20:38-07:00" pubdate>Jun 08, 2017</time></p>
+</header>
+
+  <div class="entry-content"><p><strong>Things on this page are fragmentary and immature notes/thoughts of the author. Please read with your own judgement!</strong></p>
+<p>The website <a href="https://python-graph-gallery.com/">The Python Graph Gallery</a>
+displays hundreds of charts, always providing the reproducible python code! 
+It aims to showcase the awesome dataviz possibilities of python and to help you benefit it. </p>
+<h2 id="general-purpose-visualization-libraries-based-on-javascript">General Purpose Visualization Libraries Based on JavaScript</h2>
+<h3 id="hvplot"><a href="https://github.com/pyviz/hvplot">hvplot</a></h3>
+<p>A high-level plotting API for pandas, dask, xarray, and networkx built on HoloViews </p>
+<h3 id="visdom"><a href="https://github.com/fossasia/visdom">visdom</a></h3>
+<p><a href="https://github.com/fossasia/visdom">Visdom</a>
+is a flexible tool for creating, organizing, and sharing visualizations of live, rich data. </p>
+<h3 id="cufflink"><a href="https://github.com/santosjorge/cufflinks">Cufflink</a></h3>
+<p>Enables plotly plots in pandas DataFrame (via the <code>iplot</code> method) directly. </p>
+<p>https://plot.ly/pandas/getting-started/</p>
+<p>https://medium.com/@kbrook10/day-7-data-visualization-how-to-use-plotly-and-cufflinks-for-interactive-data-visualizations-3a4b85fdd999</p>
+<h3 id="holoviews">HoloViews</h3>
+<p>HoloViews is my favorate JS-based visualization package in Python.
+It has the simpliest yet rigorous syntax.</p>
+<h3 id="bokeh">bokeh</h3>
+<p>Bokeh is a great JS-based package for visualization in Python and is also available in other programming languages.
+It is a free and opensource alternative to plotly (which is not totally free).
+Both bokeh and plotly is feature-rich.
+They supports all kinds of charts, data table and can easily build a dashboard.</p>
+<h3 id="plotly"><a href="https://plot.ly/python/user-guide/">plotly</a></h3>
+<p>Plotly is great (even better than Bokeh) but unfortunately not totally free (very limited API calls per day).</p>
+<h2 id="general-purpose-visualization-libraries-based-on-matplotlib">General Purpose Visualization Libraries Based on <code>matplotlib</code></h2>
+<h3 id="matplotlib">matplotlib</h3>
+<p>The old default visualization package in Python.</p>
+<p>has display issues without x server ...</p>
+<p>http://stackoverflow.com/questions/11264521/date-ticks-and-rotation-in-matplotlib</p>
+<p>http://stackoverflow.com/questions/9627686/plotting-dates-on-the-x-axis-with-pythons-matplotlib</p>
+<p>http://stackoverflow.com/questions/10998621/rotate-axis-text-in-python-matplotlib</p>
+<h3 id="pandas">pandas</h3>
+<p><code>pandas</code> integrates some visualization features based on matplotlib.
+It makes things convenient if you have to work with data frame a lot.</p>
+<h3 id="graphviz"><a href="https://github.com/xflr6/graphviz">Graphviz</a></h3>
+<h2 id="domain-specific-libraries">Domain Specific Libraries</h2>
+<h3 id="ipyvolume"><a href="https://github.com/maartenbreddels/ipyvolume">ipyvolume</a></h3>
+<p>3-D plotting in Python.</p>
+<h3 id="pydotpydot"><a href="https://github.com/pydot/pydot">pydot/pydot</a></h3>
+<h3 id="slundbergshap"><a href="https://github.com/slundberg/shap">slundberg/shap</a></h3>
+<p>A unified approach to explain the output of any machine learning model.</p>
+<h3 id="residentmariomissingno"><a href="https://github.com/ResidentMario/missingno">ResidentMario/missingno</a></h3>
+<p>Missing data visualization module for Python.</p>
+<h3 id="hiplot"><a href="https://github.com/facebookresearch/hiplot">hiplot</a></h3>
+<p>HiPlot makes understanding high dimensional data easy</p>
+<h3 id="scattertext"><a href="https://github.com/JasonKessler/scattertext">scattertext</a></h3>
+<p>Beautiful visualizations of how language differs among document types.</p>
+<h3 id="geemap"><a href="https://github.com/giswqs/geemap">geemap</a></h3>
+<p><a href="https://github.com/giswqs/geemap">geemap</a>
+is a Python package for interactive mapping with Google Earth Engine, ipyleaflet, and folium.</p>
+<h3 id="blender-python">Blender Python</h3>
+<p>https://docs.blender.org/api/current/info_quickstart.html</p>
+<p>https://medium.com/@behreajj/creative-coding-in-blender-a-primer-53e79ff71e</p>
+<p>https://blenderscripting.blogspot.com/</p>
+<h2 id="references">References</h2>
+<p>http://jakevdp.github.io/blog/2014/01/10/d3-plugins-truly-interactive/</p>
+<p>http://blog.ynema.com/?p=192</p></div>
+    <footer>
+<p class="meta">
+  <span class="byline author vcard">
+    Posted by <span class="fn">Ben Chuanlong Du</span>
+  </span>
+<time datetime="2017-06-08T10:20:38-07:00" pubdate>Jun 08, 2017</time>  <span class="categories">
+    <a class="category" href="https://misc.legendu.net/tag/programming.html">programming</a>
+    <a class="category" href="https://misc.legendu.net/tag/visualization.html">visualization</a>
+    <a class="category" href="https://misc.legendu.net/tag/python.html">Python</a>
+    <a class="category" href="https://misc.legendu.net/tag/holoviews.html">HoloViews</a>
+    <a class="category" href="https://misc.legendu.net/tag/bokeh.html">bokeh</a>
+    <a class="category" href="https://misc.legendu.net/tag/plotly.html">plotly</a>
+    <a class="category" href="https://misc.legendu.net/tag/matplotlib.html">matplotlib</a>
+    <a class="category" href="https://misc.legendu.net/tag/pandas.html">pandas</a>
+    <a class="category" href="https://misc.legendu.net/tag/library.html">library</a>
+  </span>
+</p>    </footer>
+  </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div>
+  </section>
+</div>
+<aside class="sidebar">
+  <section>
+    <h1>Recent Posts</h1>
+    <ul id="recent_posts">
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/tips-on-health/">Tips on Health</a>
+      </li>
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/tips-on-child-education/">Tips on Child Education</a>
+      </li>
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/tips-on-fd/">Tips on fd</a>
+      </li>
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/the-fzf-command-is-a-great-alternative-to-find/">The fzf Command Is a Great Alternative to find</a>
+      </li>
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/ruff-is-an-extremely-fast-python-linter-written-in-rust/">Ruff Is An Extremely Fast Python Linter Written in Rust</a>
+      </li>
+    </ul>
+  </section>
+  <section>
+    <h1>Categories</h1>
+    <ul id="recent_posts">
+        <li><a href="https://misc.legendu.net/category/ai.html">AI</a></li>
+        <li><a href="https://misc.legendu.net/category/career.html">Career</a></li>
+        <li><a href="https://misc.legendu.net/category/cloud.html">Cloud</a></li>
+        <li><a href="https://misc.legendu.net/category/computer-science.html">Computer Science</a></li>
+        <li><a href="https://misc.legendu.net/category/fiannce.html">Fiannce</a></li>
+        <li><a href="https://misc.legendu.net/category/finance.html">Finance</a></li>
+        <li><a href="https://misc.legendu.net/category/fun-problems.html">Fun Problems</a></li>
+        <li><a href="https://misc.legendu.net/category/hardware.html">Hardware</a></li>
+        <li><a href="https://misc.legendu.net/category/health.html">Health</a></li>
+        <li><a href="https://misc.legendu.net/category/house.html">House</a></li>
+        <li><a href="https://misc.legendu.net/category/internet.html">Internet</a></li>
+        <li><a href="https://misc.legendu.net/category/investment.html">Investment</a></li>
+        <li><a href="https://misc.legendu.net/category/life.html">life</a></li>
+        <li><a href="https://misc.legendu.net/category/linux.html">Linux</a></li>
+        <li><a href="https://misc.legendu.net/category/os.html">OS</a></li>
+        <li><a href="https://misc.legendu.net/category/people.html">People</a></li>
+        <li><a href="https://misc.legendu.net/category/philosophy.html">Philosophy</a></li>
+        <li><a href="https://misc.legendu.net/category/research.html">Research</a></li>
+        <li><a href="https://misc.legendu.net/category/shopping.html">Shopping</a></li>
+        <li><a href="https://misc.legendu.net/category/soft-skills.html">soft skills</a></li>
+        <li><a href="https://misc.legendu.net/category/software.html">Software</a></li>
+        <li><a href="https://misc.legendu.net/category/statistics.html">Statistics</a></li>
+        <li><a href="https://misc.legendu.net/category/tools.html">Tools</a></li>
+    </ul>
+  </section>
+ 
+
+  <section>
+  <h1>Tags</h1>
+  <ul class="tagcloud">
+  </ul>
+  </section>
+
+
+
+  <section>
+    <h1>GitHub Repos</h1>
+    <ul id="gh_repos">
+      <li class="loading">Status updating...</li>
+    </ul>
+      <a href="https://github.com/legendu-net">@legendu-net</a> on GitHub
+    <script type="text/javascript">
+      $.domReady(function(){
+          if (!window.jXHR){
+              var jxhr = document.createElement('script');
+              jxhr.type = 'text/javascript';
+              jxhr.src = 'https://misc.legendu.net/theme/js/jXHR.js';
+              var s = document.getElementsByTagName('script')[0];
+              s.parentNode.insertBefore(jxhr, s);
+          }
+
+          github.showRepos({
+              user: 'legendu-net',
+              count: 5,
+              skip_forks: true,
+              target: '#gh_repos'
+          });
+      });
+    </script>
+    <script src="https://misc.legendu.net/theme/js/github.js" type="text/javascript"> </script>
+  </section>
+
+    <section>
+        <h1>Social</h2>
+        <ul>
+            <li><a href="https://www.linkedin.com/in/ben-chuanlong-du-1239b221/" target="_blank">LinkedIn</a></li>
+            <li><a href="https://hub.docker.com/u/dclong" target="_blank">Docker Hub</a></li>
+            <li><a href="https://stackoverflow.com/users/7808204/benjamin-du?tab=profile" target="_blank">Stack Overflow</a></li>
+            <li><a href="https://twitter.com/longendu" target="_blank">Twitter</a></li>
+        <!--
+            <li><a href="https://misc.legendu.net/" type="application/rss+xml" rel="alternate">RSS</a></li>
+            -->
+        </ul>
+    </section>
+</aside>    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Ben Chuanlong Du -
+  <span class="credit">Powered by <a href="http://getpelican.com">Pelican</a></span>
+</p></footer>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-3STS9BVPF6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-3STS9BVPF6');
+</script>
+	<script type="text/javascript">
+	  var disqus_shortname = 'dclong';
+          var disqus_identifier = '/blog/python-modules-for-visualization/';
+          var disqus_url = 'https://misc.legendu.net/blog/python-modules-for-visualization/';
+          var disqus_title = 'Python Modules for Visualization';
+	  (function() {
+	    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	    dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+	    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	   })();
+	</script>
+</body>
+</html>

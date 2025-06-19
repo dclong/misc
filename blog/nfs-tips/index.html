@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Tips on NFS</title>
+  <meta name="author" content="Ben Chuanlong Du">
+
+  <link href="https://misc.legendu.net/atom.xml" type="application/atom+xml" rel="alternate"
+        title="Ben Chuanlong Du's Blog Atom Feed" />
+
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link href="https://misc.legendu.net/favicon.png" rel="icon">
+  <link href="https://misc.legendu.net/theme/css/main_2.css" media="screen, projection"
+        rel="stylesheet" type="text/css">
+  <script src="https://misc.legendu.net/theme/js/modernizr-2.0.js"></script>
+  <script src="https://misc.legendu.net/theme/js/ender.js"></script>
+  <script src="https://misc.legendu.net/theme/js/octopress.js" type="text/javascript"></script>
+
+  <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <script data-ad-client="ca-pub-3836424032203369" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+</head>
+
+<body>
+  <header role="banner"><hgroup>
+  <h1><a href="https://misc.legendu.net/">Ben Chuanlong Du's Blog</a></h1>
+    <h2>It is never too late to learn.</h2>
+</hgroup></header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="https://misc.legendu.net/atom.xml" rel="subscribe-rss">RSS</a></li>
+</ul>
+
+<form name="search" action="https://www.bing.com/search" method="get" onSubmit="return build_query()">
+  <fieldset role="search">
+      <!--
+    <input type="hidden" name="q" value="site:https://misc.legendu.net" />
+        -->
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+
+<script type = "text/javascript">
+    function build_query() {
+        var query = document.forms["search"]["q"].value;
+        var prefix = "site:https://misc.legendu.net "
+        if (!query.startsWith(prefix)) {
+            query = prefix + query;
+            document.forms["search"]["q"].value = query;
+        }
+        return true;
+    }
+</script>
+
+<ul class="main-navigation">
+    <li><a href="https://www.legendu.net">Home</a></li>
+    <li><a href="https://misc.legendu.net">Blog</a></li>
+    <li><a href="https://misc.legendu.net/archives.html">Archives</a></li>
+    <li><a href="https://misc.legendu.net/categories.html">Categories</a></li>
+    <li><a href="https://misc.legendu.net/tags.html">Tags</a></li>
+    <li><a href="https://www.legendu.net/pages/about">About</a></li>
+</ul></nav>
+  <div id="main">
+    <div id="content">
+<div>
+  <article class="hentry" role="article">
+<header>
+      <h1 class="entry-title">Tips on NFS</h1>
+      <p class="meta"><time datetime="2014-03-10T16:03:04-07:00" pubdate>Mar 10, 2014</time></p>
+</header>
+
+  <div class="entry-content"><p><strong>Things on this page are fragmentary and immature notes/thoughts of the author. Please read with your own judgement!</strong></p>
+<ol>
+<li>
+<p>Make sure nfs service is not blocked. 
+    Check iptables and "/etc/hosts.allow".</p>
+</li>
+<li>
+<p>Make sure nfs service is running on the server.</p>
+<p>sudo service nfs-kernel-server start</p>
+</li>
+<li>
+<p>You can choose the version of nfs using the option <code>-o nfsvers=n</code>
+    while mounting directories.
+    It seems to me on Debian you have to use <code>-o nfsvers=3</code> (based on a previous experience).
+        mount -t nfs -o nfsvers=3 192.168.0.8:/home/dclong/downloads mnt/nfsshare
+    Generally speaking, you do not have to choose a specific version manually.
+    I tried on Ubuntu (server) and Linux Mint (client) and it works well with the default version (4). </p>
+</li>
+<li>
+<p>You can choose to change the ownership of a shared file/directory to <code>nobody/nogroup</code>
+    to make it easier to access files,
+    but this is not required 
+    and you will probably only have read access unless the option <code>no_root_squash</code>
+    is specified in the server settings 
+    or your user name is the name on the client as on the server.</p>
+</li>
+<li>
+<p>You can use wildcard in the <code>/etc/exports</code> settings. 
+    For example,</p>
+<div class="highlight"><pre><span></span><code>/nfs<span class="w"> </span><span class="m">192</span>.168.*.*<span class="o">(</span>ro,sync<span class="o">)</span>
+</code></pre></div>
+
+<p>shares /nfs with all local network devices with ready-only access.
+more examples</p>
+<div class="highlight"><pre><span></span><code>*<span class="o">(</span>ro,sync<span class="o">)</span><span class="w"> </span>all<span class="w"> </span>ips
+*.iastate.edu<span class="o">(</span>ro,sync<span class="o">)</span><span class="w"> </span>all<span class="w"> </span>iastate.edu<span class="w"> </span>ips
+</code></pre></div>
+
+</li>
+<li>
+<p>You can use net mask in the <code>/etc/exports</code> settings.
+    for example,</p>
+<div class="highlight"><pre><span></span><code>/nfs<span class="w"> </span><span class="m">192</span>.168.1.0/24<span class="o">(</span>ro,sync<span class="o">)</span>
+</code></pre></div>
+
+<p>shares <code>/nfs</code> with local ip address 192.168.1.1 to 192.168.1.254. 
+It is equivalent to </p>
+<div class="highlight"><pre><span></span><code>/nfs<span class="w"> </span><span class="m">192</span>.168.1.*<span class="o">(</span>ro,sync<span class="o">)</span>
+</code></pre></div>
+
+</li>
+</ol>
+<h2 id="etcexports">/etc/exports</h2>
+<p>Below is an example of <code>/etc/exports</code>.
+    :::text
+    # /etc/exports: the access control list for filesystems which may be exported
+    #       to NFS clients.  See exports(5).
+    #
+    # Example for NFSv2 and NFSv3:
+    # /srv/homes       hostname1(rw,sync,no_subtree_check) hostname2(ro,sync,no_subtree_check)
+    #
+    # Example for NFSv4:
+    # /srv/nfs4        gss/krb5i(rw,sync,fsid=0,crossmnt,no_subtree_check)
+    # /srv/nfs4/homes  gss/krb5i(rw,sync,no_subtree_check)
+    #</p>
+<div class="highlight"><pre><span></span><code>/wwwroot        *(rw,sync,fsid=0,crossmnt,no_subtree_check)
+</code></pre></div>
+
+<h2 id="mount-nfs">Mount NFS</h2>
+<div class="highlight"><pre><span></span><code><span class="c1">#mount on Linux</span>
+sudo<span class="w"> </span>mount<span class="w"> </span>-t<span class="w"> </span>nfs4<span class="w"> </span>-o<span class="w"> </span><span class="nv">proto</span><span class="o">=</span>tcp,port<span class="o">=</span><span class="m">2049</span><span class="w"> </span><span class="m">10</span>.148.179.93:/<span class="w"> </span>/wwwroot
+
+:::bash<span class="w"> </span>
+<span class="c1"># mount on macOS</span>
+sudo<span class="w"> </span>mount<span class="w"> </span>-t<span class="w"> </span>nfs<span class="w"> </span>-o<span class="w"> </span><span class="nv">vers</span><span class="o">=</span><span class="m">4</span>,resvport<span class="w"> </span><span class="m">10</span>.148.179.93:/<span class="w"> </span>mnt
+</code></pre></div>
+
+<h2 id="references">References</h2>
+<p>http://cworld.wikidot.com/mac-os-x-automount-resvport-option</p></div>
+    <footer>
+<p class="meta">
+  <span class="byline author vcard">
+    Posted by <span class="fn">Ben Chuanlong Du</span>
+  </span>
+<time datetime="2014-03-10T16:03:04-07:00" pubdate>Mar 10, 2014</time>  <span class="categories">
+    <a class="category" href="https://misc.legendu.net/tag/linux.html">Linux</a>
+    <a class="category" href="https://misc.legendu.net/tag/internet.html">internet</a>
+    <a class="category" href="https://misc.legendu.net/tag/web.html">web</a>
+    <a class="category" href="https://misc.legendu.net/tag/nfs.html">NFS</a>
+    <a class="category" href="https://misc.legendu.net/tag/file-system.html">file system</a>
+    <a class="category" href="https://misc.legendu.net/tag/tips.html">tips</a>
+  </span>
+</p>    </footer>
+  </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div>
+  </section>
+</div>
+<aside class="sidebar">
+  <section>
+    <h1>Recent Posts</h1>
+    <ul id="recent_posts">
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/tips-on-health/">Tips on Health</a>
+      </li>
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/tips-on-child-education/">Tips on Child Education</a>
+      </li>
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/tips-on-fd/">Tips on fd</a>
+      </li>
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/the-fzf-command-is-a-great-alternative-to-find/">The fzf Command Is a Great Alternative to find</a>
+      </li>
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/ruff-is-an-extremely-fast-python-linter-written-in-rust/">Ruff Is An Extremely Fast Python Linter Written in Rust</a>
+      </li>
+    </ul>
+  </section>
+  <section>
+    <h1>Categories</h1>
+    <ul id="recent_posts">
+        <li><a href="https://misc.legendu.net/category/ai.html">AI</a></li>
+        <li><a href="https://misc.legendu.net/category/career.html">Career</a></li>
+        <li><a href="https://misc.legendu.net/category/cloud.html">Cloud</a></li>
+        <li><a href="https://misc.legendu.net/category/computer-science.html">Computer Science</a></li>
+        <li><a href="https://misc.legendu.net/category/fiannce.html">Fiannce</a></li>
+        <li><a href="https://misc.legendu.net/category/finance.html">Finance</a></li>
+        <li><a href="https://misc.legendu.net/category/fun-problems.html">Fun Problems</a></li>
+        <li><a href="https://misc.legendu.net/category/hardware.html">Hardware</a></li>
+        <li><a href="https://misc.legendu.net/category/health.html">Health</a></li>
+        <li><a href="https://misc.legendu.net/category/house.html">House</a></li>
+        <li><a href="https://misc.legendu.net/category/internet.html">Internet</a></li>
+        <li><a href="https://misc.legendu.net/category/investment.html">Investment</a></li>
+        <li><a href="https://misc.legendu.net/category/life.html">life</a></li>
+        <li><a href="https://misc.legendu.net/category/linux.html">Linux</a></li>
+        <li><a href="https://misc.legendu.net/category/os.html">OS</a></li>
+        <li><a href="https://misc.legendu.net/category/people.html">People</a></li>
+        <li><a href="https://misc.legendu.net/category/philosophy.html">Philosophy</a></li>
+        <li><a href="https://misc.legendu.net/category/research.html">Research</a></li>
+        <li><a href="https://misc.legendu.net/category/shopping.html">Shopping</a></li>
+        <li><a href="https://misc.legendu.net/category/soft-skills.html">soft skills</a></li>
+        <li><a href="https://misc.legendu.net/category/software.html">Software</a></li>
+        <li><a href="https://misc.legendu.net/category/statistics.html">Statistics</a></li>
+        <li><a href="https://misc.legendu.net/category/tools.html">Tools</a></li>
+    </ul>
+  </section>
+ 
+
+  <section>
+  <h1>Tags</h1>
+  <ul class="tagcloud">
+  </ul>
+  </section>
+
+
+
+  <section>
+    <h1>GitHub Repos</h1>
+    <ul id="gh_repos">
+      <li class="loading">Status updating...</li>
+    </ul>
+      <a href="https://github.com/legendu-net">@legendu-net</a> on GitHub
+    <script type="text/javascript">
+      $.domReady(function(){
+          if (!window.jXHR){
+              var jxhr = document.createElement('script');
+              jxhr.type = 'text/javascript';
+              jxhr.src = 'https://misc.legendu.net/theme/js/jXHR.js';
+              var s = document.getElementsByTagName('script')[0];
+              s.parentNode.insertBefore(jxhr, s);
+          }
+
+          github.showRepos({
+              user: 'legendu-net',
+              count: 5,
+              skip_forks: true,
+              target: '#gh_repos'
+          });
+      });
+    </script>
+    <script src="https://misc.legendu.net/theme/js/github.js" type="text/javascript"> </script>
+  </section>
+
+    <section>
+        <h1>Social</h2>
+        <ul>
+            <li><a href="https://www.linkedin.com/in/ben-chuanlong-du-1239b221/" target="_blank">LinkedIn</a></li>
+            <li><a href="https://hub.docker.com/u/dclong" target="_blank">Docker Hub</a></li>
+            <li><a href="https://stackoverflow.com/users/7808204/benjamin-du?tab=profile" target="_blank">Stack Overflow</a></li>
+            <li><a href="https://twitter.com/longendu" target="_blank">Twitter</a></li>
+        <!--
+            <li><a href="https://misc.legendu.net/" type="application/rss+xml" rel="alternate">RSS</a></li>
+            -->
+        </ul>
+    </section>
+</aside>    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Ben Chuanlong Du -
+  <span class="credit">Powered by <a href="http://getpelican.com">Pelican</a></span>
+</p></footer>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-3STS9BVPF6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-3STS9BVPF6');
+</script>
+	<script type="text/javascript">
+	  var disqus_shortname = 'dclong';
+          var disqus_identifier = '/blog/nfs-tips/';
+          var disqus_url = 'https://misc.legendu.net/blog/nfs-tips/';
+          var disqus_title = 'Tips on NFS';
+	  (function() {
+	    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	    dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+	    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	   })();
+	</script>
+</body>
+</html>

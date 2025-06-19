@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Useful Tools and Extensions for JupyterLab</title>
+  <meta name="author" content="Ben Chuanlong Du">
+
+  <link href="https://misc.legendu.net/atom.xml" type="application/atom+xml" rel="alternate"
+        title="Ben Chuanlong Du's Blog Atom Feed" />
+
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link href="https://misc.legendu.net/favicon.png" rel="icon">
+  <link href="https://misc.legendu.net/theme/css/main_2.css" media="screen, projection"
+        rel="stylesheet" type="text/css">
+  <script src="https://misc.legendu.net/theme/js/modernizr-2.0.js"></script>
+  <script src="https://misc.legendu.net/theme/js/ender.js"></script>
+  <script src="https://misc.legendu.net/theme/js/octopress.js" type="text/javascript"></script>
+
+  <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <script data-ad-client="ca-pub-3836424032203369" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+</head>
+
+<body>
+  <header role="banner"><hgroup>
+  <h1><a href="https://misc.legendu.net/">Ben Chuanlong Du's Blog</a></h1>
+    <h2>It is never too late to learn.</h2>
+</hgroup></header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="https://misc.legendu.net/atom.xml" rel="subscribe-rss">RSS</a></li>
+</ul>
+
+<form name="search" action="https://www.bing.com/search" method="get" onSubmit="return build_query()">
+  <fieldset role="search">
+      <!--
+    <input type="hidden" name="q" value="site:https://misc.legendu.net" />
+        -->
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+
+<script type = "text/javascript">
+    function build_query() {
+        var query = document.forms["search"]["q"].value;
+        var prefix = "site:https://misc.legendu.net "
+        if (!query.startsWith(prefix)) {
+            query = prefix + query;
+            document.forms["search"]["q"].value = query;
+        }
+        return true;
+    }
+</script>
+
+<ul class="main-navigation">
+    <li><a href="https://www.legendu.net">Home</a></li>
+    <li><a href="https://misc.legendu.net">Blog</a></li>
+    <li><a href="https://misc.legendu.net/archives.html">Archives</a></li>
+    <li><a href="https://misc.legendu.net/categories.html">Categories</a></li>
+    <li><a href="https://misc.legendu.net/tags.html">Tags</a></li>
+    <li><a href="https://www.legendu.net/pages/about">About</a></li>
+</ul></nav>
+  <div id="main">
+    <div id="content">
+<div>
+  <article class="hentry" role="article">
+<header>
+      <h1 class="entry-title">Useful Tools and Extensions for JupyterLab</h1>
+      <p class="meta"><time datetime="2017-11-24T10:55:57-08:00" pubdate>Nov 24, 2017</time></p>
+</header>
+
+  <div class="entry-content"><p><strong>Things on this page are fragmentary and immature notes/thoughts of the author. Please read with your own judgement!</strong></p>
+<h2 id="installuninstall-jupyterlab-extensions">Install/Uninstall Jupyter/Lab Extensions</h2>
+<p>Install a Jupyter/Lab extension.</p>
+<div class="highlight"><pre><span></span><code>pip3<span class="w"> </span>install<span class="w"> </span>extension_name
+</code></pre></div>
+
+<p>Unnstall a Jupyter/Lab extension.</p>
+<div class="highlight"><pre><span></span><code>pip3<span class="w"> </span>uninstall<span class="w"> </span>extension_name
+</code></pre></div>
+
+<p>Enable an installed Jupyter/Lab extension.
+Note: An extension is enabled by default once installed.</p>
+<div class="highlight"><pre><span></span><code>jupyter<span class="w"> </span>serverextension<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>--py<span class="w"> </span>jupyterlab_code_formatter
+</code></pre></div>
+
+<p>Disable an installed Jupyter/Lab extension.</p>
+<div class="highlight"><pre><span></span><code>jupyter<span class="w"> </span>serverextension<span class="w"> </span>disable<span class="w"> </span>--py<span class="w"> </span>jupyterlab_code_formatter
+</code></pre></div>
+
+<h2 id="extensionstools-to-avoid">Extensions/Tools to Avoid</h2>
+<h3 id="variable-inspaction-in-notebook">Variable Inspaction in Notebook</h3>
+<ol>
+<li>makes notebook run slow</li>
+<li>why do you want such a tool if you can check any vairable in notebook already?</li>
+</ol>
+<h3 id="jupyterlabdebugger"><a href="https://github.com/jupyterlab/debugger">jupyterLab/debugger</a></h3>
+<p>Need the <a href="https://github.com/jupyter-xeus/xeus-python">xeus-python</a> kernel to work.</p>
+<h2 id="useful-tools">Useful Tools</h2>
+<h3 id="jupyterlab-lsp">jupyterlab-lsp</h3>
+<h3 id="nbdime"><a href="http://www.legendu.net/misc/blog/use-nbdime-to-diff-and-merge-jupyterlab-notebooks/">nbdime</a></h3>
+<p><a href="http://www.legendu.net/misc/blog/use-nbdime-to-diff-and-merge-jupyterlab-notebooks/">nbdime</a>
+is a tool for diffing and merging Jupyter/Lab notebooks.
+It works well with Git.</p>
+<h3 id="jupyterhub"><a href="http://www.legendu.net/misc/blog/jupyterhub-tips/">JupyterHub</a></h3>
+<p><a href="http://www.legendu.net/misc/blog/jupyterhub-tips/">JupyterHub</a>
+is a multi-user server for Jupyter notebooks.</p>
+<h3 id="euporie"><a href="https://github.com/joouha/euporie">euporie</a></h3>
+<p><a href="https://github.com/joouha/euporie">euporie</a>
+is a text-based user interface for running and editing Jupyter notebooks.</p>
+<h2 id="useful-extensions-for-jupyterlab">Useful Extensions for JupyterLab</h2>
+<h3 id="magma-nvim"><a href="https://github.com/dccsillag/magma-nvim">magma-nvim</a></h3>
+<p><a href="https://github.com/dccsillag/magma-nvim">magma-nvim</a>
+is a NeoVim plugin for running code interactively with Jupyter.</p>
+<h3 id="jupyterlab-vim"><a href="https://github.com/axelfahy/jupyterlab-vim">jupyterlab-vim</a></h3>
+<p><a href="https://github.com/axelfahy/jupyterlab-vim">jupyterlab-vim</a>
+provides Vim keybindings for notebook cells in JupyterLab.</p>
+<h3 id="jupyter-resource-usage"><a href="https://github.com/jupyter-server/jupyter-resource-usage">jupyter-resource-usage</a></h3>
+<p>It seems that people suggest using 
+<a href="https://github.com/jupyter-server/jupyter-resource-usage">jupyter-resource-usage</a>
+instead of
+<a href="https://github.com/jtpio/jupyterlab-system-monitor">jupyterlab-system-monitor</a>
+.</p>
+<h3 id="jupyterlab-system-monitor"><a href="https://github.com/jtpio/jupyterlab-system-monitor">jupyterlab-system-monitor</a></h3>
+<h3 id="jupyterlab-extensions-for-spreadsheet"><a href="http://www.legendu.net/misc/blog/jupyterlab-extensions-for-spreadsheet/">Jupyter/Lab Extensions for Spreadsheet</a></h3>
+<h3 id="wallneradamjupyterlab-output-auto-scroll"><a href="https://github.com/wallneradam/jupyterlab-output-auto-scroll">wallneradam/jupyterlab-output-auto-scroll</a></h3>
+<p>Automatically scrolls scrollable output cells to bottom when content has changed</p>
+<h3 id="jupyterlab-latex"><a href="https://github.com/jupyterlab/jupyterlab-latex">jupyterlab-latex</a></h3>
+<h3 id="voila"><a href="https://github.com/QuantStack/voila">Voila</a></h3>
+<h3 id="ipywidgets"><a href="https://github.com/ipython/ipywidgets/tree/master/jupyterlab_widgets">ipywidgets</a></h3>
+<p>Interactive HTML widgets (slider, button, textbox, etc.) for Python Notebook.</p>
+<div class="highlight"><pre><span></span><code>pip<span class="w"> </span>install<span class="w"> </span>jupyterlab_widgets
+jupyter<span class="w"> </span>labextension<span class="w"> </span>install<span class="w"> </span>--sys-prefix<span class="w"> </span>--py<span class="w"> </span>jupyterlab_widgets
+jupyter<span class="w"> </span>labextension<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>--sys-prefix<span class="w"> </span>--py<span class="w"> </span>jupyterlab_widgets
+</code></pre></div>
+
+<p>Examples of custom widget libraries built upon ipywidgets are</p>
+<ul>
+<li>
+<p>bqplot a 2d data visualization library enabling custom user interactions.</p>
+</li>
+<li>
+<p>pythreejs a Jupyter - Three.js wrapper, bringing Three.js to the notebook.</p>
+</li>
+<li>
+<p>ipyleaflet a leaflet widget for Jupyter.</p>
+</li>
+</ul>
+<h3 id="ipyvue"><a href="https://github.com/mariobuikhuizen/ipyvue">ipyvue</a></h3>
+<h2 id="some-other-extensions-for-jupyterlab">Some Other Extensions for JupyterLab</h2>
+<h3 id="jupyterlab_geojson"><a href="https://github.com/jupyterlab/jupyterlab_geojson">jupyterlab_geojson</a></h3>
+<div class="highlight"><pre><span></span><code>pip3<span class="w"> </span>install<span class="w"> </span>jupyterlab_geojson
+jupyter<span class="w"> </span>labextension<span class="w"> </span>install<span class="w"> </span>--py<span class="w"> </span>--sys-prefix<span class="w"> </span>jupyterlab_geojson
+jupyter<span class="w"> </span>labextension<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>--py<span class="w"> </span>--sys-prefix<span class="w"> </span>jupyterlab_geojson
+</code></pre></div>
+
+<h3 id="jupyterlab-drawio"><a href="https://github.com/QuantStack/jupyterlab-drawio">jupyterlab-drawio</a></h3>
+<p><a href="https://github.com/QuantStack/jupyterlab-drawio">jupyterlab-drawio</a>
+is a standalone embedding of the FOSS drawio/mxgraph package into JupyterLab.
+If you using a office tool (MS/Google PPT/Slides/Doc),
+it is suggested that you use the built-in flowchart support instead.
+Please refer to
+<a href="http://www.legendu.net/misc/blog/text-based-flowchart-tools/">Text-based Diagram Tools</a>
+and
+<a href="http://www.legendu.net/misc/blog/gui-mind-mapping-tools/">GUI Mind Mapping Tools</a>
+for more discussions on flowchart and UML tools.</p>
+<h3 id="jupyterlab-quickopen"><a href="https://github.com/parente/jupyterlab-quickopen">jupyterlab-quickopen</a></h3>
+<p><a href="https://github.com/parente/jupyterlab-quickopen">jupyterlab-quickopen</a>
+aims to quickly open a file in JupyterLab by typing part of its name.
+However,
+it does not work well if the working directory of Jupyter/Lab contains a large number of files.
+<a href="https://github.com/parente/jupyterlab-quickopen">jupyterlab-quickopen</a>
+eithers hangs or crashes when building indexes for a large number of files.
+Unfortunately, 
+users use <a href="https://github.com/parente/jupyterlab-quickopen">jupyterlab-quickopen</a>
+mostly when the working directory of Jupyter/Lab get complicated 
+and contains lots of files.
+So, 
+overall I think <a href="https://github.com/parente/jupyterlab-quickopen">jupyterlab-quickopen</a> 
+failed its mission.</p>
+<p>As an alternative,
+it is must faster and more reliable to use the <code>find</code> command to help locate files in a terminal.
+You can also use the <code>Open Path</code> command to help you open a file 
+without changing directory in the navigation panel in JupyterLab.</p>
+<h3 id="jupyterlab-email"><a href="https://github.com/timkpaine/jupyterlab_email">jupyterlab-email</a></h3>
+<h3 id="jupyterlab-monaco"><a href="https://github.com/jupyterlab/jupyterlab-monaco">jupyterlab-monaco</a></h3>
+<h3 id="jupyterlab_spellchecker"><a href="https://github.com/ijmbarr/jupyterlab_spellchecker">jupyterlab_spellchecker</a></h3>
+<h3 id="jupyterlab-flake8"><a href="https://github.com/mlshapiro/jupyterlab-flake8">jupyterlab-flake8</a></h3>
+<p>A non polished product. Too much messages.</p>
+<h3 id="jupyterlab_code_formatter"><a href="https://github.com/ryantam626/jupyterlab_code_formatter">jupyterlab_code_formatter</a></h3>
+<h3 id="jupyterlab-google-drive"><a href="https://github.com/jupyterlab/jupyterlab-google-drive">jupyterlab-google-drive</a></h3>
+<p>Not sure whether this is useful.</p>
+<h3 id="widget-cookiecutter"><a href="https://github.com/jupyter/widget-cookiecutter">widget-cookiecutter</a></h3>
+<div class="highlight"><pre><span></span><code>pip3<span class="w"> </span>install<span class="w"> </span>cookiecutter
+</code></pre></div>
+
+<h3 id="jupyter_declarativewidgets">jupyter_declarativewidgets</h3>
+<h3 id="jupyter-wysiwyg">jupyter-wysiwyg</h3>
+<p>not available for jupyterlab yet ...</p>
+<h2 id="references">References</h2>
+<p>https://jupyterlab.readthedocs.io/en/stable/user/extensions.html</p>
+<p>https://github.com/topics/jupyterlab-extension</p>
+<p>https://medium.com/@subpath/jupyter-lab-extensions-for-data-scientist-e0d97d529fc1</p>
+<p>https://github.com/mauhai/awesome-jupyterlab</p>
+<p><a href="https://blog.jupyter.org/plasma-a-learning-platform-powered-by-jupyter-1b850fcd8624">Plasma: A learning platform powered by Jupyter</a></p></div>
+    <footer>
+<p class="meta">
+  <span class="byline author vcard">
+    Posted by <span class="fn">Ben Chuanlong Du</span>
+  </span>
+<time datetime="2017-11-24T10:55:57-08:00" pubdate>Nov 24, 2017</time>  <span class="categories">
+    <a class="category" href="https://misc.legendu.net/tag/software.html">software</a>
+    <a class="category" href="https://misc.legendu.net/tag/jupyterlab.html">JupyterLab</a>
+    <a class="category" href="https://misc.legendu.net/tag/extension.html">extension</a>
+    <a class="category" href="https://misc.legendu.net/tag/plugin.html">plugin</a>
+    <a class="category" href="https://misc.legendu.net/tag/jupyterhub.html">JupyterHub</a>
+    <a class="category" href="https://misc.legendu.net/tag/nbdime.html">nbdime</a>
+  </span>
+</p>    </footer>
+  </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div>
+  </section>
+</div>
+<aside class="sidebar">
+  <section>
+    <h1>Recent Posts</h1>
+    <ul id="recent_posts">
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/tips-on-health/">Tips on Health</a>
+      </li>
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/tips-on-child-education/">Tips on Child Education</a>
+      </li>
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/tips-on-fd/">Tips on fd</a>
+      </li>
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/the-fzf-command-is-a-great-alternative-to-find/">The fzf Command Is a Great Alternative to find</a>
+      </li>
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/ruff-is-an-extremely-fast-python-linter-written-in-rust/">Ruff Is An Extremely Fast Python Linter Written in Rust</a>
+      </li>
+    </ul>
+  </section>
+  <section>
+    <h1>Categories</h1>
+    <ul id="recent_posts">
+        <li><a href="https://misc.legendu.net/category/ai.html">AI</a></li>
+        <li><a href="https://misc.legendu.net/category/career.html">Career</a></li>
+        <li><a href="https://misc.legendu.net/category/cloud.html">Cloud</a></li>
+        <li><a href="https://misc.legendu.net/category/computer-science.html">Computer Science</a></li>
+        <li><a href="https://misc.legendu.net/category/fiannce.html">Fiannce</a></li>
+        <li><a href="https://misc.legendu.net/category/finance.html">Finance</a></li>
+        <li><a href="https://misc.legendu.net/category/fun-problems.html">Fun Problems</a></li>
+        <li><a href="https://misc.legendu.net/category/hardware.html">Hardware</a></li>
+        <li><a href="https://misc.legendu.net/category/health.html">Health</a></li>
+        <li><a href="https://misc.legendu.net/category/house.html">House</a></li>
+        <li><a href="https://misc.legendu.net/category/internet.html">Internet</a></li>
+        <li><a href="https://misc.legendu.net/category/investment.html">Investment</a></li>
+        <li><a href="https://misc.legendu.net/category/life.html">life</a></li>
+        <li><a href="https://misc.legendu.net/category/linux.html">Linux</a></li>
+        <li><a href="https://misc.legendu.net/category/os.html">OS</a></li>
+        <li><a href="https://misc.legendu.net/category/people.html">People</a></li>
+        <li><a href="https://misc.legendu.net/category/philosophy.html">Philosophy</a></li>
+        <li><a href="https://misc.legendu.net/category/research.html">Research</a></li>
+        <li><a href="https://misc.legendu.net/category/shopping.html">Shopping</a></li>
+        <li><a href="https://misc.legendu.net/category/soft-skills.html">soft skills</a></li>
+        <li><a href="https://misc.legendu.net/category/software.html">Software</a></li>
+        <li><a href="https://misc.legendu.net/category/statistics.html">Statistics</a></li>
+        <li><a href="https://misc.legendu.net/category/tools.html">Tools</a></li>
+    </ul>
+  </section>
+ 
+
+  <section>
+  <h1>Tags</h1>
+  <ul class="tagcloud">
+  </ul>
+  </section>
+
+
+
+  <section>
+    <h1>GitHub Repos</h1>
+    <ul id="gh_repos">
+      <li class="loading">Status updating...</li>
+    </ul>
+      <a href="https://github.com/legendu-net">@legendu-net</a> on GitHub
+    <script type="text/javascript">
+      $.domReady(function(){
+          if (!window.jXHR){
+              var jxhr = document.createElement('script');
+              jxhr.type = 'text/javascript';
+              jxhr.src = 'https://misc.legendu.net/theme/js/jXHR.js';
+              var s = document.getElementsByTagName('script')[0];
+              s.parentNode.insertBefore(jxhr, s);
+          }
+
+          github.showRepos({
+              user: 'legendu-net',
+              count: 5,
+              skip_forks: true,
+              target: '#gh_repos'
+          });
+      });
+    </script>
+    <script src="https://misc.legendu.net/theme/js/github.js" type="text/javascript"> </script>
+  </section>
+
+    <section>
+        <h1>Social</h2>
+        <ul>
+            <li><a href="https://www.linkedin.com/in/ben-chuanlong-du-1239b221/" target="_blank">LinkedIn</a></li>
+            <li><a href="https://hub.docker.com/u/dclong" target="_blank">Docker Hub</a></li>
+            <li><a href="https://stackoverflow.com/users/7808204/benjamin-du?tab=profile" target="_blank">Stack Overflow</a></li>
+            <li><a href="https://twitter.com/longendu" target="_blank">Twitter</a></li>
+        <!--
+            <li><a href="https://misc.legendu.net/" type="application/rss+xml" rel="alternate">RSS</a></li>
+            -->
+        </ul>
+    </section>
+</aside>    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Ben Chuanlong Du -
+  <span class="credit">Powered by <a href="http://getpelican.com">Pelican</a></span>
+</p></footer>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-3STS9BVPF6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-3STS9BVPF6');
+</script>
+	<script type="text/javascript">
+	  var disqus_shortname = 'dclong';
+          var disqus_identifier = '/blog/useful-tools-extensions-for-jupyterlab/';
+          var disqus_url = 'https://misc.legendu.net/blog/useful-tools-extensions-for-jupyterlab/';
+          var disqus_title = 'Useful Tools and Extensions for JupyterLab';
+	  (function() {
+	    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	    dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+	    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	   })();
+	</script>
+</body>
+</html>

@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Tips on Git</title>
+  <meta name="author" content="Ben Chuanlong Du">
+
+  <link href="https://misc.legendu.net/atom.xml" type="application/atom+xml" rel="alternate"
+        title="Ben Chuanlong Du's Blog Atom Feed" />
+
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link href="https://misc.legendu.net/favicon.png" rel="icon">
+  <link href="https://misc.legendu.net/theme/css/main_2.css" media="screen, projection"
+        rel="stylesheet" type="text/css">
+  <script src="https://misc.legendu.net/theme/js/modernizr-2.0.js"></script>
+  <script src="https://misc.legendu.net/theme/js/ender.js"></script>
+  <script src="https://misc.legendu.net/theme/js/octopress.js" type="text/javascript"></script>
+
+  <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <script data-ad-client="ca-pub-3836424032203369" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+</head>
+
+<body>
+  <header role="banner"><hgroup>
+  <h1><a href="https://misc.legendu.net/">Ben Chuanlong Du's Blog</a></h1>
+    <h2>It is never too late to learn.</h2>
+</hgroup></header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="https://misc.legendu.net/atom.xml" rel="subscribe-rss">RSS</a></li>
+</ul>
+
+<form name="search" action="https://www.bing.com/search" method="get" onSubmit="return build_query()">
+  <fieldset role="search">
+      <!--
+    <input type="hidden" name="q" value="site:https://misc.legendu.net" />
+        -->
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+
+<script type = "text/javascript">
+    function build_query() {
+        var query = document.forms["search"]["q"].value;
+        var prefix = "site:https://misc.legendu.net "
+        if (!query.startsWith(prefix)) {
+            query = prefix + query;
+            document.forms["search"]["q"].value = query;
+        }
+        return true;
+    }
+</script>
+
+<ul class="main-navigation">
+    <li><a href="https://www.legendu.net">Home</a></li>
+    <li><a href="https://misc.legendu.net">Blog</a></li>
+    <li><a href="https://misc.legendu.net/archives.html">Archives</a></li>
+    <li><a href="https://misc.legendu.net/categories.html">Categories</a></li>
+    <li><a href="https://misc.legendu.net/tags.html">Tags</a></li>
+    <li><a href="https://www.legendu.net/pages/about">About</a></li>
+</ul></nav>
+  <div id="main">
+    <div id="content">
+<div>
+  <article class="hentry" role="article">
+<header>
+      <h1 class="entry-title">Tips on Git</h1>
+      <p class="meta"><time datetime="2013-10-30T11:09:57-07:00" pubdate>Oct 30, 2013</time></p>
+</header>
+
+  <div class="entry-content"><p><strong>Things on this page are fragmentary and immature notes/thoughts of the author. Please read with your own judgement!</strong></p>
+<p><a href="https://www.legendu.net/misc/blog/great-command-line-tools-developed-in-rust/#git-tools">Git Tools</a></p>
+<h2 id="access-token-for-git">Access Token for Git</h2>
+<p>There are a few advantages of using (GitHub, etc.) access tokens for Git,
+especially in an enterprise environemnt.</p>
+<ol>
+<li>
+<p>Access tokens can provided more fined access control.
+    For example, 
+    you can generate an access token for reading only.</p>
+</li>
+<li>
+<p>In an enterprise environemtn, 
+    2FA is usually needed to visit GitHub (or GitLab, etc). 
+    There are a 2 ways to avoid 2FA. 
+    The first way is to add your SSH public key into GitHub,
+    and the second way is to use an GitHub access token.
+    An (read only) access token come handy 
+    if you want to make releases via GitHub
+    as it does not require users to set up thrir SSH public keys in GitHub.
+    With an GitHub access token,
+    you can clone a repository like below.</p>
+<div class="highlight"><pre><span></span><code><span class="n">git</span><span class="w"> </span><span class="n">clone</span><span class="w"> </span><span class="nl">https</span><span class="p">:</span><span class="o">//</span><span class="n">ACCESS</span><span class="o">-</span><span class="n">TOKEN</span><span class="nv">@github</span><span class="p">.</span><span class="n">your</span><span class="p">.</span><span class="n">company</span><span class="p">.</span><span class="n">com</span><span class="o">/</span><span class="nf">user_name</span><span class="o">/</span><span class="n">repo_name</span><span class="p">.</span><span class="n">git</span>
+</code></pre></div>
+
+<p>Notice that some package management tools,
+e.g., <code>pip</code> support installing packages from a Git URL directly.
+This means that if your GitHub repository is a Python library,
+users can install the Python library using the following command.</p>
+<div class="highlight"><pre><span></span><code><span class="n">pip3</span><span class="w"> </span><span class="n">install</span><span class="w"> </span><span class="o">-</span><span class="n">U</span><span class="w"> </span><span class="n">git</span><span class="o">+</span><span class="nl">https</span><span class="p">:</span><span class="o">//</span><span class="n">ACCESS</span><span class="o">-</span><span class="n">TOKEN</span><span class="nv">@github</span><span class="p">.</span><span class="n">your</span><span class="p">.</span><span class="n">company</span><span class="p">.</span><span class="n">com</span><span class="o">/</span><span class="nf">user_name</span><span class="o">/</span><span class="n">repo_name</span><span class="p">.</span><span class="n">git</span>
+</code></pre></div>
+
+</li>
+</ol>
+<h2 id="general-git-tips">General Git Tips</h2>
+<ol>
+<li>
+<p><code>-C</code> vs <code>--git-dir</code> vs <code>--work-tree</code></p>
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>-C<span class="w"> </span>/path/to/repository<span class="w"> </span>status
+<span class="c1"># which is equivalent to</span>
+git<span class="w"> </span>--git-dir<span class="o">=</span>jupyterhub-ds/.git<span class="w"> </span>--work-tree<span class="o">=</span>jupyterhub-ds<span class="w"> </span>status
+</code></pre></div>
+
+</li>
+<li>
+<p>Do not work on the master branch directly. 
+    Use it purely as the production branch and merge mature features from other branches. 
+    You can apply one or more commits in a branch into other branches.
+    @TODO: give an example</p>
+</li>
+<li>
+<p>Keep a production repository for using the your product and dev repository for developing.</p>
+</li>
+<li>
+<p>Do not use symbolic links (to files outside the repository) in a Git repository.</p>
+</li>
+<li>
+<p>Keep each commit small and specific. 
+    Do not mix different work together in a single commit. 
+    This make it convenient to apply part of your work to other branches. </p>
+</li>
+<li>
+<p>Git support several protocols: Git, SSH and HTTP. 
+    The Git protocol is preferred.
+    If you are behind a firewall and/or proxy server and cannot use the Git protocol,
+    you can try the HTTP protocol.
+    The HTTP protocol requires a password every time you access a private repository 
+    or you push to a repository (not matter private or not).</p>
+</li>
+<li>
+<p>Do not amend public commits.</p>
+</li>
+<li>
+<p>it seems to me that you should use many smaller files
+    rather than a single big file to avoid conflicts while working collaboratively.</p>
+</li>
+<li>
+<p>not a good practice to track non text files
+    especially when the files are large.
+    It suggested that you separate (large) non-text files into another place (e.g., a file host).</p>
+</li>
+<li>
+<p><code>#</code> or <code>;</code> start a comment line</p>
+</li>
+<li>
+<p>Working in remote directory mounted by fuse might cause problems.
+    Avoid using Git in a remote file system.</p>
+</li>
+<li>
+<p>Generally speaking,
+    it is not a good idea to puts things into the global Git ignoring file.</p>
+</li>
+<li>
+<p>When you want to change a part of the code,
+    and this change might also be applied to other branches,
+    then you'd better fork from the base of all branches.
+    This allows you to patch the changes to all branches easily.</p>
+</li>
+<li>
+<p>It seems that the git repo for criss's project is very large even though it is the first commit.
+    Why is this? 1.9G? while things recorded is much smaller than this.</p>
+</li>
+<li>
+<p>In Git 1.x+,
+    you can use <code>git add -u</code> to stage all tracked files including deleting previously tracked files.
+    In Git 2.0,
+    you can use <code>git add -u :/</code> to stage your whole working tree,
+    and you can use <code>git add -u .</code> to stage just the current path.</p>
+</li>
+<li>
+<p>Git with http proctol ask for passwords when one push to or pull from a repository.
+    There are ways to cache Git password in Windows,
+    however,
+    I'd rather save the pain and use AutoHotkey to help me type in password.</p>
+</li>
+<li>
+<p>To rebase, follow the steps below.</p>
+<div class="highlight"><pre><span></span><code><span class="nv">git</span><span class="w"> </span><span class="nv">pull</span><span class="w"> </span><span class="o">--</span><span class="nv">rebase</span><span class="w"> </span><span class="nv">origin</span><span class="w"> </span><span class="nv">master</span>
+<span class="nv">git</span><span class="w"> </span><span class="nv">add</span><span class="w"> </span><span class="o">&lt;</span><span class="nv">some</span><span class="o">-</span><span class="nv">file</span><span class="o">&gt;</span>
+<span class="nv">git</span><span class="w"> </span><span class="nv">rebase</span><span class="w"> </span><span class="o">--</span><span class="k">continue</span>
+<span class="nv">git</span><span class="w"> </span><span class="nv">rebase</span><span class="w"> </span><span class="o">--</span><span class="nv">abort</span>
+</code></pre></div>
+
+</li>
+<li>
+<p>Use the following comamnd to clone into a specific directory.
+    Please refer to 
+    <a href="https://stackoverflow.com/questions/651038/how-do-you-clone-a-git-repository-into-a-specific-folder">How do you clone a Git repository into a specific foler?</a>
+    for more discussions.</p>
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>clone<span class="w"> </span>git@github.com:user/repos.git<span class="w"> </span>dir_name
+</code></pre></div>
+
+</li>
+</ol>
+<h2 id="shadow-clone">Shadow Clone</h2>
+<ol>
+<li>
+<p>use</p>
+<div class="highlight"><pre><span></span><code>git clone --depth 1 repos_url
+</code></pre></div>
+
+<p>You can get the full clone later by running either of the following two commands.</p>
+<div class="highlight"><pre><span></span><code>git fetch --unshallow
+</code></pre></div>
+
+<p>or</p>
+<div class="highlight"><pre><span></span><code>git fetch --depth 1000000
+</code></pre></div>
+
+</li>
+</ol>
+<h2 id="clone-a-specific-tag">Clone a Specific Tag</h2>
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>clone<span class="w"> </span>--depth<span class="w"> </span><span class="m">1</span><span class="w"> </span>--branch<span class="w"> </span><span class="m">2</span>.4.5<span class="w"> </span>https://github.com/apache/spark.git
+</code></pre></div>
+
+<p>https://stackoverflow.com/questions/20280726/how-to-git-clone-a-specific-tag</p>
+<h2 id="proxytunnel-related">Proxy/Tunnel Related</h2>
+<p>You can use Git with ProxyChains.</p>
+<div class="highlight"><pre><span></span><code>proxychains<span class="w"> </span>git<span class="w"> </span>...
+</code></pre></div>
+
+<p>What is corkscrew?
+    :::bash
+    #!/bin/bash</p>
+<div class="highlight"><pre><span></span><code>corkscrew http://10.135.227.47 80 $*
+</code></pre></div>
+
+<h2 id="exclude-paths-in-git-diff">Exclude Paths in <code>git diff</code></h2>
+<p><a href="https://stackoverflow.com/questions/10415100/want-to-exclude-file-from-git-diff/39943727">Want to exclude file from “git diff”</a></p>
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>diff<span class="w"> </span>--<span class="w"> </span>.<span class="w"> </span><span class="s1">&#39;:(exclude)db/irrelevant.php&#39;</span><span class="w"> </span><span class="s1">&#39;:(exclude)db/irrelevant2.php&#39;</span>
+</code></pre></div>
+
+<h2 id="git-syntax">Git Syntax</h2>
+<h3 id="repository">Repository</h3>
+<ol>
+<li>
+<p>Add a Remote repository <code>origin</code> </p>
+<div class="highlight"><pre><span></span><code><span class="n">git</span><span class="w"> </span><span class="n">remote</span><span class="w"> </span><span class="k">add</span><span class="w"> </span><span class="n">origin</span><span class="w"> </span><span class="n">git</span><span class="nv">@github</span><span class="p">.</span><span class="nl">com</span><span class="p">:</span><span class="n">dclong</span><span class="o">/</span><span class="n">jmail</span><span class="p">.</span><span class="n">git</span>
+</code></pre></div>
+
+<p><code>origin</code> is a popular default name for remote repositories,
+however, you can use any valid name you like.
+If you want to add a local bare repository, </p>
+<div class="highlight"><pre><span></span><code>git remote add origin path_to_repository_dir
+</code></pre></div>
+
+</li>
+<li>
+<p>Overwrite the remote repository <code>origin</code> using the master branch.
+    Notice that no patching is going on. 
+    The entire remote repository is overwritten by the master branch.</p>
+<div class="highlight"><pre><span></span><code>git push origin master --force
+</code></pre></div>
+
+</li>
+<li>
+<p>Tells git default branches to use when pushing</p>
+<div class="highlight"><pre><span></span><code>git push -u origin master
+</code></pre></div>
+
+</li>
+</ol>
+<h3 id="misc">Misc</h3>
+<ol>
+<li>
+<p>Track all Files</p>
+<div class="highlight"><pre><span></span><code>git add *
+</code></pre></div>
+
+<p>or </p>
+<div class="highlight"><pre><span></span><code>git add .
+</code></pre></div>
+
+</li>
+<li>
+<p>Add all modifed tracked files for commit</p>
+<div class="highlight"><pre><span></span><code>git add *
+</code></pre></div>
+
+<p>or</p>
+<div class="highlight"><pre><span></span><code>git add .
+</code></pre></div>
+
+</li>
+<li>
+<p>Remove a file but keep it in the local repository</p>
+<div class="highlight"><pre><span></span><code>git rm --cached file_name
+</code></pre></div>
+
+</li>
+<li>
+<p>Init current directory as a bare repository (for local sharing purpose).</p>
+<div class="highlight"><pre><span></span><code>git init --bare
+</code></pre></div>
+
+<p>Note that the directory must end with <code>.git</code> 
+in order to be a sharing repository.</p>
+</li>
+<li>
+<p>Other commands</p>
+<p>git cherry-pick
+git push</p>
+</li>
+</ol>
+<h3 id="branching">Branching</h3>
+<ol>
+<li>
+<p>Show all branches.</p>
+<div class="highlight"><pre><span></span><code>git branch -v
+</code></pre></div>
+
+</li>
+<li>
+<p>Checkout the branch "dev".</p>
+<div class="highlight"><pre><span></span><code>git checkout dev
+</code></pre></div>
+
+</li>
+<li>
+<p>Checkout the last branch that you were on.</p>
+<div class="highlight"><pre><span></span><code>git checkout -
+</code></pre></div>
+
+</li>
+<li>
+<p>Check out the remote branch named "dev".</p>
+<div class="highlight"><pre><span></span><code>git fetch
+git checkout dev
+</code></pre></div>
+
+</li>
+<li>
+<p>Create a branch named "dev" and switch to it.</p>
+<div class="highlight"><pre><span></span><code>git checkout -b dev
+</code></pre></div>
+
+</li>
+<li>
+<p>Merge the branch named "hotfix" to the current branch</p>
+<div class="highlight"><pre><span></span><code>git merge hotfix
+</code></pre></div>
+
+</li>
+<li>
+<p>Rename "old_branch" to "new_branch".</p>
+<div class="highlight"><pre><span></span><code>git branch -m old_branch new_branch
+</code></pre></div>
+
+</li>
+<li>
+<p>Delete a fully merged branch.</p>
+<div class="highlight"><pre><span></span><code>git branch -d branch_name
+</code></pre></div>
+
+</li>
+<li>
+<p>Force to delete a branch no matter it has been merged or not.</p>
+<div class="highlight"><pre><span></span><code>git branch -D branch_name
+</code></pre></div>
+
+</li>
+</ol>
+<h3 id="patch">Patch</h3>
+<ol>
+<li>
+<p>Show patches of a file</p>
+<div class="highlight"><pre><span></span><code>git log -p file_name
+</code></pre></div>
+
+</li>
+<li>
+<p>Show diff of a staged file</p>
+<div class="highlight"><pre><span></span><code>git diff -cache file_name
+</code></pre></div>
+
+</li>
+<li>
+<p>to find commits not on remote</p>
+<div class="highlight"><pre><span></span><code>git log origin/master..
+</code></pre></div>
+
+<p>or </p>
+<div class="highlight"><pre><span></span><code>git cherry -v origin/master
+</code></pre></div>
+
+</li>
+<li>
+<p><code>git log origin/master..HEAD</code> lists unpushed commits.
+    Uncommitted changes are not listed.
+    Notice the syntax <code>git log &lt;since&gt;..&lt;until&gt;</code> is similar to Bash <code>..</code> in list.</p>
+</li>
+<li>
+<p>Switching branches carries uncommitted changes with you. 
+    Either commit first, run git checkout . to undo them, 
+    or run git stash before switching. 
+    (You can get your changes back with git stash apply)</p>
+</li>
+</ol>
+<h3 id="tags">Tags</h3>
+<ol>
+<li>
+<p>List your tags</p>
+<div class="highlight"><pre><span></span><code>git tag
+</code></pre></div>
+
+</li>
+<li>
+<p>Create a tag</p>
+<div class="highlight"><pre><span></span><code>git tag -a v0.1 -m &quot;description about the tag&quot;
+</code></pre></div>
+
+</li>
+<li>
+<p>Show a tag</p>
+<div class="highlight"><pre><span></span><code><span class="nv">git</span><span class="w"> </span><span class="k">show</span><span class="w"> </span><span class="nv">v0</span>.<span class="mi">1</span>
+</code></pre></div>
+
+</li>
+<li>
+<p>Push tags to remote repository</p>
+<div class="highlight"><pre><span></span><code>git push origin v0.1
+</code></pre></div>
+
+</li>
+<li>
+<p>Create a branch at a specific tag</p>
+<div class="highlight"><pre><span></span><code>git checkout -b branch_name v0.1
+</code></pre></div>
+
+</li>
+</ol>
+<h3 id="configuration">Configuration</h3>
+<ol>
+<li>
+<p>https://www.gitignore.io/
+    can help generate <code>.gitignore</code> files for different programming languages.</p>
+</li>
+<li>
+<p>Git in Windows automatically convert Linux/OSX line termiantors to Windows line terminators. 
+    To turn off auto line terminator conversion globally, use the following command.</p>
+<div class="highlight"><pre><span></span><code>git config core.autocrlf false
+</code></pre></div>
+
+<p>You can also use the <code>dos2unix</code> command 
+to change a Windows text file (with Windows line terminators) 
+to a Unix/Linux file (with Unix/Linux line terminators).
+The <code>unix2dos</code> does the opposite conversion.</p>
+</li>
+<li>
+<p>Git track permissions of files by default. 
+    This can be an issue if you work on multiple operating systems.
+    You can use the following command to ask Git 
+    to ignore executable differences between the index and the working copy.</p>
+<div class="highlight"><pre><span></span><code>git config --global core.fileMode false
+</code></pre></div>
+
+<p>For one-off ignoring, you use</p>
+<div class="highlight"><pre><span></span><code>git -c core.fileMode false
+</code></pre></div>
+
+</li>
+<li>
+<p>Git does not colorize output automatically on some (old) Linux servers. 
+    You can use <code>git config --global color.ui auto</code> to force Git to colorize output. </p>
+</li>
+<li>
+<p>List all tracked files in a git repository</p>
+<div class="highlight"><pre><span></span><code>git ls-tree --full-tree -r HEAD
+</code></pre></div>
+
+</li>
+<li>
+<p>Stash your work</p>
+<div class="highlight"><pre><span></span><code>git stash
+</code></pre></div>
+
+</li>
+</ol>
+<h2 id="useful-tools-for-git-and-git-repositoris">Useful Tools for Git and Git Repositoris</h2>
+<p>https://github.com/mergestat/mergestat</p>
+<p>Query git repositories with SQL. 
+Generate reports, perform status checks, analyze codebases.</p>
+<h2 id="references">References</h2>
+<ul>
+<li><a href="http://www.legendu.net/misc/blog/tips-on-git-submodule">Tips on Git Submodule</a></li>
+<li><a href="https://opensource.com/article/18/6/git-reset-revert-rebase-commands">Git reset, revert and rebase commands</a></li>
+<li><a href="http://git-scm.com/documentation">Git Documentation</a></li>
+<li><a href="http://toroid.org/ams/git-website-howto">Using Git to manage a web site</a></li>
+<li><a href="http://joemaller.com/990/a-web-focused-git-workflow/">A web-focused Git workflow</a></li>
+<li><a href="http://stackoverflow.com/questions/1029969/why-is-my-git-repository-so-big">Why is my Git repository so big?</a></li>
+</ul></div>
+    <footer>
+<p class="meta">
+  <span class="byline author vcard">
+    Posted by <span class="fn">Ben Chuanlong Du</span>
+  </span>
+<time datetime="2013-10-30T11:09:57-07:00" pubdate>Oct 30, 2013</time>  <span class="categories">
+    <a class="category" href="https://misc.legendu.net/tag/tips.html">tips</a>
+    <a class="category" href="https://misc.legendu.net/tag/git.html">Git</a>
+    <a class="category" href="https://misc.legendu.net/tag/software.html">software</a>
+    <a class="category" href="https://misc.legendu.net/tag/version-control.html">version control</a>
+    <a class="category" href="https://misc.legendu.net/tag/distributed.html">distributed</a>
+    <a class="category" href="https://misc.legendu.net/tag/access.html">access</a>
+    <a class="category" href="https://misc.legendu.net/tag/token.html">token</a>
+    <a class="category" href="https://misc.legendu.net/tag/github.html">GitHub</a>
+    <a class="category" href="https://misc.legendu.net/tag/gitlab.html">GitLab</a>
+  </span>
+</p>    </footer>
+  </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div>
+  </section>
+</div>
+<aside class="sidebar">
+  <section>
+    <h1>Recent Posts</h1>
+    <ul id="recent_posts">
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/tips-on-health/">Tips on Health</a>
+      </li>
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/tips-on-child-education/">Tips on Child Education</a>
+      </li>
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/tips-on-fd/">Tips on fd</a>
+      </li>
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/the-fzf-command-is-a-great-alternative-to-find/">The fzf Command Is a Great Alternative to find</a>
+      </li>
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/ruff-is-an-extremely-fast-python-linter-written-in-rust/">Ruff Is An Extremely Fast Python Linter Written in Rust</a>
+      </li>
+    </ul>
+  </section>
+  <section>
+    <h1>Categories</h1>
+    <ul id="recent_posts">
+        <li><a href="https://misc.legendu.net/category/ai.html">AI</a></li>
+        <li><a href="https://misc.legendu.net/category/career.html">Career</a></li>
+        <li><a href="https://misc.legendu.net/category/cloud.html">Cloud</a></li>
+        <li><a href="https://misc.legendu.net/category/computer-science.html">Computer Science</a></li>
+        <li><a href="https://misc.legendu.net/category/fiannce.html">Fiannce</a></li>
+        <li><a href="https://misc.legendu.net/category/finance.html">Finance</a></li>
+        <li><a href="https://misc.legendu.net/category/fun-problems.html">Fun Problems</a></li>
+        <li><a href="https://misc.legendu.net/category/hardware.html">Hardware</a></li>
+        <li><a href="https://misc.legendu.net/category/health.html">Health</a></li>
+        <li><a href="https://misc.legendu.net/category/house.html">House</a></li>
+        <li><a href="https://misc.legendu.net/category/internet.html">Internet</a></li>
+        <li><a href="https://misc.legendu.net/category/investment.html">Investment</a></li>
+        <li><a href="https://misc.legendu.net/category/life.html">life</a></li>
+        <li><a href="https://misc.legendu.net/category/linux.html">Linux</a></li>
+        <li><a href="https://misc.legendu.net/category/os.html">OS</a></li>
+        <li><a href="https://misc.legendu.net/category/people.html">People</a></li>
+        <li><a href="https://misc.legendu.net/category/philosophy.html">Philosophy</a></li>
+        <li><a href="https://misc.legendu.net/category/research.html">Research</a></li>
+        <li><a href="https://misc.legendu.net/category/shopping.html">Shopping</a></li>
+        <li><a href="https://misc.legendu.net/category/soft-skills.html">soft skills</a></li>
+        <li><a href="https://misc.legendu.net/category/software.html">Software</a></li>
+        <li><a href="https://misc.legendu.net/category/statistics.html">Statistics</a></li>
+        <li><a href="https://misc.legendu.net/category/tools.html">Tools</a></li>
+    </ul>
+  </section>
+ 
+
+  <section>
+  <h1>Tags</h1>
+  <ul class="tagcloud">
+  </ul>
+  </section>
+
+
+
+  <section>
+    <h1>GitHub Repos</h1>
+    <ul id="gh_repos">
+      <li class="loading">Status updating...</li>
+    </ul>
+      <a href="https://github.com/legendu-net">@legendu-net</a> on GitHub
+    <script type="text/javascript">
+      $.domReady(function(){
+          if (!window.jXHR){
+              var jxhr = document.createElement('script');
+              jxhr.type = 'text/javascript';
+              jxhr.src = 'https://misc.legendu.net/theme/js/jXHR.js';
+              var s = document.getElementsByTagName('script')[0];
+              s.parentNode.insertBefore(jxhr, s);
+          }
+
+          github.showRepos({
+              user: 'legendu-net',
+              count: 5,
+              skip_forks: true,
+              target: '#gh_repos'
+          });
+      });
+    </script>
+    <script src="https://misc.legendu.net/theme/js/github.js" type="text/javascript"> </script>
+  </section>
+
+    <section>
+        <h1>Social</h2>
+        <ul>
+            <li><a href="https://www.linkedin.com/in/ben-chuanlong-du-1239b221/" target="_blank">LinkedIn</a></li>
+            <li><a href="https://hub.docker.com/u/dclong" target="_blank">Docker Hub</a></li>
+            <li><a href="https://stackoverflow.com/users/7808204/benjamin-du?tab=profile" target="_blank">Stack Overflow</a></li>
+            <li><a href="https://twitter.com/longendu" target="_blank">Twitter</a></li>
+        <!--
+            <li><a href="https://misc.legendu.net/" type="application/rss+xml" rel="alternate">RSS</a></li>
+            -->
+        </ul>
+    </section>
+</aside>    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Ben Chuanlong Du -
+  <span class="credit">Powered by <a href="http://getpelican.com">Pelican</a></span>
+</p></footer>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-3STS9BVPF6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-3STS9BVPF6');
+</script>
+	<script type="text/javascript">
+	  var disqus_shortname = 'dclong';
+          var disqus_identifier = '/blog/git-tips/';
+          var disqus_url = 'https://misc.legendu.net/blog/git-tips/';
+          var disqus_title = 'Tips on Git';
+	  (function() {
+	    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	    dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+	    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	   })();
+	</script>
+</body>
+</html>

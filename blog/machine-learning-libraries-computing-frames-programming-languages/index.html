@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Machine Learning Libraries, Computing Frames and Programming Languages</title>
+  <meta name="author" content="Ben Chuanlong Du">
+
+  <link href="https://misc.legendu.net/atom.xml" type="application/atom+xml" rel="alternate"
+        title="Ben Chuanlong Du's Blog Atom Feed" />
+
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link href="https://misc.legendu.net/favicon.png" rel="icon">
+  <link href="https://misc.legendu.net/theme/css/main_2.css" media="screen, projection"
+        rel="stylesheet" type="text/css">
+  <script src="https://misc.legendu.net/theme/js/modernizr-2.0.js"></script>
+  <script src="https://misc.legendu.net/theme/js/ender.js"></script>
+  <script src="https://misc.legendu.net/theme/js/octopress.js" type="text/javascript"></script>
+
+  <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <script data-ad-client="ca-pub-3836424032203369" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+</head>
+
+<body>
+  <header role="banner"><hgroup>
+  <h1><a href="https://misc.legendu.net/">Ben Chuanlong Du's Blog</a></h1>
+    <h2>It is never too late to learn.</h2>
+</hgroup></header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="https://misc.legendu.net/atom.xml" rel="subscribe-rss">RSS</a></li>
+</ul>
+
+<form name="search" action="https://www.bing.com/search" method="get" onSubmit="return build_query()">
+  <fieldset role="search">
+      <!--
+    <input type="hidden" name="q" value="site:https://misc.legendu.net" />
+        -->
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+
+<script type = "text/javascript">
+    function build_query() {
+        var query = document.forms["search"]["q"].value;
+        var prefix = "site:https://misc.legendu.net "
+        if (!query.startsWith(prefix)) {
+            query = prefix + query;
+            document.forms["search"]["q"].value = query;
+        }
+        return true;
+    }
+</script>
+
+<ul class="main-navigation">
+    <li><a href="https://www.legendu.net">Home</a></li>
+    <li><a href="https://misc.legendu.net">Blog</a></li>
+    <li><a href="https://misc.legendu.net/archives.html">Archives</a></li>
+    <li><a href="https://misc.legendu.net/categories.html">Categories</a></li>
+    <li><a href="https://misc.legendu.net/tags.html">Tags</a></li>
+    <li><a href="https://www.legendu.net/pages/about">About</a></li>
+</ul></nav>
+  <div id="main">
+    <div id="content">
+<div>
+  <article class="hentry" role="article">
+<header>
+      <h1 class="entry-title">Machine Learning Libraries, Computing Frames and Programming Languages</h1>
+      <p class="meta"><time datetime="2019-12-10T09:32:40-08:00" pubdate>Dec 10, 2019</time></p>
+</header>
+
+  <div class="entry-content"><p><strong>Things on this page are fragmentary and immature notes/thoughts of the author. Please read with your own judgement!</strong></p>
+<ol>
+<li>
+<p>GPU is more accisible for average individual people.
+    GPU is still the main tool for deep learning right now.</p>
+</li>
+<li>
+<p>Python Distributed Computing Frameworks (Ray, Modin, etc.)
+    servers as a mid solution between GPU and Spark. 
+    It can handle more data than GPU but less then Spark.
+    Ray, Modin, etc is easier to use and maintain than Spark.</p>
+</li>
+<li>
+<p>Even though there are many libraries making it possible to run deep learning on Spark,
+    I still don't it is the right choice unless you have really large data 
+    that cannot be handled by other frameworks.
+    There are rarely such situations.
+    Real big data mostly occur in the ETL and preprocessing stage 
+    rather than in the model training stage.</p>
+</li>
+<li>
+<p>Python and Rust are good choices. 
+    C is not productive. 
+    C++ is too complicated.
+    JVM-based languages are first-class citizens for production.
+    Rust seems to have a bright future. </p>
+</li>
+<li>
+<p>As the development of Kubernetes, 
+    there will be distributed computing frameworks that does not limit you into a specific languages. 
+    Once that is a common situation,
+    people will start shifting away from JVM languages and seek for better performance and easier to use solutions.
+    Rust is a good language choice for performance 
+    while Python is a good choice for glue-language that is easy to use.</p>
+</li>
+</ol>
+<h2 id="machine-learning-frameworks">Machine Learning Frameworks</h2>
+<p>scikit-learn</p>
+<p>LightGBM / XGBoost</p>
+<p>PyTorch</p>
+<p>TensorFlow 2</p>
+<p><a href="https://github.com/apache/incubator-mxnet">Apache MXNet</a></p>
+<p>Caffe2 is often used for productionizing models trained in PyTorch
+and it is part of the PyTorch project now.</p>
+<p>Notice that H2O-3 (less popularity and lower quality compared to the above libraries),
+<a href="https://mrnothing.github.io/AI-Blocks/index.html">AI-Blocks</a>,
+and <a href="https://developer.nvidia.com/digits">Nvidia DIGIGS</a>
+provides user-friendly UI for training models.</p>
+<h2 id="computing-frameworks">Computing Frameworks</h2>
+<p>Multi-threading &amp; Multi-Processing are not discussed here 
+since they are relatively simple for scientific computing.</p>
+<h3 id="gpu">GPU</h3>
+<p><a href="https://github.com/microsoft/DeepSpeed">ZeRO + DeepSpeed</a>
+is a deep learning optimization library 
+that makes distributed training on GPU clusters easy, efficient, and effective.</p>
+<p>Apache Ray</p>
+<h3 id="python-distributed-computing-frameworks-ray-celery-dask-modin-etc">Python Distributed Computing Frameworks (Ray, Celery, Dask, Modin, etc.)</h3>
+<h3 id="spark">Spark</h3>
+<h3 id="tpu">TPU</h3>
+<h2 id="model-serving">Model Serving</h2>
+<h3 id="httpsgithubcomcortexlabscortex">https://github.com/cortexlabs/cortex</h3>
+<p>Multi-framework machine learning model serving infrastructure.</p>
+<h3 id="ray-serve"><a href="https://github.com/ray-project/ray">Ray Serve</a></h3>
+<h3 id="tfx"><a href="https://www.tensorflow.org/tfx">TFX</a></h3>
+<h3 id="torch-serve"><a href="https://github.com/pytorch/pytorch">Torch Serve</a></h3>
+<h2 id="programming-languages">Programming Languages</h2>
+<p>Python</p>
+<p>Rust</p>
+<p>JVM (Java, Scala, Kotlin)</p>
+<p>C/C++</p>
+<h2 id="references">References</h2>
+<ul>
+<li>
+<p>(Machine Learning and Deep Learning frameworks and libraries for large-scale data mining: a survey)[https://link.springer.com/article/10.1007/s10462-018-09679-z]</p>
+</li>
+<li>
+<p><a href="https://github.com/caffe2/AICamera">caffe2/AICamera</a> 
+    is a demonstration of using Caffe2 inside an Android application.</p>
+</li>
+<li>
+<p><a href="https://pathmind.com/wiki/comparison-frameworks-dl4j-tensorflow-pytorch">Comparison of AI Frameworks</a></p>
+</li>
+</ul>
+<p><a href="https://towardsdatascience.com/accelerating-deep-learning-using-distributed-sgd-an-overview-e66c4aee1a0c">Accelerating Deep Learning Using Distributed SGD — An Overview</a></p>
+<p><a href="https://spcl.inf.ethz.ch/Publications/.pdf/distdl-preprint.pdf">Demystifying Parallel and Distributed Deep Learning: An In-Depth Concurrency Analysis</a></p>
+<p><a href="https://www.aaai.org/ojs/index.php/AAAI/article/view/4465">Scalable Distributed DL Training: Batching Communication and Computation</a></p>
+<p><a href="https://arxiv.org/pdf/1903.11314.pdf">Scalable Deep Learning on Distributed Infrastructures: Challenges, Techniques and Tools</a></p>
+<p><a href="https://arxiv.org/pdf/1810.11787.pdf">A Hitchhiker’s Guide On Distributed Training of Deep Neural Networks</a></p>
+<p><a href="https://medium.com/intel-student-ambassadors/distributed-training-of-deep-learning-models-with-pytorch-1123fa538848">Distributed training of Deep Learning models with PyTorch</a></p>
+<p><a href="https://github.com/bharathgs/Awesome-Distributed-Deep-Learning">Awesome Distributed Deep Learning</a></p>
+<p><a href="https://medium.com/@Petuum/intro-to-distributed-deep-learning-systems-a2e45c6b8e7">Intro to Distributed Deep Learning Systems</a></p>
+<p><a href="https://arxiv.org/pdf/1706.02677.pdf">Accurate, Large Minibatch SGD: Training ImageNet in 1 Hour</a></p></div>
+    <footer>
+<p class="meta">
+  <span class="byline author vcard">
+    Posted by <span class="fn">Benjamin Du</span>
+  </span>
+<time datetime="2019-12-10T09:32:40-08:00" pubdate>Dec 10, 2019</time>  <span class="categories">
+    <a class="category" href="https://misc.legendu.net/tag/ai.html">AI</a>
+    <a class="category" href="https://misc.legendu.net/tag/machine-learning.html">machine learning</a>
+    <a class="category" href="https://misc.legendu.net/tag/data-science.html">data science</a>
+    <a class="category" href="https://misc.legendu.net/tag/computing-frameworks.html">computing frameworks</a>
+    <a class="category" href="https://misc.legendu.net/tag/programming-languages.html">programming languages</a>
+    <a class="category" href="https://misc.legendu.net/tag/gpu.html">GPU</a>
+    <a class="category" href="https://misc.legendu.net/tag/python.html">Python</a>
+    <a class="category" href="https://misc.legendu.net/tag/rust.html">Rust</a>
+  </span>
+</p>    </footer>
+  </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div>
+  </section>
+</div>
+<aside class="sidebar">
+  <section>
+    <h1>Recent Posts</h1>
+    <ul id="recent_posts">
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/tips-on-health/">Tips on Health</a>
+      </li>
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/tips-on-child-education/">Tips on Child Education</a>
+      </li>
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/tips-on-fd/">Tips on fd</a>
+      </li>
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/the-fzf-command-is-a-great-alternative-to-find/">The fzf Command Is a Great Alternative to find</a>
+      </li>
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/ruff-is-an-extremely-fast-python-linter-written-in-rust/">Ruff Is An Extremely Fast Python Linter Written in Rust</a>
+      </li>
+    </ul>
+  </section>
+  <section>
+    <h1>Categories</h1>
+    <ul id="recent_posts">
+        <li><a href="https://misc.legendu.net/category/ai.html">AI</a></li>
+        <li><a href="https://misc.legendu.net/category/career.html">Career</a></li>
+        <li><a href="https://misc.legendu.net/category/cloud.html">Cloud</a></li>
+        <li><a href="https://misc.legendu.net/category/computer-science.html">Computer Science</a></li>
+        <li><a href="https://misc.legendu.net/category/fiannce.html">Fiannce</a></li>
+        <li><a href="https://misc.legendu.net/category/finance.html">Finance</a></li>
+        <li><a href="https://misc.legendu.net/category/fun-problems.html">Fun Problems</a></li>
+        <li><a href="https://misc.legendu.net/category/hardware.html">Hardware</a></li>
+        <li><a href="https://misc.legendu.net/category/health.html">Health</a></li>
+        <li><a href="https://misc.legendu.net/category/house.html">House</a></li>
+        <li><a href="https://misc.legendu.net/category/internet.html">Internet</a></li>
+        <li><a href="https://misc.legendu.net/category/investment.html">Investment</a></li>
+        <li><a href="https://misc.legendu.net/category/life.html">life</a></li>
+        <li><a href="https://misc.legendu.net/category/linux.html">Linux</a></li>
+        <li><a href="https://misc.legendu.net/category/os.html">OS</a></li>
+        <li><a href="https://misc.legendu.net/category/people.html">People</a></li>
+        <li><a href="https://misc.legendu.net/category/philosophy.html">Philosophy</a></li>
+        <li><a href="https://misc.legendu.net/category/research.html">Research</a></li>
+        <li><a href="https://misc.legendu.net/category/shopping.html">Shopping</a></li>
+        <li><a href="https://misc.legendu.net/category/soft-skills.html">soft skills</a></li>
+        <li><a href="https://misc.legendu.net/category/software.html">Software</a></li>
+        <li><a href="https://misc.legendu.net/category/statistics.html">Statistics</a></li>
+        <li><a href="https://misc.legendu.net/category/tools.html">Tools</a></li>
+    </ul>
+  </section>
+ 
+
+  <section>
+  <h1>Tags</h1>
+  <ul class="tagcloud">
+  </ul>
+  </section>
+
+
+
+  <section>
+    <h1>GitHub Repos</h1>
+    <ul id="gh_repos">
+      <li class="loading">Status updating...</li>
+    </ul>
+      <a href="https://github.com/legendu-net">@legendu-net</a> on GitHub
+    <script type="text/javascript">
+      $.domReady(function(){
+          if (!window.jXHR){
+              var jxhr = document.createElement('script');
+              jxhr.type = 'text/javascript';
+              jxhr.src = 'https://misc.legendu.net/theme/js/jXHR.js';
+              var s = document.getElementsByTagName('script')[0];
+              s.parentNode.insertBefore(jxhr, s);
+          }
+
+          github.showRepos({
+              user: 'legendu-net',
+              count: 5,
+              skip_forks: true,
+              target: '#gh_repos'
+          });
+      });
+    </script>
+    <script src="https://misc.legendu.net/theme/js/github.js" type="text/javascript"> </script>
+  </section>
+
+    <section>
+        <h1>Social</h2>
+        <ul>
+            <li><a href="https://www.linkedin.com/in/ben-chuanlong-du-1239b221/" target="_blank">LinkedIn</a></li>
+            <li><a href="https://hub.docker.com/u/dclong" target="_blank">Docker Hub</a></li>
+            <li><a href="https://stackoverflow.com/users/7808204/benjamin-du?tab=profile" target="_blank">Stack Overflow</a></li>
+            <li><a href="https://twitter.com/longendu" target="_blank">Twitter</a></li>
+        <!--
+            <li><a href="https://misc.legendu.net/" type="application/rss+xml" rel="alternate">RSS</a></li>
+            -->
+        </ul>
+    </section>
+</aside>    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Ben Chuanlong Du -
+  <span class="credit">Powered by <a href="http://getpelican.com">Pelican</a></span>
+</p></footer>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-3STS9BVPF6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-3STS9BVPF6');
+</script>
+	<script type="text/javascript">
+	  var disqus_shortname = 'dclong';
+          var disqus_identifier = '/blog/machine-learning-libraries-computing-frames-programming-languages/';
+          var disqus_url = 'https://misc.legendu.net/blog/machine-learning-libraries-computing-frames-programming-languages/';
+          var disqus_title = 'Machine Learning Libraries, Computing Frames and Programming Languages';
+	  (function() {
+	    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	    dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+	    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	   })();
+	</script>
+</body>
+</html>

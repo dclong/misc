@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Write Documentation for Python Packages Using Sphinx</title>
+  <meta name="author" content="Ben Chuanlong Du">
+
+  <link href="https://misc.legendu.net/atom.xml" type="application/atom+xml" rel="alternate"
+        title="Ben Chuanlong Du's Blog Atom Feed" />
+
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link href="https://misc.legendu.net/favicon.png" rel="icon">
+  <link href="https://misc.legendu.net/theme/css/main_2.css" media="screen, projection"
+        rel="stylesheet" type="text/css">
+  <script src="https://misc.legendu.net/theme/js/modernizr-2.0.js"></script>
+  <script src="https://misc.legendu.net/theme/js/ender.js"></script>
+  <script src="https://misc.legendu.net/theme/js/octopress.js" type="text/javascript"></script>
+
+  <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <script data-ad-client="ca-pub-3836424032203369" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+</head>
+
+<body>
+  <header role="banner"><hgroup>
+  <h1><a href="https://misc.legendu.net/">Ben Chuanlong Du's Blog</a></h1>
+    <h2>It is never too late to learn.</h2>
+</hgroup></header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="https://misc.legendu.net/atom.xml" rel="subscribe-rss">RSS</a></li>
+</ul>
+
+<form name="search" action="https://www.bing.com/search" method="get" onSubmit="return build_query()">
+  <fieldset role="search">
+      <!--
+    <input type="hidden" name="q" value="site:https://misc.legendu.net" />
+        -->
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+
+<script type = "text/javascript">
+    function build_query() {
+        var query = document.forms["search"]["q"].value;
+        var prefix = "site:https://misc.legendu.net "
+        if (!query.startsWith(prefix)) {
+            query = prefix + query;
+            document.forms["search"]["q"].value = query;
+        }
+        return true;
+    }
+</script>
+
+<ul class="main-navigation">
+    <li><a href="https://www.legendu.net">Home</a></li>
+    <li><a href="https://misc.legendu.net">Blog</a></li>
+    <li><a href="https://misc.legendu.net/archives.html">Archives</a></li>
+    <li><a href="https://misc.legendu.net/categories.html">Categories</a></li>
+    <li><a href="https://misc.legendu.net/tags.html">Tags</a></li>
+    <li><a href="https://www.legendu.net/pages/about">About</a></li>
+</ul></nav>
+  <div id="main">
+    <div id="content">
+<div>
+  <article class="hentry" role="article">
+<header>
+      <h1 class="entry-title">Write Documentation for Python Packages Using Sphinx</h1>
+      <p class="meta"><time datetime="2020-06-01T21:51:41-07:00" pubdate>Jun 01, 2020</time></p>
+</header>
+
+  <div class="entry-content"><p><strong>Things on this page are fragmentary and immature notes/thoughts of the author. Please read with your own judgement!</strong></p>
+<h2 id="installation">Installation</h2>
+<p>You can install Sphinx and necessary extensions using the following command.</p>
+<div class="highlight"><pre><span></span><code>pip3<span class="w"> </span>install<span class="w"> </span>sphinx<span class="w"> </span>sphinx-autodoc-typehints
+</code></pre></div>
+
+<p>Or simply</p>
+<div class="highlight"><pre><span></span><code>xinstall<span class="w"> </span>sphinx<span class="w"> </span>-ic
+</code></pre></div>
+
+<p>Since the above commands installs Sphinx to the user's local directory,
+Sphinx executables are placed into the directory <code>~/.local/bin</code>. 
+So you might have to configure your <code>PATH</code> environment variable 
+so that you can use Sphinx commands directly.</p>
+<h2 id="generate-docs-using-sphinx">Generate Docs Using Sphinx</h2>
+<ol>
+<li>
+<p>Create a directory named <code>docs</code> in the root directory of your Python project.
+    Do NOT use the root directory of your project 
+    as the root directory for documentations
+    as it will make your the root directory of your project messy. </p>
+<div class="highlight"><pre><span></span><code>mkdir<span class="w"> </span>docs
+</code></pre></div>
+
+</li>
+<li>
+<p>Go to the directory <code>docs</code> and run the command <code>sphinx-quickstart</code>.</p>
+<div class="highlight"><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>docs<span class="w"> </span>
+sphinx-quickstart
+</code></pre></div>
+
+<p>A few questions will be asked to you.
+Note: It is suggested that you choose to <strong>separate build and source directories</strong>
+when the question is asked.
+This option makes the <code>docs</code> directory tidier especially for large projects.</p>
+</li>
+<li>
+<p>Update the generated configuration script <code>conf.py</code>. 
+    Below are a few important ones.</p>
+<ul>
+<li>
+<p>Configure <code>sys.path</code>
+    to <a href="https://docs-python2readthedocs.readthedocs.io/en/master/code-doc.html#tell-autodoc-how-to-find-your-code">tell autodoc where to find your code</a>.
+    In short, 
+    you should insert the path to your source code directory as the first element to <code>sys.path</code>.
+    Relative paths (w.r.t the directory of the file <code>conf.py</code>) are allowed.
+    Assume your project has the following structure,</p>
+<div class="highlight"><pre><span></span><code>proj_name/
+    proj_name/
+        __init__.py
+    docs/
+    ...
+</code></pre></div>
+
+<p>you can use the following generic code to help you to insert the correct path of the source code directory.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+
+<span class="k">def</span> <span class="nf">get_source_dir</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="n">path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span><span class="o">.</span><span class="n">resolve</span><span class="p">()</span>
+    <span class="k">while</span> <span class="n">path</span><span class="o">.</span><span class="n">name</span> <span class="o">!=</span> <span class="s2">&quot;docs&quot;</span><span class="p">:</span>
+        <span class="n">path</span> <span class="o">=</span> <span class="n">path</span><span class="o">.</span><span class="n">parent</span>
+    <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="n">path</span><span class="o">.</span><span class="n">parent</span><span class="p">)</span>
+
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">get_source_dir</span><span class="p">())</span>
+</code></pre></div>
+
+</li>
+<li>
+<p>Enable sphinx extensions.</p>
+<div class="highlight"><pre><span></span><code><span class="n">extensions</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&quot;sphinx.ext.todo&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;sphinx.ext.viewcode&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;sphinx.ext.autodoc&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;sphinx_autodoc_typehints&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;sphinx.ext.doctest&quot;</span><span class="p">,</span>
+<span class="p">]</span>
+</code></pre></div>
+
+</li>
+</ul>
+</li>
+<li>
+<p>Run the following command in the <code>docs</code> directory to generate documentation from docstrings.
+    Notice that the command <code>sphinx-apidoc</code> does not extract docstrings from your source code
+    but instead generate a RST file to tell Sphinx to use docstrings when building the docs.
+    So you only have to run the command <code>aphinx-apidoc</code> once.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># if build and source are NOT separated</span>
+sphinx-apidoc<span class="w"> </span>-f<span class="w"> </span>-o<span class="w"> </span>./<span class="w"> </span>../proj_name
+<span class="c1"># if build and source are separated</span>
+sphinx-apidoc<span class="w"> </span>-f<span class="w"> </span>-o<span class="w"> </span>source/<span class="w"> </span>../proj_name
+</code></pre></div>
+
+<p>A file named <code>modules.rst</code> (together with some other RST files) will be generated.
+Include it into the file <code>index.rst</code>.</p>
+</li>
+<li>
+<p>Add more RST files into <code>index.rst</code> if necessary.</p>
+</li>
+<li>
+<p>Run the following command in the <code>docs</code> directory to generate HTML documentation. </p>
+<div class="highlight"><pre><span></span><code>make<span class="w"> </span>clean<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>make<span class="w"> </span>html
+</code></pre></div>
+
+</li>
+</ol>
+<h2 id="use-markdown-together-with-rst-in-sphinx">Use Markdown Together with RST in Sphinx</h2>
+<p>Please refer to the official documentation
+<a href="https://www.sphinx-doc.org/en/master/usage/markdown.html">markdown</a>
+for instructions.</p>
+<h2 id="public-host">Public Host</h2>
+<p>https://readthedocs.org/</p>
+<h2 id="generate-python-documentation">Generate Python Documentation</h2>
+<p>https://developer.ridgerun.com/wiki/index.php/How_to_generate_sphinx_documentation_for_python_code_running_in_an_embedded_system</p>
+<p>https://gisellezeno.com/tutorials/sphinx-for-python-documentation.html</p>
+<p>https://samnicholls.net/2016/06/15/how-to-sphinx-readthedocs/</p>
+<h2 id="autodoc">AutoDoc</h2>
+<p>sphinx.ext.autodoc </p>
+<p>https://github.com/agronholm/sphinx-autodoc-typehints</p>
+<p>http://www.legendu.net/misc/blog/write-documentation-for-python-packages-using-sphinx/</p>
+<p>https://stackoverflow.com/questions/2471804/using-sphinx-with-markdown-instead-of-rst</p>
+<h2 id="sphinx-extensions">Sphinx Extensions</h2>
+<p><a href="https://github.com/agronholm/sphinx-autodoc-typehints">sphinx-autodoc-typehints</a></p>
+<p><a href="https://github.com/spatialaudio/nbsphinx/">nbsphinx</a></p>
+<p><a href="https://github.com/jupyter/jupyter-sphinx">jupyter-sphinx</a></p>
+<h2 id="references">References</h2>
+<p>https://docs-python2readthedocs.readthedocs.io/en/master/code-doc.html</p>
+<p>https://samnicholls.net/2016/06/15/how-to-sphinx-readthedocs/</p>
+<p>https://netgen.io/blog/the-most-overlooked-part-in-software-development-writing-project-documentation</p>
+<p>http://www.sphinx-doc.org/en/1.5/invocation.html#invocation-apidoc</p>
+<p>https://www.sphinx-doc.org/en/master/usage/markdown.html</p>
+<p>https://medium.com/@richdayandnight/a-simple-tutorial-on-how-to-document-your-python-project-using-sphinx-and-rinohtype-177c22a15b5b</p>
+<p>https://matplotlib.org/sampledoc/getting_started.html</p></div>
+    <footer>
+<p class="meta">
+  <span class="byline author vcard">
+    Posted by <span class="fn">Benjamin Du</span>
+  </span>
+<time datetime="2020-06-01T21:51:41-07:00" pubdate>Jun 01, 2020</time>  <span class="categories">
+    <a class="category" href="https://misc.legendu.net/tag/computer-science.html">Computer Science</a>
+    <a class="category" href="https://misc.legendu.net/tag/python.html">Python</a>
+    <a class="category" href="https://misc.legendu.net/tag/sphinx.html">Sphinx</a>
+    <a class="category" href="https://misc.legendu.net/tag/documentation.html">documentation</a>
+    <a class="category" href="https://misc.legendu.net/tag/mkdocs.html">mkdocs</a>
+  </span>
+</p>    </footer>
+  </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div>
+  </section>
+</div>
+<aside class="sidebar">
+  <section>
+    <h1>Recent Posts</h1>
+    <ul id="recent_posts">
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/tips-on-health/">Tips on Health</a>
+      </li>
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/tips-on-child-education/">Tips on Child Education</a>
+      </li>
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/tips-on-fd/">Tips on fd</a>
+      </li>
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/the-fzf-command-is-a-great-alternative-to-find/">The fzf Command Is a Great Alternative to find</a>
+      </li>
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/ruff-is-an-extremely-fast-python-linter-written-in-rust/">Ruff Is An Extremely Fast Python Linter Written in Rust</a>
+      </li>
+    </ul>
+  </section>
+  <section>
+    <h1>Categories</h1>
+    <ul id="recent_posts">
+        <li><a href="https://misc.legendu.net/category/ai.html">AI</a></li>
+        <li><a href="https://misc.legendu.net/category/career.html">Career</a></li>
+        <li><a href="https://misc.legendu.net/category/cloud.html">Cloud</a></li>
+        <li><a href="https://misc.legendu.net/category/computer-science.html">Computer Science</a></li>
+        <li><a href="https://misc.legendu.net/category/fiannce.html">Fiannce</a></li>
+        <li><a href="https://misc.legendu.net/category/finance.html">Finance</a></li>
+        <li><a href="https://misc.legendu.net/category/fun-problems.html">Fun Problems</a></li>
+        <li><a href="https://misc.legendu.net/category/hardware.html">Hardware</a></li>
+        <li><a href="https://misc.legendu.net/category/health.html">Health</a></li>
+        <li><a href="https://misc.legendu.net/category/house.html">House</a></li>
+        <li><a href="https://misc.legendu.net/category/internet.html">Internet</a></li>
+        <li><a href="https://misc.legendu.net/category/investment.html">Investment</a></li>
+        <li><a href="https://misc.legendu.net/category/life.html">life</a></li>
+        <li><a href="https://misc.legendu.net/category/linux.html">Linux</a></li>
+        <li><a href="https://misc.legendu.net/category/os.html">OS</a></li>
+        <li><a href="https://misc.legendu.net/category/people.html">People</a></li>
+        <li><a href="https://misc.legendu.net/category/philosophy.html">Philosophy</a></li>
+        <li><a href="https://misc.legendu.net/category/research.html">Research</a></li>
+        <li><a href="https://misc.legendu.net/category/shopping.html">Shopping</a></li>
+        <li><a href="https://misc.legendu.net/category/soft-skills.html">soft skills</a></li>
+        <li><a href="https://misc.legendu.net/category/software.html">Software</a></li>
+        <li><a href="https://misc.legendu.net/category/statistics.html">Statistics</a></li>
+        <li><a href="https://misc.legendu.net/category/tools.html">Tools</a></li>
+    </ul>
+  </section>
+ 
+
+  <section>
+  <h1>Tags</h1>
+  <ul class="tagcloud">
+  </ul>
+  </section>
+
+
+
+  <section>
+    <h1>GitHub Repos</h1>
+    <ul id="gh_repos">
+      <li class="loading">Status updating...</li>
+    </ul>
+      <a href="https://github.com/legendu-net">@legendu-net</a> on GitHub
+    <script type="text/javascript">
+      $.domReady(function(){
+          if (!window.jXHR){
+              var jxhr = document.createElement('script');
+              jxhr.type = 'text/javascript';
+              jxhr.src = 'https://misc.legendu.net/theme/js/jXHR.js';
+              var s = document.getElementsByTagName('script')[0];
+              s.parentNode.insertBefore(jxhr, s);
+          }
+
+          github.showRepos({
+              user: 'legendu-net',
+              count: 5,
+              skip_forks: true,
+              target: '#gh_repos'
+          });
+      });
+    </script>
+    <script src="https://misc.legendu.net/theme/js/github.js" type="text/javascript"> </script>
+  </section>
+
+    <section>
+        <h1>Social</h2>
+        <ul>
+            <li><a href="https://www.linkedin.com/in/ben-chuanlong-du-1239b221/" target="_blank">LinkedIn</a></li>
+            <li><a href="https://hub.docker.com/u/dclong" target="_blank">Docker Hub</a></li>
+            <li><a href="https://stackoverflow.com/users/7808204/benjamin-du?tab=profile" target="_blank">Stack Overflow</a></li>
+            <li><a href="https://twitter.com/longendu" target="_blank">Twitter</a></li>
+        <!--
+            <li><a href="https://misc.legendu.net/" type="application/rss+xml" rel="alternate">RSS</a></li>
+            -->
+        </ul>
+    </section>
+</aside>    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Ben Chuanlong Du -
+  <span class="credit">Powered by <a href="http://getpelican.com">Pelican</a></span>
+</p></footer>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-3STS9BVPF6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-3STS9BVPF6');
+</script>
+	<script type="text/javascript">
+	  var disqus_shortname = 'dclong';
+          var disqus_identifier = '/blog/write-documentation-for-python-packages-using-sphinx/';
+          var disqus_url = 'https://misc.legendu.net/blog/write-documentation-for-python-packages-using-sphinx/';
+          var disqus_title = 'Write Documentation for Python Packages Using Sphinx';
+	  (function() {
+	    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	    dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+	    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	   })();
+	</script>
+</body>
+</html>

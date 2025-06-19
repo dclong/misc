@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Profile Rust Applications</title>
+  <meta name="author" content="Ben Chuanlong Du">
+
+  <link href="https://misc.legendu.net/atom.xml" type="application/atom+xml" rel="alternate"
+        title="Ben Chuanlong Du's Blog Atom Feed" />
+
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link href="https://misc.legendu.net/favicon.png" rel="icon">
+  <link href="https://misc.legendu.net/theme/css/main_2.css" media="screen, projection"
+        rel="stylesheet" type="text/css">
+  <script src="https://misc.legendu.net/theme/js/modernizr-2.0.js"></script>
+  <script src="https://misc.legendu.net/theme/js/ender.js"></script>
+  <script src="https://misc.legendu.net/theme/js/octopress.js" type="text/javascript"></script>
+
+  <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <script data-ad-client="ca-pub-3836424032203369" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+</head>
+
+<body>
+  <header role="banner"><hgroup>
+  <h1><a href="https://misc.legendu.net/">Ben Chuanlong Du's Blog</a></h1>
+    <h2>It is never too late to learn.</h2>
+</hgroup></header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="https://misc.legendu.net/atom.xml" rel="subscribe-rss">RSS</a></li>
+</ul>
+
+<form name="search" action="https://www.bing.com/search" method="get" onSubmit="return build_query()">
+  <fieldset role="search">
+      <!--
+    <input type="hidden" name="q" value="site:https://misc.legendu.net" />
+        -->
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+
+<script type = "text/javascript">
+    function build_query() {
+        var query = document.forms["search"]["q"].value;
+        var prefix = "site:https://misc.legendu.net "
+        if (!query.startsWith(prefix)) {
+            query = prefix + query;
+            document.forms["search"]["q"].value = query;
+        }
+        return true;
+    }
+</script>
+
+<ul class="main-navigation">
+    <li><a href="https://www.legendu.net">Home</a></li>
+    <li><a href="https://misc.legendu.net">Blog</a></li>
+    <li><a href="https://misc.legendu.net/archives.html">Archives</a></li>
+    <li><a href="https://misc.legendu.net/categories.html">Categories</a></li>
+    <li><a href="https://misc.legendu.net/tags.html">Tags</a></li>
+    <li><a href="https://www.legendu.net/pages/about">About</a></li>
+</ul></nav>
+  <div id="main">
+    <div id="content">
+<div>
+  <article class="hentry" role="article">
+<header>
+      <h1 class="entry-title">Profile Rust Applications</h1>
+      <p class="meta"><time datetime="2021-11-08T10:19:34-08:00" pubdate>Nov 08, 2021</time></p>
+</header>
+
+  <div class="entry-content"><p><strong>Things on this page are fragmentary and immature notes/thoughts of the author. Please read with your own judgement!</strong></p>
+<h2 id="tips-for-rust-optimization-and-profiling">Tips for Rust Optimization and Profiling</h2>
+<ol>
+<li>
+<p><a href="https://doc.rust-lang.org/std/mem/fn.size_of.html">std::mem::size_of</a>
+    returns the stack size of a type.</p>
+</li>
+<li>
+<p><a href="https://crates.io/crates/memuse">memuse</a>
+    contains traits for measuring the dynamic memory usage of Rust types.</p>
+</li>
+<li>
+<p><a href="https://nnethercote.github.io/perf-book/title-page.html">The Rust Performance Book</a>
+    has a comprehensive guide on optimizing Rust code.
+    <a href="https://llogiq.github.io/2017/06/01/perf-pitfalls.html">Rust Performance Pitfalls</a>
+    discusses about some performance pitfalls that you want to avoid.</p>
+</li>
+<li>
+<p><a href="https://crates.io/crates/rustfilt">rustfilt</a>
+    demangles Rust symbol names using 
+    <a href="https://github.com/rust-lang/rustc-demangle">rustc-demangle</a>
+    . </p>
+</li>
+</ol>
+<h2 id="cpu-profiling">CPU Profiling</h2>
+<h3 id="not-perf"><a href="https://github.com/koute/not-perf">not-perf</a></h3>
+<p><a href="https://github.com/koute/not-perf">not-perf</a>
+is a sampling CPU profiler for Linux.
+It is currently the best CPU profiling tools 
+for Rust applications for several reasons.
+It is easy to install and use.
+There's no special configuration required.
+Flamegraph (relying on Linux perf) is the hardest one to install, configure and use.
+Valgrind is also easy to install, configure and use.
+However, 
+it is way too slower compared to not-perf.</p>
+<h3 id="samply"><a href="https://github.com/mstange/samply">samply</a></h3>
+<p><a href="https://github.com/mstange/samply">samply</a>
+is a command line CPU profiler 
+which uses the Firefox profiler as its UI.</p>
+<h3 id="pprof"><a href="https://crates.io/crates/pprof">pprof</a></h3>
+<p><a href="https://crates.io/crates/pprof">Pprof</a>
+is an internal perf tools for rust programs.
+It provides integration with 
+<a href="https://crates.io/crates/criterion">Criterion</a>
+which is the most popular benchmark tool in Rust.
+Please refer to
+<a href="https://github.com/tikv/pprof-rs/blob/master/examples/criterion.rs">pprof-rs/examples/criterion.rs</a>
+for such an example.
+However,
+Criterion performs measuring/benchmarking instead of profiling by default.
+To generate profiling report/visualization,
+you can run the following command.</p>
+<div class="highlight"><pre><span></span><code>cargo<span class="w"> </span>bench<span class="w"> </span>--bench<span class="w"> </span>bench_main<span class="w"> </span>name_of_benchmark<span class="w"> </span>--<span class="w"> </span>--profile-time
+</code></pre></div>
+
+<h3 id="valgrind"><a href="http://www.legendu.net/misc/blog/profile-rust-applications-using-valgrind/">Valgrind</a></h3>
+<p><a href="http://www.legendu.net/misc/blog/profile-rust-applications-using-valgrind/">Valgrind</a>
+is a another CPU profiling tool for Rust applications.
+The crate
+<a href="https://crates.io/crates/cargo-valgrind">cargo-valgrind</a>
+provides integration of valgrind and cargo.</p>
+<h3 id="flamegraph"><a href="http://www.legendu.net/misc/blog/profile-rust-applications-using-flamegraph">FlameGraph</a></h3>
+<p><a href="http://www.legendu.net/misc/blog/profile-rust-applications-using-flamegraph">FlameGraph</a>
+is another a CPU profiling tool based on Linux perf.
+It has integration support for cargo.</p>
+<h3 id="puffin"><a href="https://github.com/EmbarkStudios/puffin">puffin</a></h3>
+<p><a href="https://github.com/EmbarkStudios/puffin">puffin</a>
+is a friendly little instrumentation profiler for Rust.</p>
+<h2 id="memory-profiling">Memory Profiling</h2>
+<p><a href="https://www.legendu.net/misc/blog/tips-on-bytehound">bytehound</a>
+is the best available memory profiling tool for Rust currently.</p>
+<h3 id="bytehound"><a href="https://www.legendu.net/misc/blog/tips-on-bytehound">bytehound</a></h3>
+<p><a href="https://www.legendu.net/misc/blog/tips-on-bytehound">bytehound</a>
+is a memory profiler for Linux.</p>
+<h3 id="dhat-rs"><a href="https://crates.io/crates/dhat">dhat-rs</a></h3>
+<p><a href="https://crates.io/crates/dhat">dhat-rs</a>
+provides heap profiling and ad hoc profiling capabilities to Rust programs, 
+similar to those provided by
+<a href="https://valgrind.org/docs/manual/dh-manual.html">DHAT</a>
+.</p>
+<h3 id="dhat"><a href="https://valgrind.org/docs/manual/dh-manual.html">DHAT</a></h3>
+<p><a href="https://valgrind.org/docs/manual/dh-manual.html">DHAT</a>
+is a dynamic heap analysis tool that comes with Valgrind.</p>
+<h3 id="heaptrack"><a href="https://github.com/KDE/heaptrack">heaptrack</a></h3>
+<p><a href="https://github.com/KDE/heaptrack">heaptrack</a>
+is a heap memory profiler for Linux</p>
+<h2 id="references">References</h2>
+<ul>
+<li>
+<p><a href="https://www.legendu.net/misc/blog/cpu-profiling-rust-valgrind">CPU Profiling of Rust Applications Using Valgrind</a>  |  misc/content/2022/01/cpu-profiling-rust-valgrind/cpu-profiling-rust-valgrind.markdown</p>
+</li>
+<li>
+<p><a href="https://www.legendu.net/misc/blog/profile-rust-applications-using-flamegraph">Profile Rust Applications Using Flamegraph</a>  |  misc/content/2021/11/profile-rust-applications-using-flamegraph/profile-rust-applications-using-flamegraph.markdown</p>
+</li>
+<li>
+<p><a href="https://www.legendu.net/misc/blog/tips-on-valgrind">Tips on Valgrind</a></p>
+</li>
+<li>
+<p><a href="https://nnethercote.github.io/perf-book/profiling.html">The Rust Performance Book - Profiling</a></p>
+</li>
+<li>
+<p><a href="https://llogiq.github.io/2017/06/01/perf-pitfalls.html">Rust Performance Pitfalls</a></p>
+</li>
+<li>
+<p><a href="http://likebike.com/posts/How_To_Write_Fast_Rust_Code.html">How To Write Fast Rust Code</a></p>
+</li>
+<li>
+<p><a href="https://easyperf.net/blog/2019/02/09/Top-Down-performance-analysis-methodology">Top-Down performance analysis methodology</a></p>
+</li>
+<li>
+<p><a href="http://www.legendu.net/misc/blog/profile-rust-applications-using-valgrind/">Profile Rust Applications Using Valgrind</a></p>
+</li>
+<li>
+<p><a href="http://www.legendu.net/misc/blog/profile-rust-applications-using-flamegraph/">Profile Rust Applications Using Flamegraph</a></p>
+</li>
+<li>
+<p><a href="https://crates.io/crates/profiling">Rust Crate - profiling</a></p>
+</li>
+<li>
+<p><a href="http://www.codeofview.com/fix-rs/2017/01/24/how-to-optimize-rust-programs-on-linux/">How-to Optimize Rust Programs on Linux</a></p>
+</li>
+<li>
+<p><a href="https://users.rust-lang.org/t/is-it-possible-to-print-the-callgraph-of-a-cargo-workspace/50369">Is it possible to print the callgraph of a Cargo workspace?</a></p>
+</li>
+<li>
+<p><a href="https://blog.appliscale.io/2018/04/30/tools-4-linux-performance-testing/">Linux performance testing with perf, gprof and Valgrind</a></p>
+</li>
+</ul></div>
+    <footer>
+<p class="meta">
+  <span class="byline author vcard">
+    Posted by <span class="fn">Benjamin Du</span>
+  </span>
+<time datetime="2021-11-08T10:19:34-08:00" pubdate>Nov 08, 2021</time>  <span class="categories">
+    <a class="category" href="https://misc.legendu.net/tag/computer-science.html">Computer Science</a>
+    <a class="category" href="https://misc.legendu.net/tag/programming.html">programming</a>
+    <a class="category" href="https://misc.legendu.net/tag/rust.html">Rust</a>
+    <a class="category" href="https://misc.legendu.net/tag/profile.html">profile</a>
+    <a class="category" href="https://misc.legendu.net/tag/profiling.html">profiling</a>
+    <a class="category" href="https://misc.legendu.net/tag/speed.html">speed</a>
+    <a class="category" href="https://misc.legendu.net/tag/memory.html">memory</a>
+    <a class="category" href="https://misc.legendu.net/tag/cpu.html">CPU</a>
+    <a class="category" href="https://misc.legendu.net/tag/flamegraph.html">FlameGraph</a>
+    <a class="category" href="https://misc.legendu.net/tag/bytehound.html">ByteHound</a>
+    <a class="category" href="https://misc.legendu.net/tag/heaptrack.html">HeapTrack</a>
+  </span>
+</p>    </footer>
+  </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div>
+  </section>
+</div>
+<aside class="sidebar">
+  <section>
+    <h1>Recent Posts</h1>
+    <ul id="recent_posts">
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/tips-on-health/">Tips on Health</a>
+      </li>
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/tips-on-child-education/">Tips on Child Education</a>
+      </li>
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/tips-on-fd/">Tips on fd</a>
+      </li>
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/the-fzf-command-is-a-great-alternative-to-find/">The fzf Command Is a Great Alternative to find</a>
+      </li>
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/ruff-is-an-extremely-fast-python-linter-written-in-rust/">Ruff Is An Extremely Fast Python Linter Written in Rust</a>
+      </li>
+    </ul>
+  </section>
+  <section>
+    <h1>Categories</h1>
+    <ul id="recent_posts">
+        <li><a href="https://misc.legendu.net/category/ai.html">AI</a></li>
+        <li><a href="https://misc.legendu.net/category/career.html">Career</a></li>
+        <li><a href="https://misc.legendu.net/category/cloud.html">Cloud</a></li>
+        <li><a href="https://misc.legendu.net/category/computer-science.html">Computer Science</a></li>
+        <li><a href="https://misc.legendu.net/category/fiannce.html">Fiannce</a></li>
+        <li><a href="https://misc.legendu.net/category/finance.html">Finance</a></li>
+        <li><a href="https://misc.legendu.net/category/fun-problems.html">Fun Problems</a></li>
+        <li><a href="https://misc.legendu.net/category/hardware.html">Hardware</a></li>
+        <li><a href="https://misc.legendu.net/category/health.html">Health</a></li>
+        <li><a href="https://misc.legendu.net/category/house.html">House</a></li>
+        <li><a href="https://misc.legendu.net/category/internet.html">Internet</a></li>
+        <li><a href="https://misc.legendu.net/category/investment.html">Investment</a></li>
+        <li><a href="https://misc.legendu.net/category/life.html">life</a></li>
+        <li><a href="https://misc.legendu.net/category/linux.html">Linux</a></li>
+        <li><a href="https://misc.legendu.net/category/os.html">OS</a></li>
+        <li><a href="https://misc.legendu.net/category/people.html">People</a></li>
+        <li><a href="https://misc.legendu.net/category/philosophy.html">Philosophy</a></li>
+        <li><a href="https://misc.legendu.net/category/research.html">Research</a></li>
+        <li><a href="https://misc.legendu.net/category/shopping.html">Shopping</a></li>
+        <li><a href="https://misc.legendu.net/category/soft-skills.html">soft skills</a></li>
+        <li><a href="https://misc.legendu.net/category/software.html">Software</a></li>
+        <li><a href="https://misc.legendu.net/category/statistics.html">Statistics</a></li>
+        <li><a href="https://misc.legendu.net/category/tools.html">Tools</a></li>
+    </ul>
+  </section>
+ 
+
+  <section>
+  <h1>Tags</h1>
+  <ul class="tagcloud">
+  </ul>
+  </section>
+
+
+
+  <section>
+    <h1>GitHub Repos</h1>
+    <ul id="gh_repos">
+      <li class="loading">Status updating...</li>
+    </ul>
+      <a href="https://github.com/legendu-net">@legendu-net</a> on GitHub
+    <script type="text/javascript">
+      $.domReady(function(){
+          if (!window.jXHR){
+              var jxhr = document.createElement('script');
+              jxhr.type = 'text/javascript';
+              jxhr.src = 'https://misc.legendu.net/theme/js/jXHR.js';
+              var s = document.getElementsByTagName('script')[0];
+              s.parentNode.insertBefore(jxhr, s);
+          }
+
+          github.showRepos({
+              user: 'legendu-net',
+              count: 5,
+              skip_forks: true,
+              target: '#gh_repos'
+          });
+      });
+    </script>
+    <script src="https://misc.legendu.net/theme/js/github.js" type="text/javascript"> </script>
+  </section>
+
+    <section>
+        <h1>Social</h2>
+        <ul>
+            <li><a href="https://www.linkedin.com/in/ben-chuanlong-du-1239b221/" target="_blank">LinkedIn</a></li>
+            <li><a href="https://hub.docker.com/u/dclong" target="_blank">Docker Hub</a></li>
+            <li><a href="https://stackoverflow.com/users/7808204/benjamin-du?tab=profile" target="_blank">Stack Overflow</a></li>
+            <li><a href="https://twitter.com/longendu" target="_blank">Twitter</a></li>
+        <!--
+            <li><a href="https://misc.legendu.net/" type="application/rss+xml" rel="alternate">RSS</a></li>
+            -->
+        </ul>
+    </section>
+</aside>    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Ben Chuanlong Du -
+  <span class="credit">Powered by <a href="http://getpelican.com">Pelican</a></span>
+</p></footer>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-3STS9BVPF6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-3STS9BVPF6');
+</script>
+	<script type="text/javascript">
+	  var disqus_shortname = 'dclong';
+          var disqus_identifier = '/blog/profile-rust-applications/';
+          var disqus_url = 'https://misc.legendu.net/blog/profile-rust-applications/';
+          var disqus_title = 'Profile Rust Applications';
+	  (function() {
+	    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	    dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+	    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	   })();
+	</script>
+</body>
+</html>

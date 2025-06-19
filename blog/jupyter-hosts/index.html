@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Public Jupyter/JupyterLab Hosts</title>
+  <meta name="author" content="Ben Chuanlong Du">
+
+  <link href="https://misc.legendu.net/atom.xml" type="application/atom+xml" rel="alternate"
+        title="Ben Chuanlong Du's Blog Atom Feed" />
+
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link href="https://misc.legendu.net/favicon.png" rel="icon">
+  <link href="https://misc.legendu.net/theme/css/main_2.css" media="screen, projection"
+        rel="stylesheet" type="text/css">
+  <script src="https://misc.legendu.net/theme/js/modernizr-2.0.js"></script>
+  <script src="https://misc.legendu.net/theme/js/ender.js"></script>
+  <script src="https://misc.legendu.net/theme/js/octopress.js" type="text/javascript"></script>
+
+  <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <script data-ad-client="ca-pub-3836424032203369" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+</head>
+
+<body>
+  <header role="banner"><hgroup>
+  <h1><a href="https://misc.legendu.net/">Ben Chuanlong Du's Blog</a></h1>
+    <h2>It is never too late to learn.</h2>
+</hgroup></header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="https://misc.legendu.net/atom.xml" rel="subscribe-rss">RSS</a></li>
+</ul>
+
+<form name="search" action="https://www.bing.com/search" method="get" onSubmit="return build_query()">
+  <fieldset role="search">
+      <!--
+    <input type="hidden" name="q" value="site:https://misc.legendu.net" />
+        -->
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+
+<script type = "text/javascript">
+    function build_query() {
+        var query = document.forms["search"]["q"].value;
+        var prefix = "site:https://misc.legendu.net "
+        if (!query.startsWith(prefix)) {
+            query = prefix + query;
+            document.forms["search"]["q"].value = query;
+        }
+        return true;
+    }
+</script>
+
+<ul class="main-navigation">
+    <li><a href="https://www.legendu.net">Home</a></li>
+    <li><a href="https://misc.legendu.net">Blog</a></li>
+    <li><a href="https://misc.legendu.net/archives.html">Archives</a></li>
+    <li><a href="https://misc.legendu.net/categories.html">Categories</a></li>
+    <li><a href="https://misc.legendu.net/tags.html">Tags</a></li>
+    <li><a href="https://www.legendu.net/pages/about">About</a></li>
+</ul></nav>
+  <div id="main">
+    <div id="content">
+<div>
+  <article class="hentry" role="article">
+<header>
+      <h1 class="entry-title">Public Jupyter/JupyterLab Hosts</h1>
+      <p class="meta"><time datetime="2016-12-14T18:35:33-08:00" pubdate>Dec 14, 2016</time></p>
+</header>
+
+  <div class="entry-content"><p><strong>Things on this page are fragmentary and immature notes/thoughts of the author. Please read with your own judgement!</strong></p>
+<h2 id="google-firebase-studio"><a href="https://www.legendu.net/misc/blog/tips-on-project-idx">Google Firebase Studio</a></h2>
+<p>You can use notebooks after installing the jupyter extension
+and the programming lanuage that you want to use in Jupyter notebook.</p>
+<h2 id="google-cloud-shell"><a href="https://cloud.google.com/shell/docs">Google Cloud Shell</a></h2>
+<p>Technically speaking,
+<a href="https://cloud.google.com/shell/docs">Google Cloud Shell</a>
+isn't Jupyter/JupyterLab service.
+It is a always free small VM with 5GB persistent storage
+that Google Cloud Platform offers to its customers 
+to experiment with Google Cloud and manage projects and resources from web browsers. 
+However,
+the Google Cloud Shell can be used to run Jupyter/JupyterLab notebooks in 2 ways.</p>
+<ol>
+<li>
+<p>Google Cloud Shell comes with Cloud Shell Editor
+    which is a cloud IDE based on Theia 
+    (which a cloud &amp; desktop IDE framework implemented in TypeScript and is partly VSCode compatible)
+    .
+    With Cloud Shell Editor,
+    Jupyter/JupyterLab notebooks can be run 
+    (if the required notebook kernel is installed).</p>
+</li>
+<li>
+<p>You can manually install JupyterLab and launch a service. </p>
+</li>
+</ol>
+<p>A Cloud Shell VM is ephemeral and no system-wide change will persist beyond session end.
+There are 3 ways to circumvent this problem.</p>
+<ol>
+<li>
+<p>Use a custom Docker image (recommended).
+    Please refer to
+    <a href="https://cloud.google.com/shell/docs/configuring-cloud-shell#container_image_customization">container image customization</a>
+    for detailed instructions.</p>
+</li>
+<li>
+<p>Use a 
+    <a href="https://cloud.google.com/shell/docs/configuring-cloud-shell#environment_customization_script">environment customization script</a>
+    .</p>
+</li>
+<li>
+<p>Install tools to your local directories which are persistent (not recommended).</p>
+</li>
+</ol>
+<h2 id="gitpod"><a href="https://www.gitpod.io/">GitPod</a></h2>
+<p>GitPod allows users to use their customized Docker images 
+and allow users to expose HTTP services from your workspace.
+This means that if you have JupyterLab/Hub installed in your GitPod image,
+you can run a JupyterLab/Hub server within your GitPod worksapce and access it from public.
+Once you start a new services listing on a port,
+a prompt will show up at the right-bottom corner and you can click it to visit the service.
+The prompt will disappear after a few seconds or after being clicked. 
+You can always use command <code>gp url port</code> to find the public URL of an exposed port/service.</p>
+<p>Note that GitPod has a timeout of 30 minutes (unless you have the Unlimited Plan) 
+if there's no activity on the GitPod IDE page. 
+This seriously limit the usability of the JupyterLab server launched from a GitPod workspace.
+You will have to go back to the IDE page once for a while 
+to make sure that your workspace won't timeout and get killed.
+I typically use JupyterLab launched from GitPod for ad hoc short-time tasks,
+e.g., writing a notebook-based article for my blog.</p>
+<h2 id="noteable"><a href="https://app.noteable.io">Noteable</a></h2>
+<h3 id="pros">Pros</h3>
+<ol>
+<li>support filesystem navigation</li>
+<li>support different kernels in different cells in the same notebook</li>
+</ol>
+<h3 id="cons">Cons</h3>
+<ol>
+<li>no terminal support</li>
+</ol>
+<h2 id="google-colaboratory"><a href="https://colab.research.google.com/">Google Colaboratory</a></h2>
+<ol>
+<li>
+<p>No terminal unless you 
+    <a href="https://numba.pydata.org/numba-doc/dev/reference/jit-compilation.html?highlight=target%20cuda">hack it to run JupyterLab</a></p>
+</li>
+<li>
+<p>Support root user.</p>
+</li>
+<li>
+<p>Google Drive can be mounted.</p>
+</li>
+<li>
+<p><strong>Free GPU available!</strong></p>
+</li>
+</ol>
+<h2 id="kaggle"><a href="https://www.kaggle.com/">Kaggle</a></h2>
+<ol>
+<li>Jupyter notebooks only, no JupyterLab support.</li>
+<li>Only Python an R kernels are supported.</li>
+<li>GPU available for request.</li>
+</ol>
+<h2 id="deepnote"><a href="https://deepnote.com/">DeepNote</a></h2>
+<h3 id="pros_1">Pros</h3>
+<ol>
+<li>Allow customized Docker images.</li>
+</ol>
+<h3 id="cons_1">Cons</h3>
+<ol>
+<li>DeepNote uses a customized interface instead of Jupyter/Lab interface
+    causing<ul>
+<li>no easy way to navigate through the file system</li>
+<li>no easy way to switch among different kernels</li>
+</ul>
+</li>
+</ol>
+<h2 id="code-ocean"><a href="https://codeocean.com/">Code Ocean</a></h2>
+<h3 id="pros_2">Pros</h3>
+<ol>
+<li>Very flexible. Seems to be a good choice. </li>
+</ol>
+<h3 id="cons_2">Cons</h3>
+<ol>
+<li>The pricing seems to be expensive ...</li>
+</ol>
+<h2 id="cocalc"><a href="https://cocalc.com/">Cocalc</a></h2>
+<ol>
+<li>The free plan is not usable as no internet access is provided for the free plan.</li>
+</ol>
+<h2 id="binder"><a href="https://mybinder.org/">Binder</a></h2>
+<h3 id="pros_3">Pros</h3>
+<ol>
+<li>
+<p>Great for temporary usages. </p>
+</li>
+<li>
+<p>Customization of Docker iamge is supported!</p>
+</li>
+</ol>
+<h3 id="cons_3">Cons</h3>
+<ol>
+<li>No persistent storage at this time.</li>
+</ol>
+<h2 id="quantopian"><a href="https://www.quantopian.com/">Quantopian</a></h2>
+<h3 id="pros_4">Pros</h3>
+<p>There seems to be lots of good tutorials on Quant Fiance. </p>
+<h3 id="cons_4">Cons</h3>
+<ol>
+<li>Jupyter only and too limited features. Not usable. </li>
+</ol>
+<h2 id="gryd"><a href="https://gryd.us/">Gryd</a></h2>
+<h3 id="cons_5">Cons</h3>
+<ol>
+<li>
+<p>Supports only Jupyter but not JupyterLab/Hub.</p>
+</li>
+<li>
+<p>Outdate Docker images and software (Python 3.6 only).</p>
+</li>
+<li>
+<p><code>sudo</code> is not supported currently.</p>
+</li>
+<li>
+<p>Installed software does not persist.</p>
+</li>
+</ol>
+<h2 id="dataquest"><a href="https://www.dataquest.io/">DataQuest</a></h2>
+<p>Course learning only.</p>
+<h2 id="authorea"><a href="https://authorea.com/">Authorea</a></h2>
+<h3 id="cons_6">Cons</h3>
+<ol>
+<li>
+<p>Jupyter only. </p>
+</li>
+<li>
+<p><code>sudo</code> not supported</p>
+</li>
+</ol>
+<h2 id="yhat-sciencebox"><a href="https://aws.amazon.com/marketplace/pp/B00KQY1T32/ref=mkt_wir_yhatsciencebox">YHat ScienceBox</a></h2>
+<h2 id="datalore"><a href="https://datalore.io/">Datalore</a></h2>
+<p>Not usable.</p>
+<h2 id="pythonanywhere"><a href="https://www.pythonanywhere.com/">PythonAnywhere</a></h2>
+<h3 id="cons_7">Cons</h3>
+<ol>
+<li><code>sudo</code> is not supported.</li>
+</ol>
+<h2 id="microsoft-azure-notebooks"><a href="https://notebooks.azure.com/#">Microsoft Azure Notebooks</a></h2>
+<h3 id="cons_8">Cons</h3>
+<ol>
+<li>
+<p>Supports only Jupyter but not JupyterLab/Hub. </p>
+</li>
+<li>
+<p>Outdate Docker images and software (Python 3.5 only).</p>
+</li>
+<li>
+<p><code>sudo</code> is not supported currently.</p>
+</li>
+</ol>
+<h2 id="amazon-sagemath">Amazon SageMath</h2>
+<h2 id="ibm-watson-studio"><a href="https://www.ibm.com/cloud/watson-studio">IBM Watson Studio</a></h2>
+<h2 id="deploy-your-own-public-jupyterhub-server">Deploy Your Own Public JupyterHub Server</h2>
+<p>It is very easy to deploy a Jupyter/Hub/Lab server.
+The difficult part is how to make your Jupyter/Hub/Lab secure.
+Please refer to
+<a href="http://jupyter-notebook.readthedocs.io/en/latest/public_server.html">Running a notebook server</a>
+and
+<a href="https://janakiev.com/blog/jupyter-notebook-server/">Installing and Running Jupyter Notebooks on a Server</a>
+on how to set up SSL encryption to enable HTTPS for your Jupyter/Hub/Lab server.</p></div>
+    <footer>
+<p class="meta">
+  <span class="byline author vcard">
+    Posted by <span class="fn">Ben Chuanlong Du</span>
+  </span>
+<time datetime="2016-12-14T18:35:33-08:00" pubdate>Dec 14, 2016</time>  <span class="categories">
+    <a class="category" href="https://misc.legendu.net/tag/data-science.html">Data Science</a>
+    <a class="category" href="https://misc.legendu.net/tag/juptyerlab.html">JuptyerLab</a>
+    <a class="category" href="https://misc.legendu.net/tag/jupyter.html">Jupyter</a>
+    <a class="category" href="https://misc.legendu.net/tag/notebook.html">notebook</a>
+    <a class="category" href="https://misc.legendu.net/tag/deepnote.html">deepnote</a>
+  </span>
+</p>    </footer>
+  </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div>
+  </section>
+</div>
+<aside class="sidebar">
+  <section>
+    <h1>Recent Posts</h1>
+    <ul id="recent_posts">
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/tips-on-health/">Tips on Health</a>
+      </li>
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/tips-on-child-education/">Tips on Child Education</a>
+      </li>
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/tips-on-fd/">Tips on fd</a>
+      </li>
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/the-fzf-command-is-a-great-alternative-to-find/">The fzf Command Is a Great Alternative to find</a>
+      </li>
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/ruff-is-an-extremely-fast-python-linter-written-in-rust/">Ruff Is An Extremely Fast Python Linter Written in Rust</a>
+      </li>
+    </ul>
+  </section>
+  <section>
+    <h1>Categories</h1>
+    <ul id="recent_posts">
+        <li><a href="https://misc.legendu.net/category/ai.html">AI</a></li>
+        <li><a href="https://misc.legendu.net/category/career.html">Career</a></li>
+        <li><a href="https://misc.legendu.net/category/cloud.html">Cloud</a></li>
+        <li><a href="https://misc.legendu.net/category/computer-science.html">Computer Science</a></li>
+        <li><a href="https://misc.legendu.net/category/fiannce.html">Fiannce</a></li>
+        <li><a href="https://misc.legendu.net/category/finance.html">Finance</a></li>
+        <li><a href="https://misc.legendu.net/category/fun-problems.html">Fun Problems</a></li>
+        <li><a href="https://misc.legendu.net/category/hardware.html">Hardware</a></li>
+        <li><a href="https://misc.legendu.net/category/health.html">Health</a></li>
+        <li><a href="https://misc.legendu.net/category/house.html">House</a></li>
+        <li><a href="https://misc.legendu.net/category/internet.html">Internet</a></li>
+        <li><a href="https://misc.legendu.net/category/investment.html">Investment</a></li>
+        <li><a href="https://misc.legendu.net/category/life.html">life</a></li>
+        <li><a href="https://misc.legendu.net/category/linux.html">Linux</a></li>
+        <li><a href="https://misc.legendu.net/category/os.html">OS</a></li>
+        <li><a href="https://misc.legendu.net/category/people.html">People</a></li>
+        <li><a href="https://misc.legendu.net/category/philosophy.html">Philosophy</a></li>
+        <li><a href="https://misc.legendu.net/category/research.html">Research</a></li>
+        <li><a href="https://misc.legendu.net/category/shopping.html">Shopping</a></li>
+        <li><a href="https://misc.legendu.net/category/soft-skills.html">soft skills</a></li>
+        <li><a href="https://misc.legendu.net/category/software.html">Software</a></li>
+        <li><a href="https://misc.legendu.net/category/statistics.html">Statistics</a></li>
+        <li><a href="https://misc.legendu.net/category/tools.html">Tools</a></li>
+    </ul>
+  </section>
+ 
+
+  <section>
+  <h1>Tags</h1>
+  <ul class="tagcloud">
+  </ul>
+  </section>
+
+
+
+  <section>
+    <h1>GitHub Repos</h1>
+    <ul id="gh_repos">
+      <li class="loading">Status updating...</li>
+    </ul>
+      <a href="https://github.com/legendu-net">@legendu-net</a> on GitHub
+    <script type="text/javascript">
+      $.domReady(function(){
+          if (!window.jXHR){
+              var jxhr = document.createElement('script');
+              jxhr.type = 'text/javascript';
+              jxhr.src = 'https://misc.legendu.net/theme/js/jXHR.js';
+              var s = document.getElementsByTagName('script')[0];
+              s.parentNode.insertBefore(jxhr, s);
+          }
+
+          github.showRepos({
+              user: 'legendu-net',
+              count: 5,
+              skip_forks: true,
+              target: '#gh_repos'
+          });
+      });
+    </script>
+    <script src="https://misc.legendu.net/theme/js/github.js" type="text/javascript"> </script>
+  </section>
+
+    <section>
+        <h1>Social</h2>
+        <ul>
+            <li><a href="https://www.linkedin.com/in/ben-chuanlong-du-1239b221/" target="_blank">LinkedIn</a></li>
+            <li><a href="https://hub.docker.com/u/dclong" target="_blank">Docker Hub</a></li>
+            <li><a href="https://stackoverflow.com/users/7808204/benjamin-du?tab=profile" target="_blank">Stack Overflow</a></li>
+            <li><a href="https://twitter.com/longendu" target="_blank">Twitter</a></li>
+        <!--
+            <li><a href="https://misc.legendu.net/" type="application/rss+xml" rel="alternate">RSS</a></li>
+            -->
+        </ul>
+    </section>
+</aside>    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Ben Chuanlong Du -
+  <span class="credit">Powered by <a href="http://getpelican.com">Pelican</a></span>
+</p></footer>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-3STS9BVPF6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-3STS9BVPF6');
+</script>
+	<script type="text/javascript">
+	  var disqus_shortname = 'dclong';
+          var disqus_identifier = '/blog/jupyter-hosts/';
+          var disqus_url = 'https://misc.legendu.net/blog/jupyter-hosts/';
+          var disqus_title = 'Public Jupyter/JupyterLab Hosts';
+	  (function() {
+	    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	    dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+	    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	   })();
+	</script>
+</body>
+</html>

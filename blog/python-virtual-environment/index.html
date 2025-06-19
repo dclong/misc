@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Python Virtual Environment</title>
+  <meta name="author" content="Ben Chuanlong Du">
+
+  <link href="https://misc.legendu.net/atom.xml" type="application/atom+xml" rel="alternate"
+        title="Ben Chuanlong Du's Blog Atom Feed" />
+
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link href="https://misc.legendu.net/favicon.png" rel="icon">
+  <link href="https://misc.legendu.net/theme/css/main_2.css" media="screen, projection"
+        rel="stylesheet" type="text/css">
+  <script src="https://misc.legendu.net/theme/js/modernizr-2.0.js"></script>
+  <script src="https://misc.legendu.net/theme/js/ender.js"></script>
+  <script src="https://misc.legendu.net/theme/js/octopress.js" type="text/javascript"></script>
+
+  <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <script data-ad-client="ca-pub-3836424032203369" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+</head>
+
+<body>
+  <header role="banner"><hgroup>
+  <h1><a href="https://misc.legendu.net/">Ben Chuanlong Du's Blog</a></h1>
+    <h2>It is never too late to learn.</h2>
+</hgroup></header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="https://misc.legendu.net/atom.xml" rel="subscribe-rss">RSS</a></li>
+</ul>
+
+<form name="search" action="https://www.bing.com/search" method="get" onSubmit="return build_query()">
+  <fieldset role="search">
+      <!--
+    <input type="hidden" name="q" value="site:https://misc.legendu.net" />
+        -->
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+
+<script type = "text/javascript">
+    function build_query() {
+        var query = document.forms["search"]["q"].value;
+        var prefix = "site:https://misc.legendu.net "
+        if (!query.startsWith(prefix)) {
+            query = prefix + query;
+            document.forms["search"]["q"].value = query;
+        }
+        return true;
+    }
+</script>
+
+<ul class="main-navigation">
+    <li><a href="https://www.legendu.net">Home</a></li>
+    <li><a href="https://misc.legendu.net">Blog</a></li>
+    <li><a href="https://misc.legendu.net/archives.html">Archives</a></li>
+    <li><a href="https://misc.legendu.net/categories.html">Categories</a></li>
+    <li><a href="https://misc.legendu.net/tags.html">Tags</a></li>
+    <li><a href="https://www.legendu.net/pages/about">About</a></li>
+</ul></nav>
+  <div id="main">
+    <div id="content">
+<div>
+  <article class="hentry" role="article">
+<header>
+      <h1 class="entry-title">Python Virtual Environment</h1>
+      <p class="meta"><time datetime="2019-01-14T11:04:58-08:00" pubdate>Jan 14, 2019</time></p>
+</header>
+
+  <div class="entry-content"><p><strong>Things on this page are fragmentary and immature notes/thoughts of the author. Please read with your own judgement!</strong></p>
+<ol>
+<li>
+<p><a href="https://docs.python.org/3/library/venv.html#module-venv">venv</a>
+    is a standard Python library
+    and is the recommended way for managing virtual environments in Python3. </p>
+</li>
+<li>
+<p>When developing a Python project,
+    it is recommended that you use 
+    <a href="http://www.legendu.net/misc/blog/python-poetry-tips">Poetry</a>
+    to manage the project
+    which helps managing virtual environments too,
+    so that you don't have to managing virtual environments by yourself.</p>
+</li>
+</ol>
+<p>The discussion below is specifically for
+<a href="https://docs.python.org/3/library/venv.html#module-venv">venv</a>
+.</p>
+<h2 id="create-a-virtual-environment">Create a Virtual Environment</h2>
+<div class="highlight"><pre><span></span><code>python3<span class="w"> </span>-m<span class="w"> </span>venv<span class="w"> </span>/path/to/your/environment
+</code></pre></div>
+
+<p>The <code>venv</code> module provides several parameters to control the behavior of the virtual environment to be created.</p>
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>python3<span class="w"> </span>-m<span class="w"> </span>venv<span class="w"> </span>-h
+usage:<span class="w"> </span>venv<span class="w"> </span><span class="o">[</span>-h<span class="o">]</span><span class="w"> </span><span class="o">[</span>--system-site-packages<span class="o">]</span><span class="w"> </span><span class="o">[</span>--symlinks<span class="w"> </span><span class="p">|</span><span class="w"> </span>--copies<span class="o">]</span><span class="w"> </span><span class="o">[</span>--clear<span class="o">]</span>
+<span class="w">            </span><span class="o">[</span>--upgrade<span class="o">]</span><span class="w"> </span><span class="o">[</span>--without-pip<span class="o">]</span><span class="w"> </span><span class="o">[</span>--prompt<span class="w"> </span>PROMPT<span class="o">]</span>
+<span class="w">            </span>ENV_DIR<span class="w"> </span><span class="o">[</span>ENV_DIR<span class="w"> </span>...<span class="o">]</span>
+
+Creates<span class="w"> </span>virtual<span class="w"> </span>Python<span class="w"> </span>environments<span class="w"> </span><span class="k">in</span><span class="w"> </span>one<span class="w"> </span>or<span class="w"> </span>more<span class="w"> </span>target<span class="w"> </span>directories.
+
+positional<span class="w"> </span>arguments:
+<span class="w">  </span>ENV_DIR<span class="w">               </span>A<span class="w"> </span>directory<span class="w"> </span>to<span class="w"> </span>create<span class="w"> </span>the<span class="w"> </span>environment<span class="w"> </span><span class="k">in</span>.
+
+optional<span class="w"> </span>arguments:
+<span class="w">  </span>-h,<span class="w"> </span>--help<span class="w">            </span>show<span class="w"> </span>this<span class="w"> </span><span class="nb">help</span><span class="w"> </span>message<span class="w"> </span>and<span class="w"> </span><span class="nb">exit</span>
+<span class="w">  </span>--system-site-packages
+<span class="w">                        </span>Give<span class="w"> </span>the<span class="w"> </span>virtual<span class="w"> </span>environment<span class="w"> </span>access<span class="w"> </span>to<span class="w"> </span>the<span class="w"> </span>system
+<span class="w">                        </span>site-packages<span class="w"> </span>dir.
+<span class="w">  </span>--symlinks<span class="w">            </span>Try<span class="w"> </span>to<span class="w"> </span>use<span class="w"> </span>symlinks<span class="w"> </span>rather<span class="w"> </span>than<span class="w"> </span>copies,<span class="w"> </span>when<span class="w"> </span>symlinks
+<span class="w">                        </span>are<span class="w"> </span>not<span class="w"> </span>the<span class="w"> </span>default<span class="w"> </span><span class="k">for</span><span class="w"> </span>the<span class="w"> </span>platform.
+<span class="w">  </span>--copies<span class="w">              </span>Try<span class="w"> </span>to<span class="w"> </span>use<span class="w"> </span>copies<span class="w"> </span>rather<span class="w"> </span>than<span class="w"> </span>symlinks,<span class="w"> </span>even<span class="w"> </span>when
+<span class="w">                        </span>symlinks<span class="w"> </span>are<span class="w"> </span>the<span class="w"> </span>default<span class="w"> </span><span class="k">for</span><span class="w"> </span>the<span class="w"> </span>platform.
+<span class="w">  </span>--clear<span class="w">               </span>Delete<span class="w"> </span>the<span class="w"> </span>contents<span class="w"> </span>of<span class="w"> </span>the<span class="w"> </span>environment<span class="w"> </span>directory<span class="w"> </span><span class="k">if</span><span class="w"> </span>it
+<span class="w">                        </span>already<span class="w"> </span>exists,<span class="w"> </span>before<span class="w"> </span>environment<span class="w"> </span>creation.
+<span class="w">  </span>--upgrade<span class="w">             </span>Upgrade<span class="w"> </span>the<span class="w"> </span>environment<span class="w"> </span>directory<span class="w"> </span>to<span class="w"> </span>use<span class="w"> </span>this<span class="w"> </span>version
+<span class="w">                        </span>of<span class="w"> </span>Python,<span class="w"> </span>assuming<span class="w"> </span>Python<span class="w"> </span>has<span class="w"> </span>been<span class="w"> </span>upgraded<span class="w"> </span><span class="k">in</span>-place.
+<span class="w">  </span>--without-pip<span class="w">         </span>Skips<span class="w"> </span>installing<span class="w"> </span>or<span class="w"> </span>upgrading<span class="w"> </span>pip<span class="w"> </span><span class="k">in</span><span class="w"> </span>the<span class="w"> </span>virtual
+<span class="w">                        </span>environment<span class="w"> </span><span class="o">(</span>pip<span class="w"> </span>is<span class="w"> </span>bootstrapped<span class="w"> </span>by<span class="w"> </span>default<span class="o">)</span>
+<span class="w">  </span>--prompt<span class="w"> </span>PROMPT<span class="w">       </span>Provides<span class="w"> </span>an<span class="w"> </span>alternative<span class="w"> </span>prompt<span class="w"> </span>prefix<span class="w"> </span><span class="k">for</span><span class="w"> </span>this
+<span class="w">                        </span>environment.
+</code></pre></div>
+
+<p>The virtual environment can be updated by running the module command again 
+with the desired combination of parameters.
+For example, 
+suppose a virtual environment is created using the command <code>python3 -m venv /path/to/your/environment</code>,
+you can make it inherit system site-packages by running the following command.</p>
+<div class="highlight"><pre><span></span><code>python3<span class="w"> </span>-m<span class="w"> </span>venv<span class="w"> </span>--system-site-packages<span class="w"> </span>venv
+</code></pre></div>
+
+<h2 id="activate-the-virtual-environment">Activate the Virtual Environment</h2>
+<div class="highlight"><pre><span></span><code><span class="nb">source</span><span class="w"> </span>&lt;DIR&gt;/bin/activate
+<span class="c1"># or </span>
+.<span class="w"> </span>&lt;DIR&gt;/bin/activate
+</code></pre></div>
+
+<h2 id="use-the-virtual-environment-in-pycharm">Use the Virtual Environment in PyCharm</h2>
+<ol>
+<li>
+<p>Click on the <code>PyCharm</code> menu.</p>
+</li>
+<li>
+<p>Click on <code>Preferences...</code>.</p>
+</li>
+<li>
+<p>Select <code>Project Interpreter</code> in the left panel under <code>Project</code>.</p>
+</li>
+<li>
+<p>If no virtual environment is configured for PyCharm, 
+    you can select <code>Using Existing Virtual Environment</code> 
+    and then choose the Python executable in the virtual environment directory (e.g., <code>venv/bin/python</code>).</p>
+</li>
+</ol>
+<h2 id="references">References</h2>
+<ul>
+<li>
+<p>https://packaging.python.org/tutorials/installing-packages/#creating-virtual-environments</p>
+</li>
+<li>
+<p><a href="http://libzx.so/main/learning/2016/03/13/best-practice-for-virtualenv-and-git-repos.html">Best Practice for Virtual Environment and Git Repository</a></p>
+</li>
+</ul></div>
+    <footer>
+<p class="meta">
+  <span class="byline author vcard">
+    Posted by <span class="fn">Ben Chuanlong Du</span>
+  </span>
+<time datetime="2019-01-14T11:04:58-08:00" pubdate>Jan 14, 2019</time>  <span class="categories">
+    <a class="category" href="https://misc.legendu.net/tag/programming.html">programming</a>
+    <a class="category" href="https://misc.legendu.net/tag/python.html">Python</a>
+    <a class="category" href="https://misc.legendu.net/tag/virtual-environment.html">virtual environment</a>
+    <a class="category" href="https://misc.legendu.net/tag/venv.html">venv</a>
+  </span>
+</p>    </footer>
+  </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div>
+  </section>
+</div>
+<aside class="sidebar">
+  <section>
+    <h1>Recent Posts</h1>
+    <ul id="recent_posts">
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/tips-on-health/">Tips on Health</a>
+      </li>
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/tips-on-child-education/">Tips on Child Education</a>
+      </li>
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/tips-on-fd/">Tips on fd</a>
+      </li>
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/the-fzf-command-is-a-great-alternative-to-find/">The fzf Command Is a Great Alternative to find</a>
+      </li>
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/ruff-is-an-extremely-fast-python-linter-written-in-rust/">Ruff Is An Extremely Fast Python Linter Written in Rust</a>
+      </li>
+    </ul>
+  </section>
+  <section>
+    <h1>Categories</h1>
+    <ul id="recent_posts">
+        <li><a href="https://misc.legendu.net/category/ai.html">AI</a></li>
+        <li><a href="https://misc.legendu.net/category/career.html">Career</a></li>
+        <li><a href="https://misc.legendu.net/category/cloud.html">Cloud</a></li>
+        <li><a href="https://misc.legendu.net/category/computer-science.html">Computer Science</a></li>
+        <li><a href="https://misc.legendu.net/category/fiannce.html">Fiannce</a></li>
+        <li><a href="https://misc.legendu.net/category/finance.html">Finance</a></li>
+        <li><a href="https://misc.legendu.net/category/fun-problems.html">Fun Problems</a></li>
+        <li><a href="https://misc.legendu.net/category/hardware.html">Hardware</a></li>
+        <li><a href="https://misc.legendu.net/category/health.html">Health</a></li>
+        <li><a href="https://misc.legendu.net/category/house.html">House</a></li>
+        <li><a href="https://misc.legendu.net/category/internet.html">Internet</a></li>
+        <li><a href="https://misc.legendu.net/category/investment.html">Investment</a></li>
+        <li><a href="https://misc.legendu.net/category/life.html">life</a></li>
+        <li><a href="https://misc.legendu.net/category/linux.html">Linux</a></li>
+        <li><a href="https://misc.legendu.net/category/os.html">OS</a></li>
+        <li><a href="https://misc.legendu.net/category/people.html">People</a></li>
+        <li><a href="https://misc.legendu.net/category/philosophy.html">Philosophy</a></li>
+        <li><a href="https://misc.legendu.net/category/research.html">Research</a></li>
+        <li><a href="https://misc.legendu.net/category/shopping.html">Shopping</a></li>
+        <li><a href="https://misc.legendu.net/category/soft-skills.html">soft skills</a></li>
+        <li><a href="https://misc.legendu.net/category/software.html">Software</a></li>
+        <li><a href="https://misc.legendu.net/category/statistics.html">Statistics</a></li>
+        <li><a href="https://misc.legendu.net/category/tools.html">Tools</a></li>
+    </ul>
+  </section>
+ 
+
+  <section>
+  <h1>Tags</h1>
+  <ul class="tagcloud">
+  </ul>
+  </section>
+
+
+
+  <section>
+    <h1>GitHub Repos</h1>
+    <ul id="gh_repos">
+      <li class="loading">Status updating...</li>
+    </ul>
+      <a href="https://github.com/legendu-net">@legendu-net</a> on GitHub
+    <script type="text/javascript">
+      $.domReady(function(){
+          if (!window.jXHR){
+              var jxhr = document.createElement('script');
+              jxhr.type = 'text/javascript';
+              jxhr.src = 'https://misc.legendu.net/theme/js/jXHR.js';
+              var s = document.getElementsByTagName('script')[0];
+              s.parentNode.insertBefore(jxhr, s);
+          }
+
+          github.showRepos({
+              user: 'legendu-net',
+              count: 5,
+              skip_forks: true,
+              target: '#gh_repos'
+          });
+      });
+    </script>
+    <script src="https://misc.legendu.net/theme/js/github.js" type="text/javascript"> </script>
+  </section>
+
+    <section>
+        <h1>Social</h2>
+        <ul>
+            <li><a href="https://www.linkedin.com/in/ben-chuanlong-du-1239b221/" target="_blank">LinkedIn</a></li>
+            <li><a href="https://hub.docker.com/u/dclong" target="_blank">Docker Hub</a></li>
+            <li><a href="https://stackoverflow.com/users/7808204/benjamin-du?tab=profile" target="_blank">Stack Overflow</a></li>
+            <li><a href="https://twitter.com/longendu" target="_blank">Twitter</a></li>
+        <!--
+            <li><a href="https://misc.legendu.net/" type="application/rss+xml" rel="alternate">RSS</a></li>
+            -->
+        </ul>
+    </section>
+</aside>    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Ben Chuanlong Du -
+  <span class="credit">Powered by <a href="http://getpelican.com">Pelican</a></span>
+</p></footer>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-3STS9BVPF6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-3STS9BVPF6');
+</script>
+	<script type="text/javascript">
+	  var disqus_shortname = 'dclong';
+          var disqus_identifier = '/blog/python-virtual-environment/';
+          var disqus_url = 'https://misc.legendu.net/blog/python-virtual-environment/';
+          var disqus_title = 'Python Virtual Environment';
+	  (function() {
+	    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	    dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+	    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	   })();
+	</script>
+</body>
+</html>

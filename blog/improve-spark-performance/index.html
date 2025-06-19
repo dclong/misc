@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Improve the Performance of Spark</title>
+  <meta name="author" content="Ben Chuanlong Du">
+
+  <link href="https://misc.legendu.net/atom.xml" type="application/atom+xml" rel="alternate"
+        title="Ben Chuanlong Du's Blog Atom Feed" />
+
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link href="https://misc.legendu.net/favicon.png" rel="icon">
+  <link href="https://misc.legendu.net/theme/css/main_2.css" media="screen, projection"
+        rel="stylesheet" type="text/css">
+  <script src="https://misc.legendu.net/theme/js/modernizr-2.0.js"></script>
+  <script src="https://misc.legendu.net/theme/js/ender.js"></script>
+  <script src="https://misc.legendu.net/theme/js/octopress.js" type="text/javascript"></script>
+
+  <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <script data-ad-client="ca-pub-3836424032203369" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+</head>
+
+<body>
+  <header role="banner"><hgroup>
+  <h1><a href="https://misc.legendu.net/">Ben Chuanlong Du's Blog</a></h1>
+    <h2>It is never too late to learn.</h2>
+</hgroup></header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="https://misc.legendu.net/atom.xml" rel="subscribe-rss">RSS</a></li>
+</ul>
+
+<form name="search" action="https://www.bing.com/search" method="get" onSubmit="return build_query()">
+  <fieldset role="search">
+      <!--
+    <input type="hidden" name="q" value="site:https://misc.legendu.net" />
+        -->
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+
+<script type = "text/javascript">
+    function build_query() {
+        var query = document.forms["search"]["q"].value;
+        var prefix = "site:https://misc.legendu.net "
+        if (!query.startsWith(prefix)) {
+            query = prefix + query;
+            document.forms["search"]["q"].value = query;
+        }
+        return true;
+    }
+</script>
+
+<ul class="main-navigation">
+    <li><a href="https://www.legendu.net">Home</a></li>
+    <li><a href="https://misc.legendu.net">Blog</a></li>
+    <li><a href="https://misc.legendu.net/archives.html">Archives</a></li>
+    <li><a href="https://misc.legendu.net/categories.html">Categories</a></li>
+    <li><a href="https://misc.legendu.net/tags.html">Tags</a></li>
+    <li><a href="https://www.legendu.net/pages/about">About</a></li>
+</ul></nav>
+  <div id="main">
+    <div id="content">
+<div>
+  <article class="hentry" role="article">
+<header>
+      <h1 class="entry-title">Improve the Performance of Spark</h1>
+      <p class="meta"><time datetime="2019-05-05T09:10:38-07:00" pubdate>May 05, 2019</time></p>
+</header>
+
+  <div class="entry-content"><p><strong>Things on this page are fragmentary and immature notes/thoughts of the author. Please read with your own judgement!</strong></p>
+<h2 id="plan-your-work">Plan Your Work</h2>
+<ol>
+<li>Have a clear idea about what you want to do is very important, 
+    especially when you are working on an explorative project. 
+    It often saves you time to plan your work a little 
+    before jumping into it.</li>
+</ol>
+<h2 id="data-storage">Data Storage</h2>
+<ol>
+<li>
+<p>Use Parquet as the data store format.
+    While Spark/Hive supports many different data formats, 
+    Parquet is the optimal data format to use.
+    When creating a Hive table, 
+    use the Spark SQL syntax to create a Spark-based Parquet format instead of Hive-based Parquet format.
+    That is you use a query like</p>
+<div class="highlight"><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="k">table_name</span><span class="w"> </span><span class="p">(</span><span class="n">id</span><span class="w"> </span><span class="nb">Int</span><span class="p">,</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="n">String</span><span class="p">)</span><span class="w"> </span><span class="k">USING</span><span class="w"> </span><span class="n">Parquet</span>
+</code></pre></div>
+
+<p>instead of </p>
+<div class="highlight"><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="k">table_name</span><span class="w"> </span><span class="p">(</span><span class="n">id</span><span class="w"> </span><span class="nb">Int</span><span class="p">,</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="n">String</span><span class="p">)</span><span class="w"> </span><span class="n">STORE</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">Parquet</span>
+</code></pre></div>
+
+<p>or</p>
+<div class="highlight"><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="k">table_name</span><span class="w"> </span><span class="p">(</span><span class="n">id</span><span class="w"> </span><span class="nb">Int</span><span class="p">,</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="n">String</span><span class="p">)</span>
+</code></pre></div>
+
+<p>The last 2 SQL queries uses Hive-based Parquet format 
+which might not benefit from some Spark execution optimizations.</p>
+</li>
+<li>
+<p>Use partition or bucket columns on large tables.
+    For more details discussions,
+    please refer to
+    <a href="http://www.legendu.net/misc/blog/partition-bucketing-in-spark">Partition and Bucketing in Spark</a>
+    .</p>
+</li>
+</ol>
+<h2 id="sql-query-dataframe-api">SQL Query / DataFrame API</h2>
+<ol>
+<li>
+<p>Accelerate table scan by adding proper filter conditions.
+    Use proper filter conditions in your SQL statement to avoid full table scan. 
+    Proper filter conditions on Partition, Bucket and Sort columns 
+    helps Spark SQL engine to fast locate target dataset to avoid full table scan,
+    which accelerates execution.</p>
+</li>
+<li>
+<p>Several smaller queries (achieving the same functionality) is preferred to 
+    a big query (using complex features and/or subqueries).
+    For example,
+    <code>window_function(...) over (partition by ... order by ...)</code> 
+    can be achieved using a <code>group by</code> followed with a inner join.
+    The latter approach (using <code>group by</code> + <code>inner join</code>) runs faster in Spark SQL generally speaking.</p>
+</li>
+<li>
+<p>Be cautious about the method <code>RDD.collect</code> as it retrieves all data in an RDD/DataFrame to the driver.
+    This will likely cause an out-of-memory issue if the RDD/DataFrame is big.
+    Even if not, 
+    it will make your Spark application run slowly.</p>
+</li>
+</ol>
+<h3 id="reduce-unnecessary-data-before-computation">Reduce (Unnecessary) Data Before Computation</h3>
+<ol>
+<li>
+<p>Apply filtering conditions to keep only needed columns and rows.</p>
+</li>
+<li>
+<p>Prefer the method <code>reduceByKey</code> over the method <code>groupByKey</code> when aggregating a RDD object in Spark.</p>
+</li>
+</ol>
+<h3 id="using-cache-persist">Using Cache / Persist</h3>
+<ol>
+<li>
+<p>Persist a DataFrame which is used multiple times and expensive to recompute.
+    Remembe to unpersist it too when the DataFrame is no longer needed. 
+    Even Spark evict data from memory using the LRU (least recently used) strategy
+    when the caching layer becomes full,
+    it is still beneficial to unpersist data as soon as it is no used any more to reduce memory usage.</p>
+</li>
+<li>
+<p>Spark DataFrame is lazily computed but computed again if needed.
+    It can greatly boost the perfromance of your Spark application
+    if you cache/persist the intermediate Spark DataFrame 
+    which is used in mutliple places.
+    Notably,
+    if a Spark DataFrame containing randomly generately values
+    and is used in multiple places,
+    you must cache/persist it to ensure the correct logic
+    (otherwise the DataFrame will have different values each time it is used).</p>
+</li>
+</ol>
+<h3 id="optimize-joins">Optimize Joins</h3>
+<ol>
+<li>
+<p>Spark automatically decides 
+    which kind of joins (Broadcast Join, Sort Merge Join, Bucket Join) to perform. 
+    Generally speaking,
+    you should not change the default threshold for deciding which join to use.
+    However,
+    you should hint/help Spark to use the right join when applicable.</p>
+<ul>
+<li>
+<p>Do NOT split a medium sized table and boradcast each splitted part. 
+    Just let Spark pick the right join (which will be the Sort Merge Join) in this case.
+    Also notice that the splitting tricky might not work in non-inner joins.</p>
+</li>
+<li>
+<p>BroadcastHashJoin, i.e., map-side join is fast. 
+    Use BroadcastHashJoin if possible. 
+    Notice that BroadcastHashJoin only works for inner joins. 
+    If you have a outer join,
+    BroadcastHashJoin won't happend even if you explicitly Broadcast a DataFrame.</p>
+</li>
+<li>
+<p>Notice that BroadcastJoin only works for inner joins. 
+    If you have a outer join,
+    BroadcastJoin won't happend even if you explicitly Broadcast a DataFrame.</p>
+</li>
+</ul>
+</li>
+<li>
+<p>Make sure that keys to join in Spark DataFrames have the same type!
+    When joining 2 large DataFrames in Spark, 
+    Bucket Join is usually the best approach.
+    However, 
+    if the keys in the 2 DataFrame have inconsistent types 
+    the bucket table will do a type cast 
+    which makes Spark think the value of the original column 
+    is not enough resulting in Sort Merge Join (instead of Bucket Join).</p>
+</li>
+<li>
+<p>Add cast for join key to use bucket</p>
+<p>Joining columns of different types prevents Spark SQL from doing the best optimization.
+A simple fix is to cast columns to be the same type when joining them.
+For example,
+let's assume <code>A.id</code> is <code>Decimal(18, 0)</code> 
+and <code>B.id</code> is <code>BigInt</code>.
+Use</p>
+<div class="highlight"><pre><span></span><code>SELECT 
+    A.* 
+FROM
+    A
+INNER JOIN 
+    B
+ON 
+    cast(A.id AS BigInt) = B.id
+</code></pre></div>
+
+<p>instead of</p>
+<div class="highlight"><pre><span></span><code>SELECT 
+    A.* 
+FROM
+    A
+INNER JOIN 
+    B
+ON 
+    A.id = B.id
+</code></pre></div>
+
+</li>
+</ol>
+<h2 id="size-of-tasks-in-a-spark-application">Size of Tasks in a Spark Application</h2>
+<ol>
+<li>
+<p>Best to have tasks each of which can be finished in a few minutes. 
+    Having long running tasks (&gt;30 minutes) 
+    will likely degrade the performance of the whole application.</p>
+</li>
+<li>
+<p>100K is the ball park of upper limit of number of tasks. 
+    If you have an application which has more than 100k (very small) tasks, 
+    the performance is degraded. 
+    However, 
+    having too few tasks reduces the parallelism 
+    and might hurt the performance of your Spark application too. 
+    Generally speaking,
+    it is safe to keep the number of tasks to 3k - 100k. 
+    If you are unsure, 10k is a good start point. </p>
+</li>
+</ol>
+<h2 id="execuation-plan">Execuation Plan</h2>
+<ol>
+<li>Avoid having too large execution plans. 
+    Specially, 
+    avoid mixing repartition/coalesce with other execution plans. 
+    Better to do a cache/checkpoint (or manually write data to disk) 
+    before you do repartition/coalesce. </li>
+</ol>
+<h2 id="data-serialization">Data Serialization</h2>
+<p>According to https://spark.apache.org/docs/latest/tuning.html#data-serialization,
+Spark 2.0.0+ internally uses the Kryo serializer 
+when shuffling RDDs with simple types, arrays of simple types, or string type 
+and Spark automatically includes Kryo serializers for the many commonly-used core Scala classes 
+covered in the AllScalaRegistrar from the Twitter chill library. 
+So unless one uses customized classes inside RDD/DataFrame, 
+there is little benefit to switch to kryo for serialization.
+When you do use customized classes and/or complicated nested data structures in big DataFrames, 
+you might want to consider using the Kryo serializer.</p>
+<h2 id="tune-spark-job-configurations">Tune Spark Job Configurations</h2>
+<p><a href="https://medium.com/expedia-group-tech/part-3-efficient-executor-configuration-for-apache-spark-b4602929262">Part 3: Cost Efficient Executor Configuration for Apache Spark</a></p>
+<p><a href="http://www.openkb.info/2018/06/how-to-control-parallelism-of-spark-job.html">How to control the parallelism of Spark job</a></p>
+<p><a href="https://stackoverflow.com/questions/36671644/how-does-spark-achieve-parallelism-within-one-task-on-multi-core-or-hyper-thread">How does Spark achieve parallelism within one task on multi-core or hyper-threaded machines</a></p>
+<h3 id="dynamic-allocation">Dynamic Allocation</h3>
+<ol>
+<li>Enable dynamic allocation but with a limit on the max number of executors.<div class="highlight"><pre><span></span><code>...
+--conf<span class="w"> </span>spark.dynamicAllocation.enabled<span class="o">=</span><span class="nb">true</span><span class="w"> </span><span class="se">\</span>
+--conf<span class="w"> </span>spark.dynamicAllocation.maxExecutors<span class="o">=</span><span class="m">1000</span><span class="w"> </span><span class="se">\</span>
+...
+</code></pre></div>
+
+</li>
+</ol>
+<h3 id="aqe-in-spark-3">AQE in Spark 3+</h3>
+<ol>
+<li>Enable adaptive query execution in Spark 3.0+.<div class="highlight"><pre><span></span><code>...
+--conf<span class="w"> </span>spark.adaptive.query.execution<span class="o">=</span><span class="nb">true</span><span class="w"> </span><span class="se">\</span>
+...
+</code></pre></div>
+
+</li>
+</ol>
+<h3 id="speculation">Speculation</h3>
+<ol>
+<li>Generally speaking, 
+    it is not a good idea to turn on <strong>speculation</strong> in Spark. 
+    The reason is that is is usually very tricky to define "slowness".
+    There are 3 levels of time out: process -&gt; node -&gt; rack
+    through <code>spark.locality.wait.&lt;level_name&gt;</code>.
+    The default setting is 3s in the global timeout setting (<code>spark.locality.wait</code>)
+    which is comparatively too short in shared computer clusters in many companies.</li>
+</ol>
+<h3 id="sparktaskcpus-vs-sparkexecutorcores"><code>spark.task.cpus</code> vs <code>spark.executor.cores</code></h3>
+<ol>
+<li>
+<p>The default value of <code>spark.task.cpus</code> is 1. 
+    When a value greater than 1 is set,
+    it allows multithreading inside each task. 
+    The option <code>spark.task.cpus</code> interacts with <code>spark.executor.cores</code>
+    (alias of <code>--executor-cores</code>)
+    to control the number of parallel tasks in each executor.
+    Let <code>k = spark.executor.cores / spark.tasks.cpus</code> (integer division),
+    then at most <code>k</code> tasks will run in parallel in each executor.
+    If <code>spark.executor.cores</code> is not a multiple of <code>spark.task.cpus</code>,
+    then <code>r = spark.executor.cores % spark.tasks.cpus</code> virtual cores
+    are wasted in each executor.
+    So,
+    you should always set <code>spark.executor.exores</code>
+    to be a multiple of <code>spark.executor.cores</code>.</p>
+</li>
+<li>
+<p>Generally speaking,
+    you should avoid having big tasks and then try to leveraging multithreading to speed up each tasks. 
+    Instead,
+    you should have smaller single-threaded tasks 
+    and leverage Spark for parallism.</p>
+</li>
+<li>
+<p>Multhreading does not seem to work if you call a shell command 
+    (which supports multithreading)
+    from PySpark 
+    even if you set <code>spark.task.cpus</code>
+    to be greater than 1!</p>
+</li>
+</ol>
+<h2 id="udfs-vs-mapflatmap">UDFs vs map/flatMap</h2>
+<ol>
+<li>Most spark operations are column-oriented. 
+    If you want to do some operation that is hard to expression as column expressions
+    but is rather very easy to express as row expressions,
+    you can either use UDFs or the <code>map</code>/<code>flatMap</code> methods.
+    Currently, 
+    the methods <code>map</code>/<code>flatMap</code> of DataFrame are still experimental
+    so you'd use UDFs at this time.</li>
+</ol>
+<h2 id="when-to-reshuffle">When to Reshuffle</h2>
+<ol>
+<li>
+<p>Situations (e.g., merging small files or splitting huge files) 
+    that requires explicitly increasing or decreasing the number of RDD partiitons.</p>
+</li>
+<li>
+<p>Before multiple bucket joins, it is usually benefical to repartition DataFrames by the same key.</p>
+</li>
+</ol>
+<p><a href="https://databricks.com/blog/2017/08/31/cost-based-optimizer-in-apache-spark-2-2.html">Cost Based Optimizer in Apache Spark 2.2</a></p>
+<h2 id="references">References</h2>
+<p><a href="https://spark.apache.org/docs/latest/tuning.html">Tuning Spark</a></p>
+<p>https://github.com/databricks/spark-knowledgebase</p></div>
+    <footer>
+<p class="meta">
+  <span class="byline author vcard">
+    Posted by <span class="fn">Benjamin Du</span>
+  </span>
+<time datetime="2019-05-05T09:10:38-07:00" pubdate>May 05, 2019</time>  <span class="categories">
+    <a class="category" href="https://misc.legendu.net/tag/programming.html">programming</a>
+    <a class="category" href="https://misc.legendu.net/tag/computer-science.html">Computer Science</a>
+    <a class="category" href="https://misc.legendu.net/tag/spark.html">Spark</a>
+    <a class="category" href="https://misc.legendu.net/tag/tuning.html">tuning</a>
+    <a class="category" href="https://misc.legendu.net/tag/spark-sql.html">Spark SQL</a>
+    <a class="category" href="https://misc.legendu.net/tag/sql.html">SQL</a>
+    <a class="category" href="https://misc.legendu.net/tag/performance.html">performance</a>
+    <a class="category" href="https://misc.legendu.net/tag/database.html">database</a>
+    <a class="category" href="https://misc.legendu.net/tag/big-data.html">big data</a>
+  </span>
+</p>    </footer>
+  </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div>
+  </section>
+</div>
+<aside class="sidebar">
+  <section>
+    <h1>Recent Posts</h1>
+    <ul id="recent_posts">
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/tips-on-health/">Tips on Health</a>
+      </li>
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/tips-on-child-education/">Tips on Child Education</a>
+      </li>
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/tips-on-fd/">Tips on fd</a>
+      </li>
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/the-fzf-command-is-a-great-alternative-to-find/">The fzf Command Is a Great Alternative to find</a>
+      </li>
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/ruff-is-an-extremely-fast-python-linter-written-in-rust/">Ruff Is An Extremely Fast Python Linter Written in Rust</a>
+      </li>
+    </ul>
+  </section>
+  <section>
+    <h1>Categories</h1>
+    <ul id="recent_posts">
+        <li><a href="https://misc.legendu.net/category/ai.html">AI</a></li>
+        <li><a href="https://misc.legendu.net/category/career.html">Career</a></li>
+        <li><a href="https://misc.legendu.net/category/cloud.html">Cloud</a></li>
+        <li><a href="https://misc.legendu.net/category/computer-science.html">Computer Science</a></li>
+        <li><a href="https://misc.legendu.net/category/fiannce.html">Fiannce</a></li>
+        <li><a href="https://misc.legendu.net/category/finance.html">Finance</a></li>
+        <li><a href="https://misc.legendu.net/category/fun-problems.html">Fun Problems</a></li>
+        <li><a href="https://misc.legendu.net/category/hardware.html">Hardware</a></li>
+        <li><a href="https://misc.legendu.net/category/health.html">Health</a></li>
+        <li><a href="https://misc.legendu.net/category/house.html">House</a></li>
+        <li><a href="https://misc.legendu.net/category/internet.html">Internet</a></li>
+        <li><a href="https://misc.legendu.net/category/investment.html">Investment</a></li>
+        <li><a href="https://misc.legendu.net/category/life.html">life</a></li>
+        <li><a href="https://misc.legendu.net/category/linux.html">Linux</a></li>
+        <li><a href="https://misc.legendu.net/category/os.html">OS</a></li>
+        <li><a href="https://misc.legendu.net/category/people.html">People</a></li>
+        <li><a href="https://misc.legendu.net/category/philosophy.html">Philosophy</a></li>
+        <li><a href="https://misc.legendu.net/category/research.html">Research</a></li>
+        <li><a href="https://misc.legendu.net/category/shopping.html">Shopping</a></li>
+        <li><a href="https://misc.legendu.net/category/soft-skills.html">soft skills</a></li>
+        <li><a href="https://misc.legendu.net/category/software.html">Software</a></li>
+        <li><a href="https://misc.legendu.net/category/statistics.html">Statistics</a></li>
+        <li><a href="https://misc.legendu.net/category/tools.html">Tools</a></li>
+    </ul>
+  </section>
+ 
+
+  <section>
+  <h1>Tags</h1>
+  <ul class="tagcloud">
+  </ul>
+  </section>
+
+
+
+  <section>
+    <h1>GitHub Repos</h1>
+    <ul id="gh_repos">
+      <li class="loading">Status updating...</li>
+    </ul>
+      <a href="https://github.com/legendu-net">@legendu-net</a> on GitHub
+    <script type="text/javascript">
+      $.domReady(function(){
+          if (!window.jXHR){
+              var jxhr = document.createElement('script');
+              jxhr.type = 'text/javascript';
+              jxhr.src = 'https://misc.legendu.net/theme/js/jXHR.js';
+              var s = document.getElementsByTagName('script')[0];
+              s.parentNode.insertBefore(jxhr, s);
+          }
+
+          github.showRepos({
+              user: 'legendu-net',
+              count: 5,
+              skip_forks: true,
+              target: '#gh_repos'
+          });
+      });
+    </script>
+    <script src="https://misc.legendu.net/theme/js/github.js" type="text/javascript"> </script>
+  </section>
+
+    <section>
+        <h1>Social</h2>
+        <ul>
+            <li><a href="https://www.linkedin.com/in/ben-chuanlong-du-1239b221/" target="_blank">LinkedIn</a></li>
+            <li><a href="https://hub.docker.com/u/dclong" target="_blank">Docker Hub</a></li>
+            <li><a href="https://stackoverflow.com/users/7808204/benjamin-du?tab=profile" target="_blank">Stack Overflow</a></li>
+            <li><a href="https://twitter.com/longendu" target="_blank">Twitter</a></li>
+        <!--
+            <li><a href="https://misc.legendu.net/" type="application/rss+xml" rel="alternate">RSS</a></li>
+            -->
+        </ul>
+    </section>
+</aside>    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Ben Chuanlong Du -
+  <span class="credit">Powered by <a href="http://getpelican.com">Pelican</a></span>
+</p></footer>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-3STS9BVPF6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-3STS9BVPF6');
+</script>
+	<script type="text/javascript">
+	  var disqus_shortname = 'dclong';
+          var disqus_identifier = '/blog/improve-spark-performance/';
+          var disqus_url = 'https://misc.legendu.net/blog/improve-spark-performance/';
+          var disqus_title = 'Improve the Performance of Spark';
+	  (function() {
+	    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	    dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+	    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	   })();
+	</script>
+</body>
+</html>

@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>GCP Compute Engine VM Instances</title>
+  <meta name="author" content="Ben Chuanlong Du">
+
+  <link href="https://misc.legendu.net/atom.xml" type="application/atom+xml" rel="alternate"
+        title="Ben Chuanlong Du's Blog Atom Feed" />
+
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link href="https://misc.legendu.net/favicon.png" rel="icon">
+  <link href="https://misc.legendu.net/theme/css/main_2.css" media="screen, projection"
+        rel="stylesheet" type="text/css">
+  <script src="https://misc.legendu.net/theme/js/modernizr-2.0.js"></script>
+  <script src="https://misc.legendu.net/theme/js/ender.js"></script>
+  <script src="https://misc.legendu.net/theme/js/octopress.js" type="text/javascript"></script>
+
+  <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <script data-ad-client="ca-pub-3836424032203369" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+</head>
+
+<body>
+  <header role="banner"><hgroup>
+  <h1><a href="https://misc.legendu.net/">Ben Chuanlong Du's Blog</a></h1>
+    <h2>It is never too late to learn.</h2>
+</hgroup></header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="https://misc.legendu.net/atom.xml" rel="subscribe-rss">RSS</a></li>
+</ul>
+
+<form name="search" action="https://www.bing.com/search" method="get" onSubmit="return build_query()">
+  <fieldset role="search">
+      <!--
+    <input type="hidden" name="q" value="site:https://misc.legendu.net" />
+        -->
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+
+<script type = "text/javascript">
+    function build_query() {
+        var query = document.forms["search"]["q"].value;
+        var prefix = "site:https://misc.legendu.net "
+        if (!query.startsWith(prefix)) {
+            query = prefix + query;
+            document.forms["search"]["q"].value = query;
+        }
+        return true;
+    }
+</script>
+
+<ul class="main-navigation">
+    <li><a href="https://www.legendu.net">Home</a></li>
+    <li><a href="https://misc.legendu.net">Blog</a></li>
+    <li><a href="https://misc.legendu.net/archives.html">Archives</a></li>
+    <li><a href="https://misc.legendu.net/categories.html">Categories</a></li>
+    <li><a href="https://misc.legendu.net/tags.html">Tags</a></li>
+    <li><a href="https://www.legendu.net/pages/about">About</a></li>
+</ul></nav>
+  <div id="main">
+    <div id="content">
+<div>
+  <article class="hentry" role="article">
+<header>
+      <h1 class="entry-title">GCP Compute Engine VM Instances</h1>
+      <p class="meta"><time datetime="2023-07-01T17:57:54-07:00" pubdate>Jul 01, 2023</time></p>
+</header>
+
+  <div class="entry-content"><p><strong>Things on this page are fragmentary and immature notes/thoughts of the author. Please read with your own judgement!</strong></p>
+<h2 id="gcp">GCP</h2>
+<p>GCP c2 and c3 VMs are good choices according to performance per price.
+It's even cheaper than customized VM types with reduced memories!
+GCP c2 VMs are compute optimized and are ideal for CPU intensive workloads.
+Note that GCP c2 spot VMs are even cheaper than AWS t2.nano VMs
+if you can stand your VM being preempted.</p>
+<p><img alt="gcp-c2-price" src="https://user-images.githubusercontent.com/824507/250313656-891cd99a-c9a0-4004-9158-fd87503c39a6.png"></p>
+<p><img alt="gcp-c3-price" src="https://user-images.githubusercontent.com/824507/250313771-b776b124-5503-4aa9-a457-a55452bfdf67.png"></p>
+<h2 id="create-gcp-vms-using-command-line">Create GCP VMs Using Command Line</h2>
+<div class="highlight"><pre><span></span><code><span class="nx">gcloud</span><span class="w"> </span><span class="nx">compute</span><span class="w"> </span><span class="nx">instances</span><span class="w"> </span><span class="nx">create</span><span class="w"> </span><span class="nx">instance</span><span class="o">-</span><span class="mi">20240304</span><span class="o">-</span><span class="mi">20240304</span><span class="o">-</span><span class="mi">064337</span><span class="w"> </span>\
+<span class="w">    </span><span class="o">--</span><span class="nx">project</span><span class="p">=</span><span class="nx">crested</span><span class="o">-</span><span class="nx">studio</span><span class="o">-</span><span class="mi">416206</span><span class="w"> </span>\
+<span class="w">    </span><span class="o">--</span><span class="nx">zone</span><span class="p">=</span><span class="nx">northamerica</span><span class="o">-</span><span class="nx">northeast1</span><span class="o">-</span><span class="nx">c</span><span class="w"> </span>\
+<span class="w">    </span><span class="o">--</span><span class="nx">machine</span><span class="o">-</span><span class="k">type</span><span class="p">=</span><span class="nx">e2</span><span class="o">-</span><span class="nx">medium</span><span class="w"> </span>\
+<span class="w">    </span><span class="o">--</span><span class="nx">network</span><span class="o">-</span><span class="kd">interface</span><span class="p">=</span><span class="nx">network</span><span class="o">-</span><span class="nx">tier</span><span class="p">=</span><span class="nx">PREMIUM</span><span class="p">,</span><span class="nx">stack</span><span class="o">-</span><span class="k">type</span><span class="p">=</span><span class="nx">IPV4_ONLY</span><span class="p">,</span><span class="nx">subnet</span><span class="p">=</span><span class="k">default</span><span class="w"> </span>\
+<span class="w">    </span><span class="o">--</span><span class="nx">maintenance</span><span class="o">-</span><span class="nx">policy</span><span class="p">=</span><span class="nx">MIGRATE</span><span class="w"> </span>\
+<span class="w">    </span><span class="o">--</span><span class="nx">provisioning</span><span class="o">-</span><span class="nx">model</span><span class="p">=</span><span class="nx">STANDARD</span><span class="w"> </span>\
+<span class="w">    </span><span class="o">--</span><span class="nx">service</span><span class="o">-</span><span class="nx">account</span><span class="p">=</span><span class="mi">170261695503</span><span class="o">-</span><span class="nx">compute</span><span class="err">@</span><span class="nx">developer</span><span class="p">.</span><span class="nx">gserviceaccount</span><span class="p">.</span><span class="nx">com</span><span class="w"> </span>\
+<span class="w">    </span><span class="o">--</span><span class="nx">scopes</span><span class="p">=</span><span class="nx">https</span><span class="p">:</span><span class="c1">//www.googleapis.com/auth/cloud-platform \</span>
+<span class="w">    </span><span class="o">--</span><span class="nx">tags</span><span class="p">=</span><span class="nx">https</span><span class="o">-</span><span class="nx">server</span><span class="p">,</span><span class="nx">lb</span><span class="o">-</span><span class="nx">health</span><span class="o">-</span><span class="nx">check</span><span class="w"> </span>\
+<span class="w">    </span><span class="o">--</span><span class="nx">create</span><span class="o">-</span><span class="nx">disk</span><span class="p">=</span><span class="kt">auto</span><span class="o">-</span><span class="nx">delete</span><span class="p">=</span><span class="nx">yes</span><span class="p">,</span><span class="nx">boot</span><span class="p">=</span><span class="nx">yes</span><span class="p">,</span><span class="nx">device</span><span class="o">-</span><span class="nx">name</span><span class="p">=</span><span class="nx">instance</span><span class="o">-</span><span class="mi">20240304</span><span class="o">-</span><span class="mi">062735</span><span class="p">,</span><span class="nx">image</span><span class="p">=</span><span class="nx">projects</span><span class="o">/</span><span class="nx">ubuntu</span><span class="o">-</span><span class="nx">os</span><span class="o">-</span><span class="nx">cloud</span><span class="o">/</span><span class="nx">global</span><span class="o">/</span><span class="nx">images</span><span class="o">/</span><span class="nx">ubuntu</span><span class="o">-</span><span class="mi">2204</span><span class="o">-</span><span class="nx">jammy</span><span class="o">-</span><span class="nx">v20240228</span><span class="p">,</span><span class="nx">mode</span><span class="p">=</span><span class="nx">rw</span><span class="p">,</span><span class="nx">size</span><span class="p">=</span><span class="mi">10</span><span class="p">,</span><span class="k">type</span><span class="p">=</span><span class="nx">projects</span><span class="o">/</span><span class="nx">crested</span><span class="o">-</span><span class="nx">studio</span><span class="o">-</span><span class="mi">416206</span><span class="o">/</span><span class="nx">zones</span><span class="o">/</span><span class="nx">northamerica</span><span class="o">-</span><span class="nx">northeast1</span><span class="o">-</span><span class="nx">c</span><span class="o">/</span><span class="nx">diskTypes</span><span class="o">/</span><span class="nx">pd</span><span class="o">-</span><span class="nx">balanced</span><span class="w"> </span>\
+<span class="w">    </span><span class="o">--</span><span class="nx">no</span><span class="o">-</span><span class="nx">shielded</span><span class="o">-</span><span class="nx">secure</span><span class="o">-</span><span class="nx">boot</span><span class="w"> </span>\
+<span class="w">    </span><span class="o">--</span><span class="nx">shielded</span><span class="o">-</span><span class="nx">vtpm</span><span class="w"> </span>\
+<span class="w">    </span><span class="o">--</span><span class="nx">shielded</span><span class="o">-</span><span class="nx">integrity</span><span class="o">-</span><span class="nx">monitoring</span><span class="w"> </span>\
+<span class="w">    </span><span class="o">--</span><span class="nx">labels</span><span class="p">=</span><span class="nx">goog</span><span class="o">-</span><span class="nx">ec</span><span class="o">-</span><span class="nx">src</span><span class="p">=</span><span class="nx">vm_add</span><span class="o">-</span><span class="nx">gcloud</span><span class="w"> </span>\
+<span class="w">    </span><span class="o">--</span><span class="nx">reservation</span><span class="o">-</span><span class="nx">affinity</span><span class="p">=</span><span class="nx">any</span>
+</code></pre></div>
+
+<h2 id="query-gcp-vms">Query GCP VMs</h2>
+<div class="highlight"><pre><span></span><code>gcloud compute instances list --format=&#39;table(name,status,lastStartTimestamp,lastStopTimestamp.list())&#39;
+</code></pre></div>
+
+<h2 id="google-cloud-logging">Google Cloud Logging</h2>
+<p>https://console.cloud.google.com/logging</p>
+<h2 id="references">References</h2>
+<ul>
+<li>
+<p><a href="https://www.legendu.net/misc/blog/comparison-of-popular-cloud-platforms">Comparison of Popular Cloud Platforms</a></p>
+</li>
+<li>
+<p><a href="https://cloud.google.com/compute/docs/instances/creating-instance-with-custom-machine-type">GCP - Create a VM with a custom machine type</a></p>
+</li>
+<li>
+<p><a href="https://cloud.google.com/free/docs/free-cloud-features#compute">GCP - Free cloud features and trial offer</a></p>
+</li>
+<li>
+<p><a href="https://cloud.google.com/compute#section-6">GCP - Choosing the right virtual machine type</a></p>
+</li>
+<li>
+<p><a href="https://cloud.google.com/products/calculator">GCP Product Calculator</a></p>
+</li>
+<li>
+<p><a href="https://cloud.google.com/compute/all-pricing">GCP - Compute Engine Pricing</a></p>
+</li>
+</ul></div>
+    <footer>
+<p class="meta">
+  <span class="byline author vcard">
+    Posted by <span class="fn">Benjamin Du</span>
+  </span>
+<time datetime="2023-07-01T17:57:54-07:00" pubdate>Jul 01, 2023</time>  <span class="categories">
+    <a class="category" href="https://misc.legendu.net/tag/computer-science.html">Computer Science</a>
+    <a class="category" href="https://misc.legendu.net/tag/programming.html">programming</a>
+    <a class="category" href="https://misc.legendu.net/tag/cloud.html">cloud</a>
+    <a class="category" href="https://misc.legendu.net/tag/gcp.html">GCP</a>
+    <a class="category" href="https://misc.legendu.net/tag/vm.html">VM</a>
+    <a class="category" href="https://misc.legendu.net/tag/compute-engine.html">compute engine</a>
+    <a class="category" href="https://misc.legendu.net/tag/spot.html">spot</a>
+    <a class="category" href="https://misc.legendu.net/tag/google.html">Google</a>
+  </span>
+</p>    </footer>
+  </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div>
+  </section>
+</div>
+<aside class="sidebar">
+  <section>
+    <h1>Recent Posts</h1>
+    <ul id="recent_posts">
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/tips-on-health/">Tips on Health</a>
+      </li>
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/tips-on-child-education/">Tips on Child Education</a>
+      </li>
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/tips-on-fd/">Tips on fd</a>
+      </li>
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/the-fzf-command-is-a-great-alternative-to-find/">The fzf Command Is a Great Alternative to find</a>
+      </li>
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/ruff-is-an-extremely-fast-python-linter-written-in-rust/">Ruff Is An Extremely Fast Python Linter Written in Rust</a>
+      </li>
+    </ul>
+  </section>
+  <section>
+    <h1>Categories</h1>
+    <ul id="recent_posts">
+        <li><a href="https://misc.legendu.net/category/ai.html">AI</a></li>
+        <li><a href="https://misc.legendu.net/category/career.html">Career</a></li>
+        <li><a href="https://misc.legendu.net/category/cloud.html">Cloud</a></li>
+        <li><a href="https://misc.legendu.net/category/computer-science.html">Computer Science</a></li>
+        <li><a href="https://misc.legendu.net/category/fiannce.html">Fiannce</a></li>
+        <li><a href="https://misc.legendu.net/category/finance.html">Finance</a></li>
+        <li><a href="https://misc.legendu.net/category/fun-problems.html">Fun Problems</a></li>
+        <li><a href="https://misc.legendu.net/category/hardware.html">Hardware</a></li>
+        <li><a href="https://misc.legendu.net/category/health.html">Health</a></li>
+        <li><a href="https://misc.legendu.net/category/house.html">House</a></li>
+        <li><a href="https://misc.legendu.net/category/internet.html">Internet</a></li>
+        <li><a href="https://misc.legendu.net/category/investment.html">Investment</a></li>
+        <li><a href="https://misc.legendu.net/category/life.html">life</a></li>
+        <li><a href="https://misc.legendu.net/category/linux.html">Linux</a></li>
+        <li><a href="https://misc.legendu.net/category/os.html">OS</a></li>
+        <li><a href="https://misc.legendu.net/category/people.html">People</a></li>
+        <li><a href="https://misc.legendu.net/category/philosophy.html">Philosophy</a></li>
+        <li><a href="https://misc.legendu.net/category/research.html">Research</a></li>
+        <li><a href="https://misc.legendu.net/category/shopping.html">Shopping</a></li>
+        <li><a href="https://misc.legendu.net/category/soft-skills.html">soft skills</a></li>
+        <li><a href="https://misc.legendu.net/category/software.html">Software</a></li>
+        <li><a href="https://misc.legendu.net/category/statistics.html">Statistics</a></li>
+        <li><a href="https://misc.legendu.net/category/tools.html">Tools</a></li>
+    </ul>
+  </section>
+ 
+
+  <section>
+  <h1>Tags</h1>
+  <ul class="tagcloud">
+  </ul>
+  </section>
+
+
+
+  <section>
+    <h1>GitHub Repos</h1>
+    <ul id="gh_repos">
+      <li class="loading">Status updating...</li>
+    </ul>
+      <a href="https://github.com/legendu-net">@legendu-net</a> on GitHub
+    <script type="text/javascript">
+      $.domReady(function(){
+          if (!window.jXHR){
+              var jxhr = document.createElement('script');
+              jxhr.type = 'text/javascript';
+              jxhr.src = 'https://misc.legendu.net/theme/js/jXHR.js';
+              var s = document.getElementsByTagName('script')[0];
+              s.parentNode.insertBefore(jxhr, s);
+          }
+
+          github.showRepos({
+              user: 'legendu-net',
+              count: 5,
+              skip_forks: true,
+              target: '#gh_repos'
+          });
+      });
+    </script>
+    <script src="https://misc.legendu.net/theme/js/github.js" type="text/javascript"> </script>
+  </section>
+
+    <section>
+        <h1>Social</h2>
+        <ul>
+            <li><a href="https://www.linkedin.com/in/ben-chuanlong-du-1239b221/" target="_blank">LinkedIn</a></li>
+            <li><a href="https://hub.docker.com/u/dclong" target="_blank">Docker Hub</a></li>
+            <li><a href="https://stackoverflow.com/users/7808204/benjamin-du?tab=profile" target="_blank">Stack Overflow</a></li>
+            <li><a href="https://twitter.com/longendu" target="_blank">Twitter</a></li>
+        <!--
+            <li><a href="https://misc.legendu.net/" type="application/rss+xml" rel="alternate">RSS</a></li>
+            -->
+        </ul>
+    </section>
+</aside>    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Ben Chuanlong Du -
+  <span class="credit">Powered by <a href="http://getpelican.com">Pelican</a></span>
+</p></footer>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-3STS9BVPF6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-3STS9BVPF6');
+</script>
+	<script type="text/javascript">
+	  var disqus_shortname = 'dclong';
+          var disqus_identifier = '/blog/gcp-compute-engine-vm-instances/';
+          var disqus_url = 'https://misc.legendu.net/blog/gcp-compute-engine-vm-instances/';
+          var disqus_title = 'GCP Compute Engine VM Instances';
+	  (function() {
+	    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	    dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+	    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	   })();
+	</script>
+</body>
+</html>

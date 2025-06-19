@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Train PyTorch Distributedly Using Apache Ray</title>
+  <meta name="author" content="Ben Chuanlong Du">
+
+  <link href="https://misc.legendu.net/atom.xml" type="application/atom+xml" rel="alternate"
+        title="Ben Chuanlong Du's Blog Atom Feed" />
+
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link href="https://misc.legendu.net/favicon.png" rel="icon">
+  <link href="https://misc.legendu.net/theme/css/main_2.css" media="screen, projection"
+        rel="stylesheet" type="text/css">
+  <script src="https://misc.legendu.net/theme/js/modernizr-2.0.js"></script>
+  <script src="https://misc.legendu.net/theme/js/ender.js"></script>
+  <script src="https://misc.legendu.net/theme/js/octopress.js" type="text/javascript"></script>
+
+  <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <script data-ad-client="ca-pub-3836424032203369" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+</head>
+
+<body>
+  <header role="banner"><hgroup>
+  <h1><a href="https://misc.legendu.net/">Ben Chuanlong Du's Blog</a></h1>
+    <h2>It is never too late to learn.</h2>
+</hgroup></header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="https://misc.legendu.net/atom.xml" rel="subscribe-rss">RSS</a></li>
+</ul>
+
+<form name="search" action="https://www.bing.com/search" method="get" onSubmit="return build_query()">
+  <fieldset role="search">
+      <!--
+    <input type="hidden" name="q" value="site:https://misc.legendu.net" />
+        -->
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+
+<script type = "text/javascript">
+    function build_query() {
+        var query = document.forms["search"]["q"].value;
+        var prefix = "site:https://misc.legendu.net "
+        if (!query.startsWith(prefix)) {
+            query = prefix + query;
+            document.forms["search"]["q"].value = query;
+        }
+        return true;
+    }
+</script>
+
+<ul class="main-navigation">
+    <li><a href="https://www.legendu.net">Home</a></li>
+    <li><a href="https://misc.legendu.net">Blog</a></li>
+    <li><a href="https://misc.legendu.net/archives.html">Archives</a></li>
+    <li><a href="https://misc.legendu.net/categories.html">Categories</a></li>
+    <li><a href="https://misc.legendu.net/tags.html">Tags</a></li>
+    <li><a href="https://www.legendu.net/pages/about">About</a></li>
+</ul></nav>
+  <div id="main">
+    <div id="content">
+<div>
+  <article class="hentry" role="article">
+<header>
+      <h1 class="entry-title">Train PyTorch Distributedly Using Apache Ray</h1>
+      <p class="meta"><time datetime="2020-02-01T11:36:44-08:00" pubdate>Feb 01, 2020</time></p>
+</header>
+
+  <div class="entry-content"><p><strong>Things on this page are fragmentary and immature notes/thoughts of the author. Please read with your own judgement!</strong></p>
+<h2 id="training-a-model-implemented-in-pytorch">Training a Model Implemented in PyTorch</h2>
+<p>https://github.com/ray-project/ray/tree/master/python/ray/util/sgd/pytorch/examples</p>
+<p><a href="https://ray.readthedocs.io/en/latest/raysgd/raysgd_pytorch.html">Distributed PyTorch Using Apache Ray</a></p>
+<p><a href="https://ray.readthedocs.io/en/latest/raysgd/raysgd.html">RaySGD: Distributed Training Wrappers</a></p>
+<h2 id="hyperparameter-optimization-for-models-implemented-in-pytorch">Hyperparameter Optimization for Models Implemented in PyTorch</h2>
+<p>https://ray.readthedocs.io/en/latest/tune-examples.html</p>
+<p>Is the following example running distributed or not?
+Do I need to use tags to tell Ray to run it on multiple machines?</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">torch.optim</span> <span class="k">as</span> <span class="nn">optim</span>
+<span class="kn">from</span> <span class="nn">ray</span> <span class="kn">import</span> <span class="n">tune</span>
+<span class="kn">from</span> <span class="nn">ray.tune.examples.mnist_pytorch</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">get_data_loaders</span><span class="p">,</span> <span class="n">ConvNet</span><span class="p">,</span> <span class="n">train</span><span class="p">,</span> <span class="n">test</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">train_mnist</span><span class="p">(</span><span class="n">config</span><span class="p">):</span>
+    <span class="n">train_loader</span><span class="p">,</span> <span class="n">test_loader</span> <span class="o">=</span> <span class="n">get_data_loaders</span><span class="p">()</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">ConvNet</span><span class="p">()</span>
+    <span class="n">optimizer</span> <span class="o">=</span> <span class="n">optim</span><span class="o">.</span><span class="n">SGD</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">parameters</span><span class="p">(),</span> <span class="n">lr</span><span class="o">=</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;lr&quot;</span><span class="p">])</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+        <span class="n">train</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">optimizer</span><span class="p">,</span> <span class="n">train_loader</span><span class="p">)</span>
+        <span class="n">acc</span> <span class="o">=</span> <span class="n">test</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">test_loader</span><span class="p">)</span>
+        <span class="n">tune</span><span class="o">.</span><span class="n">track</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">mean_accuracy</span><span class="o">=</span><span class="n">acc</span><span class="p">)</span>
+
+
+<span class="n">analysis</span> <span class="o">=</span> <span class="n">tune</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
+    <span class="n">train_mnist</span><span class="p">,</span> <span class="n">config</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;lr&quot;</span><span class="p">:</span> <span class="n">tune</span><span class="o">.</span><span class="n">grid_search</span><span class="p">([</span><span class="mf">0.001</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">])})</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Best config: &quot;</span><span class="p">,</span> <span class="n">analysis</span><span class="o">.</span><span class="n">get_best_config</span><span class="p">(</span><span class="n">metric</span><span class="o">=</span><span class="s2">&quot;mean_accuracy&quot;</span><span class="p">))</span>
+
+<span class="c1"># Get a dataframe for analyzing trial results.</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">analysis</span><span class="o">.</span><span class="n">dataframe</span><span class="p">()</span>
+</code></pre></div>
+
+<ul>
+<li>data parallelism vs model parallelism  </li>
+<li>use Ring Allreduce (RA) (instead of Parameter Server or Peer to Peer) 
+    for synchronization among processes (CPU/GPU on the same node or different nodes)</li>
+<li>Distributed Optimization Algorithm<ul>
+<li>synchronized SGD </li>
+<li>asynchronized SGD </li>
+<li>1-bit SGD</li>
+<li>The Hogwild algorithm</li>
+<li>Downpour SGD</li>
+<li>synchronized SGD + large minibatch to reduce update frequency of parameters</li>
+</ul>
+</li>
+</ul>
+<h2 id="references">References</h2>
+<p><a href="https://stanford.edu/~rezab/classes/cme323/S16/projects_reports/hedge_usmani.pdf">Parallel and Distributed Deep Learning</a></p>
+<p><a href="https://cse.buffalo.edu/~demirbas/publications/DistMLplat.pdf">A Comparison of Distributed Machine Learning Platforms</a></p>
+<p><a href="https://arxiv.org/pdf/1909.02061.pdf">Performance Analysis and Comparison of Distributed Machine Learning Systems</a></p>
+<p><a href="https://discuss.pytorch.org/t/multiprocessing-failed-with-torch-distributed-launch-module/33056">Multiprocessing failed with Torch.distributed.launch module</a></p>
+<p>https://jdhao.github.io/2019/11/01/pytorch_distributed_training/</p>
+<p><a href="https://medium.com/huggingface/training-larger-batches-practical-tips-on-1-gpu-multi-gpu-distributed-setups-ec88c3e51255">Training Neural Nets on Larger Batches: Practical Tips for 1-GPU, Multi-GPU &amp; Distributed setups</a></p>
+<p><a href="https://pytorch.org/docs/stable/distributed.html">DISTRIBUTED COMMUNICATION PACKAGE - TORCH.DISTRIBUTED</a></p>
+<p><a href="https://pytorch.org/docs/master/nn.html#torch.nn.parallel.DistributedDataParallel">DistributedDataParallel</a></p>
+<p><a href="https://yangkky.github.io/2019/07/08/distributed-pytorch-tutorial.html">Distributed data parallel training in Pytorch</a></p>
+<p><a href="https://towardsdatascience.com/visual-intuition-on-ring-allreduce-for-distributed-deep-learning-d1f34b4911da">Visual intuition on ring-Allreduce for distributed Deep Learning</a></p>
+<p><a href="https://tech.preferred.jp/en/blog/technologies-behind-distributed-deep-learning-allreduce/">Technologies behind Distributed Deep Learning: AllReduce</a></p>
+<p><a href="http://seba1511.net/tutorials/intermediate/dist_tuto.html">Writing Distributed Applications with PyTorch</a></p>
+<p>https://github.com/ray-project/ray/issues/3609</p>
+<p>https://github.com/ray-project/ray/issues/3520</p>
+<p><a href="https://towardsdatascience.com/accelerating-deep-learning-using-distributed-sgd-an-overview-e66c4aee1a0c">Accelerating Deep Learning Using Distributed SGD — An Overview</a></p>
+<p><a href="https://medium.com/intel-student-ambassadors/distributed-training-of-deep-learning-models-with-pytorch-1123fa538848">Distributed training of Deep Learning models with PyTorch</a></p>
+<p><a href="https://www.aaai.org/ojs/index.php/AAAI/article/view/4465">Scalable Distributed DL Training: Batching Communication and Computation</a></p>
+<p>https://github.com/dmmiller612/sparktorch</p>
+<p><a href="https://github.com/bharathgs/Awesome-Distributed-Deep-Learning">Awesome Distributed Deep Learning</a></p>
+<p><a href="https://medium.com/@Petuum/intro-to-distributed-deep-learning-systems-a2e45c6b8e7">Intro to Distributed Deep Learning Systems</a></p>
+<p><a href="https://arxiv.org/pdf/1706.02677.pdf">Accurate, Large Minibatch SGD: Training ImageNet in 1 Hour</a></p></div>
+    <footer>
+<p class="meta">
+  <span class="byline author vcard">
+    Posted by <span class="fn">Benjamin Du</span>
+  </span>
+<time datetime="2020-02-01T11:36:44-08:00" pubdate>Feb 01, 2020</time>  <span class="categories">
+    <a class="category" href="https://misc.legendu.net/tag/ai.html">AI</a>
+    <a class="category" href="https://misc.legendu.net/tag/data-science.html">data science</a>
+    <a class="category" href="https://misc.legendu.net/tag/machine-learning.html">machine learning</a>
+    <a class="category" href="https://misc.legendu.net/tag/deep-learning.html">deep learning</a>
+    <a class="category" href="https://misc.legendu.net/tag/pytorch.html">PyTorch</a>
+    <a class="category" href="https://misc.legendu.net/tag/distributed.html">distributed</a>
+    <a class="category" href="https://misc.legendu.net/tag/apache-ray.html">Apache Ray</a>
+  </span>
+</p>    </footer>
+  </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div>
+  </section>
+</div>
+<aside class="sidebar">
+  <section>
+    <h1>Recent Posts</h1>
+    <ul id="recent_posts">
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/tips-on-health/">Tips on Health</a>
+      </li>
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/tips-on-child-education/">Tips on Child Education</a>
+      </li>
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/tips-on-fd/">Tips on fd</a>
+      </li>
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/the-fzf-command-is-a-great-alternative-to-find/">The fzf Command Is a Great Alternative to find</a>
+      </li>
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/ruff-is-an-extremely-fast-python-linter-written-in-rust/">Ruff Is An Extremely Fast Python Linter Written in Rust</a>
+      </li>
+    </ul>
+  </section>
+  <section>
+    <h1>Categories</h1>
+    <ul id="recent_posts">
+        <li><a href="https://misc.legendu.net/category/ai.html">AI</a></li>
+        <li><a href="https://misc.legendu.net/category/career.html">Career</a></li>
+        <li><a href="https://misc.legendu.net/category/cloud.html">Cloud</a></li>
+        <li><a href="https://misc.legendu.net/category/computer-science.html">Computer Science</a></li>
+        <li><a href="https://misc.legendu.net/category/fiannce.html">Fiannce</a></li>
+        <li><a href="https://misc.legendu.net/category/finance.html">Finance</a></li>
+        <li><a href="https://misc.legendu.net/category/fun-problems.html">Fun Problems</a></li>
+        <li><a href="https://misc.legendu.net/category/hardware.html">Hardware</a></li>
+        <li><a href="https://misc.legendu.net/category/health.html">Health</a></li>
+        <li><a href="https://misc.legendu.net/category/house.html">House</a></li>
+        <li><a href="https://misc.legendu.net/category/internet.html">Internet</a></li>
+        <li><a href="https://misc.legendu.net/category/investment.html">Investment</a></li>
+        <li><a href="https://misc.legendu.net/category/life.html">life</a></li>
+        <li><a href="https://misc.legendu.net/category/linux.html">Linux</a></li>
+        <li><a href="https://misc.legendu.net/category/os.html">OS</a></li>
+        <li><a href="https://misc.legendu.net/category/people.html">People</a></li>
+        <li><a href="https://misc.legendu.net/category/philosophy.html">Philosophy</a></li>
+        <li><a href="https://misc.legendu.net/category/research.html">Research</a></li>
+        <li><a href="https://misc.legendu.net/category/shopping.html">Shopping</a></li>
+        <li><a href="https://misc.legendu.net/category/soft-skills.html">soft skills</a></li>
+        <li><a href="https://misc.legendu.net/category/software.html">Software</a></li>
+        <li><a href="https://misc.legendu.net/category/statistics.html">Statistics</a></li>
+        <li><a href="https://misc.legendu.net/category/tools.html">Tools</a></li>
+    </ul>
+  </section>
+ 
+
+  <section>
+  <h1>Tags</h1>
+  <ul class="tagcloud">
+  </ul>
+  </section>
+
+
+
+  <section>
+    <h1>GitHub Repos</h1>
+    <ul id="gh_repos">
+      <li class="loading">Status updating...</li>
+    </ul>
+      <a href="https://github.com/legendu-net">@legendu-net</a> on GitHub
+    <script type="text/javascript">
+      $.domReady(function(){
+          if (!window.jXHR){
+              var jxhr = document.createElement('script');
+              jxhr.type = 'text/javascript';
+              jxhr.src = 'https://misc.legendu.net/theme/js/jXHR.js';
+              var s = document.getElementsByTagName('script')[0];
+              s.parentNode.insertBefore(jxhr, s);
+          }
+
+          github.showRepos({
+              user: 'legendu-net',
+              count: 5,
+              skip_forks: true,
+              target: '#gh_repos'
+          });
+      });
+    </script>
+    <script src="https://misc.legendu.net/theme/js/github.js" type="text/javascript"> </script>
+  </section>
+
+    <section>
+        <h1>Social</h2>
+        <ul>
+            <li><a href="https://www.linkedin.com/in/ben-chuanlong-du-1239b221/" target="_blank">LinkedIn</a></li>
+            <li><a href="https://hub.docker.com/u/dclong" target="_blank">Docker Hub</a></li>
+            <li><a href="https://stackoverflow.com/users/7808204/benjamin-du?tab=profile" target="_blank">Stack Overflow</a></li>
+            <li><a href="https://twitter.com/longendu" target="_blank">Twitter</a></li>
+        <!--
+            <li><a href="https://misc.legendu.net/" type="application/rss+xml" rel="alternate">RSS</a></li>
+            -->
+        </ul>
+    </section>
+</aside>    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Ben Chuanlong Du -
+  <span class="credit">Powered by <a href="http://getpelican.com">Pelican</a></span>
+</p></footer>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-3STS9BVPF6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-3STS9BVPF6');
+</script>
+	<script type="text/javascript">
+	  var disqus_shortname = 'dclong';
+          var disqus_identifier = '/blog/train-pytorch-distributedly-using-apache-ray/';
+          var disqus_url = 'https://misc.legendu.net/blog/train-pytorch-distributedly-using-apache-ray/';
+          var disqus_title = 'Train PyTorch Distributedly Using Apache Ray';
+	  (function() {
+	    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	    dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+	    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	   })();
+	</script>
+</body>
+</html>

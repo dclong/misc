@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Tips on "sed"</title>
+  <meta name="author" content="Ben Chuanlong Du">
+
+  <link href="https://misc.legendu.net/atom.xml" type="application/atom+xml" rel="alternate"
+        title="Ben Chuanlong Du's Blog Atom Feed" />
+
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link href="https://misc.legendu.net/favicon.png" rel="icon">
+  <link href="https://misc.legendu.net/theme/css/main_2.css" media="screen, projection"
+        rel="stylesheet" type="text/css">
+  <script src="https://misc.legendu.net/theme/js/modernizr-2.0.js"></script>
+  <script src="https://misc.legendu.net/theme/js/ender.js"></script>
+  <script src="https://misc.legendu.net/theme/js/octopress.js" type="text/javascript"></script>
+
+  <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <script data-ad-client="ca-pub-3836424032203369" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+</head>
+
+<body>
+  <header role="banner"><hgroup>
+  <h1><a href="https://misc.legendu.net/">Ben Chuanlong Du's Blog</a></h1>
+    <h2>It is never too late to learn.</h2>
+</hgroup></header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="https://misc.legendu.net/atom.xml" rel="subscribe-rss">RSS</a></li>
+</ul>
+
+<form name="search" action="https://www.bing.com/search" method="get" onSubmit="return build_query()">
+  <fieldset role="search">
+      <!--
+    <input type="hidden" name="q" value="site:https://misc.legendu.net" />
+        -->
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+
+<script type = "text/javascript">
+    function build_query() {
+        var query = document.forms["search"]["q"].value;
+        var prefix = "site:https://misc.legendu.net "
+        if (!query.startsWith(prefix)) {
+            query = prefix + query;
+            document.forms["search"]["q"].value = query;
+        }
+        return true;
+    }
+</script>
+
+<ul class="main-navigation">
+    <li><a href="https://www.legendu.net">Home</a></li>
+    <li><a href="https://misc.legendu.net">Blog</a></li>
+    <li><a href="https://misc.legendu.net/archives.html">Archives</a></li>
+    <li><a href="https://misc.legendu.net/categories.html">Categories</a></li>
+    <li><a href="https://misc.legendu.net/tags.html">Tags</a></li>
+    <li><a href="https://www.legendu.net/pages/about">About</a></li>
+</ul></nav>
+  <div id="main">
+    <div id="content">
+<div>
+  <article class="hentry" role="article">
+<header>
+      <h1 class="entry-title">Tips on "sed"</h1>
+      <p class="meta"><time datetime="2013-10-22T15:47:51-07:00" pubdate>Oct 22, 2013</time></p>
+</header>
+
+  <div class="entry-content"><p><strong>Things on this page are fragmentary and immature notes/thoughts of the author. Please read with your own judgement!</strong></p>
+<h2 id="alternatives">Alternatives</h2>
+<ol>
+<li>
+<p><a href="https://github.com/ms-jpq/sad">sad</a>
+    is a simpler alternative to sed.
+    sad is implemented in Rust 
+    and has built-in integration of 
+    <a href="https://www.legendu.net/misc/blog/the-fzf-command-is-a-great-alternative-to-find">fzf</a>,
+    which makes it easy to visually inspect changes.</p>
+</li>
+<li>
+<p>For complicated text substitutions,
+    it is suggested that you use Python script as an alternative to <code>sed</code>.
+    It's best to do this in a Jupyter/Lab notebook.
+    If you do prefer a pure Python script,
+    it is suggested that you use 
+    <a href="https://www.legendu.net/misc/blog/manage-python-projects-using-uv">uv</a>
+    to run the Python script.</p>
+</li>
+<li>
+<p>If you do prefer using sed,
+    you can ask AI tools (ChatGPT, Gemini, DeepSeek, etc) 
+    to generate sed comamnds for you.</p>
+</li>
+</ol>
+<h2 id="example-usages">Example Usages</h2>
+<ol>
+<li>
+<p>Add <code>#!/bin/bash</code> to the first line of all <code>.txt</code> files.  </p>
+<div class="highlight"><pre><span></span><code>sed<span class="w"> </span>-i<span class="w"> </span><span class="s1">&#39;1 s_^_#!/bin/bash\n_&#39;</span><span class="w"> </span>*.txt
+</code></pre></div>
+
+</li>
+<li>
+<p>Add <code>#!/bin/bash</code> to the last line of all <code>.txt</code> files.  </p>
+<div class="highlight"><pre><span></span><code>sed<span class="w"> </span>-i<span class="w"> </span><span class="s1">&#39;$ s_$_\n#!/bin/bash_&#39;</span><span class="w"> </span>*.txt
+</code></pre></div>
+
+</li>
+<li>
+<p>Add <code>https://www.quandl.com/api/v1/datasets/CME/</code> to the beginning of each line in a file.</p>
+<div class="highlight"><pre><span></span><code>sed<span class="w"> </span>-i<span class="w"> </span><span class="s1">&#39;s_^_https://www.quandl.com/api/v1/datasets/CME/_g&#39;</span><span class="w"> </span><span class="k">done</span>.txt
+</code></pre></div>
+
+</li>
+<li>
+<p>Get rid of all spaces (helpful for comparing not well formatted code)
+对于格式问题 可以直接先删除空格等 然后再比较文件！！！very briliant idea!!! </p>
+<div class="highlight"><pre><span></span><code>sed<span class="w"> </span>-i<span class="w"> </span><span class="s1">&#39;s/ //g&#39;</span><span class="w"> </span>*.r
+</code></pre></div>
+
+</li>
+</ol>
+<h2 id="examples-of-cleaning-csv-data">Examples of Cleaning CSV Data</h2>
+<ol>
+<li>
+<p>Replace all <code>+</code> with <code>_</code> in the first (header) line.</p>
+<div class="highlight"><pre><span></span><code>sed<span class="w"> </span>-i<span class="w"> </span><span class="s1">&#39;1 s/ + /_/g&#39;</span><span class="w"> </span>*.csv
+</code></pre></div>
+
+</li>
+<li>
+<p>Replace all <code></code> with <code>_</code> in the first (header) line.</p>
+<div class="highlight"><pre><span></span><code>sed<span class="w"> </span>-i<span class="w"> </span><span class="s1">&#39;1 s/ /_/g&#39;</span><span class="w"> </span>*.csv
+</code></pre></div>
+
+</li>
+<li>
+<p>Replace all <code>-</code> with <code>_</code> in the first (header) line.</p>
+<div class="highlight"><pre><span></span><code>sed<span class="w"> </span>-i<span class="w"> </span><span class="s1">&#39;1 s/-/_/g&#39;</span><span class="w"> </span>*.csv
+</code></pre></div>
+
+</li>
+<li>
+<p>Replace all <code>.</code> with <code>_</code> in the first (header) line.</p>
+<div class="highlight"><pre><span></span><code>sed<span class="w"> </span>-i<span class="w"> </span><span class="s1">&#39;1 s/\./_/g&#39;</span><span class="w"> </span>*.csv
+</code></pre></div>
+
+</li>
+<li>
+<p>Print the first (header) line of all CSV documents seprated by dash lines.</p>
+<div class="highlight"><pre><span></span><code><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;--------------------------------------------------&quot;</span><span class="p">;</span>
+<span class="k">for</span><span class="w"> </span>f<span class="w"> </span><span class="k">in</span><span class="w"> </span>*.csv<span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<span class="w">    </span>head<span class="w"> </span><span class="nv">$f</span><span class="w"> </span>-n<span class="w"> </span><span class="m">1</span><span class="p">;</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;--------------------------------------------------&quot;</span><span class="p">;</span>
+<span class="k">done</span>
+</code></pre></div>
+
+</li>
+<li>
+<p>More examples.</p>
+<div class="highlight"><pre><span></span><code>sed<span class="w"> </span>-i<span class="w"> </span><span class="s1">&#39;d/^layout: page/&#39;</span><span class="w"> </span>*.md
+sed<span class="w"> </span>-i<span class="w"> </span><span class="s1">&#39;/^layout: page/d&#39;</span><span class="w"> </span>*.md
+sed<span class="w"> </span>-i<span class="w"> </span><span class="s1">&#39;/^comments: yes/d&#39;</span><span class="w"> </span>*.md
+sed<span class="w"> </span>-i<span class="w"> </span><span class="s1">&#39;/^---$/d&#39;</span><span class="w"> </span>*.md
+sed<span class="w"> </span>-i<span class="w"> </span><span class="s1">&#39;/^title: /Title: /s&#39;</span><span class="w"> </span>*.md
+sed<span class="w"> </span>-i<span class="w"> </span><span class="s1">&#39;s/^title: /Title: /&#39;</span><span class="w"> </span>*.md
+sed<span class="w"> </span>-i<span class="w"> </span><span class="s2">&quot;2 s/^/Date: 2013-10-20 00:00:00\n/&quot;</span><span class="w"> </span>*.md
+sed<span class="w"> </span>-i<span class="w"> </span><span class="s1">&#39;s/\([0-9]\+\)\.  /\1\. /g&#39;</span><span class="w"> </span>*
+</code></pre></div>
+
+</li>
+<li>
+<p>insert "Author: Ben Chuanlong Du" as the 2 line into a text file. 
+Notice the <code>\</code> delimiter. You cannot use <code>/</code>.</p>
+<div class="highlight"><pre><span></span><code>sed<span class="w"> </span>-i<span class="w"> </span><span class="s1">&#39;2 i\Author: Ben Chuanlong Du&#39;</span><span class="w"> </span>path_to_file
+</code></pre></div>
+
+</li>
+</ol>
+<p>However, 
+if text file contains only 1 line, 
+the above command does not do anything!</p>
+<ol>
+<li>Add a blank line at the beginning of file.<div class="highlight"><pre><span></span><code>sed<span class="w"> </span><span class="s1">&#39;1 i\\&#39;</span><span class="w"> </span>file.txt
+</code></pre></div>
+
+</li>
+</ol>
+<h3 id="sed">sed</h3>
+<ol>
+<li>
+<p>Code for rick's problem (splitting a column into 2)</p>
+<div class="highlight"><pre><span></span><code>sed<span class="w"> </span><span class="s1">&#39;s/\(s[0-9]\{1,2\}\)&quot; &quot;\(t[0-9]\{1,2\}\)/\1-\2/g&#39;</span><span class="w"> </span>testing.txt
+</code></pre></div>
+
+</li>
+<li>
+<p>Insert <code>#!/bin/bash</code> as the first line into file with the extension <code>.txt</code>. </p>
+<div class="highlight"><pre><span></span><code>sed<span class="w"> </span>-i<span class="w"> </span><span class="s1">&#39;1 s_^_#!/bin/bash\n_&#39;</span><span class="w"> </span>*.txt
+</code></pre></div>
+
+</li>
+<li>
+<p>Get rid of lines matching <code>^user_id,.*</code> with the 1st line skipped.
+    This is helpful when you merge multiple text files with headers 
+    (e.g., output of Spark with headers).
+    This commands help you get rid of duplicated header lines. 
+    Of course, 
+    you have replace the regular expression <code>^user_id,.*</code> with an appropriate one.</p>
+<div class="highlight"><pre><span></span><code>sed<span class="w"> </span>-i<span class="w"> </span><span class="s1">&#39;2,$ s/^user_id,.*$//g&#39;</span><span class="w"> </span>data.csv
+</code></pre></div>
+
+</li>
+<li>
+<p>Get rid of escaped double quotes (<code>\"</code>).</p>
+<div class="highlight"><pre><span></span><code>sed<span class="w"> </span>-i<span class="w"> </span><span class="s1">&#39;s/\\&quot;//g&#39;</span><span class="w"> </span>data.csv
+</code></pre></div>
+
+</li>
+<li>
+<p>Replace <code>## Usage</code> with <code>## Usage in Linux/Unix</code></p>
+<div class="highlight"><pre><span></span><code>sed<span class="w"> </span>-i<span class="w"> </span><span class="s1">&#39;s_^## Usage.*$_## Usage in Linux/Unix_&#39;</span><span class="w"> </span>*.ipynb
+</code></pre></div>
+
+</li>
+<li>
+<p>Replace <code>valid users = ${DOCKER_USER}</code> with <code>valid users = dclong</code>.</p>
+<div class="highlight"><pre><span></span><code>sed<span class="w"> </span><span class="s2">&quot;s/^valid users\s*=\s*\${DOCKER_USER}/valid users = dclong/g&quot;</span><span class="w"> </span>smb.conf
+</code></pre></div>
+
+</li>
+<li>
+<p>Remove the lines containing Python 2.7 versions (e.g., <code>2.7.16</code>).</p>
+<div class="highlight"><pre><span></span><code>sed<span class="w"> </span>-z<span class="w"> </span><span class="s1">&#39;s/2\.7\.[[:digit:]]*\n//&#39;</span><span class="w"> </span>.pyenv/version
+</code></pre></div>
+
+</li>
+</ol>
+<h2 id="questions">Questions</h2>
+<ol>
+<li>sed recursively ... aaaa aa -&gt; a?</li>
+</ol></div>
+    <footer>
+<p class="meta">
+  <span class="byline author vcard">
+    Posted by <span class="fn">Ben Chuanlong Du</span>
+  </span>
+<time datetime="2013-10-22T15:47:51-07:00" pubdate>Oct 22, 2013</time>  <span class="categories">
+    <a class="category" href="https://misc.legendu.net/tag/tips.html">tips</a>
+    <a class="category" href="https://misc.legendu.net/tag/software.html">software</a>
+    <a class="category" href="https://misc.legendu.net/tag/text-manipulation.html">text manipulation</a>
+    <a class="category" href="https://misc.legendu.net/tag/shell.html">shell</a>
+    <a class="category" href="https://misc.legendu.net/tag/linux.html">Linux</a>
+    <a class="category" href="https://misc.legendu.net/tag/sed.html">sed</a>
+  </span>
+</p>    </footer>
+  </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div>
+  </section>
+</div>
+<aside class="sidebar">
+  <section>
+    <h1>Recent Posts</h1>
+    <ul id="recent_posts">
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/tips-on-health/">Tips on Health</a>
+      </li>
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/tips-on-child-education/">Tips on Child Education</a>
+      </li>
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/tips-on-fd/">Tips on fd</a>
+      </li>
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/the-fzf-command-is-a-great-alternative-to-find/">The fzf Command Is a Great Alternative to find</a>
+      </li>
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/ruff-is-an-extremely-fast-python-linter-written-in-rust/">Ruff Is An Extremely Fast Python Linter Written in Rust</a>
+      </li>
+    </ul>
+  </section>
+  <section>
+    <h1>Categories</h1>
+    <ul id="recent_posts">
+        <li><a href="https://misc.legendu.net/category/ai.html">AI</a></li>
+        <li><a href="https://misc.legendu.net/category/career.html">Career</a></li>
+        <li><a href="https://misc.legendu.net/category/cloud.html">Cloud</a></li>
+        <li><a href="https://misc.legendu.net/category/computer-science.html">Computer Science</a></li>
+        <li><a href="https://misc.legendu.net/category/fiannce.html">Fiannce</a></li>
+        <li><a href="https://misc.legendu.net/category/finance.html">Finance</a></li>
+        <li><a href="https://misc.legendu.net/category/fun-problems.html">Fun Problems</a></li>
+        <li><a href="https://misc.legendu.net/category/hardware.html">Hardware</a></li>
+        <li><a href="https://misc.legendu.net/category/health.html">Health</a></li>
+        <li><a href="https://misc.legendu.net/category/house.html">House</a></li>
+        <li><a href="https://misc.legendu.net/category/internet.html">Internet</a></li>
+        <li><a href="https://misc.legendu.net/category/investment.html">Investment</a></li>
+        <li><a href="https://misc.legendu.net/category/life.html">life</a></li>
+        <li><a href="https://misc.legendu.net/category/linux.html">Linux</a></li>
+        <li><a href="https://misc.legendu.net/category/os.html">OS</a></li>
+        <li><a href="https://misc.legendu.net/category/people.html">People</a></li>
+        <li><a href="https://misc.legendu.net/category/philosophy.html">Philosophy</a></li>
+        <li><a href="https://misc.legendu.net/category/research.html">Research</a></li>
+        <li><a href="https://misc.legendu.net/category/shopping.html">Shopping</a></li>
+        <li><a href="https://misc.legendu.net/category/soft-skills.html">soft skills</a></li>
+        <li><a href="https://misc.legendu.net/category/software.html">Software</a></li>
+        <li><a href="https://misc.legendu.net/category/statistics.html">Statistics</a></li>
+        <li><a href="https://misc.legendu.net/category/tools.html">Tools</a></li>
+    </ul>
+  </section>
+ 
+
+  <section>
+  <h1>Tags</h1>
+  <ul class="tagcloud">
+  </ul>
+  </section>
+
+
+
+  <section>
+    <h1>GitHub Repos</h1>
+    <ul id="gh_repos">
+      <li class="loading">Status updating...</li>
+    </ul>
+      <a href="https://github.com/legendu-net">@legendu-net</a> on GitHub
+    <script type="text/javascript">
+      $.domReady(function(){
+          if (!window.jXHR){
+              var jxhr = document.createElement('script');
+              jxhr.type = 'text/javascript';
+              jxhr.src = 'https://misc.legendu.net/theme/js/jXHR.js';
+              var s = document.getElementsByTagName('script')[0];
+              s.parentNode.insertBefore(jxhr, s);
+          }
+
+          github.showRepos({
+              user: 'legendu-net',
+              count: 5,
+              skip_forks: true,
+              target: '#gh_repos'
+          });
+      });
+    </script>
+    <script src="https://misc.legendu.net/theme/js/github.js" type="text/javascript"> </script>
+  </section>
+
+    <section>
+        <h1>Social</h2>
+        <ul>
+            <li><a href="https://www.linkedin.com/in/ben-chuanlong-du-1239b221/" target="_blank">LinkedIn</a></li>
+            <li><a href="https://hub.docker.com/u/dclong" target="_blank">Docker Hub</a></li>
+            <li><a href="https://stackoverflow.com/users/7808204/benjamin-du?tab=profile" target="_blank">Stack Overflow</a></li>
+            <li><a href="https://twitter.com/longendu" target="_blank">Twitter</a></li>
+        <!--
+            <li><a href="https://misc.legendu.net/" type="application/rss+xml" rel="alternate">RSS</a></li>
+            -->
+        </ul>
+    </section>
+</aside>    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Ben Chuanlong Du -
+  <span class="credit">Powered by <a href="http://getpelican.com">Pelican</a></span>
+</p></footer>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-3STS9BVPF6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-3STS9BVPF6');
+</script>
+	<script type="text/javascript">
+	  var disqus_shortname = 'dclong';
+          var disqus_identifier = '/blog/sed-tips/';
+          var disqus_url = 'https://misc.legendu.net/blog/sed-tips/';
+          var disqus_title = 'Tips on "sed"';
+	  (function() {
+	    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	    dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+	    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	   })();
+	</script>
+</body>
+</html>

@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Develop a GUI Application in Rust</title>
+  <meta name="author" content="Ben Chuanlong Du">
+
+  <link href="https://misc.legendu.net/atom.xml" type="application/atom+xml" rel="alternate"
+        title="Ben Chuanlong Du's Blog Atom Feed" />
+
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link href="https://misc.legendu.net/favicon.png" rel="icon">
+  <link href="https://misc.legendu.net/theme/css/main_2.css" media="screen, projection"
+        rel="stylesheet" type="text/css">
+  <script src="https://misc.legendu.net/theme/js/modernizr-2.0.js"></script>
+  <script src="https://misc.legendu.net/theme/js/ender.js"></script>
+  <script src="https://misc.legendu.net/theme/js/octopress.js" type="text/javascript"></script>
+
+  <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <script data-ad-client="ca-pub-3836424032203369" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+</head>
+
+<body>
+  <header role="banner"><hgroup>
+  <h1><a href="https://misc.legendu.net/">Ben Chuanlong Du's Blog</a></h1>
+    <h2>It is never too late to learn.</h2>
+</hgroup></header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="https://misc.legendu.net/atom.xml" rel="subscribe-rss">RSS</a></li>
+</ul>
+
+<form name="search" action="https://www.bing.com/search" method="get" onSubmit="return build_query()">
+  <fieldset role="search">
+      <!--
+    <input type="hidden" name="q" value="site:https://misc.legendu.net" />
+        -->
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+
+<script type = "text/javascript">
+    function build_query() {
+        var query = document.forms["search"]["q"].value;
+        var prefix = "site:https://misc.legendu.net "
+        if (!query.startsWith(prefix)) {
+            query = prefix + query;
+            document.forms["search"]["q"].value = query;
+        }
+        return true;
+    }
+</script>
+
+<ul class="main-navigation">
+    <li><a href="https://www.legendu.net">Home</a></li>
+    <li><a href="https://misc.legendu.net">Blog</a></li>
+    <li><a href="https://misc.legendu.net/archives.html">Archives</a></li>
+    <li><a href="https://misc.legendu.net/categories.html">Categories</a></li>
+    <li><a href="https://misc.legendu.net/tags.html">Tags</a></li>
+    <li><a href="https://www.legendu.net/pages/about">About</a></li>
+</ul></nav>
+  <div id="main">
+    <div id="content">
+<div>
+  <article class="hentry" role="article">
+<header>
+      <h1 class="entry-title">Develop a GUI Application in Rust</h1>
+      <p class="meta"><time datetime="2020-10-03T21:36:53-07:00" pubdate>Oct 03, 2020</time></p>
+</header>
+
+  <div class="entry-content"><p><strong>Things on this page are fragmentary and immature notes/thoughts of the author. Please read with your own judgement!</strong></p>
+<h2 id="tauri"><a href="http://www.legendu.net/misc/blog/use-tauri-to-build-a-desktop-application">tauri</a></h2>
+<p>Please refer to 
+<a href="http://www.legendu.net/misc/blog/use-tauri-to-build-a-desktop-application">tauri</a>
+for more discussions.</p>
+<h2 id="dioxus"><a href="https://github.com/dioxuslabs/dioxus">dioxus</a></h2>
+<p><a href="https://github.com/dioxuslabs/dioxus">Dioxus</a>
+is a portable, performant, 
+and ergonomic framework for building cross-platform user interfaces in Rust.</p>
+<h2 id="rinf"><a href="https://github.com/cunarist/rinf">rinf</a></h2>
+<p><a href="https://github.com/cunarist/rinf">Rinf</a>
+is a production-ready framework for creating beautiful and performant cross-platform apps 
+using Flutter and Rust with batteries fully included. </p>
+<p>https://github.com/fzyzcjy/flutter_rust_bridge
+https://github.com/fzyzcjy/flutter_rust_bridge
+High-level memory-safe binding generator for Flutter/Dart &lt;-&gt; Rust
+Want to combine the best between Flutter, a cross-platform hot-reload rapid-development UI toolkit, and Rust, a language empowering everyone to build reliable and efficient software? Here it comes!</p>
+<h2 id="slint"><a href="https://github.com/slint-ui/slint">slint</a></h2>
+<p><a href="https://github.com/slint-ui/slint">slint</a>
+is a toolkit to efficiently develop fluid graphical user interfaces for any display: 
+embedded devices and desktop applications. 
+It supports multiple programming languages, such as Rust, C++ or JavaScript.</p>
+<h2 id="gpui"><a href="https://www.gpui.rs/">GPUI</a></h2>
+<p><a href="https://www.gpui.rs/">GPUI</a>
+is a fast, productive UI framework for Rust from the creators of Zed.</p>
+<h2 id="iced"><a href="https://github.com/hecrj/iced">iced</a></h2>
+<p>A cross-platform GUI library for Rust focused on simplicity and type-safety. Inspired by Elm.</p>
+<h2 id="fltk-rs"><a href="https://github.com/fltk-rs/fltk-rs">fltk-rs</a></h2>
+<p><a href="https://github.com/fltk-rs/fltk-rs">fltk-rs</a>
+is a rust binding for the FLTK Graphical User Interface library.
+The 
+<a href="https://github.com/fltk-rs/fltk-rs">fltk-rs</a>
+crate is a crossplatform lightweight gui library 
+which can be statically linked to produce small, 
+self-contained and fast gui applications.</p>
+<h2 id="gtk-rs"><a href="https://github.com/gtk-rs/gtk-rs">gtk-rs</a></h2>
+<p>Works well on Linux but not as well on macOS and Windows.</p>
+<h2 id="winit"><a href="https://crates.io/crates/winit">winit</a></h2>
+<p><a href="https://crates.io/crates/winit">winit</a>
+is a window creation and management library. 
+It can create windows and lets you handle events 
+(for example: the window being resized, a key being pressed, a mouse movement, etc.) 
+produced by window.</p>
+<h2 id="druid"><a href="https://github.com/linebender/druid">druid</a></h2>
+<p>Druid is an experimental Rust-native UI toolkit. 
+Its main goal is to offer a polished user experience. 
+There are many factors to this goal, including performance, 
+a rich palette of interactions (hence a widget library to support them), and playing well with the native platform. 
+See the goals section for more details.</p>
+<h2 id="azul"><a href="https://github.com/fschutt/azul">azul</a></h2>
+<p>Azul is a free, functional, reactive GUI framework for Rust and C++, 
+built using the WebRender rendering engine and a CSS / HTML-like document object model for rapid development of beautiful, native desktop applications</p>
+<h2 id="orbtk"><a href="https://github.com/redox-os/orbtk">orbtk</a></h2>
+<p><a href="https://github.com/redox-os/orbtk">orbtk</a>
+is a cross-platform (G)UI toolkit for building scalable user interfaces 
+with the programming language Rust. 
+It's based on the Entity Component System Pattern and provides a functional Reactive-like API.</p>
+<p>https://crates.io/crates/OrbTk</p>
+<h2 id="conrod"><a href="https://github.com/PistonDevelopers/conrod">conrod</a></h2>
+<p><a href="https://github.com/PistonDevelopers/conrod">conrod</a>
+is an easy-to-use, 2D GUI library written entirely in Rust.</p>
+<h2 id="imgui-rs"><a href="https://github.com/Gekkio/imgui-rs">imgui-rs</a></h2>
+<p><a href="https://github.com/Gekkio/imgui-rs">imgui-rs</a>
+is a Rust bindings for Dear ImGui. </p>
+<h2 id="references">References</h2>
+<ul>
+<li>
+<p><a href="https://monadical.com/posts/shades-of-rust-gui-library-list.html">50 Shades of Rust - Or emerging Rust GUIs in a WASM world</a></p>
+</li>
+<li>
+<p><a href="https://kas-gui.github.io/blog/state-of-GUI-2022.html">Rust: state of GUI, December 2022</a></p>
+</li>
+<li>
+<p><a href="https://blog.logrocket.com/state-of-rust-gui-libraries/">The state of Rust GUI libraries</a></p>
+</li>
+<li>
+<p><a href="https://raphlinus.github.io/rust/gui/2022/07/15/next-dozen-guis.html">Advice for the next dozen Rust GUIs</a></p>
+</li>
+<li>
+<p><a href="https://dev.to/davidedelpapa/rust-gui-introduction-a-k-a-the-state-of-rust-gui-libraries-as-of-january-2021-40gl">Rust GUI: Introduction, a.k.a. the state of Rust GUI libraries (As of January 2021)</a></p>
+</li>
+<li>
+<p><a href="https://www.areweguiyet.com/">Are We GUI Yet</a></p>
+</li>
+</ul></div>
+    <footer>
+<p class="meta">
+  <span class="byline author vcard">
+    Posted by <span class="fn">Benjamin Du</span>
+  </span>
+<time datetime="2020-10-03T21:36:53-07:00" pubdate>Oct 03, 2020</time>  <span class="categories">
+    <a class="category" href="https://misc.legendu.net/tag/computer-science.html">Computer Science</a>
+    <a class="category" href="https://misc.legendu.net/tag/rust.html">Rust</a>
+    <a class="category" href="https://misc.legendu.net/tag/gui.html">GUI</a>
+    <a class="category" href="https://misc.legendu.net/tag/desktop.html">desktop</a>
+    <a class="category" href="https://misc.legendu.net/tag/application.html">application</a>
+    <a class="category" href="https://misc.legendu.net/tag/tauri.html">Tauri</a>
+    <a class="category" href="https://misc.legendu.net/tag/iced.html">Iced</a>
+    <a class="category" href="https://misc.legendu.net/tag/slint.html">Slint</a>
+  </span>
+</p>    </footer>
+  </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div>
+  </section>
+</div>
+<aside class="sidebar">
+  <section>
+    <h1>Recent Posts</h1>
+    <ul id="recent_posts">
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/tips-on-health/">Tips on Health</a>
+      </li>
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/tips-on-child-education/">Tips on Child Education</a>
+      </li>
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/tips-on-fd/">Tips on fd</a>
+      </li>
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/the-fzf-command-is-a-great-alternative-to-find/">The fzf Command Is a Great Alternative to find</a>
+      </li>
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/ruff-is-an-extremely-fast-python-linter-written-in-rust/">Ruff Is An Extremely Fast Python Linter Written in Rust</a>
+      </li>
+    </ul>
+  </section>
+  <section>
+    <h1>Categories</h1>
+    <ul id="recent_posts">
+        <li><a href="https://misc.legendu.net/category/ai.html">AI</a></li>
+        <li><a href="https://misc.legendu.net/category/career.html">Career</a></li>
+        <li><a href="https://misc.legendu.net/category/cloud.html">Cloud</a></li>
+        <li><a href="https://misc.legendu.net/category/computer-science.html">Computer Science</a></li>
+        <li><a href="https://misc.legendu.net/category/fiannce.html">Fiannce</a></li>
+        <li><a href="https://misc.legendu.net/category/finance.html">Finance</a></li>
+        <li><a href="https://misc.legendu.net/category/fun-problems.html">Fun Problems</a></li>
+        <li><a href="https://misc.legendu.net/category/hardware.html">Hardware</a></li>
+        <li><a href="https://misc.legendu.net/category/health.html">Health</a></li>
+        <li><a href="https://misc.legendu.net/category/house.html">House</a></li>
+        <li><a href="https://misc.legendu.net/category/internet.html">Internet</a></li>
+        <li><a href="https://misc.legendu.net/category/investment.html">Investment</a></li>
+        <li><a href="https://misc.legendu.net/category/life.html">life</a></li>
+        <li><a href="https://misc.legendu.net/category/linux.html">Linux</a></li>
+        <li><a href="https://misc.legendu.net/category/os.html">OS</a></li>
+        <li><a href="https://misc.legendu.net/category/people.html">People</a></li>
+        <li><a href="https://misc.legendu.net/category/philosophy.html">Philosophy</a></li>
+        <li><a href="https://misc.legendu.net/category/research.html">Research</a></li>
+        <li><a href="https://misc.legendu.net/category/shopping.html">Shopping</a></li>
+        <li><a href="https://misc.legendu.net/category/soft-skills.html">soft skills</a></li>
+        <li><a href="https://misc.legendu.net/category/software.html">Software</a></li>
+        <li><a href="https://misc.legendu.net/category/statistics.html">Statistics</a></li>
+        <li><a href="https://misc.legendu.net/category/tools.html">Tools</a></li>
+    </ul>
+  </section>
+ 
+
+  <section>
+  <h1>Tags</h1>
+  <ul class="tagcloud">
+  </ul>
+  </section>
+
+
+
+  <section>
+    <h1>GitHub Repos</h1>
+    <ul id="gh_repos">
+      <li class="loading">Status updating...</li>
+    </ul>
+      <a href="https://github.com/legendu-net">@legendu-net</a> on GitHub
+    <script type="text/javascript">
+      $.domReady(function(){
+          if (!window.jXHR){
+              var jxhr = document.createElement('script');
+              jxhr.type = 'text/javascript';
+              jxhr.src = 'https://misc.legendu.net/theme/js/jXHR.js';
+              var s = document.getElementsByTagName('script')[0];
+              s.parentNode.insertBefore(jxhr, s);
+          }
+
+          github.showRepos({
+              user: 'legendu-net',
+              count: 5,
+              skip_forks: true,
+              target: '#gh_repos'
+          });
+      });
+    </script>
+    <script src="https://misc.legendu.net/theme/js/github.js" type="text/javascript"> </script>
+  </section>
+
+    <section>
+        <h1>Social</h2>
+        <ul>
+            <li><a href="https://www.linkedin.com/in/ben-chuanlong-du-1239b221/" target="_blank">LinkedIn</a></li>
+            <li><a href="https://hub.docker.com/u/dclong" target="_blank">Docker Hub</a></li>
+            <li><a href="https://stackoverflow.com/users/7808204/benjamin-du?tab=profile" target="_blank">Stack Overflow</a></li>
+            <li><a href="https://twitter.com/longendu" target="_blank">Twitter</a></li>
+        <!--
+            <li><a href="https://misc.legendu.net/" type="application/rss+xml" rel="alternate">RSS</a></li>
+            -->
+        </ul>
+    </section>
+</aside>    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Ben Chuanlong Du -
+  <span class="credit">Powered by <a href="http://getpelican.com">Pelican</a></span>
+</p></footer>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-3STS9BVPF6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-3STS9BVPF6');
+</script>
+	<script type="text/javascript">
+	  var disqus_shortname = 'dclong';
+          var disqus_identifier = '/blog/develop-a-gui-application-in-rust/';
+          var disqus_url = 'https://misc.legendu.net/blog/develop-a-gui-application-in-rust/';
+          var disqus_title = 'Develop a GUI Application in Rust';
+	  (function() {
+	    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	    dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+	    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	   })();
+	</script>
+</body>
+</html>

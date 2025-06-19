@@ -1,0 +1,7228 @@
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Hands on the Polars Library in Python</title>
+  <meta name="author" content="Ben Chuanlong Du">
+
+  <link href="https://misc.legendu.net/atom.xml" type="application/atom+xml" rel="alternate"
+        title="Ben Chuanlong Du's Blog Atom Feed" />
+
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link href="https://misc.legendu.net/favicon.png" rel="icon">
+  <link href="https://misc.legendu.net/theme/css/main_2.css" media="screen, projection"
+        rel="stylesheet" type="text/css">
+  <script src="https://misc.legendu.net/theme/js/modernizr-2.0.js"></script>
+  <script src="https://misc.legendu.net/theme/js/ender.js"></script>
+  <script src="https://misc.legendu.net/theme/js/octopress.js" type="text/javascript"></script>
+
+  <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <script data-ad-client="ca-pub-3836424032203369" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+</head>
+
+<body>
+  <header role="banner"><hgroup>
+  <h1><a href="https://misc.legendu.net/">Ben Chuanlong Du's Blog</a></h1>
+    <h2>It is never too late to learn.</h2>
+</hgroup></header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="https://misc.legendu.net/atom.xml" rel="subscribe-rss">RSS</a></li>
+</ul>
+
+<form name="search" action="https://www.bing.com/search" method="get" onSubmit="return build_query()">
+  <fieldset role="search">
+      <!--
+    <input type="hidden" name="q" value="site:https://misc.legendu.net" />
+        -->
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+
+<script type = "text/javascript">
+    function build_query() {
+        var query = document.forms["search"]["q"].value;
+        var prefix = "site:https://misc.legendu.net "
+        if (!query.startsWith(prefix)) {
+            query = prefix + query;
+            document.forms["search"]["q"].value = query;
+        }
+        return true;
+    }
+</script>
+
+<ul class="main-navigation">
+    <li><a href="https://www.legendu.net">Home</a></li>
+    <li><a href="https://misc.legendu.net">Blog</a></li>
+    <li><a href="https://misc.legendu.net/archives.html">Archives</a></li>
+    <li><a href="https://misc.legendu.net/categories.html">Categories</a></li>
+    <li><a href="https://misc.legendu.net/tags.html">Tags</a></li>
+    <li><a href="https://www.legendu.net/pages/about">About</a></li>
+</ul></nav>
+  <div id="main">
+    <div id="content">
+<div>
+  <article class="hentry" role="article">
+<header>
+      <h1 class="entry-title">Hands on the Polars Library in Python</h1>
+      <p class="meta"><time datetime="2021-10-14T21:13:48-07:00" pubdate>Oct 14, 2021</time></p>
+</header>
+
+  <div class="entry-content"><style type="text/css">/*!
+*
+* IPython notebook
+*
+*/
+/* CSS font colors for translated ANSI escape sequences */
+/* The color values are a mix of
+   http://www.xcolors.net/dl/baskerville-ivorylight and
+   http://www.xcolors.net/dl/euphrasia */
+.ansi-black-fg {
+  color: #3E424D;
+}
+.ansi-black-bg {
+  background-color: #3E424D;
+}
+.ansi-black-intense-fg {
+  color: #282C36;
+}
+.ansi-black-intense-bg {
+  background-color: #282C36;
+}
+.ansi-red-fg {
+  color: #E75C58;
+}
+.ansi-red-bg {
+  background-color: #E75C58;
+}
+.ansi-red-intense-fg {
+  color: #B22B31;
+}
+.ansi-red-intense-bg {
+  background-color: #B22B31;
+}
+.ansi-green-fg {
+  color: #00A250;
+}
+.ansi-green-bg {
+  background-color: #00A250;
+}
+.ansi-green-intense-fg {
+  color: #007427;
+}
+.ansi-green-intense-bg {
+  background-color: #007427;
+}
+.ansi-yellow-fg {
+  color: #DDB62B;
+}
+.ansi-yellow-bg {
+  background-color: #DDB62B;
+}
+.ansi-yellow-intense-fg {
+  color: #B27D12;
+}
+.ansi-yellow-intense-bg {
+  background-color: #B27D12;
+}
+.ansi-blue-fg {
+  color: #208FFB;
+}
+.ansi-blue-bg {
+  background-color: #208FFB;
+}
+.ansi-blue-intense-fg {
+  color: #0065CA;
+}
+.ansi-blue-intense-bg {
+  background-color: #0065CA;
+}
+.ansi-magenta-fg {
+  color: #D160C4;
+}
+.ansi-magenta-bg {
+  background-color: #D160C4;
+}
+.ansi-magenta-intense-fg {
+  color: #A03196;
+}
+.ansi-magenta-intense-bg {
+  background-color: #A03196;
+}
+.ansi-cyan-fg {
+  color: #60C6C8;
+}
+.ansi-cyan-bg {
+  background-color: #60C6C8;
+}
+.ansi-cyan-intense-fg {
+  color: #258F8F;
+}
+.ansi-cyan-intense-bg {
+  background-color: #258F8F;
+}
+.ansi-white-fg {
+  color: #C5C1B4;
+}
+.ansi-white-bg {
+  background-color: #C5C1B4;
+}
+.ansi-white-intense-fg {
+  color: #A1A6B2;
+}
+.ansi-white-intense-bg {
+  background-color: #A1A6B2;
+}
+.ansi-default-inverse-fg {
+  color: #FFFFFF;
+}
+.ansi-default-inverse-bg {
+  background-color: #000000;
+}
+.ansi-bold {
+  font-weight: bold;
+}
+.ansi-underline {
+  text-decoration: underline;
+}
+/* The following styles are deprecated an will be removed in a future version */
+.ansibold {
+  font-weight: bold;
+}
+.ansi-inverse {
+  outline: 0.5px dotted;
+}
+/* use dark versions for foreground, to improve visibility */
+.ansiblack {
+  color: black;
+}
+.ansired {
+  color: darkred;
+}
+.ansigreen {
+  color: darkgreen;
+}
+.ansiyellow {
+  color: #c4a000;
+}
+.ansiblue {
+  color: darkblue;
+}
+.ansipurple {
+  color: darkviolet;
+}
+.ansicyan {
+  color: steelblue;
+}
+.ansigray {
+  color: gray;
+}
+/* and light for background, for the same reason */
+.ansibgblack {
+  background-color: black;
+}
+.ansibgred {
+  background-color: red;
+}
+.ansibggreen {
+  background-color: green;
+}
+.ansibgyellow {
+  background-color: yellow;
+}
+.ansibgblue {
+  background-color: blue;
+}
+.ansibgpurple {
+  background-color: magenta;
+}
+.ansibgcyan {
+  background-color: cyan;
+}
+.ansibggray {
+  background-color: gray;
+}
+div.cell {
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: vertical;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: vertical;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  border-radius: 2px;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  border-width: 1px;
+  border-style: solid;
+  border-color: transparent;
+  width: 100%;
+  padding: 5px;
+  /* This acts as a spacer between cells, that is outside the border */
+  margin: 0px;
+  outline: none;
+  position: relative;
+  overflow: visible;
+}
+div.cell:before {
+  position: absolute;
+  display: block;
+  top: -1px;
+  left: -1px;
+  width: 5px;
+  height: calc(100% +  2px);
+  content: '';
+  background: transparent;
+}
+div.cell.jupyter-soft-selected {
+  border-left-color: #E3F2FD;
+  border-left-width: 1px;
+  padding-left: 5px;
+  border-right-color: #E3F2FD;
+  border-right-width: 1px;
+  background: #E3F2FD;
+}
+@media print {
+  div.cell.jupyter-soft-selected {
+    border-color: transparent;
+  }
+}
+div.cell.selected,
+div.cell.selected.jupyter-soft-selected {
+  border-color: #ababab;
+}
+div.cell.selected:before,
+div.cell.selected.jupyter-soft-selected:before {
+  position: absolute;
+  display: block;
+  top: -1px;
+  left: -1px;
+  width: 5px;
+  height: calc(100% +  2px);
+  content: '';
+  background: #42A5F5;
+}
+@media print {
+  div.cell.selected,
+  div.cell.selected.jupyter-soft-selected {
+    border-color: transparent;
+  }
+}
+.edit_mode div.cell.selected {
+  border-color: #66BB6A;
+}
+.edit_mode div.cell.selected:before {
+  position: absolute;
+  display: block;
+  top: -1px;
+  left: -1px;
+  width: 5px;
+  height: calc(100% +  2px);
+  content: '';
+  background: #66BB6A;
+}
+@media print {
+  .edit_mode div.cell.selected {
+    border-color: transparent;
+  }
+}
+.prompt {
+  /* This needs to be wide enough for 3 digit prompt numbers: In[100]: */
+  min-width: 14ex;
+  /* This padding is tuned to match the padding on the CodeMirror editor. */
+  padding: 0.4em;
+  margin: 0px;
+  font-family: monospace;
+  text-align: right;
+  /* This has to match that of the the CodeMirror class line-height below */
+  line-height: 1.21429em;
+  /* Don't highlight prompt number selection */
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  /* Use default cursor */
+  cursor: default;
+}
+@media (max-width: 540px) {
+  .prompt {
+    text-align: left;
+  }
+}
+div.inner_cell {
+  min-width: 0;
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: vertical;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: vertical;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  /* Old browsers */
+  -webkit-box-flex: 1;
+  -moz-box-flex: 1;
+  box-flex: 1;
+  /* Modern browsers */
+  flex: 1;
+}
+/* input_area and input_prompt must match in top border and margin for alignment */
+div.input_area {
+  border: 1px solid #cfcfcf;
+  border-radius: 2px;
+  background: #f7f7f7;
+  line-height: 1.21429em;
+}
+/* This is needed so that empty prompt areas can collapse to zero height when there
+   is no content in the output_subarea and the prompt. The main purpose of this is
+   to make sure that empty JavaScript output_subareas have no height. */
+div.prompt:empty {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+div.unrecognized_cell {
+  padding: 5px 5px 5px 0px;
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: horizontal;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: horizontal;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: horizontal;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+}
+div.unrecognized_cell .inner_cell {
+  border-radius: 2px;
+  padding: 5px;
+  font-weight: bold;
+  color: red;
+  border: 1px solid #cfcfcf;
+  background: #eaeaea;
+}
+div.unrecognized_cell .inner_cell a {
+  color: inherit;
+  text-decoration: none;
+}
+div.unrecognized_cell .inner_cell a:hover {
+  color: inherit;
+  text-decoration: none;
+}
+@media (max-width: 540px) {
+  div.unrecognized_cell > div.prompt {
+    display: none;
+  }
+}
+div.code_cell {
+  /* avoid page breaking on code cells when printing */
+}
+@media print {
+  div.code_cell {
+    page-break-inside: avoid;
+  }
+}
+/* any special styling for code cells that are currently running goes here */
+div.input {
+  page-break-inside: avoid;
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: horizontal;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: horizontal;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: horizontal;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+}
+@media (max-width: 540px) {
+  div.input {
+    /* Old browsers */
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-box-align: stretch;
+    display: -moz-box;
+    -moz-box-orient: vertical;
+    -moz-box-align: stretch;
+    display: box;
+    box-orient: vertical;
+    box-align: stretch;
+    /* Modern browsers */
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+/* input_area and input_prompt must match in top border and margin for alignment */
+div.input_prompt {
+  color: #303F9F;
+  border-top: 1px solid transparent;
+}
+div.input_area > div.highlight {
+  margin: 0.4em;
+  border: none;
+  padding: 0px;
+  background-color: transparent;
+}
+div.input_area > div.highlight > pre {
+  margin: 0px;
+  border: none;
+  padding: 0px;
+  background-color: transparent;
+}
+/* The following gets added to the <head> if it is detected that the user has a
+ * monospace font with inconsistent normal/bold/italic height.  See
+ * notebookmain.js.  Such fonts will have keywords vertically offset with
+ * respect to the rest of the text.  The user should select a better font.
+ * See: https://github.com/ipython/ipython/issues/1503
+ *
+ * .CodeMirror span {
+ *      vertical-align: bottom;
+ * }
+ */
+.CodeMirror {
+  line-height: 1.21429em;
+  /* Changed from 1em to our global default */
+  font-size: 14px;
+  height: auto;
+  /* Changed to auto to autogrow */
+  background: none;
+  /* Changed from white to allow our bg to show through */
+}
+.CodeMirror-scroll {
+  /*  The CodeMirror docs are a bit fuzzy on if overflow-y should be hidden or visible.*/
+  /*  We have found that if it is visible, vertical scrollbars appear with font size changes.*/
+  overflow-y: hidden;
+  overflow-x: auto;
+}
+.CodeMirror-lines {
+  /* In CM2, this used to be 0.4em, but in CM3 it went to 4px. We need the em value because */
+  /* we have set a different line-height and want this to scale with that. */
+  /* Note that this should set vertical padding only, since CodeMirror assumes
+       that horizontal padding will be set on CodeMirror pre */
+  padding: 0.4em 0;
+}
+.CodeMirror-linenumber {
+  padding: 0 8px 0 4px;
+}
+.CodeMirror-gutters {
+  border-bottom-left-radius: 2px;
+  border-top-left-radius: 2px;
+}
+.CodeMirror pre {
+  /* In CM3 this went to 4px from 0 in CM2. This sets horizontal padding only,
+    use .CodeMirror-lines for vertical */
+  padding: 0 0.4em;
+  border: 0;
+  border-radius: 0;
+}
+.CodeMirror-cursor {
+  border-left: 1.4px solid black;
+}
+@media screen and (min-width: 2138px) and (max-width: 4319px) {
+  .CodeMirror-cursor {
+    border-left: 2px solid black;
+  }
+}
+@media screen and (min-width: 4320px) {
+  .CodeMirror-cursor {
+    border-left: 4px solid black;
+  }
+}
+/*
+
+Original style from softwaremaniacs.org (c) Ivan Sagalaev <Maniac@SoftwareManiacs.Org>
+Adapted from GitHub theme
+
+*/
+.highlight-base {
+  color: #000;
+}
+.highlight-variable {
+  color: #000;
+}
+.highlight-variable-2 {
+  color: #1a1a1a;
+}
+.highlight-variable-3 {
+  color: #333333;
+}
+.highlight-string {
+  color: #BA2121;
+}
+.highlight-comment {
+  color: #408080;
+  font-style: italic;
+}
+.highlight-number {
+  color: #080;
+}
+.highlight-atom {
+  color: #88F;
+}
+.highlight-keyword {
+  color: #008000;
+  font-weight: bold;
+}
+.highlight-builtin {
+  color: #008000;
+}
+.highlight-error {
+  color: #f00;
+}
+.highlight-operator {
+  color: #AA22FF;
+  font-weight: bold;
+}
+.highlight-meta {
+  color: #AA22FF;
+}
+/* previously not defined, copying from default codemirror */
+.highlight-def {
+  color: #00f;
+}
+.highlight-string-2 {
+  color: #f50;
+}
+.highlight-qualifier {
+  color: #555;
+}
+.highlight-bracket {
+  color: #997;
+}
+.highlight-tag {
+  color: #170;
+}
+.highlight-attribute {
+  color: #00c;
+}
+.highlight-header {
+  color: blue;
+}
+.highlight-quote {
+  color: #090;
+}
+.highlight-link {
+  color: #00c;
+}
+/* apply the same style to codemirror */
+.cm-s-ipython span.cm-keyword {
+  color: #008000;
+  font-weight: bold;
+}
+.cm-s-ipython span.cm-atom {
+  color: #88F;
+}
+.cm-s-ipython span.cm-number {
+  color: #080;
+}
+.cm-s-ipython span.cm-def {
+  color: #00f;
+}
+.cm-s-ipython span.cm-variable {
+  color: #000;
+}
+.cm-s-ipython span.cm-operator {
+  color: #AA22FF;
+  font-weight: bold;
+}
+.cm-s-ipython span.cm-variable-2 {
+  color: #1a1a1a;
+}
+.cm-s-ipython span.cm-variable-3 {
+  color: #333333;
+}
+.cm-s-ipython span.cm-comment {
+  color: #408080;
+  font-style: italic;
+}
+.cm-s-ipython span.cm-string {
+  color: #BA2121;
+}
+.cm-s-ipython span.cm-string-2 {
+  color: #f50;
+}
+.cm-s-ipython span.cm-meta {
+  color: #AA22FF;
+}
+.cm-s-ipython span.cm-qualifier {
+  color: #555;
+}
+.cm-s-ipython span.cm-builtin {
+  color: #008000;
+}
+.cm-s-ipython span.cm-bracket {
+  color: #997;
+}
+.cm-s-ipython span.cm-tag {
+  color: #170;
+}
+.cm-s-ipython span.cm-attribute {
+  color: #00c;
+}
+.cm-s-ipython span.cm-header {
+  color: blue;
+}
+.cm-s-ipython span.cm-quote {
+  color: #090;
+}
+.cm-s-ipython span.cm-link {
+  color: #00c;
+}
+.cm-s-ipython span.cm-error {
+  color: #f00;
+}
+.cm-s-ipython span.cm-tab {
+  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAMCAYAAAAkuj5RAAAAAXNSR0IArs4c6QAAAGFJREFUSMft1LsRQFAQheHPowAKoACx3IgEKtaEHujDjORSgWTH/ZOdnZOcM/sgk/kFFWY0qV8foQwS4MKBCS3qR6ixBJvElOobYAtivseIE120FaowJPN75GMu8j/LfMwNjh4HUpwg4LUAAAAASUVORK5CYII=);
+  background-position: right;
+  background-repeat: no-repeat;
+}
+div.output_wrapper {
+  /* this position must be relative to enable descendents to be absolute within it */
+  position: relative;
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: vertical;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: vertical;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  z-index: 1;
+}
+/* class for the output area when it should be height-limited */
+div.output_scroll {
+  /* ideally, this would be max-height, but FF barfs all over that */
+  height: 24em;
+  /* FF needs this *and the wrapper* to specify full width, or it will shrinkwrap */
+  width: 100%;
+  overflow: auto;
+  border-radius: 2px;
+  -webkit-box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.8);
+  box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.8);
+  display: block;
+}
+/* output div while it is collapsed */
+div.output_collapsed {
+  margin: 0px;
+  padding: 0px;
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: vertical;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: vertical;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+div.out_prompt_overlay {
+  height: 100%;
+  padding: 0px 0.4em;
+  position: absolute;
+  border-radius: 2px;
+}
+div.out_prompt_overlay:hover {
+  /* use inner shadow to get border that is computed the same on WebKit/FF */
+  -webkit-box-shadow: inset 0 0 1px #000;
+  box-shadow: inset 0 0 1px #000;
+  background: rgba(240, 240, 240, 0.5);
+}
+div.output_prompt {
+  color: #D84315;
+}
+/* This class is the outer container of all output sections. */
+div.output_area {
+  padding: 0px;
+  page-break-inside: avoid;
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: horizontal;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: horizontal;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: horizontal;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+}
+div.output_area .MathJax_Display {
+  text-align: left !important;
+}
+div.output_area 
+div.output_area 
+div.output_area img,
+div.output_area svg {
+  max-width: 100%;
+  height: auto;
+}
+div.output_area img.unconfined,
+div.output_area svg.unconfined {
+  max-width: none;
+}
+div.output_area .mglyph > img {
+  max-width: none;
+}
+/* This is needed to protect the pre formating from global settings such
+   as that of bootstrap */
+.output {
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: vertical;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: vertical;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+@media (max-width: 540px) {
+  div.output_area {
+    /* Old browsers */
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-box-align: stretch;
+    display: -moz-box;
+    -moz-box-orient: vertical;
+    -moz-box-align: stretch;
+    display: box;
+    box-orient: vertical;
+    box-align: stretch;
+    /* Modern browsers */
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+div.output_area pre {
+  margin: 0;
+  padding: 1px 0 1px 0;
+  border: 0;
+  vertical-align: baseline;
+  color: black;
+  background-color: transparent;
+  border-radius: 0;
+}
+/* This class is for the output subarea inside the output_area and after
+   the prompt div. */
+div.output_subarea {
+  overflow-x: auto;
+  padding: 0.4em;
+  /* Old browsers */
+  -webkit-box-flex: 1;
+  -moz-box-flex: 1;
+  box-flex: 1;
+  /* Modern browsers */
+  flex: 1;
+  max-width: calc(100% - 14ex);
+}
+div.output_scroll div.output_subarea {
+  overflow-x: visible;
+}
+/* The rest of the output_* classes are for special styling of the different
+   output types */
+/* all text output has this class: */
+div.output_text {
+  text-align: left;
+  color: #000;
+  /* This has to match that of the the CodeMirror class line-height below */
+  line-height: 1.21429em;
+}
+/* stdout/stderr are 'text' as well as 'stream', but execute_result/error are *not* streams */
+div.output_stderr {
+  background: #fdd;
+  /* very light red background for stderr */
+}
+div.output_latex {
+  text-align: left;
+}
+/* Empty output_javascript divs should have no height */
+div.output_javascript:empty {
+  padding: 0;
+}
+.js-error {
+  color: darkred;
+}
+/* raw_input styles */
+div.raw_input_container {
+  line-height: 1.21429em;
+  padding-top: 5px;
+}
+pre.raw_input_prompt {
+  /* nothing needed here. */
+}
+input.raw_input {
+  font-family: monospace;
+  font-size: inherit;
+  color: inherit;
+  width: auto;
+  /* make sure input baseline aligns with prompt */
+  vertical-align: baseline;
+  /* padding + margin = 0.5em between prompt and cursor */
+  padding: 0em 0.25em;
+  margin: 0em 0.25em;
+}
+input.raw_input:focus {
+  box-shadow: none;
+}
+p.p-space {
+  margin-bottom: 10px;
+}
+div.output_unrecognized {
+  padding: 5px;
+  font-weight: bold;
+  color: red;
+}
+div.output_unrecognized a {
+  color: inherit;
+  text-decoration: none;
+}
+div.output_unrecognized a:hover {
+  color: inherit;
+  text-decoration: none;
+}
+.rendered_html {
+  color: #000;
+  /* any extras will just be numbers: */
+}
+
+
+
+.rendered_html :link {
+  text-decoration: underline;
+}
+.rendered_html :visited {
+  text-decoration: underline;
+}
+
+
+
+
+
+
+.rendered_html h1:first-child {
+  margin-top: 0.538em;
+}
+.rendered_html h2:first-child {
+  margin-top: 0.636em;
+}
+.rendered_html h3:first-child {
+  margin-top: 0.777em;
+}
+.rendered_html h4:first-child {
+  margin-top: 1em;
+}
+.rendered_html h5:first-child {
+  margin-top: 1em;
+}
+.rendered_html h6:first-child {
+  margin-top: 1em;
+}
+.rendered_html ul:not(.list-inline),
+.rendered_html ol:not(.list-inline) {
+  padding-left: 2em;
+}
+
+
+
+
+
+
+
+
+.rendered_html * + ul {
+  margin-top: 1em;
+}
+.rendered_html * + ol {
+  margin-top: 1em;
+}
+
+
+
+
+
+.rendered_html pre,
+
+
+
+
+.rendered_html tr,
+.rendered_html th,
+
+
+.rendered_html tbody tr:nth-child(odd) {
+  background: #f5f5f5;
+}
+.rendered_html tbody tr:hover {
+  background: rgba(66, 165, 245, 0.2);
+}
+.rendered_html * + table {
+  margin-top: 1em;
+}
+
+.rendered_html * + p {
+  margin-top: 1em;
+}
+
+.rendered_html * + img {
+  margin-top: 1em;
+}
+.rendered_html img,
+
+.rendered_html img.unconfined,
+
+
+.rendered_html * + .alert {
+  margin-top: 1em;
+}
+[dir="rtl"] 
+div.text_cell {
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: horizontal;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: horizontal;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: horizontal;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+}
+@media (max-width: 540px) {
+  div.text_cell > div.prompt {
+    display: none;
+  }
+}
+div.text_cell_render {
+  /*font-family: "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;*/
+  outline: none;
+  resize: none;
+  width: inherit;
+  border-style: none;
+  padding: 0.5em 0.5em 0.5em 0.4em;
+  color: #000;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+}
+a.anchor-link:link {
+  text-decoration: none;
+  padding: 0px 20px;
+  visibility: hidden;
+}
+h1:hover .anchor-link,
+h2:hover .anchor-link,
+h3:hover .anchor-link,
+h4:hover .anchor-link,
+h5:hover .anchor-link,
+h6:hover .anchor-link {
+  visibility: visible;
+}
+.text_cell.rendered .input_area {
+  display: none;
+}
+.text_cell.rendered 
+.text_cell.rendered .rendered_html tr,
+.text_cell.rendered .rendered_html th,
+.text_cell.rendered 
+.text_cell.unrendered .text_cell_render {
+  display: none;
+}
+.text_cell .dropzone .input_area {
+  border: 2px dashed #bababa;
+  margin: -1px;
+}
+.cm-header-1,
+.cm-header-2,
+.cm-header-3,
+.cm-header-4,
+.cm-header-5,
+.cm-header-6 {
+  font-weight: bold;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+.cm-header-1 {
+  font-size: 185.7%;
+}
+.cm-header-2 {
+  font-size: 157.1%;
+}
+.cm-header-3 {
+  font-size: 128.6%;
+}
+.cm-header-4 {
+  font-size: 110%;
+}
+.cm-header-5 {
+  font-size: 100%;
+  font-style: italic;
+}
+.cm-header-6 {
+  font-size: 100%;
+  font-style: italic;
+}
+</style>
+<style type="text/css">pre { line-height: 125%; }
+td.linenos .normal { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+span.linenos { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+td.linenos .special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+ .highlight pre  .hll { background-color: #ffffcc }
+ .highlight pre  { background: #f8f8f8; }
+ .highlight pre  .c { color: #3D7B7B; font-style: italic } /* Comment */
+ .highlight pre  .err { border: 1px solid #FF0000 } /* Error */
+ .highlight pre  .k { color: #008000; font-weight: bold } /* Keyword */
+ .highlight pre  .o { color: #666666 } /* Operator */
+ .highlight pre  .ch { color: #3D7B7B; font-style: italic } /* Comment.Hashbang */
+ .highlight pre  .cm { color: #3D7B7B; font-style: italic } /* Comment.Multiline */
+ .highlight pre  .cp { color: #9C6500 } /* Comment.Preproc */
+ .highlight pre  .cpf { color: #3D7B7B; font-style: italic } /* Comment.PreprocFile */
+ .highlight pre  .c1 { color: #3D7B7B; font-style: italic } /* Comment.Single */
+ .highlight pre  .cs { color: #3D7B7B; font-style: italic } /* Comment.Special */
+ .highlight pre  .gd { color: #A00000 } /* Generic.Deleted */
+ .highlight pre  .ge { font-style: italic } /* Generic.Emph */
+ .highlight pre  .gr { color: #E40000 } /* Generic.Error */
+ .highlight pre  .gh { color: #000080; font-weight: bold } /* Generic.Heading */
+ .highlight pre  .gi { color: #008400 } /* Generic.Inserted */
+ .highlight pre  .go { color: #717171 } /* Generic.Output */
+ .highlight pre  .gp { color: #000080; font-weight: bold } /* Generic.Prompt */
+ .highlight pre  .gs { font-weight: bold } /* Generic.Strong */
+ .highlight pre  .gu { color: #800080; font-weight: bold } /* Generic.Subheading */
+ .highlight pre  .gt { color: #0044DD } /* Generic.Traceback */
+ .highlight pre  .kc { color: #008000; font-weight: bold } /* Keyword.Constant */
+ .highlight pre  .kd { color: #008000; font-weight: bold } /* Keyword.Declaration */
+ .highlight pre  .kn { color: #008000; font-weight: bold } /* Keyword.Namespace */
+ .highlight pre  .kp { color: #008000 } /* Keyword.Pseudo */
+ .highlight pre  .kr { color: #008000; font-weight: bold } /* Keyword.Reserved */
+ .highlight pre  .kt { color: #B00040 } /* Keyword.Type */
+ .highlight pre  .m { color: #666666 } /* Literal.Number */
+ .highlight pre  .s { color: #BA2121 } /* Literal.String */
+ .highlight pre  .na { color: #687822 } /* Name.Attribute */
+ .highlight pre  .nb { color: #008000 } /* Name.Builtin */
+ .highlight pre  .nc { color: #0000FF; font-weight: bold } /* Name.Class */
+ .highlight pre  .no { color: #880000 } /* Name.Constant */
+ .highlight pre  .nd { color: #AA22FF } /* Name.Decorator */
+ .highlight pre  .ni { color: #717171; font-weight: bold } /* Name.Entity */
+ .highlight pre  .ne { color: #CB3F38; font-weight: bold } /* Name.Exception */
+ .highlight pre  .nf { color: #0000FF } /* Name.Function */
+ .highlight pre  .nl { color: #767600 } /* Name.Label */
+ .highlight pre  .nn { color: #0000FF; font-weight: bold } /* Name.Namespace */
+ .highlight pre  .nt { color: #008000; font-weight: bold } /* Name.Tag */
+ .highlight pre  .nv { color: #19177C } /* Name.Variable */
+ .highlight pre  .ow { color: #AA22FF; font-weight: bold } /* Operator.Word */
+ .highlight pre  .w { color: #bbbbbb } /* Text.Whitespace */
+ .highlight pre  .mb { color: #666666 } /* Literal.Number.Bin */
+ .highlight pre  .mf { color: #666666 } /* Literal.Number.Float */
+ .highlight pre  .mh { color: #666666 } /* Literal.Number.Hex */
+ .highlight pre  .mi { color: #666666 } /* Literal.Number.Integer */
+ .highlight pre  .mo { color: #666666 } /* Literal.Number.Oct */
+ .highlight pre  .sa { color: #BA2121 } /* Literal.String.Affix */
+ .highlight pre  .sb { color: #BA2121 } /* Literal.String.Backtick */
+ .highlight pre  .sc { color: #BA2121 } /* Literal.String.Char */
+ .highlight pre  .dl { color: #BA2121 } /* Literal.String.Delimiter */
+ .highlight pre  .sd { color: #BA2121; font-style: italic } /* Literal.String.Doc */
+ .highlight pre  .s2 { color: #BA2121 } /* Literal.String.Double */
+ .highlight pre  .se { color: #AA5D1F; font-weight: bold } /* Literal.String.Escape */
+ .highlight pre  .sh { color: #BA2121 } /* Literal.String.Heredoc */
+ .highlight pre  .si { color: #A45A77; font-weight: bold } /* Literal.String.Interpol */
+ .highlight pre  .sx { color: #008000 } /* Literal.String.Other */
+ .highlight pre  .sr { color: #A45A77 } /* Literal.String.Regex */
+ .highlight pre  .s1 { color: #BA2121 } /* Literal.String.Single */
+ .highlight pre  .ss { color: #19177C } /* Literal.String.Symbol */
+ .highlight pre  .bp { color: #008000 } /* Name.Builtin.Pseudo */
+ .highlight pre  .fm { color: #0000FF } /* Name.Function.Magic */
+ .highlight pre  .vc { color: #19177C } /* Name.Variable.Class */
+ .highlight pre  .vg { color: #19177C } /* Name.Variable.Global */
+ .highlight pre  .vi { color: #19177C } /* Name.Variable.Instance */
+ .highlight pre  .vm { color: #19177C } /* Name.Variable.Magic */
+ .highlight pre  .il { color: #666666 } /* Literal.Number.Integer.Long */</style><body><div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><strong>Things on this page are fragmentary and immature notes/thoughts of the author. Please read with your own judgement!</strong></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Tips-and-Traps">Tips and Traps<a class="anchor-link" href="#Tips-and-Traps">&#182;</a></h2><ol>
+<li><code>polars.DataFrame.unique</code> and <code>polars.Series.unique</code>
+ do not maintain the original order by default.
+ To maintain the original order,
+ pass the option <code>maintain_order=True</code>.</li>
+</ol>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Polars"><a href="http://www.legendu.net/misc/blog/tips-on-polars">Polars</a><a class="anchor-link" href="#Polars">&#182;</a></h2><p>Polars is a blazingly fast DataFrames library implemented in Rust using Apache Arrow as memory model.</p>
+<ol>
+<li><p>It is the best replacement of pandas for small data at this time.</p>
+</li>
+<li><p>Polars support multithreading and lazy computation.</p>
+</li>
+<li><p>Polars CANNOT handle data larger than memory at this time 
+ (even though this might change in future).</p>
+</li>
+</ol>
+<h2 id="Comparison-with-pandas-DataFrame">Comparison with pandas DataFrame<a class="anchor-link" href="#Comparison-with-pandas-DataFrame">&#182;</a></h2><ol>
+<li><p>Polars intentionally leaves out the concept of (row) index.</p>
+</li>
+<li><p>There are no methods such as <code>loc</code> and <code>iloc</code> in Polars.
+ You can use <code>df.get_column</code> / <code>df.[col]</code>, <code>df.get_columns</code> / <code>df.[[col1, col2]]</code> to access columns.</p>
+</li>
+<li><p>Similar to pandas DataFrame,
+ chaining access works but chaining assignment doesn't work.
+ To assign value of an element,
+ use <code>df[row_index, col_name] = val</code> instead.
+ However,
+ notice that this is inefficient as it updates the whole column under the hood.
+ If you have to update values of a column in a Polars DataFrame,
+ do NOT loop through each cell to update it. 
+ Instead, 
+ create a Series which contains updated values and then update the column only once.
+ For more discussions,
+ please refer to
+ <a href="https://github.com/pola-rs/polars/issues/5973">Efficient way to update a single cell of a Polars DataFrame?</a>
+ .</p>
+</li>
+<li><p>Polars DataFrame provides APIs <code>DataFrame.from_pandas</code> and <code>DataFrame.to_pandas</code> 
+ to convert between Polars/pandas DataFrames.</p>
+</li>
+<li><p>Polars' APIs for parsing CSV files is not as flexible as pandas's. 
+ Lucky that we can parse CSV files using pandas 
+ and then convert pandas DataFrmaes into Polars DataFrames.</p>
+</li>
+</ol>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[1]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span>pip3<span class="w"> </span>install<span class="w"> </span>--user<span class="w"> </span>polars
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Collecting polars
+  Downloading polars-0.16.2-cp37-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (15.2 MB)
+     <span class="ansi-black-intense-fg">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-green-fg">15.2/15.2 MB</span> <span class="ansi-red-fg">28.7 MB/s</span> eta <span class="ansi-cyan-fg">0:00:00</span>00:0100:01
+Installing collected packages: polars
+Successfully installed polars-0.16.2
+
+<span class="ansi-bold">[</span><span class="ansi-blue-fg">notice</span><span class="ansi-bold">]</span> A new release of pip available: <span class="ansi-red-fg">22.3.1</span> -&gt; <span class="ansi-green-fg">23.0</span>
+<span class="ansi-bold">[</span><span class="ansi-blue-fg">notice</span><span class="ansi-bold">]</span> To update, run: <span class="ansi-green-fg">python3 -m pip install --upgrade pip</span>
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[2]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">itertools</span> <span class="k">as</span> <span class="nn">it</span>
+<span class="kn">import</span> <span class="nn">polars</span> <span class="k">as</span> <span class="nn">pl</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Series">Series<a class="anchor-link" href="#Series">&#182;</a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[38]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="p">[</span><span class="n">m</span> <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="nb">dir</span><span class="p">(</span><span class="n">pl</span><span class="o">.</span><span class="n">Series</span><span class="p">)</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">m</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;_&quot;</span><span class="p">)]</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[38]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>[&#39;abs&#39;,
+ &#39;alias&#39;,
+ &#39;all&#39;,
+ &#39;any&#39;,
+ &#39;append&#39;,
+ &#39;apply&#39;,
+ &#39;arccos&#39;,
+ &#39;arccosh&#39;,
+ &#39;arcsin&#39;,
+ &#39;arcsinh&#39;,
+ &#39;arctan&#39;,
+ &#39;arctanh&#39;,
+ &#39;arg_max&#39;,
+ &#39;arg_min&#39;,
+ &#39;arg_sort&#39;,
+ &#39;arg_true&#39;,
+ &#39;arg_unique&#39;,
+ &#39;argsort&#39;,
+ &#39;arr&#39;,
+ &#39;bin&#39;,
+ &#39;cast&#39;,
+ &#39;cat&#39;,
+ &#39;ceil&#39;,
+ &#39;chunk_lengths&#39;,
+ &#39;cleared&#39;,
+ &#39;clip&#39;,
+ &#39;clip_max&#39;,
+ &#39;clip_min&#39;,
+ &#39;clone&#39;,
+ &#39;cos&#39;,
+ &#39;cosh&#39;,
+ &#39;cummax&#39;,
+ &#39;cummin&#39;,
+ &#39;cumprod&#39;,
+ &#39;cumsum&#39;,
+ &#39;cumulative_eval&#39;,
+ &#39;describe&#39;,
+ &#39;diff&#39;,
+ &#39;dot&#39;,
+ &#39;drop_nans&#39;,
+ &#39;drop_nulls&#39;,
+ &#39;dt&#39;,
+ &#39;dtype&#39;,
+ &#39;entropy&#39;,
+ &#39;estimated_size&#39;,
+ &#39;ewm_mean&#39;,
+ &#39;ewm_std&#39;,
+ &#39;ewm_var&#39;,
+ &#39;exp&#39;,
+ &#39;explode&#39;,
+ &#39;extend_constant&#39;,
+ &#39;fill_nan&#39;,
+ &#39;fill_null&#39;,
+ &#39;filter&#39;,
+ &#39;flags&#39;,
+ &#39;floor&#39;,
+ &#39;get_chunks&#39;,
+ &#39;has_validity&#39;,
+ &#39;hash&#39;,
+ &#39;head&#39;,
+ &#39;inner_dtype&#39;,
+ &#39;interpolate&#39;,
+ &#39;is_boolean&#39;,
+ &#39;is_datelike&#39;,
+ &#39;is_duplicated&#39;,
+ &#39;is_empty&#39;,
+ &#39;is_finite&#39;,
+ &#39;is_first&#39;,
+ &#39;is_float&#39;,
+ &#39;is_in&#39;,
+ &#39;is_infinite&#39;,
+ &#39;is_nan&#39;,
+ &#39;is_not_nan&#39;,
+ &#39;is_not_null&#39;,
+ &#39;is_null&#39;,
+ &#39;is_numeric&#39;,
+ &#39;is_sorted&#39;,
+ &#39;is_unique&#39;,
+ &#39;is_utf8&#39;,
+ &#39;item&#39;,
+ &#39;kurtosis&#39;,
+ &#39;len&#39;,
+ &#39;limit&#39;,
+ &#39;log&#39;,
+ &#39;log10&#39;,
+ &#39;max&#39;,
+ &#39;mean&#39;,
+ &#39;median&#39;,
+ &#39;min&#39;,
+ &#39;mode&#39;,
+ &#39;n_chunks&#39;,
+ &#39;n_unique&#39;,
+ &#39;name&#39;,
+ &#39;nan_max&#39;,
+ &#39;nan_min&#39;,
+ &#39;new_from_index&#39;,
+ &#39;null_count&#39;,
+ &#39;pct_change&#39;,
+ &#39;peak_max&#39;,
+ &#39;peak_min&#39;,
+ &#39;product&#39;,
+ &#39;quantile&#39;,
+ &#39;rank&#39;,
+ &#39;rechunk&#39;,
+ &#39;reinterpret&#39;,
+ &#39;rename&#39;,
+ &#39;reshape&#39;,
+ &#39;reverse&#39;,
+ &#39;rolling_apply&#39;,
+ &#39;rolling_max&#39;,
+ &#39;rolling_mean&#39;,
+ &#39;rolling_median&#39;,
+ &#39;rolling_min&#39;,
+ &#39;rolling_quantile&#39;,
+ &#39;rolling_skew&#39;,
+ &#39;rolling_std&#39;,
+ &#39;rolling_sum&#39;,
+ &#39;rolling_var&#39;,
+ &#39;round&#39;,
+ &#39;sample&#39;,
+ &#39;search_sorted&#39;,
+ &#39;series_equal&#39;,
+ &#39;set&#39;,
+ &#39;set_at_idx&#39;,
+ &#39;set_sorted&#39;,
+ &#39;shape&#39;,
+ &#39;shift&#39;,
+ &#39;shift_and_fill&#39;,
+ &#39;shrink_dtype&#39;,
+ &#39;shrink_to_fit&#39;,
+ &#39;shuffle&#39;,
+ &#39;sign&#39;,
+ &#39;sin&#39;,
+ &#39;sinh&#39;,
+ &#39;skew&#39;,
+ &#39;slice&#39;,
+ &#39;sort&#39;,
+ &#39;sqrt&#39;,
+ &#39;std&#39;,
+ &#39;str&#39;,
+ &#39;struct&#39;,
+ &#39;sum&#39;,
+ &#39;tail&#39;,
+ &#39;take&#39;,
+ &#39;take_every&#39;,
+ &#39;tan&#39;,
+ &#39;tanh&#39;,
+ &#39;time_unit&#39;,
+ &#39;to_arrow&#39;,
+ &#39;to_dummies&#39;,
+ &#39;to_frame&#39;,
+ &#39;to_list&#39;,
+ &#39;to_numpy&#39;,
+ &#39;to_pandas&#39;,
+ &#39;to_physical&#39;,
+ &#39;top_k&#39;,
+ &#39;unique&#39;,
+ &#39;unique_counts&#39;,
+ &#39;value_counts&#39;,
+ &#39;var&#39;,
+ &#39;view&#39;,
+ &#39;zip_with&#39;]</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[36]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">s</span> <span class="o">=</span> <span class="n">pl</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
+<span class="n">s</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[36]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+
+    .dataframe td {
+        white-space: pre;
+    }
+
+    .dataframe td {
+        padding-top: 0;
+    }
+
+    .dataframe td {
+        padding-bottom: 0;
+    }
+
+    .dataframe td {
+        line-height: 95%;
+    }
+</style>
+<table border="1" class="dataframe">
+<small>shape: (3,)</small>
+<thead>
+<tr>
+<th>
+
+</th>
+</tr>
+<tr>
+<td>
+i64
+</td>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+1
+</td>
+</tr>
+<tr>
+<td>
+2
+</td>
+</tr>
+<tr>
+<td>
+3
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[37]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">s</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">s</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[37]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+
+    .dataframe td {
+        white-space: pre;
+    }
+
+    .dataframe td {
+        padding-top: 0;
+    }
+
+    .dataframe td {
+        padding-bottom: 0;
+    }
+
+    .dataframe td {
+        line-height: 95%;
+    }
+</style>
+<table border="1" class="dataframe">
+<small>shape: (3,)</small>
+<thead>
+<tr>
+<th>
+
+</th>
+</tr>
+<tr>
+<td>
+i64
+</td>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+100
+</td>
+</tr>
+<tr>
+<td>
+2
+</td>
+</tr>
+<tr>
+<td>
+3
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="DataFrame">DataFrame<a class="anchor-link" href="#DataFrame">&#182;</a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[25]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="p">[</span><span class="n">m</span> <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="nb">dir</span><span class="p">(</span><span class="n">pl</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">)</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">m</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;_&quot;</span><span class="p">)]</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[25]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>[&#39;apply&#39;,
+ &#39;cleared&#39;,
+ &#39;clone&#39;,
+ &#39;columns&#39;,
+ &#39;describe&#39;,
+ &#39;drop&#39;,
+ &#39;drop_in_place&#39;,
+ &#39;drop_nulls&#39;,
+ &#39;dtypes&#39;,
+ &#39;estimated_size&#39;,
+ &#39;explode&#39;,
+ &#39;extend&#39;,
+ &#39;fill_nan&#39;,
+ &#39;fill_null&#39;,
+ &#39;filter&#39;,
+ &#39;find_idx_by_name&#39;,
+ &#39;fold&#39;,
+ &#39;frame_equal&#39;,
+ &#39;get_column&#39;,
+ &#39;get_columns&#39;,
+ &#39;glimpse&#39;,
+ &#39;groupby&#39;,
+ &#39;groupby_dynamic&#39;,
+ &#39;groupby_rolling&#39;,
+ &#39;hash_rows&#39;,
+ &#39;head&#39;,
+ &#39;height&#39;,
+ &#39;hstack&#39;,
+ &#39;insert_at_idx&#39;,
+ &#39;interpolate&#39;,
+ &#39;is_duplicated&#39;,
+ &#39;is_empty&#39;,
+ &#39;is_unique&#39;,
+ &#39;item&#39;,
+ &#39;iterrows&#39;,
+ &#39;join&#39;,
+ &#39;join_asof&#39;,
+ &#39;lazy&#39;,
+ &#39;limit&#39;,
+ &#39;max&#39;,
+ &#39;mean&#39;,
+ &#39;median&#39;,
+ &#39;melt&#39;,
+ &#39;merge_sorted&#39;,
+ &#39;min&#39;,
+ &#39;n_chunks&#39;,
+ &#39;n_unique&#39;,
+ &#39;null_count&#39;,
+ &#39;partition_by&#39;,
+ &#39;pearson_corr&#39;,
+ &#39;pipe&#39;,
+ &#39;pivot&#39;,
+ &#39;product&#39;,
+ &#39;quantile&#39;,
+ &#39;rechunk&#39;,
+ &#39;rename&#39;,
+ &#39;replace&#39;,
+ &#39;replace_at_idx&#39;,
+ &#39;reverse&#39;,
+ &#39;row&#39;,
+ &#39;rows&#39;,
+ &#39;sample&#39;,
+ &#39;schema&#39;,
+ &#39;select&#39;,
+ &#39;shape&#39;,
+ &#39;shift&#39;,
+ &#39;shift_and_fill&#39;,
+ &#39;shrink_to_fit&#39;,
+ &#39;slice&#39;,
+ &#39;sort&#39;,
+ &#39;std&#39;,
+ &#39;sum&#39;,
+ &#39;tail&#39;,
+ &#39;take_every&#39;,
+ &#39;to_arrow&#39;,
+ &#39;to_dict&#39;,
+ &#39;to_dicts&#39;,
+ &#39;to_dummies&#39;,
+ &#39;to_numpy&#39;,
+ &#39;to_pandas&#39;,
+ &#39;to_series&#39;,
+ &#39;to_struct&#39;,
+ &#39;transpose&#39;,
+ &#39;unique&#39;,
+ &#39;unnest&#39;,
+ &#39;unstack&#39;,
+ &#39;upsample&#39;,
+ &#39;var&#39;,
+ &#39;vstack&#39;,
+ &#39;width&#39;,
+ &#39;with_column&#39;,
+ &#39;with_columns&#39;,
+ &#39;with_row_count&#39;,
+ &#39;write_avro&#39;,
+ &#39;write_csv&#39;,
+ &#39;write_ipc&#39;,
+ &#39;write_json&#39;,
+ &#39;write_ndjson&#39;,
+ &#39;write_parquet&#39;]</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[4]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pl</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;https://j.mp/iriscsv&quot;</span><span class="p">)</span>
+<span class="n">df</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[4]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+
+    .dataframe td {
+        white-space: pre;
+    }
+
+    .dataframe td {
+        padding-top: 0;
+    }
+
+    .dataframe td {
+        padding-bottom: 0;
+    }
+
+    .dataframe td {
+        line-height: 95%;
+    }
+</style>
+<table border="1" class="dataframe">
+<small>shape: (150, 5)</small>
+<thead>
+<tr>
+<th>
+sepal_length
+</th>
+<th>
+sepal_width
+</th>
+<th>
+petal_length
+</th>
+<th>
+petal_width
+</th>
+<th>
+species
+</th>
+</tr>
+<tr>
+<td>
+f64
+</td>
+<td>
+f64
+</td>
+<td>
+f64
+</td>
+<td>
+f64
+</td>
+<td>
+str
+</td>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+5.1
+</td>
+<td>
+3.5
+</td>
+<td>
+1.4
+</td>
+<td>
+0.2
+</td>
+<td>
+&quot;setosa&quot;
+</td>
+</tr>
+<tr>
+<td>
+4.9
+</td>
+<td>
+3.0
+</td>
+<td>
+1.4
+</td>
+<td>
+0.2
+</td>
+<td>
+&quot;setosa&quot;
+</td>
+</tr>
+<tr>
+<td>
+4.7
+</td>
+<td>
+3.2
+</td>
+<td>
+1.3
+</td>
+<td>
+0.2
+</td>
+<td>
+&quot;setosa&quot;
+</td>
+</tr>
+<tr>
+<td>
+4.6
+</td>
+<td>
+3.1
+</td>
+<td>
+1.5
+</td>
+<td>
+0.2
+</td>
+<td>
+&quot;setosa&quot;
+</td>
+</tr>
+<tr>
+<td>
+5.0
+</td>
+<td>
+3.6
+</td>
+<td>
+1.4
+</td>
+<td>
+0.2
+</td>
+<td>
+&quot;setosa&quot;
+</td>
+</tr>
+<tr>
+<td>
+5.4
+</td>
+<td>
+3.9
+</td>
+<td>
+1.7
+</td>
+<td>
+0.4
+</td>
+<td>
+&quot;setosa&quot;
+</td>
+</tr>
+<tr>
+<td>
+4.6
+</td>
+<td>
+3.4
+</td>
+<td>
+1.4
+</td>
+<td>
+0.3
+</td>
+<td>
+&quot;setosa&quot;
+</td>
+</tr>
+<tr>
+<td>
+5.0
+</td>
+<td>
+3.4
+</td>
+<td>
+1.5
+</td>
+<td>
+0.2
+</td>
+<td>
+&quot;setosa&quot;
+</td>
+</tr>
+<tr>
+<td>
+4.4
+</td>
+<td>
+2.9
+</td>
+<td>
+1.4
+</td>
+<td>
+0.2
+</td>
+<td>
+&quot;setosa&quot;
+</td>
+</tr>
+<tr>
+<td>
+4.9
+</td>
+<td>
+3.1
+</td>
+<td>
+1.5
+</td>
+<td>
+0.1
+</td>
+<td>
+&quot;setosa&quot;
+</td>
+</tr>
+<tr>
+<td>
+5.4
+</td>
+<td>
+3.7
+</td>
+<td>
+1.5
+</td>
+<td>
+0.2
+</td>
+<td>
+&quot;setosa&quot;
+</td>
+</tr>
+<tr>
+<td>
+4.8
+</td>
+<td>
+3.4
+</td>
+<td>
+1.6
+</td>
+<td>
+0.2
+</td>
+<td>
+&quot;setosa&quot;
+</td>
+</tr>
+<tr>
+<td>
+...
+</td>
+<td>
+...
+</td>
+<td>
+...
+</td>
+<td>
+...
+</td>
+<td>
+...
+</td>
+</tr>
+<tr>
+<td>
+6.0
+</td>
+<td>
+3.0
+</td>
+<td>
+4.8
+</td>
+<td>
+1.8
+</td>
+<td>
+&quot;virginica&quot;
+</td>
+</tr>
+<tr>
+<td>
+6.9
+</td>
+<td>
+3.1
+</td>
+<td>
+5.4
+</td>
+<td>
+2.1
+</td>
+<td>
+&quot;virginica&quot;
+</td>
+</tr>
+<tr>
+<td>
+6.7
+</td>
+<td>
+3.1
+</td>
+<td>
+5.6
+</td>
+<td>
+2.4
+</td>
+<td>
+&quot;virginica&quot;
+</td>
+</tr>
+<tr>
+<td>
+6.9
+</td>
+<td>
+3.1
+</td>
+<td>
+5.1
+</td>
+<td>
+2.3
+</td>
+<td>
+&quot;virginica&quot;
+</td>
+</tr>
+<tr>
+<td>
+5.8
+</td>
+<td>
+2.7
+</td>
+<td>
+5.1
+</td>
+<td>
+1.9
+</td>
+<td>
+&quot;virginica&quot;
+</td>
+</tr>
+<tr>
+<td>
+6.8
+</td>
+<td>
+3.2
+</td>
+<td>
+5.9
+</td>
+<td>
+2.3
+</td>
+<td>
+&quot;virginica&quot;
+</td>
+</tr>
+<tr>
+<td>
+6.7
+</td>
+<td>
+3.3
+</td>
+<td>
+5.7
+</td>
+<td>
+2.5
+</td>
+<td>
+&quot;virginica&quot;
+</td>
+</tr>
+<tr>
+<td>
+6.7
+</td>
+<td>
+3.0
+</td>
+<td>
+5.2
+</td>
+<td>
+2.3
+</td>
+<td>
+&quot;virginica&quot;
+</td>
+</tr>
+<tr>
+<td>
+6.3
+</td>
+<td>
+2.5
+</td>
+<td>
+5.0
+</td>
+<td>
+1.9
+</td>
+<td>
+&quot;virginica&quot;
+</td>
+</tr>
+<tr>
+<td>
+6.5
+</td>
+<td>
+3.0
+</td>
+<td>
+5.2
+</td>
+<td>
+2.0
+</td>
+<td>
+&quot;virginica&quot;
+</td>
+</tr>
+<tr>
+<td>
+6.2
+</td>
+<td>
+3.4
+</td>
+<td>
+5.4
+</td>
+<td>
+2.3
+</td>
+<td>
+&quot;virginica&quot;
+</td>
+</tr>
+<tr>
+<td>
+5.9
+</td>
+<td>
+3.0
+</td>
+<td>
+5.1
+</td>
+<td>
+1.8
+</td>
+<td>
+&quot;virginica&quot;
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[32]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;sepal_length&quot;</span><span class="p">]</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[32]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+
+    .dataframe td {
+        white-space: pre;
+    }
+
+    .dataframe td {
+        padding-top: 0;
+    }
+
+    .dataframe td {
+        padding-bottom: 0;
+    }
+
+    .dataframe td {
+        line-height: 95%;
+    }
+</style>
+<table border="1" class="dataframe">
+<small>shape: (150,)</small>
+<thead>
+<tr>
+<th>
+sepal_length
+</th>
+</tr>
+<tr>
+<td>
+f64
+</td>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+1000.0
+</td>
+</tr>
+<tr>
+<td>
+4.9
+</td>
+</tr>
+<tr>
+<td>
+4.7
+</td>
+</tr>
+<tr>
+<td>
+4.6
+</td>
+</tr>
+<tr>
+<td>
+5.0
+</td>
+</tr>
+<tr>
+<td>
+5.4
+</td>
+</tr>
+<tr>
+<td>
+4.6
+</td>
+</tr>
+<tr>
+<td>
+5.0
+</td>
+</tr>
+<tr>
+<td>
+4.4
+</td>
+</tr>
+<tr>
+<td>
+4.9
+</td>
+</tr>
+<tr>
+<td>
+5.4
+</td>
+</tr>
+<tr>
+<td>
+4.8
+</td>
+</tr>
+<tr>
+<td>
+...
+</td>
+</tr>
+<tr>
+<td>
+6.0
+</td>
+</tr>
+<tr>
+<td>
+6.9
+</td>
+</tr>
+<tr>
+<td>
+6.7
+</td>
+</tr>
+<tr>
+<td>
+6.9
+</td>
+</tr>
+<tr>
+<td>
+5.8
+</td>
+</tr>
+<tr>
+<td>
+6.8
+</td>
+</tr>
+<tr>
+<td>
+6.7
+</td>
+</tr>
+<tr>
+<td>
+6.7
+</td>
+</tr>
+<tr>
+<td>
+6.3
+</td>
+</tr>
+<tr>
+<td>
+6.5
+</td>
+</tr>
+<tr>
+<td>
+6.2
+</td>
+</tr>
+<tr>
+<td>
+5.9
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Similar to pandas DataFrame, 
+chaining assignment does NOT work!</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[35]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;sepal_length&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">10000</span>
+<span class="n">df</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[35]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+
+    .dataframe td {
+        white-space: pre;
+    }
+
+    .dataframe td {
+        padding-top: 0;
+    }
+
+    .dataframe td {
+        padding-bottom: 0;
+    }
+
+    .dataframe td {
+        line-height: 95%;
+    }
+</style>
+<table border="1" class="dataframe">
+<small>shape: (150, 5)</small>
+<thead>
+<tr>
+<th>
+sepal_length
+</th>
+<th>
+sepal_width
+</th>
+<th>
+petal_length
+</th>
+<th>
+petal_width
+</th>
+<th>
+species
+</th>
+</tr>
+<tr>
+<td>
+f64
+</td>
+<td>
+f64
+</td>
+<td>
+f64
+</td>
+<td>
+f64
+</td>
+<td>
+str
+</td>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+1000.0
+</td>
+<td>
+3.5
+</td>
+<td>
+1.4
+</td>
+<td>
+0.2
+</td>
+<td>
+&quot;setosa&quot;
+</td>
+</tr>
+<tr>
+<td>
+4.9
+</td>
+<td>
+3.0
+</td>
+<td>
+1.4
+</td>
+<td>
+0.2
+</td>
+<td>
+&quot;setosa&quot;
+</td>
+</tr>
+<tr>
+<td>
+4.7
+</td>
+<td>
+3.2
+</td>
+<td>
+1.3
+</td>
+<td>
+0.2
+</td>
+<td>
+&quot;setosa&quot;
+</td>
+</tr>
+<tr>
+<td>
+4.6
+</td>
+<td>
+3.1
+</td>
+<td>
+1.5
+</td>
+<td>
+0.2
+</td>
+<td>
+&quot;setosa&quot;
+</td>
+</tr>
+<tr>
+<td>
+5.0
+</td>
+<td>
+3.6
+</td>
+<td>
+1.4
+</td>
+<td>
+0.2
+</td>
+<td>
+&quot;setosa&quot;
+</td>
+</tr>
+<tr>
+<td>
+5.4
+</td>
+<td>
+3.9
+</td>
+<td>
+1.7
+</td>
+<td>
+0.4
+</td>
+<td>
+&quot;setosa&quot;
+</td>
+</tr>
+<tr>
+<td>
+4.6
+</td>
+<td>
+3.4
+</td>
+<td>
+1.4
+</td>
+<td>
+0.3
+</td>
+<td>
+&quot;setosa&quot;
+</td>
+</tr>
+<tr>
+<td>
+5.0
+</td>
+<td>
+3.4
+</td>
+<td>
+1.5
+</td>
+<td>
+0.2
+</td>
+<td>
+&quot;setosa&quot;
+</td>
+</tr>
+<tr>
+<td>
+4.4
+</td>
+<td>
+2.9
+</td>
+<td>
+1.4
+</td>
+<td>
+0.2
+</td>
+<td>
+&quot;setosa&quot;
+</td>
+</tr>
+<tr>
+<td>
+4.9
+</td>
+<td>
+3.1
+</td>
+<td>
+1.5
+</td>
+<td>
+0.1
+</td>
+<td>
+&quot;setosa&quot;
+</td>
+</tr>
+<tr>
+<td>
+5.4
+</td>
+<td>
+3.7
+</td>
+<td>
+1.5
+</td>
+<td>
+0.2
+</td>
+<td>
+&quot;setosa&quot;
+</td>
+</tr>
+<tr>
+<td>
+4.8
+</td>
+<td>
+3.4
+</td>
+<td>
+1.6
+</td>
+<td>
+0.2
+</td>
+<td>
+&quot;setosa&quot;
+</td>
+</tr>
+<tr>
+<td>
+...
+</td>
+<td>
+...
+</td>
+<td>
+...
+</td>
+<td>
+...
+</td>
+<td>
+...
+</td>
+</tr>
+<tr>
+<td>
+6.0
+</td>
+<td>
+3.0
+</td>
+<td>
+4.8
+</td>
+<td>
+1.8
+</td>
+<td>
+&quot;virginica&quot;
+</td>
+</tr>
+<tr>
+<td>
+6.9
+</td>
+<td>
+3.1
+</td>
+<td>
+5.4
+</td>
+<td>
+2.1
+</td>
+<td>
+&quot;virginica&quot;
+</td>
+</tr>
+<tr>
+<td>
+6.7
+</td>
+<td>
+3.1
+</td>
+<td>
+5.6
+</td>
+<td>
+2.4
+</td>
+<td>
+&quot;virginica&quot;
+</td>
+</tr>
+<tr>
+<td>
+6.9
+</td>
+<td>
+3.1
+</td>
+<td>
+5.1
+</td>
+<td>
+2.3
+</td>
+<td>
+&quot;virginica&quot;
+</td>
+</tr>
+<tr>
+<td>
+5.8
+</td>
+<td>
+2.7
+</td>
+<td>
+5.1
+</td>
+<td>
+1.9
+</td>
+<td>
+&quot;virginica&quot;
+</td>
+</tr>
+<tr>
+<td>
+6.8
+</td>
+<td>
+3.2
+</td>
+<td>
+5.9
+</td>
+<td>
+2.3
+</td>
+<td>
+&quot;virginica&quot;
+</td>
+</tr>
+<tr>
+<td>
+6.7
+</td>
+<td>
+3.3
+</td>
+<td>
+5.7
+</td>
+<td>
+2.5
+</td>
+<td>
+&quot;virginica&quot;
+</td>
+</tr>
+<tr>
+<td>
+6.7
+</td>
+<td>
+3.0
+</td>
+<td>
+5.2
+</td>
+<td>
+2.3
+</td>
+<td>
+&quot;virginica&quot;
+</td>
+</tr>
+<tr>
+<td>
+6.3
+</td>
+<td>
+2.5
+</td>
+<td>
+5.0
+</td>
+<td>
+1.9
+</td>
+<td>
+&quot;virginica&quot;
+</td>
+</tr>
+<tr>
+<td>
+6.5
+</td>
+<td>
+3.0
+</td>
+<td>
+5.2
+</td>
+<td>
+2.0
+</td>
+<td>
+&quot;virginica&quot;
+</td>
+</tr>
+<tr>
+<td>
+6.2
+</td>
+<td>
+3.4
+</td>
+<td>
+5.4
+</td>
+<td>
+2.3
+</td>
+<td>
+&quot;virginica&quot;
+</td>
+</tr>
+<tr>
+<td>
+5.9
+</td>
+<td>
+3.0
+</td>
+<td>
+5.1
+</td>
+<td>
+1.8
+</td>
+<td>
+&quot;virginica&quot;
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>You can slice by row and column at the same time.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[28]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;sepal_length&quot;</span><span class="p">]</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[28]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>5.1</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[65]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">dir</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[65]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>[&#39;__add__&#39;,
+ &#39;__annotations__&#39;,
+ &#39;__bool__&#39;,
+ &#39;__class__&#39;,
+ &#39;__contains__&#39;,
+ &#39;__copy__&#39;,
+ &#39;__deepcopy__&#39;,
+ &#39;__delattr__&#39;,
+ &#39;__dict__&#39;,
+ &#39;__dir__&#39;,
+ &#39;__doc__&#39;,
+ &#39;__eq__&#39;,
+ &#39;__format__&#39;,
+ &#39;__ge__&#39;,
+ &#39;__getattribute__&#39;,
+ &#39;__getitem__&#39;,
+ &#39;__getstate__&#39;,
+ &#39;__gt__&#39;,
+ &#39;__hash__&#39;,
+ &#39;__init__&#39;,
+ &#39;__init_subclass__&#39;,
+ &#39;__iter__&#39;,
+ &#39;__le__&#39;,
+ &#39;__len__&#39;,
+ &#39;__lt__&#39;,
+ &#39;__mod__&#39;,
+ &#39;__module__&#39;,
+ &#39;__mul__&#39;,
+ &#39;__ne__&#39;,
+ &#39;__new__&#39;,
+ &#39;__radd__&#39;,
+ &#39;__reduce__&#39;,
+ &#39;__reduce_ex__&#39;,
+ &#39;__repr__&#39;,
+ &#39;__rmul__&#39;,
+ &#39;__setattr__&#39;,
+ &#39;__setitem__&#39;,
+ &#39;__setstate__&#39;,
+ &#39;__sizeof__&#39;,
+ &#39;__str__&#39;,
+ &#39;__sub__&#39;,
+ &#39;__subclasshook__&#39;,
+ &#39;__truediv__&#39;,
+ &#39;__weakref__&#39;,
+ &#39;_accessors&#39;,
+ &#39;_comp&#39;,
+ &#39;_compare_to_non_df&#39;,
+ &#39;_compare_to_other_df&#39;,
+ &#39;_df&#39;,
+ &#39;_from_arrow&#39;,
+ &#39;_from_dict&#39;,
+ &#39;_from_dicts&#39;,
+ &#39;_from_numpy&#39;,
+ &#39;_from_pandas&#39;,
+ &#39;_from_pydf&#39;,
+ &#39;_from_records&#39;,
+ &#39;_ipython_key_completions_&#39;,
+ &#39;_pos_idx&#39;,
+ &#39;_pos_idxs&#39;,
+ &#39;_read_avro&#39;,
+ &#39;_read_csv&#39;,
+ &#39;_read_ipc&#39;,
+ &#39;_read_json&#39;,
+ &#39;_read_ndjson&#39;,
+ &#39;_read_parquet&#39;,
+ &#39;_repr_html_&#39;,
+ &#39;apply&#39;,
+ &#39;cleared&#39;,
+ &#39;clone&#39;,
+ &#39;columns&#39;,
+ &#39;describe&#39;,
+ &#39;drop&#39;,
+ &#39;drop_in_place&#39;,
+ &#39;drop_nulls&#39;,
+ &#39;dtypes&#39;,
+ &#39;estimated_size&#39;,
+ &#39;explode&#39;,
+ &#39;extend&#39;,
+ &#39;fill_nan&#39;,
+ &#39;fill_null&#39;,
+ &#39;filter&#39;,
+ &#39;find_idx_by_name&#39;,
+ &#39;fold&#39;,
+ &#39;frame_equal&#39;,
+ &#39;get_column&#39;,
+ &#39;get_columns&#39;,
+ &#39;glimpse&#39;,
+ &#39;groupby&#39;,
+ &#39;groupby_dynamic&#39;,
+ &#39;groupby_rolling&#39;,
+ &#39;hash_rows&#39;,
+ &#39;head&#39;,
+ &#39;height&#39;,
+ &#39;hstack&#39;,
+ &#39;insert_at_idx&#39;,
+ &#39;interpolate&#39;,
+ &#39;is_duplicated&#39;,
+ &#39;is_empty&#39;,
+ &#39;is_unique&#39;,
+ &#39;item&#39;,
+ &#39;iterrows&#39;,
+ &#39;join&#39;,
+ &#39;join_asof&#39;,
+ &#39;lazy&#39;,
+ &#39;limit&#39;,
+ &#39;max&#39;,
+ &#39;mean&#39;,
+ &#39;median&#39;,
+ &#39;melt&#39;,
+ &#39;merge_sorted&#39;,
+ &#39;min&#39;,
+ &#39;n_chunks&#39;,
+ &#39;n_unique&#39;,
+ &#39;null_count&#39;,
+ &#39;partition_by&#39;,
+ &#39;pearson_corr&#39;,
+ &#39;pipe&#39;,
+ &#39;pivot&#39;,
+ &#39;product&#39;,
+ &#39;quantile&#39;,
+ &#39;rechunk&#39;,
+ &#39;rename&#39;,
+ &#39;replace&#39;,
+ &#39;replace_at_idx&#39;,
+ &#39;reverse&#39;,
+ &#39;row&#39;,
+ &#39;rows&#39;,
+ &#39;sample&#39;,
+ &#39;schema&#39;,
+ &#39;select&#39;,
+ &#39;shape&#39;,
+ &#39;shift&#39;,
+ &#39;shift_and_fill&#39;,
+ &#39;shrink_to_fit&#39;,
+ &#39;slice&#39;,
+ &#39;sort&#39;,
+ &#39;std&#39;,
+ &#39;sum&#39;,
+ &#39;tail&#39;,
+ &#39;take_every&#39;,
+ &#39;to_arrow&#39;,
+ &#39;to_dict&#39;,
+ &#39;to_dicts&#39;,
+ &#39;to_dummies&#39;,
+ &#39;to_numpy&#39;,
+ &#39;to_pandas&#39;,
+ &#39;to_series&#39;,
+ &#39;to_struct&#39;,
+ &#39;transpose&#39;,
+ &#39;unique&#39;,
+ &#39;unnest&#39;,
+ &#39;unstack&#39;,
+ &#39;upsample&#39;,
+ &#39;var&#39;,
+ &#39;vstack&#39;,
+ &#39;width&#39;,
+ &#39;with_column&#39;,
+ &#39;with_columns&#39;,
+ &#39;with_row_count&#39;,
+ &#39;write_avro&#39;,
+ &#39;write_csv&#39;,
+ &#39;write_ipc&#39;,
+ &#39;write_json&#39;,
+ &#39;write_ndjson&#39;,
+ &#39;write_parquet&#39;]</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[29]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;sepal_length&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1000</span>
+<span class="n">df</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[29]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+
+    .dataframe td {
+        white-space: pre;
+    }
+
+    .dataframe td {
+        padding-top: 0;
+    }
+
+    .dataframe td {
+        padding-bottom: 0;
+    }
+
+    .dataframe td {
+        line-height: 95%;
+    }
+</style>
+<table border="1" class="dataframe">
+<small>shape: (150, 5)</small>
+<thead>
+<tr>
+<th>
+sepal_length
+</th>
+<th>
+sepal_width
+</th>
+<th>
+petal_length
+</th>
+<th>
+petal_width
+</th>
+<th>
+species
+</th>
+</tr>
+<tr>
+<td>
+f64
+</td>
+<td>
+f64
+</td>
+<td>
+f64
+</td>
+<td>
+f64
+</td>
+<td>
+str
+</td>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+1000.0
+</td>
+<td>
+3.5
+</td>
+<td>
+1.4
+</td>
+<td>
+0.2
+</td>
+<td>
+&quot;setosa&quot;
+</td>
+</tr>
+<tr>
+<td>
+4.9
+</td>
+<td>
+3.0
+</td>
+<td>
+1.4
+</td>
+<td>
+0.2
+</td>
+<td>
+&quot;setosa&quot;
+</td>
+</tr>
+<tr>
+<td>
+4.7
+</td>
+<td>
+3.2
+</td>
+<td>
+1.3
+</td>
+<td>
+0.2
+</td>
+<td>
+&quot;setosa&quot;
+</td>
+</tr>
+<tr>
+<td>
+4.6
+</td>
+<td>
+3.1
+</td>
+<td>
+1.5
+</td>
+<td>
+0.2
+</td>
+<td>
+&quot;setosa&quot;
+</td>
+</tr>
+<tr>
+<td>
+5.0
+</td>
+<td>
+3.6
+</td>
+<td>
+1.4
+</td>
+<td>
+0.2
+</td>
+<td>
+&quot;setosa&quot;
+</td>
+</tr>
+<tr>
+<td>
+5.4
+</td>
+<td>
+3.9
+</td>
+<td>
+1.7
+</td>
+<td>
+0.4
+</td>
+<td>
+&quot;setosa&quot;
+</td>
+</tr>
+<tr>
+<td>
+4.6
+</td>
+<td>
+3.4
+</td>
+<td>
+1.4
+</td>
+<td>
+0.3
+</td>
+<td>
+&quot;setosa&quot;
+</td>
+</tr>
+<tr>
+<td>
+5.0
+</td>
+<td>
+3.4
+</td>
+<td>
+1.5
+</td>
+<td>
+0.2
+</td>
+<td>
+&quot;setosa&quot;
+</td>
+</tr>
+<tr>
+<td>
+4.4
+</td>
+<td>
+2.9
+</td>
+<td>
+1.4
+</td>
+<td>
+0.2
+</td>
+<td>
+&quot;setosa&quot;
+</td>
+</tr>
+<tr>
+<td>
+4.9
+</td>
+<td>
+3.1
+</td>
+<td>
+1.5
+</td>
+<td>
+0.1
+</td>
+<td>
+&quot;setosa&quot;
+</td>
+</tr>
+<tr>
+<td>
+5.4
+</td>
+<td>
+3.7
+</td>
+<td>
+1.5
+</td>
+<td>
+0.2
+</td>
+<td>
+&quot;setosa&quot;
+</td>
+</tr>
+<tr>
+<td>
+4.8
+</td>
+<td>
+3.4
+</td>
+<td>
+1.6
+</td>
+<td>
+0.2
+</td>
+<td>
+&quot;setosa&quot;
+</td>
+</tr>
+<tr>
+<td>
+...
+</td>
+<td>
+...
+</td>
+<td>
+...
+</td>
+<td>
+...
+</td>
+<td>
+...
+</td>
+</tr>
+<tr>
+<td>
+6.0
+</td>
+<td>
+3.0
+</td>
+<td>
+4.8
+</td>
+<td>
+1.8
+</td>
+<td>
+&quot;virginica&quot;
+</td>
+</tr>
+<tr>
+<td>
+6.9
+</td>
+<td>
+3.1
+</td>
+<td>
+5.4
+</td>
+<td>
+2.1
+</td>
+<td>
+&quot;virginica&quot;
+</td>
+</tr>
+<tr>
+<td>
+6.7
+</td>
+<td>
+3.1
+</td>
+<td>
+5.6
+</td>
+<td>
+2.4
+</td>
+<td>
+&quot;virginica&quot;
+</td>
+</tr>
+<tr>
+<td>
+6.9
+</td>
+<td>
+3.1
+</td>
+<td>
+5.1
+</td>
+<td>
+2.3
+</td>
+<td>
+&quot;virginica&quot;
+</td>
+</tr>
+<tr>
+<td>
+5.8
+</td>
+<td>
+2.7
+</td>
+<td>
+5.1
+</td>
+<td>
+1.9
+</td>
+<td>
+&quot;virginica&quot;
+</td>
+</tr>
+<tr>
+<td>
+6.8
+</td>
+<td>
+3.2
+</td>
+<td>
+5.9
+</td>
+<td>
+2.3
+</td>
+<td>
+&quot;virginica&quot;
+</td>
+</tr>
+<tr>
+<td>
+6.7
+</td>
+<td>
+3.3
+</td>
+<td>
+5.7
+</td>
+<td>
+2.5
+</td>
+<td>
+&quot;virginica&quot;
+</td>
+</tr>
+<tr>
+<td>
+6.7
+</td>
+<td>
+3.0
+</td>
+<td>
+5.2
+</td>
+<td>
+2.3
+</td>
+<td>
+&quot;virginica&quot;
+</td>
+</tr>
+<tr>
+<td>
+6.3
+</td>
+<td>
+2.5
+</td>
+<td>
+5.0
+</td>
+<td>
+1.9
+</td>
+<td>
+&quot;virginica&quot;
+</td>
+</tr>
+<tr>
+<td>
+6.5
+</td>
+<td>
+3.0
+</td>
+<td>
+5.2
+</td>
+<td>
+2.0
+</td>
+<td>
+&quot;virginica&quot;
+</td>
+</tr>
+<tr>
+<td>
+6.2
+</td>
+<td>
+3.4
+</td>
+<td>
+5.4
+</td>
+<td>
+2.3
+</td>
+<td>
+&quot;virginica&quot;
+</td>
+</tr>
+<tr>
+<td>
+5.9
+</td>
+<td>
+3.0
+</td>
+<td>
+5.1
+</td>
+<td>
+1.8
+</td>
+<td>
+&quot;virginica&quot;
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[13]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">columns</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[13]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>[&#39;sepal_length&#39;, &#39;sepal_width&#39;, &#39;petal_length&#39;, &#39;petal_width&#39;, &#39;species&#39;]</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[16]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">s</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">get_column</span><span class="p">(</span><span class="s2">&quot;sepal_length&quot;</span><span class="p">)</span>
+<span class="n">s</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[16]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+
+    .dataframe td {
+        white-space: pre;
+    }
+
+    .dataframe td {
+        padding-top: 0;
+    }
+
+    .dataframe td {
+        padding-bottom: 0;
+    }
+
+    .dataframe td {
+        line-height: 95%;
+    }
+</style>
+<table border="1" class="dataframe">
+<small>shape: (150,)</small>
+<thead>
+<tr>
+<th>
+sepal_length
+</th>
+</tr>
+<tr>
+<td>
+f64
+</td>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+5.1
+</td>
+</tr>
+<tr>
+<td>
+4.9
+</td>
+</tr>
+<tr>
+<td>
+4.7
+</td>
+</tr>
+<tr>
+<td>
+4.6
+</td>
+</tr>
+<tr>
+<td>
+5.0
+</td>
+</tr>
+<tr>
+<td>
+5.4
+</td>
+</tr>
+<tr>
+<td>
+4.6
+</td>
+</tr>
+<tr>
+<td>
+5.0
+</td>
+</tr>
+<tr>
+<td>
+4.4
+</td>
+</tr>
+<tr>
+<td>
+4.9
+</td>
+</tr>
+<tr>
+<td>
+5.4
+</td>
+</tr>
+<tr>
+<td>
+4.8
+</td>
+</tr>
+<tr>
+<td>
+...
+</td>
+</tr>
+<tr>
+<td>
+6.0
+</td>
+</tr>
+<tr>
+<td>
+6.9
+</td>
+</tr>
+<tr>
+<td>
+6.7
+</td>
+</tr>
+<tr>
+<td>
+6.9
+</td>
+</tr>
+<tr>
+<td>
+5.8
+</td>
+</tr>
+<tr>
+<td>
+6.8
+</td>
+</tr>
+<tr>
+<td>
+6.7
+</td>
+</tr>
+<tr>
+<td>
+6.7
+</td>
+</tr>
+<tr>
+<td>
+6.3
+</td>
+</tr>
+<tr>
+<td>
+6.5
+</td>
+</tr>
+<tr>
+<td>
+6.2
+</td>
+</tr>
+<tr>
+<td>
+5.9
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[19]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">s</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1000</span>
+<span class="n">s</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[19]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+
+    .dataframe td {
+        white-space: pre;
+    }
+
+    .dataframe td {
+        padding-top: 0;
+    }
+
+    .dataframe td {
+        padding-bottom: 0;
+    }
+
+    .dataframe td {
+        line-height: 95%;
+    }
+</style>
+<table border="1" class="dataframe">
+<small>shape: (150,)</small>
+<thead>
+<tr>
+<th>
+sepal_length
+</th>
+</tr>
+<tr>
+<td>
+f64
+</td>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+1000.0
+</td>
+</tr>
+<tr>
+<td>
+4.9
+</td>
+</tr>
+<tr>
+<td>
+4.7
+</td>
+</tr>
+<tr>
+<td>
+4.6
+</td>
+</tr>
+<tr>
+<td>
+5.0
+</td>
+</tr>
+<tr>
+<td>
+5.4
+</td>
+</tr>
+<tr>
+<td>
+4.6
+</td>
+</tr>
+<tr>
+<td>
+5.0
+</td>
+</tr>
+<tr>
+<td>
+4.4
+</td>
+</tr>
+<tr>
+<td>
+4.9
+</td>
+</tr>
+<tr>
+<td>
+5.4
+</td>
+</tr>
+<tr>
+<td>
+4.8
+</td>
+</tr>
+<tr>
+<td>
+...
+</td>
+</tr>
+<tr>
+<td>
+6.0
+</td>
+</tr>
+<tr>
+<td>
+6.9
+</td>
+</tr>
+<tr>
+<td>
+6.7
+</td>
+</tr>
+<tr>
+<td>
+6.9
+</td>
+</tr>
+<tr>
+<td>
+5.8
+</td>
+</tr>
+<tr>
+<td>
+6.8
+</td>
+</tr>
+<tr>
+<td>
+6.7
+</td>
+</tr>
+<tr>
+<td>
+6.7
+</td>
+</tr>
+<tr>
+<td>
+6.3
+</td>
+</tr>
+<tr>
+<td>
+6.5
+</td>
+</tr>
+<tr>
+<td>
+6.2
+</td>
+</tr>
+<tr>
+<td>
+5.9
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[20]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[20]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+
+    .dataframe td {
+        white-space: pre;
+    }
+
+    .dataframe td {
+        padding-top: 0;
+    }
+
+    .dataframe td {
+        padding-bottom: 0;
+    }
+
+    .dataframe td {
+        line-height: 95%;
+    }
+</style>
+<table border="1" class="dataframe">
+<small>shape: (150, 5)</small>
+<thead>
+<tr>
+<th>
+sepal_length
+</th>
+<th>
+sepal_width
+</th>
+<th>
+petal_length
+</th>
+<th>
+petal_width
+</th>
+<th>
+species
+</th>
+</tr>
+<tr>
+<td>
+f64
+</td>
+<td>
+f64
+</td>
+<td>
+f64
+</td>
+<td>
+f64
+</td>
+<td>
+str
+</td>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+5.1
+</td>
+<td>
+3.5
+</td>
+<td>
+1.4
+</td>
+<td>
+0.2
+</td>
+<td>
+&quot;setosa&quot;
+</td>
+</tr>
+<tr>
+<td>
+4.9
+</td>
+<td>
+3.0
+</td>
+<td>
+1.4
+</td>
+<td>
+0.2
+</td>
+<td>
+&quot;setosa&quot;
+</td>
+</tr>
+<tr>
+<td>
+4.7
+</td>
+<td>
+3.2
+</td>
+<td>
+1.3
+</td>
+<td>
+0.2
+</td>
+<td>
+&quot;setosa&quot;
+</td>
+</tr>
+<tr>
+<td>
+4.6
+</td>
+<td>
+3.1
+</td>
+<td>
+1.5
+</td>
+<td>
+0.2
+</td>
+<td>
+&quot;setosa&quot;
+</td>
+</tr>
+<tr>
+<td>
+5.0
+</td>
+<td>
+3.6
+</td>
+<td>
+1.4
+</td>
+<td>
+0.2
+</td>
+<td>
+&quot;setosa&quot;
+</td>
+</tr>
+<tr>
+<td>
+5.4
+</td>
+<td>
+3.9
+</td>
+<td>
+1.7
+</td>
+<td>
+0.4
+</td>
+<td>
+&quot;setosa&quot;
+</td>
+</tr>
+<tr>
+<td>
+4.6
+</td>
+<td>
+3.4
+</td>
+<td>
+1.4
+</td>
+<td>
+0.3
+</td>
+<td>
+&quot;setosa&quot;
+</td>
+</tr>
+<tr>
+<td>
+5.0
+</td>
+<td>
+3.4
+</td>
+<td>
+1.5
+</td>
+<td>
+0.2
+</td>
+<td>
+&quot;setosa&quot;
+</td>
+</tr>
+<tr>
+<td>
+4.4
+</td>
+<td>
+2.9
+</td>
+<td>
+1.4
+</td>
+<td>
+0.2
+</td>
+<td>
+&quot;setosa&quot;
+</td>
+</tr>
+<tr>
+<td>
+4.9
+</td>
+<td>
+3.1
+</td>
+<td>
+1.5
+</td>
+<td>
+0.1
+</td>
+<td>
+&quot;setosa&quot;
+</td>
+</tr>
+<tr>
+<td>
+5.4
+</td>
+<td>
+3.7
+</td>
+<td>
+1.5
+</td>
+<td>
+0.2
+</td>
+<td>
+&quot;setosa&quot;
+</td>
+</tr>
+<tr>
+<td>
+4.8
+</td>
+<td>
+3.4
+</td>
+<td>
+1.6
+</td>
+<td>
+0.2
+</td>
+<td>
+&quot;setosa&quot;
+</td>
+</tr>
+<tr>
+<td>
+...
+</td>
+<td>
+...
+</td>
+<td>
+...
+</td>
+<td>
+...
+</td>
+<td>
+...
+</td>
+</tr>
+<tr>
+<td>
+6.0
+</td>
+<td>
+3.0
+</td>
+<td>
+4.8
+</td>
+<td>
+1.8
+</td>
+<td>
+&quot;virginica&quot;
+</td>
+</tr>
+<tr>
+<td>
+6.9
+</td>
+<td>
+3.1
+</td>
+<td>
+5.4
+</td>
+<td>
+2.1
+</td>
+<td>
+&quot;virginica&quot;
+</td>
+</tr>
+<tr>
+<td>
+6.7
+</td>
+<td>
+3.1
+</td>
+<td>
+5.6
+</td>
+<td>
+2.4
+</td>
+<td>
+&quot;virginica&quot;
+</td>
+</tr>
+<tr>
+<td>
+6.9
+</td>
+<td>
+3.1
+</td>
+<td>
+5.1
+</td>
+<td>
+2.3
+</td>
+<td>
+&quot;virginica&quot;
+</td>
+</tr>
+<tr>
+<td>
+5.8
+</td>
+<td>
+2.7
+</td>
+<td>
+5.1
+</td>
+<td>
+1.9
+</td>
+<td>
+&quot;virginica&quot;
+</td>
+</tr>
+<tr>
+<td>
+6.8
+</td>
+<td>
+3.2
+</td>
+<td>
+5.9
+</td>
+<td>
+2.3
+</td>
+<td>
+&quot;virginica&quot;
+</td>
+</tr>
+<tr>
+<td>
+6.7
+</td>
+<td>
+3.3
+</td>
+<td>
+5.7
+</td>
+<td>
+2.5
+</td>
+<td>
+&quot;virginica&quot;
+</td>
+</tr>
+<tr>
+<td>
+6.7
+</td>
+<td>
+3.0
+</td>
+<td>
+5.2
+</td>
+<td>
+2.3
+</td>
+<td>
+&quot;virginica&quot;
+</td>
+</tr>
+<tr>
+<td>
+6.3
+</td>
+<td>
+2.5
+</td>
+<td>
+5.0
+</td>
+<td>
+1.9
+</td>
+<td>
+&quot;virginica&quot;
+</td>
+</tr>
+<tr>
+<td>
+6.5
+</td>
+<td>
+3.0
+</td>
+<td>
+5.2
+</td>
+<td>
+2.0
+</td>
+<td>
+&quot;virginica&quot;
+</td>
+</tr>
+<tr>
+<td>
+6.2
+</td>
+<td>
+3.4
+</td>
+<td>
+5.4
+</td>
+<td>
+2.3
+</td>
+<td>
+&quot;virginica&quot;
+</td>
+</tr>
+<tr>
+<td>
+5.9
+</td>
+<td>
+3.0
+</td>
+<td>
+5.1
+</td>
+<td>
+1.8
+</td>
+<td>
+&quot;virginica&quot;
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[22]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">get_column</span><span class="p">(</span><span class="s2">&quot;sepal_length&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">2000</span>
+<span class="n">df</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[22]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+
+    .dataframe td {
+        white-space: pre;
+    }
+
+    .dataframe td {
+        padding-top: 0;
+    }
+
+    .dataframe td {
+        padding-bottom: 0;
+    }
+
+    .dataframe td {
+        line-height: 95%;
+    }
+</style>
+<table border="1" class="dataframe">
+<small>shape: (150, 5)</small>
+<thead>
+<tr>
+<th>
+sepal_length
+</th>
+<th>
+sepal_width
+</th>
+<th>
+petal_length
+</th>
+<th>
+petal_width
+</th>
+<th>
+species
+</th>
+</tr>
+<tr>
+<td>
+f64
+</td>
+<td>
+f64
+</td>
+<td>
+f64
+</td>
+<td>
+f64
+</td>
+<td>
+str
+</td>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+5.1
+</td>
+<td>
+3.5
+</td>
+<td>
+1.4
+</td>
+<td>
+0.2
+</td>
+<td>
+&quot;setosa&quot;
+</td>
+</tr>
+<tr>
+<td>
+4.9
+</td>
+<td>
+3.0
+</td>
+<td>
+1.4
+</td>
+<td>
+0.2
+</td>
+<td>
+&quot;setosa&quot;
+</td>
+</tr>
+<tr>
+<td>
+4.7
+</td>
+<td>
+3.2
+</td>
+<td>
+1.3
+</td>
+<td>
+0.2
+</td>
+<td>
+&quot;setosa&quot;
+</td>
+</tr>
+<tr>
+<td>
+4.6
+</td>
+<td>
+3.1
+</td>
+<td>
+1.5
+</td>
+<td>
+0.2
+</td>
+<td>
+&quot;setosa&quot;
+</td>
+</tr>
+<tr>
+<td>
+5.0
+</td>
+<td>
+3.6
+</td>
+<td>
+1.4
+</td>
+<td>
+0.2
+</td>
+<td>
+&quot;setosa&quot;
+</td>
+</tr>
+<tr>
+<td>
+5.4
+</td>
+<td>
+3.9
+</td>
+<td>
+1.7
+</td>
+<td>
+0.4
+</td>
+<td>
+&quot;setosa&quot;
+</td>
+</tr>
+<tr>
+<td>
+4.6
+</td>
+<td>
+3.4
+</td>
+<td>
+1.4
+</td>
+<td>
+0.3
+</td>
+<td>
+&quot;setosa&quot;
+</td>
+</tr>
+<tr>
+<td>
+5.0
+</td>
+<td>
+3.4
+</td>
+<td>
+1.5
+</td>
+<td>
+0.2
+</td>
+<td>
+&quot;setosa&quot;
+</td>
+</tr>
+<tr>
+<td>
+4.4
+</td>
+<td>
+2.9
+</td>
+<td>
+1.4
+</td>
+<td>
+0.2
+</td>
+<td>
+&quot;setosa&quot;
+</td>
+</tr>
+<tr>
+<td>
+4.9
+</td>
+<td>
+3.1
+</td>
+<td>
+1.5
+</td>
+<td>
+0.1
+</td>
+<td>
+&quot;setosa&quot;
+</td>
+</tr>
+<tr>
+<td>
+5.4
+</td>
+<td>
+3.7
+</td>
+<td>
+1.5
+</td>
+<td>
+0.2
+</td>
+<td>
+&quot;setosa&quot;
+</td>
+</tr>
+<tr>
+<td>
+4.8
+</td>
+<td>
+3.4
+</td>
+<td>
+1.6
+</td>
+<td>
+0.2
+</td>
+<td>
+&quot;setosa&quot;
+</td>
+</tr>
+<tr>
+<td>
+...
+</td>
+<td>
+...
+</td>
+<td>
+...
+</td>
+<td>
+...
+</td>
+<td>
+...
+</td>
+</tr>
+<tr>
+<td>
+6.0
+</td>
+<td>
+3.0
+</td>
+<td>
+4.8
+</td>
+<td>
+1.8
+</td>
+<td>
+&quot;virginica&quot;
+</td>
+</tr>
+<tr>
+<td>
+6.9
+</td>
+<td>
+3.1
+</td>
+<td>
+5.4
+</td>
+<td>
+2.1
+</td>
+<td>
+&quot;virginica&quot;
+</td>
+</tr>
+<tr>
+<td>
+6.7
+</td>
+<td>
+3.1
+</td>
+<td>
+5.6
+</td>
+<td>
+2.4
+</td>
+<td>
+&quot;virginica&quot;
+</td>
+</tr>
+<tr>
+<td>
+6.9
+</td>
+<td>
+3.1
+</td>
+<td>
+5.1
+</td>
+<td>
+2.3
+</td>
+<td>
+&quot;virginica&quot;
+</td>
+</tr>
+<tr>
+<td>
+5.8
+</td>
+<td>
+2.7
+</td>
+<td>
+5.1
+</td>
+<td>
+1.9
+</td>
+<td>
+&quot;virginica&quot;
+</td>
+</tr>
+<tr>
+<td>
+6.8
+</td>
+<td>
+3.2
+</td>
+<td>
+5.9
+</td>
+<td>
+2.3
+</td>
+<td>
+&quot;virginica&quot;
+</td>
+</tr>
+<tr>
+<td>
+6.7
+</td>
+<td>
+3.3
+</td>
+<td>
+5.7
+</td>
+<td>
+2.5
+</td>
+<td>
+&quot;virginica&quot;
+</td>
+</tr>
+<tr>
+<td>
+6.7
+</td>
+<td>
+3.0
+</td>
+<td>
+5.2
+</td>
+<td>
+2.3
+</td>
+<td>
+&quot;virginica&quot;
+</td>
+</tr>
+<tr>
+<td>
+6.3
+</td>
+<td>
+2.5
+</td>
+<td>
+5.0
+</td>
+<td>
+1.9
+</td>
+<td>
+&quot;virginica&quot;
+</td>
+</tr>
+<tr>
+<td>
+6.5
+</td>
+<td>
+3.0
+</td>
+<td>
+5.2
+</td>
+<td>
+2.0
+</td>
+<td>
+&quot;virginica&quot;
+</td>
+</tr>
+<tr>
+<td>
+6.2
+</td>
+<td>
+3.4
+</td>
+<td>
+5.4
+</td>
+<td>
+2.3
+</td>
+<td>
+&quot;virginica&quot;
+</td>
+</tr>
+<tr>
+<td>
+5.9
+</td>
+<td>
+3.0
+</td>
+<td>
+5.1
+</td>
+<td>
+1.8
+</td>
+<td>
+&quot;virginica&quot;
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[17]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">type</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[17]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>polars.internals.series.series.Series</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="pl.all">pl.all<a class="anchor-link" href="#pl.all">&#182;</a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[22]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">comp</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">pl</span><span class="o">.</span><span class="n">all</span><span class="p">()</span><span class="o">.</span><span class="n">all</span><span class="p">())</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[22]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+
+    .dataframe td {
+        white-space: pre;
+    }
+
+    .dataframe td {
+        padding-top: 0;
+    }
+
+    .dataframe td {
+        padding-bottom: 0;
+    }
+
+    .dataframe td {
+        line-height: 95%;
+    }
+</style>
+<table border="1" class="dataframe">
+<small>shape: (1, 3)</small>
+<thead>
+<tr>
+<th>
+j0
+</th>
+<th>
+j1
+</th>
+<th>
+ranks
+</th>
+</tr>
+<tr>
+<td>
+bool
+</td>
+<td>
+bool
+</td>
+<td>
+bool
+</td>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+true
+</td>
+<td>
+true
+</td>
+<td>
+true
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="DataFrame.frame_equal"><a href="https://pola-rs.github.io/polars/py-polars/html/reference/dataframe/api/polars.DataFrame.frame_equal.html#polars.DataFrame.frame_equal">DataFrame.frame_equal</a><a class="anchor-link" href="#DataFrame.frame_equal">&#182;</a></h2><p>Check whether a DataFrame equals to another DataFrame, elementwise.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[26]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">filter</span><span class="p">((</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;i0&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;i1&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">2</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;i2&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">13</span><span class="p">))[</span>
+    <span class="p">[</span><span class="s2">&quot;j0&quot;</span><span class="p">,</span> <span class="s2">&quot;j1&quot;</span><span class="p">,</span> <span class="s2">&quot;ranks&quot;</span><span class="p">]</span>
+<span class="p">]</span><span class="o">.</span><span class="n">frame_equal</span><span class="p">(</span>
+    <span class="n">df</span><span class="o">.</span><span class="n">filter</span><span class="p">((</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;i0&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;i1&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">2</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;i2&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">26</span><span class="p">))[</span>
+        <span class="p">[</span><span class="s2">&quot;j0&quot;</span><span class="p">,</span> <span class="s2">&quot;j1&quot;</span><span class="p">,</span> <span class="s2">&quot;ranks&quot;</span><span class="p">]</span>
+    <span class="p">]</span>
+<span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[26]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>True</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[3]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pl</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+    <span class="p">{</span>
+        <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span>
+        <span class="s2">&quot;color&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;red&quot;</span><span class="p">,</span> <span class="s2">&quot;green&quot;</span><span class="p">,</span> <span class="s2">&quot;green&quot;</span><span class="p">,</span> <span class="s2">&quot;red&quot;</span><span class="p">,</span> <span class="s2">&quot;red&quot;</span><span class="p">],</span>
+        <span class="s2">&quot;shape&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;square&quot;</span><span class="p">,</span> <span class="s2">&quot;triangle&quot;</span><span class="p">,</span> <span class="s2">&quot;square&quot;</span><span class="p">,</span> <span class="s2">&quot;triangle&quot;</span><span class="p">,</span> <span class="s2">&quot;square&quot;</span><span class="p">],</span>
+    <span class="p">}</span>
+<span class="p">)</span>
+<span class="n">df</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[3]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style>
+.pl-dataframe > thead > tr > th {
+  text-align: right;
+}
+</style>
+
+<table border="1" class="pl-dataframe">
+<small>shape: (5, 3)</small>
+<thead>
+<tr>
+<th>
+id
+</th>
+<th>
+color
+</th>
+<th>
+shape
+</th>
+</tr>
+<tr>
+<td>
+i64
+</td>
+<td>
+str
+</td>
+<td>
+str
+</td>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+0
+</td>
+<td>
+&quot;red&quot;
+</td>
+<td>
+&quot;square&quot;
+</td>
+</tr>
+<tr>
+<td>
+1
+</td>
+<td>
+&quot;green&quot;
+</td>
+<td>
+&quot;triangle&quot;
+</td>
+</tr>
+<tr>
+<td>
+2
+</td>
+<td>
+&quot;green&quot;
+</td>
+<td>
+&quot;square&quot;
+</td>
+</tr>
+<tr>
+<td>
+3
+</td>
+<td>
+&quot;red&quot;
+</td>
+<td>
+&quot;triangle&quot;
+</td>
+</tr>
+<tr>
+<td>
+4
+</td>
+<td>
+&quot;red&quot;
+</td>
+<td>
+&quot;square&quot;
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[5]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">&quot;sepal_length&quot;</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">5</span><span class="p">)</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;species&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[5]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+
+    .dataframe td {
+        white-space: pre;
+    }
+
+    .dataframe td {
+        padding-top: 0;
+    }
+
+    .dataframe td {
+        padding-bottom: 0;
+    }
+
+    .dataframe td {
+        line-height: 95%;
+    }
+</style>
+<table border="1" class="dataframe">
+<small>shape: (3, 5)</small>
+<thead>
+<tr>
+<th>
+species
+</th>
+<th>
+sepal_length
+</th>
+<th>
+sepal_width
+</th>
+<th>
+petal_length
+</th>
+<th>
+petal_width
+</th>
+</tr>
+<tr>
+<td>
+str
+</td>
+<td>
+f64
+</td>
+<td>
+f64
+</td>
+<td>
+f64
+</td>
+<td>
+f64
+</td>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+&quot;versicolor&quot;
+</td>
+<td>
+281.9
+</td>
+<td>
+131.8
+</td>
+<td>
+202.9
+</td>
+<td>
+63.3
+</td>
+</tr>
+<tr>
+<td>
+&quot;setosa&quot;
+</td>
+<td>
+116.9
+</td>
+<td>
+81.7
+</td>
+<td>
+33.2
+</td>
+<td>
+6.1
+</td>
+</tr>
+<tr>
+<td>
+&quot;virginica&quot;
+</td>
+<td>
+324.5
+</td>
+<td>
+146.2
+</td>
+<td>
+273.1
+</td>
+<td>
+99.6
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[7]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pl</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+    <span class="p">{</span>
+        <span class="s2">&quot;A&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span>
+        <span class="s2">&quot;fruits&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;banana&quot;</span><span class="p">,</span> <span class="s2">&quot;banana&quot;</span><span class="p">,</span> <span class="s2">&quot;apple&quot;</span><span class="p">,</span> <span class="s2">&quot;apple&quot;</span><span class="p">,</span> <span class="s2">&quot;banana&quot;</span><span class="p">],</span>
+        <span class="s2">&quot;B&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+        <span class="s2">&quot;cars&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;beetle&quot;</span><span class="p">,</span> <span class="s2">&quot;audi&quot;</span><span class="p">,</span> <span class="s2">&quot;beetle&quot;</span><span class="p">,</span> <span class="s2">&quot;beetle&quot;</span><span class="p">,</span> <span class="s2">&quot;beetle&quot;</span><span class="p">],</span>
+    <span class="p">}</span>
+<span class="p">)</span>
+<span class="n">df</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[7]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1 "class="dataframe ">
+<thead>
+<tr>
+<th>
+A
+</th>
+<th>
+fruits
+</th>
+<th>
+B
+</th>
+<th>
+cars
+</th>
+</tr>
+<tr>
+<td>
+i64
+</td>
+<td>
+str
+</td>
+<td>
+i64
+</td>
+<td>
+str
+</td>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+1
+</td>
+<td>
+"banana"
+</td>
+<td>
+5
+</td>
+<td>
+"beetle"
+</td>
+</tr>
+<tr>
+<td>
+2
+</td>
+<td>
+"banana"
+</td>
+<td>
+4
+</td>
+<td>
+"audi"
+</td>
+</tr>
+<tr>
+<td>
+3
+</td>
+<td>
+"apple"
+</td>
+<td>
+3
+</td>
+<td>
+"beetle"
+</td>
+</tr>
+<tr>
+<td>
+4
+</td>
+<td>
+"apple"
+</td>
+<td>
+2
+</td>
+<td>
+"beetle"
+</td>
+</tr>
+<tr>
+<td>
+5
+</td>
+<td>
+"banana"
+</td>
+<td>
+1
+</td>
+<td>
+"beetle"
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[8]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="s2">&quot;fruits&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">select</span><span class="p">(</span>
+    <span class="p">[</span>
+        <span class="s2">&quot;fruits&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;cars&quot;</span><span class="p">,</span>
+        <span class="n">pl</span><span class="o">.</span><span class="n">lit</span><span class="p">(</span><span class="s2">&quot;fruits&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">&quot;literal_string_fruits&quot;</span><span class="p">),</span>
+        <span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">&quot;B&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">&quot;cars&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="s2">&quot;beetle&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">(),</span>
+        <span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">&quot;A&quot;</span><span class="p">)</span>
+        <span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">&quot;B&quot;</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">2</span><span class="p">)</span>
+        <span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+        <span class="o">.</span><span class="n">over</span><span class="p">(</span><span class="s2">&quot;cars&quot;</span><span class="p">)</span>
+        <span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">&quot;sum_A_by_cars&quot;</span><span class="p">),</span>  <span class="c1"># groups by &quot;cars&quot;</span>
+        <span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">&quot;A&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">over</span><span class="p">(</span><span class="s2">&quot;fruits&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">&quot;sum_A_by_fruits&quot;</span><span class="p">),</span>  <span class="c1"># groups by &quot;fruits&quot;</span>
+        <span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">&quot;A&quot;</span><span class="p">)</span>
+        <span class="o">.</span><span class="n">reverse</span><span class="p">()</span>
+        <span class="o">.</span><span class="n">over</span><span class="p">(</span><span class="s2">&quot;fruits&quot;</span><span class="p">)</span>
+        <span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
+        <span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">&quot;rev_A_by_fruits&quot;</span><span class="p">),</span>  <span class="c1"># groups by &quot;fruits</span>
+        <span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">&quot;A&quot;</span><span class="p">)</span>
+        <span class="o">.</span><span class="n">sort_by</span><span class="p">(</span><span class="s2">&quot;B&quot;</span><span class="p">)</span>
+        <span class="o">.</span><span class="n">over</span><span class="p">(</span><span class="s2">&quot;fruits&quot;</span><span class="p">)</span>
+        <span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
+        <span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">&quot;sort_A_by_B_by_fruits&quot;</span><span class="p">),</span>  <span class="c1"># groups by &quot;fruits&quot;</span>
+    <span class="p">]</span>
+<span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[8]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1 "class="dataframe ">
+<thead>
+<tr>
+<th>
+fruits
+</th>
+<th>
+cars
+</th>
+<th>
+literal_string_fruits
+</th>
+<th>
+B
+</th>
+<th>
+sum_A_by_cars
+</th>
+<th>
+sum_A_by_fruits
+</th>
+<th>
+rev_A_by_fruits
+</th>
+<th>
+sort_A_by_B_by_fruits
+</th>
+</tr>
+<tr>
+<td>
+str
+</td>
+<td>
+str
+</td>
+<td>
+str
+</td>
+<td>
+i64
+</td>
+<td>
+i64
+</td>
+<td>
+i64
+</td>
+<td>
+i64
+</td>
+<td>
+i64
+</td>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+"apple"
+</td>
+<td>
+"beetle"
+</td>
+<td>
+"fruits"
+</td>
+<td>
+11
+</td>
+<td>
+4
+</td>
+<td>
+7
+</td>
+<td>
+4
+</td>
+<td>
+4
+</td>
+</tr>
+<tr>
+<td>
+"apple"
+</td>
+<td>
+"beetle"
+</td>
+<td>
+"fruits"
+</td>
+<td>
+11
+</td>
+<td>
+4
+</td>
+<td>
+7
+</td>
+<td>
+3
+</td>
+<td>
+3
+</td>
+</tr>
+<tr>
+<td>
+"banana"
+</td>
+<td>
+"beetle"
+</td>
+<td>
+"fruits"
+</td>
+<td>
+11
+</td>
+<td>
+4
+</td>
+<td>
+8
+</td>
+<td>
+5
+</td>
+<td>
+5
+</td>
+</tr>
+<tr>
+<td>
+"banana"
+</td>
+<td>
+"audi"
+</td>
+<td>
+"fruits"
+</td>
+<td>
+11
+</td>
+<td>
+2
+</td>
+<td>
+8
+</td>
+<td>
+2
+</td>
+<td>
+2
+</td>
+</tr>
+<tr>
+<td>
+"banana"
+</td>
+<td>
+"beetle"
+</td>
+<td>
+"fruits"
+</td>
+<td>
+11
+</td>
+<td>
+4
+</td>
+<td>
+8
+</td>
+<td>
+1
+</td>
+<td>
+1
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[54]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">to_dict</span><span class="p">(</span><span class="s2">&quot;records&quot;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[54]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>{&#39;id&#39;: shape: (5,)
+ Series: &#39;id&#39; [i64]
+ [
+ 	0
+ 	1
+ 	2
+ 	3
+ 	4
+ ],
+ &#39;color&#39;: shape: (5,)
+ Series: &#39;color&#39; [str]
+ [
+ 	&#34;red&#34;
+ 	&#34;green&#34;
+ 	&#34;green&#34;
+ 	&#34;red&#34;
+ 	&#34;red&#34;
+ ],
+ &#39;shape&#39;: shape: (5,)
+ Series: &#39;shape&#39; [str]
+ [
+ 	&#34;square&#34;
+ 	&#34;triangle&#34;
+ 	&#34;square&#34;
+ 	&#34;triangle&#34;
+ 	&#34;square&#34;
+ ]}</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[56]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">to_dicts</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[56]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>[{&#39;id&#39;: 0, &#39;color&#39;: &#39;red&#39;, &#39;shape&#39;: &#39;square&#39;},
+ {&#39;id&#39;: 1, &#39;color&#39;: &#39;green&#39;, &#39;shape&#39;: &#39;triangle&#39;},
+ {&#39;id&#39;: 2, &#39;color&#39;: &#39;green&#39;, &#39;shape&#39;: &#39;square&#39;},
+ {&#39;id&#39;: 3, &#39;color&#39;: &#39;red&#39;, &#39;shape&#39;: &#39;triangle&#39;},
+ {&#39;id&#39;: 4, &#39;color&#39;: &#39;red&#39;, &#39;shape&#39;: &#39;square&#39;}]</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[55]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">dir</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[55]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>[&#39;__add__&#39;,
+ &#39;__annotations__&#39;,
+ &#39;__bool__&#39;,
+ &#39;__class__&#39;,
+ &#39;__contains__&#39;,
+ &#39;__copy__&#39;,
+ &#39;__deepcopy__&#39;,
+ &#39;__delattr__&#39;,
+ &#39;__dict__&#39;,
+ &#39;__dir__&#39;,
+ &#39;__doc__&#39;,
+ &#39;__eq__&#39;,
+ &#39;__format__&#39;,
+ &#39;__ge__&#39;,
+ &#39;__getattribute__&#39;,
+ &#39;__getitem__&#39;,
+ &#39;__getstate__&#39;,
+ &#39;__gt__&#39;,
+ &#39;__hash__&#39;,
+ &#39;__init__&#39;,
+ &#39;__init_subclass__&#39;,
+ &#39;__iter__&#39;,
+ &#39;__le__&#39;,
+ &#39;__len__&#39;,
+ &#39;__lt__&#39;,
+ &#39;__mod__&#39;,
+ &#39;__module__&#39;,
+ &#39;__mul__&#39;,
+ &#39;__ne__&#39;,
+ &#39;__new__&#39;,
+ &#39;__radd__&#39;,
+ &#39;__reduce__&#39;,
+ &#39;__reduce_ex__&#39;,
+ &#39;__repr__&#39;,
+ &#39;__rmul__&#39;,
+ &#39;__setattr__&#39;,
+ &#39;__setitem__&#39;,
+ &#39;__setstate__&#39;,
+ &#39;__sizeof__&#39;,
+ &#39;__str__&#39;,
+ &#39;__sub__&#39;,
+ &#39;__subclasshook__&#39;,
+ &#39;__truediv__&#39;,
+ &#39;__weakref__&#39;,
+ &#39;_accessors&#39;,
+ &#39;_comp&#39;,
+ &#39;_compare_to_non_df&#39;,
+ &#39;_compare_to_other_df&#39;,
+ &#39;_df&#39;,
+ &#39;_from_arrow&#39;,
+ &#39;_from_dict&#39;,
+ &#39;_from_dicts&#39;,
+ &#39;_from_numpy&#39;,
+ &#39;_from_pandas&#39;,
+ &#39;_from_pydf&#39;,
+ &#39;_from_records&#39;,
+ &#39;_ipython_key_completions_&#39;,
+ &#39;_pos_idx&#39;,
+ &#39;_pos_idxs&#39;,
+ &#39;_read_avro&#39;,
+ &#39;_read_csv&#39;,
+ &#39;_read_ipc&#39;,
+ &#39;_read_json&#39;,
+ &#39;_read_ndjson&#39;,
+ &#39;_read_parquet&#39;,
+ &#39;_repr_html_&#39;,
+ &#39;apply&#39;,
+ &#39;cleared&#39;,
+ &#39;clone&#39;,
+ &#39;columns&#39;,
+ &#39;describe&#39;,
+ &#39;drop&#39;,
+ &#39;drop_in_place&#39;,
+ &#39;drop_nulls&#39;,
+ &#39;dtypes&#39;,
+ &#39;estimated_size&#39;,
+ &#39;explode&#39;,
+ &#39;extend&#39;,
+ &#39;fill_nan&#39;,
+ &#39;fill_null&#39;,
+ &#39;filter&#39;,
+ &#39;find_idx_by_name&#39;,
+ &#39;fold&#39;,
+ &#39;frame_equal&#39;,
+ &#39;get_column&#39;,
+ &#39;get_columns&#39;,
+ &#39;glimpse&#39;,
+ &#39;groupby&#39;,
+ &#39;groupby_dynamic&#39;,
+ &#39;groupby_rolling&#39;,
+ &#39;hash_rows&#39;,
+ &#39;head&#39;,
+ &#39;height&#39;,
+ &#39;hstack&#39;,
+ &#39;insert_at_idx&#39;,
+ &#39;interpolate&#39;,
+ &#39;is_duplicated&#39;,
+ &#39;is_empty&#39;,
+ &#39;is_unique&#39;,
+ &#39;item&#39;,
+ &#39;iterrows&#39;,
+ &#39;join&#39;,
+ &#39;join_asof&#39;,
+ &#39;lazy&#39;,
+ &#39;limit&#39;,
+ &#39;max&#39;,
+ &#39;mean&#39;,
+ &#39;median&#39;,
+ &#39;melt&#39;,
+ &#39;merge_sorted&#39;,
+ &#39;min&#39;,
+ &#39;n_chunks&#39;,
+ &#39;n_unique&#39;,
+ &#39;null_count&#39;,
+ &#39;partition_by&#39;,
+ &#39;pearson_corr&#39;,
+ &#39;pipe&#39;,
+ &#39;pivot&#39;,
+ &#39;product&#39;,
+ &#39;quantile&#39;,
+ &#39;rechunk&#39;,
+ &#39;rename&#39;,
+ &#39;replace&#39;,
+ &#39;replace_at_idx&#39;,
+ &#39;reverse&#39;,
+ &#39;row&#39;,
+ &#39;rows&#39;,
+ &#39;sample&#39;,
+ &#39;schema&#39;,
+ &#39;select&#39;,
+ &#39;shape&#39;,
+ &#39;shift&#39;,
+ &#39;shift_and_fill&#39;,
+ &#39;shrink_to_fit&#39;,
+ &#39;slice&#39;,
+ &#39;sort&#39;,
+ &#39;std&#39;,
+ &#39;sum&#39;,
+ &#39;tail&#39;,
+ &#39;take_every&#39;,
+ &#39;to_arrow&#39;,
+ &#39;to_dict&#39;,
+ &#39;to_dicts&#39;,
+ &#39;to_dummies&#39;,
+ &#39;to_numpy&#39;,
+ &#39;to_pandas&#39;,
+ &#39;to_series&#39;,
+ &#39;to_struct&#39;,
+ &#39;transpose&#39;,
+ &#39;unique&#39;,
+ &#39;unnest&#39;,
+ &#39;unstack&#39;,
+ &#39;upsample&#39;,
+ &#39;var&#39;,
+ &#39;vstack&#39;,
+ &#39;width&#39;,
+ &#39;with_column&#39;,
+ &#39;with_columns&#39;,
+ &#39;with_row_count&#39;,
+ &#39;write_avro&#39;,
+ &#39;write_csv&#39;,
+ &#39;write_ipc&#39;,
+ &#39;write_json&#39;,
+ &#39;write_ndjson&#39;,
+ &#39;write_parquet&#39;]</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[60]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">ss</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">to_struct</span><span class="p">(</span><span class="s2">&quot;ss&quot;</span><span class="p">)</span>
+<span class="n">ss</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[60]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+
+    .dataframe td {
+        white-space: pre;
+    }
+
+    .dataframe td {
+        padding-top: 0;
+    }
+
+    .dataframe td {
+        padding-bottom: 0;
+    }
+
+    .dataframe td {
+        line-height: 95%;
+    }
+</style>
+<table border="1" class="dataframe">
+<small>shape: (5,)</small>
+<thead>
+<tr>
+<th>
+ss
+</th>
+</tr>
+<tr>
+<td>
+struct[3]
+</td>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+{0,&quot;red&quot;,&quot;square&quot;}
+</td>
+</tr>
+<tr>
+<td>
+{1,&quot;green&quot;,&quot;triangle&quot;}
+</td>
+</tr>
+<tr>
+<td>
+{2,&quot;green&quot;,&quot;square&quot;}
+</td>
+</tr>
+<tr>
+<td>
+{3,&quot;red&quot;,&quot;triangle&quot;}
+</td>
+</tr>
+<tr>
+<td>
+{4,&quot;red&quot;,&quot;square&quot;}
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[62]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">type</span><span class="p">(</span><span class="n">ss</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[62]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>dict</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="sort">sort<a class="anchor-link" href="#sort">&#182;</a></h2><p>DataFrame.sort is not in-place.
+It returns a new DataFrame.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[63]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">?</span>pl.DataFrame.sort
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+
+
+<div class="output_text output_subarea ">
+<pre><span class="ansi-red-fg">Signature:</span>
+pl<span class="ansi-blue-fg">.</span>DataFrame<span class="ansi-blue-fg">.</span>sort<span class="ansi-blue-fg">(</span>
+    self<span class="ansi-blue-fg">:</span> <span class="ansi-blue-fg">&#39;DF&#39;</span><span class="ansi-blue-fg">,</span>
+    by<span class="ansi-blue-fg">:</span> <span class="ansi-blue-fg">&#39;str | pli.Expr | Sequence[str] | Sequence[pli.Expr]&#39;</span><span class="ansi-blue-fg">,</span>
+    reverse<span class="ansi-blue-fg">:</span> <span class="ansi-blue-fg">&#39;bool | list[bool]&#39;</span> <span class="ansi-blue-fg">=</span> <span class="ansi-green-fg">False</span><span class="ansi-blue-fg">,</span>
+    nulls_last<span class="ansi-blue-fg">:</span> <span class="ansi-blue-fg">&#39;bool&#39;</span> <span class="ansi-blue-fg">=</span> <span class="ansi-green-fg">False</span><span class="ansi-blue-fg">,</span>
+<span class="ansi-blue-fg">)</span> <span class="ansi-blue-fg">-&gt;</span> <span class="ansi-blue-fg">&#39;DF | DataFrame&#39;</span>
+<span class="ansi-red-fg">Docstring:</span>
+Sort the DataFrame by column.
+
+Parameters
+----------
+by
+    By which column to sort. Only accepts string.
+reverse
+    Reverse/descending sort.
+nulls_last
+    Place null values last. Can only be used if sorted by a single column.
+
+Examples
+--------
+&gt;&gt;&gt; df = pl.DataFrame(
+...     {
+...         &#34;foo&#34;: [1, 2, 3],
+...         &#34;bar&#34;: [6.0, 7.0, 8.0],
+...         &#34;ham&#34;: [&#34;a&#34;, &#34;b&#34;, &#34;c&#34;],
+...     }
+... )
+&gt;&gt;&gt; df.sort(&#34;foo&#34;, reverse=True)
+shape: (3, 3)
+┌─────┬─────┬─────┐
+│ foo ┆ bar ┆ ham │
+│ --- ┆ --- ┆ --- │
+│ i64 ┆ f64 ┆ str │
+╞═════╪═════╪═════╡
+│ 3   ┆ 8.0 ┆ c   │
+├╌╌╌╌╌┼╌╌╌╌╌┼╌╌╌╌╌┤
+│ 2   ┆ 7.0 ┆ b   │
+├╌╌╌╌╌┼╌╌╌╌╌┼╌╌╌╌╌┤
+│ 1   ┆ 6.0 ┆ a   │
+└─────┴─────┴─────┘
+
+**Sort by multiple columns.**
+For multiple columns we can also use expression syntax.
+
+&gt;&gt;&gt; df.sort(
+...     [pl.col(&#34;foo&#34;), pl.col(&#34;bar&#34;) ** 2],
+...     reverse=[True, False],
+... )
+shape: (3, 3)
+┌─────┬─────┬─────┐
+│ foo ┆ bar ┆ ham │
+│ --- ┆ --- ┆ --- │
+│ i64 ┆ f64 ┆ str │
+╞═════╪═════╪═════╡
+│ 3   ┆ 8.0 ┆ c   │
+├╌╌╌╌╌┼╌╌╌╌╌┼╌╌╌╌╌┤
+│ 2   ┆ 7.0 ┆ b   │
+├╌╌╌╌╌┼╌╌╌╌╌┼╌╌╌╌╌┤
+│ 1   ┆ 6.0 ┆ a   │
+└─────┴─────┴─────┘
+<span class="ansi-red-fg">File:</span>      ~/.local/lib/python3.10/site-packages/polars/internals/dataframe/frame.py
+<span class="ansi-red-fg">Type:</span>      function
+</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="to_pandas">to_pandas<a class="anchor-link" href="#to_pandas">&#182;</a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[4]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pl</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+    <span class="p">{</span>
+        <span class="s2">&quot;foo&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span>
+        <span class="s2">&quot;bar&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">],</span>
+        <span class="s2">&quot;ham&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="s2">&quot;c&quot;</span><span class="p">],</span>
+    <span class="p">}</span>
+<span class="p">)</span>
+<span class="n">dfp</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">to_pandas</span><span class="p">()</span>
+<span class="n">dfp</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[4]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>foo</th>
+      <th>bar</th>
+      <th>ham</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>6</td>
+      <td>a</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>7</td>
+      <td>b</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>8</td>
+      <td>c</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="from_pandas"><a href="https://pola-rs.github.io/polars/py-polars/html/reference/api/polars.from_pandas.html#polars.from_pandas">from_pandas</a><a class="anchor-link" href="#from_pandas">&#182;</a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[5]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">pl</span><span class="o">.</span><span class="n">from_pandas</span><span class="p">(</span><span class="n">dfp</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[5]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+
+    .dataframe td {
+        white-space: pre;
+    }
+
+    .dataframe td {
+        padding-top: 0;
+    }
+
+    .dataframe td {
+        padding-bottom: 0;
+    }
+
+    .dataframe td {
+        line-height: 95%;
+    }
+</style>
+<table border="1" class="dataframe">
+<small>shape: (3, 3)</small>
+<thead>
+<tr>
+<th>
+foo
+</th>
+<th>
+bar
+</th>
+<th>
+ham
+</th>
+</tr>
+<tr>
+<td>
+i64
+</td>
+<td>
+i64
+</td>
+<td>
+str
+</td>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+1
+</td>
+<td>
+6
+</td>
+<td>
+&quot;a&quot;
+</td>
+</tr>
+<tr>
+<td>
+2
+</td>
+<td>
+7
+</td>
+<td>
+&quot;b&quot;
+</td>
+</tr>
+<tr>
+<td>
+3
+</td>
+<td>
+8
+</td>
+<td>
+&quot;c&quot;
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="References">References<a class="anchor-link" href="#References">&#182;</a></h2><ul>
+<li><p><a href="https://github.com/pola-rs/polars">polars @ GitHub</a></p>
+</li>
+<li><p><a href="https://www.pola.rs/">Polars - Official Documentation</a></p>
+</li>
+<li><p><a href="https://www.legendu.net/misc/blog/hands-on-polars-in-rust/">Hands on the polars Crate in Rust</a></p>
+</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+
+</div>
+</div>
+</div>
+ 
+
+</body>
+<script type="text/javascript">if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
+    var mathjaxscript = document.createElement('script');
+    mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
+    mathjaxscript.type = 'text/javascript';
+    mathjaxscript.src = '//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML';
+    mathjaxscript[(window.opera ? "innerHTML" : "text")] =
+        "MathJax.Hub.Config({" +
+        "    config: ['MMLorHTML.js']," +
+        "    TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'AMS' } }," +
+        "    jax: ['input/TeX','input/MathML','output/HTML-CSS']," +
+        "    extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']," +
+        "    displayAlign: 'center'," +
+        "    displayIndent: '0em'," +
+        "    showMathMenu: true," +
+        "    tex2jax: { " +
+        "        inlineMath: [ ['$','$'] ], " +
+        "        displayMath: [ ['$$','$$'] ]," +
+        "        processEscapes: true," +
+        "        preview: 'TeX'," +
+        "    }, " +
+        "    'HTML-CSS': { " +
+        " linebreaks: { automatic: true, width: '95% container' }, " +
+        "        styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: 'black ! important'} }" +
+        "    } " +
+        "}); ";
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
+}
+</script>
+</div>
+    <footer>
+<p class="meta">
+  <span class="byline author vcard">
+    Posted by <span class="fn">Benjamin Du</span>
+  </span>
+<time datetime="2021-10-14T21:13:48-07:00" pubdate>Oct 14, 2021</time>  <span class="categories">
+    <a class="category" href="https://misc.legendu.net/tag/computer-science.html">Computer Science</a>
+    <a class="category" href="https://misc.legendu.net/tag/programming.html">programming</a>
+    <a class="category" href="https://misc.legendu.net/tag/rust.html">Rust</a>
+    <a class="category" href="https://misc.legendu.net/tag/polars.html">Polars</a>
+    <a class="category" href="https://misc.legendu.net/tag/dataframe.html">DataFrame</a>
+    <a class="category" href="https://misc.legendu.net/tag/big-data.html">big data</a>
+    <a class="category" href="https://misc.legendu.net/tag/python.html">Python</a>
+  </span>
+</p>    </footer>
+  </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div>
+  </section>
+</div>
+<aside class="sidebar">
+  <section>
+    <h1>Recent Posts</h1>
+    <ul id="recent_posts">
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/tips-on-health/">Tips on Health</a>
+      </li>
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/tips-on-child-education/">Tips on Child Education</a>
+      </li>
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/tips-on-fd/">Tips on fd</a>
+      </li>
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/the-fzf-command-is-a-great-alternative-to-find/">The fzf Command Is a Great Alternative to find</a>
+      </li>
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/ruff-is-an-extremely-fast-python-linter-written-in-rust/">Ruff Is An Extremely Fast Python Linter Written in Rust</a>
+      </li>
+    </ul>
+  </section>
+  <section>
+    <h1>Categories</h1>
+    <ul id="recent_posts">
+        <li><a href="https://misc.legendu.net/category/ai.html">AI</a></li>
+        <li><a href="https://misc.legendu.net/category/career.html">Career</a></li>
+        <li><a href="https://misc.legendu.net/category/cloud.html">Cloud</a></li>
+        <li><a href="https://misc.legendu.net/category/computer-science.html">Computer Science</a></li>
+        <li><a href="https://misc.legendu.net/category/fiannce.html">Fiannce</a></li>
+        <li><a href="https://misc.legendu.net/category/finance.html">Finance</a></li>
+        <li><a href="https://misc.legendu.net/category/fun-problems.html">Fun Problems</a></li>
+        <li><a href="https://misc.legendu.net/category/hardware.html">Hardware</a></li>
+        <li><a href="https://misc.legendu.net/category/health.html">Health</a></li>
+        <li><a href="https://misc.legendu.net/category/house.html">House</a></li>
+        <li><a href="https://misc.legendu.net/category/internet.html">Internet</a></li>
+        <li><a href="https://misc.legendu.net/category/investment.html">Investment</a></li>
+        <li><a href="https://misc.legendu.net/category/life.html">life</a></li>
+        <li><a href="https://misc.legendu.net/category/linux.html">Linux</a></li>
+        <li><a href="https://misc.legendu.net/category/os.html">OS</a></li>
+        <li><a href="https://misc.legendu.net/category/people.html">People</a></li>
+        <li><a href="https://misc.legendu.net/category/philosophy.html">Philosophy</a></li>
+        <li><a href="https://misc.legendu.net/category/research.html">Research</a></li>
+        <li><a href="https://misc.legendu.net/category/shopping.html">Shopping</a></li>
+        <li><a href="https://misc.legendu.net/category/soft-skills.html">soft skills</a></li>
+        <li><a href="https://misc.legendu.net/category/software.html">Software</a></li>
+        <li><a href="https://misc.legendu.net/category/statistics.html">Statistics</a></li>
+        <li><a href="https://misc.legendu.net/category/tools.html">Tools</a></li>
+    </ul>
+  </section>
+ 
+
+  <section>
+  <h1>Tags</h1>
+  <ul class="tagcloud">
+  </ul>
+  </section>
+
+
+
+  <section>
+    <h1>GitHub Repos</h1>
+    <ul id="gh_repos">
+      <li class="loading">Status updating...</li>
+    </ul>
+      <a href="https://github.com/legendu-net">@legendu-net</a> on GitHub
+    <script type="text/javascript">
+      $.domReady(function(){
+          if (!window.jXHR){
+              var jxhr = document.createElement('script');
+              jxhr.type = 'text/javascript';
+              jxhr.src = 'https://misc.legendu.net/theme/js/jXHR.js';
+              var s = document.getElementsByTagName('script')[0];
+              s.parentNode.insertBefore(jxhr, s);
+          }
+
+          github.showRepos({
+              user: 'legendu-net',
+              count: 5,
+              skip_forks: true,
+              target: '#gh_repos'
+          });
+      });
+    </script>
+    <script src="https://misc.legendu.net/theme/js/github.js" type="text/javascript"> </script>
+  </section>
+
+    <section>
+        <h1>Social</h2>
+        <ul>
+            <li><a href="https://www.linkedin.com/in/ben-chuanlong-du-1239b221/" target="_blank">LinkedIn</a></li>
+            <li><a href="https://hub.docker.com/u/dclong" target="_blank">Docker Hub</a></li>
+            <li><a href="https://stackoverflow.com/users/7808204/benjamin-du?tab=profile" target="_blank">Stack Overflow</a></li>
+            <li><a href="https://twitter.com/longendu" target="_blank">Twitter</a></li>
+        <!--
+            <li><a href="https://misc.legendu.net/" type="application/rss+xml" rel="alternate">RSS</a></li>
+            -->
+        </ul>
+    </section>
+</aside>    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Ben Chuanlong Du -
+  <span class="credit">Powered by <a href="http://getpelican.com">Pelican</a></span>
+</p></footer>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-3STS9BVPF6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-3STS9BVPF6');
+</script>
+	<script type="text/javascript">
+	  var disqus_shortname = 'dclong';
+          var disqus_identifier = '/blog/python-polars/';
+          var disqus_url = 'https://misc.legendu.net/blog/python-polars/';
+          var disqus_title = 'Hands on the Polars Library in Python';
+	  (function() {
+	    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	    dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+	    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	   })();
+	</script>
+</body>
+</html>

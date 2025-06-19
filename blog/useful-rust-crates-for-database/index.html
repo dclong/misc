@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Useful Rust Crates for Database</title>
+  <meta name="author" content="Ben Chuanlong Du">
+
+  <link href="https://misc.legendu.net/atom.xml" type="application/atom+xml" rel="alternate"
+        title="Ben Chuanlong Du's Blog Atom Feed" />
+
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link href="https://misc.legendu.net/favicon.png" rel="icon">
+  <link href="https://misc.legendu.net/theme/css/main_2.css" media="screen, projection"
+        rel="stylesheet" type="text/css">
+  <script src="https://misc.legendu.net/theme/js/modernizr-2.0.js"></script>
+  <script src="https://misc.legendu.net/theme/js/ender.js"></script>
+  <script src="https://misc.legendu.net/theme/js/octopress.js" type="text/javascript"></script>
+
+  <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <script data-ad-client="ca-pub-3836424032203369" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+</head>
+
+<body>
+  <header role="banner"><hgroup>
+  <h1><a href="https://misc.legendu.net/">Ben Chuanlong Du's Blog</a></h1>
+    <h2>It is never too late to learn.</h2>
+</hgroup></header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="https://misc.legendu.net/atom.xml" rel="subscribe-rss">RSS</a></li>
+</ul>
+
+<form name="search" action="https://www.bing.com/search" method="get" onSubmit="return build_query()">
+  <fieldset role="search">
+      <!--
+    <input type="hidden" name="q" value="site:https://misc.legendu.net" />
+        -->
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+
+<script type = "text/javascript">
+    function build_query() {
+        var query = document.forms["search"]["q"].value;
+        var prefix = "site:https://misc.legendu.net "
+        if (!query.startsWith(prefix)) {
+            query = prefix + query;
+            document.forms["search"]["q"].value = query;
+        }
+        return true;
+    }
+</script>
+
+<ul class="main-navigation">
+    <li><a href="https://www.legendu.net">Home</a></li>
+    <li><a href="https://misc.legendu.net">Blog</a></li>
+    <li><a href="https://misc.legendu.net/archives.html">Archives</a></li>
+    <li><a href="https://misc.legendu.net/categories.html">Categories</a></li>
+    <li><a href="https://misc.legendu.net/tags.html">Tags</a></li>
+    <li><a href="https://www.legendu.net/pages/about">About</a></li>
+</ul></nav>
+  <div id="main">
+    <div id="content">
+<div>
+  <article class="hentry" role="article">
+<header>
+      <h1 class="entry-title">Useful Rust Crates for Database</h1>
+      <p class="meta"><time datetime="2023-01-13T15:46:22-08:00" pubdate>Jan 13, 2023</time></p>
+</header>
+
+  <div class="entry-content"><p><strong>Things on this page are fragmentary and immature notes/thoughts of the author. Please read with your own judgement!</strong></p>
+<h2 id="neon"><a href="https://github.com/neondatabase/neon">Neon</a></h2>
+<p><a href="https://github.com/neondatabase/neon">Neon</a>
+is a serverless open-source alternative to AWS Aurora Postgres. 
+It separates storage and compute and substitutes the PostgreSQL storage layer 
+by redistributing data across a cluster of nodes.</p>
+<h2 id="sqlx"><a href="https://github.com/launchbadge/sqlx">sqlx</a></h2>
+<p><a href="HTTPS://GITHUB.COM/LAUNCHBADGE/SQLX">SQLx</a>
+is an async, pure Rust† SQL crate featuring compile-time checked queries without a DSL.
+Supports PostgreSQL, MySQL, and SQLite.</p>
+<h2 id="gluesql"><a href="https://github.com/gluesql/gluesql">gluesql</a></h2>
+<p><a href="https://github.com/gluesql/gluesql">GlueSQL</a>
+is an open source SQL database engine fully written in Rust 
+with pure functional execution layer, 
+easily swappable storage and web assembly support!</p>
+<h2 id="surrealdb"><a href="https://github.com/surrealdb/surrealdb">surrealdb</a></h2>
+<p><a href="https://github.com/surrealdb/surrealdb">SurrealDB</a>
+is an end-to-end cloud native database for web, mobile, serverless, Jamstack, backend, and traditional applications. 
+SurrealDB reduces the development time of modern applications by simplifying your database and API stack, 
+removing the need for most server-side components, 
+and allowing you to build secure, performant apps quicker and cheaper. 
+SurrealDB acts as both a database and a modern, real-time, collaborative API backend layer. 
+SurrealDB can run as a single server or in a highly-available, 
+highly-scalable distributed mode, 
+with support for SQL querying from client devices, GraphQL, ACID transactions, WebSocket connections, structured 
+and unstructured data, graph querying, full-text indexing, geospatial querying, and row-by-row permissions-based access.</p>
+<p>https://github.com/quickwit-oss/quickwit</p>
+<p>https://github.com/cberner/redb</p>
+<p>https://github.com/quickwit-oss/tantivy</p>
+<h2 id="indradb"><a href="https://github.com/indradb/indradb">indradb</a></h2>
+<p><a href="https://github.com/indradb/indradb">indradb</a>
+is a graph database written in rust.</p>
+<h2 id="oxigraph"><a href="https://github.com/oxigraph/oxigraph/">oxigraph/</a></h2>
+<p><a href="https://github.com/oxigraph/oxigraph/">oxigraph/</a>
+Oxigraph is a graph database implementing the SPARQL standard.
+Its goal is to provide a compliant, safe, 
+and fast graph database based on the RocksDB and Sled key-value stores. 
+It is written in Rust. 
+It also provides a set of utility functions for reading, writing, and processing RDF files.
+Oxigraph is in heavy development and SPARQL query evaluation has not been optimized yet.</p>
+<h3 id="skytable"><a href="https://github.com/skytable/skytable">skytable</a></h3>
+<p><a href="https://github.com/skytable/skytable">Skytable</a>
+is a free and open-source NoSQL database 
+that aims to provide flexible data modeling at scale. 
+Simplicity, performance and flexibility are the guiding design principles.</p>
+<h3 id="bolt-rs"><a href="https://github.com/lucis-fluxum/bolt-rs">bolt-rs</a></h3>
+<p><a href="https://github.com/lucis-fluxum/bolt-rs">bolt-rs</a>
+aims to provide a comprehensive set of libraries 
+that allow for interaction with graph database servers 
+that support the Bolt protocol, namely, Neo4j. 
+This set of libraries allows interacting with servers 
+supporting versions 1 through 4.1 of the protocol, 
+which includes Neo4j 3.1 through 4.2.</p>
+<h3 id="neo4rs"><a href="https://github.com/yehohanan7/neo4rs">neo4rs</a></h3>
+<p><a href="https://github.com/yehohanan7/neo4rs">Neo4rs</a>
+is a Neo4j rust driver implemented using bolt specification.
+This driver is compatible with neo4j 4.x versions</p>
+<h2 id="qdrant"><a href="https://github.com/qdrant/qdrant">qdrant</a></h2>
+<p><a href="https://github.com/qdrant/qdrant">Qdrant</a>
+is a vector similarity search engine and vector database. 
+It provides a production-ready service with a convenient API 
+to store, search, and manage points - vectors with an additional payload. 
+Qdrant is tailored to extended filtering support. 
+It makes it useful for all sorts of neural-network or semantic-based matching, faceted search, and other applications.</p>
+<h2 id="embedded-databases">Embedded Databases</h2>
+<p>https://github.com/tursodatabase/limbo
+Limbo is a project to build the modern evolution of SQLite.</p>
+<h3 id="rusqlite"><a href="https://crates.io/crates/rusqlite">rusqlite</a></h3>
+<p><a href="https://crates.io/crates/rusqlite">rusqlite</a>
+is an ergonomic wrapper for SQLite.</p>
+<p>SurrealDB
+https://surrealdb.com/docs/surrealdb/embedding
+can be embedded.</p>
+<p>https://github.com/PoloDB/PoloDB
+PoloDB is an embedded document database.</p>
+<h2 id="sled"><a href="https://github.com/spacejam/sled">sled</a></h2>
+<p><a href="https://github.com/spacejam/sled">sled</a>
+is an embedded key-value pair databases written in Rust.</p>
+<p>https://github.com/vincent-herlemont/native_db
+Drop-in embedded database in Rust</p>
+<p>https://github.com/tonbo-io/tonbo
+A portable embedded database using Arrow.</p>
+<h2 id="olap-specific-databases">OLAP Specific Databases</h2>
+<h3 id="seafowl"><a href="https://github.com/splitgraph/seafowl">seafowl</a></h3>
+<p><a href="https://github.com/splitgraph/seafowl">Seafowl</a>
+is an analytical database for modern data-driven Web applications.
+Its CDN and HTTP cache-friendly query execution API 
+lets you deliver data to your visualizations, 
+dashboards and notebooks by running SQL straight from the user's browser.</p>
+<h2 id="time-series-databases">Time Series Databases</h2>
+<h3 id="ceresdb"><a href="https://github.com/CeresDB/ceresdb">ceresdb</a></h3>
+<p><a href="https://github.com/CeresDB/ceresdb">CeresDB</a>
+is a high-performance, distributed, cloud native time-series database.</p>
+<h3 id="cnosdb"><a href="https://github.com/cnosdb/cnosdb">cnosdb</a></h3>
+<p><a href="https://github.com/cnosdb/cnosdb">CnosDB</a>
+An Open Source Distributed Time Series Database with high performance, high compression ratio and high usability.</p>
+<h3 id="influxdb_iox"><a href="https://github.com/influxdata/influxdb_iox">influxdb_iox</a></h3>
+<p><a href="https://github.com/influxdata/influxdb_iox">Influxdb IOX</a>
+(short for Iron Oxide, pronounced InfluxDB "eye-ox") 
+is the future core of InfluxDB, an open source time series database. 
+The name is in homage to Rust, 
+the language this project is written in. 
+It is built using Apache Arrow and DataFusion among other things. </p>
+<h2 id="storage">Storage</h2>
+<h3 id="datenlord"><a href="https://github.com/datenlord/datenlord">datenlord</a></h3>
+<p><a href="https://github.com/datenlord/datenlord">DatenLord</a>
+is a next-generation cloud-native distributed storage platform, 
+which aims to meet the performance-critical storage needs from next-generation cloud-native applications, such as microservice, serverless, AI, etc. On one hand, DatenLord is designed to be a cloud-native storage system, which itself is distributed, fault-tolerant, and graceful upgrade. These cloud-native features make DatenLord easy to use and easy to maintain. On the other hand, DatenLord is designed as an application-orientated storage system, in that DatenLord is optimized for many performance-critical scenarios, such as databases, AI machine learning, big data. Meanwhile, DatenLord provides high-performance storage service for containers, which facilitates stateful applications running on top of Kubernetes (K8S). The high performance of DatenLord is achieved by leveraging the most recent technology revolution in hardware and software, such as NVMe, non-volatile memory, asynchronous programming, and the native Linux asynchronous IO support.</p>
+<h2 id="log-storage">Log Storage</h2>
+<p>openobserve
+https://github.com/openobserve/openobserve
+OpenObserve is a cloud native observability platform built specifically for logs, metrics, traces and analytics designed to work at petabyte scale.
+🚀 10x easier, 🚀 140x lower storage cost, 🚀 high performance, 🚀 petabyte scale - Elasticsearch/Splunk/Datadog alternative for 🚀 (logs, metrics, traces).</p>
+<h3 id="parseable"><a href="https://github.com/parseablehq/parseable">parseable</a></h3>
+<p><a href="https://github.com/parseablehq/parseable">Parseable</a>
+is a lightweight, cloud native log observability engine. 
+It can use either a local drive or S3 (and compatible stores) for backend data storage.
+Parseable is written in Rust and uses Apache Arrow and Parquet as underlying data structures. 
+Additionally, it uses a simple, index-free mechanism to organize and query data allowing low latency, 
+and high throughput ingestion and query.</p>
+<h3 id="zincobserve"><a href="https://github.com/zinclabs/zincobserve">zincobserve</a></h3>
+<p><a href="https://github.com/zinclabs/zincobserve">ZincObserve</a>
+is a cloud native observability platform built specifically 
+for logs, metrics, traces and analytics designed to work at petabyte scale.
+It is very simple and easy to operate as opposed to Elasticsearch 
+which requires a couple dozen knobs to understand and tune 
+which you can get up and running in under 2 minutes.
+It is a drop-in replacement for Elasticsearch 
+if you are just ingesting data using APIs 
+and searching using kibana (Kibana is not supported nor required with ZincObserve. 
+ZincObserve provides its own UI which does not require separate installation unlike kibana).</p>
+<h2 id="minio-rs"><a href="https://github.com/minio/minio-rs">minio-rs</a></h2>
+<p><a href="https://github.com/minio/minio-rs">MinIO Rust SDK</a>
+is Simple Storage Service (aka S3) client 
+to perform bucket and object operations to any Amazon S3 compatible object storage service.</p>
+<h2 id="cache">Cache</h2>
+<p>https://github.com/06chaynes/http-cache
+A caching middleware that follows HTTP caching rules
+A caching middleware that follows HTTP caching rules, thanks to http-cache-semantics. By default, it uses cacache as the backend cache manager.</p>
+<h2 id="data-layer">Data Layer</h2>
+<p>https://github.com/vectordotdev/vector
+Vector is a high-performance, end-to-end (agent &amp; aggregator) observability data pipeline that puts you in control of your observability data. Collect, transform, and route all your logs, metrics, and traces to any vendors you want today and any other vendors you may want tomorrow. Vector enables dramatic cost reduction, novel data enrichment, and data security where you need it, not where it is most convenient for your vendors. Additionally, it is open source and up to 10x faster than every alternative in the space.</p>
+<p>https://github.com/grafbase/grafbase</p>
+<h3 id="dozer"><a href="https://github.com/getdozer/dozer">Dozer</a></h3>
+<p><a href="https://github.com/getdozer/dozer">Dozer</a>
+makes it easy to build low-latency data APIs (gRPC and REST) from any data source. 
+Data is transformed on the fly 
+using Dozer's reactive SQL engine and stored in a high-performance cache 
+to offer the best possible experience. 
+Dozer is useful for quickly building data products.</p>
+<h3 id="opendal"><a href="https://github.com/apache/incubator-opendal">OpenDal</a></h3>
+<p><a href="https://github.com/apache/incubator-opendal">Apache OpenDal</a>
+makes data accessing freely, painlessly, and efficiently.</p>
+<h3 id="cubejs"><a href="https://github.com/cube-js/cube.js">cube.js</a></h3>
+<p><a href="https://github.com/cube-js/cube.js">cube.js</a>
+is the semantic layer for building data applications. 
+It helps data engineers and application developers access data from modern data stores, 
+organize it into consistent definitions, and deliver it to every application.</p>
+<h2 id="database-clients-for-rust">Database Clients for Rust</h2>
+<p>Please refer to 
+<a href="https://www.legendu.net/misc/blog/querying-a-sql-database-in-rust">Database Clients for Rust</a>
+for details
+.</p>
+<h2 id="metrics-and-monitoring">Metrics and Monitoring</h2>
+<p>https://github.com/frolicorg/frolic
+Frolic is an open source project (written in Rust) to build customer facing dashboards 10x faster. You can directly connect your database to the project and use ready made APIs to query data and create customer facing dashboards. You can also use frolic-react for your UI along with frolic to create full stack dashboards much faster.</p>
+<h2 id="command-line-tools">Command-line Tools</h2>
+<p>https://github.com/timvw/qv
+A simply CLI to quickly view your data. Powered by DataFusion.</p>
+<h2 id="big-data">Big Data</h2>
+<ul>
+<li>
+<p><a href="https://github.com/rewrite-bigdata-in-rust/RBIR">rewrite-bigdata-in-rust/RBIR</a></p>
+<p>A collection of RBIR projects and posts for anyone interested in joining this journey.</p>
+</li>
+<li>
+<p><a href="https://www.xenonstack.com/blog/rust-big-data-applications">Rust for Big Data and Parallel Processing Applications</a></p>
+</li>
+</ul>
+<h3 id="datafuse"><a href="https://github.com/datafuselabs/datafuse">datafuse</a></h3>
+<h3 id="fluvio"><a href="https://github.com/infinyon/fluvio">fluvio</a></h3>
+<h3 id="databend"><a href="https://github.com/datafuselabs/databend">DataBend</a></h3>
+<h3 id="kamu-cli"><a href="https://github.com/kamu-data/kamu-cli">kamu-cli</a></h3>
+<h3 id="datafusion"><a href="http://www.legendu.net/misc/blog/tips-on-datafusion">datafusion</a></h3>
+<h3 id="ballista"><a href="https://github.com/apache/arrow-ballista">ballista</a></h3>
+<h3 id="polars"><a href="http://www.legendu.net/misc/blog/tips-on-polars">Polars</a></h3>
+<h2 id="references">References</h2>
+<ul>
+<li>
+<p><a href="https://stackoverflow.com/questions/56472727/difference-between-apache-parquet-and-arrow">Difference between Apache parquet and arrow</a></p>
+</li>
+<li>
+<p>https://arrow.apache.org/</p>
+</li>
+<li>
+<p><a href="https://h2oai.github.io/db-benchmark/">Database-like ops benchmark</a></p>
+</li>
+<li>
+<p><a href="https://blog.devgenius.io/rust-for-big-data-40fc48df9703">Rust For Big Data!</a></p>
+</li>
+<li>
+<p><a href="https://jlgjosue.medium.com/cube-creating-a-semantic-data-layer-a947fd0b6a5c">Cube: Creating a Semantic Data Layer!</a></p>
+</li>
+</ul></div>
+    <footer>
+<p class="meta">
+  <span class="byline author vcard">
+    Posted by <span class="fn">Benjamin Du</span>
+  </span>
+<time datetime="2023-01-13T15:46:22-08:00" pubdate>Jan 13, 2023</time>  <span class="categories">
+    <a class="category" href="https://misc.legendu.net/tag/computer-science.html">Computer Science</a>
+    <a class="category" href="https://misc.legendu.net/tag/programming.html">programming</a>
+    <a class="category" href="https://misc.legendu.net/tag/rust.html">Rust</a>
+    <a class="category" href="https://misc.legendu.net/tag/database.html">database</a>
+    <a class="category" href="https://misc.legendu.net/tag/crate.html">crate</a>
+    <a class="category" href="https://misc.legendu.net/tag/sql.html">SQL</a>
+    <a class="category" href="https://misc.legendu.net/tag/big-data.html">big data</a>
+    <a class="category" href="https://misc.legendu.net/tag/streaming.html">streaming</a>
+  </span>
+</p>    </footer>
+  </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div>
+  </section>
+</div>
+<aside class="sidebar">
+  <section>
+    <h1>Recent Posts</h1>
+    <ul id="recent_posts">
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/tips-on-health/">Tips on Health</a>
+      </li>
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/tips-on-child-education/">Tips on Child Education</a>
+      </li>
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/tips-on-fd/">Tips on fd</a>
+      </li>
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/the-fzf-command-is-a-great-alternative-to-find/">The fzf Command Is a Great Alternative to find</a>
+      </li>
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/ruff-is-an-extremely-fast-python-linter-written-in-rust/">Ruff Is An Extremely Fast Python Linter Written in Rust</a>
+      </li>
+    </ul>
+  </section>
+  <section>
+    <h1>Categories</h1>
+    <ul id="recent_posts">
+        <li><a href="https://misc.legendu.net/category/ai.html">AI</a></li>
+        <li><a href="https://misc.legendu.net/category/career.html">Career</a></li>
+        <li><a href="https://misc.legendu.net/category/cloud.html">Cloud</a></li>
+        <li><a href="https://misc.legendu.net/category/computer-science.html">Computer Science</a></li>
+        <li><a href="https://misc.legendu.net/category/fiannce.html">Fiannce</a></li>
+        <li><a href="https://misc.legendu.net/category/finance.html">Finance</a></li>
+        <li><a href="https://misc.legendu.net/category/fun-problems.html">Fun Problems</a></li>
+        <li><a href="https://misc.legendu.net/category/hardware.html">Hardware</a></li>
+        <li><a href="https://misc.legendu.net/category/health.html">Health</a></li>
+        <li><a href="https://misc.legendu.net/category/house.html">House</a></li>
+        <li><a href="https://misc.legendu.net/category/internet.html">Internet</a></li>
+        <li><a href="https://misc.legendu.net/category/investment.html">Investment</a></li>
+        <li><a href="https://misc.legendu.net/category/life.html">life</a></li>
+        <li><a href="https://misc.legendu.net/category/linux.html">Linux</a></li>
+        <li><a href="https://misc.legendu.net/category/os.html">OS</a></li>
+        <li><a href="https://misc.legendu.net/category/people.html">People</a></li>
+        <li><a href="https://misc.legendu.net/category/philosophy.html">Philosophy</a></li>
+        <li><a href="https://misc.legendu.net/category/research.html">Research</a></li>
+        <li><a href="https://misc.legendu.net/category/shopping.html">Shopping</a></li>
+        <li><a href="https://misc.legendu.net/category/soft-skills.html">soft skills</a></li>
+        <li><a href="https://misc.legendu.net/category/software.html">Software</a></li>
+        <li><a href="https://misc.legendu.net/category/statistics.html">Statistics</a></li>
+        <li><a href="https://misc.legendu.net/category/tools.html">Tools</a></li>
+    </ul>
+  </section>
+ 
+
+  <section>
+  <h1>Tags</h1>
+  <ul class="tagcloud">
+  </ul>
+  </section>
+
+
+
+  <section>
+    <h1>GitHub Repos</h1>
+    <ul id="gh_repos">
+      <li class="loading">Status updating...</li>
+    </ul>
+      <a href="https://github.com/legendu-net">@legendu-net</a> on GitHub
+    <script type="text/javascript">
+      $.domReady(function(){
+          if (!window.jXHR){
+              var jxhr = document.createElement('script');
+              jxhr.type = 'text/javascript';
+              jxhr.src = 'https://misc.legendu.net/theme/js/jXHR.js';
+              var s = document.getElementsByTagName('script')[0];
+              s.parentNode.insertBefore(jxhr, s);
+          }
+
+          github.showRepos({
+              user: 'legendu-net',
+              count: 5,
+              skip_forks: true,
+              target: '#gh_repos'
+          });
+      });
+    </script>
+    <script src="https://misc.legendu.net/theme/js/github.js" type="text/javascript"> </script>
+  </section>
+
+    <section>
+        <h1>Social</h2>
+        <ul>
+            <li><a href="https://www.linkedin.com/in/ben-chuanlong-du-1239b221/" target="_blank">LinkedIn</a></li>
+            <li><a href="https://hub.docker.com/u/dclong" target="_blank">Docker Hub</a></li>
+            <li><a href="https://stackoverflow.com/users/7808204/benjamin-du?tab=profile" target="_blank">Stack Overflow</a></li>
+            <li><a href="https://twitter.com/longendu" target="_blank">Twitter</a></li>
+        <!--
+            <li><a href="https://misc.legendu.net/" type="application/rss+xml" rel="alternate">RSS</a></li>
+            -->
+        </ul>
+    </section>
+</aside>    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Ben Chuanlong Du -
+  <span class="credit">Powered by <a href="http://getpelican.com">Pelican</a></span>
+</p></footer>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-3STS9BVPF6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-3STS9BVPF6');
+</script>
+	<script type="text/javascript">
+	  var disqus_shortname = 'dclong';
+          var disqus_identifier = '/blog/useful-rust-crates-for-database/';
+          var disqus_url = 'https://misc.legendu.net/blog/useful-rust-crates-for-database/';
+          var disqus_title = 'Useful Rust Crates for Database';
+	  (function() {
+	    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	    dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+	    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	   })();
+	</script>
+</body>
+</html>

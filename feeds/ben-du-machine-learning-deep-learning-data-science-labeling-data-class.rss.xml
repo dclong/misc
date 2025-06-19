@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0"><channel><title>Ben Chuanlong Du's Blog - Ben Du, machine learning, deep learning, data science, labeling, data, class</title><link>https://misc.legendu.net/</link><description>It is never too late to learn.</description><lastBuildDate>Sat, 11 Jun 2022 15:46:37 -0700</lastBuildDate><item><title>Label Image Data Quickly Without Crowdsourcing</title><link>https://misc.legendu.net/blog/label-image-data-quickly-without-crowdsourcing/</link><description>&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;If you have to label images for your project but have no budget for crowdsourcing,
+here are some simple tips
+which might help you reduce time on human labeling significantly.&lt;/p&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h2 id="Approach-0:-Train-a-Model-on-Already-Labeled-Data-and-Use-it-to-Label-New-Data"&gt;Approach 0: Train a Model on Already Labeled Data and Use it to Label New Data&lt;a class="anchor-link" href="#Approach-0:-Train-a-Model-on-Already-Labeled-Data-and-Use-it-to-Label-New-Data"&gt;&amp;#182;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;If you already have some labeled data,
+you can train a simple model on it 
+and use it to help you label new data.&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Ben Du, machine learning, deep learning, data science, labeling, data, class</dc:creator><pubDate>Thu, 16 Apr 2020 11:47:14 -0700</pubDate><guid isPermaLink="false">tag:misc.legendu.net,2020-04-16:/blog/label-image-data-quickly-without-crowdsourcing/</guid><category>Computer Science</category><category>Computer Science</category></item></channel></rss>

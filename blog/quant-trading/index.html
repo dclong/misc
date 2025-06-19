@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Quant Trading</title>
+  <meta name="author" content="Ben Chuanlong Du">
+
+  <link href="https://misc.legendu.net/atom.xml" type="application/atom+xml" rel="alternate"
+        title="Ben Chuanlong Du's Blog Atom Feed" />
+
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link href="https://misc.legendu.net/favicon.png" rel="icon">
+  <link href="https://misc.legendu.net/theme/css/main_2.css" media="screen, projection"
+        rel="stylesheet" type="text/css">
+  <script src="https://misc.legendu.net/theme/js/modernizr-2.0.js"></script>
+  <script src="https://misc.legendu.net/theme/js/ender.js"></script>
+  <script src="https://misc.legendu.net/theme/js/octopress.js" type="text/javascript"></script>
+
+  <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <script data-ad-client="ca-pub-3836424032203369" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+</head>
+
+<body>
+  <header role="banner"><hgroup>
+  <h1><a href="https://misc.legendu.net/">Ben Chuanlong Du's Blog</a></h1>
+    <h2>It is never too late to learn.</h2>
+</hgroup></header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="https://misc.legendu.net/atom.xml" rel="subscribe-rss">RSS</a></li>
+</ul>
+
+<form name="search" action="https://www.bing.com/search" method="get" onSubmit="return build_query()">
+  <fieldset role="search">
+      <!--
+    <input type="hidden" name="q" value="site:https://misc.legendu.net" />
+        -->
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+
+<script type = "text/javascript">
+    function build_query() {
+        var query = document.forms["search"]["q"].value;
+        var prefix = "site:https://misc.legendu.net "
+        if (!query.startsWith(prefix)) {
+            query = prefix + query;
+            document.forms["search"]["q"].value = query;
+        }
+        return true;
+    }
+</script>
+
+<ul class="main-navigation">
+    <li><a href="https://www.legendu.net">Home</a></li>
+    <li><a href="https://misc.legendu.net">Blog</a></li>
+    <li><a href="https://misc.legendu.net/archives.html">Archives</a></li>
+    <li><a href="https://misc.legendu.net/categories.html">Categories</a></li>
+    <li><a href="https://misc.legendu.net/tags.html">Tags</a></li>
+    <li><a href="https://www.legendu.net/pages/about">About</a></li>
+</ul></nav>
+  <div id="main">
+    <div id="content">
+<div>
+  <article class="hentry" role="article">
+<header>
+      <h1 class="entry-title">Quant Trading</h1>
+      <p class="meta"><time datetime="2016-06-09T19:32:27-07:00" pubdate>Jun 09, 2016</time></p>
+</header>
+
+  <div class="entry-content"><p><strong>Things on this page are fragmentary and immature notes/thoughts of the author. Please read with your own judgement!</strong></p>
+<p>https://www.quantstart.com/</p>
+<p>https://github.com/edtechre/pybroker</p>
+<p>https://github.com/whittlem/pycryptobot</p>
+<p>https://github.com/asavinov/intelligent-trading-bot</p>
+<h2 id="forums-discussions">Forums &amp; Discussions</h2>
+<ul>
+<li><a href="https://www.ml-quant.com/public">ML-Quant</a></li>
+</ul>
+<h2 id="quant-trading-libraries">Quant Trading Libraries</h2>
+<h2 id="general">General</h2>
+<ol>
+<li>
+<p><a href="https://github.com/avhz/RustQuant">RustQuant</a>
+    is a Rust library for quantitative finance.</p>
+</li>
+<li>
+<p><a href="https://github.com/zvtvz/zvt">zvt</a>
+    is a modular quant framework.</p>
+</li>
+</ol>
+<h3 id="technical-analysis">Technical Analysis</h3>
+<ol>
+<li>
+<p><a href="https://github.com/TA-Lib/ta-lib">TA-Lib</a>
+    is an open-source technical analysis library for financial applications. 
+    It provides a wide range of technical indicators and functions for analyzing financial market data.</p>
+</li>
+<li>
+<p><a href="https://github.com/lballabio/quantlib">QuantLib</a>
+    is aimed at providing a comprehensive software framework for quantitative finance. 
+    QuantLib is a free/open-source library for modeling, trading, and risk management in real-life.</p>
+</li>
+<li>
+<p><a href="https://github.com/pmorissette/ffn">ffn</a>
+    is a library that contains many useful functions 
+    for those who work in quantitative finance. 
+    It stands on the shoulders of giants (Pandas, Numpy, Scipy, etc.) 
+    and provides a vast array of utilities, 
+    from performance measurement and evaluation to graphing and common data transformations.</p>
+</li>
+<li>
+<p><a href="https://github.com/convexfi/riskparity.py">riskparity.py</a>
+    riskparityportfolio provides solvers to design risk parity portfolios. 
+    In its simplest form, we consider the convex formulation with a unique solution proposed by Spinu (2013) and use cyclical methods inspired by Griveau-Billion et al. (2013) and Choi &amp; Chen (2022). 
+    For more general formulations, which are usually nonconvex, 
+    we implement the successive convex approximation method proposed by Feng &amp; Palomar (2015).</p>
+</li>
+</ol>
+<h3 id="indicators">Indicators</h3>
+<ol>
+<li>
+<p><a href="https://github.com/TA-Lib/ta-lib">TA-Lib</a>
+    is an open-source technical analysis library for financial applications. 
+    It provides a wide range of technical indicators and functions for analyzing financial market data.</p>
+</li>
+<li>
+<p><a href="https://github.com/cinar/indicator">indicator</a>
+    is a Golang module providing various stock technical analysis indicators for trading.</p>
+</li>
+<li>
+<p><a href="https://github.com/facioquo/stock-indicators-python">stock-indicators-python</a>
+    is a PyPI library package that produces financial market technical indicators. 
+    Send in historical price quotes and get back desired indicators 
+    such as moving averages, Relative Strength Index, Stochastic Oscillator, Parabolic SAR, etc. Nothing more.
+    <a href="https://github.com/facioquo/stock-indicators-python">stock-indicators-python</a>
+    is based on
+    <a href="https://github.com/DaveSkender/Stock.Indicators">Stock.Indicators</a>
+    which is implemented in C#.</p>
+</li>
+<li>
+<p><a href="https://tulipindicators.org/">Tulip Indicators</a>
+    is a library of functions for technical analysis of financial time series data. 
+    It is written in ANSI C for speed and portability. 
+    Bindings are available for many other programming languages too.</p>
+</li>
+<li>
+<p><a href="https://github.com/MathisWellmann/trade_aggregation-rs">trade_aggregation-rs</a>
+    is a high performance, modular and flexible trade aggregation crate, producing Candle data, 
+    suitable for low-latency applications and incremental updates. 
+    It allows the user to choose the rule dictating how a new candle is created through the AggregationRule trait, e.g: Time, Volume based or some other information driven rule. 
+    It also allows the user to choose which type of candle will be created from the aggregation process through the ModularCandle trait. 
+    Combined with the Candle macro, it enables the user to flexibly create any type of Candle as long as each component implements the CandleComponent trait. 
+    The aggregation process is also generic over the type of input trade data as long as it implements the TakerTrade trait, allowing for greater flexibility for downstream projects.</p>
+</li>
+<li>
+<p><a href="https://github.com/MathisWellmann/sliding_features-rs">sliding_features-rs</a>
+    provides modular, chainable sliding windows with various signal processing functions and technical indicators.</p>
+</li>
+</ol>
+<h3 id="calendar">Calendar</h3>
+<ol>
+<li>[python-bizdays] (https://github.com/wilsonfreitas/python-bizdays)
+    offers business days calculations and utilities.</li>
+</ol>
+<h3 id="backtesting">Backtesting</h3>
+<ol>
+<li>
+<p><a href="https://github.com/pmorissette/bt">bt</a>
+    is a flexible backtesting framework 
+    for Python used to test quantitative trading strategies. 
+    Backtesting is the process of testing a strategy over a given data set. 
+    This framework allows you to easily create strategies that mix and match different Algos. 
+    It aims to foster the creation of easily testable, 
+    re-usable and flexible blocks of strategy logic 
+    to facilitate the rapid development of complex trading strategies.</p>
+</li>
+<li>
+<p><a href="https://github.com/polakowo/vectorbt">vectorbt</a>
+    is a powerful Python library that enables easy backtesting 
+    of trading strategies, financial data analysis, and visualization. 
+    It provides a fast and efficient engine for quantitative finance research and algorithmic trading.</p>
+</li>
+<li>
+<p><a href="https://github.com/mhallsmoore/qstrader">qstrader</a>
+    is a free Python-based open-source modular schedule-driven backtesting framework 
+    for long-short equities and ETF based systematic trading strategies.</p>
+</li>
+</ol>
+<h3 id="deep-learning">Deep Learning</h3>
+<ol>
+<li><a href="https://github.com/AI4Finance-Foundation/FinRL">FinRL</a>
+    is an open-source framework for financial reinforcement learning. 
+    It aims to revolutionize FinTech by providing a comprehensive ecosystem 
+    for developing and deploying reinforcement learning-based trading strategies.</li>
+</ol>
+<h2 id="good-platfroms">Good Platfroms</h2>
+<p><a href="https://alpaca.markets/learn/algo-trading-landscape/">API Algo Trading Landscape</a>
+has a good summary.</p>
+<p>Charles Schwab supports algo trading via the thinkorswim® platform (thinkScript).
+For more details,
+please refer to
+<a href="https://www.schwab.com/learn/story/coding-traders-building-your-own-indicator">Coding for Traders: Building Your Own Indicator</a>
+.
+Charles Schwab is currently developing Trade APIs 
+(both for commercial and individual)
+.</p>
+<p><a href="https://alpaca.markets/">Alpaca</a></p>
+<p><a href="https://medium.com/hackernoon/9-great-tools-for-algo-trading-e0938a6856cd">9 Great Tools for Algo Trading</a>
+has a good summary </p>
+<p>In terms of cost to get started,
+<a href="https://alpaca.markets/">Alpaca</a> &lt; <a href="https://www.quantconnect.com/pricing">QuantConnect</a> &lt; <a href="https://www.quantrocket.com/pricing/">QuantRocket</a>
+&lt; <a href="https://www.interactivebrokers.com/en/home.php">IteractiveBrokers</a>
+.</p>
+<h2 id="open-source-trading-platformsprojects">Open Source Trading Platforms/Projects</h2>
+<p><a href="https://ocw.mit.edu/search/ocwsearch.htm?q=trading">MIT Open Course Ware - Trading</a></p>
+<p>quantos, kungfu, vnpy, RQAlpha2</p>
+<p>https://zhuanlan.zhihu.com/p/34822731</p>
+<p><a href="https://github.com/quantopian">Quantopian</a></p>
+<p><a href="https://python.quantecon.org/">Quantitative Economics</a></p>
+<h2 id="data-source">Data Source</h2>
+<h3 id="polygonio"><a href="https://polygon.io/pricing">polygon.io</a></h3>
+<p><a href="https://polygon.io/pricing">polygon.io</a>
+is great data source with free plans available.</p>
+<h2 id="taxes">Taxes</h2>
+<h3 id="short-term-taxes">Short-term taxes</h3>
+<h3 id="wash-sale">Wash Sale</h3>
+<p>Please refer to 
+<a href="https://www.legendu.net/misc/blog/tips-on-wash-sale">Tips on Wash Sale</a><br>
+for detailed discussions.</p>
+<h2 id="order-types">Order Types</h2>
+<ul>
+<li><a href="https://www.schwab.com/learn/story/trailing-stop-orders-mastering-order-types">Trailing Stop Orders</a></li>
+</ul>
+<h2 id="misc">Misc</h2>
+<p>http://www.zhihu.com/question/28557233?from=profile_question_card</p>
+<p>http://myquant.cn/</p>
+<p>http://www.vnpy.org/quantlib-tutorial.html</p>
+<p>http://www.vnpy.org/talib-tutorial.html</p>
+<p>http://www.vnpy.org/basic-tutorial-4.html</p>
+<p>http://www.zhihu.com/question/33555640/answer/56820093</p>
+<p>https://www.zhihu.com/question/25074959/answer/31184123?from=profile_answer_card</p>
+<p>https://www.zhihu.com/question/21789812/answer/22369809</p>
+<p>https://zhuanlan.zhihu.com/p/20505282?refer=edwardfuna</p>
+<p>https://zhuanlan.zhihu.com/p/20502027?refer=edwardfuna</p>
+<p>https://www.zhihu.com/question/34868706/answer/106024559</p>
+<p>https://www.zhihu.com/question/36532600/answer/68127964?from=profile_answer_card</p>
+<p>https://www.zhihu.com/question/31817168/answer/53462153</p>
+<p><a href="https://www.zhihu.com/question/23667442/answer/28965906">Tow the Iceburg</a></p>
+<p>Prediction of Hidden Liquidity in the Limit Order Book of GLOBEX Futures</p>
+<p>Mclean, R. David and Jeffrey Pontiff, 2016, Does Academic Research Destroy Stock Return Predictability, The Journal of Finance 71(1), 5-32.</p>
+<h2 id="references">References</h2>
+<ul>
+<li>
+<p><a href="https://misc.legendu.net/blog/investment-tips/">Investment</a></p>
+</li>
+<li>
+<p><a href="https://github.com/wilsonfreitas/awesome-quant">awesome-quant</a></p>
+</li>
+<li>
+<p><a href="https://www.nerdwallet.com/m/investing/how-to-buy-stocks-cs?bucket_id=Without+Chase&amp;gad_source=1&amp;gclid=CjwKCAiAgeeqBhBAEiwAoDDhn-ZlWJMKfNxBXeHm5f7iTKol0KmclBRNnVBNIbOUYG_KFIesxDvyVhoCNegQAvD_BwE&amp;gclsrc=aw.ds&amp;mktg_body=2989&amp;mktg_hline=19335&amp;mktg_place=aud-2205081372215%3Akwd-21866581&amp;model_execution_id=D27E7BC4-58F9-46C0-B087-21293245805C&amp;nw_campaign_id=154950223590786600&amp;utm_campaign=in_mktg_paid_072023_stocks_upper-funnel_broad_desktop&amp;utm_content=ta&amp;utm_medium=cpc&amp;utm_source=goog&amp;utm_term=learn+about+stocks">The first-timer’s guide to buying stocks</a></p>
+</li>
+</ul></div>
+    <footer>
+<p class="meta">
+  <span class="byline author vcard">
+    Posted by <span class="fn">Ben Chuanlong Du</span>
+  </span>
+<time datetime="2016-06-09T19:32:27-07:00" pubdate>Jun 09, 2016</time>  <span class="categories">
+    <a class="category" href="https://misc.legendu.net/tag/quant.html">quant</a>
+    <a class="category" href="https://misc.legendu.net/tag/quantitative.html">quantitative</a>
+    <a class="category" href="https://misc.legendu.net/tag/trading.html">trading</a>
+    <a class="category" href="https://misc.legendu.net/tag/investment.html">investment</a>
+    <a class="category" href="https://misc.legendu.net/tag/money.html">money</a>
+    <a class="category" href="https://misc.legendu.net/tag/stock.html">stock</a>
+    <a class="category" href="https://misc.legendu.net/tag/etf.html">ETF</a>
+    <a class="category" href="https://misc.legendu.net/tag/alpaca.html">Alpaca</a>
+    <a class="category" href="https://misc.legendu.net/tag/quantconnect.html">QuantConnect</a>
+    <a class="category" href="https://misc.legendu.net/tag/quantrocket.html">QuantRocket</a>
+  </span>
+</p>    </footer>
+  </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div>
+  </section>
+</div>
+<aside class="sidebar">
+  <section>
+    <h1>Recent Posts</h1>
+    <ul id="recent_posts">
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/tips-on-health/">Tips on Health</a>
+      </li>
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/tips-on-child-education/">Tips on Child Education</a>
+      </li>
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/tips-on-fd/">Tips on fd</a>
+      </li>
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/the-fzf-command-is-a-great-alternative-to-find/">The fzf Command Is a Great Alternative to find</a>
+      </li>
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/ruff-is-an-extremely-fast-python-linter-written-in-rust/">Ruff Is An Extremely Fast Python Linter Written in Rust</a>
+      </li>
+    </ul>
+  </section>
+  <section>
+    <h1>Categories</h1>
+    <ul id="recent_posts">
+        <li><a href="https://misc.legendu.net/category/ai.html">AI</a></li>
+        <li><a href="https://misc.legendu.net/category/career.html">Career</a></li>
+        <li><a href="https://misc.legendu.net/category/cloud.html">Cloud</a></li>
+        <li><a href="https://misc.legendu.net/category/computer-science.html">Computer Science</a></li>
+        <li><a href="https://misc.legendu.net/category/fiannce.html">Fiannce</a></li>
+        <li><a href="https://misc.legendu.net/category/finance.html">Finance</a></li>
+        <li><a href="https://misc.legendu.net/category/fun-problems.html">Fun Problems</a></li>
+        <li><a href="https://misc.legendu.net/category/hardware.html">Hardware</a></li>
+        <li><a href="https://misc.legendu.net/category/health.html">Health</a></li>
+        <li><a href="https://misc.legendu.net/category/house.html">House</a></li>
+        <li><a href="https://misc.legendu.net/category/internet.html">Internet</a></li>
+        <li><a href="https://misc.legendu.net/category/investment.html">Investment</a></li>
+        <li><a href="https://misc.legendu.net/category/life.html">life</a></li>
+        <li><a href="https://misc.legendu.net/category/linux.html">Linux</a></li>
+        <li><a href="https://misc.legendu.net/category/os.html">OS</a></li>
+        <li><a href="https://misc.legendu.net/category/people.html">People</a></li>
+        <li><a href="https://misc.legendu.net/category/philosophy.html">Philosophy</a></li>
+        <li><a href="https://misc.legendu.net/category/research.html">Research</a></li>
+        <li><a href="https://misc.legendu.net/category/shopping.html">Shopping</a></li>
+        <li><a href="https://misc.legendu.net/category/soft-skills.html">soft skills</a></li>
+        <li><a href="https://misc.legendu.net/category/software.html">Software</a></li>
+        <li><a href="https://misc.legendu.net/category/statistics.html">Statistics</a></li>
+        <li><a href="https://misc.legendu.net/category/tools.html">Tools</a></li>
+    </ul>
+  </section>
+ 
+
+  <section>
+  <h1>Tags</h1>
+  <ul class="tagcloud">
+  </ul>
+  </section>
+
+
+
+  <section>
+    <h1>GitHub Repos</h1>
+    <ul id="gh_repos">
+      <li class="loading">Status updating...</li>
+    </ul>
+      <a href="https://github.com/legendu-net">@legendu-net</a> on GitHub
+    <script type="text/javascript">
+      $.domReady(function(){
+          if (!window.jXHR){
+              var jxhr = document.createElement('script');
+              jxhr.type = 'text/javascript';
+              jxhr.src = 'https://misc.legendu.net/theme/js/jXHR.js';
+              var s = document.getElementsByTagName('script')[0];
+              s.parentNode.insertBefore(jxhr, s);
+          }
+
+          github.showRepos({
+              user: 'legendu-net',
+              count: 5,
+              skip_forks: true,
+              target: '#gh_repos'
+          });
+      });
+    </script>
+    <script src="https://misc.legendu.net/theme/js/github.js" type="text/javascript"> </script>
+  </section>
+
+    <section>
+        <h1>Social</h2>
+        <ul>
+            <li><a href="https://www.linkedin.com/in/ben-chuanlong-du-1239b221/" target="_blank">LinkedIn</a></li>
+            <li><a href="https://hub.docker.com/u/dclong" target="_blank">Docker Hub</a></li>
+            <li><a href="https://stackoverflow.com/users/7808204/benjamin-du?tab=profile" target="_blank">Stack Overflow</a></li>
+            <li><a href="https://twitter.com/longendu" target="_blank">Twitter</a></li>
+        <!--
+            <li><a href="https://misc.legendu.net/" type="application/rss+xml" rel="alternate">RSS</a></li>
+            -->
+        </ul>
+    </section>
+</aside>    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Ben Chuanlong Du -
+  <span class="credit">Powered by <a href="http://getpelican.com">Pelican</a></span>
+</p></footer>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-3STS9BVPF6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-3STS9BVPF6');
+</script>
+	<script type="text/javascript">
+	  var disqus_shortname = 'dclong';
+          var disqus_identifier = '/blog/quant-trading/';
+          var disqus_url = 'https://misc.legendu.net/blog/quant-trading/';
+          var disqus_title = 'Quant Trading';
+	  (function() {
+	    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	    dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+	    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	   })();
+	</script>
+</body>
+</html>

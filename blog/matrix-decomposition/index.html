@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Matrix Decomposition</title>
+  <meta name="author" content="Ben Chuanlong Du">
+
+  <link href="https://misc.legendu.net/atom.xml" type="application/atom+xml" rel="alternate"
+        title="Ben Chuanlong Du's Blog Atom Feed" />
+
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link href="https://misc.legendu.net/favicon.png" rel="icon">
+  <link href="https://misc.legendu.net/theme/css/main_2.css" media="screen, projection"
+        rel="stylesheet" type="text/css">
+  <script src="https://misc.legendu.net/theme/js/modernizr-2.0.js"></script>
+  <script src="https://misc.legendu.net/theme/js/ender.js"></script>
+  <script src="https://misc.legendu.net/theme/js/octopress.js" type="text/javascript"></script>
+
+  <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <script data-ad-client="ca-pub-3836424032203369" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+</head>
+
+<body>
+  <header role="banner"><hgroup>
+  <h1><a href="https://misc.legendu.net/">Ben Chuanlong Du's Blog</a></h1>
+    <h2>It is never too late to learn.</h2>
+</hgroup></header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="https://misc.legendu.net/atom.xml" rel="subscribe-rss">RSS</a></li>
+</ul>
+
+<form name="search" action="https://www.bing.com/search" method="get" onSubmit="return build_query()">
+  <fieldset role="search">
+      <!--
+    <input type="hidden" name="q" value="site:https://misc.legendu.net" />
+        -->
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+
+<script type = "text/javascript">
+    function build_query() {
+        var query = document.forms["search"]["q"].value;
+        var prefix = "site:https://misc.legendu.net "
+        if (!query.startsWith(prefix)) {
+            query = prefix + query;
+            document.forms["search"]["q"].value = query;
+        }
+        return true;
+    }
+</script>
+
+<ul class="main-navigation">
+    <li><a href="https://www.legendu.net">Home</a></li>
+    <li><a href="https://misc.legendu.net">Blog</a></li>
+    <li><a href="https://misc.legendu.net/archives.html">Archives</a></li>
+    <li><a href="https://misc.legendu.net/categories.html">Categories</a></li>
+    <li><a href="https://misc.legendu.net/tags.html">Tags</a></li>
+    <li><a href="https://www.legendu.net/pages/about">About</a></li>
+</ul></nav>
+  <div id="main">
+    <div id="content">
+<div>
+  <article class="hentry" role="article">
+<header>
+      <h1 class="entry-title">Matrix Decomposition</h1>
+      <p class="meta"><time datetime="2013-04-24T23:14:16-07:00" pubdate>Apr 24, 2013</time></p>
+</header>
+
+  <div class="entry-content"><p><strong>Things on this page are fragmentary and immature notes/thoughts of the author. Please read with your own judgement!</strong></p>
+<h2 id="qr-decomposition">QR Decomposition</h2>
+<p>The QR decomposition uses the Gram-Schmidt process to express a set of vectors 
+(columns of design matrix from statistical view) in a set of orthogonal unit vecotors (which means that Q is matrix with orthogonal unit vectors) 
+so that for any <code>k</code>, 
+the space spanned by the first <code>k</code> original vectors is the same as the space spanned by the first <code>k</code> orthogonal unit vectors. 
+The ith column of R is the way that the ith original vector can be expressed in the first <code>i</code> orthogonal unit vectors.<br>
+This means that R is an upper (right) triangular matrix.</p>
+<p>More specifically, 
+For any realy matrix <span class="math">\(X_{n\times p}\)</span>, there <span class="math">\(Q_{n\times p}\)</span> and <span class="math">\(R_{p\times p}\)</span> such that 
+    (X_{n\times p} = Q_{n\times p} R_{p\times p}),
+where <span class="math">\(Q\)</span> is a matrix with orthogonal unit column vectors, 
+i.e., <span class="math">\(Q'Q=I\)</span>; <span class="math">\(R\)</span> is an upper (right) triangular matrix.
+QR decomposition is often done throught Gram-Schmidt process. 
+Given a vector <span class="math">\(x_i\)</span>, 
+the Gram-Schmidt process produce a (unit) vector <span class="math">\(e_i\)</span> that is orthogonal to previously produced orthogonal vectors <span class="math">\(\{e_1,...,e_{i-1}\}\)</span>. 
+This is done by subtract the projection of <span class="math">\(e_i\)</span> to the space spanned by <span class="math">\(\{e_1,...,e_{i-1}\}\)</span> from <span class="math">\(e_i\)</span> (and then normalize it).
+For any <span class="math">\(i\)</span>, 
+the spaces spanned by <span class="math">\(\{x_1, ..., x_i\}\)</span> and <span class="math">\(\{e_1, ..., e_i\}\)</span> are the same. 
+The <span class="math">\(i^{th}\)</span> column of <span class="math">\(R\)</span> is the way that <span class="math">\(x_i\)</span> can be expressed by <span class="math">\(\{e_1, ..., e_i\}\)</span>,
+i.e., the first <span class="math">\(i\)</span> columns of <span class="math">\(Q\)</span>.</p>
+<p>QR decomposition can be used to</p>
+<ol>
+<li>
+<p>determine the rank of a matrix. 
+For example, to find the rank of a matrix X in R, you can use command <code>qr(X)$rank</code>.</p>
+</li>
+<li>
+<p>find estimates of coefficients in linear regression, 
+which is 
+        (\hat{\beta} = R^{-1}Q'\boldsymbol{y}).
+The fact that R is an upper (right) triangular matrix make it easy to find its inverse. </p>
+</li>
+</ol>
+<h2 id="singular-value-decomposition">Singular Value Decomposition</h2>
+<p>For any real matrix <span class="math">\(X_{n\times p}\)</span> of rank <span class="math">\(r\)</span>,
+there exists matrix <span class="math">\(U_{n\times r}\)</span>, <span class="math">\(D_{r\times r}\)</span> and <span class="math">\(V_{p\times r}\)</span> such that
+    (X=UDV'),
+where <span class="math">\(U\)</span> is a matrix with orthogonal unit column vectors spanning the column space of X;
+<span class="math">\(D\)</span> is a diagonal matrix with positive (decreasing) diagonal elements; 
+<span class="math">\(V\)</span> is a matrix with orthogona unit row vectors spanning the row space of X.</p>
+<ol>
+<li>
+<p>If we expand <span class="math">\(U\)</span> and <span class="math">\(V\)</span> to be squared matrixes (adding 0's into the diagonal elements of <span class="math">\(D\)</span>),
+the SVD can be explained as to use rotation, scaling and rotation to express any linear map <span class="math">\(X\)</span>.</p>
+</li>
+<li>
+<p><span class="math">\(X\)</span> maps a unit sphere into a ellipsoid. 
+The singular values are the semiaxes of the ellipsoid.</p>
+</li>
+<li>
+<p>The singular values are square root of the eigenvalues of <span class="math">\(X'X\)</span> and <span class="math">\(XX'\)</span>.</p>
+</li>
+<li>
+<p>If <span class="math">\(X\)</span> is a square matrix and has eigenvalue decomposition,
+then the singular values are absolute eigenvalues of <span class="math">\(X\)</span>.</p>
+</li>
+<li>
+<p>If <span class="math">\(X\)</span> is a nonnegative definite matrix, 
+then the SVD is the eigenvalue decomposition.</p>
+</li>
+<li>
+<p>The SVD can be rewritten as a weighted (singular values are the weights) sum of separable matrixes.</p>
+</li>
+</ol>
+<p>The SVD can be used to</p>
+<ol>
+<li>
+<p>find the rank of the matrix <span class="math">\(X\)</span>.</p>
+</li>
+<li>
+<p>find pseudoinverse inverse of the matirx <span class="math">\(X\)</span>.</p>
+</li>
+<li>
+<p>find lower rank approximation of the matrix <span class="math">\(X\)</span>. 
+This is one way to reduce dimension in statistics.</p>
+</li>
+</ol>
+<h2 id="eigendecomposition-spectral-decomposition">Eigendecomposition (Spectral Decomposition)</h2>
+<ol>
+<li>
+<p>Only diagonalizable matrices have eigendecompostions.
+The geometric dimension of an eigenvalue of a matrix is less than or equal to its algebraic dimension.
+A matrix is diagonalizable iff the geometric dimension is the same as the algebraic dimension for each eigenvalue.
+Nonnegative definite matrices are diagonalizable.
+Specially project matrices are diagonalizable (with eigenvalues 0 and 1).</p>
+</li>
+<li>
+<p>For a Markov chain process, 
+a stationary distribution is an eigenvalue of the transition matrix with respect to the eigenvalue 1.</p>
+</li>
+<li>
+<p>The eigendecomposition can be used to calculate the power of diagonalizable matrices.</p>
+</li>
+<li>
+<p>Eigendecomposition is used in principal components analysis. </p>
+</li>
+</ol>
+<script type="text/javascript">if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
+    var align = "center",
+        indent = "0em",
+        linebreak = "false";
+
+    if (false) {
+        align = (screen.width < 768) ? "left" : align;
+        indent = (screen.width < 768) ? "0em" : indent;
+        linebreak = (screen.width < 768) ? 'true' : linebreak;
+    }
+
+    var mathjaxscript = document.createElement('script');
+    mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
+    mathjaxscript.type = 'text/javascript';
+    mathjaxscript.src = 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.3/latest.js?config=TeX-AMS-MML_HTMLorMML';
+
+    var configscript = document.createElement('script');
+    configscript.type = 'text/x-mathjax-config';
+    configscript[(window.opera ? "innerHTML" : "text")] =
+        "MathJax.Hub.Config({" +
+        "    config: ['MMLorHTML.js']," +
+        "    TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js','color.js','mhchem.js'], equationNumbers: { autoNumber: 'none' } }," +
+        "    jax: ['input/TeX','input/MathML','output/HTML-CSS']," +
+        "    extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']," +
+        "    displayAlign: '"+ align +"'," +
+        "    displayIndent: '"+ indent +"'," +
+        "    showMathMenu: true," +
+        "    messageStyle: 'normal'," +
+        "    tex2jax: { " +
+        "        inlineMath: [ ['\\\\(','\\\\)'] ], " +
+        "        displayMath: [ ['$$','$$'] ]," +
+        "        processEscapes: true," +
+        "        preview: 'TeX'," +
+        "    }, " +
+        "    'HTML-CSS': { " +
+        "        availableFonts: ['STIX', 'TeX']," +
+        "        preferredFont: 'STIX'," +
+        "        styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: 'inherit ! important'} }," +
+        "        linebreaks: { automatic: "+ linebreak +", width: '90% container' }," +
+        "    }, " +
+        "}); " +
+        "if ('default' !== 'default') {" +
+            "MathJax.Hub.Register.StartupHook('HTML-CSS Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax['HTML-CSS'].FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+            "MathJax.Hub.Register.StartupHook('SVG Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax.SVG.FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+        "}";
+
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(configscript);
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
+}
+</script></div>
+    <footer>
+<p class="meta">
+  <span class="byline author vcard">
+    Posted by <span class="fn">Ben Chuanlong Du</span>
+  </span>
+<time datetime="2013-04-24T23:14:16-07:00" pubdate>Apr 24, 2013</time>  <span class="categories">
+    <a class="category" href="https://misc.legendu.net/tag/statistics.html">statistics</a>
+    <a class="category" href="https://misc.legendu.net/tag/math.html">math</a>
+    <a class="category" href="https://misc.legendu.net/tag/algebra.html">algebra</a>
+    <a class="category" href="https://misc.legendu.net/tag/decomposition.html">decomposition</a>
+    <a class="category" href="https://misc.legendu.net/tag/matrix.html">matrix</a>
+  </span>
+</p>    </footer>
+  </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div>
+  </section>
+</div>
+<aside class="sidebar">
+  <section>
+    <h1>Recent Posts</h1>
+    <ul id="recent_posts">
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/tips-on-health/">Tips on Health</a>
+      </li>
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/tips-on-child-education/">Tips on Child Education</a>
+      </li>
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/tips-on-fd/">Tips on fd</a>
+      </li>
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/the-fzf-command-is-a-great-alternative-to-find/">The fzf Command Is a Great Alternative to find</a>
+      </li>
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/ruff-is-an-extremely-fast-python-linter-written-in-rust/">Ruff Is An Extremely Fast Python Linter Written in Rust</a>
+      </li>
+    </ul>
+  </section>
+  <section>
+    <h1>Categories</h1>
+    <ul id="recent_posts">
+        <li><a href="https://misc.legendu.net/category/ai.html">AI</a></li>
+        <li><a href="https://misc.legendu.net/category/career.html">Career</a></li>
+        <li><a href="https://misc.legendu.net/category/cloud.html">Cloud</a></li>
+        <li><a href="https://misc.legendu.net/category/computer-science.html">Computer Science</a></li>
+        <li><a href="https://misc.legendu.net/category/fiannce.html">Fiannce</a></li>
+        <li><a href="https://misc.legendu.net/category/finance.html">Finance</a></li>
+        <li><a href="https://misc.legendu.net/category/fun-problems.html">Fun Problems</a></li>
+        <li><a href="https://misc.legendu.net/category/hardware.html">Hardware</a></li>
+        <li><a href="https://misc.legendu.net/category/health.html">Health</a></li>
+        <li><a href="https://misc.legendu.net/category/house.html">House</a></li>
+        <li><a href="https://misc.legendu.net/category/internet.html">Internet</a></li>
+        <li><a href="https://misc.legendu.net/category/investment.html">Investment</a></li>
+        <li><a href="https://misc.legendu.net/category/life.html">life</a></li>
+        <li><a href="https://misc.legendu.net/category/linux.html">Linux</a></li>
+        <li><a href="https://misc.legendu.net/category/os.html">OS</a></li>
+        <li><a href="https://misc.legendu.net/category/people.html">People</a></li>
+        <li><a href="https://misc.legendu.net/category/philosophy.html">Philosophy</a></li>
+        <li><a href="https://misc.legendu.net/category/research.html">Research</a></li>
+        <li><a href="https://misc.legendu.net/category/shopping.html">Shopping</a></li>
+        <li><a href="https://misc.legendu.net/category/soft-skills.html">soft skills</a></li>
+        <li><a href="https://misc.legendu.net/category/software.html">Software</a></li>
+        <li><a href="https://misc.legendu.net/category/statistics.html">Statistics</a></li>
+        <li><a href="https://misc.legendu.net/category/tools.html">Tools</a></li>
+    </ul>
+  </section>
+ 
+
+  <section>
+  <h1>Tags</h1>
+  <ul class="tagcloud">
+  </ul>
+  </section>
+
+
+
+  <section>
+    <h1>GitHub Repos</h1>
+    <ul id="gh_repos">
+      <li class="loading">Status updating...</li>
+    </ul>
+      <a href="https://github.com/legendu-net">@legendu-net</a> on GitHub
+    <script type="text/javascript">
+      $.domReady(function(){
+          if (!window.jXHR){
+              var jxhr = document.createElement('script');
+              jxhr.type = 'text/javascript';
+              jxhr.src = 'https://misc.legendu.net/theme/js/jXHR.js';
+              var s = document.getElementsByTagName('script')[0];
+              s.parentNode.insertBefore(jxhr, s);
+          }
+
+          github.showRepos({
+              user: 'legendu-net',
+              count: 5,
+              skip_forks: true,
+              target: '#gh_repos'
+          });
+      });
+    </script>
+    <script src="https://misc.legendu.net/theme/js/github.js" type="text/javascript"> </script>
+  </section>
+
+    <section>
+        <h1>Social</h2>
+        <ul>
+            <li><a href="https://www.linkedin.com/in/ben-chuanlong-du-1239b221/" target="_blank">LinkedIn</a></li>
+            <li><a href="https://hub.docker.com/u/dclong" target="_blank">Docker Hub</a></li>
+            <li><a href="https://stackoverflow.com/users/7808204/benjamin-du?tab=profile" target="_blank">Stack Overflow</a></li>
+            <li><a href="https://twitter.com/longendu" target="_blank">Twitter</a></li>
+        <!--
+            <li><a href="https://misc.legendu.net/" type="application/rss+xml" rel="alternate">RSS</a></li>
+            -->
+        </ul>
+    </section>
+</aside>    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Ben Chuanlong Du -
+  <span class="credit">Powered by <a href="http://getpelican.com">Pelican</a></span>
+</p></footer>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-3STS9BVPF6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-3STS9BVPF6');
+</script>
+	<script type="text/javascript">
+	  var disqus_shortname = 'dclong';
+          var disqus_identifier = '/blog/matrix-decomposition/';
+          var disqus_url = 'https://misc.legendu.net/blog/matrix-decomposition/';
+          var disqus_title = 'Matrix Decomposition';
+	  (function() {
+	    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	    dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+	    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	   })();
+	</script>
+</body>
+</html>

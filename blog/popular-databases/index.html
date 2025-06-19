@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Popular Databases</title>
+  <meta name="author" content="Ben Chuanlong Du">
+
+  <link href="https://misc.legendu.net/atom.xml" type="application/atom+xml" rel="alternate"
+        title="Ben Chuanlong Du's Blog Atom Feed" />
+
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link href="https://misc.legendu.net/favicon.png" rel="icon">
+  <link href="https://misc.legendu.net/theme/css/main_2.css" media="screen, projection"
+        rel="stylesheet" type="text/css">
+  <script src="https://misc.legendu.net/theme/js/modernizr-2.0.js"></script>
+  <script src="https://misc.legendu.net/theme/js/ender.js"></script>
+  <script src="https://misc.legendu.net/theme/js/octopress.js" type="text/javascript"></script>
+
+  <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <script data-ad-client="ca-pub-3836424032203369" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+</head>
+
+<body>
+  <header role="banner"><hgroup>
+  <h1><a href="https://misc.legendu.net/">Ben Chuanlong Du's Blog</a></h1>
+    <h2>It is never too late to learn.</h2>
+</hgroup></header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="https://misc.legendu.net/atom.xml" rel="subscribe-rss">RSS</a></li>
+</ul>
+
+<form name="search" action="https://www.bing.com/search" method="get" onSubmit="return build_query()">
+  <fieldset role="search">
+      <!--
+    <input type="hidden" name="q" value="site:https://misc.legendu.net" />
+        -->
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+
+<script type = "text/javascript">
+    function build_query() {
+        var query = document.forms["search"]["q"].value;
+        var prefix = "site:https://misc.legendu.net "
+        if (!query.startsWith(prefix)) {
+            query = prefix + query;
+            document.forms["search"]["q"].value = query;
+        }
+        return true;
+    }
+</script>
+
+<ul class="main-navigation">
+    <li><a href="https://www.legendu.net">Home</a></li>
+    <li><a href="https://misc.legendu.net">Blog</a></li>
+    <li><a href="https://misc.legendu.net/archives.html">Archives</a></li>
+    <li><a href="https://misc.legendu.net/categories.html">Categories</a></li>
+    <li><a href="https://misc.legendu.net/tags.html">Tags</a></li>
+    <li><a href="https://www.legendu.net/pages/about">About</a></li>
+</ul></nav>
+  <div id="main">
+    <div id="content">
+<div>
+  <article class="hentry" role="article">
+<header>
+      <h1 class="entry-title">Popular Databases</h1>
+      <p class="meta"><time datetime="2021-06-10T10:33:02-07:00" pubdate>Jun 10, 2021</time></p>
+</header>
+
+  <div class="entry-content"><p><strong>Things on this page are fragmentary and immature notes/thoughts of the author. Please read with your own judgement!</strong></p>
+<p>The YouTube video
+<a href="https://www.youtube.com/watch?v=kkeFE6iRfMM">How to Choose The Right Database</a>
+has great advices on how to choose the right databases.</p>
+<h2 id="types-of-databases">Types of Databases</h2>
+<ul>
+<li>relational </li>
+<li>non-relational </li>
+<li>key value database<ul>
+<li>document database</li>
+<li>wide column database</li>
+</ul>
+</li>
+<li>graph database</li>
+<li>search engine database</li>
+<li>time series database</li>
+</ul>
+<p>Advantages of Relational Databases
+- consitency
+- security
+- ease of backup and recovery</p>
+<p>Advantages of Non-relational Databases
+- flexibility
+- scalability
+- cost of effectiveness</p>
+<h2 id="storage-format">Storage Format</h2>
+<ul>
+<li>row storage</li>
+<li>columnar storage</li>
+</ul>
+<p>columnar storage is good for analytical operations</p>
+<h2 id="comparison-of-databases">Comparison of Databases</h2>
+<table style="width:100%">
+  <tr>
+    <th> Name </th>
+    <th> Language </th>
+    <th> Opensource/Free </th>
+    <th> PACELC </th>
+    <th> Advantages </th>
+    <th> Disadvantages </th>
+    <th> Comment </th>
+  </tr>
+  <tr>
+    <td> 
+    <a href="https://github.com/mysql">SQLite</a>
+    </td>
+    <th> SQL </th>
+    <td> Opensource </td>
+    <th> -/ELC </th>
+    <td> </td>
+    <td> </td>
+    <td> the most popular embedded database </td>
+  </tr>
+  <tr>
+    <td> 
+    <a href="https://github.com/mysql">DuckDB</a>
+    </td>
+    <th> SQL </th>
+    <td> Opensource </td>
+    <th> -/ELC </th>
+    <td> </td>
+    <td> </td>
+    <td> 
+    - embedded OLAP
+    - a good raising alternative to SQLite 
+    </td>
+  </tr>
+  <tr>
+    <td> 
+    <a href="https://github.com/mysql">PostgreSQL</a>
+    </td>
+    <th> SQL </th>
+    <td> Opensource </td>
+    <th> PC/EC </th>
+    <td> </td>
+    <td> </td>
+    <td> a better alternative to MySQL </td>
+  </tr>
+  <tr>
+    <td> 
+    <a href="https://github.com/mysql">MySQL</a>
+    <a href="#footnote7">[1]</a>
+    </td>
+    <th> SQL </th>
+    <td> Opensource </td>
+    <th> PC/EC </th>
+    <td> </td>
+    <td> </td>
+    <td> the most popular opensource RDBMS </td>
+  </tr>
+  <tr>
+    <td> 
+    <a href="https://github.com/ClickHouse/ClickHouse">ClickHouse</a>
+    <a href="#footnote7">[2]</a>
+    </td>
+    <th> SQL </th>
+    <td> Opensource </td>
+    <th> </th>
+    <td> OLAP for big data </td>
+    <td> </td>
+    <td> Has very good performance </td>
+  </tr>
+  <tr>
+    <td> 
+    <a href="https://github.com/pingcap/tidb">TiDB</a>
+    <a href="#footnote7">[3]</a>
+    </td>
+    <th> SQL </th>
+    <td> Opensource </td>
+    <th> </th>
+    <td> OLAP for big data </td>
+    <td> </td>
+    <td> good performance, support integration with Spark </td>
+  </tr>
+  <tr>
+    <td> 
+    <a href="">Cassandra</a>
+    <a href="#footnote7">[1]</a>
+    </td>
+    <th> CQL (Cassandra <br> Query Language) </th>
+    <td> Opensource </td>
+    <th> PA/EL </th>
+    <td> real-time </td>
+    <td> no join </td>
+    <td> </td>
+  </tr>
+  <tr>
+    <td> 
+    <a href="">HBase</a>
+    <a href="#footnote7">[1]</a>
+    </td>
+    <th> </th>
+    <td> Opensource </td>
+    <th> PC/EC </th>
+    <td> real-time </td>
+    <td> no join </td>
+    <td> </td>
+  </tr>
+  <tr>
+    <td> 
+    <a href="https://github.com/redis">Redis</a>
+    <a href="#footnote7">[4]</a>
+    </td>
+    <th> DSL (hashmap <br> API-like) </th>
+    <td> Opensource </td>
+    <th> </th>
+    <td> Distributed in-memory cache for real-time applications </td>
+    <td> Queries or joins </td>
+    <td> </td>
+  </tr>
+  <tr>
+    <td> 
+    <a href="https://github.com/neo4j">neo4j</a>
+    <a href="#footnote7">[5]</a>
+    </td>
+    <th> Cypher (Graph <br> Query Language) </th>
+    <td> Opensource </td>
+    <th> </th>
+    <td> Graph applications </td>
+    <td> </td>
+    <td> The most popular graph database </td>
+  </tr>
+  <tr>
+    <td> 
+    <a href="https://github.com/elastic">Elasticsearch</a>
+    <a href="#footnote7">[6]</a>
+    </td>
+    <td> DSL, SQL </td>
+    <td> Opensource </td>
+    <th> </th>
+    <td> Out-of-the-box search engine for large documents </td>
+    <td> </td>
+    <td> Designed as a search engine but also popularly used as a database </td>
+  </tr>
+  <tr>
+    <td> 
+    <a href="https://github.com/taosdata/TDengine">TDengine</a>
+    <a href="#footnote7">[7]</a>
+    </td>
+    <td> SQL </td>
+    <td> Opensource </td>
+    <th> </th>
+    <td> IoT </td>
+    <td> </td>
+    <td> IoT, good performance </td>
+  </tr>
+</table>
+
+<p>[2] <a href="https://github.com/ClickHouse/ClickHouse">ClickHouse</a>
+is an open-source column-oriented database management system 
+that allows generating analytical data reports in real time.</p>
+<h2 id="yugabyte-db"><a href="https://github.com/YugaByte/yugabyte-db">yugabyte-db</a></h2>
+<p><a href="https://github.com/YugaByte/yugabyte-db">yugabyte-db</a></p>
+<h2 id="scylladb"><a href="https://github.com/scylladb/scylladb">scylladb</a></h2>
+<p><a href="https://github.com/scylladb/scylladb">Scylla</a>
+is the real-time big data database 
+that is API-compatible with Apache Cassandra and Amazon DynamoDB. 
+Scylla embraces a shared-nothing approach that increases throughput and storage capacity 
+to realize order-of-magnitude performance improvements and reduce hardware costs.</p>
+<h2 id="mongodb">MongoDB</h2>
+<p>MongoDB is a document-oriented, disk-based database optimized 
+for operational simplicity, schema-free design and very large data volumes. </p>
+<h2 id="distributed-in-memory-cache">Distributed In-memory Cache</h2>
+<p>A distributed in-memory cache is essentially a distributed key-value storage/database.
+You can think it as a hashmap over network.</p>
+<p><a href="https://github.com/redis">Redis</a>
+is the most popular in-memory cache which is implemented in C.
+<a href="https://github.com/memcached/memcached">memcached</a>
+is another (not so popular) in-memory cache and is also implemented in C.
+<a href="https://github.com/twitter/pelikan">pelikan</a>
+is Twitter's unified cache backend
+which is implemented in C and Rust.</p>
+<h2 id="references">References</h2>
+<ul>
+<li>
+<p><a href="https://www.youtube.com/watch?v=xynXjChKkJc">How Discord Stores Trillions of Messages | Deep Dive</a></p>
+</li>
+<li>
+<p><a href="https://www.youtube.com/watch?v=E9AgJnsEvG4">Relational vs. Non-Relational Databases</a></p>
+</li>
+<li>
+<p><a href="https://berb.github.io/diploma-thesis/original/061_challenge.html">6.1 The Challenge of Distributed Database Systems</a></p>
+</li>
+<li>
+<p><a href="https://developer.okta.com/blog/2019/07/19/mysql-vs-postgres">MySQL vs PostgreSQL -- Choose the Right Database for Your Project</a></p>
+</li>
+<li>
+<p><a href="https://eng.uber.com/postgres-to-mysql-migration/">Why Uber Engineering Switched from Postgres to MySQL</a></p>
+</li>
+<li>
+<p><a href="https://blog.yugabyte.com/yes-we-can-distributed-acid-transactions-with-high-performance/">Yes We Can! Distributed ACID Transactions with High Performance</a></p>
+</li>
+<li>
+<p><a href="https://www.analyticsvidhya.com/blog/2020/08/a-beginners-guide-to-cap-theorem-for-data-engineering/">A Beginner’s Guide to CAP Theorem for Data Engineering</a></p>
+</li>
+</ul></div>
+    <footer>
+<p class="meta">
+  <span class="byline author vcard">
+    Posted by <span class="fn">Benjamin Du</span>
+  </span>
+<time datetime="2021-06-10T10:33:02-07:00" pubdate>Jun 10, 2021</time>  <span class="categories">
+    <a class="category" href="https://misc.legendu.net/tag/computer-science.html">Computer Science</a>
+    <a class="category" href="https://misc.legendu.net/tag/programming.html">programming</a>
+    <a class="category" href="https://misc.legendu.net/tag/database.html">database</a>
+    <a class="category" href="https://misc.legendu.net/tag/mysql.html">MySQL</a>
+    <a class="category" href="https://misc.legendu.net/tag/clickhouse.html">ClickHouse</a>
+    <a class="category" href="https://misc.legendu.net/tag/tidb.html">TiDB</a>
+    <a class="category" href="https://misc.legendu.net/tag/neo4j.html">neo4j</a>
+    <a class="category" href="https://misc.legendu.net/tag/elasticsearch.html">Elasticsearch</a>
+    <a class="category" href="https://misc.legendu.net/tag/tdengine.html">TDengine</a>
+    <a class="category" href="https://misc.legendu.net/tag/redis.html">Redis</a>
+  </span>
+</p>    </footer>
+  </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div>
+  </section>
+</div>
+<aside class="sidebar">
+  <section>
+    <h1>Recent Posts</h1>
+    <ul id="recent_posts">
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/tips-on-health/">Tips on Health</a>
+      </li>
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/tips-on-child-education/">Tips on Child Education</a>
+      </li>
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/tips-on-fd/">Tips on fd</a>
+      </li>
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/the-fzf-command-is-a-great-alternative-to-find/">The fzf Command Is a Great Alternative to find</a>
+      </li>
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/ruff-is-an-extremely-fast-python-linter-written-in-rust/">Ruff Is An Extremely Fast Python Linter Written in Rust</a>
+      </li>
+    </ul>
+  </section>
+  <section>
+    <h1>Categories</h1>
+    <ul id="recent_posts">
+        <li><a href="https://misc.legendu.net/category/ai.html">AI</a></li>
+        <li><a href="https://misc.legendu.net/category/career.html">Career</a></li>
+        <li><a href="https://misc.legendu.net/category/cloud.html">Cloud</a></li>
+        <li><a href="https://misc.legendu.net/category/computer-science.html">Computer Science</a></li>
+        <li><a href="https://misc.legendu.net/category/fiannce.html">Fiannce</a></li>
+        <li><a href="https://misc.legendu.net/category/finance.html">Finance</a></li>
+        <li><a href="https://misc.legendu.net/category/fun-problems.html">Fun Problems</a></li>
+        <li><a href="https://misc.legendu.net/category/hardware.html">Hardware</a></li>
+        <li><a href="https://misc.legendu.net/category/health.html">Health</a></li>
+        <li><a href="https://misc.legendu.net/category/house.html">House</a></li>
+        <li><a href="https://misc.legendu.net/category/internet.html">Internet</a></li>
+        <li><a href="https://misc.legendu.net/category/investment.html">Investment</a></li>
+        <li><a href="https://misc.legendu.net/category/life.html">life</a></li>
+        <li><a href="https://misc.legendu.net/category/linux.html">Linux</a></li>
+        <li><a href="https://misc.legendu.net/category/os.html">OS</a></li>
+        <li><a href="https://misc.legendu.net/category/people.html">People</a></li>
+        <li><a href="https://misc.legendu.net/category/philosophy.html">Philosophy</a></li>
+        <li><a href="https://misc.legendu.net/category/research.html">Research</a></li>
+        <li><a href="https://misc.legendu.net/category/shopping.html">Shopping</a></li>
+        <li><a href="https://misc.legendu.net/category/soft-skills.html">soft skills</a></li>
+        <li><a href="https://misc.legendu.net/category/software.html">Software</a></li>
+        <li><a href="https://misc.legendu.net/category/statistics.html">Statistics</a></li>
+        <li><a href="https://misc.legendu.net/category/tools.html">Tools</a></li>
+    </ul>
+  </section>
+ 
+
+  <section>
+  <h1>Tags</h1>
+  <ul class="tagcloud">
+  </ul>
+  </section>
+
+
+
+  <section>
+    <h1>GitHub Repos</h1>
+    <ul id="gh_repos">
+      <li class="loading">Status updating...</li>
+    </ul>
+      <a href="https://github.com/legendu-net">@legendu-net</a> on GitHub
+    <script type="text/javascript">
+      $.domReady(function(){
+          if (!window.jXHR){
+              var jxhr = document.createElement('script');
+              jxhr.type = 'text/javascript';
+              jxhr.src = 'https://misc.legendu.net/theme/js/jXHR.js';
+              var s = document.getElementsByTagName('script')[0];
+              s.parentNode.insertBefore(jxhr, s);
+          }
+
+          github.showRepos({
+              user: 'legendu-net',
+              count: 5,
+              skip_forks: true,
+              target: '#gh_repos'
+          });
+      });
+    </script>
+    <script src="https://misc.legendu.net/theme/js/github.js" type="text/javascript"> </script>
+  </section>
+
+    <section>
+        <h1>Social</h2>
+        <ul>
+            <li><a href="https://www.linkedin.com/in/ben-chuanlong-du-1239b221/" target="_blank">LinkedIn</a></li>
+            <li><a href="https://hub.docker.com/u/dclong" target="_blank">Docker Hub</a></li>
+            <li><a href="https://stackoverflow.com/users/7808204/benjamin-du?tab=profile" target="_blank">Stack Overflow</a></li>
+            <li><a href="https://twitter.com/longendu" target="_blank">Twitter</a></li>
+        <!--
+            <li><a href="https://misc.legendu.net/" type="application/rss+xml" rel="alternate">RSS</a></li>
+            -->
+        </ul>
+    </section>
+</aside>    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Ben Chuanlong Du -
+  <span class="credit">Powered by <a href="http://getpelican.com">Pelican</a></span>
+</p></footer>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-3STS9BVPF6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-3STS9BVPF6');
+</script>
+	<script type="text/javascript">
+	  var disqus_shortname = 'dclong';
+          var disqus_identifier = '/blog/popular-databases/';
+          var disqus_url = 'https://misc.legendu.net/blog/popular-databases/';
+          var disqus_title = 'Popular Databases';
+	  (function() {
+	    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	    dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+	    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	   })();
+	</script>
+</body>
+</html>

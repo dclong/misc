@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>General Tips on SQL</title>
+  <meta name="author" content="Ben Chuanlong Du">
+
+  <link href="https://misc.legendu.net/atom.xml" type="application/atom+xml" rel="alternate"
+        title="Ben Chuanlong Du's Blog Atom Feed" />
+
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link href="https://misc.legendu.net/favicon.png" rel="icon">
+  <link href="https://misc.legendu.net/theme/css/main_2.css" media="screen, projection"
+        rel="stylesheet" type="text/css">
+  <script src="https://misc.legendu.net/theme/js/modernizr-2.0.js"></script>
+  <script src="https://misc.legendu.net/theme/js/ender.js"></script>
+  <script src="https://misc.legendu.net/theme/js/octopress.js" type="text/javascript"></script>
+
+  <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <script data-ad-client="ca-pub-3836424032203369" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+</head>
+
+<body>
+  <header role="banner"><hgroup>
+  <h1><a href="https://misc.legendu.net/">Ben Chuanlong Du's Blog</a></h1>
+    <h2>It is never too late to learn.</h2>
+</hgroup></header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="https://misc.legendu.net/atom.xml" rel="subscribe-rss">RSS</a></li>
+</ul>
+
+<form name="search" action="https://www.bing.com/search" method="get" onSubmit="return build_query()">
+  <fieldset role="search">
+      <!--
+    <input type="hidden" name="q" value="site:https://misc.legendu.net" />
+        -->
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+
+<script type = "text/javascript">
+    function build_query() {
+        var query = document.forms["search"]["q"].value;
+        var prefix = "site:https://misc.legendu.net "
+        if (!query.startsWith(prefix)) {
+            query = prefix + query;
+            document.forms["search"]["q"].value = query;
+        }
+        return true;
+    }
+</script>
+
+<ul class="main-navigation">
+    <li><a href="https://www.legendu.net">Home</a></li>
+    <li><a href="https://misc.legendu.net">Blog</a></li>
+    <li><a href="https://misc.legendu.net/archives.html">Archives</a></li>
+    <li><a href="https://misc.legendu.net/categories.html">Categories</a></li>
+    <li><a href="https://misc.legendu.net/tags.html">Tags</a></li>
+    <li><a href="https://www.legendu.net/pages/about">About</a></li>
+</ul></nav>
+  <div id="main">
+    <div id="content">
+<div>
+  <article class="hentry" role="article">
+<header>
+      <h1 class="entry-title">General Tips on SQL</h1>
+      <p class="meta"><time datetime="2014-02-15T12:10:03-08:00" pubdate>Feb 15, 2014</time></p>
+</header>
+
+  <div class="entry-content"><p><strong>Things on this page are fragmentary and immature notes/thoughts of the author. Please read with your own judgement!</strong></p>
+<h2 id="performance">Performance</h2>
+<ol>
+<li>
+<p>Avoid implicit data convertion!
+    This might cause full table scan which hurts performance badly.
+    For more discussions,
+    please refer to
+    <a href="https://mp.weixin.qq.com/s/mdl4Xa9zbl-CUBCi4Io-Tg">一条垃圾SQL，把 64 核 CPU 快跑崩了！</a>
+    .</p>
+</li>
+<li>
+<p>If performance is an issue, temp tables are preferred to subqueriess.</p>
+</li>
+<li>
+<p>When you create a table by selecting records from another table,
+    it is best to specify a primary index
+    even if the original table has primary indexes.
+    The reason is that the data you've selected might not have the same distribution as the original data.
+    Specifying a good primary index not only improve the performance of queries
+    but can also reduces the percentage of wasted spaces.</p>
+</li>
+</ol>
+<h2 id="misc">Misc</h2>
+<ol>
+<li>
+<p>If you want to do some analysis on a time window of data,
+    it is best to choose a continuous window during a certain month if possible.
+    This makes it simple (no need to use date/time function) to work with the dates later.</p>
+</li>
+<li>
+<p>Outer join is preferred over inner join if you doing some exploring analyses
+    (unless you absolute know that inner join is sufficient) 
+    as it preserves more information.
+    It is often the case when doing exploring analyses that you run an inner join and then found that you really need a left/right join.
+    This can be a great waste of time if your analysis consist of many steps and you have to go back to the very beginning change an inner join to an outer join.
+    On the contrary, 
+    it does not hurt that your run a left/right join when you found that you really just need an inner join.
+    However, 
+    DO be careful when you use outer joins as they are tricky too!
+    If using left/right join, 
+    prefer to keep column in the left/right table.</p>
+</li>
+<li>
+<p><code>window_function() over (partition by col1, col2 order by col3)</code>
+    Be careful that a default window of unbounded prceeding to the current row is used by default when you sort partitions.
+    Due to this, some window functions requires full information (such as last, max, mean, rank, etc.) won't give you the right results.
+    However, windows functions that only require partial information (such as first, row_number, etc.) work as expected.
+    For this reason, 
+        - first is preferred over last
+        - row_number is preferred over rank</p>
+</li>
+<li>
+<p><code>row_number() over ()</code> It is allowed to specify no partition for window functions.
+    In that case, all records is treated as one partition.</p>
+</li>
+<li>
+<p>When using integer constant in SQL code, prefer BigInt, i.e., suffix them with <code>L</code>.
+    This can save you troubes of overflow if count/sum a large table.</p>
+</li>
+<li>
+<p>Always assume there are data issues (such as missing values, duplicates, etc.) unless forced by table constraints
+    as this is often the fact.</p>
+</li>
+<li>
+<p>If you write some database-based application,
+    never delete anything and just mark records (to be deleted) as hidden instead.</p>
+</li>
+<li>
+<p>If space and performance is not critical, 
+    to make it is easier for collabarating,
+    you can define all columns as type of varchar. 
+    The advantage is that no one has to remember the type of columns. </p>
+</li>
+<li>
+<p>Good to keep all kind of IDs even if you won't need them currently, 
+    you nev.. know when you are going to need them ...</p>
+</li>
+<li>
+<p>Avoid using subqueries in SQL. 
+    Use CTE (with clause) instead
+    which is equivalent but much more readable.</p>
+</li>
+<li>
+<p>Avoid using resvered keywords (e.g., <code>title</code>) as column/table name, 
+    even if you can use "keyword" but still other people might forget for not obvious keywords like title</p>
+</li>
+<li>
+<p>JDBC is preferred over ODBC for 3 reason. 
+    First, JDBC is easier to set up.
+    Second, JDBC has better performance.
+    Last but not least, JDBC has wider support.</p>
+</li>
+<li>
+<p><code>*</code> stand for all fields. 
+    If you want all fields of a specific table,
+    then prefix <code>*</code> with the table name, 
+    e.g., <code>t.*</code>. 
+    This is helpful when you join multiple tables.
+    Another thing is that <code>*</code> cannot be followed by more fields. 
+    However, <code>t.*</code> can (where <code>t</code> is a table).</p>
+</li>
+<li>
+<p>Some versions of SQL use <code>as</code> when creating aliases for selected fields 
+    while some other versions of SQL don't.</p>
+</li>
+<li>
+<p>analytical functions are powerful
+    row_number() over partition
+    another way is to use self join</p>
+</li>
+<li>
+<p><code>select count(*) from table t;</code>
+    no grouping, kind of default grouping, all record are in a default group</p>
+</li>
+<li>
+<p>Use <code>=</code> instead of <code>==</code> for comparison.
+    Quote strings using single quotation marks instead of double quotation marks.</p>
+</li>
+<li>
+<p>refresh in SQLDeveloper to show newly created talbes</p>
+</li>
+<li>
+<p>You must put all columns of the SELECT 
+    in the GROUP BY or use aggregate functions on them 
+    which compress the results to a single value (like MIN, MAX or SUM) 
+    according to SQL standard.
+    MySQL does not conform to this standard
+    and the results returned is not well defined sometimes 
+    when you don't follow the SQL standard.</p>
+</li>
+<li>
+<p>the select distinct, distinct describes record, not column.</p>
+</li>
+</ol>
+<h2 id="tricks-and-traps">Tricks and Traps</h2>
+<ol>
+<li>
+<p><a href="https://www.youtube.com/watch?v=mgipNdAgQ3o">Ten SQL Tricks that You Didn’t Think Were Possible (Lukas Eder)</a></p>
+</li>
+<li>
+<p>You cannot use <code>order by</code> when insert records into a table using select .
+    this is easy to understand as first SQL does not save data in order. 
+    second, ordering in select might conflict with ordered columns (e.g., auto increment columns).
+    Finally, select never garantee any ordering.
+    You have to apply order by any way. </p>
+</li>
+<li>
+<p>It is always good practice to indicate the version of SQL in your sql code ....
+    as others cannot easily tell whether you are using Teradata SQL, Oracel SQL or MS SQL
+    not to mention the version (if version specific feature is used).</p>
+</li>
+<li>
+<p>extra semicolon somewhere causes mistakes</p>
+</li>
+<li>
+<p>case when, break at first match, no need to manually break (unlike C/C++)</p>
+</li>
+<li>
+<p>avoid using keywords as column names, 
+    if you do want use a keyword as a column name, 
+    you have to double quote it (e.g., "as"). 
+    can also use [], '', in MS SQL, etc.</p>
+</li>
+<li>
+<p>always specify (unique) primary index when you create a table </p>
+</li>
+<li>
+<p>if not group by statement, then all records as 1 group 
+    if there is a aggregation function.</p>
+</li>
+<li>
+<p>be careful when you use the 
+    <code>delete from table_name</code> command, 
+    as you might mistakely delete all rows 
+    if you forget the <code>where</code> clause or has an extra <code>;</code> before ...</p>
+</li>
+<li>
+<p>sometimes you want add "missing" rows (compared to some "full" table). 
+    the first step is of course to create such a full table, 
+    and join the two tables to find "missing" rows</p>
+</li>
+<li>
+<p>Even if observations in a table is sorted, 
+    you have to rely on the <code>order by</code> clause to get sorted observations.
+    That is the <code>select</code> statement without <code>order by</code> guarantees no specific order of observations.
+    This is true for all versions of SQLs.</p>
+</li>
+</ol>
+<h2 id="syntax">Syntax</h2>
+<ol>
+<li><code>()</code> can be used and sometimes make people confused ... function or keyword ...</li>
+</ol>
+<h2 id="operators">Operators</h2>
+<ol>
+<li>
+<p>Prefer <code>&lt;&gt;</code> as the not equal sign as not all versions of SQL support <code>!=</code> as the not equal sign.</p>
+</li>
+<li>
+<p>extra <code>;</code> can be really dangerous ... </p>
+</li>
+</ol>
+<h2 id="comment">Comment</h2>
+<ol>
+<li>Amost all versions of SQL support <code>--</code> as single-line comment.
+    and <code>/* ... */</code> as multiple-line comment.
+    MySQL also support <code>#</code> as single-line comment.</li>
+</ol>
+<h2 id="references">References</h2>
+<ul>
+<li>
+<p><a href="http://www.legendu.net/en/blog/understand-execuation-of-sql-statements">Understand Execuation of SQL Statements</a></p>
+</li>
+<li>
+<p><a href="http://www.legendu.net/misc/blog/spark-sql-tips/">Spark SQL</a></p>
+</li>
+<li>
+<p><a href="http://www.legendu.net/misc/blog/hive-tips/">Hive SQL</a></p>
+</li>
+<li>
+<p><a href="http://www.legendu.net/misc/blog/sql-style-and-formatter/">SQL Style And Formatter</a></p>
+</li>
+<li>
+<p><a href="http://www.legendu.net/misc/blog/tips-on-sqlfluff/">Tips on Sqlfluff</a></p>
+</li>
+<li>
+<p><a href="http://www.legendu.net/misc/blog/sql-questions/">Questions on SQL</a></p>
+</li>
+<li>
+<p><a href="https://www.oreilly.com/library/view/high-performance-mysql/9780596101718/ch04.html">Chapter 4. Query Performance Optimization</a></p>
+</li>
+<li>
+<p><a href="https://www.youtube.com/watch?v=mgipNdAgQ3o">Ten SQL Tricks that You Didn’t Think Were Possible (Lukas Eder)</a></p>
+</li>
+</ul></div>
+    <footer>
+<p class="meta">
+  <span class="byline author vcard">
+    Posted by <span class="fn">Ben Chuanlong Du</span>
+  </span>
+<time datetime="2014-02-15T12:10:03-08:00" pubdate>Feb 15, 2014</time>  <span class="categories">
+    <a class="category" href="https://misc.legendu.net/tag/programming.html">programming</a>
+    <a class="category" href="https://misc.legendu.net/tag/sql.html">SQL</a>
+    <a class="category" href="https://misc.legendu.net/tag/tips.html">tips</a>
+    <a class="category" href="https://misc.legendu.net/tag/ide.html">IDE</a>
+    <a class="category" href="https://misc.legendu.net/tag/sqldep.html">sqldep</a>
+    <a class="category" href="https://misc.legendu.net/tag/queryscope.html">queryscope</a>
+    <a class="category" href="https://misc.legendu.net/tag/queryviz.html">queryViz</a>
+    <a class="category" href="https://misc.legendu.net/tag/sqlalchemy.html">SQLAlchemy</a>
+    <a class="category" href="https://misc.legendu.net/tag/database.html">database</a>
+  </span>
+</p>    </footer>
+  </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div>
+  </section>
+</div>
+<aside class="sidebar">
+  <section>
+    <h1>Recent Posts</h1>
+    <ul id="recent_posts">
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/tips-on-health/">Tips on Health</a>
+      </li>
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/tips-on-child-education/">Tips on Child Education</a>
+      </li>
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/tips-on-fd/">Tips on fd</a>
+      </li>
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/the-fzf-command-is-a-great-alternative-to-find/">The fzf Command Is a Great Alternative to find</a>
+      </li>
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/ruff-is-an-extremely-fast-python-linter-written-in-rust/">Ruff Is An Extremely Fast Python Linter Written in Rust</a>
+      </li>
+    </ul>
+  </section>
+  <section>
+    <h1>Categories</h1>
+    <ul id="recent_posts">
+        <li><a href="https://misc.legendu.net/category/ai.html">AI</a></li>
+        <li><a href="https://misc.legendu.net/category/career.html">Career</a></li>
+        <li><a href="https://misc.legendu.net/category/cloud.html">Cloud</a></li>
+        <li><a href="https://misc.legendu.net/category/computer-science.html">Computer Science</a></li>
+        <li><a href="https://misc.legendu.net/category/fiannce.html">Fiannce</a></li>
+        <li><a href="https://misc.legendu.net/category/finance.html">Finance</a></li>
+        <li><a href="https://misc.legendu.net/category/fun-problems.html">Fun Problems</a></li>
+        <li><a href="https://misc.legendu.net/category/hardware.html">Hardware</a></li>
+        <li><a href="https://misc.legendu.net/category/health.html">Health</a></li>
+        <li><a href="https://misc.legendu.net/category/house.html">House</a></li>
+        <li><a href="https://misc.legendu.net/category/internet.html">Internet</a></li>
+        <li><a href="https://misc.legendu.net/category/investment.html">Investment</a></li>
+        <li><a href="https://misc.legendu.net/category/life.html">life</a></li>
+        <li><a href="https://misc.legendu.net/category/linux.html">Linux</a></li>
+        <li><a href="https://misc.legendu.net/category/os.html">OS</a></li>
+        <li><a href="https://misc.legendu.net/category/people.html">People</a></li>
+        <li><a href="https://misc.legendu.net/category/philosophy.html">Philosophy</a></li>
+        <li><a href="https://misc.legendu.net/category/research.html">Research</a></li>
+        <li><a href="https://misc.legendu.net/category/shopping.html">Shopping</a></li>
+        <li><a href="https://misc.legendu.net/category/soft-skills.html">soft skills</a></li>
+        <li><a href="https://misc.legendu.net/category/software.html">Software</a></li>
+        <li><a href="https://misc.legendu.net/category/statistics.html">Statistics</a></li>
+        <li><a href="https://misc.legendu.net/category/tools.html">Tools</a></li>
+    </ul>
+  </section>
+ 
+
+  <section>
+  <h1>Tags</h1>
+  <ul class="tagcloud">
+  </ul>
+  </section>
+
+
+
+  <section>
+    <h1>GitHub Repos</h1>
+    <ul id="gh_repos">
+      <li class="loading">Status updating...</li>
+    </ul>
+      <a href="https://github.com/legendu-net">@legendu-net</a> on GitHub
+    <script type="text/javascript">
+      $.domReady(function(){
+          if (!window.jXHR){
+              var jxhr = document.createElement('script');
+              jxhr.type = 'text/javascript';
+              jxhr.src = 'https://misc.legendu.net/theme/js/jXHR.js';
+              var s = document.getElementsByTagName('script')[0];
+              s.parentNode.insertBefore(jxhr, s);
+          }
+
+          github.showRepos({
+              user: 'legendu-net',
+              count: 5,
+              skip_forks: true,
+              target: '#gh_repos'
+          });
+      });
+    </script>
+    <script src="https://misc.legendu.net/theme/js/github.js" type="text/javascript"> </script>
+  </section>
+
+    <section>
+        <h1>Social</h2>
+        <ul>
+            <li><a href="https://www.linkedin.com/in/ben-chuanlong-du-1239b221/" target="_blank">LinkedIn</a></li>
+            <li><a href="https://hub.docker.com/u/dclong" target="_blank">Docker Hub</a></li>
+            <li><a href="https://stackoverflow.com/users/7808204/benjamin-du?tab=profile" target="_blank">Stack Overflow</a></li>
+            <li><a href="https://twitter.com/longendu" target="_blank">Twitter</a></li>
+        <!--
+            <li><a href="https://misc.legendu.net/" type="application/rss+xml" rel="alternate">RSS</a></li>
+            -->
+        </ul>
+    </section>
+</aside>    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Ben Chuanlong Du -
+  <span class="credit">Powered by <a href="http://getpelican.com">Pelican</a></span>
+</p></footer>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-3STS9BVPF6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-3STS9BVPF6');
+</script>
+	<script type="text/javascript">
+	  var disqus_shortname = 'dclong';
+          var disqus_identifier = '/blog/sql-tips/';
+          var disqus_url = 'https://misc.legendu.net/blog/sql-tips/';
+          var disqus_title = 'General Tips on SQL';
+	  (function() {
+	    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	    dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+	    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	   })();
+	</script>
+</body>
+</html>

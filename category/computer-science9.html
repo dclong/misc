@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Ben Chuanlong Du's Blog - Computer Science category</title>
+  <meta name="author" content="Ben Chuanlong Du">
+
+  <link href="https://misc.legendu.net/atom.xml" type="application/atom+xml" rel="alternate"
+        title="Ben Chuanlong Du's Blog Atom Feed" />
+
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link href="https://misc.legendu.net/favicon.png" rel="icon">
+  <link href="https://misc.legendu.net/theme/css/main_2.css" media="screen, projection"
+        rel="stylesheet" type="text/css">
+  <script src="https://misc.legendu.net/theme/js/modernizr-2.0.js"></script>
+  <script src="https://misc.legendu.net/theme/js/ender.js"></script>
+  <script src="https://misc.legendu.net/theme/js/octopress.js" type="text/javascript"></script>
+
+  <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <script data-ad-client="ca-pub-3836424032203369" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+</head>
+
+<body>
+  <header role="banner"><hgroup>
+  <h1><a href="https://misc.legendu.net/">Ben Chuanlong Du's Blog</a></h1>
+    <h2>It is never too late to learn.</h2>
+</hgroup></header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="https://misc.legendu.net/atom.xml" rel="subscribe-rss">RSS</a></li>
+</ul>
+
+<form name="search" action="https://www.bing.com/search" method="get" onSubmit="return build_query()">
+  <fieldset role="search">
+      <!--
+    <input type="hidden" name="q" value="site:https://misc.legendu.net" />
+        -->
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+
+<script type = "text/javascript">
+    function build_query() {
+        var query = document.forms["search"]["q"].value;
+        var prefix = "site:https://misc.legendu.net "
+        if (!query.startsWith(prefix)) {
+            query = prefix + query;
+            document.forms["search"]["q"].value = query;
+        }
+        return true;
+    }
+</script>
+
+<ul class="main-navigation">
+    <li><a href="https://www.legendu.net">Home</a></li>
+    <li><a href="https://misc.legendu.net">Blog</a></li>
+    <li><a href="https://misc.legendu.net/archives.html">Archives</a></li>
+    <li><a href="https://misc.legendu.net/categories.html">Categories</a></li>
+    <li><a href="https://misc.legendu.net/tags.html">Tags</a></li>
+    <li><a href="https://www.legendu.net/pages/about">About</a></li>
+</ul></nav>
+  <div id="main">
+    <div id="content">
+<div class="blog-index">
+  		<article>
+<header>
+      <h1 class="entry-title">
+        <a href="https://misc.legendu.net/blog/write-unsafe-code-in-rust/">Write Unsafe Code in Rust</a>
+      </h1>
+      <p class="meta"><time datetime="2022-09-04T21:38:08-07:00" pubdate>Sep 04, 2022</time></p>
+</header>
+
+  <div class="entry-content"><p><strong>Things on this page are fragmentary and immature notes/thoughts of the author. Please read with your own judgement!</strong></p>
+<p><a href="https://doc.rust-lang.org/reference/unsafe-keyword.html#the-unsafe-keyword">The Unsafe Keyword</a></p>
+<p><a href="https://doc.rust-lang.org/book/ch19-01-unsafe-rust.html">Unsafe Rust</a></p>
+<p><a href="https://blog.logrocket.com/unsafe-rust-how-and-when-not-to-use-it/">Unsafe Rust: How and when (not) to use it</a></p>
+<p><a href="https://www.youtube.com/watch?v=DG-VLezRkYQ">Unsafe Rust is not C</a></p>
+<p><a href="https://rust-lang.github.io/unsafe-code-guidelines/introduction.html">Rust's Unsafe Code Guidelines Reference</a></p>
+<p>Unsafe Code Guidelines
+https://github.com/rust-lang …</p></div>
+  <footer>
+    <a rel="full-article" href="https://misc.legendu.net/blog/write-unsafe-code-in-rust/">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
+        <a href="https://misc.legendu.net/blog/take-screenshot-in-rust/">Take Screenshot in Rust</a>
+      </h1>
+      <p class="meta"><time datetime="2021-06-17T22:50:10-07:00" pubdate>Jun 17, 2021</time></p>
+</header>
+
+  <div class="entry-content"><p><strong>Things on this page are fragmentary and immature notes/thoughts of the author. Please read with your own judgement!</strong></p>
+<h2 id="scrap"><a href="https://crates.io/crates/scrap">scrap</a></h2>
+<p><a href="https://crates.io/crates/scrap">scrap</a>
+makes screen capture easy!</p>
+<h2 id="captrs"><a href="https://crates.io/crates/captrs">captrs</a></h2>
+<p><a href="https://crates.io/crates/captrs">captrs</a>
+is a library for cross-platform screen capture in Rust. 
+Uses dxgcap for capture on Windows via the Desktop Duplication API, 
+and X11Cap for …</p></div>
+  <footer>
+    <a rel="full-article" href="https://misc.legendu.net/blog/take-screenshot-in-rust/">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
+        <a href="https://misc.legendu.net/blog/async-in-rust/">Async in Rust</a>
+      </h1>
+      <p class="meta"><time datetime="2022-12-04T10:38:16-08:00" pubdate>Dec 04, 2022</time></p>
+</header>
+
+  <div class="entry-content"><p><strong>Things on this page are fragmentary and immature notes/thoughts of the author. Please read with your own judgement!</strong></p>
+<ol>
+<li>Combining asynchronous code with synchronous code that can cause blocking is never a wise choice.
+    When calling asynchronous code from a synchronous context, 
+    use <code>futures::executor::block_on</code> and spawn the async …</li></ol></div>
+  <footer>
+    <a rel="full-article" href="https://misc.legendu.net/blog/async-in-rust/">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
+        <a href="https://misc.legendu.net/blog/dev-tools-for-rust/">Dev Tools for Rust</a>
+      </h1>
+      <p class="meta"><time datetime="2023-01-13T16:02:14-08:00" pubdate>Jan 13, 2023</time></p>
+</header>
+
+  <div class="entry-content"><p><strong>Things on this page are fragmentary and immature notes/thoughts of the author. Please read with your own judgement!</strong></p>
+<h2 id="online-tools">Online Tools</h2>
+<ul>
+<li>
+<p><a href="https://godbolt.org/">GodBolt - Compiler Explorer</a></p>
+</li>
+<li>
+<p><a href="https://www.rustexplorer.com/b">Rust Explorer</a></p>
+</li>
+<li>
+<p><a href="https://cognitive-engineering-lab.github.io/aquascope/">Rust Aquascope Playground</a></p>
+</li>
+<li>
+<p><a href="https://play.rust-lang.org/">Rust Playground</a></p>
+</li>
+</ul>
+<h2 id="rust-dev-tools">Rust Dev Tools</h2>
+<h3 id="cargo-show-asm"><a href="https://github.com/pacak/cargo-show-asm">cargo-show-asm</a></h3>
+<p><a href="https://github.com/pacak/cargo-show-asm">cargo-show-asm</a>
+is a cargo subcommand showing the assembly, LLVM-IR and MIR generated for Rust code …</p></div>
+  <footer>
+    <a rel="full-article" href="https://misc.legendu.net/blog/dev-tools-for-rust/">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
+        <a href="https://misc.legendu.net/blog/find-unused-rust-deps-using-cargo-udeps/">Find Unused Rust Dependencies Using cargo-udeps</a>
+      </h1>
+      <p class="meta"><time datetime="2023-01-18T20:47:16-08:00" pubdate>Jan 18, 2023</time></p>
+</header>
+
+  <div class="entry-content"><p><strong>Things on this page are fragmentary and immature notes/thoughts of the author. Please read with your own judgement!</strong></p>
+<p><a href="https://github.com/est31/cargo-udeps">cargo-udeps</a>
+helps find unused dependencies in Cargo.toml.</p>
+<h2 id="installation">Installation</h2>
+<div class="highlight"><pre><span></span><code>cargo<span class="w"> </span>install<span class="w"> </span>cargo-udeps
+</code></pre></div>
+
+<h2 id="usage">Usage</h2>
+<div class="highlight"><pre><span></span><code>cargo<span class="w"> </span>+nightly<span class="w"> </span>udeps
+</code></pre></div>
+
+<h2 id="references">References</h2>
+<ul>
+<li>
+<p><a href="https://github.com/est31/cargo-udeps">cargo-udeps @ GitHub</a></p>
+</li>
+<li>
+<p><a href="https://deps.rs/">Deps.rs - Keep your dependencies up-to-date</a></p>
+</li>
+</ul></div>
+  <footer>
+    <a rel="full-article" href="https://misc.legendu.net/blog/find-unused-rust-deps-using-cargo-udeps/">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
+        <a href="https://misc.legendu.net/blog/tips-on-xfinity/">Tips on XFinity</a>
+      </h1>
+      <p class="meta"><time datetime="2020-06-14T22:45:40-07:00" pubdate>Jun 14, 2020</time></p>
+</header>
+
+  <div class="entry-content"><p><strong>Things on this page are fragmentary and immature notes/thoughts of the author. Please read with your own judgement!</strong></p>
+<h2 id="user-manageemnt">User Manageemnt</h2>
+<p><a href="https://www.xfinity.com/support/articles/primary-and-secondary-accounts">Manage user roles and permissions on Xfinity accounts</a></p>
+<h2 id="separate-2g-and-5g-wifi-networks">Separate 2G and 5G WiFi Networks</h2>
+<ol>
+<li>
+<p>Go to https://internet.xfinity.com/</p>
+</li>
+<li>
+<p>Click on the name of your WiFi.</p>
+</li>
+<li>
+<p>Click "Edit …</p></li></ol></div>
+  <footer>
+    <a rel="full-article" href="https://misc.legendu.net/blog/tips-on-xfinity/">Read On &crarr;</a>
+  </footer>
+  		</article>
+<div class="pagination">
+    <a class="prev" href="https://misc.legendu.net/category/computer-science10.html">&larr; Older</a>
+
+      <a class="next" href="https://misc.legendu.net/category/computer-science8.html">Newer &rarr;</a>
+  <br />
+</div></div>
+<aside class="sidebar">
+  <section>
+    <h1>Recent Posts</h1>
+    <ul id="recent_posts">
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/tips-on-fd/">Tips on fd</a>
+      </li>
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/the-fzf-command-is-a-great-alternative-to-find/">The fzf Command Is a Great Alternative to find</a>
+      </li>
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/ruff-is-an-extremely-fast-python-linter-written-in-rust/">Ruff Is An Extremely Fast Python Linter Written in Rust</a>
+      </li>
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/useful-tools-for-python-developing/">Useful Tools for Python Developing</a>
+      </li>
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/tips-on-pyrefly/">Tips on Pyrefly</a>
+      </li>
+    </ul>
+  </section>
+  <section>
+    <h1>Categories</h1>
+    <ul id="recent_posts">
+        <li><a href="https://misc.legendu.net/category/ai.html">AI</a></li>
+        <li><a href="https://misc.legendu.net/category/career.html">Career</a></li>
+        <li><a href="https://misc.legendu.net/category/cloud.html">Cloud</a></li>
+        <li><a href="https://misc.legendu.net/category/computer-science.html">Computer Science</a></li>
+        <li><a href="https://misc.legendu.net/category/fiannce.html">Fiannce</a></li>
+        <li><a href="https://misc.legendu.net/category/finance.html">Finance</a></li>
+        <li><a href="https://misc.legendu.net/category/fun-problems.html">Fun Problems</a></li>
+        <li><a href="https://misc.legendu.net/category/hardware.html">Hardware</a></li>
+        <li><a href="https://misc.legendu.net/category/health.html">Health</a></li>
+        <li><a href="https://misc.legendu.net/category/house.html">House</a></li>
+        <li><a href="https://misc.legendu.net/category/internet.html">Internet</a></li>
+        <li><a href="https://misc.legendu.net/category/investment.html">Investment</a></li>
+        <li><a href="https://misc.legendu.net/category/life.html">life</a></li>
+        <li><a href="https://misc.legendu.net/category/linux.html">Linux</a></li>
+        <li><a href="https://misc.legendu.net/category/os.html">OS</a></li>
+        <li><a href="https://misc.legendu.net/category/people.html">People</a></li>
+        <li><a href="https://misc.legendu.net/category/philosophy.html">Philosophy</a></li>
+        <li><a href="https://misc.legendu.net/category/research.html">Research</a></li>
+        <li><a href="https://misc.legendu.net/category/shopping.html">Shopping</a></li>
+        <li><a href="https://misc.legendu.net/category/soft-skills.html">soft skills</a></li>
+        <li><a href="https://misc.legendu.net/category/software.html">Software</a></li>
+        <li><a href="https://misc.legendu.net/category/statistics.html">Statistics</a></li>
+        <li><a href="https://misc.legendu.net/category/tools.html">Tools</a></li>
+    </ul>
+  </section>
+ 
+
+  <section>
+  <h1>Tags</h1>
+  <ul class="tagcloud">
+  </ul>
+  </section>
+
+
+
+  <section>
+    <h1>GitHub Repos</h1>
+    <ul id="gh_repos">
+      <li class="loading">Status updating...</li>
+    </ul>
+      <a href="https://github.com/legendu-net">@legendu-net</a> on GitHub
+    <script type="text/javascript">
+      $.domReady(function(){
+          if (!window.jXHR){
+              var jxhr = document.createElement('script');
+              jxhr.type = 'text/javascript';
+              jxhr.src = 'https://misc.legendu.net/theme/js/jXHR.js';
+              var s = document.getElementsByTagName('script')[0];
+              s.parentNode.insertBefore(jxhr, s);
+          }
+
+          github.showRepos({
+              user: 'legendu-net',
+              count: 5,
+              skip_forks: true,
+              target: '#gh_repos'
+          });
+      });
+    </script>
+    <script src="https://misc.legendu.net/theme/js/github.js" type="text/javascript"> </script>
+  </section>
+
+    <section>
+        <h1>Social</h2>
+        <ul>
+            <li><a href="https://www.linkedin.com/in/ben-chuanlong-du-1239b221/" target="_blank">LinkedIn</a></li>
+            <li><a href="https://hub.docker.com/u/dclong" target="_blank">Docker Hub</a></li>
+            <li><a href="https://stackoverflow.com/users/7808204/benjamin-du?tab=profile" target="_blank">Stack Overflow</a></li>
+            <li><a href="https://twitter.com/longendu" target="_blank">Twitter</a></li>
+        <!--
+            <li><a href="https://misc.legendu.net/" type="application/rss+xml" rel="alternate">RSS</a></li>
+            -->
+        </ul>
+    </section>
+</aside>    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Ben Chuanlong Du -
+  <span class="credit">Powered by <a href="http://getpelican.com">Pelican</a></span>
+</p></footer>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-3STS9BVPF6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-3STS9BVPF6');
+</script>
+	<script type="text/javascript">
+	  var disqus_shortname = 'dclong';
+	  (function() {
+	    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	    dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+	    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	   })();
+	</script>
+</body>
+</html>

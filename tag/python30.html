@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Ben Chuanlong Du's Blog - Python</title>
+  <meta name="author" content="Ben Chuanlong Du">
+
+  <link href="https://misc.legendu.net/atom.xml" type="application/atom+xml" rel="alternate"
+        title="Ben Chuanlong Du's Blog Atom Feed" />
+
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link href="https://misc.legendu.net/favicon.png" rel="icon">
+  <link href="https://misc.legendu.net/theme/css/main_2.css" media="screen, projection"
+        rel="stylesheet" type="text/css">
+  <script src="https://misc.legendu.net/theme/js/modernizr-2.0.js"></script>
+  <script src="https://misc.legendu.net/theme/js/ender.js"></script>
+  <script src="https://misc.legendu.net/theme/js/octopress.js" type="text/javascript"></script>
+
+  <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <script data-ad-client="ca-pub-3836424032203369" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+</head>
+
+<body>
+  <header role="banner"><hgroup>
+  <h1><a href="https://misc.legendu.net/">Ben Chuanlong Du's Blog</a></h1>
+    <h2>It is never too late to learn.</h2>
+</hgroup></header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="https://misc.legendu.net/atom.xml" rel="subscribe-rss">RSS</a></li>
+</ul>
+
+<form name="search" action="https://www.bing.com/search" method="get" onSubmit="return build_query()">
+  <fieldset role="search">
+      <!--
+    <input type="hidden" name="q" value="site:https://misc.legendu.net" />
+        -->
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+
+<script type = "text/javascript">
+    function build_query() {
+        var query = document.forms["search"]["q"].value;
+        var prefix = "site:https://misc.legendu.net "
+        if (!query.startsWith(prefix)) {
+            query = prefix + query;
+            document.forms["search"]["q"].value = query;
+        }
+        return true;
+    }
+</script>
+
+<ul class="main-navigation">
+    <li><a href="https://www.legendu.net">Home</a></li>
+    <li><a href="https://misc.legendu.net">Blog</a></li>
+    <li><a href="https://misc.legendu.net/archives.html">Archives</a></li>
+    <li><a href="https://misc.legendu.net/categories.html">Categories</a></li>
+    <li><a href="https://misc.legendu.net/tags.html">Tags</a></li>
+    <li><a href="https://www.legendu.net/pages/about">About</a></li>
+</ul></nav>
+  <div id="main">
+    <div id="content">
+<div class="blog-index">
+  		<article>
+<header>
+      <h1 class="entry-title">
+        <a href="https://misc.legendu.net/blog/python-pandas-multiindex-construct/">Construct MultiIndexes in pandas</a>
+      </h1>
+      <p class="meta"><time datetime="2020-07-31T09:39:02-07:00" pubdate>Jul 31, 2020</time></p>
+</header>
+
+  <div class="entry-content"><div class="cell border-box-sizing code_cell rendered">
+<div class="input"></div>
+  <footer>
+    <a rel="full-article" href="https://misc.legendu.net/blog/python-pandas-multiindex-construct/">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
+        <a href="https://misc.legendu.net/blog/python-pandas-reset_index/">Reset the Index of a pandas DataFrame</a>
+      </h1>
+      <p class="meta"><time datetime="2020-07-31T09:39:02-07:00" pubdate>Jul 31, 2020</time></p>
+</header>
+
+  <div class="entry-content"><div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="reset_index">reset_index<a class="anchor-link" href="#reset_index">&#182;</a></h2><p>By default <code>reset_index</code> returns a copy rather than modify the original data frame. 
+You can specify <code>inplace = True</code> to overwrite the behavior.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Series">Series<a class="anchor-link" href="#Series">&#182;</a></h3><ol>
+<li>If you drop the original index, 
+ you still have a Series. 
+ However, 
+ if you reset index of a sereis without dropping the original index, 
+ you get a data frame.</li></div>
+  <footer>
+    <a rel="full-article" href="https://misc.legendu.net/blog/python-pandas-reset_index/">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
+        <a href="https://misc.legendu.net/blog/python-pandas-set_index/">Change the Index of a pandas DataFrame</a>
+      </h1>
+      <p class="meta"><time datetime="2020-07-31T09:39:02-07:00" pubdate>Jul 31, 2020</time></p>
+</header>
+
+  <div class="entry-content"><div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Assign-Index">Assign Index<a class="anchor-link" href="#Assign-Index">&#182;</a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input"></div>
+  <footer>
+    <a rel="full-article" href="https://misc.legendu.net/blog/python-pandas-set_index/">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
+        <a href="https://misc.legendu.net/blog/sort-python-imports-using-isort/">Sort Python Imports Using isort</a>
+      </h1>
+      <p class="meta"><time datetime="2020-05-16T12:09:15-07:00" pubdate>May 16, 2020</time></p>
+</header>
+
+  <div class="entry-content"><div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Installation">Installation<a class="anchor-link" href="#Installation">&#182;</a></h2><p><code>isort</code> can be installed with the following command.</p>
+
+<pre><code>pip3 install isort</code></pre>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Configuration">Configuration<a class="anchor-link" href="#Configuration">&#182;</a></h2><p>There are 2 recommened ways to configure <code>isort</code>.
+The first recommended way is to place a file named <code>.isort.cfg</code> 
+at the root of your project.
+For example,</p>
+
+<pre><code>[settings]
+line_length=120
+force_to_top=file1.py,file2.py
+skip=file3.py,file4.py
+known_future_library=future,pies
+known_standard_library=std,std2
+known_third_party=randomthirdparty
+known_first_party=mylib1,mylib2
+indent='    '
+multi_line_output=3
+length_sort=1
+forced_separate=django.contrib,django.utils
+default_section=FIRSTPARTY
+no_lines_before=LOCALFOLDER
+
+</code></pre>
+<p>The second way is to add your desired settings under a [tool.isort] section in the <code>pyproject.toml</code></div>
+  <footer>
+    <a rel="full-article" href="https://misc.legendu.net/blog/sort-python-imports-using-isort/">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
+        <a href="https://misc.legendu.net/blog/python-logging-made-stupidly-simple-with-loguru/">Python Logging Made Stupidly Simple With Loguru</a>
+      </h1>
+      <p class="meta"><time datetime="2020-07-14T22:42:11-07:00" pubdate>Jul 14, 2020</time></p>
+</header>
+
+  <div class="entry-content"><div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The best logging package for Python!</p>
+<ol>
+<li><p>Note that the default logging level is <code>DEBUG</code> in loguru
+and it is not allowed to change the logging level of an created logger object in loguru.
+You can refer to
+<a href="https://loguru.readthedocs.io/en/latest/resources/recipes.html#changing-the-level-of-an-existing-handler">changing-the-level-of-an-existing-handler</a>
+and
+<a href="https://github.com/Delgan/loguru/issues/51">Change level of default handler</a>
+on ways to changing logging level in loguru.</p>
+<ol>
+<li>Remove the default logger (with logging level equals DEBUG) and add a new one with the desired logging level.</li></div>
+  <footer>
+    <a rel="full-article" href="https://misc.legendu.net/blog/python-logging-made-stupidly-simple-with-loguru/">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
+        <a href="https://misc.legendu.net/blog/docker-images-for-programming-languages/">Docker Images for Programming Languages</a>
+      </h1>
+      <p class="meta"><time datetime="2017-07-14T09:41:49-07:00" pubdate>Jul 14, 2017</time></p>
+</header>
+
+  <div class="entry-content"><p><strong>Things on this page are fragmentary and immature notes/thoughts of the author. Please read with your own judgement!</strong></p>
+<h2 id="python">Python</h2>
+<h3 id="continuumiominiconda3"><a href="https://hub.docker.com/r/continuumio/miniconda3">continuumio/miniconda3</a></h3>
+<ul>
+<li>It is hard to figure out the version of Python from the version of the Docker image.</li>
+</ul>
+<h3 id="continuumioanaconda3"><a href="https://hub.docker.com/r/continuumio/anaconda3/">continuumio/anaconda3</a></h3>
+<ul>
+<li>It is hard to figure out the version of …</li></ul></div>
+  <footer>
+    <a rel="full-article" href="https://misc.legendu.net/blog/docker-images-for-programming-languages/">Read On &crarr;</a>
+  </footer>
+  		</article>
+<div class="pagination">
+    <a class="prev" href="https://misc.legendu.net/tag/python31.html">&larr; Older</a>
+
+      <a class="next" href="https://misc.legendu.net/tag/python29.html">Newer &rarr;</a>
+  <br />
+</div></div>
+<aside class="sidebar">
+  <section>
+    <h1>Recent Posts</h1>
+    <ul id="recent_posts">
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/ruff-is-an-extremely-fast-python-linter-written-in-rust/">Ruff Is An Extremely Fast Python Linter Written in Rust</a>
+      </li>
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/useful-tools-for-python-developing/">Useful Tools for Python Developing</a>
+      </li>
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/tips-on-pyrefly/">Tips on Pyrefly</a>
+      </li>
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/ty-is-a-new-modern-static-type-checking-and-language-server-for-python/">ty Is a New Modern Static Type Checking and Language Server for Python</a>
+      </li>
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/manage-python-projects-using-uv/">Manage Python Projects Using uv</a>
+      </li>
+    </ul>
+  </section>
+  <section>
+    <h1>Categories</h1>
+    <ul id="recent_posts">
+        <li><a href="https://misc.legendu.net/category/ai.html">AI</a></li>
+        <li><a href="https://misc.legendu.net/category/career.html">Career</a></li>
+        <li><a href="https://misc.legendu.net/category/cloud.html">Cloud</a></li>
+        <li><a href="https://misc.legendu.net/category/computer-science.html">Computer Science</a></li>
+        <li><a href="https://misc.legendu.net/category/fiannce.html">Fiannce</a></li>
+        <li><a href="https://misc.legendu.net/category/finance.html">Finance</a></li>
+        <li><a href="https://misc.legendu.net/category/fun-problems.html">Fun Problems</a></li>
+        <li><a href="https://misc.legendu.net/category/hardware.html">Hardware</a></li>
+        <li><a href="https://misc.legendu.net/category/health.html">Health</a></li>
+        <li><a href="https://misc.legendu.net/category/house.html">House</a></li>
+        <li><a href="https://misc.legendu.net/category/internet.html">Internet</a></li>
+        <li><a href="https://misc.legendu.net/category/investment.html">Investment</a></li>
+        <li><a href="https://misc.legendu.net/category/life.html">life</a></li>
+        <li><a href="https://misc.legendu.net/category/linux.html">Linux</a></li>
+        <li><a href="https://misc.legendu.net/category/os.html">OS</a></li>
+        <li><a href="https://misc.legendu.net/category/people.html">People</a></li>
+        <li><a href="https://misc.legendu.net/category/philosophy.html">Philosophy</a></li>
+        <li><a href="https://misc.legendu.net/category/research.html">Research</a></li>
+        <li><a href="https://misc.legendu.net/category/shopping.html">Shopping</a></li>
+        <li><a href="https://misc.legendu.net/category/soft-skills.html">soft skills</a></li>
+        <li><a href="https://misc.legendu.net/category/software.html">Software</a></li>
+        <li><a href="https://misc.legendu.net/category/statistics.html">Statistics</a></li>
+        <li><a href="https://misc.legendu.net/category/tools.html">Tools</a></li>
+    </ul>
+  </section>
+ 
+
+  <section>
+  <h1>Tags</h1>
+  <ul class="tagcloud">
+  </ul>
+  </section>
+
+
+
+  <section>
+    <h1>GitHub Repos</h1>
+    <ul id="gh_repos">
+      <li class="loading">Status updating...</li>
+    </ul>
+      <a href="https://github.com/legendu-net">@legendu-net</a> on GitHub
+    <script type="text/javascript">
+      $.domReady(function(){
+          if (!window.jXHR){
+              var jxhr = document.createElement('script');
+              jxhr.type = 'text/javascript';
+              jxhr.src = 'https://misc.legendu.net/theme/js/jXHR.js';
+              var s = document.getElementsByTagName('script')[0];
+              s.parentNode.insertBefore(jxhr, s);
+          }
+
+          github.showRepos({
+              user: 'legendu-net',
+              count: 5,
+              skip_forks: true,
+              target: '#gh_repos'
+          });
+      });
+    </script>
+    <script src="https://misc.legendu.net/theme/js/github.js" type="text/javascript"> </script>
+  </section>
+
+    <section>
+        <h1>Social</h2>
+        <ul>
+            <li><a href="https://www.linkedin.com/in/ben-chuanlong-du-1239b221/" target="_blank">LinkedIn</a></li>
+            <li><a href="https://hub.docker.com/u/dclong" target="_blank">Docker Hub</a></li>
+            <li><a href="https://stackoverflow.com/users/7808204/benjamin-du?tab=profile" target="_blank">Stack Overflow</a></li>
+            <li><a href="https://twitter.com/longendu" target="_blank">Twitter</a></li>
+        <!--
+            <li><a href="https://misc.legendu.net/" type="application/rss+xml" rel="alternate">RSS</a></li>
+            -->
+        </ul>
+    </section>
+</aside>    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Ben Chuanlong Du -
+  <span class="credit">Powered by <a href="http://getpelican.com">Pelican</a></span>
+</p></footer>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-3STS9BVPF6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-3STS9BVPF6');
+</script>
+	<script type="text/javascript">
+	  var disqus_shortname = 'dclong';
+	  (function() {
+	    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	    dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+	    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	   })();
+	</script>
+</body>
+</html>

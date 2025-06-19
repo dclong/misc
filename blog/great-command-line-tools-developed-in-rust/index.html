@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Great Command Line Tools Developed in Rust</title>
+  <meta name="author" content="Ben Chuanlong Du">
+
+  <link href="https://misc.legendu.net/atom.xml" type="application/atom+xml" rel="alternate"
+        title="Ben Chuanlong Du's Blog Atom Feed" />
+
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link href="https://misc.legendu.net/favicon.png" rel="icon">
+  <link href="https://misc.legendu.net/theme/css/main_2.css" media="screen, projection"
+        rel="stylesheet" type="text/css">
+  <script src="https://misc.legendu.net/theme/js/modernizr-2.0.js"></script>
+  <script src="https://misc.legendu.net/theme/js/ender.js"></script>
+  <script src="https://misc.legendu.net/theme/js/octopress.js" type="text/javascript"></script>
+
+  <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <script data-ad-client="ca-pub-3836424032203369" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+</head>
+
+<body>
+  <header role="banner"><hgroup>
+  <h1><a href="https://misc.legendu.net/">Ben Chuanlong Du's Blog</a></h1>
+    <h2>It is never too late to learn.</h2>
+</hgroup></header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="https://misc.legendu.net/atom.xml" rel="subscribe-rss">RSS</a></li>
+</ul>
+
+<form name="search" action="https://www.bing.com/search" method="get" onSubmit="return build_query()">
+  <fieldset role="search">
+      <!--
+    <input type="hidden" name="q" value="site:https://misc.legendu.net" />
+        -->
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+
+<script type = "text/javascript">
+    function build_query() {
+        var query = document.forms["search"]["q"].value;
+        var prefix = "site:https://misc.legendu.net "
+        if (!query.startsWith(prefix)) {
+            query = prefix + query;
+            document.forms["search"]["q"].value = query;
+        }
+        return true;
+    }
+</script>
+
+<ul class="main-navigation">
+    <li><a href="https://www.legendu.net">Home</a></li>
+    <li><a href="https://misc.legendu.net">Blog</a></li>
+    <li><a href="https://misc.legendu.net/archives.html">Archives</a></li>
+    <li><a href="https://misc.legendu.net/categories.html">Categories</a></li>
+    <li><a href="https://misc.legendu.net/tags.html">Tags</a></li>
+    <li><a href="https://www.legendu.net/pages/about">About</a></li>
+</ul></nav>
+  <div id="main">
+    <div id="content">
+<div>
+  <article class="hentry" role="article">
+<header>
+      <h1 class="entry-title">Great Command Line Tools Developed in Rust</h1>
+      <p class="meta"><time datetime="2022-12-21T10:14:53-08:00" pubdate>Dec 21, 2022</time></p>
+</header>
+
+  <div class="entry-content"><p><strong>Things on this page are fragmentary and immature notes/thoughts of the author. Please read with your own judgement!</strong></p>
+<h2 id="gql"><a href="https://github.com/AmrDeveloper/GQL">GQL</a></h2>
+<p><a href="https://github.com/AmrDeveloper/GQL">GQL</a>
+is a query language with a syntax very similar to SQL with a tiny engine to perform queries on .git files instance of database files, 
+the engine executes the query on the fly without the need to create database files or convert .git files into any other format, 
+note that all Keywords in GQL are case-insensitive similar to SQL.</p>
+<h2 id="tealdeer"><a href="https://crates.io/crates/tealdeer">tealdeer</a></h2>
+<p><a href="https://crates.io/crates/tealdeer">tealdeer</a>
+is a very fast implementation of tldr in Rust: 
+Simplified, example based and community-driven man pages.</p>
+<h2 id="halp"><a href="https://github.com/orhun/halp">halp</a></h2>
+<p><a href="https://github.com/orhun/halp">halp</a>
+aims to help find the correct arguments for command-line tools 
+by checking the predefined list of commonly used options/flags. 
+Additionally, 
+it provides a prompt for quick access to the manual page or cheat sheet of the given command.</p>
+<h2 id="atuin"><a href="https://github.com/ellie/atuin">Atuin</a></h2>
+<p><a href="https://github.com/ellie/atuin">Atuin</a>
+replaces your existing shell history with a SQLite database, 
+and records additional context for your commands. 
+Additionally, 
+it provides optional and fully encrypted synchronisation of your history between machines, via an Atuin server.</p>
+<h2 id="see"><a href="https://github.com/guilhermeprokisch/see">see</a></h2>
+<p><a href="https://github.com/guilhermeprokisch/see">see</a>
+is a powerful file visualization tool for the terminal, 
+offering advanced code viewing capabilities, Markdown rendering, and more. 
+It provides syntax highlighting, emoji support, and image rendering capabilities, 
+offering a visually appealing way to view various file types directly in your console.</p>
+<h2 id="bat"><a href="https://www.legendu.net/misc/blog/bat-is-a-better-alternative-to-cat">bat</a></h2>
+<p><a href="https://www.legendu.net/misc/blog/bat-is-a-better-alternative-to-cat">bat</a>
+is a cat clone with syntax highlighting and Git integration.</p>
+<h2 id="exa"><a href="https://github.com/ogham/exa">exa</a></h2>
+<p><a href="https://github.com/ogham/exa">exa</a>
+is a modern replacement for ls.</p>
+<h2 id="procs"><a href="https://github.com/dalance/procs">procs</a></h2>
+<p><a href="https://github.com/dalance/procs">procs</a>
+is a modern replacement for ps written in Rust.</p>
+<h2 id="sd"><a href="https://github.com/chmln/sd">sd</a></h2>
+<p><a href="https://github.com/chmln/sd">sd</a>
+is an intuitive find &amp; replace CLI (sed alternative).</p>
+<h2 id="skim"><a href="https://github.com/skim-rs/skim">skim</a></h2>
+<p><a href="https://github.com/skim-rs/skim">skim</a>
+is a fuzzy finder implemented in rust!</p>
+<h2 id="summarize-a-project">Summarize a Project</h2>
+<h3 id="git-cliff"><a href="https://github.com/orhun/git-cliff">git-cliff</a></h3>
+<p><a href="https://github.com/orhun/git-cliff">git-cliff</a>
+can generate changelog files from the Git history 
+by utilizing conventional commits as well as regex-powered custom parsers. 
+The changelog template can be customized with a configuration file to match the desired format.</p>
+<h3 id="tokei"><a href="https://github.com/XAMPPRocky/tokei">tokei</a></h3>
+<p><a href="https://github.com/XAMPPRocky/tokei">Tokei</a>
+is a program that displays statistics about your code. 
+Tokei will show the number of files, 
+total lines within those files and code, comments, and blanks grouped by language.</p>
+<h3 id="onefetch"><a href="https://github.com/o2sh/onefetch">onefetch</a></h3>
+<p><a href="https://github.com/o2sh/onefetch">OneFetch</a>
+is a command-line Git information tool written in Rust 
+that displays project information and code statistics 
+for a local Git repository directly to your terminal. 
+The tool is completely offline - no network access is required.</p>
+<h2 id="system-monitoring">System Monitoring</h2>
+<h3 id="bottom"><a href="https://crates.io/crates/bottom">bottom</a></h3>
+<p><a href="https://crates.io/crates/bottom">bottom</a>
+is a customizable cross-platform graphical process/system monitor 
+for the terminal. 
+It supports Linux, macOS, and Windows.</p>
+<h3 id="sniffnet"><a href="https://crates.io/crates/sniffnet">sniffnet</a></h3>
+<p><a href="https://crates.io/crates/sniffnet">sniffnet</a>
+is an application to comfortably monitor your network traffic.</p>
+<h3 id="trippy"><a href="https://github.com/fujiapple852/trippy">trippy</a></h3>
+<p><a href="https://github.com/fujiapple852/trippy">Trippy</a>
+combines the functionality of traceroute and ping 
+and is designed to assist with the analysis of networking issues.</p>
+<h3 id="gping"><a href="https://github.com/orf/gping">gping</a></h3>
+<p><a href="https://github.com/orf/gping">gping</a>
+is ping with a graph.</p>
+<h3 id="bandwhich"><a href="https://crates.io/crates/bandwhich">bandwhich</a></h3>
+<p><a href="https://crates.io/crates/bandwhich">bandwhich</a>
+is a CLI utility for displaying current network utilization by process, 
+connection and remote IP/hostname.</p>
+<h3 id="below"><a href="https://github.com/facebookincubator/below">below</a></h3>
+<p><a href="https://github.com/facebookincubator/below">below</a>
+is an interactive tool to view and record historical system data.</p>
+<h2 id="disk-usage">Disk Usage</h2>
+<h3 id="dust"><a href="https://github.com/bootandy/dust">dust</a></h3>
+<p><a href="https://github.com/bootandy/dust">Dust</a>
+is a more intuitive version of du in rust.</p>
+<h3 id="dua-cli"><a href="https://crates.io/crates/dua-cli">dua-cli</a></h3>
+<p><a href="https://crates.io/crates/dua-cli">dua-cli</a></p>
+<h2 id="navigation-and-searching">Navigation and Searching</h2>
+<h3 id="ripgrep"><a href="https://www.legendu.net/misc/blog/ripgrep-is-a-better-alternative-to-find">ripgrep</a></h3>
+<p><a href="https://www.legendu.net/misc/blog/ripgrep-is-a-better-alternative-to-find">ripgrep</a>
+recursively searches directories for a regex pattern while respecting your gitignore.</p>
+<h3 id="igrep"><a href="https://github.com/konradsz/igrep">igrep</a></h3>
+<p><a href="https://github.com/konradsz/igrep">igrep</a>
+runs grep (ripgrep's library) in the background, 
+allows interactively pick its results and open selected match in text editor of choice (vim by default).</p>
+<h3 id="broot"><a href="https://github.com/Canop/broot">broot</a></h3>
+<p><a href="https://github.com/Canop/broot">broot</a>
+provides a new better way to see and navigate directory trees.</p>
+<h2 id="git-tools">Git Tools</h2>
+<h3 id="gitui"><a href="https://github.com/extrawurst/gitui">gitui</a></h3>
+<p><a href="https://github.com/extrawurst/gitui">GitUI</a>
+provides you with the comfort of a git GUI but right in your terminal
+.</p>
+<h3 id="gitoxide"><a href="https://github.com/Byron/gitoxide">gitoxide</a></h3>
+<p><a href="https://github.com/Byron/gitoxide">gitoxide</a>
+is an implementation of git written in Rust 
+for developing future-proof applications which strive 
+for correctness and performance 
+while providing a pleasant and unsurprising developer experience.</p>
+<h3 id="git-leave"><a href="https://crates.io/crates/git-leave">git-leave</a></h3>
+<p><a href="https://crates.io/crates/git-leave">git-leave</a>
+checks for unsaved or uncommitted changes on your machine.</p>
+<h3 id="stacked-git"><a href="https://github.com/stacked-git/stgit">Stacked Git</a></h3>
+<p><a href="https://github.com/stacked-git/stgit">Stacked Git</a>
+,
+StGit for short, 
+is an application for managing Git commits as a stack of patches.</p>
+<h2 id="grex"><a href="https://github.com/pemistahl/grex">grex</a></h2>
+<p><a href="https://github.com/pemistahl/grex">grex</a>
+is a command-line tool and Rust library 
+for generating regular expressions from user-provided test cases
+.</p>
+<h2 id="delta"><a href="https://github.com/dandavison/delta">delta</a></h2>
+<p><a href="https://github.com/dandavison/delta">delta</a>
+is a syntax-highlighting pager for git, diff, and grep output.</p>
+<h2 id="difftastic"><a href="https://github.com/Wilfred/difftastic">difftastic</a></h2>
+<p><a href="https://github.com/Wilfred/difftastic">Difftastic</a>
+is a structural diff tool that compares files based on their syntax.</p>
+<h2 id="ruff"><a href="https://github.com/charliermarsh/ruff">ruff</a></h2>
+<p><a href="https://github.com/charliermarsh/ruff">ruff</a>
+is an extremely fast Python linter, written in Rust.</p>
+<h2 id="rome"><a href="https://github.com/rome/tools">Rome</a></h2>
+<p><a href="https://github.com/rome/tools">Rome</a>
+provides unified developer tools for JavaScript, TypeScript, and the web.</p>
+<h2 id="carbonyl"><a href="https://github.com/fathyb/carbonyl">carbonyl</a></h2>
+<p><a href="https://github.com/fathyb/carbonyl">Carbonyl</a>
+is a Chromium based browser built to run in a terminal.</p>
+<h2 id="speedtest-rs"><a href="https://github.com/nelsonjchen/speedtest-rs">speedtest-rs</a></h2>
+<p><a href="https://github.com/nelsonjchen/speedtest-rs">speedtest-rs</a>
+a tool like speedtest-cli, but in Rust
+.</p>
+<h2 id="mprocs"><a href="https://github.com/pvolok/mprocs">mprocs</a></h2>
+<p><a href="https://github.com/pvolok/mprocs">mprocs</a>
+runs multiple commands in parallel and shows output of each command separately.</p>
+<h2 id="security">Security</h2>
+<h2 id="nosey-parker"><a href="https://github.com/praetorian-inc/noseyparker">Nosey Parker</a></h2>
+<p><a href="https://github.com/praetorian-inc/noseyparker">Nosey Parker</a>
+is a command-line program that finds secrets and sensitive information in textual data and Git history.</p>
+<h2 id="rtx"><a href="https://github.com/jdxcode/rtx">rtx</a></h2>
+<p><a href="https://github.com/jdxcode/rtx">rtx</a>
+is a version manager for multiple programming languages.</p>
+<h2 id="good-ones-but-which-i-wont-use">Good Ones but Which I Won't Use</h2>
+<p>nushell</p>
+<h2 id="references">References</h2>
+<ul>
+<li>
+<p><a href="https://zaiste.net/posts/shell-commands-rust/">Rewritten in Rust: Modern Alternatives of Command-Line Tools</a></p>
+</li>
+<li>
+<p><a href="https://github.com/TaKO8Ki/awesome-alternatives-in-rust">Awesome Alternatives in Rust</a></p>
+</li>
+</ul></div>
+    <footer>
+<p class="meta">
+  <span class="byline author vcard">
+    Posted by <span class="fn">Benjamin Du</span>
+  </span>
+<time datetime="2022-12-21T10:14:53-08:00" pubdate>Dec 21, 2022</time>  <span class="categories">
+    <a class="category" href="https://misc.legendu.net/tag/computer-science.html">Computer Science</a>
+    <a class="category" href="https://misc.legendu.net/tag/programming.html">programming</a>
+    <a class="category" href="https://misc.legendu.net/tag/rust.html">Rust</a>
+    <a class="category" href="https://misc.legendu.net/tag/alternative.html">alternative</a>
+    <a class="category" href="https://misc.legendu.net/tag/command-line.html">command-line</a>
+    <a class="category" href="https://misc.legendu.net/tag/rewrite.html">rewrite</a>
+  </span>
+</p>    </footer>
+  </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div>
+  </section>
+</div>
+<aside class="sidebar">
+  <section>
+    <h1>Recent Posts</h1>
+    <ul id="recent_posts">
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/tips-on-health/">Tips on Health</a>
+      </li>
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/tips-on-child-education/">Tips on Child Education</a>
+      </li>
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/tips-on-fd/">Tips on fd</a>
+      </li>
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/the-fzf-command-is-a-great-alternative-to-find/">The fzf Command Is a Great Alternative to find</a>
+      </li>
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/ruff-is-an-extremely-fast-python-linter-written-in-rust/">Ruff Is An Extremely Fast Python Linter Written in Rust</a>
+      </li>
+    </ul>
+  </section>
+  <section>
+    <h1>Categories</h1>
+    <ul id="recent_posts">
+        <li><a href="https://misc.legendu.net/category/ai.html">AI</a></li>
+        <li><a href="https://misc.legendu.net/category/career.html">Career</a></li>
+        <li><a href="https://misc.legendu.net/category/cloud.html">Cloud</a></li>
+        <li><a href="https://misc.legendu.net/category/computer-science.html">Computer Science</a></li>
+        <li><a href="https://misc.legendu.net/category/fiannce.html">Fiannce</a></li>
+        <li><a href="https://misc.legendu.net/category/finance.html">Finance</a></li>
+        <li><a href="https://misc.legendu.net/category/fun-problems.html">Fun Problems</a></li>
+        <li><a href="https://misc.legendu.net/category/hardware.html">Hardware</a></li>
+        <li><a href="https://misc.legendu.net/category/health.html">Health</a></li>
+        <li><a href="https://misc.legendu.net/category/house.html">House</a></li>
+        <li><a href="https://misc.legendu.net/category/internet.html">Internet</a></li>
+        <li><a href="https://misc.legendu.net/category/investment.html">Investment</a></li>
+        <li><a href="https://misc.legendu.net/category/life.html">life</a></li>
+        <li><a href="https://misc.legendu.net/category/linux.html">Linux</a></li>
+        <li><a href="https://misc.legendu.net/category/os.html">OS</a></li>
+        <li><a href="https://misc.legendu.net/category/people.html">People</a></li>
+        <li><a href="https://misc.legendu.net/category/philosophy.html">Philosophy</a></li>
+        <li><a href="https://misc.legendu.net/category/research.html">Research</a></li>
+        <li><a href="https://misc.legendu.net/category/shopping.html">Shopping</a></li>
+        <li><a href="https://misc.legendu.net/category/soft-skills.html">soft skills</a></li>
+        <li><a href="https://misc.legendu.net/category/software.html">Software</a></li>
+        <li><a href="https://misc.legendu.net/category/statistics.html">Statistics</a></li>
+        <li><a href="https://misc.legendu.net/category/tools.html">Tools</a></li>
+    </ul>
+  </section>
+ 
+
+  <section>
+  <h1>Tags</h1>
+  <ul class="tagcloud">
+  </ul>
+  </section>
+
+
+
+  <section>
+    <h1>GitHub Repos</h1>
+    <ul id="gh_repos">
+      <li class="loading">Status updating...</li>
+    </ul>
+      <a href="https://github.com/legendu-net">@legendu-net</a> on GitHub
+    <script type="text/javascript">
+      $.domReady(function(){
+          if (!window.jXHR){
+              var jxhr = document.createElement('script');
+              jxhr.type = 'text/javascript';
+              jxhr.src = 'https://misc.legendu.net/theme/js/jXHR.js';
+              var s = document.getElementsByTagName('script')[0];
+              s.parentNode.insertBefore(jxhr, s);
+          }
+
+          github.showRepos({
+              user: 'legendu-net',
+              count: 5,
+              skip_forks: true,
+              target: '#gh_repos'
+          });
+      });
+    </script>
+    <script src="https://misc.legendu.net/theme/js/github.js" type="text/javascript"> </script>
+  </section>
+
+    <section>
+        <h1>Social</h2>
+        <ul>
+            <li><a href="https://www.linkedin.com/in/ben-chuanlong-du-1239b221/" target="_blank">LinkedIn</a></li>
+            <li><a href="https://hub.docker.com/u/dclong" target="_blank">Docker Hub</a></li>
+            <li><a href="https://stackoverflow.com/users/7808204/benjamin-du?tab=profile" target="_blank">Stack Overflow</a></li>
+            <li><a href="https://twitter.com/longendu" target="_blank">Twitter</a></li>
+        <!--
+            <li><a href="https://misc.legendu.net/" type="application/rss+xml" rel="alternate">RSS</a></li>
+            -->
+        </ul>
+    </section>
+</aside>    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Ben Chuanlong Du -
+  <span class="credit">Powered by <a href="http://getpelican.com">Pelican</a></span>
+</p></footer>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-3STS9BVPF6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-3STS9BVPF6');
+</script>
+	<script type="text/javascript">
+	  var disqus_shortname = 'dclong';
+          var disqus_identifier = '/blog/great-command-line-tools-developed-in-rust/';
+          var disqus_url = 'https://misc.legendu.net/blog/great-command-line-tools-developed-in-rust/';
+          var disqus_title = 'Great Command Line Tools Developed in Rust';
+	  (function() {
+	    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	    dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+	    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	   })();
+	</script>
+</body>
+</html>

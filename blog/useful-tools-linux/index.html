@@ -1,0 +1,923 @@
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Useful Tools in Linux</title>
+  <meta name="author" content="Ben Chuanlong Du">
+
+  <link href="https://misc.legendu.net/atom.xml" type="application/atom+xml" rel="alternate"
+        title="Ben Chuanlong Du's Blog Atom Feed" />
+
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link href="https://misc.legendu.net/favicon.png" rel="icon">
+  <link href="https://misc.legendu.net/theme/css/main_2.css" media="screen, projection"
+        rel="stylesheet" type="text/css">
+  <script src="https://misc.legendu.net/theme/js/modernizr-2.0.js"></script>
+  <script src="https://misc.legendu.net/theme/js/ender.js"></script>
+  <script src="https://misc.legendu.net/theme/js/octopress.js" type="text/javascript"></script>
+
+  <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <script data-ad-client="ca-pub-3836424032203369" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+</head>
+
+<body>
+  <header role="banner"><hgroup>
+  <h1><a href="https://misc.legendu.net/">Ben Chuanlong Du's Blog</a></h1>
+    <h2>It is never too late to learn.</h2>
+</hgroup></header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="https://misc.legendu.net/atom.xml" rel="subscribe-rss">RSS</a></li>
+</ul>
+
+<form name="search" action="https://www.bing.com/search" method="get" onSubmit="return build_query()">
+  <fieldset role="search">
+      <!--
+    <input type="hidden" name="q" value="site:https://misc.legendu.net" />
+        -->
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+
+<script type = "text/javascript">
+    function build_query() {
+        var query = document.forms["search"]["q"].value;
+        var prefix = "site:https://misc.legendu.net "
+        if (!query.startsWith(prefix)) {
+            query = prefix + query;
+            document.forms["search"]["q"].value = query;
+        }
+        return true;
+    }
+</script>
+
+<ul class="main-navigation">
+    <li><a href="https://www.legendu.net">Home</a></li>
+    <li><a href="https://misc.legendu.net">Blog</a></li>
+    <li><a href="https://misc.legendu.net/archives.html">Archives</a></li>
+    <li><a href="https://misc.legendu.net/categories.html">Categories</a></li>
+    <li><a href="https://misc.legendu.net/tags.html">Tags</a></li>
+    <li><a href="https://www.legendu.net/pages/about">About</a></li>
+</ul></nav>
+  <div id="main">
+    <div id="content">
+<div>
+  <article class="hentry" role="article">
+<header>
+      <h1 class="entry-title">Useful Tools in Linux</h1>
+      <p class="meta"><time datetime="2012-08-17T11:42:15-07:00" pubdate>Aug 17, 2012</time></p>
+</header>
+
+  <div class="entry-content"><p><strong>Things on this page are fragmentary and immature notes/thoughts of the author. Please read with your own judgement!</strong></p>
+<p><img src="http://dclong.github.io/media/linux/linux.png" height="200" width="240" align="right"/></p>
+<p><a href="http://www.icewalkers.com/">IceWalkers</a> is a great place
+to find software/tools for all kinds of purposes.</p>
+<h2 id="project"><a href="http://www.legendu.net/misc/blog/project-tips/">Project</a></h2>
+<h2 id="serverdesktop-management">Server/Desktop Management</h2>
+<h3 id="linux-desktop-environment"><a href="http://www.legendu.net/misc/blog/desktop-environments-for-linux/">Linux Desktop Environment</a></h3>
+<h3 id="linux-package-management"><a href="http://www.legendu.net/misc/blog/package-management-in-linux/">Linux Package Management</a></h3>
+<h3 id="terminal-tools"><a href="http://www.legendu.net/misc/blog/linux-terminal-tips/">Terminal Tools</a></h3>
+<h3 id="administer"><a href="http://www.legendu.net/misc/blog/linux-administrator-tools/">Administer</a></h3>
+<h3 id="disk-maintenance"><a href="http://www.legendu.net/misc/blog/command-line-tools-for-linux-file-system/">Disk Maintenance</a></h3>
+<h3 id="admin-tools"><a href="http://www.legendu.net/misc/blog/linux-administrator-tools/">Admin Tools</a></h3>
+<h3 id="security">Security</h3>
+<ol>
+<li>fail2ban</li>
+<li>Tor (on-line anonymity)</li>
+</ol>
+<h3 id="encryption">Encryption</h3>
+<ol>
+<li>gpg</li>
+</ol>
+<h3 id="time-synchronization">Time Synchronization</h3>
+<ol>
+<li>ntp (sync-debian)</li>
+</ol>
+<h3 id="task-scheduling"><a href="http://www.legendu.net/misc/blog/workflow-managing-tools">Task Scheduling</a></h3>
+<h2 id="backup">Backup</h2>
+<h3 id="cloud-backup-tools">Cloud Backup Tools</h3>
+<ol>
+<li>
+<p>Network Attach Storage (NAS)</p>
+</li>
+<li>
+<p>Storage Made Simple (SME)</p>
+</li>
+</ol>
+<h4 id="centralized">Centralized</h4>
+<ol>
+<li>
+<p>Amazon S3</p>
+<ul>
+<li>AeroFS can backup to Amazon S3</li>
+<li>s3cmd is a command line client for Linux</li>
+</ul>
+</li>
+<li>
+<p>Dropbox</p>
+</li>
+<li>
+<p>TeamDrive (secure, fast)</p>
+</li>
+<li>
+<p>Bitcasa (security, infinite storage)</p>
+</li>
+<li>
+<p>Google Drive</p>
+</li>
+</ol>
+<h4 id="decentralized-private-security">Decentralized (private, security)</h4>
+<ol>
+<li>BitTorrent Sync (BTSync)</li>
+</ol>
+<h5 id="pros">Pros</h5>
+<ol>
+<li>
+<p>secure</p>
+</li>
+<li>
+<p>free</p>
+</li>
+<li>
+<p>no limit on files except the limit of your own disk</p>
+</li>
+</ol>
+<h5 id="cons">Cons</h5>
+<ol>
+<li>
+<p>beta version, not stable enough</p>
+</li>
+<li>
+<p>versioning is a little bit tricky</p>
+</li>
+<li>
+<p>no GUI version for Linux</p>
+</li>
+<li>
+<p>AeroFS (can use Amazon S3 as the central repository)</p>
+</li>
+<li>
+<p>Syncthing</p>
+</li>
+</ol>
+<h3 id="non-cloud-backup-tools">Non-cloud Backup Tools</h3>
+<ol>
+<li>
+<p>rsync (1-way synchronization)</p>
+</li>
+<li>
+<p>rsnapshot (incremental backup)</p>
+</li>
+<li>
+<p>duplicity (incremental backup with encryption and compression)</p>
+</li>
+<li>
+<p>borg</p>
+</li>
+<li>
+<p>Back In Time</p>
+</li>
+<li>
+<p>unison (2-way synchronization, not a good solution compared to cloud backup tools)</p>
+</li>
+<li>
+<p>Bacula (comprehensive backup tool)</p>
+</li>
+<li>
+<p>BackupPC</p>
+</li>
+<li>
+<p>FreeFileSync (a very good synchronization software written in C++, but bundled with malware now)</p>
+</li>
+</ol>
+<h3 id="file-transfer">File Transfer</h3>
+<ol>
+<li>
+<p>infinit (fast, secure)</p>
+</li>
+<li>
+<p>BitTorrent</p>
+</li>
+<li>
+<p>BiTorrent Sync</p>
+</li>
+</ol>
+<h3 id="file-cleaning">File Cleaning</h3>
+<ol>
+<li>BleachBit</li>
+</ol>
+<h3 id="file-hosting">File Hosting</h3>
+<ol>
+<li>Mega</li>
+</ol>
+<h4 id="pros_1">Pros</h4>
+<ol>
+<li>
+<p>50 GB free</p>
+</li>
+<li>
+<p>secure (encrypted before upload)</p>
+</li>
+<li>
+<p>10 GB every 30 minutes free (essentially free consider currently network speed)</p>
+</li>
+<li>
+<p>maximum file size is only restricted by browser memory capability</p>
+</li>
+<li>
+<p>never expire</p>
+</li>
+<li>
+<p>cross-platform and command line tools available for Linux</p>
+</li>
+<li>
+<p>able to follow symbolic link</p>
+</li>
+</ol>
+<h4 id="cons_1">Cons</h4>
+<div class="highlight"><pre><span></span><code><span class="mf">1.</span><span class="w"> </span><span class="kr">on</span><span class="n">e</span><span class="w"> </span><span class="n">file</span><span class="w"> </span><span class="n">at</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">time</span><span class="w"> </span><span class="kr">for</span><span class="w"> </span><span class="nb">fre</span><span class="n">e</span><span class="w"> </span><span class="n">account</span>
+</code></pre></div>
+
+<ol>
+<li>File Dropper</li>
+</ol>
+<h4 id="pros_2">Pros</h4>
+<ol>
+<li>
+<p>unlimited space</p>
+</li>
+<li>
+<p>no bandwith limit</p>
+</li>
+</ol>
+<h4 id="cons_2">Cons</h4>
+<ol>
+<li>
+<p>uploaded files will be removed if they are not downloaded even once
+    within 30 days consecutively (files belong to premium account are never removed)</p>
+</li>
+<li>
+<p>upload file can be at most 5 GB</p>
+</li>
+<li>
+<p>the cheapest plan is $1/month.
+    really no free account, but rather just upload and keep link
+    so not convenient for people without an premium account</p>
+<p>Good for people who would like to share large files and do not need uploaded files to be persistent.
+Or for backing up frequently changed files so that before an uploaded file is removed,
+another updated version is uploaded.</p>
+</li>
+<li>
+<p>Baidu Yun</p>
+</li>
+<li>
+<p>Tencent Weiyun</p>
+</li>
+</ol>
+<h2 id="network"><a href="http://www.legendu.net/misc/blog/linux-network-tools/">Network</a></h2>
+<h2 id="compress-and-uncompress"><a href="http://www.legendu.net/en/blog/compress-and-decompress-in-linux/">Compress and Uncompress</a></h2>
+<h2 id="virtual-machine">Virtual Machine</h2>
+<ol>
+<li>VirtualBox</li>
+<li>VMWare</li>
+<li>Xen</li>
+<li>KVM (requires hardware support, e.g., Intel VT-x or AMD-V)</li>
+<li>QEMU-KVM (requires hardware support, e.g., Intel VT-x or AMD-V)</li>
+</ol>
+<h2 id="database-management-system-dbms">Database Management System (DBMS)</h2>
+<h3 id="relational-dbms">Relational DBMS</h3>
+<ol>
+<li>
+<p>MySQL</p>
+</li>
+<li>
+<p>SQLite (embedded database)</p>
+</li>
+</ol>
+<h3 id="objectdocument-oriented-dbms">Object/Document-oriented DBMS</h3>
+<ol>
+<li>MongoDB</li>
+<li>CouchDB</li>
+<li>OrientDB (written in Java)</li>
+<li>UnQLite (embedded database, sounds like a good replace for SQLite)</li>
+<li>MooDB (embedded database)</li>
+<li>Kyoto Cabinet (embedded, for simple key-value data)</li>
+<li>LevelDB (embedded, for simple key-value data)</li>
+</ol>
+<h2 id="daily-work-tools-office-tools-etc">Daily Work Tools (Office Tools, etc.)</h2>
+<h3 id="well-supported-printers">Well Supported Printers</h3>
+<ol>
+<li>HP</li>
+<li>Brother</li>
+</ol>
+<h3 id="pinyin-input-method">Pinyin Input Method</h3>
+<ol>
+<li>Sogou Pinyin</li>
+<li>Google Pinyin</li>
+<li>Sun Pinyin</li>
+</ol>
+<h3 id="web-browser">Web Browser</h3>
+<ol>
+<li>Tor (on-line anonymity)</li>
+<li>Google Chrome</li>
+<li>Firefox/Iceweasel</li>
+<li>w3m (a powerful text-based web browser)</li>
+<li>lynx (another text-based web browser)</li>
+</ol>
+<h3 id="on-line-tools">On-line Tools</h3>
+<ol>
+<li>Doodle</li>
+<li>Survata (for custom surveys)</li>
+<li>Google Docs (Google Form can a simple solution to custom surveys)</li>
+</ol>
+<h3 id="finance">Finance</h3>
+<ol>
+<li>gnucash</li>
+<li>DocumentBurst</li>
+</ol>
+<h3 id="password-management"><a href="http://www.legendu.net/misc/blog/password-management/">Password Management</a></h3>
+<h3 id="data-manipulation">Data Manipulation</h3>
+<ol>
+<li>grep/sed/awk/cut/sort/uniq/comm</li>
+<li>pdfgrep</li>
+</ol>
+<p>Search in pdf files for strings matching a regular expression.
+It only works on PDF files but even not text files.</p>
+<ol>
+<li>
+<p>taggrepper - search and match tags of audio files against regular expressions</p>
+</li>
+<li>
+<p>crgrep - common resource grep</p>
+</li>
+<li>
+<p>sgrep - tool to search a file for structured pattern</p>
+</li>
+<li>
+<p>recoll</p>
+</li>
+</ol>
+<p>Personal full text search package with a Qt GUI</p>
+<ol>
+<li>catdoc/xls2csv/catppt</li>
+</ol>
+<h3 id="text-editor">Text Editor</h3>
+<ol>
+<li>Vim (general purpose text editor)</li>
+<li>Visual Studio Code</li>
+</ol>
+<h2 id="ms-office-alternative">MS Office Alternative</h2>
+<ol>
+<li>
+<p>LibreOffice</p>
+</li>
+<li>
+<p><a href="http://www.onlyoffice.com/">OnlyOffice</a></p>
+</li>
+<li>
+<p>Calligra Suite (KDE dependent)</p>
+</li>
+<li>
+<p>AbiWord (Word)</p>
+</li>
+<li>
+<p>gnumeric (Excel)</p>
+</li>
+<li>
+<p>WPS Office</p>
+</li>
+</ol>
+<h3 id="publishing-tools">Publishing Tools</h3>
+<ol>
+<li>LaTex</li>
+</ol>
+<h4 id="scribus"><a href="https://www.scribus.net/magazine-production/">Scribus</a></h4>
+<p>Opensource Desktop Publishing</p>
+<h3 id="dictionary">Dictionary</h3>
+<ol>
+<li>
+<p>goldendict</p>
+</li>
+<li>
+<p>dict</p>
+</li>
+</ol>
+<h3 id="email-client">Email Client</h3>
+<ol>
+<li>
+<p>Thunderbird (called IceDove in Debian)</p>
+</li>
+<li>
+<p>Evolution</p>
+</li>
+<li>
+<p>Claws Mail</p>
+</li>
+<li>
+<p>Sieve (mail filtering language)</p>
+</li>
+</ol>
+<h3 id="pdf-tools">PDF Tools</h3>
+<h4 id="readerviewer">Reader/Viewer</h4>
+<ol>
+<li>
+<p>evince</p>
+</li>
+<li>
+<p>xpdf</p>
+</li>
+<li>
+<p>okular</p>
+</li>
+</ol>
+<h4 id="manipulation">Manipulation</h4>
+<ol>
+<li>pdftk</li>
+</ol>
+<h3 id="scientific-reference-management">Scientific Reference Management</h3>
+<ol>
+<li>
+<p>Zotero (open source, a very good one)</p>
+</li>
+<li>
+<p>Mendeley (2G free, social network based, good for small usage, better to use together with Zotero)</p>
+</li>
+<li>
+<p>ReadCube</p>
+</li>
+<li>
+<p>JabRef (OK but not good)</p>
+</li>
+</ol>
+<h3 id="e-book-library-management">E-book library management</h3>
+<ol>
+<li>calibre</li>
+</ol>
+<h3 id="notes-taking">Notes Taking</h3>
+<p><a href="http://www.legendu.net/misc/blog/software-for-taking-notes/">http://www.legendu.net/misc/blog/software-for-taking-notes/</a></p>
+<h3 id="task-management">Task Management</h3>
+<ol>
+<li>
+<p>XMind</p>
+</li>
+<li>
+<p>WorkFlowy</p>
+</li>
+<li>
+<p>Todoist</p>
+</li>
+<li>
+<p>Wunderlist</p>
+</li>
+<li>
+<p>Taskwarrior</p>
+</li>
+</ol>
+<h3 id="auto-typing-tools"><a href="http://www.legendu.net/misc/blog/auto-typing-tools/">Auto Typing Tools</a></h3>
+<h2 id="programming-tools">Programming Tools</h2>
+<h3 id="compiler">Compiler</h3>
+<ol>
+<li>
+<p>GCC</p>
+</li>
+<li>
+<p>Clang</p>
+</li>
+</ol>
+<h3 id="debugging-tools">Debugging Tools</h3>
+<ol>
+<li>
+<p>GDB</p>
+</li>
+<li>
+<p>Valgrind</p>
+</li>
+<li>
+<p>CUDA-Memcheck</p>
+</li>
+</ol>
+<h3 id="version-control">Version Control</h3>
+<ol>
+<li>git</li>
+</ol>
+<h2 id="multimedia-tools">Multimedia Tools</h2>
+<h3 id="obs-studio"><a href="https://github.com/obsproject/obs-studio">OBS Studio</a></h3>
+<p><a href="https://github.com/obsproject/obs-studio">OBS Studio</a>
+Free and open source software for live streaming and screen recording</p>
+<h3 id="music-player">Music Player</h3>
+<ol>
+<li><a href="https://www.clementine-player.org/">Clementine</a></li>
+</ol>
+<h3 id="screenshot">Screenshot</h3>
+<p><a href="http://www.legendu.net/misc/blog/take-screenshot-using-shutter-on-linux">Take Screenshot Using Shutter on Linux</a></p>
+<h3 id="cddvd-burning">CD/DVD burning</h3>
+<h4 id="gui-tools">GUI Tools</h4>
+<ol>
+<li>
+<p>k3b  </p>
+</li>
+<li>
+<p>gnome baker</p>
+</li>
+<li>
+<p>brasero</p>
+</li>
+</ol>
+<h4 id="command-line-tools">Command line Tools</h4>
+<ol>
+<li>
+<p>xvidenc (shell script to encode DVDs to Xvid)</p>
+</li>
+<li>
+<p>isoinfo</p>
+</li>
+<li>
+<p>genisoimage (Debian) or mkisofs (other Linux)</p>
+</li>
+<li>
+<p>dd or cat</p>
+</li>
+</ol>
+<h3 id="videoaudio-player">Video/Audio Player</h3>
+<ol>
+<li>
+<p>vlc</p>
+</li>
+<li>
+<p><a href="https://github.com/iina/iina">IINA</a></p>
+</li>
+<li>
+<p>HandBrake</p>
+</li>
+<li>
+<p>exiftool (command line multimedia meta data editor)</p>
+</li>
+<li>
+<p>Exiv2 (image meta data library and tools written in C++)</p>
+</li>
+</ol>
+<h3 id="software-for-editing-videos"><a href="http://www.legendu.net/misc/blog/software-for-editing-videos/">Software for Editing Videos</a></h3>
+<h3 id="audio-tools"><a href="http://www.legendu.net/misc/blog/Audio-Tools/">Audio Tools</a></h3>
+<p>Please refer to
+<a href="http://www.legendu.net/misc/blog/Audio-Tools/">Audio Tools</a>
+for more details.</p>
+<h3 id="screencast">Screencast</h3>
+<ol>
+<li>comstudio (Windows only)</li>
+</ol>
+<h3 id="voice-control">Voice Control</h3>
+<ol>
+<li>
+<p>Blather</p>
+</li>
+<li>
+<p>Voxforge</p>
+</li>
+<li>
+<p>Simon</p>
+</li>
+</ol>
+<h3 id="image">Image</h3>
+<ol>
+<li>
+<p>ImageMagic</p>
+</li>
+<li>
+<p>GwenView (KDE)</p>
+</li>
+<li>
+<p>digiKam (KDE)</p>
+</li>
+<li>
+<p>PIL (python image library)</p>
+</li>
+<li>
+<p>exiftool</p>
+</li>
+</ol>
+<h3 id="scanocr">Scan/OCR</h3>
+<ol>
+<li>
+<p>VueScan</p>
+</li>
+<li>
+<p>tesseract</p>
+</li>
+<li>
+<p>gocr</p>
+</li>
+</ol>
+<h3 id="charts"><a href="http://www.legendu.net/misc/blog/software-for-charts/">Charts</a></h3>
+<h3 id="3-d-modelling">3-D Modelling</h3>
+<ol>
+<li>
+<p>blender</p>
+</li>
+<li>
+<p>freeCAD</p>
+</li>
+<li>
+<p>OpenSCAD</p>
+</li>
+<li>
+<p>Google Sketchup</p>
+</li>
+<li>
+<p>EQUINOX-3D</p>
+</li>
+</ol>
+<h2 id="social-tools">Social Tools</h2>
+<h3 id="teleconference">Teleconference</h3>
+<ol>
+<li>
+<p>Blink</p>
+</li>
+<li>
+<p>Skype</p>
+</li>
+<li>
+<p>Wire</p>
+</li>
+<li>
+<p>Jitsi</p>
+</li>
+<li>
+<p>ekiga</p>
+</li>
+<li>
+<p>QQ (webqq, wineqq)</p>
+</li>
+</ol>
+<h2 id="web-hosting">Web Hosting</h2>
+<h3 id="server-side-scripting-language">Server Side Scripting Language</h3>
+<ol>
+<li>
+<p>PHP</p>
+</li>
+<li>
+<p>JSP</p>
+</li>
+</ol>
+<h3 id="client-side-scripting-language">Client Side Scripting Language</h3>
+<ol>
+<li>JavaScript</li>
+</ol>
+<h3 id="integrated-package-for-web-hosting">Integrated Package for Web Hosting</h3>
+<ol>
+<li>XAMPP (originaly called LAMPP)</li>
+</ol>
+<h3 id="math-formulas-in-web-pages">Math Formulas in Web Pages</h3>
+<ol>
+<li>MathJax (a successor to jsMath)</li>
+</ol>
+<h2 id="performance-tools">Performance Tools</h2>
+<h2 id="boot-performance">Boot Performance</h2>
+<ol>
+<li>
+<p>bootchart</p>
+</li>
+<li>
+<p>readahead-fedora</p>
+</li>
+</ol>
+<h2 id="runtime-performance">Runtime Performance</h2>
+<ol>
+<li>
+<p>preload</p>
+</li>
+<li>
+<p>localepurge</p>
+</li>
+</ol>
+<h2 id="other-suggestions">Other Suggestions</h2>
+<ol>
+<li>
+<p>remove old kernels</p>
+</li>
+<li>
+<p>package clean-up</p>
+</li>
+</ol>
+<h2 id="web-tools">Web Tools</h2>
+<ol>
+<li>
+<ol>
+<li>JustInMind Prototyper</li>
+</ol>
+</li>
+<li>
+<p>Django</p>
+</li>
+<li>
+<p>Node.JS</p>
+</li>
+<li>
+<p>ActiveJDBC</p>
+</li>
+<li>
+<p>web2py</p>
+</li>
+</ol>
+<h2 id="software-host">Software Host</h2>
+<ol>
+<li>
+<p>GitHub</p>
+<ul>
+<li>no private repository for free account</li>
+</ul>
+</li>
+<li>
+<p>Bitbucket</p>
+<ul>
+<li>unlimited private repositories for free account</li>
+</ul>
+</li>
+<li>
+<p>SourceForge</p>
+</li>
+</ol>
+<h2 id="repository-hosting-tools">Repository Hosting Tools</h2>
+<ol>
+<li>
+<p>gitolite</p>
+</li>
+<li>
+<p>gitlab</p>
+</li>
+</ol>
+<h2 id="websites">Websites</h2>
+<ol>
+<li>
+<p>MileWise</p>
+</li>
+<li>
+<p>BTGuard</p>
+</li>
+<li>
+<p>http://dedalvs.tumblr.com/post/48998678919/99-life-hacks-to-make-your-life-easier</p>
+</li>
+</ol>
+<h2 id="translation">Translation</h2>
+<p>https://www.apertium.org/index.eng.html?dir=eng-cat#translation</p>
+<h2 id="misc">Misc</h2>
+<ol>
+<li>KeyMon: displays the mouse button or key being clicked/pressed,
+    useful when you video tape your screen</li>
+</ol></div>
+    <footer>
+<p class="meta">
+  <span class="byline author vcard">
+    Posted by <span class="fn">Ben Chuanlong Du</span>
+  </span>
+<time datetime="2012-08-17T11:42:15-07:00" pubdate>Aug 17, 2012</time>  <span class="categories">
+    <a class="category" href="https://misc.legendu.net/tag/shell.html">shell</a>
+    <a class="category" href="https://misc.legendu.net/tag/remote.html">remote</a>
+    <a class="category" href="https://misc.legendu.net/tag/pdf.html">PDF</a>
+    <a class="category" href="https://misc.legendu.net/tag/software.html">software</a>
+    <a class="category" href="https://misc.legendu.net/tag/tools.html">tools</a>
+    <a class="category" href="https://misc.legendu.net/tag/terminal.html">terminal</a>
+    <a class="category" href="https://misc.legendu.net/tag/application.html">application</a>
+    <a class="category" href="https://misc.legendu.net/tag/linux.html">Linux</a>
+  </span>
+</p>    </footer>
+  </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div>
+  </section>
+</div>
+<aside class="sidebar">
+  <section>
+    <h1>Recent Posts</h1>
+    <ul id="recent_posts">
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/tips-on-health/">Tips on Health</a>
+      </li>
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/tips-on-child-education/">Tips on Child Education</a>
+      </li>
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/tips-on-fd/">Tips on fd</a>
+      </li>
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/the-fzf-command-is-a-great-alternative-to-find/">The fzf Command Is a Great Alternative to find</a>
+      </li>
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/ruff-is-an-extremely-fast-python-linter-written-in-rust/">Ruff Is An Extremely Fast Python Linter Written in Rust</a>
+      </li>
+    </ul>
+  </section>
+  <section>
+    <h1>Categories</h1>
+    <ul id="recent_posts">
+        <li><a href="https://misc.legendu.net/category/ai.html">AI</a></li>
+        <li><a href="https://misc.legendu.net/category/career.html">Career</a></li>
+        <li><a href="https://misc.legendu.net/category/cloud.html">Cloud</a></li>
+        <li><a href="https://misc.legendu.net/category/computer-science.html">Computer Science</a></li>
+        <li><a href="https://misc.legendu.net/category/fiannce.html">Fiannce</a></li>
+        <li><a href="https://misc.legendu.net/category/finance.html">Finance</a></li>
+        <li><a href="https://misc.legendu.net/category/fun-problems.html">Fun Problems</a></li>
+        <li><a href="https://misc.legendu.net/category/hardware.html">Hardware</a></li>
+        <li><a href="https://misc.legendu.net/category/health.html">Health</a></li>
+        <li><a href="https://misc.legendu.net/category/house.html">House</a></li>
+        <li><a href="https://misc.legendu.net/category/internet.html">Internet</a></li>
+        <li><a href="https://misc.legendu.net/category/investment.html">Investment</a></li>
+        <li><a href="https://misc.legendu.net/category/life.html">life</a></li>
+        <li><a href="https://misc.legendu.net/category/linux.html">Linux</a></li>
+        <li><a href="https://misc.legendu.net/category/os.html">OS</a></li>
+        <li><a href="https://misc.legendu.net/category/people.html">People</a></li>
+        <li><a href="https://misc.legendu.net/category/philosophy.html">Philosophy</a></li>
+        <li><a href="https://misc.legendu.net/category/research.html">Research</a></li>
+        <li><a href="https://misc.legendu.net/category/shopping.html">Shopping</a></li>
+        <li><a href="https://misc.legendu.net/category/soft-skills.html">soft skills</a></li>
+        <li><a href="https://misc.legendu.net/category/software.html">Software</a></li>
+        <li><a href="https://misc.legendu.net/category/statistics.html">Statistics</a></li>
+        <li><a href="https://misc.legendu.net/category/tools.html">Tools</a></li>
+    </ul>
+  </section>
+ 
+
+  <section>
+  <h1>Tags</h1>
+  <ul class="tagcloud">
+  </ul>
+  </section>
+
+
+
+  <section>
+    <h1>GitHub Repos</h1>
+    <ul id="gh_repos">
+      <li class="loading">Status updating...</li>
+    </ul>
+      <a href="https://github.com/legendu-net">@legendu-net</a> on GitHub
+    <script type="text/javascript">
+      $.domReady(function(){
+          if (!window.jXHR){
+              var jxhr = document.createElement('script');
+              jxhr.type = 'text/javascript';
+              jxhr.src = 'https://misc.legendu.net/theme/js/jXHR.js';
+              var s = document.getElementsByTagName('script')[0];
+              s.parentNode.insertBefore(jxhr, s);
+          }
+
+          github.showRepos({
+              user: 'legendu-net',
+              count: 5,
+              skip_forks: true,
+              target: '#gh_repos'
+          });
+      });
+    </script>
+    <script src="https://misc.legendu.net/theme/js/github.js" type="text/javascript"> </script>
+  </section>
+
+    <section>
+        <h1>Social</h2>
+        <ul>
+            <li><a href="https://www.linkedin.com/in/ben-chuanlong-du-1239b221/" target="_blank">LinkedIn</a></li>
+            <li><a href="https://hub.docker.com/u/dclong" target="_blank">Docker Hub</a></li>
+            <li><a href="https://stackoverflow.com/users/7808204/benjamin-du?tab=profile" target="_blank">Stack Overflow</a></li>
+            <li><a href="https://twitter.com/longendu" target="_blank">Twitter</a></li>
+        <!--
+            <li><a href="https://misc.legendu.net/" type="application/rss+xml" rel="alternate">RSS</a></li>
+            -->
+        </ul>
+    </section>
+</aside>    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Ben Chuanlong Du -
+  <span class="credit">Powered by <a href="http://getpelican.com">Pelican</a></span>
+</p></footer>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-3STS9BVPF6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-3STS9BVPF6');
+</script>
+	<script type="text/javascript">
+	  var disqus_shortname = 'dclong';
+          var disqus_identifier = '/blog/useful-tools-linux/';
+          var disqus_url = 'https://misc.legendu.net/blog/useful-tools-linux/';
+          var disqus_title = 'Useful Tools in Linux';
+	  (function() {
+	    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	    dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+	    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	   })();
+	</script>
+</body>
+</html>

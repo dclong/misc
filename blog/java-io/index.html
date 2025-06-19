@@ -1,0 +1,1780 @@
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Java IO</title>
+  <meta name="author" content="Ben Chuanlong Du">
+
+  <link href="https://misc.legendu.net/atom.xml" type="application/atom+xml" rel="alternate"
+        title="Ben Chuanlong Du's Blog Atom Feed" />
+
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link href="https://misc.legendu.net/favicon.png" rel="icon">
+  <link href="https://misc.legendu.net/theme/css/main_2.css" media="screen, projection"
+        rel="stylesheet" type="text/css">
+  <script src="https://misc.legendu.net/theme/js/modernizr-2.0.js"></script>
+  <script src="https://misc.legendu.net/theme/js/ender.js"></script>
+  <script src="https://misc.legendu.net/theme/js/octopress.js" type="text/javascript"></script>
+
+  <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <script data-ad-client="ca-pub-3836424032203369" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+</head>
+
+<body>
+  <header role="banner"><hgroup>
+  <h1><a href="https://misc.legendu.net/">Ben Chuanlong Du's Blog</a></h1>
+    <h2>It is never too late to learn.</h2>
+</hgroup></header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="https://misc.legendu.net/atom.xml" rel="subscribe-rss">RSS</a></li>
+</ul>
+
+<form name="search" action="https://www.bing.com/search" method="get" onSubmit="return build_query()">
+  <fieldset role="search">
+      <!--
+    <input type="hidden" name="q" value="site:https://misc.legendu.net" />
+        -->
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+
+<script type = "text/javascript">
+    function build_query() {
+        var query = document.forms["search"]["q"].value;
+        var prefix = "site:https://misc.legendu.net "
+        if (!query.startsWith(prefix)) {
+            query = prefix + query;
+            document.forms["search"]["q"].value = query;
+        }
+        return true;
+    }
+</script>
+
+<ul class="main-navigation">
+    <li><a href="https://www.legendu.net">Home</a></li>
+    <li><a href="https://misc.legendu.net">Blog</a></li>
+    <li><a href="https://misc.legendu.net/archives.html">Archives</a></li>
+    <li><a href="https://misc.legendu.net/categories.html">Categories</a></li>
+    <li><a href="https://misc.legendu.net/tags.html">Tags</a></li>
+    <li><a href="https://www.legendu.net/pages/about">About</a></li>
+</ul></nav>
+  <div id="main">
+    <div id="content">
+<div>
+  <article class="hentry" role="article">
+<header>
+      <h1 class="entry-title">Java IO</h1>
+      <p class="meta"><time datetime="2019-11-21T00:00:00-08:00" pubdate>Nov 21, 2019</time></p>
+</header>
+
+  <div class="entry-content"><style type="text/css">/*!
+*
+* IPython notebook
+*
+*/
+/* CSS font colors for translated ANSI escape sequences */
+/* The color values are a mix of
+   http://www.xcolors.net/dl/baskerville-ivorylight and
+   http://www.xcolors.net/dl/euphrasia */
+.ansi-black-fg {
+  color: #3E424D;
+}
+.ansi-black-bg {
+  background-color: #3E424D;
+}
+.ansi-black-intense-fg {
+  color: #282C36;
+}
+.ansi-black-intense-bg {
+  background-color: #282C36;
+}
+.ansi-red-fg {
+  color: #E75C58;
+}
+.ansi-red-bg {
+  background-color: #E75C58;
+}
+.ansi-red-intense-fg {
+  color: #B22B31;
+}
+.ansi-red-intense-bg {
+  background-color: #B22B31;
+}
+.ansi-green-fg {
+  color: #00A250;
+}
+.ansi-green-bg {
+  background-color: #00A250;
+}
+.ansi-green-intense-fg {
+  color: #007427;
+}
+.ansi-green-intense-bg {
+  background-color: #007427;
+}
+.ansi-yellow-fg {
+  color: #DDB62B;
+}
+.ansi-yellow-bg {
+  background-color: #DDB62B;
+}
+.ansi-yellow-intense-fg {
+  color: #B27D12;
+}
+.ansi-yellow-intense-bg {
+  background-color: #B27D12;
+}
+.ansi-blue-fg {
+  color: #208FFB;
+}
+.ansi-blue-bg {
+  background-color: #208FFB;
+}
+.ansi-blue-intense-fg {
+  color: #0065CA;
+}
+.ansi-blue-intense-bg {
+  background-color: #0065CA;
+}
+.ansi-magenta-fg {
+  color: #D160C4;
+}
+.ansi-magenta-bg {
+  background-color: #D160C4;
+}
+.ansi-magenta-intense-fg {
+  color: #A03196;
+}
+.ansi-magenta-intense-bg {
+  background-color: #A03196;
+}
+.ansi-cyan-fg {
+  color: #60C6C8;
+}
+.ansi-cyan-bg {
+  background-color: #60C6C8;
+}
+.ansi-cyan-intense-fg {
+  color: #258F8F;
+}
+.ansi-cyan-intense-bg {
+  background-color: #258F8F;
+}
+.ansi-white-fg {
+  color: #C5C1B4;
+}
+.ansi-white-bg {
+  background-color: #C5C1B4;
+}
+.ansi-white-intense-fg {
+  color: #A1A6B2;
+}
+.ansi-white-intense-bg {
+  background-color: #A1A6B2;
+}
+.ansi-default-inverse-fg {
+  color: #FFFFFF;
+}
+.ansi-default-inverse-bg {
+  background-color: #000000;
+}
+.ansi-bold {
+  font-weight: bold;
+}
+.ansi-underline {
+  text-decoration: underline;
+}
+/* The following styles are deprecated an will be removed in a future version */
+.ansibold {
+  font-weight: bold;
+}
+.ansi-inverse {
+  outline: 0.5px dotted;
+}
+/* use dark versions for foreground, to improve visibility */
+.ansiblack {
+  color: black;
+}
+.ansired {
+  color: darkred;
+}
+.ansigreen {
+  color: darkgreen;
+}
+.ansiyellow {
+  color: #c4a000;
+}
+.ansiblue {
+  color: darkblue;
+}
+.ansipurple {
+  color: darkviolet;
+}
+.ansicyan {
+  color: steelblue;
+}
+.ansigray {
+  color: gray;
+}
+/* and light for background, for the same reason */
+.ansibgblack {
+  background-color: black;
+}
+.ansibgred {
+  background-color: red;
+}
+.ansibggreen {
+  background-color: green;
+}
+.ansibgyellow {
+  background-color: yellow;
+}
+.ansibgblue {
+  background-color: blue;
+}
+.ansibgpurple {
+  background-color: magenta;
+}
+.ansibgcyan {
+  background-color: cyan;
+}
+.ansibggray {
+  background-color: gray;
+}
+div.cell {
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: vertical;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: vertical;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  border-radius: 2px;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  border-width: 1px;
+  border-style: solid;
+  border-color: transparent;
+  width: 100%;
+  padding: 5px;
+  /* This acts as a spacer between cells, that is outside the border */
+  margin: 0px;
+  outline: none;
+  position: relative;
+  overflow: visible;
+}
+div.cell:before {
+  position: absolute;
+  display: block;
+  top: -1px;
+  left: -1px;
+  width: 5px;
+  height: calc(100% +  2px);
+  content: '';
+  background: transparent;
+}
+div.cell.jupyter-soft-selected {
+  border-left-color: #E3F2FD;
+  border-left-width: 1px;
+  padding-left: 5px;
+  border-right-color: #E3F2FD;
+  border-right-width: 1px;
+  background: #E3F2FD;
+}
+@media print {
+  div.cell.jupyter-soft-selected {
+    border-color: transparent;
+  }
+}
+div.cell.selected,
+div.cell.selected.jupyter-soft-selected {
+  border-color: #ababab;
+}
+div.cell.selected:before,
+div.cell.selected.jupyter-soft-selected:before {
+  position: absolute;
+  display: block;
+  top: -1px;
+  left: -1px;
+  width: 5px;
+  height: calc(100% +  2px);
+  content: '';
+  background: #42A5F5;
+}
+@media print {
+  div.cell.selected,
+  div.cell.selected.jupyter-soft-selected {
+    border-color: transparent;
+  }
+}
+.edit_mode div.cell.selected {
+  border-color: #66BB6A;
+}
+.edit_mode div.cell.selected:before {
+  position: absolute;
+  display: block;
+  top: -1px;
+  left: -1px;
+  width: 5px;
+  height: calc(100% +  2px);
+  content: '';
+  background: #66BB6A;
+}
+@media print {
+  .edit_mode div.cell.selected {
+    border-color: transparent;
+  }
+}
+.prompt {
+  /* This needs to be wide enough for 3 digit prompt numbers: In[100]: */
+  min-width: 14ex;
+  /* This padding is tuned to match the padding on the CodeMirror editor. */
+  padding: 0.4em;
+  margin: 0px;
+  font-family: monospace;
+  text-align: right;
+  /* This has to match that of the the CodeMirror class line-height below */
+  line-height: 1.21429em;
+  /* Don't highlight prompt number selection */
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  /* Use default cursor */
+  cursor: default;
+}
+@media (max-width: 540px) {
+  .prompt {
+    text-align: left;
+  }
+}
+div.inner_cell {
+  min-width: 0;
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: vertical;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: vertical;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  /* Old browsers */
+  -webkit-box-flex: 1;
+  -moz-box-flex: 1;
+  box-flex: 1;
+  /* Modern browsers */
+  flex: 1;
+}
+/* input_area and input_prompt must match in top border and margin for alignment */
+div.input_area {
+  border: 1px solid #cfcfcf;
+  border-radius: 2px;
+  background: #f7f7f7;
+  line-height: 1.21429em;
+}
+/* This is needed so that empty prompt areas can collapse to zero height when there
+   is no content in the output_subarea and the prompt. The main purpose of this is
+   to make sure that empty JavaScript output_subareas have no height. */
+div.prompt:empty {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+div.unrecognized_cell {
+  padding: 5px 5px 5px 0px;
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: horizontal;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: horizontal;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: horizontal;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+}
+div.unrecognized_cell .inner_cell {
+  border-radius: 2px;
+  padding: 5px;
+  font-weight: bold;
+  color: red;
+  border: 1px solid #cfcfcf;
+  background: #eaeaea;
+}
+div.unrecognized_cell .inner_cell a {
+  color: inherit;
+  text-decoration: none;
+}
+div.unrecognized_cell .inner_cell a:hover {
+  color: inherit;
+  text-decoration: none;
+}
+@media (max-width: 540px) {
+  div.unrecognized_cell > div.prompt {
+    display: none;
+  }
+}
+div.code_cell {
+  /* avoid page breaking on code cells when printing */
+}
+@media print {
+  div.code_cell {
+    page-break-inside: avoid;
+  }
+}
+/* any special styling for code cells that are currently running goes here */
+div.input {
+  page-break-inside: avoid;
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: horizontal;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: horizontal;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: horizontal;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+}
+@media (max-width: 540px) {
+  div.input {
+    /* Old browsers */
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-box-align: stretch;
+    display: -moz-box;
+    -moz-box-orient: vertical;
+    -moz-box-align: stretch;
+    display: box;
+    box-orient: vertical;
+    box-align: stretch;
+    /* Modern browsers */
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+/* input_area and input_prompt must match in top border and margin for alignment */
+div.input_prompt {
+  color: #303F9F;
+  border-top: 1px solid transparent;
+}
+div.input_area > div.highlight {
+  margin: 0.4em;
+  border: none;
+  padding: 0px;
+  background-color: transparent;
+}
+div.input_area > div.highlight > pre {
+  margin: 0px;
+  border: none;
+  padding: 0px;
+  background-color: transparent;
+}
+/* The following gets added to the <head> if it is detected that the user has a
+ * monospace font with inconsistent normal/bold/italic height.  See
+ * notebookmain.js.  Such fonts will have keywords vertically offset with
+ * respect to the rest of the text.  The user should select a better font.
+ * See: https://github.com/ipython/ipython/issues/1503
+ *
+ * .CodeMirror span {
+ *      vertical-align: bottom;
+ * }
+ */
+.CodeMirror {
+  line-height: 1.21429em;
+  /* Changed from 1em to our global default */
+  font-size: 14px;
+  height: auto;
+  /* Changed to auto to autogrow */
+  background: none;
+  /* Changed from white to allow our bg to show through */
+}
+.CodeMirror-scroll {
+  /*  The CodeMirror docs are a bit fuzzy on if overflow-y should be hidden or visible.*/
+  /*  We have found that if it is visible, vertical scrollbars appear with font size changes.*/
+  overflow-y: hidden;
+  overflow-x: auto;
+}
+.CodeMirror-lines {
+  /* In CM2, this used to be 0.4em, but in CM3 it went to 4px. We need the em value because */
+  /* we have set a different line-height and want this to scale with that. */
+  /* Note that this should set vertical padding only, since CodeMirror assumes
+       that horizontal padding will be set on CodeMirror pre */
+  padding: 0.4em 0;
+}
+.CodeMirror-linenumber {
+  padding: 0 8px 0 4px;
+}
+.CodeMirror-gutters {
+  border-bottom-left-radius: 2px;
+  border-top-left-radius: 2px;
+}
+.CodeMirror pre {
+  /* In CM3 this went to 4px from 0 in CM2. This sets horizontal padding only,
+    use .CodeMirror-lines for vertical */
+  padding: 0 0.4em;
+  border: 0;
+  border-radius: 0;
+}
+.CodeMirror-cursor {
+  border-left: 1.4px solid black;
+}
+@media screen and (min-width: 2138px) and (max-width: 4319px) {
+  .CodeMirror-cursor {
+    border-left: 2px solid black;
+  }
+}
+@media screen and (min-width: 4320px) {
+  .CodeMirror-cursor {
+    border-left: 4px solid black;
+  }
+}
+/*
+
+Original style from softwaremaniacs.org (c) Ivan Sagalaev <Maniac@SoftwareManiacs.Org>
+Adapted from GitHub theme
+
+*/
+.highlight-base {
+  color: #000;
+}
+.highlight-variable {
+  color: #000;
+}
+.highlight-variable-2 {
+  color: #1a1a1a;
+}
+.highlight-variable-3 {
+  color: #333333;
+}
+.highlight-string {
+  color: #BA2121;
+}
+.highlight-comment {
+  color: #408080;
+  font-style: italic;
+}
+.highlight-number {
+  color: #080;
+}
+.highlight-atom {
+  color: #88F;
+}
+.highlight-keyword {
+  color: #008000;
+  font-weight: bold;
+}
+.highlight-builtin {
+  color: #008000;
+}
+.highlight-error {
+  color: #f00;
+}
+.highlight-operator {
+  color: #AA22FF;
+  font-weight: bold;
+}
+.highlight-meta {
+  color: #AA22FF;
+}
+/* previously not defined, copying from default codemirror */
+.highlight-def {
+  color: #00f;
+}
+.highlight-string-2 {
+  color: #f50;
+}
+.highlight-qualifier {
+  color: #555;
+}
+.highlight-bracket {
+  color: #997;
+}
+.highlight-tag {
+  color: #170;
+}
+.highlight-attribute {
+  color: #00c;
+}
+.highlight-header {
+  color: blue;
+}
+.highlight-quote {
+  color: #090;
+}
+.highlight-link {
+  color: #00c;
+}
+/* apply the same style to codemirror */
+.cm-s-ipython span.cm-keyword {
+  color: #008000;
+  font-weight: bold;
+}
+.cm-s-ipython span.cm-atom {
+  color: #88F;
+}
+.cm-s-ipython span.cm-number {
+  color: #080;
+}
+.cm-s-ipython span.cm-def {
+  color: #00f;
+}
+.cm-s-ipython span.cm-variable {
+  color: #000;
+}
+.cm-s-ipython span.cm-operator {
+  color: #AA22FF;
+  font-weight: bold;
+}
+.cm-s-ipython span.cm-variable-2 {
+  color: #1a1a1a;
+}
+.cm-s-ipython span.cm-variable-3 {
+  color: #333333;
+}
+.cm-s-ipython span.cm-comment {
+  color: #408080;
+  font-style: italic;
+}
+.cm-s-ipython span.cm-string {
+  color: #BA2121;
+}
+.cm-s-ipython span.cm-string-2 {
+  color: #f50;
+}
+.cm-s-ipython span.cm-meta {
+  color: #AA22FF;
+}
+.cm-s-ipython span.cm-qualifier {
+  color: #555;
+}
+.cm-s-ipython span.cm-builtin {
+  color: #008000;
+}
+.cm-s-ipython span.cm-bracket {
+  color: #997;
+}
+.cm-s-ipython span.cm-tag {
+  color: #170;
+}
+.cm-s-ipython span.cm-attribute {
+  color: #00c;
+}
+.cm-s-ipython span.cm-header {
+  color: blue;
+}
+.cm-s-ipython span.cm-quote {
+  color: #090;
+}
+.cm-s-ipython span.cm-link {
+  color: #00c;
+}
+.cm-s-ipython span.cm-error {
+  color: #f00;
+}
+.cm-s-ipython span.cm-tab {
+  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAMCAYAAAAkuj5RAAAAAXNSR0IArs4c6QAAAGFJREFUSMft1LsRQFAQheHPowAKoACx3IgEKtaEHujDjORSgWTH/ZOdnZOcM/sgk/kFFWY0qV8foQwS4MKBCS3qR6ixBJvElOobYAtivseIE120FaowJPN75GMu8j/LfMwNjh4HUpwg4LUAAAAASUVORK5CYII=);
+  background-position: right;
+  background-repeat: no-repeat;
+}
+div.output_wrapper {
+  /* this position must be relative to enable descendents to be absolute within it */
+  position: relative;
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: vertical;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: vertical;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  z-index: 1;
+}
+/* class for the output area when it should be height-limited */
+div.output_scroll {
+  /* ideally, this would be max-height, but FF barfs all over that */
+  height: 24em;
+  /* FF needs this *and the wrapper* to specify full width, or it will shrinkwrap */
+  width: 100%;
+  overflow: auto;
+  border-radius: 2px;
+  -webkit-box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.8);
+  box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.8);
+  display: block;
+}
+/* output div while it is collapsed */
+div.output_collapsed {
+  margin: 0px;
+  padding: 0px;
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: vertical;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: vertical;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+div.out_prompt_overlay {
+  height: 100%;
+  padding: 0px 0.4em;
+  position: absolute;
+  border-radius: 2px;
+}
+div.out_prompt_overlay:hover {
+  /* use inner shadow to get border that is computed the same on WebKit/FF */
+  -webkit-box-shadow: inset 0 0 1px #000;
+  box-shadow: inset 0 0 1px #000;
+  background: rgba(240, 240, 240, 0.5);
+}
+div.output_prompt {
+  color: #D84315;
+}
+/* This class is the outer container of all output sections. */
+div.output_area {
+  padding: 0px;
+  page-break-inside: avoid;
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: horizontal;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: horizontal;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: horizontal;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+}
+div.output_area .MathJax_Display {
+  text-align: left !important;
+}
+div.output_area 
+div.output_area 
+div.output_area img,
+div.output_area svg {
+  max-width: 100%;
+  height: auto;
+}
+div.output_area img.unconfined,
+div.output_area svg.unconfined {
+  max-width: none;
+}
+div.output_area .mglyph > img {
+  max-width: none;
+}
+/* This is needed to protect the pre formating from global settings such
+   as that of bootstrap */
+.output {
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: vertical;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: vertical;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+@media (max-width: 540px) {
+  div.output_area {
+    /* Old browsers */
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-box-align: stretch;
+    display: -moz-box;
+    -moz-box-orient: vertical;
+    -moz-box-align: stretch;
+    display: box;
+    box-orient: vertical;
+    box-align: stretch;
+    /* Modern browsers */
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+div.output_area pre {
+  margin: 0;
+  padding: 1px 0 1px 0;
+  border: 0;
+  vertical-align: baseline;
+  color: black;
+  background-color: transparent;
+  border-radius: 0;
+}
+/* This class is for the output subarea inside the output_area and after
+   the prompt div. */
+div.output_subarea {
+  overflow-x: auto;
+  padding: 0.4em;
+  /* Old browsers */
+  -webkit-box-flex: 1;
+  -moz-box-flex: 1;
+  box-flex: 1;
+  /* Modern browsers */
+  flex: 1;
+  max-width: calc(100% - 14ex);
+}
+div.output_scroll div.output_subarea {
+  overflow-x: visible;
+}
+/* The rest of the output_* classes are for special styling of the different
+   output types */
+/* all text output has this class: */
+div.output_text {
+  text-align: left;
+  color: #000;
+  /* This has to match that of the the CodeMirror class line-height below */
+  line-height: 1.21429em;
+}
+/* stdout/stderr are 'text' as well as 'stream', but execute_result/error are *not* streams */
+div.output_stderr {
+  background: #fdd;
+  /* very light red background for stderr */
+}
+div.output_latex {
+  text-align: left;
+}
+/* Empty output_javascript divs should have no height */
+div.output_javascript:empty {
+  padding: 0;
+}
+.js-error {
+  color: darkred;
+}
+/* raw_input styles */
+div.raw_input_container {
+  line-height: 1.21429em;
+  padding-top: 5px;
+}
+pre.raw_input_prompt {
+  /* nothing needed here. */
+}
+input.raw_input {
+  font-family: monospace;
+  font-size: inherit;
+  color: inherit;
+  width: auto;
+  /* make sure input baseline aligns with prompt */
+  vertical-align: baseline;
+  /* padding + margin = 0.5em between prompt and cursor */
+  padding: 0em 0.25em;
+  margin: 0em 0.25em;
+}
+input.raw_input:focus {
+  box-shadow: none;
+}
+p.p-space {
+  margin-bottom: 10px;
+}
+div.output_unrecognized {
+  padding: 5px;
+  font-weight: bold;
+  color: red;
+}
+div.output_unrecognized a {
+  color: inherit;
+  text-decoration: none;
+}
+div.output_unrecognized a:hover {
+  color: inherit;
+  text-decoration: none;
+}
+.rendered_html {
+  color: #000;
+  /* any extras will just be numbers: */
+}
+
+
+
+.rendered_html :link {
+  text-decoration: underline;
+}
+.rendered_html :visited {
+  text-decoration: underline;
+}
+
+
+
+
+
+
+.rendered_html h1:first-child {
+  margin-top: 0.538em;
+}
+.rendered_html h2:first-child {
+  margin-top: 0.636em;
+}
+.rendered_html h3:first-child {
+  margin-top: 0.777em;
+}
+.rendered_html h4:first-child {
+  margin-top: 1em;
+}
+.rendered_html h5:first-child {
+  margin-top: 1em;
+}
+.rendered_html h6:first-child {
+  margin-top: 1em;
+}
+.rendered_html ul:not(.list-inline),
+.rendered_html ol:not(.list-inline) {
+  padding-left: 2em;
+}
+
+
+
+
+
+
+
+
+.rendered_html * + ul {
+  margin-top: 1em;
+}
+.rendered_html * + ol {
+  margin-top: 1em;
+}
+
+
+
+
+
+.rendered_html pre,
+
+
+
+
+.rendered_html tr,
+.rendered_html th,
+
+
+.rendered_html tbody tr:nth-child(odd) {
+  background: #f5f5f5;
+}
+.rendered_html tbody tr:hover {
+  background: rgba(66, 165, 245, 0.2);
+}
+.rendered_html * + table {
+  margin-top: 1em;
+}
+
+.rendered_html * + p {
+  margin-top: 1em;
+}
+
+.rendered_html * + img {
+  margin-top: 1em;
+}
+.rendered_html img,
+
+.rendered_html img.unconfined,
+
+
+.rendered_html * + .alert {
+  margin-top: 1em;
+}
+[dir="rtl"] 
+div.text_cell {
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: horizontal;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: horizontal;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: horizontal;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+}
+@media (max-width: 540px) {
+  div.text_cell > div.prompt {
+    display: none;
+  }
+}
+div.text_cell_render {
+  /*font-family: "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;*/
+  outline: none;
+  resize: none;
+  width: inherit;
+  border-style: none;
+  padding: 0.5em 0.5em 0.5em 0.4em;
+  color: #000;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+}
+a.anchor-link:link {
+  text-decoration: none;
+  padding: 0px 20px;
+  visibility: hidden;
+}
+h1:hover .anchor-link,
+h2:hover .anchor-link,
+h3:hover .anchor-link,
+h4:hover .anchor-link,
+h5:hover .anchor-link,
+h6:hover .anchor-link {
+  visibility: visible;
+}
+.text_cell.rendered .input_area {
+  display: none;
+}
+.text_cell.rendered 
+.text_cell.rendered .rendered_html tr,
+.text_cell.rendered .rendered_html th,
+.text_cell.rendered 
+.text_cell.unrendered .text_cell_render {
+  display: none;
+}
+.text_cell .dropzone .input_area {
+  border: 2px dashed #bababa;
+  margin: -1px;
+}
+.cm-header-1,
+.cm-header-2,
+.cm-header-3,
+.cm-header-4,
+.cm-header-5,
+.cm-header-6 {
+  font-weight: bold;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+.cm-header-1 {
+  font-size: 185.7%;
+}
+.cm-header-2 {
+  font-size: 157.1%;
+}
+.cm-header-3 {
+  font-size: 128.6%;
+}
+.cm-header-4 {
+  font-size: 110%;
+}
+.cm-header-5 {
+  font-size: 100%;
+  font-style: italic;
+}
+.cm-header-6 {
+  font-size: 100%;
+  font-style: italic;
+}
+</style>
+<style type="text/css">pre { line-height: 125%; }
+td.linenos .normal { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+span.linenos { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+td.linenos .special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+ .highlight pre  .hll { background-color: #ffffcc }
+ .highlight pre  { background: #f8f8f8; }
+ .highlight pre  .c { color: #3D7B7B; font-style: italic } /* Comment */
+ .highlight pre  .err { border: 1px solid #FF0000 } /* Error */
+ .highlight pre  .k { color: #008000; font-weight: bold } /* Keyword */
+ .highlight pre  .o { color: #666666 } /* Operator */
+ .highlight pre  .ch { color: #3D7B7B; font-style: italic } /* Comment.Hashbang */
+ .highlight pre  .cm { color: #3D7B7B; font-style: italic } /* Comment.Multiline */
+ .highlight pre  .cp { color: #9C6500 } /* Comment.Preproc */
+ .highlight pre  .cpf { color: #3D7B7B; font-style: italic } /* Comment.PreprocFile */
+ .highlight pre  .c1 { color: #3D7B7B; font-style: italic } /* Comment.Single */
+ .highlight pre  .cs { color: #3D7B7B; font-style: italic } /* Comment.Special */
+ .highlight pre  .gd { color: #A00000 } /* Generic.Deleted */
+ .highlight pre  .ge { font-style: italic } /* Generic.Emph */
+ .highlight pre  .gr { color: #E40000 } /* Generic.Error */
+ .highlight pre  .gh { color: #000080; font-weight: bold } /* Generic.Heading */
+ .highlight pre  .gi { color: #008400 } /* Generic.Inserted */
+ .highlight pre  .go { color: #717171 } /* Generic.Output */
+ .highlight pre  .gp { color: #000080; font-weight: bold } /* Generic.Prompt */
+ .highlight pre  .gs { font-weight: bold } /* Generic.Strong */
+ .highlight pre  .gu { color: #800080; font-weight: bold } /* Generic.Subheading */
+ .highlight pre  .gt { color: #0044DD } /* Generic.Traceback */
+ .highlight pre  .kc { color: #008000; font-weight: bold } /* Keyword.Constant */
+ .highlight pre  .kd { color: #008000; font-weight: bold } /* Keyword.Declaration */
+ .highlight pre  .kn { color: #008000; font-weight: bold } /* Keyword.Namespace */
+ .highlight pre  .kp { color: #008000 } /* Keyword.Pseudo */
+ .highlight pre  .kr { color: #008000; font-weight: bold } /* Keyword.Reserved */
+ .highlight pre  .kt { color: #B00040 } /* Keyword.Type */
+ .highlight pre  .m { color: #666666 } /* Literal.Number */
+ .highlight pre  .s { color: #BA2121 } /* Literal.String */
+ .highlight pre  .na { color: #687822 } /* Name.Attribute */
+ .highlight pre  .nb { color: #008000 } /* Name.Builtin */
+ .highlight pre  .nc { color: #0000FF; font-weight: bold } /* Name.Class */
+ .highlight pre  .no { color: #880000 } /* Name.Constant */
+ .highlight pre  .nd { color: #AA22FF } /* Name.Decorator */
+ .highlight pre  .ni { color: #717171; font-weight: bold } /* Name.Entity */
+ .highlight pre  .ne { color: #CB3F38; font-weight: bold } /* Name.Exception */
+ .highlight pre  .nf { color: #0000FF } /* Name.Function */
+ .highlight pre  .nl { color: #767600 } /* Name.Label */
+ .highlight pre  .nn { color: #0000FF; font-weight: bold } /* Name.Namespace */
+ .highlight pre  .nt { color: #008000; font-weight: bold } /* Name.Tag */
+ .highlight pre  .nv { color: #19177C } /* Name.Variable */
+ .highlight pre  .ow { color: #AA22FF; font-weight: bold } /* Operator.Word */
+ .highlight pre  .w { color: #bbbbbb } /* Text.Whitespace */
+ .highlight pre  .mb { color: #666666 } /* Literal.Number.Bin */
+ .highlight pre  .mf { color: #666666 } /* Literal.Number.Float */
+ .highlight pre  .mh { color: #666666 } /* Literal.Number.Hex */
+ .highlight pre  .mi { color: #666666 } /* Literal.Number.Integer */
+ .highlight pre  .mo { color: #666666 } /* Literal.Number.Oct */
+ .highlight pre  .sa { color: #BA2121 } /* Literal.String.Affix */
+ .highlight pre  .sb { color: #BA2121 } /* Literal.String.Backtick */
+ .highlight pre  .sc { color: #BA2121 } /* Literal.String.Char */
+ .highlight pre  .dl { color: #BA2121 } /* Literal.String.Delimiter */
+ .highlight pre  .sd { color: #BA2121; font-style: italic } /* Literal.String.Doc */
+ .highlight pre  .s2 { color: #BA2121 } /* Literal.String.Double */
+ .highlight pre  .se { color: #AA5D1F; font-weight: bold } /* Literal.String.Escape */
+ .highlight pre  .sh { color: #BA2121 } /* Literal.String.Heredoc */
+ .highlight pre  .si { color: #A45A77; font-weight: bold } /* Literal.String.Interpol */
+ .highlight pre  .sx { color: #008000 } /* Literal.String.Other */
+ .highlight pre  .sr { color: #A45A77 } /* Literal.String.Regex */
+ .highlight pre  .s1 { color: #BA2121 } /* Literal.String.Single */
+ .highlight pre  .ss { color: #19177C } /* Literal.String.Symbol */
+ .highlight pre  .bp { color: #008000 } /* Name.Builtin.Pseudo */
+ .highlight pre  .fm { color: #0000FF } /* Name.Function.Magic */
+ .highlight pre  .vc { color: #19177C } /* Name.Variable.Class */
+ .highlight pre  .vg { color: #19177C } /* Name.Variable.Global */
+ .highlight pre  .vi { color: #19177C } /* Name.Variable.Instance */
+ .highlight pre  .vm { color: #19177C } /* Name.Variable.Magic */
+ .highlight pre  .il { color: #666666 } /* Literal.Number.Integer.Long */</style><body><div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="References">References<a class="anchor-link" href="#References">&#182;</a></h2><ol>
+<li>Generally speaking, 
+ BufferedReader/BufferedWrite are preferred over InputStreamReader/InputStreamWriter.</li>
+</ol>
+<p><a href="https://docs.oracle.com/javase/8/docs/api/java/io/BufferedWriter.html">https://docs.oracle.com/javase/8/docs/api/java/io/BufferedWriter.html</a></p>
+<p><a href="https://stackoverflow.com/questions/6976893/in-java-what-is-the-advantage-of-using-bufferedwriter-to-append-to-a-file">https://stackoverflow.com/questions/6976893/in-java-what-is-the-advantage-of-using-bufferedwriter-to-append-to-a-file</a></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="public-static-Stream\&lt;String&gt;-java.nio.file.Files.lines">public static Stream\&lt;String&gt; <a href="https://docs.oracle.com/javase/8/docs/api/java/nio/file/Files.html#lines-java.nio.file.Path-">java.nio.file.Files.lines</a><a class="anchor-link" href="#public-static-Stream\&lt;String&gt;-java.nio.file.Files.lines">&#182;</a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="public-static-List\&lt;String&gt;-java.nio.file.Files.readAllLines">public static List\&lt;String&gt; <a href="https://docs.oracle.com/javase/8/docs/api/java/nio/file/Files.html#readAllLines-java.nio.file.Path-">java.nio.file.Files.readAllLines</a><a class="anchor-link" href="#public-static-List\&lt;String&gt;-java.nio.file.Files.readAllLines">&#182;</a></h2><p>Read all lines from a file. 
+Bytes from the file are decoded into characters using the UTF-8 charset.
+Notice that this method returns a List of Strings,
+which is different from the method <code>java.nio.file.Files.lines</code> (who returns a Stream of Strings).</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="public-String-BufferedRead.readLine">public String <a href="https://docs.oracle.com/javase/8/docs/api/java/io/BufferedReader.html#readLine--">BufferedRead.readLine</a><a class="anchor-link" href="#public-String-BufferedRead.readLine">&#182;</a></h2><p>Reads a line of text. A line is considered to be terminated by any one of a line feed ('\n'), a carriage return ('\r'), or a carriage return followed immediately by a linefeed.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="public-Stream\&lt;String&gt;-BufferedRead.lines">public Stream\&lt;String&gt; <a href="https://docs.oracle.com/javase/8/docs/api/java/io/BufferedReader.html#lines--">BufferedRead.lines</a><a class="anchor-link" href="#public-Stream\&lt;String&gt;-BufferedRead.lines">&#182;</a></h2><p>Returns a Stream, the elements of which are lines read from this BufferedReader. The Stream is lazily populated, i.e., read only occurs during the terminal stream operation.
+The reader must not be operated on during the execution of the terminal stream operation. Otherwise, the result of the terminal stream operation is undefined.</p>
+<p>After execution of the terminal stream operation there are no guarantees that the reader will be at a specific position from which to read the next character or line.</p>
+<p>If an IOException is thrown when accessing the underlying BufferedReader, it is wrapped in an UncheckedIOException which will be thrown from the Stream method that caused the read to take place. This method will return a Stream if invoked on a BufferedReader that is closed. Any operation on that stream that requires reading from the BufferedReader after it is closed, will cause an UncheckedIOException to be thrown.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Scanner">Scanner<a class="anchor-link" href="#Scanner">&#182;</a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-Java"><pre><span></span><span class="n">String</span><span class="w"> </span><span class="n">file</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;D:\\Dropbox\\Research\\Nettleton\\SPT\\Mean\\k.txt&quot;</span><span class="p">;</span>
+<span class="w">		</span><span class="n">Scanner</span><span class="w"> </span><span class="n">scan</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Scanner</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">File</span><span class="p">(</span><span class="n">file</span><span class="p">)).</span><span class="na">useDelimiter</span><span class="p">(</span><span class="s">&quot; &quot;</span><span class="p">);</span>
+<span class="w">		</span><span class="k">while</span><span class="p">(</span><span class="n">scan</span><span class="p">.</span><span class="na">hasNextDouble</span><span class="p">()){</span>
+<span class="w">			</span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">scan</span><span class="p">.</span><span class="na">nextDouble</span><span class="p">()</span><span class="o">+</span><span class="s">&quot; &quot;</span><span class="p">);</span>
+<span class="w">		</span><span class="p">}</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="PrintWriter">PrintWriter<a class="anchor-link" href="#PrintWriter">&#182;</a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-Java"><pre><span></span><span class="n">PrintWriter</span><span class="w"> </span><span class="n">out</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">PrintWriter</span><span class="p">(</span><span class="s">&quot;java_out.txt&quot;</span><span class="p">);</span>
+<span class="w">		</span><span class="n">out</span><span class="p">.</span><span class="na">print</span><span class="p">(</span><span class="mf">1.11111111</span><span class="o">+</span><span class="s">&quot; &quot;</span><span class="p">);</span>
+<span class="w">		</span><span class="n">out</span><span class="p">.</span><span class="na">print</span><span class="p">(</span><span class="mf">2.2</span><span class="o">+</span><span class="s">&quot; &quot;</span><span class="p">);</span>
+<span class="w">		</span><span class="n">out</span><span class="p">.</span><span class="na">print</span><span class="p">(</span><span class="mf">3.3</span><span class="o">+</span><span class="s">&quot; &quot;</span><span class="p">);</span>
+<span class="w">		</span><span class="n">out</span><span class="p">.</span><span class="na">close</span><span class="p">();</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="DataInputStream">DataInputStream<a class="anchor-link" href="#DataInputStream">&#182;</a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-Java"><pre><span></span><span class="n">String</span><span class="w"> </span><span class="n">file</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;D:\\Dropbox\\Research\\Nettleton\\SPT\\Mean\\test-again.bin&quot;</span><span class="p">;</span>
+<span class="w">		</span><span class="c1">//file = &quot;D:\\Dropbox\\Common\\Matlab\\mtest.bin&quot;;</span>
+<span class="w">		</span><span class="n">DataInputStream</span><span class="w"> </span><span class="n">in</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">DataInputStream</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">BufferedInputStream</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">FileInputStream</span><span class="p">(</span><span class="n">file</span><span class="p">)));</span>
+<span class="w">		</span><span class="kt">int</span><span class="w"> </span><span class="n">count</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">		</span><span class="k">while</span><span class="p">(</span><span class="n">in</span><span class="p">.</span><span class="na">available</span><span class="p">()</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">){</span>
+<span class="w">			</span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">in</span><span class="p">.</span><span class="na">readDouble</span><span class="p">()</span><span class="o">+</span><span class="s">&quot; &quot;</span><span class="p">);</span>
+<span class="w">			</span><span class="n">count</span><span class="o">++</span><span class="p">;</span>
+<span class="w">		</span><span class="p">}</span>
+<span class="w">		</span><span class="n">in</span><span class="p">.</span><span class="na">close</span><span class="p">();</span>
+<span class="w">		</span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">count</span><span class="o">+</span><span class="s">&quot; items are read in.&quot;</span><span class="p">);</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="DataOutputStream">DataOutputStream<a class="anchor-link" href="#DataOutputStream">&#182;</a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-Java"><pre><span></span><span class="n">String</span><span class="w"> </span><span class="n">file</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;java_out.bin&quot;</span><span class="p">;</span>
+<span class="w">		</span><span class="n">DataOutputStream</span><span class="w"> </span><span class="n">out</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">DataOutputStream</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">FileOutputStream</span><span class="p">(</span><span class="n">file</span><span class="p">));</span>
+<span class="w">		</span><span class="n">out</span><span class="p">.</span><span class="na">writeDouble</span><span class="p">(</span><span class="mf">1.1</span><span class="p">);</span>
+<span class="w">		</span><span class="n">out</span><span class="p">.</span><span class="na">writeDouble</span><span class="p">(</span><span class="mf">2.2</span><span class="p">);</span>
+<span class="w">		</span><span class="n">out</span><span class="p">.</span><span class="na">writeDouble</span><span class="p">(</span><span class="mf">3.3</span><span class="p">);</span>
+<span class="w">		</span><span class="n">out</span><span class="p">.</span><span class="na">close</span><span class="p">();</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-Java"><pre><span></span><span class="n">Reader</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">Abstract</span><span class="w"> </span><span class="kd">class</span> <span class="nc">for</span><span class="w"> </span><span class="n">reading</span><span class="w"> </span><span class="n">character</span><span class="w"> </span><span class="n">streams</span>
+<span class="w">    </span><span class="n">InputStream</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">Abstract</span><span class="w"> </span><span class="kd">class</span> <span class="nc">is</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">superclass</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">all</span><span class="w"> </span><span class="n">classes</span><span class="w"> </span><span class="n">representing</span><span class="w"> </span><span class="n">an</span><span class="w"> </span><span class="n">input</span><span class="w"> </span><span class="n">stream</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">bytes</span><span class="p">.</span>
+<span class="n">And</span><span class="w"> </span><span class="n">similary</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">Writer</span><span class="w"> </span><span class="n">vs</span><span class="w"> </span><span class="n">OutputStream</span>
+
+<span class="n">Scanner</span><span class="w"> </span><span class="n">is</span><span class="w"> </span><span class="n">used</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">parsing</span><span class="w"> </span><span class="n">tokens</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">contents</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">stream</span><span class="w"> </span><span class="k">while</span><span class="w"> </span><span class="n">BufferedReader</span><span class="w"> </span><span class="n">just</span><span class="w"> </span><span class="n">reads</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">stream</span><span class="w"> </span><span class="n">and</span><span class="w"> </span><span class="n">does</span><span class="w"> </span><span class="n">not</span><span class="w"> </span><span class="k">do</span><span class="w"> </span><span class="n">any</span><span class="w"> </span><span class="n">special</span><span class="w"> </span><span class="n">parsing</span><span class="p">.</span>
+
+<span class="n">In</span><span class="w"> </span><span class="n">fact</span><span class="w"> </span><span class="n">you</span><span class="w"> </span><span class="n">can</span><span class="w"> </span><span class="n">pass</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">BufferedReader</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">scanner</span><span class="w"> </span><span class="n">as</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">source</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">characters</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">parse</span><span class="p">.</span>
+
+<span class="n">As</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">choice</span><span class="p">,</span><span class="w"> </span><span class="n">use</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">Scanner</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">you</span><span class="w"> </span><span class="n">want</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">parse</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">file</span><span class="p">,</span><span class="w"> </span><span class="n">use</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">BufferedReader</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">you</span><span class="w"> </span><span class="n">want</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">read</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">file</span><span class="w"> </span><span class="n">line</span><span class="w"> </span><span class="n">by</span><span class="w"> </span><span class="n">line</span><span class="p">.</span><span class="w"> </span><span class="n">Also</span><span class="w"> </span><span class="n">see</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">introductory</span><span class="w"> </span><span class="n">text</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">their</span><span class="w"> </span><span class="n">aforelinked</span><span class="w"> </span><span class="n">API</span><span class="w"> </span><span class="n">documentations</span><span class="p">.</span>
+
+
+
+<span class="w">    </span><span class="n">A</span><span class="w"> </span><span class="n">BufferedReader</span><span class="w"> </span><span class="n">is</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">simple</span><span class="w"> </span><span class="kd">class</span> <span class="nc">meant</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">efficiently</span><span class="w"> </span><span class="n">read</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">underling</span><span class="w"> </span><span class="n">stream</span><span class="p">.</span><span class="w"> </span><span class="n">Generally</span><span class="p">,</span><span class="w"> </span><span class="n">each</span><span class="w"> </span><span class="n">read</span><span class="w"> </span><span class="n">request</span><span class="w"> </span><span class="n">made</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">Reader</span><span class="w"> </span><span class="n">like</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">FileReader</span><span class="w"> </span><span class="n">causes</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">corresponding</span><span class="w"> </span><span class="n">read</span><span class="w"> </span><span class="n">request</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">be</span><span class="w"> </span><span class="n">made</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">underlying</span><span class="w"> </span><span class="n">stream</span><span class="p">.</span><span class="w"> </span><span class="n">Each</span><span class="w"> </span><span class="n">invocation</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="nf">read</span><span class="p">()</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="nf">readLine</span><span class="p">()</span><span class="w"> </span><span class="n">could</span><span class="w"> </span><span class="n">cause</span><span class="w"> </span><span class="n">bytes</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">be</span><span class="w"> </span><span class="n">read</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">file</span><span class="p">,</span><span class="w"> </span><span class="n">converted</span><span class="w"> </span><span class="n">into</span><span class="w"> </span><span class="n">characters</span><span class="p">,</span><span class="w"> </span><span class="n">and</span><span class="w"> </span><span class="n">then</span><span class="w"> </span><span class="n">returned</span><span class="p">,</span><span class="w"> </span><span class="n">which</span><span class="w"> </span><span class="n">can</span><span class="w"> </span><span class="n">be</span><span class="w"> </span><span class="n">very</span><span class="w"> </span><span class="n">inefficient</span><span class="p">.</span><span class="w"> </span><span class="n">Efficiency</span><span class="w"> </span><span class="n">is</span><span class="w"> </span><span class="n">improved</span><span class="w"> </span><span class="n">appreciably</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">Reader</span><span class="w"> </span><span class="n">is</span><span class="w"> </span><span class="n">warped</span><span class="w"> </span><span class="n">in</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">BufferedReader</span><span class="p">.</span>
+
+<span class="w">    </span><span class="n">BufferedReader</span><span class="w"> </span><span class="n">is</span><span class="w"> </span><span class="kd">synchronized</span><span class="p">,</span><span class="w"> </span><span class="n">so</span><span class="w"> </span><span class="n">read</span><span class="w"> </span><span class="n">operations</span><span class="w"> </span><span class="n">on</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">BufferedReader</span><span class="w"> </span><span class="n">can</span><span class="w"> </span><span class="n">safely</span><span class="w"> </span><span class="n">be</span><span class="w"> </span><span class="n">done</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="n">multiple</span><span class="w"> </span><span class="n">threads</span><span class="p">.</span>
+
+<span class="w">    </span><span class="n">A</span><span class="w"> </span><span class="n">scanner</span><span class="w"> </span><span class="n">on</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">other</span><span class="w"> </span><span class="n">hand</span><span class="w"> </span><span class="n">has</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">lot</span><span class="w"> </span><span class="n">more</span><span class="w"> </span><span class="n">cheese</span><span class="w"> </span><span class="n">built</span><span class="w"> </span><span class="n">into</span><span class="w"> </span><span class="n">it</span><span class="p">;</span><span class="w"> </span><span class="n">it</span><span class="w"> </span><span class="n">can</span><span class="w"> </span><span class="k">do</span><span class="w"> </span><span class="n">all</span><span class="w"> </span><span class="n">that</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">BufferedReader</span><span class="w"> </span><span class="n">can</span><span class="w"> </span><span class="k">do</span><span class="w"> </span><span class="n">and</span><span class="w"> </span><span class="n">at</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">same</span><span class="w"> </span><span class="n">level</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">efficiency</span><span class="w"> </span><span class="n">as</span><span class="w"> </span><span class="n">well</span><span class="p">.</span><span class="w"> </span><span class="n">However</span><span class="p">,</span><span class="w"> </span><span class="n">in</span><span class="w"> </span><span class="n">addition</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">Scanner</span><span class="w"> </span><span class="n">can</span><span class="w"> </span><span class="n">parse</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">underlying</span><span class="w"> </span><span class="n">stream</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">primitive</span><span class="w"> </span><span class="n">types</span><span class="w"> </span><span class="n">and</span><span class="w"> </span><span class="n">strings</span><span class="w"> </span><span class="n">using</span><span class="w"> </span><span class="n">regular</span><span class="w"> </span><span class="n">expressions</span><span class="p">.</span><span class="w"> </span><span class="n">It</span><span class="w"> </span><span class="n">can</span><span class="w"> </span><span class="n">also</span><span class="w"> </span><span class="n">tokenize</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">underlying</span><span class="w"> </span><span class="n">stream</span><span class="w"> </span><span class="n">with</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">delimiter</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">your</span><span class="w"> </span><span class="n">choice</span><span class="p">.</span><span class="w"> </span><span class="n">It</span><span class="w"> </span><span class="n">can</span><span class="w"> </span><span class="n">also</span><span class="w"> </span><span class="k">do</span><span class="w"> </span><span class="n">forward</span><span class="w"> </span><span class="n">scanning</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">underlying</span><span class="w"> </span><span class="n">stream</span><span class="w"> </span><span class="n">disregarding</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">delimiter</span><span class="o">!</span>
+
+<span class="w">    </span><span class="n">A</span><span class="w"> </span><span class="n">scanner</span><span class="w"> </span><span class="n">however</span><span class="w"> </span><span class="n">is</span><span class="w"> </span><span class="n">not</span><span class="w"> </span><span class="n">thread</span><span class="w"> </span><span class="n">safe</span><span class="p">,</span><span class="w"> </span><span class="n">it</span><span class="w"> </span><span class="n">has</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">be</span><span class="w"> </span><span class="n">externally</span><span class="w"> </span><span class="kd">synchronized</span><span class="p">.</span>
+
+<span class="w">    </span><span class="n">The</span><span class="w"> </span><span class="n">choice</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">using</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">BufferedReader</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">Scanner</span><span class="w"> </span><span class="n">depends</span><span class="w"> </span><span class="n">on</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">code</span><span class="w"> </span><span class="n">you</span><span class="w"> </span><span class="n">are</span><span class="w"> </span><span class="n">writing</span><span class="p">,</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">you</span><span class="w"> </span><span class="n">are</span><span class="w"> </span><span class="n">writing</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">simple</span><span class="w"> </span><span class="n">log</span><span class="w"> </span><span class="n">reader</span><span class="w"> </span><span class="n">Buffered</span><span class="w"> </span><span class="n">reader</span><span class="w"> </span><span class="n">is</span><span class="w"> </span><span class="n">adequate</span><span class="p">.</span><span class="w"> </span><span class="n">However</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">you</span><span class="w"> </span><span class="n">are</span><span class="w"> </span><span class="n">writing</span><span class="w"> </span><span class="n">an</span><span class="w"> </span><span class="n">XML</span><span class="w"> </span><span class="n">parser</span><span class="w"> </span><span class="n">Scanner</span><span class="w"> </span><span class="n">is</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">more</span><span class="w"> </span><span class="n">natural</span><span class="w"> </span><span class="n">choice</span><span class="p">.</span>
+
+<span class="w">    </span><span class="n">Even</span><span class="w"> </span><span class="k">while</span><span class="w"> </span><span class="n">reading</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">input</span><span class="p">,</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">want</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">accept</span><span class="w"> </span><span class="n">user</span><span class="w"> </span><span class="n">input</span><span class="w"> </span><span class="n">line</span><span class="w"> </span><span class="n">by</span><span class="w"> </span><span class="n">line</span><span class="w"> </span><span class="n">and</span><span class="w"> </span><span class="n">say</span><span class="w"> </span><span class="n">just</span><span class="w"> </span><span class="n">add</span><span class="w"> </span><span class="n">it</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">file</span><span class="p">,</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">BufferedReader</span><span class="w"> </span><span class="n">is</span><span class="w"> </span><span class="n">good</span><span class="w"> </span><span class="n">enough</span><span class="p">.</span><span class="w"> </span><span class="n">On</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">other</span><span class="w"> </span><span class="n">hand</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">you</span><span class="w"> </span><span class="n">want</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">accept</span><span class="w"> </span><span class="n">user</span><span class="w"> </span><span class="n">input</span><span class="w"> </span><span class="n">as</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">command</span><span class="w"> </span><span class="n">with</span><span class="w"> </span><span class="n">multiple</span><span class="w"> </span><span class="n">options</span><span class="p">,</span><span class="w"> </span><span class="n">and</span><span class="w"> </span><span class="n">then</span><span class="w"> </span><span class="n">intend</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">perform</span><span class="w"> </span><span class="n">different</span><span class="w"> </span><span class="n">operations</span><span class="w"> </span><span class="n">based</span><span class="w"> </span><span class="n">on</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">command</span><span class="w"> </span><span class="n">and</span><span class="w"> </span><span class="n">options</span><span class="w"> </span><span class="n">specified</span><span class="p">,</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">Scanner</span><span class="w"> </span><span class="n">will</span><span class="w"> </span><span class="n">suit</span><span class="w"> </span><span class="n">better</span><span class="p">.</span>
+
+
+<span class="n">PrintWriter</span><span class="w"> </span><span class="n">is</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">output</span><span class="w"> </span><span class="n">equivalent</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">Scanner</span><span class="w"> </span><span class="kd">class</span>
+
+<span class="err">```</span><span class="nc">language</span>
+<span class="c1">//PrintWriter is a class for writng text file.</span>
+<span class="kn">package</span><span class="w"> </span><span class="nn">study.io</span><span class="p">;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.io.FileNotFoundException</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.io.PrintWriter</span><span class="p">;</span>
+
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">TestPrintWriter</span><span class="w"> </span><span class="p">{</span>
+<span class="w">	</span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">FileNotFoundException</span><span class="p">{</span>
+<span class="w">		</span><span class="n">PrintWriter</span><span class="w"> </span><span class="n">out</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">PrintWriter</span><span class="p">(</span><span class="s">&quot;java_out.txt&quot;</span><span class="p">);</span>
+<span class="w">		</span><span class="n">out</span><span class="p">.</span><span class="na">print</span><span class="p">(</span><span class="mf">1.11111111</span><span class="o">+</span><span class="s">&quot; &quot;</span><span class="p">);</span>
+<span class="w">		</span><span class="n">out</span><span class="p">.</span><span class="na">print</span><span class="p">(</span><span class="mf">2.2</span><span class="o">+</span><span class="s">&quot; &quot;</span><span class="p">);</span>
+<span class="w">		</span><span class="n">out</span><span class="p">.</span><span class="na">print</span><span class="p">(</span><span class="mf">3.3</span><span class="o">+</span><span class="s">&quot; &quot;</span><span class="p">);</span>
+<span class="w">		</span><span class="n">out</span><span class="p">.</span><span class="na">close</span><span class="p">();</span>
+<span class="w">	</span><span class="p">}</span>
+<span class="p">}</span>
+<span class="err">```</span>
+
+
+<span class="err">##</span><span class="w"> </span><span class="n">Input</span><span class="w"> </span><span class="n">and</span><span class="w"> </span><span class="n">Output</span>
+
+<span class="mf">1.</span><span class="w"> </span><span class="err">`</span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="err">`</span><span class="w"> </span><span class="n">is</span><span class="w"> </span><span class="kd">super</span><span class="w"> </span><span class="n">fast</span><span class="p">.</span><span class="w"> </span><span class="n">Generally</span><span class="w"> </span><span class="n">speaking</span><span class="p">,</span><span class="w"> </span><span class="n">you</span><span class="w"> </span><span class="k">do</span><span class="w"> </span><span class="n">not</span>
+<span class="n">have</span><span class="w"> </span><span class="n">worry</span><span class="w"> </span><span class="n">much</span><span class="w"> </span><span class="n">about</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">overheading</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">printing</span><span class="w"> </span><span class="n">information</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">the</span>
+<span class="n">console</span><span class="w"> </span><span class="n">in</span><span class="w"> </span><span class="n">Java</span><span class="p">.</span>
+
+<span class="err">##</span><span class="w"> </span><span class="n">Reading</span><span class="w"> </span><span class="n">and</span><span class="w"> </span><span class="n">Writing</span><span class="w"> </span><span class="n">Text</span><span class="w"> </span><span class="n">File</span>
+
+<span class="mf">1.</span><span class="w"> </span><span class="err">`</span><span class="n">Scanner</span><span class="err">`</span><span class="w"> </span><span class="n">is</span><span class="w"> </span><span class="n">convenient</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">parsing</span><span class="w"> </span><span class="n">text</span><span class="w"> </span><span class="n">data</span><span class="p">.</span>
+
+<span class="mf">2.</span><span class="w"> </span><span class="err">`</span><span class="n">PrintWriter</span><span class="err">`</span><span class="w"> </span><span class="n">is</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">writing</span><span class="w"> </span><span class="n">text</span><span class="w"> </span><span class="n">file</span><span class="p">.</span>
+
+<span class="err">##</span><span class="w"> </span><span class="n">Reading</span><span class="w"> </span><span class="n">and</span><span class="w"> </span><span class="n">Writing</span><span class="w"> </span><span class="n">Binary</span><span class="w"> </span><span class="n">File</span>
+
+<span class="mf">1.</span><span class="w"> </span><span class="n">To</span><span class="w"> </span><span class="n">read</span><span class="w"> </span><span class="n">in</span><span class="w"> </span><span class="n">binary</span><span class="w"> </span><span class="nf">data</span><span class="w"> </span><span class="p">(</span><span class="n">through</span><span class="w"> </span><span class="kt">byte</span><span class="p">)</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">file</span><span class="p">,</span><span class="w"> </span><span class="n">you</span><span class="w"> </span><span class="n">can</span><span class="w"> </span><span class="n">use</span>
+<span class="err">`</span><span class="n">FileInputStream</span><span class="err">`</span><span class="p">;</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">write</span><span class="w"> </span><span class="n">binary</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="n">into</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">file</span><span class="p">,</span><span class="w"> </span><span class="n">you</span><span class="w"> </span><span class="n">can</span><span class="w"> </span><span class="n">use</span>
+<span class="err">`</span><span class="n">FileOutputStream</span><span class="err">`</span><span class="p">.</span><span class="w"> </span><span class="n">To</span><span class="w"> </span><span class="n">read</span><span class="w"> </span><span class="n">in</span><span class="w"> </span><span class="n">binary</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="n">into</span><span class="w"> </span><span class="n">primitive</span><span class="w"> </span><span class="n">types</span>
+<span class="n">from</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">file</span><span class="p">,</span><span class="w"> </span><span class="n">you</span><span class="w"> </span><span class="n">can</span><span class="w"> </span><span class="n">wrap</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">FileInputStream</span><span class="w"> </span><span class="n">in</span><span class="w"> </span><span class="n">DataInputStream</span><span class="p">;</span>
+<span class="n">to</span><span class="w"> </span><span class="n">write</span><span class="w"> </span><span class="n">primitive</span><span class="w"> </span><span class="n">types</span><span class="w"> </span><span class="n">into</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">binary</span><span class="w"> </span><span class="n">file</span><span class="w"> </span><span class="n">directly</span><span class="p">,</span><span class="w"> </span><span class="n">you</span><span class="w"> </span><span class="n">can</span>
+<span class="n">wrap</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">FileOutputStream</span><span class="w"> </span><span class="n">in</span><span class="w"> </span><span class="n">DataOutputStream</span><span class="p">.</span><span class="w"> </span><span class="n">Note</span><span class="w"> </span><span class="n">that</span>
+<span class="n">DataInputStream</span><span class="w"> </span><span class="n">and</span><span class="w"> </span><span class="n">DataOutputStream</span><span class="w"> </span><span class="n">is</span><span class="w"> </span><span class="n">compatible</span><span class="p">,</span><span class="w"> </span><span class="n">i</span><span class="p">.</span><span class="na">e</span><span class="p">.,</span><span class="w"> </span><span class="n">they</span>
+<span class="n">recognize</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">format</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">each</span><span class="w"> </span><span class="n">other</span><span class="p">.</span><span class="w"> </span><span class="n">However</span><span class="p">,</span><span class="w"> </span><span class="n">DataInputStream</span><span class="w"> </span><span class="n">is</span>
+<span class="n">not</span><span class="w"> </span><span class="n">compatible</span><span class="w"> </span><span class="n">with</span><span class="w"> </span><span class="err">`</span><span class="n">writeBin</span><span class="err">`</span><span class="w"> </span><span class="n">in</span><span class="w"> </span><span class="n">R</span><span class="p">;</span><span class="w"> </span><span class="n">neither</span><span class="w"> </span><span class="n">is</span><span class="w"> </span><span class="n">DataOutputStream</span>
+<span class="n">compatible</span><span class="w"> </span><span class="n">with</span><span class="w"> </span><span class="err">`</span><span class="n">readBin</span><span class="err">`</span><span class="w"> </span><span class="n">in</span><span class="w"> </span><span class="n">R</span><span class="p">.</span><span class="w"> </span><span class="n">To</span><span class="w"> </span><span class="n">communicate</span><span class="w"> </span><span class="n">binary</span><span class="w"> </span><span class="n">data</span>
+<span class="n">between</span><span class="w"> </span><span class="n">Java</span><span class="w"> </span><span class="n">and</span><span class="w"> </span><span class="n">R</span><span class="p">,</span><span class="w"> </span><span class="n">you</span><span class="w"> </span><span class="n">can</span><span class="w"> </span><span class="n">run</span><span class="w"> </span><span class="n">Java</span><span class="w"> </span><span class="n">code</span><span class="w"> </span><span class="n">which</span><span class="w"> </span><span class="k">do</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">right</span><span class="w"> </span><span class="n">job</span>
+<span class="k">for</span><span class="w"> </span><span class="n">you</span><span class="w"> </span><span class="n">using</span><span class="w"> </span><span class="err">`</span><span class="n">rJava</span><span class="err">`</span><span class="p">.</span>
+
+
+
+
+<span class="n">FileReader</span><span class="w"> </span><span class="n">vs</span><span class="w"> </span><span class="n">FileInputStream</span><span class="o">?</span>
+<span class="n">Or</span><span class="w"> </span><span class="n">Reader</span><span class="w"> </span><span class="n">vs</span><span class="w"> </span><span class="n">InputStream</span>
+<span class="n">Writer</span><span class="w"> </span><span class="n">vs</span><span class="w"> </span><span class="n">OutputStream</span>
+<span class="n">DataInputStream</span><span class="o">/</span><span class="n">DataOutPutStream</span><span class="w"> </span><span class="n">vs</span><span class="w"> </span><span class="n">FileInputStream</span><span class="o">/</span><span class="n">FileOutputStream</span>
+
+
+<span class="n">The</span><span class="w"> </span><span class="n">following</span><span class="w"> </span><span class="n">is</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">simple</span><span class="w"> </span><span class="n">yet</span><span class="w"> </span><span class="n">very</span><span class="w"> </span><span class="n">common</span><span class="w"> </span><span class="n">way</span>
+<span class="err">```</span><span class="n">language</span>
+<span class="nf">try</span><span class="p">(</span><span class="n">BufferedReader</span><span class="w"> </span><span class="n">br</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">BufferedReader</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">FileReader</span><span class="p">(</span><span class="s">&quot;file.txt&quot;</span><span class="p">)))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">StringBuilder</span><span class="w"> </span><span class="n">sb</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">StringBuilder</span><span class="p">();</span>
+<span class="w">    </span><span class="n">String</span><span class="w"> </span><span class="n">line</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">br</span><span class="p">.</span><span class="na">readLine</span><span class="p">();</span>
+
+<span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">line</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">sb</span><span class="p">.</span><span class="na">append</span><span class="p">(</span><span class="n">line</span><span class="p">);</span>
+<span class="w">        </span><span class="n">sb</span><span class="p">.</span><span class="na">append</span><span class="p">(</span><span class="n">System</span><span class="p">.</span><span class="na">lineSeparator</span><span class="p">());</span>
+<span class="w">        </span><span class="n">line</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">br</span><span class="p">.</span><span class="na">readLine</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="n">String</span><span class="w"> </span><span class="n">everything</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sb</span><span class="p">.</span><span class="na">toString</span><span class="p">();</span>
+<span class="p">}</span>
+<span class="err">```</span>
+
+<span class="o">---------------------------------------------------------------------------------------------------------------------------------------</span>
+<span class="n">In</span><span class="w"> </span><span class="n">Java</span><span class="w"> </span><span class="mi">7</span><span class="p">:</span><span class="w"> </span><span class="n">similar</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="nf">BufferedReader</span><span class="p">(</span><span class="n">FileInputStream</span><span class="p">...)</span>
+<span class="err">```</span><span class="n">language</span>
+<span class="n">Charset</span><span class="w"> </span><span class="n">charset</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Charset</span><span class="p">.</span><span class="na">forName</span><span class="p">(</span><span class="s">&quot;US-ASCII&quot;</span><span class="p">);</span>
+<span class="k">try</span><span class="w"> </span><span class="p">(</span><span class="n">BufferedReader</span><span class="w"> </span><span class="n">reader</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Files</span><span class="p">.</span><span class="na">newBufferedReader</span><span class="p">(</span><span class="n">file</span><span class="p">,</span><span class="w"> </span><span class="n">charset</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">	</span><span class="n">String</span><span class="w"> </span><span class="n">line</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span>
+<span class="w">	</span><span class="k">while</span><span class="w"> </span><span class="p">((</span><span class="n">line</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">reader</span><span class="p">.</span><span class="na">readLine</span><span class="p">())</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">		</span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">line</span><span class="p">);</span>
+<span class="w">	</span><span class="p">}</span>
+<span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">IOException</span><span class="w"> </span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">	</span><span class="n">System</span><span class="p">.</span><span class="na">err</span><span class="p">.</span><span class="na">format</span><span class="p">(</span><span class="s">&quot;IOException: %s%n&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="err">```</span>
+<span class="o">--------------------------------------------------------------------------------------------------------------------------------------------</span>
+<span class="n">The</span><span class="w"> </span><span class="n">difference</span><span class="w"> </span><span class="n">between</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">two</span><span class="w"> </span><span class="n">methods</span><span class="w"> </span><span class="n">is</span><span class="w"> </span><span class="n">what</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">use</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">construct</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">BufferedReader</span><span class="p">.</span><span class="w"> </span><span class="n">Method</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="n">uses</span><span class="w"> </span><span class="n">InputStreamReader</span><span class="w"> </span><span class="n">and</span><span class="w"> </span><span class="n">Method</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="n">uses</span><span class="w"> </span><span class="n">FileReader</span><span class="p">.</span><span class="w"> </span><span class="n">What</span><span class="err">&#39;</span><span class="n">s</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">difference</span><span class="w"> </span><span class="n">between</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">two</span><span class="w"> </span><span class="n">classes</span><span class="o">?</span>
+
+<span class="n">From</span><span class="w"> </span><span class="n">Java</span><span class="w"> </span><span class="n">Doc</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;An InputStreamReader is a bridge from byte streams to character streams: It reads bytes and decodes them into characters using a specified charset.&quot;</span><span class="w"> </span><span class="n">InputStreamReader</span><span class="w"> </span><span class="n">can</span><span class="w"> </span><span class="n">handle</span><span class="w"> </span><span class="n">other</span><span class="w"> </span><span class="n">input</span><span class="w"> </span><span class="n">streams</span><span class="w"> </span><span class="n">than</span><span class="w"> </span><span class="n">files</span><span class="p">,</span><span class="w"> </span><span class="n">such</span><span class="w"> </span><span class="n">as</span><span class="w"> </span><span class="n">network</span><span class="w"> </span><span class="n">connections</span><span class="p">,</span><span class="w"> </span><span class="n">classpath</span><span class="w"> </span><span class="n">resources</span><span class="p">,</span><span class="w"> </span><span class="n">ZIP</span><span class="w"> </span><span class="n">files</span><span class="p">,</span><span class="w"> </span><span class="n">etc</span><span class="p">.</span>
+
+<span class="n">FileReader</span><span class="w"> </span><span class="n">is</span><span class="w"> </span><span class="s">&quot;Convenience class for reading character files. The constructors of this class assume that the default character encoding and the default byte-buffer size are appropriate.&quot;</span><span class="w"> </span><span class="n">FileReader</span><span class="w"> </span><span class="n">does</span><span class="w"> </span><span class="n">not</span><span class="w"> </span><span class="n">allow</span><span class="w"> </span><span class="n">you</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">specify</span><span class="w"> </span><span class="n">an</span><span class="w"> </span><span class="n">encoding</span><span class="w"> </span><span class="n">other</span><span class="w"> </span><span class="n">than</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">platform</span><span class="w"> </span><span class="k">default</span><span class="w"> </span><span class="n">encoding</span><span class="p">.</span><span class="w"> </span><span class="n">Therefore</span><span class="p">,</span><span class="w"> </span><span class="n">it</span><span class="w"> </span><span class="n">is</span><span class="w"> </span><span class="n">not</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">good</span><span class="w"> </span><span class="n">idea</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">use</span><span class="w"> </span><span class="n">it</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">program</span><span class="w"> </span><span class="n">will</span><span class="w"> </span><span class="n">run</span><span class="w"> </span><span class="n">on</span><span class="w"> </span><span class="n">systems</span><span class="w"> </span><span class="n">with</span><span class="w"> </span><span class="n">different</span><span class="w"> </span><span class="n">platform</span><span class="w"> </span><span class="n">encoding</span><span class="p">.</span>
+
+<span class="n">In</span><span class="w"> </span><span class="n">summary</span><span class="p">,</span><span class="w"> </span><span class="n">InputStreamReader</span><span class="w"> </span><span class="n">is</span><span class="w"> </span><span class="n">always</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">safer</span><span class="w"> </span><span class="n">choice</span><span class="w"> </span><span class="n">than</span><span class="w"> </span><span class="n">FileReader</span><span class="p">.</span>
+
+
+<span class="n">Scanner</span><span class="w"> </span><span class="n">in</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Scanner</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">FileReader</span><span class="p">(</span><span class="s">&quot;filename.txt&quot;</span><span class="p">));</span>
+
+<span class="nl">http</span><span class="p">:</span><span class="c1">//www.javapractices.com/topic/TopicAction.do?Id=42</span>
+
+<span class="nl">http</span><span class="p">:</span><span class="c1">//howtodoinjava.com/2013/05/01/3-ways-to-read-files-using-java-nio/</span>
+
+<span class="nl">http</span><span class="p">:</span><span class="c1">//www.programcreek.com/2011/03/java-read-a-file-line-by-line-code-example/</span>
+
+<span class="nl">http</span><span class="p">:</span><span class="c1">//www.baeldung.com/java-read-lines-large-file</span>
+<span class="n">Faster</span><span class="w"> </span><span class="n">file</span><span class="w"> </span><span class="n">copy</span><span class="w"> </span><span class="n">with</span><span class="w"> </span><span class="n">mapped</span><span class="w"> </span><span class="kt">byte</span><span class="w"> </span><span class="n">buffer</span>
+
+<span class="err">```</span><span class="n">language</span>
+<span class="kn">package</span><span class="w"> </span><span class="nn">com.howtodoinjava.test.nio</span><span class="p">;</span>
+<span class="w"> </span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.io.IOException</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.io.RandomAccessFile</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.nio.MappedByteBuffer</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.nio.channels.FileChannel</span><span class="p">;</span>
+<span class="w"> </span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">ReadFileWithMappedByteBuffer</span>
+<span class="p">{</span>
+<span class="w">	</span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">IOException</span>
+<span class="w">	</span><span class="p">{</span>
+<span class="w">		</span><span class="n">RandomAccessFile</span><span class="w"> </span><span class="n">aFile</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">RandomAccessFile</span>
+<span class="w">				</span><span class="p">(</span><span class="s">&quot;test.txt&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;r&quot;</span><span class="p">);</span>
+<span class="w">		</span><span class="n">FileChannel</span><span class="w"> </span><span class="n">inChannel</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">aFile</span><span class="p">.</span><span class="na">getChannel</span><span class="p">();</span>
+<span class="w">		</span><span class="n">MappedByteBuffer</span><span class="w"> </span><span class="n">buffer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">inChannel</span><span class="p">.</span><span class="na">map</span><span class="p">(</span><span class="n">FileChannel</span><span class="p">.</span><span class="na">MapMode</span><span class="p">.</span><span class="na">READ_ONLY</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">inChannel</span><span class="p">.</span><span class="na">size</span><span class="p">());</span>
+<span class="w">		</span><span class="n">buffer</span><span class="p">.</span><span class="na">load</span><span class="p">();</span><span class="w"> </span>
+<span class="w">		</span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">buffer</span><span class="p">.</span><span class="na">limit</span><span class="p">();</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span>
+<span class="w">		</span><span class="p">{</span>
+<span class="w">			</span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">print</span><span class="p">((</span><span class="kt">char</span><span class="p">)</span><span class="w"> </span><span class="n">buffer</span><span class="p">.</span><span class="na">get</span><span class="p">());</span>
+<span class="w">		</span><span class="p">}</span>
+<span class="w">		</span><span class="n">buffer</span><span class="p">.</span><span class="na">clear</span><span class="p">();</span><span class="w"> </span><span class="c1">// do something with the data and clear/compact it.</span>
+<span class="w">		</span><span class="n">inChannel</span><span class="p">.</span><span class="na">close</span><span class="p">();</span>
+<span class="w">		</span><span class="n">aFile</span><span class="p">.</span><span class="na">close</span><span class="p">();</span>
+<span class="w">	</span><span class="p">}</span>
+<span class="p">}</span>
+<span class="err">```</span>
+
+
+
+
+
+
+
+<span class="n">There</span><span class="w"> </span><span class="n">are</span><span class="w"> </span><span class="n">too</span><span class="w"> </span><span class="n">many</span><span class="w"> </span><span class="n">ways</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">read</span><span class="w"> </span><span class="n">files</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="n">Java</span><span class="p">.</span><span class="w"> </span><span class="n">Best</span><span class="w"> </span><span class="n">practice</span><span class="o">?</span>
+
+
+<span class="n">FileReader</span><span class="w"> </span><span class="n">vs</span><span class="w"> </span><span class="n">FileInputStream</span><span class="o">?</span>
+<span class="n">Or</span><span class="w"> </span><span class="n">Reader</span><span class="w"> </span><span class="n">vs</span><span class="w"> </span><span class="n">InputStream</span>
+<span class="n">Writer</span><span class="w"> </span><span class="n">vs</span><span class="w"> </span><span class="n">OutputStream</span>
+<span class="n">DataInputStream</span><span class="o">/</span><span class="n">DataOutPutStream</span><span class="w"> </span><span class="n">vs</span><span class="w"> </span><span class="n">FileInputStream</span><span class="o">/</span><span class="n">FileOutputStream</span>
+
+
+<span class="n">The</span><span class="w"> </span><span class="n">following</span><span class="w"> </span><span class="n">is</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">simple</span><span class="w"> </span><span class="n">yet</span><span class="w"> </span><span class="n">very</span><span class="w"> </span><span class="n">common</span><span class="w"> </span><span class="n">way</span>
+
+<span class="nf">try</span><span class="p">(</span><span class="n">BufferedReader</span><span class="w"> </span><span class="n">br</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">BufferedReader</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">FileReader</span><span class="p">(</span><span class="s">&quot;file.txt&quot;</span><span class="p">)))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">		</span><span class="n">StringBuilder</span><span class="w"> </span><span class="n">sb</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">StringBuilder</span><span class="p">();</span>
+<span class="w">		</span><span class="n">String</span><span class="w"> </span><span class="n">line</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">br</span><span class="p">.</span><span class="na">readLine</span><span class="p">();</span>
+
+<span class="w">		</span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">line</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">			</span><span class="n">sb</span><span class="p">.</span><span class="na">append</span><span class="p">(</span><span class="n">line</span><span class="p">);</span>
+<span class="w">			</span><span class="n">sb</span><span class="p">.</span><span class="na">append</span><span class="p">(</span><span class="n">System</span><span class="p">.</span><span class="na">lineSeparator</span><span class="p">());</span>
+<span class="w">			</span><span class="n">line</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">br</span><span class="p">.</span><span class="na">readLine</span><span class="p">();</span>
+<span class="w">		</span><span class="p">}</span>
+<span class="w">		</span><span class="n">String</span><span class="w"> </span><span class="n">everything</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sb</span><span class="p">.</span><span class="na">toString</span><span class="p">();</span>
+<span class="w">   </span><span class="p">}</span>
+
+<span class="o">---------------------------------------------------------------------------------------------------------------------------------------</span>
+<span class="n">In</span><span class="w"> </span><span class="n">Java</span><span class="w"> </span><span class="mi">7</span><span class="p">:</span><span class="w"> </span><span class="n">similar</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="nf">BufferedReader</span><span class="p">(</span><span class="n">FileInputStream</span><span class="p">...)</span>
+<span class="n">Charset</span><span class="w"> </span><span class="n">charset</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Charset</span><span class="p">.</span><span class="na">forName</span><span class="p">(</span><span class="s">&quot;US-ASCII&quot;</span><span class="p">);</span>
+<span class="k">try</span><span class="w"> </span><span class="p">(</span><span class="n">BufferedReader</span><span class="w"> </span><span class="n">reader</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Files</span><span class="p">.</span><span class="na">newBufferedReader</span><span class="p">(</span><span class="n">file</span><span class="p">,</span><span class="w"> </span><span class="n">charset</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">	</span><span class="n">String</span><span class="w"> </span><span class="n">line</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span>
+<span class="w">	</span><span class="k">while</span><span class="w"> </span><span class="p">((</span><span class="n">line</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">reader</span><span class="p">.</span><span class="na">readLine</span><span class="p">())</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">		</span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">line</span><span class="p">);</span>
+<span class="w">	</span><span class="p">}</span>
+<span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">IOException</span><span class="w"> </span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">	</span><span class="n">System</span><span class="p">.</span><span class="na">err</span><span class="p">.</span><span class="na">format</span><span class="p">(</span><span class="s">&quot;IOException: %s%n&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="o">--------------------------------------------------------------------------------------------------------------------------------------------</span>
+<span class="n">The</span><span class="w"> </span><span class="n">difference</span><span class="w"> </span><span class="n">between</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">two</span><span class="w"> </span><span class="n">methods</span><span class="w"> </span><span class="n">is</span><span class="w"> </span><span class="n">what</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">use</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">construct</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">BufferedReader</span><span class="p">.</span><span class="w"> </span><span class="n">Method</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="n">uses</span><span class="w"> </span><span class="n">InputStreamReader</span><span class="w"> </span><span class="n">and</span><span class="w"> </span><span class="n">Method</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="n">uses</span><span class="w"> </span><span class="n">FileReader</span><span class="p">.</span><span class="w"> </span><span class="n">What</span><span class="err">&#39;</span><span class="n">s</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">difference</span><span class="w"> </span><span class="n">between</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">two</span><span class="w"> </span><span class="n">classes</span><span class="o">?</span>
+
+<span class="n">From</span><span class="w"> </span><span class="n">Java</span><span class="w"> </span><span class="n">Doc</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;An InputStreamReader is a bridge from byte streams to character streams: It reads bytes and decodes them into characters using a specified charset.&quot;</span><span class="w"> </span><span class="n">InputStreamReader</span><span class="w"> </span><span class="n">can</span><span class="w"> </span><span class="n">handle</span><span class="w"> </span><span class="n">other</span><span class="w"> </span><span class="n">input</span><span class="w"> </span><span class="n">streams</span><span class="w"> </span><span class="n">than</span><span class="w"> </span><span class="n">files</span><span class="p">,</span><span class="w"> </span><span class="n">such</span><span class="w"> </span><span class="n">as</span><span class="w"> </span><span class="n">network</span><span class="w"> </span><span class="n">connections</span><span class="p">,</span><span class="w"> </span><span class="n">classpath</span><span class="w"> </span><span class="n">resources</span><span class="p">,</span><span class="w"> </span><span class="n">ZIP</span><span class="w"> </span><span class="n">files</span><span class="p">,</span><span class="w"> </span><span class="n">etc</span><span class="p">.</span>
+
+<span class="n">FileReader</span><span class="w"> </span><span class="n">is</span><span class="w"> </span><span class="s">&quot;Convenience class for reading character files. The constructors of this class assume that the default character encoding and the default byte-buffer size are appropriate.&quot;</span><span class="w"> </span><span class="n">FileReader</span><span class="w"> </span><span class="n">does</span><span class="w"> </span><span class="n">not</span><span class="w"> </span><span class="n">allow</span><span class="w"> </span><span class="n">you</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">specify</span><span class="w"> </span><span class="n">an</span><span class="w"> </span><span class="n">encoding</span><span class="w"> </span><span class="n">other</span><span class="w"> </span><span class="n">than</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">platform</span><span class="w"> </span><span class="k">default</span><span class="w"> </span><span class="n">encoding</span><span class="p">.</span><span class="w"> </span><span class="n">Therefore</span><span class="p">,</span><span class="w"> </span><span class="n">it</span><span class="w"> </span><span class="n">is</span><span class="w"> </span><span class="n">not</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">good</span><span class="w"> </span><span class="n">idea</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">use</span><span class="w"> </span><span class="n">it</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">program</span><span class="w"> </span><span class="n">will</span><span class="w"> </span><span class="n">run</span><span class="w"> </span><span class="n">on</span><span class="w"> </span><span class="n">systems</span><span class="w"> </span><span class="n">with</span><span class="w"> </span><span class="n">different</span><span class="w"> </span><span class="n">platform</span><span class="w"> </span><span class="n">encoding</span><span class="p">.</span>
+
+<span class="n">In</span><span class="w"> </span><span class="n">summary</span><span class="p">,</span><span class="w"> </span><span class="n">InputStreamReader</span><span class="w"> </span><span class="n">is</span><span class="w"> </span><span class="n">always</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">safer</span><span class="w"> </span><span class="n">choice</span><span class="w"> </span><span class="n">than</span><span class="w"> </span><span class="n">FileReader</span><span class="p">.</span>
+
+
+<span class="n">Scanner</span><span class="w"> </span><span class="n">in</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Scanner</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">FileReader</span><span class="p">(</span><span class="s">&quot;filename.txt&quot;</span><span class="p">));</span>
+
+<span class="nl">http</span><span class="p">:</span><span class="c1">//www.javapractices.com/topic/TopicAction.do?Id=42</span>
+
+<span class="nl">http</span><span class="p">:</span><span class="c1">//howtodoinjava.com/2013/05/01/3-ways-to-read-files-using-java-nio/</span>
+
+<span class="nl">http</span><span class="p">:</span><span class="c1">//www.programcreek.com/2011/03/java-read-a-file-line-by-line-code-example/</span>
+
+<span class="nl">http</span><span class="p">:</span><span class="c1">//www.baeldung.com/java-read-lines-large-file</span>
+<span class="n">Faster</span><span class="w"> </span><span class="n">file</span><span class="w"> </span><span class="n">copy</span><span class="w"> </span><span class="n">with</span><span class="w"> </span><span class="n">mapped</span><span class="w"> </span><span class="kt">byte</span><span class="w"> </span><span class="n">buffer</span>
+
+<span class="kn">package</span><span class="w"> </span><span class="nn">com.howtodoinjava.test.nio</span><span class="p">;</span>
+<span class="w"> </span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.io.IOException</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.io.RandomAccessFile</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.nio.MappedByteBuffer</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.nio.channels.FileChannel</span><span class="p">;</span>
+<span class="w"> </span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">ReadFileWithMappedByteBuffer</span>
+<span class="p">{</span>
+<span class="w">	</span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">IOException</span>
+<span class="w">	</span><span class="p">{</span>
+<span class="w">		</span><span class="n">RandomAccessFile</span><span class="w"> </span><span class="n">aFile</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">RandomAccessFile</span>
+<span class="w">				</span><span class="p">(</span><span class="s">&quot;test.txt&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;r&quot;</span><span class="p">);</span>
+<span class="w">		</span><span class="n">FileChannel</span><span class="w"> </span><span class="n">inChannel</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">aFile</span><span class="p">.</span><span class="na">getChannel</span><span class="p">();</span>
+<span class="w">		</span><span class="n">MappedByteBuffer</span><span class="w"> </span><span class="n">buffer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">inChannel</span><span class="p">.</span><span class="na">map</span><span class="p">(</span><span class="n">FileChannel</span><span class="p">.</span><span class="na">MapMode</span><span class="p">.</span><span class="na">READ_ONLY</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">inChannel</span><span class="p">.</span><span class="na">size</span><span class="p">());</span>
+<span class="w">		</span><span class="n">buffer</span><span class="p">.</span><span class="na">load</span><span class="p">();</span><span class="w"> </span>
+<span class="w">		</span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">buffer</span><span class="p">.</span><span class="na">limit</span><span class="p">();</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span>
+<span class="w">		</span><span class="p">{</span>
+<span class="w">			</span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">print</span><span class="p">((</span><span class="kt">char</span><span class="p">)</span><span class="w"> </span><span class="n">buffer</span><span class="p">.</span><span class="na">get</span><span class="p">());</span>
+<span class="w">		</span><span class="p">}</span>
+<span class="w">		</span><span class="n">buffer</span><span class="p">.</span><span class="na">clear</span><span class="p">();</span><span class="w"> </span><span class="c1">// do something with the data and clear/compact it.</span>
+<span class="w">		</span><span class="n">inChannel</span><span class="p">.</span><span class="na">close</span><span class="p">();</span>
+<span class="w">		</span><span class="n">aFile</span><span class="p">.</span><span class="na">close</span><span class="p">();</span>
+<span class="w">	</span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+ 
+
+</body>
+<script type="text/javascript">if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
+    var mathjaxscript = document.createElement('script');
+    mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
+    mathjaxscript.type = 'text/javascript';
+    mathjaxscript.src = '//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML';
+    mathjaxscript[(window.opera ? "innerHTML" : "text")] =
+        "MathJax.Hub.Config({" +
+        "    config: ['MMLorHTML.js']," +
+        "    TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'AMS' } }," +
+        "    jax: ['input/TeX','input/MathML','output/HTML-CSS']," +
+        "    extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']," +
+        "    displayAlign: 'center'," +
+        "    displayIndent: '0em'," +
+        "    showMathMenu: true," +
+        "    tex2jax: { " +
+        "        inlineMath: [ ['$','$'] ], " +
+        "        displayMath: [ ['$$','$$'] ]," +
+        "        processEscapes: true," +
+        "        preview: 'TeX'," +
+        "    }, " +
+        "    'HTML-CSS': { " +
+        " linebreaks: { automatic: true, width: '95% container' }, " +
+        "        styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: 'black ! important'} }" +
+        "    } " +
+        "}); ";
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
+}
+</script>
+</div>
+    <footer>
+<p class="meta">
+  <span class="byline author vcard">
+    Posted by <span class="fn">Ben Du</span>
+  </span>
+<time datetime="2019-11-21T00:00:00-08:00" pubdate>Nov 21, 2019</time>  <span class="categories">
+    <a class="category" href="https://misc.legendu.net/tag/programming.html">programming</a>
+    <a class="category" href="https://misc.legendu.net/tag/jvm.html">JVM</a>
+    <a class="category" href="https://misc.legendu.net/tag/java.html">Java</a>
+    <a class="category" href="https://misc.legendu.net/tag/io.html">IO</a>
+  </span>
+</p>    </footer>
+  </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div>
+  </section>
+</div>
+<aside class="sidebar">
+  <section>
+    <h1>Recent Posts</h1>
+    <ul id="recent_posts">
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/tips-on-health/">Tips on Health</a>
+      </li>
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/tips-on-child-education/">Tips on Child Education</a>
+      </li>
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/tips-on-fd/">Tips on fd</a>
+      </li>
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/the-fzf-command-is-a-great-alternative-to-find/">The fzf Command Is a Great Alternative to find</a>
+      </li>
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/ruff-is-an-extremely-fast-python-linter-written-in-rust/">Ruff Is An Extremely Fast Python Linter Written in Rust</a>
+      </li>
+    </ul>
+  </section>
+  <section>
+    <h1>Categories</h1>
+    <ul id="recent_posts">
+        <li><a href="https://misc.legendu.net/category/ai.html">AI</a></li>
+        <li><a href="https://misc.legendu.net/category/career.html">Career</a></li>
+        <li><a href="https://misc.legendu.net/category/cloud.html">Cloud</a></li>
+        <li><a href="https://misc.legendu.net/category/computer-science.html">Computer Science</a></li>
+        <li><a href="https://misc.legendu.net/category/fiannce.html">Fiannce</a></li>
+        <li><a href="https://misc.legendu.net/category/finance.html">Finance</a></li>
+        <li><a href="https://misc.legendu.net/category/fun-problems.html">Fun Problems</a></li>
+        <li><a href="https://misc.legendu.net/category/hardware.html">Hardware</a></li>
+        <li><a href="https://misc.legendu.net/category/health.html">Health</a></li>
+        <li><a href="https://misc.legendu.net/category/house.html">House</a></li>
+        <li><a href="https://misc.legendu.net/category/internet.html">Internet</a></li>
+        <li><a href="https://misc.legendu.net/category/investment.html">Investment</a></li>
+        <li><a href="https://misc.legendu.net/category/life.html">life</a></li>
+        <li><a href="https://misc.legendu.net/category/linux.html">Linux</a></li>
+        <li><a href="https://misc.legendu.net/category/os.html">OS</a></li>
+        <li><a href="https://misc.legendu.net/category/people.html">People</a></li>
+        <li><a href="https://misc.legendu.net/category/philosophy.html">Philosophy</a></li>
+        <li><a href="https://misc.legendu.net/category/research.html">Research</a></li>
+        <li><a href="https://misc.legendu.net/category/shopping.html">Shopping</a></li>
+        <li><a href="https://misc.legendu.net/category/soft-skills.html">soft skills</a></li>
+        <li><a href="https://misc.legendu.net/category/software.html">Software</a></li>
+        <li><a href="https://misc.legendu.net/category/statistics.html">Statistics</a></li>
+        <li><a href="https://misc.legendu.net/category/tools.html">Tools</a></li>
+    </ul>
+  </section>
+ 
+
+  <section>
+  <h1>Tags</h1>
+  <ul class="tagcloud">
+  </ul>
+  </section>
+
+
+
+  <section>
+    <h1>GitHub Repos</h1>
+    <ul id="gh_repos">
+      <li class="loading">Status updating...</li>
+    </ul>
+      <a href="https://github.com/legendu-net">@legendu-net</a> on GitHub
+    <script type="text/javascript">
+      $.domReady(function(){
+          if (!window.jXHR){
+              var jxhr = document.createElement('script');
+              jxhr.type = 'text/javascript';
+              jxhr.src = 'https://misc.legendu.net/theme/js/jXHR.js';
+              var s = document.getElementsByTagName('script')[0];
+              s.parentNode.insertBefore(jxhr, s);
+          }
+
+          github.showRepos({
+              user: 'legendu-net',
+              count: 5,
+              skip_forks: true,
+              target: '#gh_repos'
+          });
+      });
+    </script>
+    <script src="https://misc.legendu.net/theme/js/github.js" type="text/javascript"> </script>
+  </section>
+
+    <section>
+        <h1>Social</h2>
+        <ul>
+            <li><a href="https://www.linkedin.com/in/ben-chuanlong-du-1239b221/" target="_blank">LinkedIn</a></li>
+            <li><a href="https://hub.docker.com/u/dclong" target="_blank">Docker Hub</a></li>
+            <li><a href="https://stackoverflow.com/users/7808204/benjamin-du?tab=profile" target="_blank">Stack Overflow</a></li>
+            <li><a href="https://twitter.com/longendu" target="_blank">Twitter</a></li>
+        <!--
+            <li><a href="https://misc.legendu.net/" type="application/rss+xml" rel="alternate">RSS</a></li>
+            -->
+        </ul>
+    </section>
+</aside>    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Ben Chuanlong Du -
+  <span class="credit">Powered by <a href="http://getpelican.com">Pelican</a></span>
+</p></footer>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-3STS9BVPF6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-3STS9BVPF6');
+</script>
+	<script type="text/javascript">
+	  var disqus_shortname = 'dclong';
+          var disqus_identifier = '/blog/java-io/';
+          var disqus_url = 'https://misc.legendu.net/blog/java-io/';
+          var disqus_title = 'Java IO';
+	  (function() {
+	    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	    dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+	    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	   })();
+	</script>
+</body>
+</html>

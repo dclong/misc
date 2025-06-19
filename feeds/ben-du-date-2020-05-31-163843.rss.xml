@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0"><channel><title>Ben Chuanlong Du's Blog - Ben Du- Date: 2020-05-31 16:38:43</title><link>https://misc.legendu.net/</link><description>It is never too late to learn.</description><lastBuildDate>Thu, 24 Dec 2020 00:23:26 -0800</lastBuildDate><item><title>Get the Dependencies of a Python Package Without Installing It</title><link>https://misc.legendu.net/blog/get-the-dependencies-of-a-Python-package-without-installing-it/</link><description>&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;After installing a Python package,
+you can use the command &lt;code&gt;pip3 show pkg&lt;/code&gt; to check detailed information about it.
+What if you want to get information about a Python package without installing?
+The RESTAPI &lt;a href="https://pypi.org/pypi/pkg/json"&gt;https://pypi.org/pypi/pkg/json&lt;/a&gt; returns detailed information of the Python package &lt;code&gt;pkg&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Note: The recursive version of dependencies implemented bellow does not take into consideration of versions,
+so it might not return the correct dependencies of a Python packages.&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Ben Du- Date: 2020-05-31 16:38:43</dc:creator><pubDate>Sun, 24 May 2020 00:23:26 -0700</pubDate><guid isPermaLink="false">tag:misc.legendu.net,2020-05-24:/blog/get-the-dependencies-of-a-Python-package-without-installing-it/</guid><category>Computer Science</category><category>Computer Science</category><category>Python</category><category>package</category><category>module</category><category>dependency</category><category>aiutil</category></item></channel></rss>

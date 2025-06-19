@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Packaging Python Dependencies for PySpark Using Pex</title>
+  <meta name="author" content="Ben Chuanlong Du">
+
+  <link href="https://misc.legendu.net/atom.xml" type="application/atom+xml" rel="alternate"
+        title="Ben Chuanlong Du's Blog Atom Feed" />
+
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link href="https://misc.legendu.net/favicon.png" rel="icon">
+  <link href="https://misc.legendu.net/theme/css/main_2.css" media="screen, projection"
+        rel="stylesheet" type="text/css">
+  <script src="https://misc.legendu.net/theme/js/modernizr-2.0.js"></script>
+  <script src="https://misc.legendu.net/theme/js/ender.js"></script>
+  <script src="https://misc.legendu.net/theme/js/octopress.js" type="text/javascript"></script>
+
+  <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <script data-ad-client="ca-pub-3836424032203369" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+</head>
+
+<body>
+  <header role="banner"><hgroup>
+  <h1><a href="https://misc.legendu.net/">Ben Chuanlong Du's Blog</a></h1>
+    <h2>It is never too late to learn.</h2>
+</hgroup></header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="https://misc.legendu.net/atom.xml" rel="subscribe-rss">RSS</a></li>
+</ul>
+
+<form name="search" action="https://www.bing.com/search" method="get" onSubmit="return build_query()">
+  <fieldset role="search">
+      <!--
+    <input type="hidden" name="q" value="site:https://misc.legendu.net" />
+        -->
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+
+<script type = "text/javascript">
+    function build_query() {
+        var query = document.forms["search"]["q"].value;
+        var prefix = "site:https://misc.legendu.net "
+        if (!query.startsWith(prefix)) {
+            query = prefix + query;
+            document.forms["search"]["q"].value = query;
+        }
+        return true;
+    }
+</script>
+
+<ul class="main-navigation">
+    <li><a href="https://www.legendu.net">Home</a></li>
+    <li><a href="https://misc.legendu.net">Blog</a></li>
+    <li><a href="https://misc.legendu.net/archives.html">Archives</a></li>
+    <li><a href="https://misc.legendu.net/categories.html">Categories</a></li>
+    <li><a href="https://misc.legendu.net/tags.html">Tags</a></li>
+    <li><a href="https://www.legendu.net/pages/about">About</a></li>
+</ul></nav>
+  <div id="main">
+    <div id="content">
+<div>
+  <article class="hentry" role="article">
+<header>
+      <h1 class="entry-title">Packaging Python Dependencies for PySpark Using Pex</h1>
+      <p class="meta"><time datetime="2020-02-07T14:44:03-08:00" pubdate>Feb 07, 2020</time></p>
+</header>
+
+  <div class="entry-content"><p><strong>Things on this page are fragmentary and immature notes/thoughts of the author. Please read with your own judgement!</strong></p>
+<p><a href="https://github.com/indygreg/python-build-standalone">python-build-standalone</a>
+is a better alternative to conda-pack on managing Python dependencies for PySpark.
+Please refer to 
+<a href="http://www.legendu.net/en/blog/packaging-Python-Dependencies-for-PySpark-Using-python-build-standalone">Packaging Python Dependencies for PySpark Using python-build-standalone</a>
+for tutorials on how to use
+<a href="https://github.com/indygreg/python-build-standalone">python-build-standalone</a>
+to manage Python dependencies for PySpark.</p>
+<h2 id="general-tips-on-using-pex-with-pyspark">General Tips on Using pex with PySpark</h2>
+<ol>
+<li>
+<p>Please refer to <a href="http://www.legendu.net/misc/blog/tips-on-pex/">Tips on pex</a>
+    on tips about pex.</p>
+</li>
+<li>
+<p>If the pex environment file inherits the contents of <code>sys.path</code>,
+    it need not to have <code>pyspark</code> installed in it. 
+    Otherwise (the default), 
+    the pex environment file need to have <code>pyspark</code> installed in it. </p>
+</li>
+</ol>
+<h2 id="the-pex-root-directory">The pex Root Directory</h2>
+<p>By default,
+the pex root directory is <code>~/.pex</code>.
+Some Spark cluster might not be configured correctly 
+for the default pex root to work well.
+For example,
+some Spark clusters configure <code>$HOME</code> to be <code>/home</code>
+which makes the default pex root directory to be <code>/home/.pex</code>.
+This causes <a href="https://github.com/pantsbuild/pex/issues/359">permission issues</a>
+as users do not have previleges to create the directory on the master and executor containers.
+If this happens, 
+you have to set the environment variable <code>PEX_ROOT</code> 
+to a writable location using thee option <code>--conf</code> 
+when submitting your PySpark application.
+Notice that you have to set the environment variable 
+for both executors and the master 
+if you submit your spark application in the <code>cluster</code> deploy mode (<code>--deploy-mode cluster</code>).
+For more discussions please refer to
+<a href="https://github.com/pantsbuild/pex/issues/905">this issue</a>
+.</p>
+<div class="highlight"><pre><span></span><code><span class="ch">#!/bin/bash</span>
+
+/apache/spark2.3/bin/spark-submit<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--files<span class="w"> </span><span class="s2">&quot;file:///apache/hive/conf/hive-site.xml,file:///apache/hadoop/etc/hadoop/ssl-client.xml,file:///apache/hadoop/etc/hadoop/hdfs-site.xml,file:///apache/hadoop/etc/hadoop/core-site.xml,file:///apache/hadoop/etc/hadoop/federation-mapping.xml&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--master<span class="w"> </span>yarn<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--deploy-mode<span class="w"> </span>cluster<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--queue<span class="w"> </span>YOUR_QUEUE<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--num-executors<span class="w"> </span><span class="m">200</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--executor-memory<span class="w"> </span>10G<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--driver-memory<span class="w"> </span>15G<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--executor-cores<span class="w"> </span><span class="m">4</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--conf<span class="w"> </span>spark.yarn.maxAppAttempts<span class="o">=</span><span class="m">2</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--conf<span class="w"> </span>spark.dynamicAllocation.enabled<span class="o">=</span><span class="nb">true</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--conf<span class="w"> </span>spark.dynamicAllocation.maxExecutors<span class="o">=</span><span class="m">1000</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--conf<span class="w"> </span>spark.network.timeout<span class="o">=</span>300s<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--conf<span class="w"> </span>spark.executor.memoryOverhead<span class="o">=</span>2G<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--conf<span class="w"> </span>spark.pyspark.driver.python<span class="o">=</span>./env.pex<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--conf<span class="w"> </span>spark.pyspark.python<span class="o">=</span>./env.pex<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--conf<span class="w"> </span>spark.executorEnv.PEX_ROOT<span class="o">=</span>./tmp<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--conf<span class="w"> </span>spark.yarn.appMasterEnv.PEX_ROOT<span class="o">=</span>./tmp<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--files<span class="w"> </span>env.pex<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span><span class="nv">$1</span>
+</code></pre></div>
+
+<h2 id="py4jexception-constructor-orgapachesparkapipythonpythonaccumulatorv2-does-not-exist">Py4JException: Constructor org.apache.spark.api.python.PythonAccumulatorV2 Does Not Exist</h2>
+<p>You might run into the following error when using pex with PySpark.</p>
+<blockquote>
+<p>Py4JError: An error occurred while calling None.org.apache.spark.api.python.PythonAccumulatorV2. Trace:
+py4j.Py4JException: Constructor org.apache.spark.api.python.PythonAccumulatorV2([class java.lang.String, class java.lang.Integer, class java.lang.String]) does not exist</p>
+</blockquote>
+<p>This means that PySpark libraries are not visible to pex. 
+There are a few ways to fix this issue.</p>
+<ol>
+<li>
+<p>You can install the Package package <code>findspark</code>
+    and use it help to locate the home directory of Spark. </p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">findspark</span>
+<span class="n">findspark</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+</code></pre></div>
+
+<p>Or if you know the home directory of Spark.
+    :::python
+    import findspark
+    findspark.init("/apache/spark")</p>
+<p>The first way finds the home directory of Spark automatically 
+if Spark is installed into a standard location. 
+This generally not the situation when you run submit your Spark application to a cluster 
+since containers and temporary directories are created for your application to run.
+The second way requires you to know the home directory of Spark.
+This is not feasible either generally speaking if you submit your Spark application to a cluster.
+To sum up, 
+this method is not really useful in practice.</p>
+</li>
+<li>
+<p>Build your pex environment file with the option <code>--inherit-path=prefer</code>
+    (<code>--inherit-path=fallback</code> might not work well).</p>
+</li>
+<li>
+<p>Export the environment variable <code>PEX_INHERIT_PATH</code> to be <code>prefer</code> at run time.</p>
+<div class="highlight"><pre><span></span><code><span class="ch">#!/bin/bash</span>
+
+/apache/spark2.3/bin/spark-submit<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--files<span class="w"> </span><span class="s2">&quot;file:///apache/hive/conf/hive-site.xml,file:///apache/hadoop/etc/hadoop/ssl-client.xml,file:///apache/hadoop/etc/hadoop/hdfs-site.xml,file:///apache/hadoop/etc/hadoop/core-site.xml,file:///apache/hadoop/etc/hadoop/federation-mapping.xml&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--master<span class="w"> </span>yarn<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--deploy-mode<span class="w"> </span>cluster<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--queue<span class="w"> </span>YOUR_QUEUE<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--num-executors<span class="w"> </span><span class="m">200</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--executor-memory<span class="w"> </span>10G<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--driver-memory<span class="w"> </span>15G<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--executor-cores<span class="w"> </span><span class="m">4</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--conf<span class="w"> </span>spark.yarn.maxAppAttempts<span class="o">=</span><span class="m">2</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--conf<span class="w"> </span>spark.dynamicAllocation.enabled<span class="o">=</span><span class="nb">true</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--conf<span class="w"> </span>spark.dynamicAllocation.maxExecutors<span class="o">=</span><span class="m">1000</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--conf<span class="w"> </span>spark.network.timeout<span class="o">=</span>300s<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--conf<span class="w"> </span>spark.executor.memoryOverhead<span class="o">=</span>2G<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--conf<span class="w"> </span>spark.pyspark.driver.python<span class="o">=</span>./env.pex<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--conf<span class="w"> </span>spark.pyspark.python<span class="o">=</span>./env.pex<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--conf<span class="w"> </span>spark.executorEnv.PEX_ROOT<span class="o">=</span>./tmp<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--conf<span class="w"> </span>spark.yarn.appMasterEnv.PEX_ROOT<span class="o">=</span>./tmp<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--conf<span class="w"> </span>spark.executorEnv.PEX_INHERIT_PATH<span class="o">=</span>prefer<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--conf<span class="w"> </span>spark.yarn.appMasterEnv.PEX_INHERIT_PATH<span class="o">=</span>prefer<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--files<span class="w"> </span>env.pex<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span><span class="nv">$1</span>
+</code></pre></div>
+
+</li>
+</ol>
+<h2 id="issues">Issues</h2>
+<p>Spark works well but the Hive metastore is not recognized.
+For more details,
+please refer to 
+<a href="https://github.com/pantsbuild/pex/issues/904">this issue</a>
+.</p>
+<h2 id="references">References</h2>
+<ul>
+<li>
+<p><a href="http://www.legendu.net/en/blog/packaging-Python-Dependencies-for-PySpark-Using-python-build-standalone">Packaging Python Dependencies for PySpark Using Python-Build-Standalone</a></p>
+</li>
+<li>
+<p><a href="http://www.legendu.net/en/blog/packaging-python-dependencies-for-pyspark-using-conda-pack">Packaging Python Dependencies for PySpark Using Conda-Pack</a></p>
+</li>
+<li>
+<p>https://github.com/jcrist/skein/</p>
+</li>
+<li>
+<p>https://github.com/pantsbuild/pex</p>
+</li>
+<li>
+<p>https://medium.com/criteo-labs/packaging-code-with-pex-a-pyspark-example-9057f9f144f3</p>
+</li>
+<li>
+<p><a href="https://hang-hu.github.io/spark/2018/10/31/Run-pyspark-scripts-with-python3-instead-of-pyspark.html">Run pyspark scripts with python3 instead of pyspark</a></p>
+</li>
+<li>
+<p>https://github.com/pantsbuild/pex/issues/746</p>
+</li>
+</ul></div>
+    <footer>
+<p class="meta">
+  <span class="byline author vcard">
+    Posted by <span class="fn">Benjamin Du</span>
+  </span>
+<time datetime="2020-02-07T14:44:03-08:00" pubdate>Feb 07, 2020</time>  <span class="categories">
+    <a class="category" href="https://misc.legendu.net/tag/programming.html">programming</a>
+    <a class="category" href="https://misc.legendu.net/tag/pyspark.html">PySpark</a>
+    <a class="category" href="https://misc.legendu.net/tag/python.html">Python</a>
+    <a class="category" href="https://misc.legendu.net/tag/dependency.html">dependency</a>
+    <a class="category" href="https://misc.legendu.net/tag/packaging.html">packaging</a>
+    <a class="category" href="https://misc.legendu.net/tag/pex.html">pex</a>
+  </span>
+</p>    </footer>
+  </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div>
+  </section>
+</div>
+<aside class="sidebar">
+  <section>
+    <h1>Recent Posts</h1>
+    <ul id="recent_posts">
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/tips-on-health/">Tips on Health</a>
+      </li>
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/tips-on-child-education/">Tips on Child Education</a>
+      </li>
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/tips-on-fd/">Tips on fd</a>
+      </li>
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/the-fzf-command-is-a-great-alternative-to-find/">The fzf Command Is a Great Alternative to find</a>
+      </li>
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/ruff-is-an-extremely-fast-python-linter-written-in-rust/">Ruff Is An Extremely Fast Python Linter Written in Rust</a>
+      </li>
+    </ul>
+  </section>
+  <section>
+    <h1>Categories</h1>
+    <ul id="recent_posts">
+        <li><a href="https://misc.legendu.net/category/ai.html">AI</a></li>
+        <li><a href="https://misc.legendu.net/category/career.html">Career</a></li>
+        <li><a href="https://misc.legendu.net/category/cloud.html">Cloud</a></li>
+        <li><a href="https://misc.legendu.net/category/computer-science.html">Computer Science</a></li>
+        <li><a href="https://misc.legendu.net/category/fiannce.html">Fiannce</a></li>
+        <li><a href="https://misc.legendu.net/category/finance.html">Finance</a></li>
+        <li><a href="https://misc.legendu.net/category/fun-problems.html">Fun Problems</a></li>
+        <li><a href="https://misc.legendu.net/category/hardware.html">Hardware</a></li>
+        <li><a href="https://misc.legendu.net/category/health.html">Health</a></li>
+        <li><a href="https://misc.legendu.net/category/house.html">House</a></li>
+        <li><a href="https://misc.legendu.net/category/internet.html">Internet</a></li>
+        <li><a href="https://misc.legendu.net/category/investment.html">Investment</a></li>
+        <li><a href="https://misc.legendu.net/category/life.html">life</a></li>
+        <li><a href="https://misc.legendu.net/category/linux.html">Linux</a></li>
+        <li><a href="https://misc.legendu.net/category/os.html">OS</a></li>
+        <li><a href="https://misc.legendu.net/category/people.html">People</a></li>
+        <li><a href="https://misc.legendu.net/category/philosophy.html">Philosophy</a></li>
+        <li><a href="https://misc.legendu.net/category/research.html">Research</a></li>
+        <li><a href="https://misc.legendu.net/category/shopping.html">Shopping</a></li>
+        <li><a href="https://misc.legendu.net/category/soft-skills.html">soft skills</a></li>
+        <li><a href="https://misc.legendu.net/category/software.html">Software</a></li>
+        <li><a href="https://misc.legendu.net/category/statistics.html">Statistics</a></li>
+        <li><a href="https://misc.legendu.net/category/tools.html">Tools</a></li>
+    </ul>
+  </section>
+ 
+
+  <section>
+  <h1>Tags</h1>
+  <ul class="tagcloud">
+  </ul>
+  </section>
+
+
+
+  <section>
+    <h1>GitHub Repos</h1>
+    <ul id="gh_repos">
+      <li class="loading">Status updating...</li>
+    </ul>
+      <a href="https://github.com/legendu-net">@legendu-net</a> on GitHub
+    <script type="text/javascript">
+      $.domReady(function(){
+          if (!window.jXHR){
+              var jxhr = document.createElement('script');
+              jxhr.type = 'text/javascript';
+              jxhr.src = 'https://misc.legendu.net/theme/js/jXHR.js';
+              var s = document.getElementsByTagName('script')[0];
+              s.parentNode.insertBefore(jxhr, s);
+          }
+
+          github.showRepos({
+              user: 'legendu-net',
+              count: 5,
+              skip_forks: true,
+              target: '#gh_repos'
+          });
+      });
+    </script>
+    <script src="https://misc.legendu.net/theme/js/github.js" type="text/javascript"> </script>
+  </section>
+
+    <section>
+        <h1>Social</h2>
+        <ul>
+            <li><a href="https://www.linkedin.com/in/ben-chuanlong-du-1239b221/" target="_blank">LinkedIn</a></li>
+            <li><a href="https://hub.docker.com/u/dclong" target="_blank">Docker Hub</a></li>
+            <li><a href="https://stackoverflow.com/users/7808204/benjamin-du?tab=profile" target="_blank">Stack Overflow</a></li>
+            <li><a href="https://twitter.com/longendu" target="_blank">Twitter</a></li>
+        <!--
+            <li><a href="https://misc.legendu.net/" type="application/rss+xml" rel="alternate">RSS</a></li>
+            -->
+        </ul>
+    </section>
+</aside>    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Ben Chuanlong Du -
+  <span class="credit">Powered by <a href="http://getpelican.com">Pelican</a></span>
+</p></footer>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-3STS9BVPF6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-3STS9BVPF6');
+</script>
+	<script type="text/javascript">
+	  var disqus_shortname = 'dclong';
+          var disqus_identifier = '/blog/packaging-python-dependencies-for-pyspark-using-pex/';
+          var disqus_url = 'https://misc.legendu.net/blog/packaging-python-dependencies-for-pyspark-using-pex/';
+          var disqus_title = 'Packaging Python Dependencies for PySpark Using Pex';
+	  (function() {
+	    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	    dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+	    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	   })();
+	</script>
+</body>
+</html>

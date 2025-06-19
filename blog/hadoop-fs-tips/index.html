@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Hadoop Filesystem Tips</title>
+  <meta name="author" content="Ben Chuanlong Du">
+
+  <link href="https://misc.legendu.net/atom.xml" type="application/atom+xml" rel="alternate"
+        title="Ben Chuanlong Du's Blog Atom Feed" />
+
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link href="https://misc.legendu.net/favicon.png" rel="icon">
+  <link href="https://misc.legendu.net/theme/css/main_2.css" media="screen, projection"
+        rel="stylesheet" type="text/css">
+  <script src="https://misc.legendu.net/theme/js/modernizr-2.0.js"></script>
+  <script src="https://misc.legendu.net/theme/js/ender.js"></script>
+  <script src="https://misc.legendu.net/theme/js/octopress.js" type="text/javascript"></script>
+
+  <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <script data-ad-client="ca-pub-3836424032203369" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+</head>
+
+<body>
+  <header role="banner"><hgroup>
+  <h1><a href="https://misc.legendu.net/">Ben Chuanlong Du's Blog</a></h1>
+    <h2>It is never too late to learn.</h2>
+</hgroup></header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="https://misc.legendu.net/atom.xml" rel="subscribe-rss">RSS</a></li>
+</ul>
+
+<form name="search" action="https://www.bing.com/search" method="get" onSubmit="return build_query()">
+  <fieldset role="search">
+      <!--
+    <input type="hidden" name="q" value="site:https://misc.legendu.net" />
+        -->
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+
+<script type = "text/javascript">
+    function build_query() {
+        var query = document.forms["search"]["q"].value;
+        var prefix = "site:https://misc.legendu.net "
+        if (!query.startsWith(prefix)) {
+            query = prefix + query;
+            document.forms["search"]["q"].value = query;
+        }
+        return true;
+    }
+</script>
+
+<ul class="main-navigation">
+    <li><a href="https://www.legendu.net">Home</a></li>
+    <li><a href="https://misc.legendu.net">Blog</a></li>
+    <li><a href="https://misc.legendu.net/archives.html">Archives</a></li>
+    <li><a href="https://misc.legendu.net/categories.html">Categories</a></li>
+    <li><a href="https://misc.legendu.net/tags.html">Tags</a></li>
+    <li><a href="https://www.legendu.net/pages/about">About</a></li>
+</ul></nav>
+  <div id="main">
+    <div id="content">
+<div>
+  <article class="hentry" role="article">
+<header>
+      <h1 class="entry-title">Hadoop Filesystem Tips</h1>
+      <p class="meta"><time datetime="2014-01-21T23:37:52-08:00" pubdate>Jan 21, 2014</time></p>
+</header>
+
+  <div class="entry-content"><p><strong>Things on this page are fragmentary and immature notes/thoughts of the author. Please read with your own judgement!</strong></p>
+<h2 id="tips-and-traps">Tips and Traps</h2>
+<ol>
+<li>
+<p>It is suggested that you never use the <code>-skipTrash</code> option
+    unless you are absolutely aware of what you are doing. 
+    I made mistakes a couple of times in the past 
+    to remove HDFS paths accidentally with the <code>-skipTrash</code> option
+    which means that those HDFS files couldn't be recovered from trash.</p>
+</li>
+<li>
+<p>The HDFS command supports wildcards. 
+    However, 
+    <code>*</code> represents all files/directories 
+    including hidden ones (which is different from Linux/Unix shell).</p>
+</li>
+<li>
+<p>The success file <code>_SUCCESS</code> is generated when a Spark/Hadoop application succeed.
+    It can be used to check whether the data produced by a Spark application is ready.
+    The success file <code>_HIVESUCCESS</code> is generated when a Hive table is refreshed successfully.
+    It can be used to check whether a Hive table is ready for consumption.</p>
+</li>
+</ol>
+<h2 id="hadoop-fs-vs-hadoop-dfs-vs-hdfs-dfs">hadoop fs vs hadoop dfs vs hdfs dfs</h2>
+<ol>
+<li>
+<p><code>hadoop fs</code> supports generic file systems.
+    It can be used when you are dealing with different file systems 
+    such as Local FS, HFTP FS, S3 FS, and others.
+    <code>hadoop fs</code> is recommended when you work with differnt file systems at the same time.</p>
+</li>
+<li>
+<p>Both <code>hdfs dfs</code> and <code>hadoop dfs</code> are very specific to HDFS. 
+    They work for operation relates to HDFS. 
+    <code>hadoop dfs</code> has been deprecated in favor of <code>hdfs dfs</code>.
+    <code>hdfs dfs</code> is recommended when you work with HDFS only.</p>
+</li>
+</ol>
+<h2 id="cat-print-a-file">cat - Print a File</h2>
+<div class="highlight"><pre><span></span><code>hdfs<span class="w"> </span>dfs<span class="w"> </span>-cat
+</code></pre></div>
+
+<h2 id="chmod-change-permission-of-filesdirectories">chmod - Change Permission of Files/Directories</h2>
+<div class="highlight"><pre><span></span><code>hdfs<span class="w"> </span>dfs<span class="w"> </span>-chmod<span class="w"> </span>-R<span class="w"> </span><span class="m">777</span><span class="w"> </span>/hdfs/path
+</code></pre></div>
+
+<h2 id="chown-change-the-owner-of-filesdirectories">chown - Change the Owner of Files/Directories</h2>
+<div class="highlight"><pre><span></span><code>hdfs<span class="w"> </span>dfs<span class="w"> </span>-chown<span class="w"> </span>new_owner<span class="w"> </span>/hdfs/path
+</code></pre></div>
+
+<p>Notice that a HDFS path (file or directory)
+can only be removed by its owner.
+Other users cannot remove the path even if the file permission of the path is set 777.
+If a HDFS path under user A's home (<code>/user/A/</code>) is changed to be owned by user B,
+then neither A nor B can remove the path.
+You have to change the owner of the path back to user A
+and then use user A to remove the path.</p>
+<h2 id="count-for-quota">count (for Quota)</h2>
+<div class="highlight"><pre><span></span><code>hdfs<span class="w"> </span>dfs<span class="w"> </span>-count<span class="w"> </span>-q<span class="w"> </span>-v<span class="w"> </span>-h<span class="w"> </span>/user/username
+QUOTA<span class="w">       </span>REM_QUOTA<span class="w">     </span>SPACE_QUOTA<span class="w"> </span>REM_SPACE_QUOTA<span class="w">    </span>DIR_COUNT<span class="w">   </span>FILE_COUNT<span class="w">       </span>CONTENT_SIZE<span class="w">  </span>PATHNAME<span class="w">  </span>
+<span class="m">16</span><span class="w"> </span>K<span class="w">           </span><span class="m">7</span>.9<span class="w"> </span>K<span class="w">             </span><span class="m">3</span><span class="w"> </span>T<span class="w">           </span><span class="m">3</span>.0<span class="w"> </span>T<span class="w">           </span><span class="m">27</span><span class="w">        </span><span class="m">8</span>.1<span class="w"> </span>K<span class="w">            </span><span class="m">573</span>.8<span class="w"> </span>M<span class="w">  </span>/user/username
+</code></pre></div>
+
+<p><code>QUOTA</code> is namespace quota, 
+i.e., the number of files you can store. 
+The directory /tmp has no quota limit. You can use it for storing files temporarily.</p>
+<h2 id="cp-copy-filesdirectories">cp - Copy Files/Directories</h2>
+<div class="highlight"><pre><span></span><code>hdfs<span class="w"> </span>dfs<span class="w"> </span>-cp<span class="w"> </span>/user/saurzcode/dir1/abc.txt<span class="w"> </span>/user/saurzcode/dir2
+</code></pre></div>
+
+<h2 id="get-download-a-filedirectory">get - Download a File/Directory</h2>
+<div class="highlight"><pre><span></span><code>hdfs<span class="w"> </span>dfs<span class="w"> </span>-get
+</code></pre></div>
+
+<h2 id="getmerge">getmerge</h2>
+<div class="highlight"><pre><span></span><code>hdfs<span class="w"> </span>dfs<span class="w"> </span>-getmerge<span class="w"> </span>/hdfs/path<span class="w"> </span>/path/in/linux
+</code></pre></div>
+
+<h2 id="mkdir">mkdir</h2>
+<div class="highlight"><pre><span></span><code>hdfs<span class="w"> </span>dfs<span class="w"> </span>-mkdir<span class="w"> </span><span class="o">[</span>-p<span class="o">]</span><span class="w"> </span>/path/to/create
+</code></pre></div>
+
+<h2 id="mv-moverename-filesdirectories">mv - Move/Rename Files/Directories</h2>
+<p>Move/rename the source file/directory <code>/path/to/source</code> TO <code>/path/to/des</code>.</p>
+<div class="highlight"><pre><span></span><code>hdfs<span class="w"> </span>dfs<span class="w"> </span>-mv<span class="w"> </span>/path/to/source<span class="w"> </span>/path/to/des
+</code></pre></div>
+
+<p>Move the source file/directory <code>/path/to/source</code> INTO the directory <code>/path/to/des</code>.
+That is,
+move/rename the file/directory <code>/path/to/source</code> to <code>/path/to/des/source</code>.</p>
+<div class="highlight"><pre><span></span><code>hdfs<span class="w"> </span>dfs<span class="w"> </span>-mv<span class="w"> </span>/path/to/source<span class="w"> </span>/path/to/des/
+</code></pre></div>
+
+<h2 id="putcopyfromlocal-upload-a-filedirectory-to-hdfs">put/copyFromLocal - Upload a file/directory to HDFS.</h2>
+<div class="highlight"><pre><span></span><code>hdfs<span class="w"> </span>dfs<span class="w"> </span>-put<span class="w"> </span><span class="o">[</span>-f<span class="o">]</span>
+</code></pre></div>
+
+<p>The option <code>-f</code> overwrite existing files on HDFS. 
+However, 
+a tricky misunderstanding might happend when you upload a directory using the following command.</p>
+<div class="highlight"><pre><span></span><code>hdfs<span class="w"> </span>dfs<span class="w"> </span>-put<span class="w"> </span>-f<span class="w"> </span>/local/path/to/some_directory<span class="w"> </span>/hdfs/path/to/some_directory
+</code></pre></div>
+
+<p>Supppose <code>/hdfs/path/to/some_directory</code> already exists,
+it is not the directory <code>/hdfs/path/to/some_directory</code> itself get overwritten 
+but rather files in it get overwritten.
+If files in <code>/local/path/to/some_directory</code> have diffrent names than files in <code>/hdfs/path/to/some_directory</code>
+then nothing is overwritten.
+This might not what you want and can get you bitten. 
+It is suggested that you always remove a directory manually using the command <code>hdfs dfs -rm -r /hdfs/path/to/some_directory</code>
+if you intend to overwrite the whole directory.</p>
+<h2 id="tail-show-last-lines-of-a-file">tail - Show Last Lines of a File</h2>
+<div class="highlight"><pre><span></span><code>hdfs<span class="w"> </span>dfs<span class="w"> </span>-tail<span class="w"> </span>/user/saurzcode/dir1/abc.txt
+</code></pre></div>
+
+<ol>
+<li>
+<p>The command <code>hdfs dfs -mkdir</code> supports the <code>-p</code> option similar to that of the <code>mkdir</code> command in Linux/Unix.</p>
+</li>
+<li>
+<p>Check size of a directory.
+    However, the depth option is not supported currently.</p>
+<div class="highlight"><pre><span></span><code>hdfs<span class="w"> </span>dfs<span class="w"> </span>-du<span class="w"> </span><span class="o">[</span>-s<span class="o">]</span><span class="w"> </span><span class="o">[</span>-h<span class="o">]</span><span class="w"> </span>URI<span class="w"> </span><span class="o">[</span>URI<span class="w"> </span>…<span class="o">]</span>
+</code></pre></div>
+
+</li>
+<li>
+<p>Remove a directory in HDFS without making a backup in trash.
+    This is a dangerous operation 
+    but it is useful when the directory that you want to remove 
+    is too big to place into the trash directory.</p>
+<div class="highlight"><pre><span></span><code>hdfs<span class="w"> </span>dfs<span class="w"> </span>-rm<span class="w"> </span>-r<span class="w"> </span>-skipTrash<span class="w"> </span>/tmp/item_desc
+</code></pre></div>
+
+</li>
+</ol>
+<h2 id="checksum">checksum</h2>
+<div class="highlight"><pre><span></span><code>hdfs<span class="w"> </span>dfs<span class="w"> </span>-checksum<span class="w"> </span>URL
+</code></pre></div>
+
+<p>Notice that the checksum command on HDFS returns different result from the md5sum command on Linux.</p>
+<h2 id="setfacl">setfacl</h2>
+<p>Grant permission to a user.</p>
+<div class="highlight"><pre><span></span><code>hadoop<span class="w"> </span>fs<span class="w"> </span>-setfacl<span class="w"> </span>-R<span class="w"> </span>-m<span class="w"> </span>user:user_name:rwx<span class="w"> </span>/path/to/grant/permission
+</code></pre></div>
+
+<h2 id="merge-multiple-files">Merge Multiple Files</h2>
+<p>Use hadoop-streaming job (with single reducer) 
+to merge all part files data to single hdfs file on cluster itself 
+and then use hdfs get to fetch single file to local system.</p>
+<div class="highlight"><pre><span></span><code>hadoop<span class="w"> </span>jar<span class="w"> </span>/usr/hdp/2.3.2.0-2950/hadoop-mapreduce/hadoop-streaming-2.7.1.2.3.2.0-2950.jar<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-Dmapred.reduce.tasks<span class="o">=</span><span class="m">1</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-input<span class="w"> </span><span class="s2">&quot;/hdfs/input/dir&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-output<span class="w"> </span><span class="s2">&quot;/hdfs/output/dir&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-mapper<span class="w"> </span>cat<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-reducer<span class="w"> </span>cat
+</code></pre></div>
+
+<h2 id="hadoop-fs-compress">Hadoop FS compress</h2>
+<p>http://stackoverflow.com/questions/5571156/hadoop-how-to-compress-mapper-output-but-not-the-reducer-output</p>
+<p>http://www.ericlin.me/disable-hive-output-compression</p>
+<ol>
+<li>
+<p>no update, have to update locally and upload to hadoop</p>
+</li>
+<li>
+<p>by default 3 reps of each block of data, 3 reps is the best according to many discussions</p>
+</li>
+<li>
+<p>hadoop is for large data of course</p>
+</li>
+<li>
+<p>because of false tolorence/replication of data, you acutally use more space on Hadoop</p>
+</li>
+<li>
+<p>master node (name node): data about data, primary and secondary master node, for reliable</p>
+</li>
+<li>
+<p>data nodes (slave nodes), edge node, access point for the external applications, tools, and users that need to utilize the hadoop environment</p>
+</li>
+<li>
+<p>edge nodes (gate to hadoop), name nodes, data nodes</p>
+</li>
+</ol>
+<h2 id="references">References</h2>
+<ul>
+<li>
+<p><a href="https://hadoop.apache.org/docs/stable/api/org/apache/hadoop/fs/FileSystem.html#delete-org.apache.hadoop.fs.Path-boolean-">Hadoop Filesystem - Java APIs</a></p>
+</li>
+<li>
+<p><a href="https://newbedev.com/pyspark-and-hdfs-commands">PySpark and HDFS Commands</a></p>
+</li>
+<li>
+<p><a href="https://sparkbyexamples.com/spark/spark-rename-and-delete-file-directory-from-hdfs/">Spark – Rename and Delete a File or Directory From HDFS</a></p>
+</li>
+<li>
+<p>https://hadoop.apache.org/docs/stable/hadoop-project-dist/hadoop-common/SingleCluster.html</p>
+</li>
+<li>
+<p>https://hadoop.apache.org/docs/stable/hadoop-project-dist/hadoop-common/FileSystemShell.html</p>
+</li>
+<li>
+<p>https://stackoverflow.com/questions/6504107/the-way-to-check-a-hdfs-directorys-size</p>
+</li>
+<li>
+<p>https://dzone.com/articles/top-10-hadoop-shell-commands</p>
+</li>
+<li>
+<p>https://stackoverflow.com/questions/18142960/whats-the-difference-between-hadoop-fs-shell-commands-and-hdfs-dfs-shell-co</p>
+</li>
+</ul></div>
+    <footer>
+<p class="meta">
+  <span class="byline author vcard">
+    Posted by <span class="fn">Ben Chuanlong Du</span>
+  </span>
+<time datetime="2014-01-21T23:37:52-08:00" pubdate>Jan 21, 2014</time>  <span class="categories">
+    <a class="category" href="https://misc.legendu.net/tag/big-data.html">big data</a>
+    <a class="category" href="https://misc.legendu.net/tag/hadoop.html">Hadoop</a>
+    <a class="category" href="https://misc.legendu.net/tag/filesystem.html">filesystem</a>
+    <a class="category" href="https://misc.legendu.net/tag/file-system.html">file system</a>
+    <a class="category" href="https://misc.legendu.net/tag/tips.html">tips</a>
+  </span>
+</p>    </footer>
+  </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div>
+  </section>
+</div>
+<aside class="sidebar">
+  <section>
+    <h1>Recent Posts</h1>
+    <ul id="recent_posts">
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/tips-on-health/">Tips on Health</a>
+      </li>
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/tips-on-child-education/">Tips on Child Education</a>
+      </li>
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/tips-on-fd/">Tips on fd</a>
+      </li>
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/the-fzf-command-is-a-great-alternative-to-find/">The fzf Command Is a Great Alternative to find</a>
+      </li>
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/ruff-is-an-extremely-fast-python-linter-written-in-rust/">Ruff Is An Extremely Fast Python Linter Written in Rust</a>
+      </li>
+    </ul>
+  </section>
+  <section>
+    <h1>Categories</h1>
+    <ul id="recent_posts">
+        <li><a href="https://misc.legendu.net/category/ai.html">AI</a></li>
+        <li><a href="https://misc.legendu.net/category/career.html">Career</a></li>
+        <li><a href="https://misc.legendu.net/category/cloud.html">Cloud</a></li>
+        <li><a href="https://misc.legendu.net/category/computer-science.html">Computer Science</a></li>
+        <li><a href="https://misc.legendu.net/category/fiannce.html">Fiannce</a></li>
+        <li><a href="https://misc.legendu.net/category/finance.html">Finance</a></li>
+        <li><a href="https://misc.legendu.net/category/fun-problems.html">Fun Problems</a></li>
+        <li><a href="https://misc.legendu.net/category/hardware.html">Hardware</a></li>
+        <li><a href="https://misc.legendu.net/category/health.html">Health</a></li>
+        <li><a href="https://misc.legendu.net/category/house.html">House</a></li>
+        <li><a href="https://misc.legendu.net/category/internet.html">Internet</a></li>
+        <li><a href="https://misc.legendu.net/category/investment.html">Investment</a></li>
+        <li><a href="https://misc.legendu.net/category/life.html">life</a></li>
+        <li><a href="https://misc.legendu.net/category/linux.html">Linux</a></li>
+        <li><a href="https://misc.legendu.net/category/os.html">OS</a></li>
+        <li><a href="https://misc.legendu.net/category/people.html">People</a></li>
+        <li><a href="https://misc.legendu.net/category/philosophy.html">Philosophy</a></li>
+        <li><a href="https://misc.legendu.net/category/research.html">Research</a></li>
+        <li><a href="https://misc.legendu.net/category/shopping.html">Shopping</a></li>
+        <li><a href="https://misc.legendu.net/category/soft-skills.html">soft skills</a></li>
+        <li><a href="https://misc.legendu.net/category/software.html">Software</a></li>
+        <li><a href="https://misc.legendu.net/category/statistics.html">Statistics</a></li>
+        <li><a href="https://misc.legendu.net/category/tools.html">Tools</a></li>
+    </ul>
+  </section>
+ 
+
+  <section>
+  <h1>Tags</h1>
+  <ul class="tagcloud">
+  </ul>
+  </section>
+
+
+
+  <section>
+    <h1>GitHub Repos</h1>
+    <ul id="gh_repos">
+      <li class="loading">Status updating...</li>
+    </ul>
+      <a href="https://github.com/legendu-net">@legendu-net</a> on GitHub
+    <script type="text/javascript">
+      $.domReady(function(){
+          if (!window.jXHR){
+              var jxhr = document.createElement('script');
+              jxhr.type = 'text/javascript';
+              jxhr.src = 'https://misc.legendu.net/theme/js/jXHR.js';
+              var s = document.getElementsByTagName('script')[0];
+              s.parentNode.insertBefore(jxhr, s);
+          }
+
+          github.showRepos({
+              user: 'legendu-net',
+              count: 5,
+              skip_forks: true,
+              target: '#gh_repos'
+          });
+      });
+    </script>
+    <script src="https://misc.legendu.net/theme/js/github.js" type="text/javascript"> </script>
+  </section>
+
+    <section>
+        <h1>Social</h2>
+        <ul>
+            <li><a href="https://www.linkedin.com/in/ben-chuanlong-du-1239b221/" target="_blank">LinkedIn</a></li>
+            <li><a href="https://hub.docker.com/u/dclong" target="_blank">Docker Hub</a></li>
+            <li><a href="https://stackoverflow.com/users/7808204/benjamin-du?tab=profile" target="_blank">Stack Overflow</a></li>
+            <li><a href="https://twitter.com/longendu" target="_blank">Twitter</a></li>
+        <!--
+            <li><a href="https://misc.legendu.net/" type="application/rss+xml" rel="alternate">RSS</a></li>
+            -->
+        </ul>
+    </section>
+</aside>    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Ben Chuanlong Du -
+  <span class="credit">Powered by <a href="http://getpelican.com">Pelican</a></span>
+</p></footer>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-3STS9BVPF6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-3STS9BVPF6');
+</script>
+	<script type="text/javascript">
+	  var disqus_shortname = 'dclong';
+          var disqus_identifier = '/blog/hadoop-fs-tips/';
+          var disqus_url = 'https://misc.legendu.net/blog/hadoop-fs-tips/';
+          var disqus_title = 'Hadoop Filesystem Tips';
+	  (function() {
+	    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	    dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+	    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	   })();
+	</script>
+</body>
+</html>

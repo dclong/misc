@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Thread-Local Storage for Rayon</title>
+  <meta name="author" content="Ben Chuanlong Du">
+
+  <link href="https://misc.legendu.net/atom.xml" type="application/atom+xml" rel="alternate"
+        title="Ben Chuanlong Du's Blog Atom Feed" />
+
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link href="https://misc.legendu.net/favicon.png" rel="icon">
+  <link href="https://misc.legendu.net/theme/css/main_2.css" media="screen, projection"
+        rel="stylesheet" type="text/css">
+  <script src="https://misc.legendu.net/theme/js/modernizr-2.0.js"></script>
+  <script src="https://misc.legendu.net/theme/js/ender.js"></script>
+  <script src="https://misc.legendu.net/theme/js/octopress.js" type="text/javascript"></script>
+
+  <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <script data-ad-client="ca-pub-3836424032203369" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+</head>
+
+<body>
+  <header role="banner"><hgroup>
+  <h1><a href="https://misc.legendu.net/">Ben Chuanlong Du's Blog</a></h1>
+    <h2>It is never too late to learn.</h2>
+</hgroup></header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="https://misc.legendu.net/atom.xml" rel="subscribe-rss">RSS</a></li>
+</ul>
+
+<form name="search" action="https://www.bing.com/search" method="get" onSubmit="return build_query()">
+  <fieldset role="search">
+      <!--
+    <input type="hidden" name="q" value="site:https://misc.legendu.net" />
+        -->
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+
+<script type = "text/javascript">
+    function build_query() {
+        var query = document.forms["search"]["q"].value;
+        var prefix = "site:https://misc.legendu.net "
+        if (!query.startsWith(prefix)) {
+            query = prefix + query;
+            document.forms["search"]["q"].value = query;
+        }
+        return true;
+    }
+</script>
+
+<ul class="main-navigation">
+    <li><a href="https://www.legendu.net">Home</a></li>
+    <li><a href="https://misc.legendu.net">Blog</a></li>
+    <li><a href="https://misc.legendu.net/archives.html">Archives</a></li>
+    <li><a href="https://misc.legendu.net/categories.html">Categories</a></li>
+    <li><a href="https://misc.legendu.net/tags.html">Tags</a></li>
+    <li><a href="https://www.legendu.net/pages/about">About</a></li>
+</ul></nav>
+  <div id="main">
+    <div id="content">
+<div>
+  <article class="hentry" role="article">
+<header>
+      <h1 class="entry-title">Thread-Local Storage for Rayon</h1>
+      <p class="meta"><time datetime="2023-07-05T09:24:27-07:00" pubdate>Jul 05, 2023</time></p>
+</header>
+
+  <div class="entry-content"><p><strong>Things on this page are fragmentary and immature notes/thoughts of the author. Please read with your own judgement!</strong></p>
+<p>There might be issue if the code relies on Drop of the struct.
+For example,
+if you create a BufWriter in thread-local storage,
+last buffered output might not flush.
+You have to 
+1. (not recommended) manually flush 
+2. (recommended) swap out the <code>BufWrite</code> from RefCell to allow it to be dropped.</p>
+<p>Have to manually call bw.replace(None) so own the struct so that it can be dropped.
+This is good practice anyway as you want to lease handle to files so soon as they are no longer used.</p>
+<h2 id="rayon">rayon</h2>
+<ol>
+<li>Can<br>
+<a href="https://docs.rs/rayon/latest/rayon/struct.ThreadPool.html#method.broadcast">ThreadPool.broadcast</a>
+    be used?
+    No good example of using it for thread-local storage ...</li>
+</ol>
+<div class="highlight"><pre><span></span><code><span class="nt">let</span><span class="w"> </span><span class="nt">zip_archive</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nt">zip</span><span class="p">::</span><span class="nd">ZipArchive</span><span class="p">::</span><span class="nd">new</span><span class="o">(</span><span class="nt">std</span><span class="p">::</span><span class="nd">fs</span><span class="p">::</span><span class="nd">File</span><span class="p">::</span><span class="nd">open</span><span class="o">(</span><span class="s2">&quot;AllPublicXML.zip&quot;</span><span class="o">)?)?;</span>
+<span class="nt">let</span><span class="w"> </span><span class="nt">results</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">(</span><span class="nt">0</span><span class="o">.</span><span class="p">.</span><span class="nc">zip_archive</span><span class="p">.</span><span class="nc">len</span><span class="o">())</span>
+<span class="w">    </span><span class="p">.</span><span class="nc">into_par_iter</span><span class="o">()</span>
+<span class="w">    </span><span class="p">.</span><span class="nc">map</span><span class="o">(|</span><span class="nt">i</span><span class="o">|</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="err">thread_local!(static</span><span class="w"> </span><span class="n">ZIP_ARCHIVE</span><span class="p">:</span><span class="w"> </span><span class="n">RefCell</span><span class="o">&lt;</span><span class="n">Result</span><span class="o">&lt;</span><span class="n">zip</span><span class="o">::</span><span class="n">ZipArchive</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">fs</span><span class="o">::</span><span class="n">File</span><span class="o">&gt;&gt;&gt;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">RefCell</span><span class="o">::</span><span class="nf">new</span><span class="p">(</span><span class="n">std</span><span class="err">::</span><span class="n">fs</span><span class="err">::</span><span class="n">File</span><span class="err">::</span><span class="kc">open</span><span class="err">(</span><span class="s2">&quot;AllPublicXML.zip&quot;</span><span class="p">)</span><span class="o">.</span><span class="nf">map_err</span><span class="p">(</span><span class="n">failure</span><span class="err">::</span><span class="n">Error</span><span class="err">::</span><span class="n">from</span><span class="p">)</span><span class="o">.</span><span class="nf">and_then</span><span class="p">(</span><span class="err">|</span><span class="n">f</span><span class="err">|</span><span class="n">zip</span><span class="err">::</span><span class="n">ZipArchive</span><span class="err">::</span><span class="nf">new</span><span class="p">(</span><span class="n">f</span><span class="p">)</span><span class="err">.</span><span class="nf">map_err</span><span class="p">(</span><span class="err">|</span><span class="n">e</span><span class="err">|</span><span class="n">e</span><span class="err">.</span><span class="nf">into</span><span class="p">()))));</span>
+<span class="w">        </span><span class="err">thread_local!(static</span><span class="w"> </span><span class="n">CONTENTS</span><span class="p">:</span><span class="w"> </span><span class="n">RefCell</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">RefCell</span><span class="o">::</span><span class="nf">new</span><span class="p">(</span><span class="n">String</span><span class="err">::</span><span class="nf">new</span><span class="p">()));</span>
+<span class="w">        </span><span class="err">CONTENTS.with(|contents|</span><span class="w"> </span><span class="err">{</span>
+<span class="w">            </span><span class="err">let</span><span class="w"> </span><span class="err">name</span><span class="w"> </span><span class="err">=</span><span class="w"> </span><span class="err">ZIP_ARCHIVE.with(|zip_archive|</span><span class="w"> </span><span class="err">{</span>
+<span class="w">                </span><span class="err">Ok(match</span><span class="w"> </span><span class="err">&amp;mut</span><span class="w"> </span><span class="err">*zip_archive.borrow_mut()</span><span class="w"> </span><span class="err">{</span>
+<span class="w">                    </span><span class="err">&amp;mut</span><span class="w"> </span><span class="err">Ok(ref</span><span class="w"> </span><span class="err">mut</span><span class="w"> </span><span class="err">zip_archive)</span><span class="w"> </span><span class="err">=&gt;</span><span class="w"> </span><span class="err">{</span>
+<span class="w">                        </span><span class="err">let</span><span class="w"> </span><span class="err">mut</span><span class="w"> </span><span class="err">f</span><span class="w"> </span><span class="err">=</span><span class="w"> </span><span class="err">zip_archive.by_index(i)?</span><span class="p">;</span>
+<span class="w">                        </span><span class="err">let</span><span class="w"> </span><span class="err">name_string</span><span class="w"> </span><span class="err">=</span><span class="w"> </span><span class="n">std</span><span class="p">:</span><span class="o">:</span><span class="n">path</span><span class="o">::</span><span class="n">Path</span><span class="o">::</span><span class="nf">new</span><span class="p">(</span><span class="n">f</span><span class="err">.</span><span class="nf">name</span><span class="p">())</span>
+<span class="w">                            </span><span class="o">.</span><span class="nf">file_stem</span><span class="p">()</span>
+<span class="w">                            </span><span class="o">.</span><span class="nf">unwrap</span><span class="p">()</span>
+<span class="w">                            </span><span class="o">.</span><span class="nf">to_str</span><span class="p">()</span>
+<span class="w">                            </span><span class="o">.</span><span class="nf">unwrap</span><span class="p">()</span>
+<span class="w">                            </span><span class="o">.</span><span class="nf">to_owned</span><span class="p">();</span>
+<span class="w">                        </span><span class="err">debug!(&quot;Processing</span><span class="w"> </span><span class="err">{</span><span class="p">}</span><span class="o">...</span><span class="s2">&quot;, name_string);</span>
+<span class="s2">                        contents.borrow_mut().clear();</span>
+<span class="s2">                        f.read_to_string(&amp;mut *contents.borrow_mut())?;</span>
+<span class="s2">                        name_string</span>
+<span class="s2">                    }</span>
+<span class="s2">                    &amp;mut Err(ref e) =&gt; return Err(format_err!(&quot;</span><span class="p">{</span><span class="err">:?</span><span class="p">}</span><span class="err">&quot;</span><span class="o">,</span><span class="w"> </span><span class="nt">e</span><span class="o">)),</span>
+<span class="w">                </span><span class="err">}</span><span class="o">)</span>
+<span class="w">            </span><span class="err">}</span><span class="o">)?;</span>
+<span class="w">            </span><span class="nt">Ok</span><span class="o">((</span>
+<span class="w">                </span><span class="nt">name</span><span class="o">,</span>
+<span class="w">                </span><span class="nt">phrases</span>
+<span class="w">                    </span><span class="p">.</span><span class="nc">iter</span><span class="o">()</span>
+<span class="w">                    </span><span class="p">.</span><span class="nc">filter_map</span><span class="o">(|</span><span class="nt">phrase</span><span class="o">|</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                        </span><span class="err">let</span><span class="w"> </span><span class="err">capture_names</span><span class="w"> </span><span class="err">=</span><span class="w"> </span><span class="err">phrase.capture_names()</span><span class="p">;</span>
+<span class="w">                        </span><span class="err">phrase.captures(&amp;*contents.borrow()).map(|captures|</span><span class="w"> </span><span class="err">{</span>
+<span class="w">                            </span><span class="err">capture_names</span>
+<span class="w">                                </span><span class="err">.filter_map(|name_opt|</span><span class="w"> </span><span class="err">{</span>
+<span class="w">                                    </span><span class="err">name_opt.and_then(|name|</span><span class="w"> </span><span class="err">{</span>
+<span class="w">                                        </span><span class="err">captures.name(name).map(|value|</span><span class="w"> </span><span class="err">{</span>
+<span class="w">                                            </span><span class="err">(name.to_owned(),</span><span class="w"> </span><span class="err">value.as_str().to_owned())</span>
+<span class="w">                                        </span><span class="p">}</span><span class="o">)</span>
+<span class="w">                                    </span><span class="err">}</span><span class="o">)</span>
+<span class="w">                                </span><span class="err">}</span><span class="o">)</span>
+<span class="w">                                </span><span class="p">.</span><span class="nc">collect</span><span class="o">::&lt;</span><span class="nt">Vec</span><span class="o">&lt;(</span><span class="nt">String</span><span class="o">,</span><span class="w"> </span><span class="nt">String</span><span class="o">)&gt;&gt;()</span>
+<span class="w">                        </span><span class="err">}</span><span class="o">)</span>
+<span class="w">                    </span><span class="err">}</span><span class="o">)</span>
+<span class="w">                    </span><span class="p">.</span><span class="nc">flat_map</span><span class="o">(|</span><span class="nt">x</span><span class="o">|</span><span class="w"> </span><span class="nt">x</span><span class="o">)</span>
+<span class="w">                    </span><span class="p">.</span><span class="nc">collect</span><span class="o">::&lt;</span><span class="nt">Vec</span><span class="o">&lt;(</span><span class="nt">String</span><span class="o">,</span><span class="w"> </span><span class="nt">String</span><span class="o">)&gt;&gt;(),</span>
+<span class="w">            </span><span class="o">))</span>
+<span class="w">        </span><span class="err">}</span><span class="o">)</span>
+<span class="w">    </span><span class="err">}</span><span class="o">)</span>
+<span class="w">    </span><span class="p">.</span><span class="nc">filter_map</span><span class="o">(|</span><span class="nt">e</span><span class="o">|</span><span class="w"> </span><span class="nt">match</span><span class="w"> </span><span class="nt">e</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="err">Ok((_,</span><span class="w"> </span><span class="err">ref</span><span class="w"> </span><span class="err">data))</span><span class="w"> </span><span class="err">if</span><span class="w"> </span><span class="err">data.is_empty()</span><span class="w"> </span><span class="err">=&gt;</span><span class="w"> </span><span class="err">None,</span>
+<span class="w">        </span><span class="err">Ok((name,</span><span class="w"> </span><span class="err">data))</span><span class="w"> </span><span class="err">=&gt;</span><span class="w"> </span><span class="err">Some(Ok((name,</span><span class="w"> </span><span class="err">data))),</span>
+<span class="w">        </span><span class="err">Err(e)</span><span class="w"> </span><span class="err">=&gt;</span><span class="w"> </span><span class="err">Some(Err(e)),</span>
+<span class="w">    </span><span class="p">}</span><span class="o">)</span>
+<span class="w">    </span><span class="p">.</span><span class="nc">collect</span><span class="o">::&lt;</span><span class="nt">Result</span><span class="o">&lt;</span><span class="nt">HashMap</span><span class="o">&lt;</span><span class="nt">String</span><span class="o">,</span><span class="w"> </span><span class="nt">Vec</span><span class="o">&lt;(</span><span class="nt">String</span><span class="o">,</span><span class="w"> </span><span class="nt">String</span><span class="o">)&gt;&gt;&gt;&gt;()?;</span>
+</code></pre></div>
+
+<h2 id="crossbeam">crossbeam</h2>
+<div class="highlight"><pre><span></span><code><span class="n">use</span><span class="w"> </span><span class="n">crossbeam</span><span class="p">::</span><span class="n">thread_local</span><span class="p">;</span>
+
+<span class="o">//</span><span class="w"> </span><span class="n">Define</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">thread</span><span class="o">-</span><span class="n">local</span><span class="w"> </span><span class="n">variable</span><span class="o">.</span>
+<span class="n">thread_local</span><span class="o">!</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="n">MY_VARIABLE</span><span class="p">:</span><span class="w"> </span><span class="n">u32</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">42</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">fn</span><span class="w"> </span><span class="n">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="o">//</span><span class="w"> </span><span class="n">Access</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">thread</span><span class="o">-</span><span class="n">local</span><span class="w"> </span><span class="n">variable</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="n">multiple</span><span class="w"> </span><span class="n">threads</span><span class="o">.</span>
+<span class="w">    </span><span class="n">crossbeam</span><span class="p">::</span><span class="n">scope</span><span class="p">(</span><span class="o">|</span><span class="n">scope</span><span class="o">|</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">scope</span><span class="o">.</span><span class="n">spawn</span><span class="p">(</span><span class="o">|</span><span class="n">_</span><span class="o">|</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="o">//</span><span class="w"> </span><span class="n">Get</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">thread</span><span class="o">-</span><span class="n">local</span><span class="w"> </span><span class="n">variable</span><span class="o">.</span>
+<span class="w">            </span><span class="n">println</span><span class="o">!</span><span class="p">(</span><span class="s2">&quot;Thread 1: {}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">MY_VARIABLE</span><span class="o">.</span><span class="n">with</span><span class="p">(</span><span class="o">|&amp;</span><span class="n">v</span><span class="o">|</span><span class="w"> </span><span class="n">v</span><span class="p">));</span>
+
+<span class="w">            </span><span class="o">//</span><span class="w"> </span><span class="n">Set</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">new</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">thread</span><span class="o">-</span><span class="n">local</span><span class="w"> </span><span class="n">variable</span><span class="o">.</span>
+<span class="w">            </span><span class="n">MY_VARIABLE</span><span class="o">.</span><span class="n">with</span><span class="p">(</span><span class="o">|</span><span class="n">v</span><span class="o">|</span><span class="w"> </span><span class="o">*</span><span class="n">v</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">100</span><span class="p">);</span>
+<span class="w">        </span><span class="p">});</span>
+
+<span class="w">        </span><span class="n">scope</span><span class="o">.</span><span class="n">spawn</span><span class="p">(</span><span class="o">|</span><span class="n">_</span><span class="o">|</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="o">//</span><span class="w"> </span><span class="n">Get</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">thread</span><span class="o">-</span><span class="n">local</span><span class="w"> </span><span class="n">variable</span><span class="o">.</span>
+<span class="w">            </span><span class="n">println</span><span class="o">!</span><span class="p">(</span><span class="s2">&quot;Thread 2: {}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">MY_VARIABLE</span><span class="o">.</span><span class="n">with</span><span class="p">(</span><span class="o">|&amp;</span><span class="n">v</span><span class="o">|</span><span class="w"> </span><span class="n">v</span><span class="p">));</span>
+
+<span class="w">            </span><span class="o">//</span><span class="w"> </span><span class="n">Set</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">new</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">thread</span><span class="o">-</span><span class="n">local</span><span class="w"> </span><span class="n">variable</span><span class="o">.</span>
+<span class="w">            </span><span class="n">MY_VARIABLE</span><span class="o">.</span><span class="n">with</span><span class="p">(</span><span class="o">|</span><span class="n">v</span><span class="o">|</span><span class="w"> </span><span class="o">*</span><span class="n">v</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">200</span><span class="p">);</span>
+<span class="w">        </span><span class="p">});</span>
+<span class="w">    </span><span class="p">})</span>
+<span class="w">    </span><span class="o">.</span><span class="n">unwrap</span><span class="p">();</span>
+
+<span class="w">    </span><span class="o">//</span><span class="w"> </span><span class="n">Get</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">thread</span><span class="o">-</span><span class="n">local</span><span class="w"> </span><span class="n">variable</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">main</span><span class="w"> </span><span class="n">thread</span><span class="o">.</span>
+<span class="w">    </span><span class="n">println</span><span class="o">!</span><span class="p">(</span><span class="s2">&quot;Main thread: {}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">MY_VARIABLE</span><span class="o">.</span><span class="n">with</span><span class="p">(</span><span class="o">|&amp;</span><span class="n">v</span><span class="o">|</span><span class="w"> </span><span class="n">v</span><span class="p">));</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<p><a href="https://internals.rust-lang.org/t/thread-lifetime-for-tls/13550/">Thread lifetime for TLS</a></p>
+<h2 id="references">References</h2>
+<ul>
+<li>
+<p><a href="https://github.com/rayon-rs/rayon/issues/493">Example for thread-local variables</a></p>
+</li>
+<li>
+<p><a href="https://github.com/rayon-rs/rayon/issues/941">Stack-based thread-local storage</a></p>
+</li>
+<li>
+<p><a href="https://github.com/crossbeam-rs/crossbeam/issues/285">Strange memory leak (probably) when using rayon::ThreadPool</a></p>
+</li>
+<li>
+<p><a href="https://www.reddit.com/r/rust/comments/7kk49h/best_practices_for_using_combinators/">Best practices for using combinators?</a></p>
+</li>
+<li>
+<p><a href="https://users.rust-lang.org/t/per-thread-storage-patterns-custom-reductions/76441">Per-thread storage patterns &amp; custom reductions</a></p>
+</li>
+<li>
+<p><a href="https://github.com/rayon-rs/rayon/issues/720">Feature request: easy thread-local resources</a></p>
+</li>
+</ul></div>
+    <footer>
+<p class="meta">
+  <span class="byline author vcard">
+    Posted by <span class="fn">Benjamin Du</span>
+  </span>
+<time datetime="2023-07-05T09:24:27-07:00" pubdate>Jul 05, 2023</time>  <span class="categories">
+    <a class="category" href="https://misc.legendu.net/tag/computer-science.html">Computer Science</a>
+    <a class="category" href="https://misc.legendu.net/tag/programming.html">programming</a>
+    <a class="category" href="https://misc.legendu.net/tag/rust.html">Rust</a>
+    <a class="category" href="https://misc.legendu.net/tag/thread.html">thread</a>
+    <a class="category" href="https://misc.legendu.net/tag/thread-local.html">thread-local</a>
+    <a class="category" href="https://misc.legendu.net/tag/tls.html">TLS</a>
+    <a class="category" href="https://misc.legendu.net/tag/storage.html">storage</a>
+    <a class="category" href="https://misc.legendu.net/tag/multi-thread.html">multi-thread</a>
+    <a class="category" href="https://misc.legendu.net/tag/concurrency.html">concurrency</a>
+  </span>
+</p>    </footer>
+  </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div>
+  </section>
+</div>
+<aside class="sidebar">
+  <section>
+    <h1>Recent Posts</h1>
+    <ul id="recent_posts">
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/tips-on-health/">Tips on Health</a>
+      </li>
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/tips-on-child-education/">Tips on Child Education</a>
+      </li>
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/tips-on-fd/">Tips on fd</a>
+      </li>
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/the-fzf-command-is-a-great-alternative-to-find/">The fzf Command Is a Great Alternative to find</a>
+      </li>
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/ruff-is-an-extremely-fast-python-linter-written-in-rust/">Ruff Is An Extremely Fast Python Linter Written in Rust</a>
+      </li>
+    </ul>
+  </section>
+  <section>
+    <h1>Categories</h1>
+    <ul id="recent_posts">
+        <li><a href="https://misc.legendu.net/category/ai.html">AI</a></li>
+        <li><a href="https://misc.legendu.net/category/career.html">Career</a></li>
+        <li><a href="https://misc.legendu.net/category/cloud.html">Cloud</a></li>
+        <li><a href="https://misc.legendu.net/category/computer-science.html">Computer Science</a></li>
+        <li><a href="https://misc.legendu.net/category/fiannce.html">Fiannce</a></li>
+        <li><a href="https://misc.legendu.net/category/finance.html">Finance</a></li>
+        <li><a href="https://misc.legendu.net/category/fun-problems.html">Fun Problems</a></li>
+        <li><a href="https://misc.legendu.net/category/hardware.html">Hardware</a></li>
+        <li><a href="https://misc.legendu.net/category/health.html">Health</a></li>
+        <li><a href="https://misc.legendu.net/category/house.html">House</a></li>
+        <li><a href="https://misc.legendu.net/category/internet.html">Internet</a></li>
+        <li><a href="https://misc.legendu.net/category/investment.html">Investment</a></li>
+        <li><a href="https://misc.legendu.net/category/life.html">life</a></li>
+        <li><a href="https://misc.legendu.net/category/linux.html">Linux</a></li>
+        <li><a href="https://misc.legendu.net/category/os.html">OS</a></li>
+        <li><a href="https://misc.legendu.net/category/people.html">People</a></li>
+        <li><a href="https://misc.legendu.net/category/philosophy.html">Philosophy</a></li>
+        <li><a href="https://misc.legendu.net/category/research.html">Research</a></li>
+        <li><a href="https://misc.legendu.net/category/shopping.html">Shopping</a></li>
+        <li><a href="https://misc.legendu.net/category/soft-skills.html">soft skills</a></li>
+        <li><a href="https://misc.legendu.net/category/software.html">Software</a></li>
+        <li><a href="https://misc.legendu.net/category/statistics.html">Statistics</a></li>
+        <li><a href="https://misc.legendu.net/category/tools.html">Tools</a></li>
+    </ul>
+  </section>
+ 
+
+  <section>
+  <h1>Tags</h1>
+  <ul class="tagcloud">
+  </ul>
+  </section>
+
+
+
+  <section>
+    <h1>GitHub Repos</h1>
+    <ul id="gh_repos">
+      <li class="loading">Status updating...</li>
+    </ul>
+      <a href="https://github.com/legendu-net">@legendu-net</a> on GitHub
+    <script type="text/javascript">
+      $.domReady(function(){
+          if (!window.jXHR){
+              var jxhr = document.createElement('script');
+              jxhr.type = 'text/javascript';
+              jxhr.src = 'https://misc.legendu.net/theme/js/jXHR.js';
+              var s = document.getElementsByTagName('script')[0];
+              s.parentNode.insertBefore(jxhr, s);
+          }
+
+          github.showRepos({
+              user: 'legendu-net',
+              count: 5,
+              skip_forks: true,
+              target: '#gh_repos'
+          });
+      });
+    </script>
+    <script src="https://misc.legendu.net/theme/js/github.js" type="text/javascript"> </script>
+  </section>
+
+    <section>
+        <h1>Social</h2>
+        <ul>
+            <li><a href="https://www.linkedin.com/in/ben-chuanlong-du-1239b221/" target="_blank">LinkedIn</a></li>
+            <li><a href="https://hub.docker.com/u/dclong" target="_blank">Docker Hub</a></li>
+            <li><a href="https://stackoverflow.com/users/7808204/benjamin-du?tab=profile" target="_blank">Stack Overflow</a></li>
+            <li><a href="https://twitter.com/longendu" target="_blank">Twitter</a></li>
+        <!--
+            <li><a href="https://misc.legendu.net/" type="application/rss+xml" rel="alternate">RSS</a></li>
+            -->
+        </ul>
+    </section>
+</aside>    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Ben Chuanlong Du -
+  <span class="credit">Powered by <a href="http://getpelican.com">Pelican</a></span>
+</p></footer>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-3STS9BVPF6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-3STS9BVPF6');
+</script>
+	<script type="text/javascript">
+	  var disqus_shortname = 'dclong';
+          var disqus_identifier = '/blog/thread-local-storage-for-rayon/';
+          var disqus_url = 'https://misc.legendu.net/blog/thread-local-storage-for-rayon/';
+          var disqus_title = 'Thread-Local Storage for Rayon';
+	  (function() {
+	    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	    dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+	    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	   })();
+	</script>
+</body>
+</html>

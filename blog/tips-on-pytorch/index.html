@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Tips on PyTorch</title>
+  <meta name="author" content="Ben Chuanlong Du">
+
+  <link href="https://misc.legendu.net/atom.xml" type="application/atom+xml" rel="alternate"
+        title="Ben Chuanlong Du's Blog Atom Feed" />
+
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link href="https://misc.legendu.net/favicon.png" rel="icon">
+  <link href="https://misc.legendu.net/theme/css/main_2.css" media="screen, projection"
+        rel="stylesheet" type="text/css">
+  <script src="https://misc.legendu.net/theme/js/modernizr-2.0.js"></script>
+  <script src="https://misc.legendu.net/theme/js/ender.js"></script>
+  <script src="https://misc.legendu.net/theme/js/octopress.js" type="text/javascript"></script>
+
+  <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <script data-ad-client="ca-pub-3836424032203369" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+</head>
+
+<body>
+  <header role="banner"><hgroup>
+  <h1><a href="https://misc.legendu.net/">Ben Chuanlong Du's Blog</a></h1>
+    <h2>It is never too late to learn.</h2>
+</hgroup></header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="https://misc.legendu.net/atom.xml" rel="subscribe-rss">RSS</a></li>
+</ul>
+
+<form name="search" action="https://www.bing.com/search" method="get" onSubmit="return build_query()">
+  <fieldset role="search">
+      <!--
+    <input type="hidden" name="q" value="site:https://misc.legendu.net" />
+        -->
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+
+<script type = "text/javascript">
+    function build_query() {
+        var query = document.forms["search"]["q"].value;
+        var prefix = "site:https://misc.legendu.net "
+        if (!query.startsWith(prefix)) {
+            query = prefix + query;
+            document.forms["search"]["q"].value = query;
+        }
+        return true;
+    }
+</script>
+
+<ul class="main-navigation">
+    <li><a href="https://www.legendu.net">Home</a></li>
+    <li><a href="https://misc.legendu.net">Blog</a></li>
+    <li><a href="https://misc.legendu.net/archives.html">Archives</a></li>
+    <li><a href="https://misc.legendu.net/categories.html">Categories</a></li>
+    <li><a href="https://misc.legendu.net/tags.html">Tags</a></li>
+    <li><a href="https://www.legendu.net/pages/about">About</a></li>
+</ul></nav>
+  <div id="main">
+    <div id="content">
+<div>
+  <article class="hentry" role="article">
+<header>
+      <h1 class="entry-title">Tips on PyTorch</h1>
+      <p class="meta"><time datetime="2020-01-18T00:39:50-08:00" pubdate>Jan 18, 2020</time></p>
+</header>
+
+  <div class="entry-content"><p><strong>Things on this page are fragmentary and immature notes/thoughts of the author. Please read with your own judgement!</strong></p>
+<h2 id="docker-images-for-pytorch">Docker Images for PyTorch</h2>
+<ul>
+<li><a href="https://hub.docker.com/r/pytorch/pytorch">pytorch/pytorch:latest</a> (official PyTorch image) </li>
+<li><a href="https://hub.docker.com/repository/docker/dclong/jupyterhub-pytorch">dclong/jupyterhub-pytorch</a></li>
+</ul>
+<h2 id="pytorch-tutorials">PyTorch Tutorials</h2>
+<p><a href="https://pytorch.org/tutorials/index.html">WELCOME TO PYTORCH TUTORIALS</a></p>
+<p>https://pytorch.org/tutorials/beginner/pytorch_with_examples.html</p>
+<h2 id="initialize-weights-and-biases">Initialize Weights and Biases</h2>
+<p>In general,
+you do not have to initialize weights manually in PyTorch
+as PyTorch automatically set weights and bias for layers following good practices.
+If you do want to initialize weights by yourself, 
+please refer to 
+<a href="https://www.legendu.net/misc/blog/training-deep-neural-networks/#initialize-weights">Initialize Weights</a>
+for some good practices. 
+And below are some example PyTorch code snippets for initalizing weights.</p>
+<p>torch.nn.init.xavier_uniform(conv1.weight)
+conv1.weight.data.fill_(0.01)
+conv1.bias.data.fill_(0.01)
+torch.nn.init.normal_(self.fc1.weight, mean=0.0, std=0.01)
+torch.nn.init.zeros_(self.fc1.bias)
+torch.nn.init.normal_(self.fc2.weight, mean=0.0, std=0.01)
+torch.nn.init.zeros_(self.fc2.bias)
+torch.nn.init.normal_(self.fc3.weight, mean=0.0, std=0.01)
+torch.nn.init.zeros_(self.fc3.bias)</p>
+<h2 id="train-and-evaluate-models-in-pytorch">Train and Evaluate Models in PyTorch</h2>
+<p>model.train() tells your model that you are training the model. 
+So effectively layers like dropout, batchnorm etc. 
+which behave different on the train and test procedures know what is going on and hence can behave accordingly.</p>
+<p>More details: It sets the mode to train (see source code). 
+You can call either model.eval() or model.train(mode=False) to tell that you are testing. 
+It is somewhat intuitive to expect train function to train model but it does not do that. It just sets the mode.</p>
+<p>The bottom line is that 
+if you use dropout or batch normalization in PyTorch, 
+then you must explicitly set your model into evaluation mode 
+by calling the eval() function mode when computing model output values.</p>
+<p>It is suggested that you always call the method <code>.train()</code> explicitly 
+to turn on training mode before you train your model
+and call the method <code>.eval()</code> explicitly 
+to turn on evaluation mode before you run your model for outputs.</p>
+<p>https://jamesmccaffrey.wordpress.com/2019/01/23/pytorch-train-vs-eval-mode/</p>
+<p>https://stackoverflow.com/questions/51433378/what-does-model-train-do-in-pytorch</p>
+<p>https://discuss.pytorch.org/t/trying-to-understand-the-meaning-of-model-train-and-model-eval/20158/2</p>
+<h2 id="use-pytorch-models-in-production">Use PyTorch Models in Production</h2>
+<ol>
+<li>save model<ul>
+<li>Python pickle </li>
+<li>ONNX</li>
+<li>TorchScript</li>
+</ul>
+</li>
+<li>save models parameters</li>
+</ol>
+<p>https://medium.com/datadriveninvestor/deploy-your-pytorch-model-to-production-f69460192217</p>
+<p><a href="https://pytorch.org/tutorials/advanced/super_resolution_with_caffe2.html">TRANSFERING A MODEL FROM PYTORCH TO CAFFE2 AND MOBILE USING ONNX</a></p>
+<p><a href="https://pytorch.org/docs/master/onnx.html">TORCH.ONNX</a></p>
+<p><a href="https://github.com/microsoft/onnxruntime">onnxruntime</a></p>
+<p><a href="https://pytorch.org/tutorials/beginner/Intro_to_TorchScript_tutorial.html">INTRODUCTION TO TORCHSCRIPT</a></p>
+<h2 id="questions">Questions</h2>
+<blockquote>
+<p>There are significant caveats to using CUDA models with multiprocessing; 
+unless care is taken to meet the data handling requirements exactly, 
+it is likely that your program will have incorrect or undefined behavior.</p>
+</blockquote>
+<p>Apache Ray is essentially multiprocessing, right? 
+How does Apache Ray work with PyTorch?</p>
+<ol>
+<li>shall we every use <code>inplace=True</code> when manipulating Layers in PyTorch?</li>
+</ol>
+<h2 id="pytorch-ecosystem">PyTorch Ecosystem</h2>
+<p>torchvision: Popular deep learning models for computer vision.</p>
+<p>torchtext: Data loaders and abstractions for text and NLP.</p>
+<p>torchaudio: Data manipulation and transformation for audio signal processing, powered by PyTorch.</p>
+<p><a href="https://github.com/rusty1s/pytorch_geometric">pytorch_geometric</a>
+is a geometric deep learning extension library for PyTorch.</p>
+<p><a href="https://pytorch.org/hub/">PyTorch Hub</a> has pretrained deep learning models 
+that anyone can download.</p>
+<p><a href="https://github.com/PyTorchLightning/pytorch-lightning">PyTorch Lightning</a>
+The lightweight PyTorch wrapper for ML researchers. 
+Scale your models. 
+Write less boilerplate </p>
+<p>Note: PyTorch Lightning is very close to what I've done ...</p>
+<h2 id="configuration">Configuration</h2>
+<p>cudnn.benchmark = true -- uses the inbuilt cudnn auto-tuner to find the fastest convolution algorithms.
+                       -- If this is set to false, uses some in-built heuristics that might not always be fastest.</p>
+<p>Regarding cudnn.fastest, 
+I think it’s because by default it also tries not to use very much memory, 
+but when you enable fastest, 
+it doesn’t care.</p>
+<p>See https://github.com/soumith/cudnn.torch/blob/master/SpatialConvolution.lua#L167-L174</p>
+<p>regarding cudnn.benchmark, 
+if you have variable length sequences given as inputs, 
+benchmark will try to auto-tune for every new input shape, 
+and that will result in a huge slowdown.</p>
+<p>https://pytorch.org/docs/master/notes/cuda.html#device-agnostic-code
+This is the suggested way to control tensors on CPU/GPU. </p>
+<h2 id="references">References</h2>
+<p>https://stackoverflow.com/questions/48152674/how-to-check-if-pytorch-is-using-the-gpu</p>
+<p>https://medium.com/ai%C2%B3-theory-practice-business/use-gpu-in-your-pytorch-code-676a67faed09</p>
+<p>https://groups.google.com/forum/#!topic/torch7/CkB57025yRY</p>
+<p><a href="https://download.pytorch.org/whl/torch_stable.html">PyTorch Stable Downloads</a></p></div>
+    <footer>
+<p class="meta">
+  <span class="byline author vcard">
+    Posted by <span class="fn">Benjamin Du</span>
+  </span>
+<time datetime="2020-01-18T00:39:50-08:00" pubdate>Jan 18, 2020</time>  <span class="categories">
+    <a class="category" href="https://misc.legendu.net/tag/programming.html">programming</a>
+    <a class="category" href="https://misc.legendu.net/tag/python.html">Python</a>
+    <a class="category" href="https://misc.legendu.net/tag/pytorch.html">PyTorch</a>
+    <a class="category" href="https://misc.legendu.net/tag/gpu.html">GPU</a>
+    <a class="category" href="https://misc.legendu.net/tag/tips.html">tips</a>
+  </span>
+</p>    </footer>
+  </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div>
+  </section>
+</div>
+<aside class="sidebar">
+  <section>
+    <h1>Recent Posts</h1>
+    <ul id="recent_posts">
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/tips-on-health/">Tips on Health</a>
+      </li>
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/tips-on-child-education/">Tips on Child Education</a>
+      </li>
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/tips-on-fd/">Tips on fd</a>
+      </li>
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/the-fzf-command-is-a-great-alternative-to-find/">The fzf Command Is a Great Alternative to find</a>
+      </li>
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/ruff-is-an-extremely-fast-python-linter-written-in-rust/">Ruff Is An Extremely Fast Python Linter Written in Rust</a>
+      </li>
+    </ul>
+  </section>
+  <section>
+    <h1>Categories</h1>
+    <ul id="recent_posts">
+        <li><a href="https://misc.legendu.net/category/ai.html">AI</a></li>
+        <li><a href="https://misc.legendu.net/category/career.html">Career</a></li>
+        <li><a href="https://misc.legendu.net/category/cloud.html">Cloud</a></li>
+        <li><a href="https://misc.legendu.net/category/computer-science.html">Computer Science</a></li>
+        <li><a href="https://misc.legendu.net/category/fiannce.html">Fiannce</a></li>
+        <li><a href="https://misc.legendu.net/category/finance.html">Finance</a></li>
+        <li><a href="https://misc.legendu.net/category/fun-problems.html">Fun Problems</a></li>
+        <li><a href="https://misc.legendu.net/category/hardware.html">Hardware</a></li>
+        <li><a href="https://misc.legendu.net/category/health.html">Health</a></li>
+        <li><a href="https://misc.legendu.net/category/house.html">House</a></li>
+        <li><a href="https://misc.legendu.net/category/internet.html">Internet</a></li>
+        <li><a href="https://misc.legendu.net/category/investment.html">Investment</a></li>
+        <li><a href="https://misc.legendu.net/category/life.html">life</a></li>
+        <li><a href="https://misc.legendu.net/category/linux.html">Linux</a></li>
+        <li><a href="https://misc.legendu.net/category/os.html">OS</a></li>
+        <li><a href="https://misc.legendu.net/category/people.html">People</a></li>
+        <li><a href="https://misc.legendu.net/category/philosophy.html">Philosophy</a></li>
+        <li><a href="https://misc.legendu.net/category/research.html">Research</a></li>
+        <li><a href="https://misc.legendu.net/category/shopping.html">Shopping</a></li>
+        <li><a href="https://misc.legendu.net/category/soft-skills.html">soft skills</a></li>
+        <li><a href="https://misc.legendu.net/category/software.html">Software</a></li>
+        <li><a href="https://misc.legendu.net/category/statistics.html">Statistics</a></li>
+        <li><a href="https://misc.legendu.net/category/tools.html">Tools</a></li>
+    </ul>
+  </section>
+ 
+
+  <section>
+  <h1>Tags</h1>
+  <ul class="tagcloud">
+  </ul>
+  </section>
+
+
+
+  <section>
+    <h1>GitHub Repos</h1>
+    <ul id="gh_repos">
+      <li class="loading">Status updating...</li>
+    </ul>
+      <a href="https://github.com/legendu-net">@legendu-net</a> on GitHub
+    <script type="text/javascript">
+      $.domReady(function(){
+          if (!window.jXHR){
+              var jxhr = document.createElement('script');
+              jxhr.type = 'text/javascript';
+              jxhr.src = 'https://misc.legendu.net/theme/js/jXHR.js';
+              var s = document.getElementsByTagName('script')[0];
+              s.parentNode.insertBefore(jxhr, s);
+          }
+
+          github.showRepos({
+              user: 'legendu-net',
+              count: 5,
+              skip_forks: true,
+              target: '#gh_repos'
+          });
+      });
+    </script>
+    <script src="https://misc.legendu.net/theme/js/github.js" type="text/javascript"> </script>
+  </section>
+
+    <section>
+        <h1>Social</h2>
+        <ul>
+            <li><a href="https://www.linkedin.com/in/ben-chuanlong-du-1239b221/" target="_blank">LinkedIn</a></li>
+            <li><a href="https://hub.docker.com/u/dclong" target="_blank">Docker Hub</a></li>
+            <li><a href="https://stackoverflow.com/users/7808204/benjamin-du?tab=profile" target="_blank">Stack Overflow</a></li>
+            <li><a href="https://twitter.com/longendu" target="_blank">Twitter</a></li>
+        <!--
+            <li><a href="https://misc.legendu.net/" type="application/rss+xml" rel="alternate">RSS</a></li>
+            -->
+        </ul>
+    </section>
+</aside>    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Ben Chuanlong Du -
+  <span class="credit">Powered by <a href="http://getpelican.com">Pelican</a></span>
+</p></footer>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-3STS9BVPF6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-3STS9BVPF6');
+</script>
+	<script type="text/javascript">
+	  var disqus_shortname = 'dclong';
+          var disqus_identifier = '/blog/tips-on-pytorch/';
+          var disqus_url = 'https://misc.legendu.net/blog/tips-on-pytorch/';
+          var disqus_title = 'Tips on PyTorch';
+	  (function() {
+	    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	    dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+	    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	   })();
+	</script>
+</body>
+</html>

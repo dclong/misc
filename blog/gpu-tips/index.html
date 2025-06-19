@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Tips on GPU Computing</title>
+  <meta name="author" content="Ben Chuanlong Du">
+
+  <link href="https://misc.legendu.net/atom.xml" type="application/atom+xml" rel="alternate"
+        title="Ben Chuanlong Du's Blog Atom Feed" />
+
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link href="https://misc.legendu.net/favicon.png" rel="icon">
+  <link href="https://misc.legendu.net/theme/css/main_2.css" media="screen, projection"
+        rel="stylesheet" type="text/css">
+  <script src="https://misc.legendu.net/theme/js/modernizr-2.0.js"></script>
+  <script src="https://misc.legendu.net/theme/js/ender.js"></script>
+  <script src="https://misc.legendu.net/theme/js/octopress.js" type="text/javascript"></script>
+
+  <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <script data-ad-client="ca-pub-3836424032203369" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+</head>
+
+<body>
+  <header role="banner"><hgroup>
+  <h1><a href="https://misc.legendu.net/">Ben Chuanlong Du's Blog</a></h1>
+    <h2>It is never too late to learn.</h2>
+</hgroup></header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="https://misc.legendu.net/atom.xml" rel="subscribe-rss">RSS</a></li>
+</ul>
+
+<form name="search" action="https://www.bing.com/search" method="get" onSubmit="return build_query()">
+  <fieldset role="search">
+      <!--
+    <input type="hidden" name="q" value="site:https://misc.legendu.net" />
+        -->
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+
+<script type = "text/javascript">
+    function build_query() {
+        var query = document.forms["search"]["q"].value;
+        var prefix = "site:https://misc.legendu.net "
+        if (!query.startsWith(prefix)) {
+            query = prefix + query;
+            document.forms["search"]["q"].value = query;
+        }
+        return true;
+    }
+</script>
+
+<ul class="main-navigation">
+    <li><a href="https://www.legendu.net">Home</a></li>
+    <li><a href="https://misc.legendu.net">Blog</a></li>
+    <li><a href="https://misc.legendu.net/archives.html">Archives</a></li>
+    <li><a href="https://misc.legendu.net/categories.html">Categories</a></li>
+    <li><a href="https://misc.legendu.net/tags.html">Tags</a></li>
+    <li><a href="https://www.legendu.net/pages/about">About</a></li>
+</ul></nav>
+  <div id="main">
+    <div id="content">
+<div>
+  <article class="hentry" role="article">
+<header>
+      <h1 class="entry-title">Tips on GPU Computing</h1>
+      <p class="meta"><time datetime="2013-10-12T11:19:32-07:00" pubdate>Oct 12, 2013</time></p>
+</header>
+
+  <div class="entry-content"><p><strong>Things on this page are fragmentary and immature notes/thoughts of the author. Please read with your own judgement!</strong></p>
+<h2 id="list-gpu-devices-on-linux">List GPU Devices on Linux</h2>
+<p>You can list GPU devices using the following command on linux.</p>
+<div class="highlight"><pre><span></span><code>lspci<span class="w"> </span>-v<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>VGA
+</code></pre></div>
+
+<h2 id="machine-learning-frameworks-supporting-managing-gpu-resources">Machine Learning Frameworks Supporting Managing GPU Resources</h2>
+<ul>
+<li>
+<p><a href="https://github.com/horovod/horovod">Horovod</a></p>
+</li>
+<li>
+<p><a href="https://github.com/ray-project/ray">Apache Ray</a></p>
+</li>
+<li>
+<p><a href="https://github.com/microsoft/DeepSpeed">ZeRO + DeepSpeed</a>
+    is a deep learning optimization library 
+    that makes distributed training on GPU clusters easy, efficient, and effective.</p>
+</li>
+</ul>
+<h2 id="high-level-scientific-libraries-with-built-in-gpu-support">High-level Scientific Libraries with Built-in GPU Support</h2>
+<ul>
+<li>
+<p>TensorFlow</p>
+</li>
+<li>
+<p>PyTorch </p>
+</li>
+<li>
+<p>XGBoost</p>
+</li>
+<li>
+<p>LightGBM</p>
+</li>
+<li>
+<p><a href="https://github.com/lebedov/scikit-cuda">scikit-cuda</a></p>
+</li>
+<li>
+<p><a href="https://github.com/rapidsai/cudf">cudf</a></p>
+</li>
+<li>
+<p>Numba</p>
+</li>
+</ul>
+<h2 id="low-level-libraries-for-general-purpose-gpu-computing">Low-level Libraries for General Purpose GPU Computing</h2>
+<ol>
+<li>CUDA and Vulkan (successor to OpenCL) are the 2 most popular frameworks for GPU computing.
+    CUDA is commerical and for Nvidia GPUs only 
+    while Vulkan is opensource and support more brand of GPUs.
+    Generally speaking, 
+    CUDA has slight better performance than Vulkan on Nvidia GPUs.
+    It is suggested that you go with CUDA if you want to squeeze the most out of performance.</li>
+</ol>
+<h3 id="rust">Rust</h3>
+<ul>
+<li>
+<p><a href="https://github.com/gfx-rs/wgpu">wgpu</a>
+<a href="https://github.com/gfx-rs/wgpu">wgpu</a>
+is a cross-platform, safe, pure-rust graphics api. 
+It runs natively on Vulkan, Metal, D3D12, D3D11, and OpenGLES; 
+and on top of WebGPU on wasm.</p>
+</li>
+<li>
+<p><a href="https://github.com/MaikKlein/ash/">ash</a>
+<a href="https://github.com/MaikKlein/ash/">ash</a>
+is a very lightweight wrapper around Vulkan.</p>
+</li>
+<li>
+<p><a href="https://github.com/EmbarkStudios/rust-gpu">rust-gpu</a>
+    <a href="https://github.com/EmbarkStudios/rust-gpu">rust-gpu</a>
+    aims at making Rust a first-class language and ecosystem for GPU shaders.</p>
+</li>
+<li>
+<p><a href="https://github.com/vulkano-rs/vulkano">vulkano</a>
+<a href="https://github.com/vulkano-rs/vulkano">Vulkano</a>
+is a Rust wrapper around the Vulkan graphics API. 
+It follows the Rust philosophy, 
+which is that as long as you don't use unsafe code you shouldn't be able to trigger any undefined behavior. 
+In the case of Vulkan, this means that non-unsafe code should always conform to valid API usage.
+<a href="https://github.com/vulkano-rs/vulkano">Vulkano</a>
+is not as mature as
+<a href="https://github.com/MaikKlein/ash/">ash</a>
+.</p>
+</li>
+</ul>
+<p>https://github.com/zakarumych/gpu-alloc</p>
+<p>https://github.com/zakarumych/gpu-descriptor
+Backend agnostic descriptor allocator for Vulkan-like APIs</p>
+<ul>
+<li><a href="https://github.com/arrayfire/arrayfire-rust">ArrayFire-rust</a></li>
+</ul>
+<h2 id="pathfinder"><a href="https://github.com/servo/pathfinder">pathfinder</a></h2>
+<p><a href="https://github.com/servo/pathfinder">pathfinder</a>
+is a fast, practical, GPU-based rasterizer for fonts and vector graphics 
+using OpenGL 3.0+, OpenGL ES 3.0+, WebGL 2, and Metal.</p>
+<h3 id="gpu-computing-in-python">GPU Computing in Python</h3>
+<p>Please refer to 
+<a href="http://www.legendu.net/misc/gpu-computing-in-python">GPU Computing in Python</a>
+for more details.</p>
+<p>https://weeraman.com/put-that-gpu-to-good-use-with-python-e5a437168c01</p>
+<p>https://docs.anaconda.com/anaconda/user-guide/tasks/gpu-packages/</p>
+<p>https://towardsdatascience.com/python-performance-and-gpus-1be860ffd58d</p>
+<p>https://developer.nvidia.com/how-to-cuda-python</p>
+<p>https://devblogs.nvidia.com/numba-python-cuda-acceleration/</p>
+<p>https://github.com/harrism/numba_examples/blob/master/mandelbrot_numba.ipynb</p>
+<ul>
+<li>
+<p><a href="https://github.com/pygfx/wgpu-py">wgpu-py</a>
+<a href="https://github.com/pygfx/wgpu-py">wgpu-py</a>
+is a next generation GPU API for Python.
+It is a Python lib wrapping wgpu-native and exposing it with a Pythonic API similar to the WebGPU spec.</p>
+</li>
+<li>
+<p><a href="https://github.com/EthicalML/vulkan-kompute">vulkan-kompute</a>
+General purpose GPU compute framework for cross vendor graphics cards 
+(AMD, Qualcomm, NVIDIA &amp; friends). 
+Blazing fast, mobile-enabled, asynchronous and optimized for advanced GPU data processing usecases.</p>
+</li>
+</ul>
+<p>https://gabdube.github.io/python/vulkan/2019/01/10/python-and-vulkan-01.html</p>
+<p><a href="https://towardsdatascience.com/beyond-cuda-gpu-accelerated-python-for-machine-learning-in-cross-vendor-graphics-cards-made-simple-6cc828a45cc3">Beyond CUDA: GPU Accelerated Python for Machine Learning on Cross-Vendor Graphics Cards Made Simple</a></p>
+<h3 id="c">C++</h3>
+<ul>
+<li>
+<p><a href="https://developer.nvidia.com/thrust">Thrust</a></p>
+<p>Thrust is a parallel algorithms library which resembles the C++ Standard Template Library (STL). 
+Thrust is high-level interface greatly enhances programmer productivity 
+while enabling performance portability between GPUs and multicore CPUs. 
+Interoperability with established technologies (such as CUDA, TBB, and OpenMP) facilitates integration with existing software. </p>
+</li>
+<li>
+<p><a href="https://github.com/arrayfire/arrayfire">ArrayFire</a></p>
+</li>
+</ul>
+<h3 id="java">Java</h3>
+<ul>
+<li>
+<p><a href="https://github.com/Syncleus/aparapi">aparapi</a></p>
+</li>
+<li>
+<p><a href="https://github.com/jcuda/jcuda">jcuda</a></p>
+<p>Java bindings for CUDA.</p>
+</li>
+</ul>
+<h2 id="graphics-rendering">Graphics Rendering</h2>
+<p>OpenGL
+https://github.com/mcfletch/pyopengl</p>
+<p>PyOpenGL</p>
+<p>GLFW
+https://github.com/glfw/glfw
+GLFW is an Open Source, multi-platform library for OpenGL, OpenGL ES and Vulkan application development. It provides a simple, platform-independent API for creating windows, contexts and surfaces, reading input, handling events, etc.</p>
+<p><a href="https://github.com/vulkano-rs/vulkano">vulkano</a></p>
+<h2 id="external-graphics-card">External Graphics Card</h2>
+<p>https://www.pcworld.com/article/2984716/how-to-transform-your-laptop-into-a-gaming-powerhouse-with-an-external-graphics-card.html</p>
+<p>https://www.laptopmag.com/articles/best-egpus</p>
+<h2 id="references">References</h2>
+<ul>
+<li>
+<p><a href="https://docs.nvidia.com/cuda/cuda-installation-guide-microsoft-windows/index.html">CUDA Installation Guide for Microsoft Windows</a></p>
+</li>
+<li>
+<p><a href="https://core.ac.uk/reader/323473500">Comparative performance analysis ofVulkan and CUDA programming modelimplementations for GPUs</a></p>
+</li>
+<li>
+<p><a href="https://developer.download.nvidia.com/compute/cuda/repos/">Nvidia CUDA Linux Repositories</a></p>
+</li>
+<li>
+<p><a href="https://alain.xyz/blog/comparison-of-modern-graphics-apis">A Comparison of Modern Graphics APIs</a> </p>
+</li>
+<li>
+<p>https://bheisler.github.io/post/state-of-gpgpu-in-rust/</p>
+</li>
+<li>
+<p>https://towardsdatascience.com/python-performance-and-gpus-1be860ffd58d</p>
+</li>
+<li>
+<p>https://towardsdatascience.com/speed-up-your-algorithms-part-1-pytorch-56d8a4ae7051</p>
+</li>
+<li>
+<p>https://towardsdatascience.com/speed-up-your-algorithms-part-2-numba-293e554c5cc1</p>
+</li>
+<li>
+<p>https://towardsdatascience.com/speed-up-your-algorithms-part-3-parallelization-4d95c0888748</p>
+</li>
+<li>
+<p>https://towardsdatascience.com/speeding-up-your-algorithms-part-4-dask-7c6ed79994ef</p>
+</li>
+<li>
+<p>https://github.com/PuneetGrov3r/MediumPosts/blob/master/SpeedUpYourAlgorithms/1)%20PyTorch.ipynb</p>
+</li>
+<li>
+<p>https://github.com/PuneetGrov3r/MediumPosts/blob/master/SpeedUpYourAlgorithms/2)%20Numba.ipynb</p>
+</li>
+<li>
+<p>https://github.com/PuneetGrov3r/MediumPosts/blob/master/SpeedUpYourAlgorithms/3)%20Prallelization.ipynb</p>
+</li>
+<li>
+<p>https://github.com/PuneetGrov3r/MediumPosts/blob/master/SpeedUpYourAlgorithms/4)%20Dask.ipynb</p>
+</li>
+<li>
+<p>https://github.com/harrism/numba_examples/blob/master/mandelbrot_numba.ipynb</p>
+</li>
+</ul></div>
+    <footer>
+<p class="meta">
+  <span class="byline author vcard">
+    Posted by <span class="fn">Ben Chuanlong Du</span>
+  </span>
+<time datetime="2013-10-12T11:19:32-07:00" pubdate>Oct 12, 2013</time>  <span class="categories">
+    <a class="category" href="https://misc.legendu.net/tag/tips.html">tips</a>
+    <a class="category" href="https://misc.legendu.net/tag/gpu.html">GPU</a>
+    <a class="category" href="https://misc.legendu.net/tag/programming.html">programming</a>
+    <a class="category" href="https://misc.legendu.net/tag/nvidia.html">Nvidia</a>
+  </span>
+</p>    </footer>
+  </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div>
+  </section>
+</div>
+<aside class="sidebar">
+  <section>
+    <h1>Recent Posts</h1>
+    <ul id="recent_posts">
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/tips-on-health/">Tips on Health</a>
+      </li>
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/tips-on-child-education/">Tips on Child Education</a>
+      </li>
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/tips-on-fd/">Tips on fd</a>
+      </li>
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/the-fzf-command-is-a-great-alternative-to-find/">The fzf Command Is a Great Alternative to find</a>
+      </li>
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/ruff-is-an-extremely-fast-python-linter-written-in-rust/">Ruff Is An Extremely Fast Python Linter Written in Rust</a>
+      </li>
+    </ul>
+  </section>
+  <section>
+    <h1>Categories</h1>
+    <ul id="recent_posts">
+        <li><a href="https://misc.legendu.net/category/ai.html">AI</a></li>
+        <li><a href="https://misc.legendu.net/category/career.html">Career</a></li>
+        <li><a href="https://misc.legendu.net/category/cloud.html">Cloud</a></li>
+        <li><a href="https://misc.legendu.net/category/computer-science.html">Computer Science</a></li>
+        <li><a href="https://misc.legendu.net/category/fiannce.html">Fiannce</a></li>
+        <li><a href="https://misc.legendu.net/category/finance.html">Finance</a></li>
+        <li><a href="https://misc.legendu.net/category/fun-problems.html">Fun Problems</a></li>
+        <li><a href="https://misc.legendu.net/category/hardware.html">Hardware</a></li>
+        <li><a href="https://misc.legendu.net/category/health.html">Health</a></li>
+        <li><a href="https://misc.legendu.net/category/house.html">House</a></li>
+        <li><a href="https://misc.legendu.net/category/internet.html">Internet</a></li>
+        <li><a href="https://misc.legendu.net/category/investment.html">Investment</a></li>
+        <li><a href="https://misc.legendu.net/category/life.html">life</a></li>
+        <li><a href="https://misc.legendu.net/category/linux.html">Linux</a></li>
+        <li><a href="https://misc.legendu.net/category/os.html">OS</a></li>
+        <li><a href="https://misc.legendu.net/category/people.html">People</a></li>
+        <li><a href="https://misc.legendu.net/category/philosophy.html">Philosophy</a></li>
+        <li><a href="https://misc.legendu.net/category/research.html">Research</a></li>
+        <li><a href="https://misc.legendu.net/category/shopping.html">Shopping</a></li>
+        <li><a href="https://misc.legendu.net/category/soft-skills.html">soft skills</a></li>
+        <li><a href="https://misc.legendu.net/category/software.html">Software</a></li>
+        <li><a href="https://misc.legendu.net/category/statistics.html">Statistics</a></li>
+        <li><a href="https://misc.legendu.net/category/tools.html">Tools</a></li>
+    </ul>
+  </section>
+ 
+
+  <section>
+  <h1>Tags</h1>
+  <ul class="tagcloud">
+  </ul>
+  </section>
+
+
+
+  <section>
+    <h1>GitHub Repos</h1>
+    <ul id="gh_repos">
+      <li class="loading">Status updating...</li>
+    </ul>
+      <a href="https://github.com/legendu-net">@legendu-net</a> on GitHub
+    <script type="text/javascript">
+      $.domReady(function(){
+          if (!window.jXHR){
+              var jxhr = document.createElement('script');
+              jxhr.type = 'text/javascript';
+              jxhr.src = 'https://misc.legendu.net/theme/js/jXHR.js';
+              var s = document.getElementsByTagName('script')[0];
+              s.parentNode.insertBefore(jxhr, s);
+          }
+
+          github.showRepos({
+              user: 'legendu-net',
+              count: 5,
+              skip_forks: true,
+              target: '#gh_repos'
+          });
+      });
+    </script>
+    <script src="https://misc.legendu.net/theme/js/github.js" type="text/javascript"> </script>
+  </section>
+
+    <section>
+        <h1>Social</h2>
+        <ul>
+            <li><a href="https://www.linkedin.com/in/ben-chuanlong-du-1239b221/" target="_blank">LinkedIn</a></li>
+            <li><a href="https://hub.docker.com/u/dclong" target="_blank">Docker Hub</a></li>
+            <li><a href="https://stackoverflow.com/users/7808204/benjamin-du?tab=profile" target="_blank">Stack Overflow</a></li>
+            <li><a href="https://twitter.com/longendu" target="_blank">Twitter</a></li>
+        <!--
+            <li><a href="https://misc.legendu.net/" type="application/rss+xml" rel="alternate">RSS</a></li>
+            -->
+        </ul>
+    </section>
+</aside>    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Ben Chuanlong Du -
+  <span class="credit">Powered by <a href="http://getpelican.com">Pelican</a></span>
+</p></footer>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-3STS9BVPF6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-3STS9BVPF6');
+</script>
+	<script type="text/javascript">
+	  var disqus_shortname = 'dclong';
+          var disqus_identifier = '/blog/gpu-tips/';
+          var disqus_url = 'https://misc.legendu.net/blog/gpu-tips/';
+          var disqus_title = 'Tips on GPU Computing';
+	  (function() {
+	    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	    dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+	    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	   })();
+	</script>
+</body>
+</html>

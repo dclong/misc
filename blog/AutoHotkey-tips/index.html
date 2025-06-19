@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Typing Automatically Using AutoHotkey</title>
+  <meta name="author" content="Ben Chuanlong Du">
+
+  <link href="https://misc.legendu.net/atom.xml" type="application/atom+xml" rel="alternate"
+        title="Ben Chuanlong Du's Blog Atom Feed" />
+
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link href="https://misc.legendu.net/favicon.png" rel="icon">
+  <link href="https://misc.legendu.net/theme/css/main_2.css" media="screen, projection"
+        rel="stylesheet" type="text/css">
+  <script src="https://misc.legendu.net/theme/js/modernizr-2.0.js"></script>
+  <script src="https://misc.legendu.net/theme/js/ender.js"></script>
+  <script src="https://misc.legendu.net/theme/js/octopress.js" type="text/javascript"></script>
+
+  <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <script data-ad-client="ca-pub-3836424032203369" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+</head>
+
+<body>
+  <header role="banner"><hgroup>
+  <h1><a href="https://misc.legendu.net/">Ben Chuanlong Du's Blog</a></h1>
+    <h2>It is never too late to learn.</h2>
+</hgroup></header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="https://misc.legendu.net/atom.xml" rel="subscribe-rss">RSS</a></li>
+</ul>
+
+<form name="search" action="https://www.bing.com/search" method="get" onSubmit="return build_query()">
+  <fieldset role="search">
+      <!--
+    <input type="hidden" name="q" value="site:https://misc.legendu.net" />
+        -->
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+
+<script type = "text/javascript">
+    function build_query() {
+        var query = document.forms["search"]["q"].value;
+        var prefix = "site:https://misc.legendu.net "
+        if (!query.startsWith(prefix)) {
+            query = prefix + query;
+            document.forms["search"]["q"].value = query;
+        }
+        return true;
+    }
+</script>
+
+<ul class="main-navigation">
+    <li><a href="https://www.legendu.net">Home</a></li>
+    <li><a href="https://misc.legendu.net">Blog</a></li>
+    <li><a href="https://misc.legendu.net/archives.html">Archives</a></li>
+    <li><a href="https://misc.legendu.net/categories.html">Categories</a></li>
+    <li><a href="https://misc.legendu.net/tags.html">Tags</a></li>
+    <li><a href="https://www.legendu.net/pages/about">About</a></li>
+</ul></nav>
+  <div id="main">
+    <div id="content">
+<div>
+  <article class="hentry" role="article">
+<header>
+      <h1 class="entry-title">Typing Automatically Using AutoHotkey</h1>
+      <p class="meta"><time datetime="2014-05-22T13:34:48-07:00" pubdate>May 22, 2014</time></p>
+</header>
+
+  <div class="entry-content"><p><strong>Things on this page are fragmentary and immature notes/thoughts of the author. Please read with your own judgement!</strong></p>
+<ol>
+<li>
+<p>it is suggested that you put things into </p>
+<p>```AutoHotkey</p>
+<h1 id="ifwinactive-window_condition">IfWinActive window_condition</h1>
+<p>...</p>
+<h1 id="ifwinactive">IfWinActive</h1>
+<p>```</p>
+</li>
+</ol>
+<h2 id="include">Include</h2>
+<ol>
+<li>
+<p>You can use <code>#include file_path</code> to include a AutoHotKey scripts 
+    (as if the content of the included file appears exactly there).</p>
+<p>use #include path_to_dir to change the working directory for subsequent #includes
+and then use #include with relative path 
+this makes things much more conveninet</p>
+</li>
+</ol>
+<h2 id="syntax">Syntax</h2>
+<ol>
+<li>
+<p>Lines that start with a semicolon are comments and thus not executed.</p>
+</li>
+<li>
+<p>Commands in AutoHotkey are case-insensitive.</p>
+</li>
+<li>
+<p><code>!</code> is a special character in AutoHotkey and is cannot be used directly in hotstrings. 
+    Use <code>{!}</code> to represent a literal <code>!</code>.
+    {{} literal {
+    {}} literal }</p>
+</li>
+<li>
+<p>Leading/trailing spaces in hotstring definitions are ignored. 
+    To use literal leading/trailing spaces in a hotstring definition, 
+    use {Space} instead.
+    Actually you always use {Space} to replace literal spaces.</p>
+</li>
+<li>
+<p>{+} literal plus</p>
+</li>
+<li>
+<p>You cannot put <code>;coment</code> after a command in a line, instead, you have to start a new line
+    <code>`%</code>: literal % or you can use continuation mode () or use SendRaw ...</p>
+</li>
+<li>
+<p>take another look at the ignoring case functionality!!!</p>
+</li>
+<li>
+<p><code>is a special character in AutoHotkey. 
+    if you want to use AutoHotkey to automatically type in password for in,
+    you cannot use</code> in the password.</p>
+</li>
+</ol>
+<h2 id="general-tips">General Tips</h2>
+<ol>
+<li>
+<p>Do not define too many hotstrings that you even do not remember to use. 
+    Generally speaking, 
+    only whole (long) sentenses and extremely frequntly used short phrases are useful.</p>
+</li>
+<li>
+<p>When sending a key, you can specify the number of repeated time instead of doing it manually. 
+    For example, 
+    instead of <code>send {Left}{Left}{Left}</code>, you can use <code>send {Left 3}</code>.</p>
+</li>
+<li>
+<p>You can use <code>GroupAdd</code> to define window groups 
+    (to be used by <code>IfWinActive</code> or <code>#IfWinActive</code>.</p>
+</li>
+<li>
+<p><code>#IfWinActive</code> (without anything following) matches any window.</p>
+</li>
+<li>
+<p>Symbolic links (made in Cygwin/MobaXterm) and shortcuts (created in Windows) of scripts cannot be used for AutoHotkey. 
+    However, hard links (made in Cygwin/Mobaxterm) work well.</p>
+</li>
+<li>
+<p>Order of hotstring and hotkeys matters. 
+    For example, 
+    if you have both <code>/u</code> and <code>u</code> defined in AutoHotkey, 
+    you have to put <code>/u</code> before <code>u</code>. 
+    Otherwise, <code>u</code> will be triggered when you type in <code>/u</code>.
+    Generally speaking, if you have two hotstrings/hotkeys <code>A</code> and <code>B</code> defined and <code>B</code> is a substring of <code>A</code>,
+    you need to put the definition of <code>A</code> before <code>B</code>.</p>
+</li>
+<li>
+<p>AutoHotkey ignores the case of triggers by default,
+    which makes hotstrings to adjust cases according to cases of triggers.
+    For example, 
+    if you define <code>:O:mma:mathematica</code>, 
+    then <code>MMA</code> is expanded to <code>MATHEMATICA</code>, <code>Mma</code> is expanded to <code>Mathematica</code>
+    and <code>mma</code> is expanded to <code>mathematica</code>.</p>
+</li>
+</ol>
+<h2 id="ahk_class-of-windows"><code>ahk_class</code> of Windows</h2>
+<ol>
+<li>
+<p>You can use <code>AU3_Spy.exe</code> to get the <code>ahk_class</code> information of a window.</p>
+</li>
+<li>
+<p>IMWindowClass: Microsoft Lync Office Communicator</p>
+</li>
+<li>
+<p>MozillaWindowClass: Firefox</p>
+</li>
+<li>
+<p>MozillaUIWindowClass: Thunderbird</p>
+</li>
+<li>
+<p>IEFrame: IE Explorer</p>
+</li>
+<li>
+<p>rctrl_renwnd32: Outlook</p>
+</li>
+<li>
+<p>Chrome_WidgetWin_1: Chrome</p>
+</li>
+<li>
+<p>PuTTY: putty</p>
+</li>
+<li>
+<p>mintty: mintty</p>
+</li>
+</ol>
+<h2 id="useful-optionsfunctionscommands">Useful Options/Functions/Commands</h2>
+<ol>
+<li>
+<p><code>SetTitleMatchMode</code> sets the matching behavior of the WinTitle parameter in commands such as WinWait.</p>
+</li>
+<li>
+<p><code>IfWinActive</code>/<code>IfWinNotActive</code></p>
+</li>
+</ol>
+<h2 id="questions">Questions</h2>
+<ol>
+<li>
+<p>How to reuse path? 
+    and is it possible to use windows environment variables in AutoHotkey scripts?</p>
+</li>
+<li>
+<p>is it possible to specify a different script location?</p>
+</li>
+<li>
+<p>can ahk be used with regular expression?</p>
+</li>
+<li>
+<p>is it possible to let AutoHotkey popup a list of values to choose from like AutoKey does?
+    This makes things more convenient many times ...</p>
+</li>
+</ol>
+<h2 id="references">References</h2>
+<ul>
+<li><a href="https://github.com/Lexikos/AutoHotkey_L">AutoHotkey @ GitHub</a></li>
+</ul></div>
+    <footer>
+<p class="meta">
+  <span class="byline author vcard">
+    Posted by <span class="fn">Ben Chuanlong Du</span>
+  </span>
+<time datetime="2014-05-22T13:34:48-07:00" pubdate>May 22, 2014</time>  <span class="categories">
+    <a class="category" href="https://misc.legendu.net/tag/tips.html">tips</a>
+    <a class="category" href="https://misc.legendu.net/tag/software.html">software</a>
+    <a class="category" href="https://misc.legendu.net/tag/autohotkey.html">AutoHotkey</a>
+    <a class="category" href="https://misc.legendu.net/tag/automation.html">automation</a>
+  </span>
+</p>    </footer>
+  </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div>
+  </section>
+</div>
+<aside class="sidebar">
+  <section>
+    <h1>Recent Posts</h1>
+    <ul id="recent_posts">
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/tips-on-health/">Tips on Health</a>
+      </li>
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/tips-on-child-education/">Tips on Child Education</a>
+      </li>
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/tips-on-fd/">Tips on fd</a>
+      </li>
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/the-fzf-command-is-a-great-alternative-to-find/">The fzf Command Is a Great Alternative to find</a>
+      </li>
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/ruff-is-an-extremely-fast-python-linter-written-in-rust/">Ruff Is An Extremely Fast Python Linter Written in Rust</a>
+      </li>
+    </ul>
+  </section>
+  <section>
+    <h1>Categories</h1>
+    <ul id="recent_posts">
+        <li><a href="https://misc.legendu.net/category/ai.html">AI</a></li>
+        <li><a href="https://misc.legendu.net/category/career.html">Career</a></li>
+        <li><a href="https://misc.legendu.net/category/cloud.html">Cloud</a></li>
+        <li><a href="https://misc.legendu.net/category/computer-science.html">Computer Science</a></li>
+        <li><a href="https://misc.legendu.net/category/fiannce.html">Fiannce</a></li>
+        <li><a href="https://misc.legendu.net/category/finance.html">Finance</a></li>
+        <li><a href="https://misc.legendu.net/category/fun-problems.html">Fun Problems</a></li>
+        <li><a href="https://misc.legendu.net/category/hardware.html">Hardware</a></li>
+        <li><a href="https://misc.legendu.net/category/health.html">Health</a></li>
+        <li><a href="https://misc.legendu.net/category/house.html">House</a></li>
+        <li><a href="https://misc.legendu.net/category/internet.html">Internet</a></li>
+        <li><a href="https://misc.legendu.net/category/investment.html">Investment</a></li>
+        <li><a href="https://misc.legendu.net/category/life.html">life</a></li>
+        <li><a href="https://misc.legendu.net/category/linux.html">Linux</a></li>
+        <li><a href="https://misc.legendu.net/category/os.html">OS</a></li>
+        <li><a href="https://misc.legendu.net/category/people.html">People</a></li>
+        <li><a href="https://misc.legendu.net/category/philosophy.html">Philosophy</a></li>
+        <li><a href="https://misc.legendu.net/category/research.html">Research</a></li>
+        <li><a href="https://misc.legendu.net/category/shopping.html">Shopping</a></li>
+        <li><a href="https://misc.legendu.net/category/soft-skills.html">soft skills</a></li>
+        <li><a href="https://misc.legendu.net/category/software.html">Software</a></li>
+        <li><a href="https://misc.legendu.net/category/statistics.html">Statistics</a></li>
+        <li><a href="https://misc.legendu.net/category/tools.html">Tools</a></li>
+    </ul>
+  </section>
+ 
+
+  <section>
+  <h1>Tags</h1>
+  <ul class="tagcloud">
+  </ul>
+  </section>
+
+
+
+  <section>
+    <h1>GitHub Repos</h1>
+    <ul id="gh_repos">
+      <li class="loading">Status updating...</li>
+    </ul>
+      <a href="https://github.com/legendu-net">@legendu-net</a> on GitHub
+    <script type="text/javascript">
+      $.domReady(function(){
+          if (!window.jXHR){
+              var jxhr = document.createElement('script');
+              jxhr.type = 'text/javascript';
+              jxhr.src = 'https://misc.legendu.net/theme/js/jXHR.js';
+              var s = document.getElementsByTagName('script')[0];
+              s.parentNode.insertBefore(jxhr, s);
+          }
+
+          github.showRepos({
+              user: 'legendu-net',
+              count: 5,
+              skip_forks: true,
+              target: '#gh_repos'
+          });
+      });
+    </script>
+    <script src="https://misc.legendu.net/theme/js/github.js" type="text/javascript"> </script>
+  </section>
+
+    <section>
+        <h1>Social</h2>
+        <ul>
+            <li><a href="https://www.linkedin.com/in/ben-chuanlong-du-1239b221/" target="_blank">LinkedIn</a></li>
+            <li><a href="https://hub.docker.com/u/dclong" target="_blank">Docker Hub</a></li>
+            <li><a href="https://stackoverflow.com/users/7808204/benjamin-du?tab=profile" target="_blank">Stack Overflow</a></li>
+            <li><a href="https://twitter.com/longendu" target="_blank">Twitter</a></li>
+        <!--
+            <li><a href="https://misc.legendu.net/" type="application/rss+xml" rel="alternate">RSS</a></li>
+            -->
+        </ul>
+    </section>
+</aside>    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Ben Chuanlong Du -
+  <span class="credit">Powered by <a href="http://getpelican.com">Pelican</a></span>
+</p></footer>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-3STS9BVPF6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-3STS9BVPF6');
+</script>
+	<script type="text/javascript">
+	  var disqus_shortname = 'dclong';
+          var disqus_identifier = '/blog/AutoHotkey-tips/';
+          var disqus_url = 'https://misc.legendu.net/blog/AutoHotkey-tips/';
+          var disqus_title = 'Typing Automatically Using AutoHotkey';
+	  (function() {
+	    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	    dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+	    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	   })();
+	</script>
+</body>
+</html>

@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Tips on macOS</title>
+  <meta name="author" content="Ben Chuanlong Du">
+
+  <link href="https://misc.legendu.net/atom.xml" type="application/atom+xml" rel="alternate"
+        title="Ben Chuanlong Du's Blog Atom Feed" />
+
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link href="https://misc.legendu.net/favicon.png" rel="icon">
+  <link href="https://misc.legendu.net/theme/css/main_2.css" media="screen, projection"
+        rel="stylesheet" type="text/css">
+  <script src="https://misc.legendu.net/theme/js/modernizr-2.0.js"></script>
+  <script src="https://misc.legendu.net/theme/js/ender.js"></script>
+  <script src="https://misc.legendu.net/theme/js/octopress.js" type="text/javascript"></script>
+
+  <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <script data-ad-client="ca-pub-3836424032203369" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+</head>
+
+<body>
+  <header role="banner"><hgroup>
+  <h1><a href="https://misc.legendu.net/">Ben Chuanlong Du's Blog</a></h1>
+    <h2>It is never too late to learn.</h2>
+</hgroup></header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="https://misc.legendu.net/atom.xml" rel="subscribe-rss">RSS</a></li>
+</ul>
+
+<form name="search" action="https://www.bing.com/search" method="get" onSubmit="return build_query()">
+  <fieldset role="search">
+      <!--
+    <input type="hidden" name="q" value="site:https://misc.legendu.net" />
+        -->
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+
+<script type = "text/javascript">
+    function build_query() {
+        var query = document.forms["search"]["q"].value;
+        var prefix = "site:https://misc.legendu.net "
+        if (!query.startsWith(prefix)) {
+            query = prefix + query;
+            document.forms["search"]["q"].value = query;
+        }
+        return true;
+    }
+</script>
+
+<ul class="main-navigation">
+    <li><a href="https://www.legendu.net">Home</a></li>
+    <li><a href="https://misc.legendu.net">Blog</a></li>
+    <li><a href="https://misc.legendu.net/archives.html">Archives</a></li>
+    <li><a href="https://misc.legendu.net/categories.html">Categories</a></li>
+    <li><a href="https://misc.legendu.net/tags.html">Tags</a></li>
+    <li><a href="https://www.legendu.net/pages/about">About</a></li>
+</ul></nav>
+  <div id="main">
+    <div id="content">
+<div>
+  <article class="hentry" role="article">
+<header>
+      <h1 class="entry-title">Tips on macOS</h1>
+      <p class="meta"><time datetime="2015-10-23T22:14:55-07:00" pubdate>Oct 23, 2015</time></p>
+</header>
+
+  <div class="entry-content"><p><strong>Things on this page are fragmentary and immature notes/thoughts of the author. Please read with your own judgement!</strong></p>
+<ol>
+<li>
+<p>Print Mac OS X operating system version information.</p>
+<div class="highlight"><pre><span></span><code>sw_vers<span class="w"> </span>-productName
+</code></pre></div>
+
+</li>
+<li>
+<p>You can use Homebrew to install applications in Mac
+    similar to the command <code>apt-get</code> or wajig in Debian series of Linux distributions.
+    However, you do not have to run the command brew with sudo.
+    As a matter of fact, 
+    you should never do this. </p>
+</li>
+<li>
+<p>You can configure macOS to hibernate on lid close
+    following instructions in
+    <a href="https://discussions.apple.com/thread/255421002?sortBy=rank">How to configure a MacBook to hibernate when the lid is closed?</a>
+    .</p>
+</li>
+</ol>
+<h2 id="key-repeating">Key Repeating</h2>
+<ol>
+<li>
+<p>Run the following command in terminal and then <strong>restart your Mac</strong> to enable key repeating by pressing and holding.</p>
+<div class="highlight"><pre><span></span><code>defaults<span class="w"> </span>write<span class="w"> </span>-g<span class="w"> </span>ApplePressAndHoldEnabled<span class="w"> </span>-bool<span class="w"> </span><span class="nb">false</span>
+</code></pre></div>
+
+</li>
+<li>
+<p>Run the following command in terminal and then <strong>restart your Mac</strong> to disable key repeating by presing and holding.</p>
+<div class="highlight"><pre><span></span><code>defaults<span class="w"> </span>write<span class="w"> </span>-g<span class="w"> </span>ApplePressAndHoldEnabled<span class="w"> </span>-bool<span class="w"> </span><span class="nb">true</span>
+</code></pre></div>
+
+</li>
+</ol>
+<p>For more details please refer to
+<a href="https://www.howtogeek.com/267463/how-to-enable-key-repeating-in-macos/">How to Enable Key Repeating in macOS</a>
+.</p>
+<h2 id="allow-ssh-into-mac">Allow SSH into Mac</h2>
+<p><a href="http://osxdaily.com/2011/09/30/remote-login-ssh-server-mac-os-x/">Enable Remote Login to Start SSH Server in Mac OS X</a></p>
+<h2 id="ip-address">IP Address</h2>
+<div class="highlight"><pre><span></span><code>ifconfig<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>inet
+</code></pre></div>
+
+<p><a href="https://blog.pcrisk.com/mac/12377-how-to-find-out-your-ip-address-on-mac">How to find internal and external IP addresses on Mac OS X and macOS?</a></p>
+<h2 id="touchpad">Touchpad</h2>
+<ol>
+<li>
+<p>Enable tapping (for click) by checking the checkbox <code>Tap to click</code>
+    in <code>System preference...</code> &gt; <code>Trackpad</code> &gt; <code>Point &amp; Click</code>.</p>
+</li>
+<li>
+<p>Enable tapping with two fingers for right click by checking the checkboxs <code>Tap to click</code> and <code>Secondary click</code>
+    in <code>System preference...</code> &gt; <code>Trackpad</code> &gt; <code>Point &amp; Click</code>.</p>
+</li>
+<li>
+<p>Tapping is automatically disable while typing on Mac.</p>
+</li>
+</ol>
+<h2 id="useful-applications">Useful Applications</h2>
+<h3 id="cheatsheet"><a href="https://mediaatelier.com/CheatSheet/">CheatSheet</a></h3>
+<p>Just hold the ⌘-Key a bit longer to get a list of all active short cuts of the current application. It's as simple as that.</p>
+<h3 id="licecap"><a href="https://www.cockos.com/licecap/">LICEcap</a></h3>
+<p>LICEcap can capture an area of your desktop and save it directly to .GIF (for viewing in web browsers, etc) or .LCF.</p>
+<h3 id="keycastr"><a href="https://github.com/keycastr/keycastr">KeyCastr</a></h3>
+<p>KeyCastr, an open-source keystroke visualizer.</p>
+<h3 id="anks"><a href="https://apps.ankiweb.net/">Anks</a></h3>
+<p>Anki is a program which makes remembering things easy. 
+Because it's a lot more efficient than traditional study methods, 
+you can either greatly decrease your time spent studying, or greatly increase the amount you learn.</p>
+<h3 id="magnet"><a href="https://magnet.crowdcafe.com/">Magnet</a></h3>
+<p>Magnet keeps your workspace organized.</p>
+<h3 id="alfred"><a href="https://www.alfredapp.com/">Alfred</a></h3>
+<p>Alfred is an award-winning app for macOS which boosts your efficiency with hotkeys, keywords, text expansion and more. 
+Search your Mac and the web, and be more productive with custom actions to control your Mac.</p>
+<h2 id="move-and-resize-windows">Move and Resize Windows</h2>
+<p>https://www.spectacleapp.co/</p>
+<p>https://github.com/eczarny/spectacle</p>
+<h2 id="external-monitors">External Monitors</h2>
+<p>https://support.apple.com/en-us/HT202351</p>
+<h2 id="references">References</h2>
+<ul>
+<li><a href="https://discussions.apple.com/thread/255421002?sortBy=rank">How to configure a MacBook to hibernate when the lid is closed?</a></li>
+<li><a href="https://www.legendu.net/en/blog/map-keys-in-macos">Map Keys in macOS</a></li>
+<li><a href="https://www.legendu.net/en/blog/install-python-in-mac">Install Python in macOS</a></li>
+<li><a href="misc/content/2020/03/remove-system-applications-in-mac/remove-system-applications-in-mac.markdown">Remove System Applications in macOS</a></li>
+<li><a href="https://www.legendu.net/en/blog/change-shell-in-mac">Change Shell in macOS</a></li>
+<li><a href="https://www.legendu.net/misc/blog/proxychains-ng-issues-on-mac">Proxychains-Ng Issues on macOS</a></li>
+<li><a href="https://www.legendu.net/misc/blog/shortcuts-for-mac">Shortcuts in macOS</a></li>
+<li><a href="https://www.legendu.net/misc/blog/add-new-document-to-right-click-menu-in-mac">Add New Document to Right-Click Menu in macOS</a></li>
+<li><a href="https://www.legendu.net/misc/blog/screen-resolution-in-macOS">Screen Resolution in macOS</a></li>
+</ul></div>
+    <footer>
+<p class="meta">
+  <span class="byline author vcard">
+    Posted by <span class="fn">Ben Chuanlong Du</span>
+  </span>
+<time datetime="2015-10-23T22:14:55-07:00" pubdate>Oct 23, 2015</time>  <span class="categories">
+    <a class="category" href="https://misc.legendu.net/tag/macos.html">macOS</a>
+    <a class="category" href="https://misc.legendu.net/tag/tips.html">tips</a>
+    <a class="category" href="https://misc.legendu.net/tag/apple.html">Apple</a>
+  </span>
+</p>    </footer>
+  </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div>
+  </section>
+</div>
+<aside class="sidebar">
+  <section>
+    <h1>Recent Posts</h1>
+    <ul id="recent_posts">
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/tips-on-health/">Tips on Health</a>
+      </li>
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/tips-on-child-education/">Tips on Child Education</a>
+      </li>
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/tips-on-fd/">Tips on fd</a>
+      </li>
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/the-fzf-command-is-a-great-alternative-to-find/">The fzf Command Is a Great Alternative to find</a>
+      </li>
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/ruff-is-an-extremely-fast-python-linter-written-in-rust/">Ruff Is An Extremely Fast Python Linter Written in Rust</a>
+      </li>
+    </ul>
+  </section>
+  <section>
+    <h1>Categories</h1>
+    <ul id="recent_posts">
+        <li><a href="https://misc.legendu.net/category/ai.html">AI</a></li>
+        <li><a href="https://misc.legendu.net/category/career.html">Career</a></li>
+        <li><a href="https://misc.legendu.net/category/cloud.html">Cloud</a></li>
+        <li><a href="https://misc.legendu.net/category/computer-science.html">Computer Science</a></li>
+        <li><a href="https://misc.legendu.net/category/fiannce.html">Fiannce</a></li>
+        <li><a href="https://misc.legendu.net/category/finance.html">Finance</a></li>
+        <li><a href="https://misc.legendu.net/category/fun-problems.html">Fun Problems</a></li>
+        <li><a href="https://misc.legendu.net/category/hardware.html">Hardware</a></li>
+        <li><a href="https://misc.legendu.net/category/health.html">Health</a></li>
+        <li><a href="https://misc.legendu.net/category/house.html">House</a></li>
+        <li><a href="https://misc.legendu.net/category/internet.html">Internet</a></li>
+        <li><a href="https://misc.legendu.net/category/investment.html">Investment</a></li>
+        <li><a href="https://misc.legendu.net/category/life.html">life</a></li>
+        <li><a href="https://misc.legendu.net/category/linux.html">Linux</a></li>
+        <li><a href="https://misc.legendu.net/category/os.html">OS</a></li>
+        <li><a href="https://misc.legendu.net/category/people.html">People</a></li>
+        <li><a href="https://misc.legendu.net/category/philosophy.html">Philosophy</a></li>
+        <li><a href="https://misc.legendu.net/category/research.html">Research</a></li>
+        <li><a href="https://misc.legendu.net/category/shopping.html">Shopping</a></li>
+        <li><a href="https://misc.legendu.net/category/soft-skills.html">soft skills</a></li>
+        <li><a href="https://misc.legendu.net/category/software.html">Software</a></li>
+        <li><a href="https://misc.legendu.net/category/statistics.html">Statistics</a></li>
+        <li><a href="https://misc.legendu.net/category/tools.html">Tools</a></li>
+    </ul>
+  </section>
+ 
+
+  <section>
+  <h1>Tags</h1>
+  <ul class="tagcloud">
+  </ul>
+  </section>
+
+
+
+  <section>
+    <h1>GitHub Repos</h1>
+    <ul id="gh_repos">
+      <li class="loading">Status updating...</li>
+    </ul>
+      <a href="https://github.com/legendu-net">@legendu-net</a> on GitHub
+    <script type="text/javascript">
+      $.domReady(function(){
+          if (!window.jXHR){
+              var jxhr = document.createElement('script');
+              jxhr.type = 'text/javascript';
+              jxhr.src = 'https://misc.legendu.net/theme/js/jXHR.js';
+              var s = document.getElementsByTagName('script')[0];
+              s.parentNode.insertBefore(jxhr, s);
+          }
+
+          github.showRepos({
+              user: 'legendu-net',
+              count: 5,
+              skip_forks: true,
+              target: '#gh_repos'
+          });
+      });
+    </script>
+    <script src="https://misc.legendu.net/theme/js/github.js" type="text/javascript"> </script>
+  </section>
+
+    <section>
+        <h1>Social</h2>
+        <ul>
+            <li><a href="https://www.linkedin.com/in/ben-chuanlong-du-1239b221/" target="_blank">LinkedIn</a></li>
+            <li><a href="https://hub.docker.com/u/dclong" target="_blank">Docker Hub</a></li>
+            <li><a href="https://stackoverflow.com/users/7808204/benjamin-du?tab=profile" target="_blank">Stack Overflow</a></li>
+            <li><a href="https://twitter.com/longendu" target="_blank">Twitter</a></li>
+        <!--
+            <li><a href="https://misc.legendu.net/" type="application/rss+xml" rel="alternate">RSS</a></li>
+            -->
+        </ul>
+    </section>
+</aside>    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Ben Chuanlong Du -
+  <span class="credit">Powered by <a href="http://getpelican.com">Pelican</a></span>
+</p></footer>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-3STS9BVPF6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-3STS9BVPF6');
+</script>
+	<script type="text/javascript">
+	  var disqus_shortname = 'dclong';
+          var disqus_identifier = '/blog/mac-tips/';
+          var disqus_url = 'https://misc.legendu.net/blog/mac-tips/';
+          var disqus_title = 'Tips on macOS';
+	  (function() {
+	    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	    dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+	    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	   })();
+	</script>
+</body>
+</html>

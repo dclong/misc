@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Tips on TinyProxy</title>
+  <meta name="author" content="Ben Chuanlong Du">
+
+  <link href="https://misc.legendu.net/atom.xml" type="application/atom+xml" rel="alternate"
+        title="Ben Chuanlong Du's Blog Atom Feed" />
+
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link href="https://misc.legendu.net/favicon.png" rel="icon">
+  <link href="https://misc.legendu.net/theme/css/main_2.css" media="screen, projection"
+        rel="stylesheet" type="text/css">
+  <script src="https://misc.legendu.net/theme/js/modernizr-2.0.js"></script>
+  <script src="https://misc.legendu.net/theme/js/ender.js"></script>
+  <script src="https://misc.legendu.net/theme/js/octopress.js" type="text/javascript"></script>
+
+  <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <script data-ad-client="ca-pub-3836424032203369" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+</head>
+
+<body>
+  <header role="banner"><hgroup>
+  <h1><a href="https://misc.legendu.net/">Ben Chuanlong Du's Blog</a></h1>
+    <h2>It is never too late to learn.</h2>
+</hgroup></header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="https://misc.legendu.net/atom.xml" rel="subscribe-rss">RSS</a></li>
+</ul>
+
+<form name="search" action="https://www.bing.com/search" method="get" onSubmit="return build_query()">
+  <fieldset role="search">
+      <!--
+    <input type="hidden" name="q" value="site:https://misc.legendu.net" />
+        -->
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+
+<script type = "text/javascript">
+    function build_query() {
+        var query = document.forms["search"]["q"].value;
+        var prefix = "site:https://misc.legendu.net "
+        if (!query.startsWith(prefix)) {
+            query = prefix + query;
+            document.forms["search"]["q"].value = query;
+        }
+        return true;
+    }
+</script>
+
+<ul class="main-navigation">
+    <li><a href="https://www.legendu.net">Home</a></li>
+    <li><a href="https://misc.legendu.net">Blog</a></li>
+    <li><a href="https://misc.legendu.net/archives.html">Archives</a></li>
+    <li><a href="https://misc.legendu.net/categories.html">Categories</a></li>
+    <li><a href="https://misc.legendu.net/tags.html">Tags</a></li>
+    <li><a href="https://www.legendu.net/pages/about">About</a></li>
+</ul></nav>
+  <div id="main">
+    <div id="content">
+<div>
+  <article class="hentry" role="article">
+<header>
+      <h1 class="entry-title">Tips on TinyProxy</h1>
+      <p class="meta"><time datetime="2020-10-17T21:09:17-07:00" pubdate>Oct 17, 2020</time></p>
+</header>
+
+  <div class="entry-content"><p><strong>Things on this page are fragmentary and immature notes/thoughts of the author. Please read with your own judgement!</strong></p>
+<h2 id="tips-and-traps">Tips and Traps</h2>
+<ol>
+<li><a href="https://hub.docker.com/r/dannydirect/tinyproxy/">dannydirect/tinyproxy</a>
+    is a good Docker image for tinyproxy.</li>
+</ol>
+<h2 id="tutorials">Tutorials</h2>
+<p><a href="https://medium.com/@isabelcmdcosta/how-i-set-up-tinyproxy-as-a-forward-proxy-and-reverse-proxy-2a5dc1ed64e4">How I set up TinyProxy as a forward proxy and reverse proxy</a></p>
+<p><a href="https://nxnjz.net/2019/10/how-to-setup-a-simple-proxy-server-with-tinyproxy-debian-10-buster/">How to setup a simple proxy server with tinyproxy (Debian 10 Buster)</a></p>
+<h2 id="configure-tinyproxy-to-use-different-upstream-proxies-for-different-destinations">Configure TinyProxy to use Different Upstream Proxies for Different Destinations</h2>
+<p>For more discussions,
+please refer to
+<a href="https://github.com/tinyproxy/tinyproxy/issues/331">[Question]: How can I configure TinyProxy to use different upstream proxies for different destinations?</a>
+and
+<a href="https://tinyproxy.github.io/#Upstream">TinyProxy::Upstream</a>
+.</p>
+<div class="highlight"><pre><span></span><code>#<span class="w"> </span><span class="nv">first</span><span class="w"> </span><span class="nv">rules</span>:<span class="w"> </span><span class="nv">don</span><span class="err">&#39;t redirect local ips over upstreams</span>
+<span class="err">upstream none &quot;127.0.0.1/8&quot;</span>
+<span class="err">upstream none &quot;10.0.0.0/8&quot;</span>
+<span class="err">upstream none &quot;192.168.0.0/16&quot;</span>
+
+<span class="err">#nullroute ads/trackers</span>
+<span class="err">upstream http 0.0.0.0:0  &quot;.adserver.com&quot;</span>
+<span class="err">upstream http 0.0.0.0:0  &quot;.spy-analytics.com&quot;</span>
+
+<span class="err">#route google traffic over proxy1</span>
+<span class="err">upstream socks5 127.0.0.1:8001 &quot;.google.com&quot;</span>
+
+<span class="err">#route yahoo traffic over proxy2</span>
+<span class="err">upstream socks5 127.0.0.1:8002 &quot;.yahoo.com&quot;</span>
+
+<span class="err">#route everything else over tor</span>
+<span class="err">upstream socks4 127.0.0.1:9050</span>
+</code></pre></div>
+
+<h2 id="configuration">Configuration</h2>
+<p>http://tinyproxy.github.io/#documentation</p>
+<p>Below is an example of configuration file.</p>
+<div class="highlight"><pre><span></span><code><span class="err">##</span>
+<span class="err">##</span><span class="w"> </span><span class="nx">tinyproxy</span><span class="p">.</span><span class="nx">conf</span><span class="w"> </span><span class="o">--</span><span class="w"> </span><span class="nx">tinyproxy</span><span class="w"> </span><span class="nx">daemon</span><span class="w"> </span><span class="nx">configuration</span><span class="w"> </span><span class="nx">file</span>
+<span class="err">##</span>
+<span class="err">##</span><span class="w"> </span><span class="nx">This</span><span class="w"> </span><span class="nx">example</span><span class="w"> </span><span class="nx">tinyproxy</span><span class="p">.</span><span class="nx">conf</span><span class="w"> </span><span class="nx">file</span><span class="w"> </span><span class="nx">contains</span><span class="w"> </span><span class="nx">example</span><span class="w"> </span><span class="nx">settings</span>
+<span class="err">##</span><span class="w"> </span><span class="nx">with</span><span class="w"> </span><span class="nx">explanations</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="nx">comments</span><span class="p">.</span><span class="w"> </span><span class="nx">For</span><span class="w"> </span><span class="nx">decriptions</span><span class="w"> </span><span class="nx">of</span><span class="w"> </span><span class="nx">all</span>
+<span class="err">##</span><span class="w"> </span><span class="nx">parameters</span><span class="p">,</span><span class="w"> </span><span class="nx">see</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">tinproxy</span><span class="p">.</span><span class="nx">conf</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span><span class="w"> </span><span class="nx">manual</span><span class="w"> </span><span class="nx">page</span><span class="p">.</span>
+<span class="err">##</span>
+
+<span class="err">#</span>
+<span class="err">#</span><span class="w"> </span><span class="nx">User</span><span class="o">/</span><span class="nx">Group</span><span class="p">:</span><span class="w"> </span><span class="nx">This</span><span class="w"> </span><span class="nx">allows</span><span class="w"> </span><span class="nx">you</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">set</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">user</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="nx">group</span><span class="w"> </span><span class="nx">that</span><span class="w"> </span><span class="nx">will</span><span class="w"> </span><span class="nx">be</span>
+<span class="err">#</span><span class="w"> </span><span class="nx">used</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="nx">tinyproxy</span><span class="w"> </span><span class="nx">after</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">initial</span><span class="w"> </span><span class="nx">binding</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">port</span><span class="w"> </span><span class="nx">has</span><span class="w"> </span><span class="nx">been</span><span class="w"> </span><span class="nx">done</span>
+<span class="err">#</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">root</span><span class="w"> </span><span class="nx">user</span><span class="p">.</span><span class="w"> </span><span class="nx">Either</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">user</span><span class="w"> </span><span class="k">or</span><span class="w"> </span><span class="nx">group</span><span class="w"> </span><span class="nx">name</span><span class="w"> </span><span class="k">or</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">UID</span><span class="w"> </span><span class="k">or</span><span class="w"> </span><span class="nx">GID</span>
+<span class="err">#</span><span class="w"> </span><span class="nx">number</span><span class="w"> </span><span class="nx">may</span><span class="w"> </span><span class="nx">be</span><span class="w"> </span><span class="nx">used</span><span class="p">.</span>
+<span class="err">#</span>
+<span class="nx">User</span><span class="w"> </span><span class="nx">nobody</span>
+<span class="nx">Group</span><span class="w"> </span><span class="nx">nogroup</span>
+
+<span class="err">#</span>
+<span class="err">#</span><span class="w"> </span><span class="nx">Port</span><span class="p">:</span><span class="w"> </span><span class="nx">Specify</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">port</span><span class="w"> </span><span class="nx">which</span><span class="w"> </span><span class="nx">tinyproxy</span><span class="w"> </span><span class="nx">will</span><span class="w"> </span><span class="nx">listen</span><span class="w"> </span><span class="nx">on</span><span class="p">.</span><span class="w">  </span><span class="nx">Please</span><span class="w"> </span><span class="nx">note</span>
+<span class="err">#</span><span class="w"> </span><span class="nx">that</span><span class="w"> </span><span class="nx">should</span><span class="w"> </span><span class="nx">you</span><span class="w"> </span><span class="nx">choose</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">run</span><span class="w"> </span><span class="nx">on</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="nx">port</span><span class="w"> </span><span class="nx">lower</span><span class="w"> </span><span class="nx">than</span><span class="w"> </span><span class="mi">1024</span><span class="w"> </span><span class="nx">you</span><span class="w"> </span><span class="nx">will</span><span class="w"> </span><span class="nx">need</span>
+<span class="err">#</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">start</span><span class="w"> </span><span class="nx">tinyproxy</span><span class="w"> </span><span class="nx">using</span><span class="w"> </span><span class="nx">root</span><span class="p">.</span>
+<span class="err">#</span>
+<span class="nx">Port</span><span class="w"> </span><span class="mi">8888</span>
+
+<span class="err">#</span>
+<span class="err">#</span><span class="w"> </span><span class="nx">Listen</span><span class="p">:</span><span class="w"> </span><span class="nx">If</span><span class="w"> </span><span class="nx">you</span><span class="w"> </span><span class="nx">have</span><span class="w"> </span><span class="nx">multiple</span><span class="w"> </span><span class="nx">interfaces</span><span class="w"> </span><span class="nx">this</span><span class="w"> </span><span class="nx">allows</span><span class="w"> </span><span class="nx">you</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">bind</span><span class="w"> </span><span class="nx">to</span>
+<span class="err">#</span><span class="w"> </span><span class="nx">only</span><span class="w"> </span><span class="nx">one</span><span class="p">.</span><span class="w"> </span><span class="nx">If</span><span class="w"> </span><span class="nx">this</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="nx">commented</span><span class="w"> </span><span class="nx">out</span><span class="p">,</span><span class="w"> </span><span class="nx">tinyproxy</span><span class="w"> </span><span class="nx">will</span><span class="w"> </span><span class="nx">bind</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">all</span>
+<span class="err">#</span><span class="w"> </span><span class="nx">interfaces</span><span class="w"> </span><span class="nx">present</span><span class="p">.</span>
+<span class="err">#</span>
+<span class="err">#</span><span class="nx">Listen</span><span class="w"> </span><span class="m m-Double">192.168.0.1</span>
+
+<span class="err">#</span>
+<span class="err">#</span><span class="w"> </span><span class="nx">Bind</span><span class="p">:</span><span class="w"> </span><span class="nx">This</span><span class="w"> </span><span class="nx">allows</span><span class="w"> </span><span class="nx">you</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">specify</span><span class="w"> </span><span class="nx">which</span><span class="w"> </span><span class="kd">interface</span><span class="w"> </span><span class="nx">will</span><span class="w"> </span><span class="nx">be</span><span class="w"> </span><span class="nx">used</span><span class="w"> </span><span class="k">for</span>
+<span class="err">#</span><span class="w"> </span><span class="nx">outgoing</span><span class="w"> </span><span class="nx">connections</span><span class="p">.</span><span class="w">  </span><span class="nx">This</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="nx">useful</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="nx">multi</span><span class="o">-</span><span class="nx">home</span><span class="err">&#39;</span><span class="nx">d</span><span class="w"> </span><span class="nx">machines</span><span class="w"> </span><span class="k">where</span>
+<span class="err">#</span><span class="w"> </span><span class="nx">you</span><span class="w"> </span><span class="nx">want</span><span class="w"> </span><span class="nx">all</span><span class="w"> </span><span class="nx">traffic</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">appear</span><span class="w"> </span><span class="nx">outgoing</span><span class="w"> </span><span class="nx">from</span><span class="w"> </span><span class="nx">one</span><span class="w"> </span><span class="nx">particular</span><span class="w"> </span><span class="kd">interface</span><span class="p">.</span>
+<span class="err">#</span>
+<span class="err">#</span><span class="nx">Bind</span><span class="w"> </span><span class="m m-Double">192.168.0.1</span>
+
+<span class="err">#</span>
+<span class="err">#</span><span class="w"> </span><span class="nx">BindSame</span><span class="p">:</span><span class="w"> </span><span class="nx">If</span><span class="w"> </span><span class="nx">enabled</span><span class="p">,</span><span class="w"> </span><span class="nx">tinyproxy</span><span class="w"> </span><span class="nx">will</span><span class="w"> </span><span class="nx">bind</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">outgoing</span><span class="w"> </span><span class="nx">connection</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">the</span>
+<span class="err">#</span><span class="w"> </span><span class="nx">ip</span><span class="w"> </span><span class="nx">address</span><span class="w"> </span><span class="nx">of</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">incoming</span><span class="w"> </span><span class="nx">connection</span><span class="p">.</span>
+<span class="err">#</span>
+<span class="err">#</span><span class="nx">BindSame</span><span class="w"> </span><span class="nx">yes</span>
+
+<span class="err">#</span>
+<span class="err">#</span><span class="w"> </span><span class="nx">Timeout</span><span class="p">:</span><span class="w"> </span><span class="nx">The</span><span class="w"> </span><span class="nx">maximum</span><span class="w"> </span><span class="nx">number</span><span class="w"> </span><span class="nx">of</span><span class="w"> </span><span class="nx">seconds</span><span class="w"> </span><span class="nx">of</span><span class="w"> </span><span class="nx">inactivity</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="nx">connection</span><span class="w"> </span><span class="k">is</span>
+<span class="err">#</span><span class="w"> </span><span class="nx">allowed</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">have</span><span class="w"> </span><span class="nx">before</span><span class="w"> </span><span class="nx">it</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="nx">closed</span><span class="w"> </span><span class="nx">by</span><span class="w"> </span><span class="nx">tinyproxy</span><span class="p">.</span>
+<span class="err">#</span>
+<span class="nx">Timeout</span><span class="w"> </span><span class="mi">600</span>
+
+<span class="err">#</span>
+<span class="err">#</span><span class="w"> </span><span class="nx">ErrorFile</span><span class="p">:</span><span class="w"> </span><span class="nx">Defines</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">HTML</span><span class="w"> </span><span class="nx">file</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">send</span><span class="w"> </span><span class="nx">when</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="nx">given</span><span class="w"> </span><span class="nx">HTTP</span><span class="w"> </span><span class="nx">error</span>
+<span class="err">#</span><span class="w"> </span><span class="nx">occurs</span><span class="p">.</span><span class="w">  </span><span class="nx">You</span><span class="w"> </span><span class="nx">will</span><span class="w"> </span><span class="nx">probably</span><span class="w"> </span><span class="nx">need</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">customize</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">location</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">your</span>
+<span class="err">#</span><span class="w"> </span><span class="nx">particular</span><span class="w"> </span><span class="nx">install</span><span class="p">.</span><span class="w">  </span><span class="nx">The</span><span class="w"> </span><span class="nx">usual</span><span class="w"> </span><span class="nx">locations</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">check</span><span class="w"> </span><span class="nx">are</span><span class="p">:</span>
+<span class="err">#</span><span class="w">   </span><span class="o">/</span><span class="nx">usr</span><span class="o">/</span><span class="nx">local</span><span class="o">/</span><span class="nx">share</span><span class="o">/</span><span class="nx">tinyproxy</span>
+<span class="err">#</span><span class="w">   </span><span class="o">/</span><span class="nx">usr</span><span class="o">/</span><span class="nx">share</span><span class="o">/</span><span class="nx">tinyproxy</span>
+<span class="err">#</span><span class="w">   </span><span class="o">/</span><span class="nx">etc</span><span class="o">/</span><span class="nx">tinyproxy</span>
+<span class="err">#</span>
+<span class="err">#</span><span class="nx">ErrorFile</span><span class="w"> </span><span class="mi">404</span><span class="w"> </span><span class="s">&quot;/usr/share/tinyproxy/404.html&quot;</span>
+<span class="err">#</span><span class="nx">ErrorFile</span><span class="w"> </span><span class="mi">400</span><span class="w"> </span><span class="s">&quot;/usr/share/tinyproxy/400.html&quot;</span>
+<span class="err">#</span><span class="nx">ErrorFile</span><span class="w"> </span><span class="mi">503</span><span class="w"> </span><span class="s">&quot;/usr/share/tinyproxy/503.html&quot;</span>
+<span class="err">#</span><span class="nx">ErrorFile</span><span class="w"> </span><span class="mi">403</span><span class="w"> </span><span class="s">&quot;/usr/share/tinyproxy/403.html&quot;</span>
+<span class="err">#</span><span class="nx">ErrorFile</span><span class="w"> </span><span class="mi">408</span><span class="w"> </span><span class="s">&quot;/usr/share/tinyproxy/408.html&quot;</span>
+
+<span class="err">#</span>
+<span class="err">#</span><span class="w"> </span><span class="nx">DefaultErrorFile</span><span class="p">:</span><span class="w"> </span><span class="nx">The</span><span class="w"> </span><span class="nx">HTML</span><span class="w"> </span><span class="nx">file</span><span class="w"> </span><span class="nx">that</span><span class="w"> </span><span class="nx">gets</span><span class="w"> </span><span class="nx">sent</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="nx">there</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="nx">no</span>
+<span class="err">#</span><span class="w"> </span><span class="nx">HTML</span><span class="w"> </span><span class="nx">file</span><span class="w"> </span><span class="nx">defined</span><span class="w"> </span><span class="nx">with</span><span class="w"> </span><span class="nx">an</span><span class="w"> </span><span class="nx">ErrorFile</span><span class="w"> </span><span class="nx">keyword</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">HTTP</span><span class="w"> </span><span class="nx">error</span>
+<span class="err">#</span><span class="w"> </span><span class="nx">that</span><span class="w"> </span><span class="nx">has</span><span class="w"> </span><span class="nx">occured</span><span class="p">.</span>
+<span class="err">#</span>
+<span class="nx">DefaultErrorFile</span><span class="w"> </span><span class="s">&quot;/usr/share/tinyproxy/default.html&quot;</span>
+
+<span class="err">#</span>
+<span class="err">#</span><span class="w"> </span><span class="nx">StatHost</span><span class="p">:</span><span class="w"> </span><span class="nx">This</span><span class="w"> </span><span class="nx">configures</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">host</span><span class="w"> </span><span class="nx">name</span><span class="w"> </span><span class="k">or</span><span class="w"> </span><span class="nx">IP</span><span class="w"> </span><span class="nx">address</span><span class="w"> </span><span class="nx">that</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="nx">treated</span>
+<span class="err">#</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">stat</span><span class="w"> </span><span class="nx">host</span><span class="p">:</span><span class="w"> </span><span class="nx">Whenever</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="nx">request</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="nx">this</span><span class="w"> </span><span class="nx">host</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="nx">received</span><span class="p">,</span>
+<span class="err">#</span><span class="w"> </span><span class="nx">Tinyproxy</span><span class="w"> </span><span class="nx">will</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="nx">an</span><span class="w"> </span><span class="nx">internal</span><span class="w"> </span><span class="nx">statistics</span><span class="w"> </span><span class="nx">page</span><span class="w"> </span><span class="nx">instead</span><span class="w"> </span><span class="nx">of</span>
+<span class="err">#</span><span class="w"> </span><span class="nx">forwarding</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">request</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">that</span><span class="w"> </span><span class="nx">host</span><span class="p">.</span><span class="w">  </span><span class="nx">The</span><span class="w"> </span><span class="k">default</span><span class="w"> </span><span class="nx">value</span><span class="w"> </span><span class="nx">of</span><span class="w"> </span><span class="nx">StatHost</span><span class="w"> </span><span class="k">is</span>
+<span class="err">#</span><span class="w"> </span><span class="nx">tinyproxy</span><span class="p">.</span><span class="nx">stats</span><span class="p">.</span>
+<span class="err">#</span>
+<span class="err">#</span><span class="nx">StatHost</span><span class="w"> </span><span class="s">&quot;tinyproxy.stats&quot;</span>
+<span class="err">#</span>
+
+<span class="err">#</span>
+<span class="err">#</span><span class="w"> </span><span class="nx">StatFile</span><span class="p">:</span><span class="w"> </span><span class="nx">The</span><span class="w"> </span><span class="nx">HTML</span><span class="w"> </span><span class="nx">file</span><span class="w"> </span><span class="nx">that</span><span class="w"> </span><span class="nx">gets</span><span class="w"> </span><span class="nx">sent</span><span class="w"> </span><span class="nx">when</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="nx">request</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="nx">made</span>
+<span class="err">#</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">stathost</span><span class="p">.</span><span class="w">  </span><span class="nx">If</span><span class="w"> </span><span class="nx">this</span><span class="w"> </span><span class="nx">file</span><span class="w"> </span><span class="nx">doesn</span><span class="err">&#39;</span><span class="nx">t</span><span class="w"> </span><span class="nx">exist</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="nx">basic</span><span class="w"> </span><span class="nx">page</span><span class="w"> </span><span class="k">is</span>
+<span class="err">#</span><span class="w"> </span><span class="nx">hardcoded</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="nx">tinyproxy</span><span class="p">.</span>
+<span class="err">#</span>
+<span class="nx">StatFile</span><span class="w"> </span><span class="s">&quot;/usr/share/tinyproxy/stats.html&quot;</span>
+
+<span class="err">#</span>
+<span class="err">#</span><span class="w"> </span><span class="nx">Logfile</span><span class="p">:</span><span class="w"> </span><span class="nx">Allows</span><span class="w"> </span><span class="nx">you</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">specify</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">location</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="nx">information</span><span class="w"> </span><span class="nx">should</span>
+<span class="err">#</span><span class="w"> </span><span class="nx">be</span><span class="w"> </span><span class="nx">logged</span><span class="w"> </span><span class="nx">to</span><span class="p">.</span><span class="w">  </span><span class="nx">If</span><span class="w"> </span><span class="nx">you</span><span class="w"> </span><span class="nx">would</span><span class="w"> </span><span class="nx">prefer</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">log</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">syslog</span><span class="p">,</span><span class="w"> </span><span class="k">then</span><span class="w"> </span><span class="nx">disable</span><span class="w"> </span><span class="nx">this</span>
+<span class="err">#</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="nx">enable</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">Syslog</span><span class="w"> </span><span class="nx">directive</span><span class="p">.</span><span class="w">  </span><span class="nx">These</span><span class="w"> </span><span class="nx">directives</span><span class="w"> </span><span class="nx">are</span><span class="w"> </span><span class="nx">mutually</span>
+<span class="err">#</span><span class="w"> </span><span class="nx">exclusive</span><span class="p">.</span>
+<span class="err">#</span>
+<span class="nx">Logfile</span><span class="w"> </span><span class="s">&quot;/var/log/tinyproxy/tinyproxy.log&quot;</span>
+
+<span class="err">#</span>
+<span class="err">#</span><span class="w"> </span><span class="nx">Syslog</span><span class="p">:</span><span class="w"> </span><span class="nx">Tell</span><span class="w"> </span><span class="nx">tinyproxy</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">use</span><span class="w"> </span><span class="nx">syslog</span><span class="w"> </span><span class="nx">instead</span><span class="w"> </span><span class="nx">of</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="nx">logfile</span><span class="p">.</span><span class="w">  </span><span class="nx">This</span>
+<span class="err">#</span><span class="w"> </span><span class="nx">option</span><span class="w"> </span><span class="nx">must</span><span class="w"> </span><span class="k">not</span><span class="w"> </span><span class="nx">be</span><span class="w"> </span><span class="nx">enabled</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">Logfile</span><span class="w"> </span><span class="nx">directive</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="nx">being</span><span class="w"> </span><span class="nx">used</span><span class="p">.</span>
+<span class="err">#</span><span class="w"> </span><span class="nx">These</span><span class="w"> </span><span class="nx">two</span><span class="w"> </span><span class="nx">directives</span><span class="w"> </span><span class="nx">are</span><span class="w"> </span><span class="nx">mutually</span><span class="w"> </span><span class="nx">exclusive</span><span class="p">.</span>
+<span class="err">#</span>
+<span class="err">#</span><span class="nx">Syslog</span><span class="w"> </span><span class="nx">On</span>
+
+<span class="err">#</span>
+<span class="err">#</span><span class="w"> </span><span class="nx">LogLevel</span><span class="p">:</span><span class="w"> </span>
+<span class="err">#</span>
+<span class="err">#</span><span class="w"> </span><span class="nx">Set</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">logging</span><span class="w"> </span><span class="nx">level</span><span class="p">.</span><span class="w"> </span><span class="nx">Allowed</span><span class="w"> </span><span class="nx">settings</span><span class="w"> </span><span class="nx">are</span><span class="p">:</span>
+<span class="err">#</span><span class="w">   </span><span class="nx">Critical</span><span class="w">    </span><span class="p">(</span><span class="nx">least</span><span class="w"> </span><span class="nx">verbose</span><span class="p">)</span>
+<span class="err">#</span><span class="w">   </span><span class="nx">Error</span>
+<span class="err">#</span><span class="w">   </span><span class="nx">Warning</span>
+<span class="err">#</span><span class="w">   </span><span class="nx">Notice</span>
+<span class="err">#</span><span class="w">   </span><span class="nx">Connect</span><span class="w">     </span><span class="p">(</span><span class="nx">to</span><span class="w"> </span><span class="nx">log</span><span class="w"> </span><span class="nx">connections</span><span class="w"> </span><span class="nx">without</span><span class="w"> </span><span class="nx">Info</span><span class="err">&#39;</span><span class="nx">s</span><span class="w"> </span><span class="nx">noise</span><span class="p">)</span>
+<span class="err">#</span><span class="w">   </span><span class="nx">Info</span><span class="w">        </span><span class="p">(</span><span class="nx">most</span><span class="w"> </span><span class="nx">verbose</span><span class="p">)</span>
+<span class="err">#</span>
+<span class="err">#</span><span class="w"> </span><span class="nx">The</span><span class="w"> </span><span class="nx">LogLevel</span><span class="w"> </span><span class="nx">logs</span><span class="w"> </span><span class="nx">from</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">set</span><span class="w"> </span><span class="nx">level</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="nx">above</span><span class="p">.</span><span class="w"> </span><span class="nx">For</span><span class="w"> </span><span class="nx">example</span><span class="p">,</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="nx">the</span>
+<span class="err">#</span><span class="w"> </span><span class="nx">LogLevel</span><span class="w"> </span><span class="nx">was</span><span class="w"> </span><span class="nx">set</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">Warning</span><span class="p">,</span><span class="w"> </span><span class="k">then</span><span class="w"> </span><span class="nx">all</span><span class="w"> </span><span class="nx">log</span><span class="w"> </span><span class="nx">messages</span><span class="w"> </span><span class="nx">from</span><span class="w"> </span><span class="nx">Warning</span><span class="w"> </span><span class="nx">to</span>
+<span class="err">#</span><span class="w"> </span><span class="nx">Critical</span><span class="w"> </span><span class="nx">would</span><span class="w"> </span><span class="nx">be</span><span class="w"> </span><span class="nx">output</span><span class="p">,</span><span class="w"> </span><span class="nx">but</span><span class="w"> </span><span class="nx">Notice</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="nx">below</span><span class="w"> </span><span class="nx">would</span><span class="w"> </span><span class="nx">be</span><span class="w"> </span><span class="nx">suppressed</span><span class="p">.</span>
+<span class="err">#</span>
+<span class="nx">LogLevel</span><span class="w"> </span><span class="nx">Info</span>
+
+<span class="err">#</span>
+<span class="err">#</span><span class="w"> </span><span class="nx">PidFile</span><span class="p">:</span><span class="w"> </span><span class="nx">Write</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">PID</span><span class="w"> </span><span class="nx">of</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">main</span><span class="w"> </span><span class="nx">tinyproxy</span><span class="w"> </span><span class="nx">thread</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">this</span><span class="w"> </span><span class="nx">file</span><span class="w"> </span><span class="nx">so</span><span class="w"> </span><span class="nx">it</span>
+<span class="err">#</span><span class="w"> </span><span class="nx">can</span><span class="w"> </span><span class="nx">be</span><span class="w"> </span><span class="nx">used</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="nx">signalling</span><span class="w"> </span><span class="nx">purposes</span><span class="p">.</span>
+<span class="err">#</span>
+<span class="nx">PidFile</span><span class="w"> </span><span class="s">&quot;/var/run/tinyproxy/tinyproxy.pid&quot;</span>
+
+<span class="err">#</span>
+<span class="err">#</span><span class="w"> </span><span class="nx">XTinyproxy</span><span class="p">:</span><span class="w"> </span><span class="nx">Tell</span><span class="w"> </span><span class="nx">Tinyproxy</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">include</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">X</span><span class="o">-</span><span class="nx">Tinyproxy</span><span class="w"> </span><span class="nx">header</span><span class="p">,</span><span class="w"> </span><span class="nx">which</span>
+<span class="err">#</span><span class="w"> </span><span class="nx">contains</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">client</span><span class="err">&#39;</span><span class="nx">s</span><span class="w"> </span><span class="nx">IP</span><span class="w"> </span><span class="nx">address</span><span class="p">.</span>
+<span class="err">#</span>
+<span class="err">#</span><span class="nx">XTinyproxy</span><span class="w"> </span><span class="nx">Yes</span>
+
+<span class="err">#</span>
+<span class="err">#</span><span class="w"> </span><span class="nx">Upstream</span><span class="p">:</span>
+<span class="err">#</span>
+<span class="err">#</span><span class="w"> </span><span class="nx">Turns</span><span class="w"> </span><span class="nx">on</span><span class="w"> </span><span class="nx">upstream</span><span class="w"> </span><span class="nx">proxy</span><span class="w"> </span><span class="nx">support</span><span class="p">.</span>
+<span class="err">#</span>
+<span class="err">#</span><span class="w"> </span><span class="nx">The</span><span class="w"> </span><span class="nx">upstream</span><span class="w"> </span><span class="nx">rules</span><span class="w"> </span><span class="nx">allow</span><span class="w"> </span><span class="nx">you</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">selectively</span><span class="w"> </span><span class="nx">route</span><span class="w"> </span><span class="nx">upstream</span><span class="w"> </span><span class="nx">connections</span>
+<span class="err">#</span><span class="w"> </span><span class="nx">based</span><span class="w"> </span><span class="nx">on</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">host</span><span class="o">/</span><span class="nx">domain</span><span class="w"> </span><span class="nx">of</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">site</span><span class="w"> </span><span class="nx">being</span><span class="w"> </span><span class="nx">accessed</span><span class="p">.</span>
+<span class="err">#</span>
+<span class="err">#</span><span class="w"> </span><span class="nx">For</span><span class="w"> </span><span class="nx">example</span><span class="p">:</span>
+<span class="err">#</span><span class="w">  </span><span class="err">#</span><span class="w"> </span><span class="nx">connection</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">test</span><span class="w"> </span><span class="nx">domain</span><span class="w"> </span><span class="nx">goes</span><span class="w"> </span><span class="nx">through</span><span class="w"> </span><span class="nx">testproxy</span>
+<span class="err">#</span><span class="w">  </span><span class="nx">upstream</span><span class="w"> </span><span class="nx">testproxy</span><span class="p">:</span><span class="mi">8008</span><span class="w"> </span><span class="s">&quot;.test.domain.invalid&quot;</span>
+<span class="err">#</span><span class="w">  </span><span class="nx">upstream</span><span class="w"> </span><span class="nx">testproxy</span><span class="p">:</span><span class="mi">8008</span><span class="w"> </span><span class="s">&quot;.our_testbed.example.com&quot;</span>
+<span class="err">#</span><span class="w">  </span><span class="nx">upstream</span><span class="w"> </span><span class="nx">testproxy</span><span class="p">:</span><span class="mi">8008</span><span class="w"> </span><span class="s">&quot;192.168.128.0/255.255.254.0&quot;</span>
+<span class="err">#</span>
+<span class="err">#</span><span class="w">  </span><span class="err">#</span><span class="w"> </span><span class="nx">no</span><span class="w"> </span><span class="nx">upstream</span><span class="w"> </span><span class="nx">proxy</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="nx">internal</span><span class="w"> </span><span class="nx">websites</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="nx">unqualified</span><span class="w"> </span><span class="nx">hosts</span>
+<span class="err">#</span><span class="w">  </span><span class="nx">no</span><span class="w"> </span><span class="nx">upstream</span><span class="w"> </span><span class="s">&quot;.internal.example.com&quot;</span>
+<span class="err">#</span><span class="w">  </span><span class="nx">no</span><span class="w"> </span><span class="nx">upstream</span><span class="w"> </span><span class="s">&quot;www.example.com&quot;</span>
+<span class="err">#</span><span class="w">  </span><span class="nx">no</span><span class="w"> </span><span class="nx">upstream</span><span class="w"> </span><span class="s">&quot;10.0.0.0/8&quot;</span>
+<span class="err">#</span><span class="w">  </span><span class="nx">no</span><span class="w"> </span><span class="nx">upstream</span><span class="w"> </span><span class="s">&quot;192.168.0.0/255.255.254.0&quot;</span>
+<span class="err">#</span><span class="w">  </span><span class="nx">no</span><span class="w"> </span><span class="nx">upstream</span><span class="w"> </span><span class="s">&quot;.&quot;</span>
+<span class="err">#</span>
+<span class="err">#</span><span class="w">  </span><span class="err">#</span><span class="w"> </span><span class="nx">connection</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">these</span><span class="w"> </span><span class="nx">boxes</span><span class="w"> </span><span class="nx">go</span><span class="w"> </span><span class="nx">through</span><span class="w"> </span><span class="nx">their</span><span class="w"> </span><span class="nx">DMZ</span><span class="w"> </span><span class="nx">firewalls</span>
+<span class="err">#</span><span class="w">  </span><span class="nx">upstream</span><span class="w"> </span><span class="nx">cust1_firewall</span><span class="p">:</span><span class="mi">8008</span><span class="w"> </span><span class="s">&quot;testbed_for_cust1&quot;</span>
+<span class="err">#</span><span class="w">  </span><span class="nx">upstream</span><span class="w"> </span><span class="nx">cust2_firewall</span><span class="p">:</span><span class="mi">8008</span><span class="w"> </span><span class="s">&quot;testbed_for_cust2&quot;</span>
+<span class="err">#</span>
+<span class="err">#</span><span class="w">  </span><span class="err">#</span><span class="w"> </span><span class="k">default</span><span class="w"> </span><span class="nx">upstream</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="nx">internet</span><span class="w"> </span><span class="nx">firewall</span>
+<span class="err">#</span><span class="w">  </span><span class="nx">upstream</span><span class="w"> </span><span class="nx">firewall</span><span class="p">.</span><span class="nx">internal</span><span class="p">.</span><span class="nx">example</span><span class="p">.</span><span class="nx">com</span><span class="p">:</span><span class="mi">80</span>
+<span class="err">#</span>
+<span class="err">#</span><span class="w"> </span><span class="nx">The</span><span class="w"> </span><span class="nx">LAST</span><span class="w"> </span><span class="nx">matching</span><span class="w"> </span><span class="nx">rule</span><span class="w"> </span><span class="nx">wins</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">route</span><span class="w"> </span><span class="nx">decision</span><span class="p">.</span><span class="w">  </span><span class="nx">As</span><span class="w"> </span><span class="nx">you</span><span class="w"> </span><span class="nx">can</span><span class="w"> </span><span class="nx">see</span><span class="p">,</span><span class="w"> </span><span class="nx">you</span>
+<span class="err">#</span><span class="w"> </span><span class="nx">can</span><span class="w"> </span><span class="nx">use</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="nx">host</span><span class="p">,</span><span class="w"> </span><span class="k">or</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="nx">domain</span><span class="p">:</span>
+<span class="err">#</span><span class="w">  </span><span class="nx">name</span><span class="w">     </span><span class="nx">matches</span><span class="w"> </span><span class="nx">host</span><span class="w"> </span><span class="nx">exactly</span>
+<span class="err">#</span><span class="w">  </span><span class="p">.</span><span class="nx">name</span><span class="w">    </span><span class="nx">matches</span><span class="w"> </span><span class="nx">any</span><span class="w"> </span><span class="nx">host</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="nx">domain</span><span class="w"> </span><span class="s">&quot;name&quot;</span>
+<span class="err">#</span><span class="w">  </span><span class="p">.</span><span class="w">        </span><span class="nx">matches</span><span class="w"> </span><span class="nx">any</span><span class="w"> </span><span class="nx">host</span><span class="w"> </span><span class="nx">with</span><span class="w"> </span><span class="nx">no</span><span class="w"> </span><span class="nx">domain</span><span class="w"> </span><span class="p">(</span><span class="k">in</span><span class="w"> </span><span class="err">&#39;</span><span class="nx">empty</span><span class="err">&#39;</span><span class="w"> </span><span class="nx">domain</span><span class="p">)</span>
+<span class="err">#</span><span class="w">  </span><span class="nx">IP</span><span class="o">/</span><span class="nx">bits</span><span class="w">  </span><span class="nx">matches</span><span class="w"> </span><span class="nx">network</span><span class="o">/</span><span class="nx">mask</span>
+<span class="err">#</span><span class="w">  </span><span class="nx">IP</span><span class="o">/</span><span class="nx">mask</span><span class="w">  </span><span class="nx">matches</span><span class="w"> </span><span class="nx">network</span><span class="o">/</span><span class="nx">mask</span>
+<span class="err">#</span>
+<span class="err">#</span><span class="nx">Upstream</span><span class="w"> </span><span class="nx">some</span><span class="p">.</span><span class="nx">remote</span><span class="p">.</span><span class="nx">proxy</span><span class="p">:</span><span class="nx">port</span>
+
+<span class="err">#</span>
+<span class="err">#</span><span class="w"> </span><span class="nx">MaxClients</span><span class="p">:</span><span class="w"> </span><span class="nx">This</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">absolute</span><span class="w"> </span><span class="nx">highest</span><span class="w"> </span><span class="nx">number</span><span class="w"> </span><span class="nx">of</span><span class="w"> </span><span class="nx">threads</span><span class="w"> </span><span class="nx">which</span><span class="w"> </span><span class="nx">will</span>
+<span class="err">#</span><span class="w"> </span><span class="nx">be</span><span class="w"> </span><span class="nx">created</span><span class="p">.</span><span class="w"> </span><span class="nx">In</span><span class="w"> </span><span class="nx">other</span><span class="w"> </span><span class="nx">words</span><span class="p">,</span><span class="w"> </span><span class="nx">only</span><span class="w"> </span><span class="nx">MaxClients</span><span class="w"> </span><span class="nx">number</span><span class="w"> </span><span class="nx">of</span><span class="w"> </span><span class="nx">clients</span><span class="w"> </span><span class="nx">can</span><span class="w"> </span><span class="nx">be</span>
+<span class="err">#</span><span class="w"> </span><span class="nx">connected</span><span class="w"> </span><span class="nx">at</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">same</span><span class="w"> </span><span class="nx">time</span><span class="p">.</span>
+<span class="err">#</span>
+<span class="nx">MaxClients</span><span class="w"> </span><span class="mi">100</span>
+
+<span class="err">#</span>
+<span class="err">#</span><span class="w"> </span><span class="nx">MinSpareServers</span><span class="o">/</span><span class="nx">MaxSpareServers</span><span class="p">:</span><span class="w"> </span><span class="nx">These</span><span class="w"> </span><span class="nx">settings</span><span class="w"> </span><span class="nx">set</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">upper</span><span class="w"> </span><span class="k">and</span>
+<span class="err">#</span><span class="w"> </span><span class="nx">lower</span><span class="w"> </span><span class="nx">limit</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">number</span><span class="w"> </span><span class="nx">of</span><span class="w"> </span><span class="nx">spare</span><span class="w"> </span><span class="nx">servers</span><span class="w"> </span><span class="nx">which</span><span class="w"> </span><span class="nx">should</span><span class="w"> </span><span class="nx">be</span><span class="w"> </span><span class="nx">available</span><span class="p">.</span>
+<span class="err">#</span>
+<span class="err">#</span><span class="w"> </span><span class="nx">If</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">number</span><span class="w"> </span><span class="nx">of</span><span class="w"> </span><span class="nx">spare</span><span class="w"> </span><span class="nx">servers</span><span class="w"> </span><span class="nx">falls</span><span class="w"> </span><span class="nx">below</span><span class="w"> </span><span class="nx">MinSpareServers</span><span class="w"> </span><span class="k">then</span><span class="w"> </span><span class="nx">new</span>
+<span class="err">#</span><span class="w"> </span><span class="nx">server</span><span class="w"> </span><span class="nx">processes</span><span class="w"> </span><span class="nx">will</span><span class="w"> </span><span class="nx">be</span><span class="w"> </span><span class="nx">spawned</span><span class="p">.</span><span class="w">  </span><span class="nx">If</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">number</span><span class="w"> </span><span class="nx">of</span><span class="w"> </span><span class="nx">servers</span><span class="w"> </span><span class="nx">exceeds</span>
+<span class="err">#</span><span class="w"> </span><span class="nx">MaxSpareServers</span><span class="w"> </span><span class="k">then</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">extras</span><span class="w"> </span><span class="nx">will</span><span class="w"> </span><span class="nx">be</span><span class="w"> </span><span class="nx">killed</span><span class="w"> </span><span class="nx">off</span><span class="p">.</span>
+<span class="err">#</span>
+<span class="nx">MinSpareServers</span><span class="w"> </span><span class="mi">5</span>
+<span class="nx">MaxSpareServers</span><span class="w"> </span><span class="mi">20</span>
+
+<span class="err">#</span>
+<span class="err">#</span><span class="w"> </span><span class="nx">StartServers</span><span class="p">:</span><span class="w"> </span><span class="nx">The</span><span class="w"> </span><span class="nx">number</span><span class="w"> </span><span class="nx">of</span><span class="w"> </span><span class="nx">servers</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">start</span><span class="w"> </span><span class="nx">initially</span><span class="p">.</span>
+<span class="err">#</span>
+<span class="nx">StartServers</span><span class="w"> </span><span class="mi">10</span>
+
+<span class="err">#</span>
+<span class="err">#</span><span class="w"> </span><span class="nx">MaxRequestsPerChild</span><span class="p">:</span><span class="w"> </span><span class="nx">The</span><span class="w"> </span><span class="nx">number</span><span class="w"> </span><span class="nx">of</span><span class="w"> </span><span class="nx">connections</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="nx">thread</span><span class="w"> </span><span class="nx">will</span><span class="w"> </span><span class="nx">handle</span>
+<span class="err">#</span><span class="w"> </span><span class="nx">before</span><span class="w"> </span><span class="nx">it</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="nx">killed</span><span class="p">.</span><span class="w"> </span><span class="nx">In</span><span class="w"> </span><span class="nx">practise</span><span class="w"> </span><span class="nx">this</span><span class="w"> </span><span class="nx">should</span><span class="w"> </span><span class="nx">be</span><span class="w"> </span><span class="nx">set</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="nx">which</span>
+<span class="err">#</span><span class="w"> </span><span class="nx">disables</span><span class="w"> </span><span class="nx">thread</span><span class="w"> </span><span class="nx">reaping</span><span class="p">.</span><span class="w"> </span><span class="nx">If</span><span class="w"> </span><span class="nx">you</span><span class="w"> </span><span class="nx">do</span><span class="w"> </span><span class="nx">notice</span><span class="w"> </span><span class="nx">problems</span><span class="w"> </span><span class="nx">with</span><span class="w"> </span><span class="nx">memory</span>
+<span class="err">#</span><span class="w"> </span><span class="nx">leakage</span><span class="p">,</span><span class="w"> </span><span class="k">then</span><span class="w"> </span><span class="nx">set</span><span class="w"> </span><span class="nx">this</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">something</span><span class="w"> </span><span class="k">like</span><span class="w"> </span><span class="mi">10000</span><span class="p">.</span>
+<span class="err">#</span>
+<span class="nx">MaxRequestsPerChild</span><span class="w"> </span><span class="mi">0</span>
+
+<span class="err">#</span>
+<span class="err">#</span><span class="w"> </span><span class="nx">Allow</span><span class="p">:</span><span class="w"> </span><span class="nx">Customization</span><span class="w"> </span><span class="nx">of</span><span class="w"> </span><span class="nx">authorization</span><span class="w"> </span><span class="nx">controls</span><span class="p">.</span><span class="w"> </span><span class="nx">If</span><span class="w"> </span><span class="nx">there</span><span class="w"> </span><span class="nx">are</span><span class="w"> </span><span class="nx">any</span>
+<span class="err">#</span><span class="w"> </span><span class="nx">access</span><span class="w"> </span><span class="nx">control</span><span class="w"> </span><span class="nx">keywords</span><span class="w"> </span><span class="k">then</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="k">default</span><span class="w"> </span><span class="nx">action</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">DENY</span><span class="p">.</span><span class="w"> </span><span class="nx">Otherwise</span><span class="p">,</span>
+<span class="err">#</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="k">default</span><span class="w"> </span><span class="nx">action</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="nx">ALLOW</span><span class="p">.</span>
+<span class="err">#</span>
+<span class="err">#</span><span class="w"> </span><span class="nx">The</span><span class="w"> </span><span class="nx">order</span><span class="w"> </span><span class="nx">of</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">controls</span><span class="w"> </span><span class="nx">are</span><span class="w"> </span><span class="nx">important</span><span class="p">.</span><span class="w"> </span><span class="nx">All</span><span class="w"> </span><span class="nx">incoming</span><span class="w"> </span><span class="nx">connections</span><span class="w"> </span><span class="nx">are</span>
+<span class="err">#</span><span class="w"> </span><span class="nx">tested</span><span class="w"> </span><span class="nx">against</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">controls</span><span class="w"> </span><span class="nx">based</span><span class="w"> </span><span class="nx">on</span><span class="w"> </span><span class="nx">order</span><span class="p">.</span>
+<span class="err">#</span>
+<span class="nx">Allow</span><span class="w"> </span><span class="m m-Double">127.0.0.1</span>
+<span class="err">#</span><span class="nx">Allow</span><span class="w"> </span><span class="m m-Double">192.168.0.0</span><span class="o">/</span><span class="mi">16</span>
+<span class="err">#</span><span class="nx">Allow</span><span class="w"> </span><span class="m m-Double">172.16.0.0</span><span class="o">/</span><span class="mi">12</span>
+<span class="err">#</span><span class="nx">Allow</span><span class="w"> </span><span class="m m-Double">10.0.0.0</span><span class="o">/</span><span class="mi">8</span>
+
+<span class="err">#</span>
+<span class="err">#</span><span class="w"> </span><span class="nx">AddHeader</span><span class="p">:</span><span class="w"> </span><span class="nx">Adds</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">specified</span><span class="w"> </span><span class="nx">headers</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">outgoing</span><span class="w"> </span><span class="nx">HTTP</span><span class="w"> </span><span class="nx">requests</span><span class="w"> </span><span class="nx">that</span>
+<span class="err">#</span><span class="w"> </span><span class="nx">Tinyproxy</span><span class="w"> </span><span class="nx">makes</span><span class="p">.</span><span class="w"> </span><span class="nx">Note</span><span class="w"> </span><span class="nx">that</span><span class="w"> </span><span class="nx">this</span><span class="w"> </span><span class="nx">option</span><span class="w"> </span><span class="nx">will</span><span class="w"> </span><span class="k">not</span><span class="w"> </span><span class="nx">work</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="nx">HTTPS</span>
+<span class="err">#</span><span class="w"> </span><span class="nx">traffic</span><span class="p">,</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nx">Tinyproxy</span><span class="w"> </span><span class="nx">has</span><span class="w"> </span><span class="nx">no</span><span class="w"> </span><span class="nx">control</span><span class="w"> </span><span class="nx">over</span><span class="w"> </span><span class="nx">what</span><span class="w"> </span><span class="nx">headers</span><span class="w"> </span><span class="nx">are</span><span class="w"> </span><span class="nx">exchanged</span><span class="p">.</span>
+<span class="err">#</span>
+<span class="err">#</span><span class="nx">AddHeader</span><span class="w"> </span><span class="s">&quot;X-My-Header&quot;</span><span class="w"> </span><span class="s">&quot;Powered by Tinyproxy&quot;</span>
+
+<span class="err">#</span>
+<span class="err">#</span><span class="w"> </span><span class="nx">ViaProxyName</span><span class="p">:</span><span class="w"> </span><span class="nx">The</span><span class="w"> </span><span class="s">&quot;Via&quot;</span><span class="w"> </span><span class="nx">header</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="nx">required</span><span class="w"> </span><span class="nx">by</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">HTTP</span><span class="w"> </span><span class="nx">RFC</span><span class="p">,</span><span class="w"> </span><span class="nx">but</span><span class="w"> </span><span class="nx">using</span>
+<span class="err">#</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">real</span><span class="w"> </span><span class="nx">host</span><span class="w"> </span><span class="nx">name</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="nx">security</span><span class="w"> </span><span class="nx">concern</span><span class="p">.</span><span class="w">  </span><span class="nx">If</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">following</span><span class="w"> </span><span class="nx">directive</span>
+<span class="err">#</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="nx">enabled</span><span class="p">,</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="nx">supplied</span><span class="w"> </span><span class="nx">will</span><span class="w"> </span><span class="nx">be</span><span class="w"> </span><span class="nx">used</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">host</span><span class="w"> </span><span class="nx">name</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="nx">the</span>
+<span class="err">#</span><span class="w"> </span><span class="nx">Via</span><span class="w"> </span><span class="nx">header</span><span class="p">;</span><span class="w"> </span><span class="nx">otherwise</span><span class="p">,</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">server</span><span class="err">&#39;</span><span class="nx">s</span><span class="w"> </span><span class="nx">host</span><span class="w"> </span><span class="nx">name</span><span class="w"> </span><span class="nx">will</span><span class="w"> </span><span class="nx">be</span><span class="w"> </span><span class="nx">used</span><span class="p">.</span>
+<span class="err">#</span>
+<span class="nx">ViaProxyName</span><span class="w"> </span><span class="s">&quot;tinyproxy&quot;</span>
+
+<span class="err">#</span>
+<span class="err">#</span><span class="w"> </span><span class="nx">DisableViaHeader</span><span class="p">:</span><span class="w"> </span><span class="nx">When</span><span class="w"> </span><span class="nx">this</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="nx">set</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">yes</span><span class="p">,</span><span class="w"> </span><span class="nx">Tinyproxy</span><span class="w"> </span><span class="nx">does</span><span class="w"> </span><span class="nx">NOT</span><span class="w"> </span><span class="nx">add</span>
+<span class="err">#</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">Via</span><span class="w"> </span><span class="nx">header</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">requests</span><span class="p">.</span><span class="w"> </span><span class="nx">This</span><span class="w"> </span><span class="nx">virtually</span><span class="w"> </span><span class="nx">puts</span><span class="w"> </span><span class="nx">Tinyproxy</span><span class="w"> </span><span class="nx">into</span>
+<span class="err">#</span><span class="w"> </span><span class="nx">stealth</span><span class="w"> </span><span class="nx">mode</span><span class="p">.</span><span class="w"> </span><span class="nx">Note</span><span class="w"> </span><span class="nx">that</span><span class="w"> </span><span class="nx">RFC</span><span class="w"> </span><span class="mi">2616</span><span class="w"> </span><span class="nx">requires</span><span class="w"> </span><span class="nx">proxies</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">set</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">Via</span>
+<span class="err">#</span><span class="w"> </span><span class="nx">header</span><span class="p">,</span><span class="w"> </span><span class="nx">so</span><span class="w"> </span><span class="nx">by</span><span class="w"> </span><span class="nx">enabling</span><span class="w"> </span><span class="nx">this</span><span class="w"> </span><span class="nx">option</span><span class="p">,</span><span class="w"> </span><span class="nx">you</span><span class="w"> </span><span class="k">break</span><span class="w"> </span><span class="nx">compliance</span><span class="p">.</span>
+<span class="err">#</span><span class="w"> </span><span class="nx">Don</span><span class="err">&#39;</span><span class="nx">t</span><span class="w"> </span><span class="nx">disable</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">Via</span><span class="w"> </span><span class="nx">header</span><span class="w"> </span><span class="nx">unless</span><span class="w"> </span><span class="nx">you</span><span class="w"> </span><span class="nx">know</span><span class="w"> </span><span class="nx">what</span><span class="w"> </span><span class="nx">you</span><span class="w"> </span><span class="nx">are</span><span class="w"> </span><span class="nx">doing</span><span class="o">...</span>
+<span class="err">#</span>
+<span class="err">#</span><span class="nx">DisableViaHeader</span><span class="w"> </span><span class="nx">Yes</span>
+
+<span class="err">#</span>
+<span class="err">#</span><span class="w"> </span><span class="nx">Filter</span><span class="p">:</span><span class="w"> </span><span class="nx">This</span><span class="w"> </span><span class="nx">allows</span><span class="w"> </span><span class="nx">you</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">specify</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">location</span><span class="w"> </span><span class="nx">of</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">filter</span><span class="w"> </span><span class="nx">file</span><span class="p">.</span>
+<span class="err">#</span>
+<span class="err">#</span><span class="nx">Filter</span><span class="w"> </span><span class="s">&quot;/etc/filter&quot;</span>
+
+<span class="err">#</span>
+<span class="err">#</span><span class="w"> </span><span class="nx">FilterURLs</span><span class="p">:</span><span class="w"> </span><span class="nx">Filter</span><span class="w"> </span><span class="nx">based</span><span class="w"> </span><span class="nx">on</span><span class="w"> </span><span class="nx">URLs</span><span class="w"> </span><span class="nx">rather</span><span class="w"> </span><span class="nx">than</span><span class="w"> </span><span class="nx">domains</span><span class="p">.</span>
+<span class="err">#</span>
+<span class="err">#</span><span class="nx">FilterURLs</span><span class="w"> </span><span class="nx">On</span>
+
+<span class="err">#</span>
+<span class="err">#</span><span class="w"> </span><span class="nx">FilterExtended</span><span class="p">:</span><span class="w"> </span><span class="nx">Use</span><span class="w"> </span><span class="nx">POSIX</span><span class="w"> </span><span class="nx">Extended</span><span class="w"> </span><span class="nx">regular</span><span class="w"> </span><span class="nx">expressions</span><span class="w"> </span><span class="nx">rather</span><span class="w"> </span><span class="nx">than</span>
+<span class="err">#</span><span class="w"> </span><span class="nx">basic</span><span class="p">.</span>
+<span class="err">#</span>
+<span class="err">#</span><span class="nx">FilterExtended</span><span class="w"> </span><span class="nx">On</span>
+
+<span class="err">#</span>
+<span class="err">#</span><span class="w"> </span><span class="nx">FilterCaseSensitive</span><span class="p">:</span><span class="w"> </span><span class="nx">Use</span><span class="w"> </span><span class="k">case</span><span class="w"> </span><span class="nx">sensitive</span><span class="w"> </span><span class="nx">regular</span><span class="w"> </span><span class="nx">expressions</span><span class="p">.</span>
+<span class="err">#</span>
+<span class="err">#</span><span class="nx">FilterCaseSensitive</span><span class="w"> </span><span class="nx">On</span>
+
+<span class="err">#</span>
+<span class="err">#</span><span class="w"> </span><span class="nx">FilterDefaultDeny</span><span class="p">:</span><span class="w"> </span><span class="nx">Change</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="k">default</span><span class="w"> </span><span class="nx">policy</span><span class="w"> </span><span class="nx">of</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">filtering</span><span class="w"> </span><span class="nx">system</span><span class="p">.</span>
+<span class="err">#</span><span class="w"> </span><span class="nx">If</span><span class="w"> </span><span class="nx">this</span><span class="w"> </span><span class="nx">directive</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="nx">commented</span><span class="w"> </span><span class="nx">out</span><span class="p">,</span><span class="w"> </span><span class="k">or</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="nx">set</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="s">&quot;No&quot;</span><span class="w"> </span><span class="k">then</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="k">default</span>
+<span class="err">#</span><span class="w"> </span><span class="nx">policy</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">allow</span><span class="w"> </span><span class="nx">everything</span><span class="w"> </span><span class="nx">which</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="k">not</span><span class="w"> </span><span class="nx">specifically</span><span class="w"> </span><span class="nx">denied</span><span class="w"> </span><span class="nx">by</span><span class="w"> </span><span class="nx">the</span>
+<span class="err">#</span><span class="w"> </span><span class="nx">filter</span><span class="w"> </span><span class="nx">file</span><span class="p">.</span>
+<span class="err">#</span>
+<span class="err">#</span><span class="w"> </span><span class="nx">However</span><span class="p">,</span><span class="w"> </span><span class="nx">by</span><span class="w"> </span><span class="nx">setting</span><span class="w"> </span><span class="nx">this</span><span class="w"> </span><span class="nx">directive</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="s">&quot;Yes&quot;</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="k">default</span><span class="w"> </span><span class="nx">policy</span><span class="w"> </span><span class="nx">becomes</span>
+<span class="err">#</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">deny</span><span class="w"> </span><span class="nx">everything</span><span class="w"> </span><span class="nx">which</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="nx">_not_</span><span class="w"> </span><span class="nx">specifically</span><span class="w"> </span><span class="nx">allowed</span><span class="w"> </span><span class="nx">by</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">filter</span>
+<span class="err">#</span><span class="w"> </span><span class="nx">file</span><span class="p">.</span>
+<span class="err">#</span>
+<span class="err">#</span><span class="nx">FilterDefaultDeny</span><span class="w"> </span><span class="nx">Yes</span>
+
+<span class="err">#</span>
+<span class="err">#</span><span class="w"> </span><span class="nx">Anonymous</span><span class="p">:</span><span class="w"> </span><span class="nx">If</span><span class="w"> </span><span class="nx">an</span><span class="w"> </span><span class="nx">Anonymous</span><span class="w"> </span><span class="nx">keyword</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="nx">present</span><span class="p">,</span><span class="w"> </span><span class="k">then</span><span class="w"> </span><span class="nx">anonymous</span><span class="w"> </span><span class="nx">proxying</span>
+<span class="err">#</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="nx">enabled</span><span class="p">.</span><span class="w">  </span><span class="nx">The</span><span class="w"> </span><span class="nx">headers</span><span class="w"> </span><span class="nx">listed</span><span class="w"> </span><span class="nx">are</span><span class="w"> </span><span class="nx">allowed</span><span class="w"> </span><span class="nx">through</span><span class="p">,</span><span class="w"> </span><span class="k">while</span><span class="w"> </span><span class="nx">all</span><span class="w"> </span><span class="nx">others</span>
+<span class="err">#</span><span class="w"> </span><span class="nx">are</span><span class="w"> </span><span class="nx">denied</span><span class="p">.</span><span class="w"> </span><span class="nx">If</span><span class="w"> </span><span class="nx">no</span><span class="w"> </span><span class="nx">Anonymous</span><span class="w"> </span><span class="nx">keyword</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="nx">present</span><span class="p">,</span><span class="w"> </span><span class="k">then</span><span class="w"> </span><span class="nx">all</span><span class="w"> </span><span class="nx">headers</span><span class="w"> </span><span class="nx">are</span>
+<span class="err">#</span><span class="w"> </span><span class="nx">allowed</span><span class="w"> </span><span class="nx">through</span><span class="p">.</span><span class="w">  </span><span class="nx">You</span><span class="w"> </span><span class="nx">must</span><span class="w"> </span><span class="nx">include</span><span class="w"> </span><span class="nx">quotes</span><span class="w"> </span><span class="nx">around</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">headers</span><span class="p">.</span>
+<span class="err">#</span>
+<span class="err">#</span><span class="w"> </span><span class="nx">Most</span><span class="w"> </span><span class="nx">sites</span><span class="w"> </span><span class="nx">require</span><span class="w"> </span><span class="nx">cookies</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">be</span><span class="w"> </span><span class="nx">enabled</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="nx">them</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">work</span><span class="w"> </span><span class="nx">correctly</span><span class="p">,</span><span class="w"> </span><span class="nx">so</span>
+<span class="err">#</span><span class="w"> </span><span class="nx">you</span><span class="w"> </span><span class="nx">will</span><span class="w"> </span><span class="nx">need</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">allow</span><span class="w"> </span><span class="nx">Cookies</span><span class="w"> </span><span class="nx">through</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="nx">you</span><span class="w"> </span><span class="nx">access</span><span class="w"> </span><span class="nx">those</span><span class="w"> </span><span class="nx">sites</span><span class="p">.</span>
+<span class="err">#</span>
+<span class="err">#</span><span class="nx">Anonymous</span><span class="w"> </span><span class="s">&quot;Host&quot;</span>
+<span class="err">#</span><span class="nx">Anonymous</span><span class="w"> </span><span class="s">&quot;Authorization&quot;</span>
+<span class="err">#</span><span class="nx">Anonymous</span><span class="w"> </span><span class="s">&quot;Cookie&quot;</span>
+
+<span class="err">#</span>
+<span class="err">#</span><span class="w"> </span><span class="nx">ConnectPort</span><span class="p">:</span><span class="w"> </span><span class="nx">This</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="nx">list</span><span class="w"> </span><span class="nx">of</span><span class="w"> </span><span class="nx">ports</span><span class="w"> </span><span class="nx">allowed</span><span class="w"> </span><span class="nx">by</span><span class="w"> </span><span class="nx">tinyproxy</span><span class="w"> </span><span class="nx">when</span><span class="w"> </span><span class="nx">the</span>
+<span class="err">#</span><span class="w"> </span><span class="nx">CONNECT</span><span class="w"> </span><span class="nx">method</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="nx">used</span><span class="p">.</span><span class="w">  </span><span class="nx">To</span><span class="w"> </span><span class="nx">disable</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">CONNECT</span><span class="w"> </span><span class="nx">method</span><span class="w"> </span><span class="nx">altogether</span><span class="p">,</span><span class="w"> </span><span class="nx">set</span>
+<span class="err">#</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">value</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="mi">0</span><span class="p">.</span><span class="w">  </span><span class="nx">If</span><span class="w"> </span><span class="nx">no</span><span class="w"> </span><span class="nx">ConnectPort</span><span class="w"> </span><span class="nx">line</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="nx">found</span><span class="p">,</span><span class="w"> </span><span class="nx">all</span><span class="w"> </span><span class="nx">ports</span><span class="w"> </span><span class="nx">are</span>
+<span class="err">#</span><span class="w"> </span><span class="nx">allowed</span><span class="w"> </span><span class="p">(</span><span class="nx">which</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="k">not</span><span class="w"> </span><span class="nx">very</span><span class="w"> </span><span class="nx">secure</span><span class="p">.)</span>
+<span class="err">#</span>
+<span class="err">#</span><span class="w"> </span><span class="nx">The</span><span class="w"> </span><span class="nx">following</span><span class="w"> </span><span class="nx">two</span><span class="w"> </span><span class="nx">ports</span><span class="w"> </span><span class="nx">are</span><span class="w"> </span><span class="nx">used</span><span class="w"> </span><span class="nx">by</span><span class="w"> </span><span class="nx">SSL</span><span class="p">.</span>
+<span class="err">#</span>
+<span class="nx">ConnectPort</span><span class="w"> </span><span class="mi">443</span>
+<span class="nx">ConnectPort</span><span class="w"> </span><span class="mi">563</span>
+
+<span class="err">#</span>
+<span class="err">#</span><span class="w"> </span><span class="nx">Configure</span><span class="w"> </span><span class="nx">one</span><span class="w"> </span><span class="k">or</span><span class="w"> </span><span class="nx">more</span><span class="w"> </span><span class="nx">ReversePath</span><span class="w"> </span><span class="nx">directives</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">enable</span><span class="w"> </span><span class="nx">reverse</span><span class="w"> </span><span class="nx">proxy</span>
+<span class="err">#</span><span class="w"> </span><span class="nx">support</span><span class="p">.</span><span class="w"> </span><span class="nx">With</span><span class="w"> </span><span class="nx">reverse</span><span class="w"> </span><span class="nx">proxying</span><span class="w"> </span><span class="nx">it</span><span class="err">&#39;</span><span class="nx">s</span><span class="w"> </span><span class="nx">possible</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">make</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="nx">number</span><span class="w"> </span><span class="nx">of</span>
+<span class="err">#</span><span class="w"> </span><span class="nx">sites</span><span class="w"> </span><span class="nx">appear</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="nx">they</span><span class="w"> </span><span class="nx">were</span><span class="w"> </span><span class="nx">part</span><span class="w"> </span><span class="nx">of</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="nx">single</span><span class="w"> </span><span class="nx">site</span><span class="p">.</span>
+<span class="err">#</span>
+<span class="err">#</span><span class="w"> </span><span class="nx">If</span><span class="w"> </span><span class="nx">you</span><span class="w"> </span><span class="nx">uncomment</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">following</span><span class="w"> </span><span class="nx">two</span><span class="w"> </span><span class="nx">directives</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="nx">run</span><span class="w"> </span><span class="nx">tinyproxy</span>
+<span class="err">#</span><span class="w"> </span><span class="nx">on</span><span class="w"> </span><span class="nx">your</span><span class="w"> </span><span class="nx">own</span><span class="w"> </span><span class="nx">computer</span><span class="w"> </span><span class="nx">at</span><span class="w"> </span><span class="nx">port</span><span class="w"> </span><span class="mi">8888</span><span class="p">,</span><span class="w"> </span><span class="nx">you</span><span class="w"> </span><span class="nx">can</span><span class="w"> </span><span class="nx">access</span><span class="w"> </span><span class="nx">Google</span><span class="w"> </span><span class="nx">using</span>
+<span class="err">#</span><span class="w"> </span><span class="nx">http</span><span class="p">:</span><span class="c1">//localhost:8888/google/ and Wired News using</span>
+<span class="err">#</span><span class="w"> </span><span class="nx">http</span><span class="p">:</span><span class="c1">//localhost:8888/wired/news/. Neither will actually work</span>
+<span class="err">#</span><span class="w"> </span><span class="nx">until</span><span class="w"> </span><span class="nx">you</span><span class="w"> </span><span class="nx">uncomment</span><span class="w"> </span><span class="nx">ReverseMagic</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nx">they</span><span class="w"> </span><span class="nx">use</span><span class="w"> </span><span class="nx">absolute</span><span class="w"> </span><span class="nx">linking</span><span class="p">.</span>
+<span class="err">#</span>
+<span class="err">#</span><span class="nx">ReversePath</span><span class="w"> </span><span class="s">&quot;/google/&quot;</span><span class="w"> </span><span class="s">&quot;http://www.google.com/&quot;</span>
+<span class="err">#</span><span class="nx">ReversePath</span><span class="w"> </span><span class="s">&quot;/wired/&quot;</span><span class="w">  </span><span class="s">&quot;http://www.wired.com/&quot;</span>
+
+<span class="err">#</span>
+<span class="err">#</span><span class="w"> </span><span class="nx">When</span><span class="w"> </span><span class="nx">using</span><span class="w"> </span><span class="nx">tinyproxy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="nx">reverse</span><span class="w"> </span><span class="nx">proxy</span><span class="p">,</span><span class="w"> </span><span class="nx">it</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="nx">STRONGLY</span><span class="w"> </span><span class="nx">recommended</span>
+<span class="err">#</span><span class="w"> </span><span class="nx">that</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">normal</span><span class="w"> </span><span class="nx">proxy</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="nx">turned</span><span class="w"> </span><span class="nx">off</span><span class="w"> </span><span class="nx">by</span><span class="w"> </span><span class="nx">uncommenting</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">next</span><span class="w"> </span><span class="nx">directive</span><span class="p">.</span>
+<span class="err">#</span>
+<span class="err">#</span><span class="nx">ReverseOnly</span><span class="w"> </span><span class="nx">Yes</span>
+
+<span class="err">#</span>
+<span class="err">#</span><span class="w"> </span><span class="nx">Use</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="nx">cookie</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">track</span><span class="w"> </span><span class="nx">reverse</span><span class="w"> </span><span class="nx">proxy</span><span class="w"> </span><span class="nx">mappings</span><span class="p">.</span><span class="w"> </span><span class="nx">If</span><span class="w"> </span><span class="nx">you</span><span class="w"> </span><span class="nx">need</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">reverse</span>
+<span class="err">#</span><span class="w"> </span><span class="nx">proxy</span><span class="w"> </span><span class="nx">sites</span><span class="w"> </span><span class="nx">which</span><span class="w"> </span><span class="nx">have</span><span class="w"> </span><span class="nx">absolute</span><span class="w"> </span><span class="nx">links</span><span class="w"> </span><span class="nx">you</span><span class="w"> </span><span class="nx">must</span><span class="w"> </span><span class="nx">uncomment</span><span class="w"> </span><span class="nx">this</span><span class="p">.</span>
+<span class="err">#</span>
+<span class="err">#</span><span class="nx">ReverseMagic</span><span class="w"> </span><span class="nx">Yes</span>
+
+<span class="err">#</span>
+<span class="err">#</span><span class="w"> </span><span class="nx">The</span><span class="w"> </span><span class="nx">URL</span><span class="w"> </span><span class="nx">that</span><span class="err">&#39;</span><span class="nx">s</span><span class="w"> </span><span class="nx">used</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">access</span><span class="w"> </span><span class="nx">this</span><span class="w"> </span><span class="nx">reverse</span><span class="w"> </span><span class="nx">proxy</span><span class="p">.</span><span class="w"> </span><span class="nx">The</span><span class="w"> </span><span class="nx">URL</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="nx">used</span><span class="w"> </span><span class="nx">to</span>
+<span class="err">#</span><span class="w"> </span><span class="nx">rewrite</span><span class="w"> </span><span class="nx">HTTP</span><span class="w"> </span><span class="nx">redirects</span><span class="w"> </span><span class="nx">so</span><span class="w"> </span><span class="nx">that</span><span class="w"> </span><span class="nx">they</span><span class="w"> </span><span class="nx">won</span><span class="err">&#39;</span><span class="nx">t</span><span class="w"> </span><span class="nx">escape</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">proxy</span><span class="p">.</span><span class="w"> </span><span class="nx">If</span><span class="w"> </span><span class="nx">you</span>
+<span class="err">#</span><span class="w"> </span><span class="nx">have</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="nx">chain</span><span class="w"> </span><span class="nx">of</span><span class="w"> </span><span class="nx">reverse</span><span class="w"> </span><span class="nx">proxies</span><span class="p">,</span><span class="w"> </span><span class="nx">you</span><span class="err">&#39;</span><span class="nx">ll</span><span class="w"> </span><span class="nx">need</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">put</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">outermost</span>
+<span class="err">#</span><span class="w"> </span><span class="nx">URL</span><span class="w"> </span><span class="nx">here</span><span class="w"> </span><span class="p">(</span><span class="nx">the</span><span class="w"> </span><span class="nx">address</span><span class="w"> </span><span class="nx">which</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">end</span><span class="w"> </span><span class="nx">user</span><span class="w"> </span><span class="nx">types</span><span class="w"> </span><span class="nx">into</span><span class="w"> </span><span class="nx">his</span><span class="o">/</span><span class="nx">her</span><span class="w"> </span><span class="nx">browser</span><span class="p">).</span>
+<span class="err">#</span>
+<span class="err">#</span><span class="w"> </span><span class="nx">If</span><span class="w"> </span><span class="k">not</span><span class="w"> </span><span class="nx">set</span><span class="w"> </span><span class="k">then</span><span class="w"> </span><span class="nx">no</span><span class="w"> </span><span class="nx">rewriting</span><span class="w"> </span><span class="nx">occurs</span><span class="p">.</span>
+<span class="err">#</span>
+<span class="err">#</span><span class="nx">ReverseBaseURL</span><span class="w"> </span><span class="s">&quot;http://localhost:8888/&quot;</span>
+</code></pre></div>
+
+<h2 id="references">References</h2>
+<ul>
+<li><a href="https://github.com/tinyproxy/tinyproxy">tinyproxy</a></li>
+</ul></div>
+    <footer>
+<p class="meta">
+  <span class="byline author vcard">
+    Posted by <span class="fn">Benjamin Du</span>
+  </span>
+<time datetime="2020-10-17T21:09:17-07:00" pubdate>Oct 17, 2020</time>  <span class="categories">
+    <a class="category" href="https://misc.legendu.net/tag/computer-science.html">Computer Science</a>
+    <a class="category" href="https://misc.legendu.net/tag/proxy.html">proxy</a>
+    <a class="category" href="https://misc.legendu.net/tag/proxy-server.html">proxy server</a>
+    <a class="category" href="https://misc.legendu.net/tag/tinyproxy.html">TinyProxy</a>
+  </span>
+</p>    </footer>
+  </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div>
+  </section>
+</div>
+<aside class="sidebar">
+  <section>
+    <h1>Recent Posts</h1>
+    <ul id="recent_posts">
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/tips-on-health/">Tips on Health</a>
+      </li>
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/tips-on-child-education/">Tips on Child Education</a>
+      </li>
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/tips-on-fd/">Tips on fd</a>
+      </li>
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/the-fzf-command-is-a-great-alternative-to-find/">The fzf Command Is a Great Alternative to find</a>
+      </li>
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/ruff-is-an-extremely-fast-python-linter-written-in-rust/">Ruff Is An Extremely Fast Python Linter Written in Rust</a>
+      </li>
+    </ul>
+  </section>
+  <section>
+    <h1>Categories</h1>
+    <ul id="recent_posts">
+        <li><a href="https://misc.legendu.net/category/ai.html">AI</a></li>
+        <li><a href="https://misc.legendu.net/category/career.html">Career</a></li>
+        <li><a href="https://misc.legendu.net/category/cloud.html">Cloud</a></li>
+        <li><a href="https://misc.legendu.net/category/computer-science.html">Computer Science</a></li>
+        <li><a href="https://misc.legendu.net/category/fiannce.html">Fiannce</a></li>
+        <li><a href="https://misc.legendu.net/category/finance.html">Finance</a></li>
+        <li><a href="https://misc.legendu.net/category/fun-problems.html">Fun Problems</a></li>
+        <li><a href="https://misc.legendu.net/category/hardware.html">Hardware</a></li>
+        <li><a href="https://misc.legendu.net/category/health.html">Health</a></li>
+        <li><a href="https://misc.legendu.net/category/house.html">House</a></li>
+        <li><a href="https://misc.legendu.net/category/internet.html">Internet</a></li>
+        <li><a href="https://misc.legendu.net/category/investment.html">Investment</a></li>
+        <li><a href="https://misc.legendu.net/category/life.html">life</a></li>
+        <li><a href="https://misc.legendu.net/category/linux.html">Linux</a></li>
+        <li><a href="https://misc.legendu.net/category/os.html">OS</a></li>
+        <li><a href="https://misc.legendu.net/category/people.html">People</a></li>
+        <li><a href="https://misc.legendu.net/category/philosophy.html">Philosophy</a></li>
+        <li><a href="https://misc.legendu.net/category/research.html">Research</a></li>
+        <li><a href="https://misc.legendu.net/category/shopping.html">Shopping</a></li>
+        <li><a href="https://misc.legendu.net/category/soft-skills.html">soft skills</a></li>
+        <li><a href="https://misc.legendu.net/category/software.html">Software</a></li>
+        <li><a href="https://misc.legendu.net/category/statistics.html">Statistics</a></li>
+        <li><a href="https://misc.legendu.net/category/tools.html">Tools</a></li>
+    </ul>
+  </section>
+ 
+
+  <section>
+  <h1>Tags</h1>
+  <ul class="tagcloud">
+  </ul>
+  </section>
+
+
+
+  <section>
+    <h1>GitHub Repos</h1>
+    <ul id="gh_repos">
+      <li class="loading">Status updating...</li>
+    </ul>
+      <a href="https://github.com/legendu-net">@legendu-net</a> on GitHub
+    <script type="text/javascript">
+      $.domReady(function(){
+          if (!window.jXHR){
+              var jxhr = document.createElement('script');
+              jxhr.type = 'text/javascript';
+              jxhr.src = 'https://misc.legendu.net/theme/js/jXHR.js';
+              var s = document.getElementsByTagName('script')[0];
+              s.parentNode.insertBefore(jxhr, s);
+          }
+
+          github.showRepos({
+              user: 'legendu-net',
+              count: 5,
+              skip_forks: true,
+              target: '#gh_repos'
+          });
+      });
+    </script>
+    <script src="https://misc.legendu.net/theme/js/github.js" type="text/javascript"> </script>
+  </section>
+
+    <section>
+        <h1>Social</h2>
+        <ul>
+            <li><a href="https://www.linkedin.com/in/ben-chuanlong-du-1239b221/" target="_blank">LinkedIn</a></li>
+            <li><a href="https://hub.docker.com/u/dclong" target="_blank">Docker Hub</a></li>
+            <li><a href="https://stackoverflow.com/users/7808204/benjamin-du?tab=profile" target="_blank">Stack Overflow</a></li>
+            <li><a href="https://twitter.com/longendu" target="_blank">Twitter</a></li>
+        <!--
+            <li><a href="https://misc.legendu.net/" type="application/rss+xml" rel="alternate">RSS</a></li>
+            -->
+        </ul>
+    </section>
+</aside>    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Ben Chuanlong Du -
+  <span class="credit">Powered by <a href="http://getpelican.com">Pelican</a></span>
+</p></footer>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-3STS9BVPF6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-3STS9BVPF6');
+</script>
+	<script type="text/javascript">
+	  var disqus_shortname = 'dclong';
+          var disqus_identifier = '/blog/tips-on-tinyproxy/';
+          var disqus_url = 'https://misc.legendu.net/blog/tips-on-tinyproxy/';
+          var disqus_title = 'Tips on TinyProxy';
+	  (function() {
+	    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	    dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+	    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	   })();
+	</script>
+</body>
+</html>

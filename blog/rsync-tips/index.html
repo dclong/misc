@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Tips on rsync</title>
+  <meta name="author" content="Ben Chuanlong Du">
+
+  <link href="https://misc.legendu.net/atom.xml" type="application/atom+xml" rel="alternate"
+        title="Ben Chuanlong Du's Blog Atom Feed" />
+
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link href="https://misc.legendu.net/favicon.png" rel="icon">
+  <link href="https://misc.legendu.net/theme/css/main_2.css" media="screen, projection"
+        rel="stylesheet" type="text/css">
+  <script src="https://misc.legendu.net/theme/js/modernizr-2.0.js"></script>
+  <script src="https://misc.legendu.net/theme/js/ender.js"></script>
+  <script src="https://misc.legendu.net/theme/js/octopress.js" type="text/javascript"></script>
+
+  <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <script data-ad-client="ca-pub-3836424032203369" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+</head>
+
+<body>
+  <header role="banner"><hgroup>
+  <h1><a href="https://misc.legendu.net/">Ben Chuanlong Du's Blog</a></h1>
+    <h2>It is never too late to learn.</h2>
+</hgroup></header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="https://misc.legendu.net/atom.xml" rel="subscribe-rss">RSS</a></li>
+</ul>
+
+<form name="search" action="https://www.bing.com/search" method="get" onSubmit="return build_query()">
+  <fieldset role="search">
+      <!--
+    <input type="hidden" name="q" value="site:https://misc.legendu.net" />
+        -->
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+
+<script type = "text/javascript">
+    function build_query() {
+        var query = document.forms["search"]["q"].value;
+        var prefix = "site:https://misc.legendu.net "
+        if (!query.startsWith(prefix)) {
+            query = prefix + query;
+            document.forms["search"]["q"].value = query;
+        }
+        return true;
+    }
+</script>
+
+<ul class="main-navigation">
+    <li><a href="https://www.legendu.net">Home</a></li>
+    <li><a href="https://misc.legendu.net">Blog</a></li>
+    <li><a href="https://misc.legendu.net/archives.html">Archives</a></li>
+    <li><a href="https://misc.legendu.net/categories.html">Categories</a></li>
+    <li><a href="https://misc.legendu.net/tags.html">Tags</a></li>
+    <li><a href="https://www.legendu.net/pages/about">About</a></li>
+</ul></nav>
+  <div id="main">
+    <div id="content">
+<div>
+  <article class="hentry" role="article">
+<header>
+      <h1 class="entry-title">Tips on rsync</h1>
+      <p class="meta"><time datetime="2016-11-18T18:54:19-08:00" pubdate>Nov 18, 2016</time></p>
+</header>
+
+  <div class="entry-content"><p><strong>Things on this page are fragmentary and immature notes/thoughts of the author. Please read with your own judgement!</strong></p>
+<h2 id="tips-and-traps">Tips and Traps</h2>
+<ol>
+<li>
+<p>The command <code>rsync -avh src_dir des_dir</code> (<code>src_dir</code> has no trailing slash) 
+    synchronizes the whole directory <code>src_dir</code> into the destination directory <code>des_dir</code>
+    while <code>rsync -avh src_dir/ des_dir</code> (<code>src_dir/</code> has trailing slash) 
+    synchronizes the contents (sub-files and sub-directories) of <code>src_dir</code> into the destination directory <code>des_dir</code>.
+    However, 
+    one thing tricky is that <code>rsync -avh . des_dir</code> synchronizes the content 
+    (sub-files and sub-directories) of the current directory into the destination directory <code>des_dir</code>.
+    This is especially tricky if you programmally get the source directory that you want to synchronize.
+    Here are a few <strong>good practices to follow</strong>.</p>
+<ul>
+<li>
+<p>Convert programmally generated path (for use in <code>rsync</code>) into its absolute form.</p>
+</li>
+<li>
+<p>Always use the form <code>rsync -avh src_dir/ des_dir/</code> instead of the form <code>rsync -avh src_dir des_dir</code>.</p>
+</li>
+</ul>
+</li>
+<li>
+<p>Use the option <code>--partial</code> to keep partially transfered files 
+    so that you can resume from break-point if rsync is interrupted.
+    This is <strong>really useful</strong> 
+    if you use rsync to transfer large files over unstable network.</p>
+</li>
+<li>
+<p>You can specify the option <code>--relative</code> to ask <code>rsync</code> to create missing directories
+    in order to keep the same directory structure.
+    For example,
+    suppose you want to copy the content of the directory <code>/new/x/y/z/</code> (of a machine) 
+    to <code>/pre_existing/dir/</code> (on another machine)
+    and you want keep the directory structure 
+    (that is you want the content to be copied to <code>/pre_existing/dir/new/x/y/z/</code> instead of <code>/pre_existing/dir/</code>),
+    you can use the following comamnd.</p>
+<div class="highlight"><pre><span></span><code>rsync<span class="w"> </span>-a<span class="w"> </span>--relative<span class="w"> </span>/new/x/y/z/<span class="w"> </span>user@remote:/pre_existing/dir/
+</code></pre></div>
+
+<p>And if you want to have <code>y/z/</code> created but not inside <code>new/x/</code>
+(i.e., copy the content to <code>/pre_existing/dir/y/z/</code>), 
+you can add <code>./</code> where you want <code>--relative</code> to begin.</p>
+<div class="highlight"><pre><span></span><code>rsync<span class="w"> </span>-a<span class="w"> </span>--relative<span class="w"> </span>/new/x/./y/z/<span class="w"> </span>user@remote:/pre_existing/dir/
+</code></pre></div>
+
+</li>
+<li>
+<p>You can use <code>rsync</code> to sync between 2 local directories/files 
+    or to sync between a remote server and the local host.
+    You cannot use <code>rsync</code> to directly rsync between 2 remote servers.
+    However, 
+    this is archivable (indirectly) uisng SSH.
+    For example, 
+    the following command logs into a server named <code>vm1.example.com</code> using SSH 
+    and then use <code>rsync</code> to synchronize the directory <code>/workdir/</code> on the server <code>vm2.example.com</code>
+    to the directory <code>/workdir/</code> on the server <code>vm1.example.com</code> (which is the local machine of <code>rsync</code>).</p>
+<div class="highlight"><pre><span></span><code>ssh<span class="w"> </span>vm1.example.com<span class="w"> </span>rsync<span class="w"> </span>-avh<span class="w"> </span>--info<span class="o">=</span>progress2<span class="w"> </span>--delete<span class="w"> </span>vm2.example.com:/workdir/<span class="w"> </span>/workdir/<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>&gt;<span class="w"> </span>backup.log<span class="w"> </span><span class="m">2</span>&gt;<span class="w"> </span>backup.err
+</code></pre></div>
+
+</li>
+<li>
+<p>By default, 
+    <code>rsync</code> set the owner of files on the destination machine to be the user that receives the files.
+    However,
+    you can keep the original owners/groups information by specifying the options <code>-o</code> and <code>-g</code>.
+    For more discussions,
+    please refer to <a href="https://serverfault.com/questions/564385/rsync-command-issues-owner-and-group-permissions-doesn%C2%B4t-change">Rsync command issues, owner and group permissions doesn´t change</a>
+    .</p>
+</li>
+</ol>
+<h2 id="examples">Examples</h2>
+<ol>
+<li>
+<p>Disable strickt host key checking. </p>
+<div class="highlight"><pre><span></span><code>rsync<span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;ssh -o StrictHostKeyChecking=no&quot;</span><span class="w"> </span>...
+</code></pre></div>
+
+</li>
+<li>
+<p>Use a different port (rather than 22).</p>
+<div class="highlight"><pre><span></span><code>rsync<span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;ssh -p 323&quot;</span><span class="w"> </span>...
+</code></pre></div>
+
+</li>
+<li>
+<p>Copy specified patterns (e.g., JupyterLab notebooks) only.</p>
+<div class="highlight"><pre><span></span><code>rsync<span class="w"> </span>-avh<span class="w"> </span>--include<span class="o">=</span><span class="s1">&#39;*.ipynb&#39;</span><span class="w"> </span>--include<span class="o">=</span><span class="s1">&#39;*/&#39;</span><span class="w"> </span>--exclude<span class="o">=</span><span class="s1">&#39;*&#39;</span><span class="w"> </span>--delete<span class="w"> </span>src_dir/<span class="w"> </span>des_dir/
+</code></pre></div>
+
+</li>
+<li>
+<p>Sync one directory to another one. </p>
+<div class="highlight"><pre><span></span><code>rsync<span class="w"> </span>-avh<span class="w"> </span>--info<span class="o">=</span>progress2<span class="w"> </span>--exclude<span class="o">=</span>‘*.pyc’<span class="w"> </span>--exclude<span class="o">=</span>‘.Trash-*’<span class="w"> </span>--exclude<span class="o">=</span>‘lost+found’<span class="w"> </span>--delete<span class="w"> </span><span class="nv">$tiger</span>:/workdir/<span class="w"> </span>/workdir/
+</code></pre></div>
+
+</li>
+<li>
+<p>An example script for synchronizing a Java project directory.</p>
+<div class="highlight"><pre><span></span><code><span class="ch">#!/usr/bin/env bash</span>
+
+<span class="nv">dir</span><span class="o">=</span><span class="k">$(</span>dirname<span class="w"> </span><span class="k">$(</span>dirname<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$0</span><span class="s2">&quot;</span><span class="k">))</span>
+
+rsync<span class="w"> </span>-avh<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--info<span class="o">=</span>progress2<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--delete<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--exclude<span class="o">=</span>.git/<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--exclude<span class="o">=</span>target/<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--exclude<span class="o">=</span>build/<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--exclude<span class="o">=</span>analysis/<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--exclude<span class="o">=</span>classes/<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--exclude<span class="o">=</span>maven-archiver/<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--exclude<span class="o">=</span>surefire-reports/<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--exclude<span class="o">=</span>test-classes/<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--exclude<span class="o">=</span>generated-sources/<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--exclude<span class="o">=</span>generated-test-sources/<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--exclude<span class="o">=</span>java.io.tmpdir/<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--exclude<span class="o">=</span>out<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span><span class="nv">$dir</span>/<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span><span class="nv">$tiger</span>:/workdir/users/
+</code></pre></div>
+
+</li>
+</ol>
+<h2 id="squeeze-the-performance-out-of-rsync-over-ssh">Squeeze the Performance out of <code>rsync</code> over <code>ssh</code></h2>
+<h3 id="some-options-of-rsync">Some Options of <code>rsync</code></h3>
+<ul>
+<li>a: archive mode - rescursive, preserves owner, preserves permissions, preserves modification times, preserves group, copies symlinks as symlinks, preserves device files.</li>
+<li>H: preserves hard-links</li>
+<li>A: preserves ACLs</li>
+<li>X: preserves extended attributes</li>
+<li>x: don't cross file-system boundaries</li>
+<li>v: increase verbosity</li>
+<li>--numeric-ds: don't map uid/gid values by user/group name</li>
+<li>--delete: delete extraneous files from dest dirs (differential clean-up during sync)</li>
+<li>--info=progress2: show progress during transfer</li>
+</ul>
+<h2 id="some-options-of-ssh">Some Options of <code>ssh</code></h2>
+<ul>
+<li>T: turn off pseudo-tty to decrease cpu load on destination.</li>
+<li>c arcfour: use the weakest but fastest SSH encryption. Must specify "Ciphers arcfour" in sshd_config on destination.</li>
+<li>o Compression=no: Turn off SSH compression.</li>
+<li>x: turn off X forwarding if it is on by default.</li>
+</ul>
+<p>Example of copying files from local to a remote server using rsync and ssh with optimal speed.</p>
+<div class="highlight"><pre><span></span><code>rsync<span class="w"> </span>-aHAXxv<span class="w"> </span>--numeric-ids<span class="w"> </span>--delete<span class="w"> </span>--info<span class="o">=</span>progress2<span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;ssh -T -c arcfour -o Compression=no -x&quot;</span><span class="w"> </span>user@remote_host:source_dir<span class="w"> </span>dest_dir
+</code></pre></div>
+
+<p>Example of copying files from a remote server to local using rsync and ssh with optimal speed.</p>
+<div class="highlight"><pre><span></span><code>rsync<span class="w"> </span>-aHAXxv<span class="w"> </span>--numeric-ids<span class="w"> </span>--delete<span class="w"> </span>--info<span class="o">=</span>progress2<span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;ssh -T -c arcfour -o Compression=no -x&quot;</span><span class="w"> </span>source_dir<span class="w"> </span>user@remote_host:dest_dir<span class="o">]</span>
+</code></pre></div>
+
+<h2 id="errors-solutions">Errors &amp; Solutions</h2>
+<h3 id="error-in-protocol-data-stream-code-12">error in protocol data stream (code 12)</h3>
+<p>It is probably because the remote diretory does not exist.</p>
+<h3 id="references">References</h3>
+<p><a href="http://www.librebyte.net/en/gnulinux/14-practical-examples-of-the-rsync-command/">14 Practical examples of the rsync command</a></p>
+<p>https://askubuntu.com/questions/625085/rsync-over-ssh-error-in-protocol-data-stream-code-12-ssh-works</p>
+<p>https://gist.github.com/KartikTalwar/4393116</p>
+<p><a href="https://stackoverflow.com/questions/1636889/rsync-how-can-i-configure-it-to-create-target-directory-on-server">rsync: how can I configure it to create target directory on server?</a></p></div>
+    <footer>
+<p class="meta">
+  <span class="byline author vcard">
+    Posted by <span class="fn">Ben Chuanlong Du</span>
+  </span>
+<time datetime="2016-11-18T18:54:19-08:00" pubdate>Nov 18, 2016</time>  <span class="categories">
+    <a class="category" href="https://misc.legendu.net/tag/linux.html">Linux</a>
+    <a class="category" href="https://misc.legendu.net/tag/copy.html">copy</a>
+    <a class="category" href="https://misc.legendu.net/tag/synchronization.html">synchronization</a>
+    <a class="category" href="https://misc.legendu.net/tag/file-system.html">file system</a>
+    <a class="category" href="https://misc.legendu.net/tag/filesystem.html">filesystem</a>
+    <a class="category" href="https://misc.legendu.net/tag/rsync.html">rsync</a>
+  </span>
+</p>    </footer>
+  </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div>
+  </section>
+</div>
+<aside class="sidebar">
+  <section>
+    <h1>Recent Posts</h1>
+    <ul id="recent_posts">
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/tips-on-health/">Tips on Health</a>
+      </li>
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/tips-on-child-education/">Tips on Child Education</a>
+      </li>
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/tips-on-fd/">Tips on fd</a>
+      </li>
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/the-fzf-command-is-a-great-alternative-to-find/">The fzf Command Is a Great Alternative to find</a>
+      </li>
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/ruff-is-an-extremely-fast-python-linter-written-in-rust/">Ruff Is An Extremely Fast Python Linter Written in Rust</a>
+      </li>
+    </ul>
+  </section>
+  <section>
+    <h1>Categories</h1>
+    <ul id="recent_posts">
+        <li><a href="https://misc.legendu.net/category/ai.html">AI</a></li>
+        <li><a href="https://misc.legendu.net/category/career.html">Career</a></li>
+        <li><a href="https://misc.legendu.net/category/cloud.html">Cloud</a></li>
+        <li><a href="https://misc.legendu.net/category/computer-science.html">Computer Science</a></li>
+        <li><a href="https://misc.legendu.net/category/fiannce.html">Fiannce</a></li>
+        <li><a href="https://misc.legendu.net/category/finance.html">Finance</a></li>
+        <li><a href="https://misc.legendu.net/category/fun-problems.html">Fun Problems</a></li>
+        <li><a href="https://misc.legendu.net/category/hardware.html">Hardware</a></li>
+        <li><a href="https://misc.legendu.net/category/health.html">Health</a></li>
+        <li><a href="https://misc.legendu.net/category/house.html">House</a></li>
+        <li><a href="https://misc.legendu.net/category/internet.html">Internet</a></li>
+        <li><a href="https://misc.legendu.net/category/investment.html">Investment</a></li>
+        <li><a href="https://misc.legendu.net/category/life.html">life</a></li>
+        <li><a href="https://misc.legendu.net/category/linux.html">Linux</a></li>
+        <li><a href="https://misc.legendu.net/category/os.html">OS</a></li>
+        <li><a href="https://misc.legendu.net/category/people.html">People</a></li>
+        <li><a href="https://misc.legendu.net/category/philosophy.html">Philosophy</a></li>
+        <li><a href="https://misc.legendu.net/category/research.html">Research</a></li>
+        <li><a href="https://misc.legendu.net/category/shopping.html">Shopping</a></li>
+        <li><a href="https://misc.legendu.net/category/soft-skills.html">soft skills</a></li>
+        <li><a href="https://misc.legendu.net/category/software.html">Software</a></li>
+        <li><a href="https://misc.legendu.net/category/statistics.html">Statistics</a></li>
+        <li><a href="https://misc.legendu.net/category/tools.html">Tools</a></li>
+    </ul>
+  </section>
+ 
+
+  <section>
+  <h1>Tags</h1>
+  <ul class="tagcloud">
+  </ul>
+  </section>
+
+
+
+  <section>
+    <h1>GitHub Repos</h1>
+    <ul id="gh_repos">
+      <li class="loading">Status updating...</li>
+    </ul>
+      <a href="https://github.com/legendu-net">@legendu-net</a> on GitHub
+    <script type="text/javascript">
+      $.domReady(function(){
+          if (!window.jXHR){
+              var jxhr = document.createElement('script');
+              jxhr.type = 'text/javascript';
+              jxhr.src = 'https://misc.legendu.net/theme/js/jXHR.js';
+              var s = document.getElementsByTagName('script')[0];
+              s.parentNode.insertBefore(jxhr, s);
+          }
+
+          github.showRepos({
+              user: 'legendu-net',
+              count: 5,
+              skip_forks: true,
+              target: '#gh_repos'
+          });
+      });
+    </script>
+    <script src="https://misc.legendu.net/theme/js/github.js" type="text/javascript"> </script>
+  </section>
+
+    <section>
+        <h1>Social</h2>
+        <ul>
+            <li><a href="https://www.linkedin.com/in/ben-chuanlong-du-1239b221/" target="_blank">LinkedIn</a></li>
+            <li><a href="https://hub.docker.com/u/dclong" target="_blank">Docker Hub</a></li>
+            <li><a href="https://stackoverflow.com/users/7808204/benjamin-du?tab=profile" target="_blank">Stack Overflow</a></li>
+            <li><a href="https://twitter.com/longendu" target="_blank">Twitter</a></li>
+        <!--
+            <li><a href="https://misc.legendu.net/" type="application/rss+xml" rel="alternate">RSS</a></li>
+            -->
+        </ul>
+    </section>
+</aside>    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Ben Chuanlong Du -
+  <span class="credit">Powered by <a href="http://getpelican.com">Pelican</a></span>
+</p></footer>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-3STS9BVPF6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-3STS9BVPF6');
+</script>
+	<script type="text/javascript">
+	  var disqus_shortname = 'dclong';
+          var disqus_identifier = '/blog/rsync-tips/';
+          var disqus_url = 'https://misc.legendu.net/blog/rsync-tips/';
+          var disqus_title = 'Tips on rsync';
+	  (function() {
+	    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	    dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+	    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	   })();
+	</script>
+</body>
+</html>

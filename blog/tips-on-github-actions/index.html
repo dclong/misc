@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Tips on GitHub Actions</title>
+  <meta name="author" content="Ben Chuanlong Du">
+
+  <link href="https://misc.legendu.net/atom.xml" type="application/atom+xml" rel="alternate"
+        title="Ben Chuanlong Du's Blog Atom Feed" />
+
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link href="https://misc.legendu.net/favicon.png" rel="icon">
+  <link href="https://misc.legendu.net/theme/css/main_2.css" media="screen, projection"
+        rel="stylesheet" type="text/css">
+  <script src="https://misc.legendu.net/theme/js/modernizr-2.0.js"></script>
+  <script src="https://misc.legendu.net/theme/js/ender.js"></script>
+  <script src="https://misc.legendu.net/theme/js/octopress.js" type="text/javascript"></script>
+
+  <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <script data-ad-client="ca-pub-3836424032203369" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+</head>
+
+<body>
+  <header role="banner"><hgroup>
+  <h1><a href="https://misc.legendu.net/">Ben Chuanlong Du's Blog</a></h1>
+    <h2>It is never too late to learn.</h2>
+</hgroup></header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="https://misc.legendu.net/atom.xml" rel="subscribe-rss">RSS</a></li>
+</ul>
+
+<form name="search" action="https://www.bing.com/search" method="get" onSubmit="return build_query()">
+  <fieldset role="search">
+      <!--
+    <input type="hidden" name="q" value="site:https://misc.legendu.net" />
+        -->
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+
+<script type = "text/javascript">
+    function build_query() {
+        var query = document.forms["search"]["q"].value;
+        var prefix = "site:https://misc.legendu.net "
+        if (!query.startsWith(prefix)) {
+            query = prefix + query;
+            document.forms["search"]["q"].value = query;
+        }
+        return true;
+    }
+</script>
+
+<ul class="main-navigation">
+    <li><a href="https://www.legendu.net">Home</a></li>
+    <li><a href="https://misc.legendu.net">Blog</a></li>
+    <li><a href="https://misc.legendu.net/archives.html">Archives</a></li>
+    <li><a href="https://misc.legendu.net/categories.html">Categories</a></li>
+    <li><a href="https://misc.legendu.net/tags.html">Tags</a></li>
+    <li><a href="https://www.legendu.net/pages/about">About</a></li>
+</ul></nav>
+  <div id="main">
+    <div id="content">
+<div>
+  <article class="hentry" role="article">
+<header>
+      <h1 class="entry-title">Tips on GitHub Actions</h1>
+      <p class="meta"><time datetime="2020-09-01T12:42:15-07:00" pubdate>Sep 01, 2020</time></p>
+</header>
+
+  <div class="entry-content"><p><strong>Things on this page are fragmentary and immature notes/thoughts of the author. Please read with your own judgement!</strong></p>
+<h2 id="tips-and-traps">Tips and Traps</h2>
+<ol>
+<li>
+<p>You can use <code>sudo</code> without password in Linux and macOS when running GitHub Actions.</p>
+</li>
+<li>
+<p>GitHub Actions supports <a href="https://github.blog/changelog/2020-07-06-github-actions-manual-triggers-with-workflow_dispatch/">manual triggers with workflow_dispatch</a>.
+    Workflow parameters are supported in manually triggers.</p>
+</li>
+<li>
+<p><code>GITHUB_TOKEN</code> is an automatically generated secret 
+    that lets you make authenticated calls to the GitHub API in your workflow runs. 
+    Actions generates a new token for each job and expires the token when a job completes.
+    <code>GITHUB_TOKEN</code> can also be used for the GitHub Action <code>peter-evans/create-pull-request</code> to create PRs automatically.
+    However,
+    GitHub bot is the owner of a PR created by the GitHub action 
+    <a href="https://github.com/peter-evans/create-pull-request">create-pull-request</a> with <code>GITHUB_TOKEN</code> 
+    which might have issues triggering other pipelines listening to PR events.
+    A simple solution to this problem is to manually create a repository secret (e.g., <code>GITHUBACTIONS</code>)
+    and use it to autenticate the GitHub Action 
+    <a href="https://github.com/peter-evans/create-pull-request">create-pull-request</a> with <code>GITHUB_TOKEN</code> 
+    .</p>
+</li>
+<li>
+<p>Rust cannot be installed into a global location 
+    following instructions at 
+    <a href="https://www.legendu.net/en/blog/install-rust-globally/">Install Rust Globally in Linux</a>
+    .
+    This might because GitHub Actions VMs have restrictions on environemnt variables.
+    You can still install Rust using root (via sudo)
+    but this doesn't give you much priviledge
+    as the root account in a GitHub Actions VM is restricted too.</p>
+</li>
+<li>
+<p>The <code>runner</code> account (even with <code>sudo</code>) in GitHub Actions VMs 
+    have restricted priviledges.
+    For example, 
+    the Linux perf (and equivalent) tools cannot be run in GitHub Actions VMs
+    even if <code>sudo</code> is used.
+    Docker containers running in GitHub Actions VMs are restricted too.
+    For more details,
+    please refer to
+    <a href="https://docs.github.com/en/actions/creating-actions/dockerfile-support-for-github-actions#supported-linux-capabilities">Supported Linux capabilities</a>
+    .</p>
+</li>
+<li>
+<p>OS: ubuntu-latest, windows-latest, macOS-latest</p>
+</li>
+<li>
+<p>Docker container is available in Ubuntu and Windows but not macOS in GitHub Actions due to license issues.
+    To use Docker in macOS in GitHub Actions,
+    you have to install it manually.
+    Please refer to 
+    <a href="https://github.community/t/is-it-possible-to-install-and-configure-docker-on-macos-runner/16981">Is it possible to install and configure Docker on MacOS runner?</a>
+    for more details.</p>
+</li>
+<li>
+<p>Good practices for GitHub repository with GitHub Actions workflows:</p>
+<ul>
+<li>Have 2 protected branches <code>main</code> and <code>dev</code>,
+    where <code>main</code> is reserved for releasing 
+    and <code>dev</code> is reserved for development.</li>
+<li>Fork the <code>dev</code> branch for development.</li>
+<li>A PR from <code>dev</code> to <code>main</code> should be made 
+    when it is ready to release a new version.</li>
+</ul>
+</li>
+</ol>
+<h2 id="issues-and-solutions">Issues and Solutions</h2>
+<h3 id="error-the-process-usrbingit-failed-with-exit-code-1">Error: The process '/usr/bin/git' failed with exit code 1</h3>
+<p>Sympton: A GitHub Actions workflow fail to checkout a branch of a repository 
+and throws the following error message.</p>
+<blockquote>
+<p>Error: The process '/usr/bin/git' failed with exit code 1</p>
+</blockquote>
+<p>Possible Causes and Solutions: It's possible that you use a branch name 
+(e.g., used <code>main</code> while the repo does not have a <code>main</code> branch) which does not exist. 
+If so, 
+use the correct branch name might fix the issue.</p>
+<h2 id="branch-matching">Branch Matching</h2>
+<div class="highlight"><pre><span></span><code><span class="n">on</span><span class="o">:</span>
+<span class="n">push</span><span class="o">:</span>
+<span class="w">    </span><span class="n">branches</span><span class="o">:</span><span class="w">    </span>
+<span class="w">    </span><span class="o">-</span><span class="w"> </span><span class="s1">&#39;*&#39;</span><span class="w">         </span><span class="err">#</span><span class="w"> </span><span class="n">matches</span><span class="w"> </span><span class="n">every</span><span class="w"> </span><span class="n">branch</span><span class="w"> </span><span class="n">that</span><span class="w"> </span><span class="n">doesn</span><span class="s1">&#39;t contain a &#39;</span><span class="o">/</span><span class="s1">&#39;</span>
+<span class="s1">    - &#39;</span><span class="o">*/*</span><span class="s1">&#39;       # matches every branch containing a single &#39;</span><span class="o">/</span><span class="s1">&#39;</span>
+<span class="s1">    - &#39;</span><span class="o">**</span><span class="s1">&#39;        # matches every branch</span>
+<span class="s1">    - &#39;</span><span class="o">!</span><span class="n">master</span><span class="err">&#39;</span><span class="w">   </span><span class="err">#</span><span class="w"> </span><span class="n">excludes</span><span class="w"> </span><span class="n">master</span>
+</code></pre></div>
+
+<p>For more discussions,
+please refer to
+<a href="https://stackoverflow.com/questions/57699839/github-actions-how-to-target-all-branches-except-master">GitHub Actions: how to target all branches EXCEPT master?</a>
+and
+<a href="https://docs.github.com/en/free-pro-team@latest/actions/reference/workflow-syntax-for-github-actions">Workflow syntax for GitHub Actions</a>
+.</p>
+<h2 id="powershell-on-windows">PowerShell on Windows</h2>
+<h3 id="set-path">Set PATH</h3>
+<p>echo "::add-path::./swigwin-4.0.1"</p>
+<p>echo %programfiles%
+echo ::set-env name=ProgramFilesPath::%programfiles%</p>
+<p>https://stackoverflow.com/questions/60169752/how-to-update-the-path-in-a-github-action-workflow-file-for-a-windows-latest-hos</p>
+<p>https://docs.github.com/en/free-pro-team@latest/actions/reference/workflow-commands-for-github-actions#adding-a-system-path</p>
+<p>Prepends a directory to the system PATH variable for all subsequent actions in the current job. The currently running action cannot access the new path variable.</p>
+<h2 id="good-github-actions">Good Github Actions</h2>
+<h3 id="checkout">checkout</h3>
+<h3 id="ssh-agent"><a href="https://github.com/webfactory/ssh-agent">ssh-agent</a></h3>
+<p><a href="https://github.com/webfactory/ssh-agent">ssh-agent</a>
+is a GitHub Action to setup <code>ssh-agent</code> with a private key.</p>
+<h3 id="bencher"><a href="https://github.com/bencherdev/bencher">bencher</a></h3>
+<p><a href="https://github.com/bencherdev/bencher">Bencher</a>
+is a suite of continuous benchmarking tools.</p>
+<h3 id="github-actions-for-python">GitHub Actions for Python</h3>
+<p>https://hynek.me/articles/python-github-actions/</p>
+<p>https://github.com/actions/setup-python</p>
+<h3 id="pull-request">Pull Request</h3>
+<p>https://github.com/peter-evans/create-pull-request</p>
+<p><a href="https://github.com/peter-evans/create-pull-request/issues/544">Create PR from push on a given branch</a></p>
+<h3 id="examples">Examples</h3>
+<p><a href="https://www.youtube.com/watch?v=rCXq86FOlzQ">Using semantic-release with GitHub Actions</a></p>
+<p><a href="https://github.com/pascalgn/automerge-action">automerge-action</a></p>
+<p><a href="https://www.youtube.com/watch?v=X3F3El_yvFg">Automatic Deployment With Github Actions</a></p>
+<p><a href="https://www.youtube.com/watch?v=yAkMgcfdok0">Zip Code Base with Github Actions for Releases</a></p>
+<p><a href="https://github.com/marketplace/actions/automatic-releases">GitHub Automatic Releases</a></p>
+<p><a href="https://www.youtube.com/watch?v=N_-Cu9_2YAA">Introducing GitHub Package Registry</a></p>
+<h2 id="self-hosted-runners">Self-hosted Runners</h2>
+<ol>
+<li>
+<p>straight forward to set up self-hosted runners following instructions</p>
+</li>
+<li>
+<p>No need for the machine to be publicly accessible</p>
+</li>
+<li>
+<p>Currently, 
+    a runner can be configured to accept only 1 repo in a personal account 
+    (which is inconveneint)
+    or multiple repositories in a GitHub organization.</p>
+</li>
+<li>
+<p>A self-hosted runner is able to use SSH keys on the host.
+    However, 
+    if a Docker container is used with a self-hosted runner,
+    you have to properly expose SSH keys on the host to the Docker container.
+    A feasible way is to </p>
+<div class="highlight"><pre><span></span><code><span class="mf">1.</span><span class="w"> </span><span class="n">Configure</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">GitHub</span><span class="w"> </span><span class="n">Action</span><span class="w"> </span><span class="n">workflow</span><span class="w"> </span><span class="kr">to</span><span class="w"> </span><span class="n">mount</span><span class="w"> </span><span class="err">`$</span><span class="n">HOME</span><span class="o">/</span><span class="mf">.</span><span class="n">ssh</span><span class="err">`</span><span class="w"> </span><span class="kr">to</span><span class="w"> </span><span class="err">`</span><span class="o">/</span><span class="n">ssh</span><span class="err">`</span><span class="mf">.</span>
+<span class="mf">2.</span><span class="w"> </span><span class="n">Copy</span><span class="w"> </span><span class="err">`</span><span class="o">/</span><span class="n">ssh</span><span class="err">`</span><span class="w"> </span><span class="kr">to</span><span class="w"> </span><span class="err">`</span><span class="o">/</span><span class="n">root</span><span class="o">/</span><span class="mf">.</span><span class="n">ssh</span><span class="err">`</span><span class="w"> </span><span class="n">in</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">Docker</span><span class="w"> </span><span class="kr">cont</span><span class="n">ainer</span><span class="mf">.</span><span class="w"> </span>
+<span class="mf">3.</span><span class="w"> </span><span class="kr">Run</span><span class="w"> </span><span class="err">`</span><span class="n">chmod</span><span class="w"> </span><span class="mf">600</span><span class="w"> </span><span class="o">/</span><span class="n">root</span><span class="o">/</span><span class="mf">.</span><span class="n">ssh</span><span class="o">/*</span><span class="err">`</span><span class="w"> </span><span class="kr">to</span><span class="w"> </span><span class="n">ensure</span><span class="w"> </span><span class="n">right</span><span class="w"> </span><span class="n">permissions</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">SSH</span><span class="w"> </span><span class="n">keys</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="n">configuration</span><span class="w"> </span><span class="n">files</span><span class="mf">.</span>
+</code></pre></div>
+
+</li>
+</ol>
+<h2 id="references">References</h2>
+<p>https://www.youtube.com/watch?v=Ll50l3fsoYs&amp;feature=emb_logo</p>
+<p>https://www.youtube.com/watch?v=0ahRkhrOePo</p>
+<p>https://docs.github.com/en/actions/reference/virtual-environments-for-github-hosted-runners#about-virtual-environments</p>
+<p>https://stackoverflow.com/questions/57830375/github-actions-workflow-error-permission-denied</p>
+<p><a href="https://medium.com/inexdigital-fr/githubs-actions-v2-tips-and-tricks-c083ec6cfae0">GitHub’s Actions v2 — Tips and Tricks</a></p>
+<p><a href="https://github.community/t/questions-about-pr-workflows-and-actions-checkout-v2/122347">Questions about PR workflows and actions/checkout@v2</a></p></div>
+    <footer>
+<p class="meta">
+  <span class="byline author vcard">
+    Posted by <span class="fn">Benjamin Du</span>
+  </span>
+<time datetime="2020-09-01T12:42:15-07:00" pubdate>Sep 01, 2020</time>  <span class="categories">
+    <a class="category" href="https://misc.legendu.net/tag/computer-science.html">Computer Science</a>
+    <a class="category" href="https://misc.legendu.net/tag/github-actions.html">GitHub Actions</a>
+    <a class="category" href="https://misc.legendu.net/tag/cicd.html">CICD</a>
+  </span>
+</p>    </footer>
+  </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div>
+  </section>
+</div>
+<aside class="sidebar">
+  <section>
+    <h1>Recent Posts</h1>
+    <ul id="recent_posts">
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/tips-on-health/">Tips on Health</a>
+      </li>
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/tips-on-child-education/">Tips on Child Education</a>
+      </li>
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/tips-on-fd/">Tips on fd</a>
+      </li>
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/the-fzf-command-is-a-great-alternative-to-find/">The fzf Command Is a Great Alternative to find</a>
+      </li>
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/ruff-is-an-extremely-fast-python-linter-written-in-rust/">Ruff Is An Extremely Fast Python Linter Written in Rust</a>
+      </li>
+    </ul>
+  </section>
+  <section>
+    <h1>Categories</h1>
+    <ul id="recent_posts">
+        <li><a href="https://misc.legendu.net/category/ai.html">AI</a></li>
+        <li><a href="https://misc.legendu.net/category/career.html">Career</a></li>
+        <li><a href="https://misc.legendu.net/category/cloud.html">Cloud</a></li>
+        <li><a href="https://misc.legendu.net/category/computer-science.html">Computer Science</a></li>
+        <li><a href="https://misc.legendu.net/category/fiannce.html">Fiannce</a></li>
+        <li><a href="https://misc.legendu.net/category/finance.html">Finance</a></li>
+        <li><a href="https://misc.legendu.net/category/fun-problems.html">Fun Problems</a></li>
+        <li><a href="https://misc.legendu.net/category/hardware.html">Hardware</a></li>
+        <li><a href="https://misc.legendu.net/category/health.html">Health</a></li>
+        <li><a href="https://misc.legendu.net/category/house.html">House</a></li>
+        <li><a href="https://misc.legendu.net/category/internet.html">Internet</a></li>
+        <li><a href="https://misc.legendu.net/category/investment.html">Investment</a></li>
+        <li><a href="https://misc.legendu.net/category/life.html">life</a></li>
+        <li><a href="https://misc.legendu.net/category/linux.html">Linux</a></li>
+        <li><a href="https://misc.legendu.net/category/os.html">OS</a></li>
+        <li><a href="https://misc.legendu.net/category/people.html">People</a></li>
+        <li><a href="https://misc.legendu.net/category/philosophy.html">Philosophy</a></li>
+        <li><a href="https://misc.legendu.net/category/research.html">Research</a></li>
+        <li><a href="https://misc.legendu.net/category/shopping.html">Shopping</a></li>
+        <li><a href="https://misc.legendu.net/category/soft-skills.html">soft skills</a></li>
+        <li><a href="https://misc.legendu.net/category/software.html">Software</a></li>
+        <li><a href="https://misc.legendu.net/category/statistics.html">Statistics</a></li>
+        <li><a href="https://misc.legendu.net/category/tools.html">Tools</a></li>
+    </ul>
+  </section>
+ 
+
+  <section>
+  <h1>Tags</h1>
+  <ul class="tagcloud">
+  </ul>
+  </section>
+
+
+
+  <section>
+    <h1>GitHub Repos</h1>
+    <ul id="gh_repos">
+      <li class="loading">Status updating...</li>
+    </ul>
+      <a href="https://github.com/legendu-net">@legendu-net</a> on GitHub
+    <script type="text/javascript">
+      $.domReady(function(){
+          if (!window.jXHR){
+              var jxhr = document.createElement('script');
+              jxhr.type = 'text/javascript';
+              jxhr.src = 'https://misc.legendu.net/theme/js/jXHR.js';
+              var s = document.getElementsByTagName('script')[0];
+              s.parentNode.insertBefore(jxhr, s);
+          }
+
+          github.showRepos({
+              user: 'legendu-net',
+              count: 5,
+              skip_forks: true,
+              target: '#gh_repos'
+          });
+      });
+    </script>
+    <script src="https://misc.legendu.net/theme/js/github.js" type="text/javascript"> </script>
+  </section>
+
+    <section>
+        <h1>Social</h2>
+        <ul>
+            <li><a href="https://www.linkedin.com/in/ben-chuanlong-du-1239b221/" target="_blank">LinkedIn</a></li>
+            <li><a href="https://hub.docker.com/u/dclong" target="_blank">Docker Hub</a></li>
+            <li><a href="https://stackoverflow.com/users/7808204/benjamin-du?tab=profile" target="_blank">Stack Overflow</a></li>
+            <li><a href="https://twitter.com/longendu" target="_blank">Twitter</a></li>
+        <!--
+            <li><a href="https://misc.legendu.net/" type="application/rss+xml" rel="alternate">RSS</a></li>
+            -->
+        </ul>
+    </section>
+</aside>    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Ben Chuanlong Du -
+  <span class="credit">Powered by <a href="http://getpelican.com">Pelican</a></span>
+</p></footer>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-3STS9BVPF6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-3STS9BVPF6');
+</script>
+	<script type="text/javascript">
+	  var disqus_shortname = 'dclong';
+          var disqus_identifier = '/blog/tips-on-github-actions/';
+          var disqus_url = 'https://misc.legendu.net/blog/tips-on-github-actions/';
+          var disqus_title = 'Tips on GitHub Actions';
+	  (function() {
+	    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	    dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+	    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	   })();
+	</script>
+</body>
+</html>

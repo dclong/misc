@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Ben Chuanlong Du's Blog - Statistics</title><link href="https://misc.legendu.net/" rel="alternate"></link><link href="https://misc.legendu.net/feeds/statistics.atom.xml" rel="self"></link><id>https://misc.legendu.net/</id><updated>2023-12-08T21:54:38-08:00</updated><subtitle>It is never too late to learn.</subtitle><entry><title>Bootstrap Resampling in Python</title><link href="https://misc.legendu.net/blog/bootstrap-resampling-in-python/" rel="alternate"></link><published>2023-12-08T21:54:38-08:00</published><updated>2023-12-08T21:54:38-08:00</updated><author><name>Benjamin Du</name></author><id>tag:misc.legendu.net,2023-12-08:/blog/bootstrap-resampling-in-python/</id><content type="html">&lt;p&gt;&lt;strong&gt;Things on this page are fragmentary and immature notes/thoughts of the author. Please read with your own judgement!&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.bootstrap.html&lt;/p&gt;</content><category term="Statistics"></category><category term="Statistics"></category><category term="Python"></category><category term="resampling"></category><category term="bootstrap"></category></entry><entry><title>Construct Confidence Intervals Using Jackknife</title><link href="https://misc.legendu.net/blog/construct-confidence-intervals-using-jackknife/" rel="alternate"></link><published>2023-12-08T21:46:25-08:00</published><updated>2023-12-08T21:46:25-08:00</updated><author><name>Benjamin Du</name></author><id>tag:misc.legendu.net,2023-12-08:/blog/construct-confidence-intervals-using-jackknife/</id><summary type="html">&lt;p&gt;&lt;strong&gt;Things on this page are fragmentary and immature notes/thoughts of the author. Please read with your own judgement!&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://github.com/google/meterstick"&gt;meterstick&lt;/a&gt;
+is an opensource Python library by Google,
+which provides a concise syntax to describe and execute routine data analysis tasks
+.
+Specially,
+it supports the statistical method "jackknife on bucketized data …&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;strong&gt;Things on this page are fragmentary and immature notes/thoughts of the author. Please read with your own judgement!&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://github.com/google/meterstick"&gt;meterstick&lt;/a&gt;
+is an opensource Python library by Google,
+which provides a concise syntax to describe and execute routine data analysis tasks
+.
+Specially,
+it supports the statistical method "jackknife on bucketized data"
+for estimating variances and construct confidence intervals.&lt;/p&gt;
+&lt;h2 id="references"&gt;References&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="https://research.google/pubs/pub43157/"&gt;Estimating Uncertainty for Massive Data Streams&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="https://support.google.com/google-ads/answer/9232676?hl=en"&gt;The statistical methodology behind experiments&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="https://www.math.wustl.edu/~sawyer/handouts/Jackknife.pdf"&gt;Resampling Data: Using a Statistical Jackknife&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="https://www.unofficialgoogledatascience.com/2016/08/mind-your-units.html"&gt;Mind Your Units&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;</content><category term="Statistics"></category><category term="Statistics"></category><category term="jackknife"></category><category term="confidence interval"></category><category term="ci"></category><category term="bucketize"></category></entry></feed>

@@ -1,0 +1,3001 @@
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Case of Column Names in Spark DataFrames</title>
+  <meta name="author" content="Ben Chuanlong Du">
+
+  <link href="https://misc.legendu.net/atom.xml" type="application/atom+xml" rel="alternate"
+        title="Ben Chuanlong Du's Blog Atom Feed" />
+
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link href="https://misc.legendu.net/favicon.png" rel="icon">
+  <link href="https://misc.legendu.net/theme/css/main_2.css" media="screen, projection"
+        rel="stylesheet" type="text/css">
+  <script src="https://misc.legendu.net/theme/js/modernizr-2.0.js"></script>
+  <script src="https://misc.legendu.net/theme/js/ender.js"></script>
+  <script src="https://misc.legendu.net/theme/js/octopress.js" type="text/javascript"></script>
+
+  <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <script data-ad-client="ca-pub-3836424032203369" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+</head>
+
+<body>
+  <header role="banner"><hgroup>
+  <h1><a href="https://misc.legendu.net/">Ben Chuanlong Du's Blog</a></h1>
+    <h2>It is never too late to learn.</h2>
+</hgroup></header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="https://misc.legendu.net/atom.xml" rel="subscribe-rss">RSS</a></li>
+</ul>
+
+<form name="search" action="https://www.bing.com/search" method="get" onSubmit="return build_query()">
+  <fieldset role="search">
+      <!--
+    <input type="hidden" name="q" value="site:https://misc.legendu.net" />
+        -->
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+
+<script type = "text/javascript">
+    function build_query() {
+        var query = document.forms["search"]["q"].value;
+        var prefix = "site:https://misc.legendu.net "
+        if (!query.startsWith(prefix)) {
+            query = prefix + query;
+            document.forms["search"]["q"].value = query;
+        }
+        return true;
+    }
+</script>
+
+<ul class="main-navigation">
+    <li><a href="https://www.legendu.net">Home</a></li>
+    <li><a href="https://misc.legendu.net">Blog</a></li>
+    <li><a href="https://misc.legendu.net/archives.html">Archives</a></li>
+    <li><a href="https://misc.legendu.net/categories.html">Categories</a></li>
+    <li><a href="https://misc.legendu.net/tags.html">Tags</a></li>
+    <li><a href="https://www.legendu.net/pages/about">About</a></li>
+</ul></nav>
+  <div id="main">
+    <div id="content">
+<div>
+  <article class="hentry" role="article">
+<header>
+      <h1 class="entry-title">Case of Column Names in Spark DataFrames</h1>
+      <p class="meta"><time datetime="2019-12-03T00:00:00-08:00" pubdate>Dec 03, 2019</time></p>
+</header>
+
+  <div class="entry-content"><style type="text/css">/*!
+*
+* IPython notebook
+*
+*/
+/* CSS font colors for translated ANSI escape sequences */
+/* The color values are a mix of
+   http://www.xcolors.net/dl/baskerville-ivorylight and
+   http://www.xcolors.net/dl/euphrasia */
+.ansi-black-fg {
+  color: #3E424D;
+}
+.ansi-black-bg {
+  background-color: #3E424D;
+}
+.ansi-black-intense-fg {
+  color: #282C36;
+}
+.ansi-black-intense-bg {
+  background-color: #282C36;
+}
+.ansi-red-fg {
+  color: #E75C58;
+}
+.ansi-red-bg {
+  background-color: #E75C58;
+}
+.ansi-red-intense-fg {
+  color: #B22B31;
+}
+.ansi-red-intense-bg {
+  background-color: #B22B31;
+}
+.ansi-green-fg {
+  color: #00A250;
+}
+.ansi-green-bg {
+  background-color: #00A250;
+}
+.ansi-green-intense-fg {
+  color: #007427;
+}
+.ansi-green-intense-bg {
+  background-color: #007427;
+}
+.ansi-yellow-fg {
+  color: #DDB62B;
+}
+.ansi-yellow-bg {
+  background-color: #DDB62B;
+}
+.ansi-yellow-intense-fg {
+  color: #B27D12;
+}
+.ansi-yellow-intense-bg {
+  background-color: #B27D12;
+}
+.ansi-blue-fg {
+  color: #208FFB;
+}
+.ansi-blue-bg {
+  background-color: #208FFB;
+}
+.ansi-blue-intense-fg {
+  color: #0065CA;
+}
+.ansi-blue-intense-bg {
+  background-color: #0065CA;
+}
+.ansi-magenta-fg {
+  color: #D160C4;
+}
+.ansi-magenta-bg {
+  background-color: #D160C4;
+}
+.ansi-magenta-intense-fg {
+  color: #A03196;
+}
+.ansi-magenta-intense-bg {
+  background-color: #A03196;
+}
+.ansi-cyan-fg {
+  color: #60C6C8;
+}
+.ansi-cyan-bg {
+  background-color: #60C6C8;
+}
+.ansi-cyan-intense-fg {
+  color: #258F8F;
+}
+.ansi-cyan-intense-bg {
+  background-color: #258F8F;
+}
+.ansi-white-fg {
+  color: #C5C1B4;
+}
+.ansi-white-bg {
+  background-color: #C5C1B4;
+}
+.ansi-white-intense-fg {
+  color: #A1A6B2;
+}
+.ansi-white-intense-bg {
+  background-color: #A1A6B2;
+}
+.ansi-default-inverse-fg {
+  color: #FFFFFF;
+}
+.ansi-default-inverse-bg {
+  background-color: #000000;
+}
+.ansi-bold {
+  font-weight: bold;
+}
+.ansi-underline {
+  text-decoration: underline;
+}
+/* The following styles are deprecated an will be removed in a future version */
+.ansibold {
+  font-weight: bold;
+}
+.ansi-inverse {
+  outline: 0.5px dotted;
+}
+/* use dark versions for foreground, to improve visibility */
+.ansiblack {
+  color: black;
+}
+.ansired {
+  color: darkred;
+}
+.ansigreen {
+  color: darkgreen;
+}
+.ansiyellow {
+  color: #c4a000;
+}
+.ansiblue {
+  color: darkblue;
+}
+.ansipurple {
+  color: darkviolet;
+}
+.ansicyan {
+  color: steelblue;
+}
+.ansigray {
+  color: gray;
+}
+/* and light for background, for the same reason */
+.ansibgblack {
+  background-color: black;
+}
+.ansibgred {
+  background-color: red;
+}
+.ansibggreen {
+  background-color: green;
+}
+.ansibgyellow {
+  background-color: yellow;
+}
+.ansibgblue {
+  background-color: blue;
+}
+.ansibgpurple {
+  background-color: magenta;
+}
+.ansibgcyan {
+  background-color: cyan;
+}
+.ansibggray {
+  background-color: gray;
+}
+div.cell {
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: vertical;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: vertical;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  border-radius: 2px;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  border-width: 1px;
+  border-style: solid;
+  border-color: transparent;
+  width: 100%;
+  padding: 5px;
+  /* This acts as a spacer between cells, that is outside the border */
+  margin: 0px;
+  outline: none;
+  position: relative;
+  overflow: visible;
+}
+div.cell:before {
+  position: absolute;
+  display: block;
+  top: -1px;
+  left: -1px;
+  width: 5px;
+  height: calc(100% +  2px);
+  content: '';
+  background: transparent;
+}
+div.cell.jupyter-soft-selected {
+  border-left-color: #E3F2FD;
+  border-left-width: 1px;
+  padding-left: 5px;
+  border-right-color: #E3F2FD;
+  border-right-width: 1px;
+  background: #E3F2FD;
+}
+@media print {
+  div.cell.jupyter-soft-selected {
+    border-color: transparent;
+  }
+}
+div.cell.selected,
+div.cell.selected.jupyter-soft-selected {
+  border-color: #ababab;
+}
+div.cell.selected:before,
+div.cell.selected.jupyter-soft-selected:before {
+  position: absolute;
+  display: block;
+  top: -1px;
+  left: -1px;
+  width: 5px;
+  height: calc(100% +  2px);
+  content: '';
+  background: #42A5F5;
+}
+@media print {
+  div.cell.selected,
+  div.cell.selected.jupyter-soft-selected {
+    border-color: transparent;
+  }
+}
+.edit_mode div.cell.selected {
+  border-color: #66BB6A;
+}
+.edit_mode div.cell.selected:before {
+  position: absolute;
+  display: block;
+  top: -1px;
+  left: -1px;
+  width: 5px;
+  height: calc(100% +  2px);
+  content: '';
+  background: #66BB6A;
+}
+@media print {
+  .edit_mode div.cell.selected {
+    border-color: transparent;
+  }
+}
+.prompt {
+  /* This needs to be wide enough for 3 digit prompt numbers: In[100]: */
+  min-width: 14ex;
+  /* This padding is tuned to match the padding on the CodeMirror editor. */
+  padding: 0.4em;
+  margin: 0px;
+  font-family: monospace;
+  text-align: right;
+  /* This has to match that of the the CodeMirror class line-height below */
+  line-height: 1.21429em;
+  /* Don't highlight prompt number selection */
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  /* Use default cursor */
+  cursor: default;
+}
+@media (max-width: 540px) {
+  .prompt {
+    text-align: left;
+  }
+}
+div.inner_cell {
+  min-width: 0;
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: vertical;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: vertical;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  /* Old browsers */
+  -webkit-box-flex: 1;
+  -moz-box-flex: 1;
+  box-flex: 1;
+  /* Modern browsers */
+  flex: 1;
+}
+/* input_area and input_prompt must match in top border and margin for alignment */
+div.input_area {
+  border: 1px solid #cfcfcf;
+  border-radius: 2px;
+  background: #f7f7f7;
+  line-height: 1.21429em;
+}
+/* This is needed so that empty prompt areas can collapse to zero height when there
+   is no content in the output_subarea and the prompt. The main purpose of this is
+   to make sure that empty JavaScript output_subareas have no height. */
+div.prompt:empty {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+div.unrecognized_cell {
+  padding: 5px 5px 5px 0px;
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: horizontal;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: horizontal;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: horizontal;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+}
+div.unrecognized_cell .inner_cell {
+  border-radius: 2px;
+  padding: 5px;
+  font-weight: bold;
+  color: red;
+  border: 1px solid #cfcfcf;
+  background: #eaeaea;
+}
+div.unrecognized_cell .inner_cell a {
+  color: inherit;
+  text-decoration: none;
+}
+div.unrecognized_cell .inner_cell a:hover {
+  color: inherit;
+  text-decoration: none;
+}
+@media (max-width: 540px) {
+  div.unrecognized_cell > div.prompt {
+    display: none;
+  }
+}
+div.code_cell {
+  /* avoid page breaking on code cells when printing */
+}
+@media print {
+  div.code_cell {
+    page-break-inside: avoid;
+  }
+}
+/* any special styling for code cells that are currently running goes here */
+div.input {
+  page-break-inside: avoid;
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: horizontal;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: horizontal;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: horizontal;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+}
+@media (max-width: 540px) {
+  div.input {
+    /* Old browsers */
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-box-align: stretch;
+    display: -moz-box;
+    -moz-box-orient: vertical;
+    -moz-box-align: stretch;
+    display: box;
+    box-orient: vertical;
+    box-align: stretch;
+    /* Modern browsers */
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+/* input_area and input_prompt must match in top border and margin for alignment */
+div.input_prompt {
+  color: #303F9F;
+  border-top: 1px solid transparent;
+}
+div.input_area > div.highlight {
+  margin: 0.4em;
+  border: none;
+  padding: 0px;
+  background-color: transparent;
+}
+div.input_area > div.highlight > pre {
+  margin: 0px;
+  border: none;
+  padding: 0px;
+  background-color: transparent;
+}
+/* The following gets added to the <head> if it is detected that the user has a
+ * monospace font with inconsistent normal/bold/italic height.  See
+ * notebookmain.js.  Such fonts will have keywords vertically offset with
+ * respect to the rest of the text.  The user should select a better font.
+ * See: https://github.com/ipython/ipython/issues/1503
+ *
+ * .CodeMirror span {
+ *      vertical-align: bottom;
+ * }
+ */
+.CodeMirror {
+  line-height: 1.21429em;
+  /* Changed from 1em to our global default */
+  font-size: 14px;
+  height: auto;
+  /* Changed to auto to autogrow */
+  background: none;
+  /* Changed from white to allow our bg to show through */
+}
+.CodeMirror-scroll {
+  /*  The CodeMirror docs are a bit fuzzy on if overflow-y should be hidden or visible.*/
+  /*  We have found that if it is visible, vertical scrollbars appear with font size changes.*/
+  overflow-y: hidden;
+  overflow-x: auto;
+}
+.CodeMirror-lines {
+  /* In CM2, this used to be 0.4em, but in CM3 it went to 4px. We need the em value because */
+  /* we have set a different line-height and want this to scale with that. */
+  /* Note that this should set vertical padding only, since CodeMirror assumes
+       that horizontal padding will be set on CodeMirror pre */
+  padding: 0.4em 0;
+}
+.CodeMirror-linenumber {
+  padding: 0 8px 0 4px;
+}
+.CodeMirror-gutters {
+  border-bottom-left-radius: 2px;
+  border-top-left-radius: 2px;
+}
+.CodeMirror pre {
+  /* In CM3 this went to 4px from 0 in CM2. This sets horizontal padding only,
+    use .CodeMirror-lines for vertical */
+  padding: 0 0.4em;
+  border: 0;
+  border-radius: 0;
+}
+.CodeMirror-cursor {
+  border-left: 1.4px solid black;
+}
+@media screen and (min-width: 2138px) and (max-width: 4319px) {
+  .CodeMirror-cursor {
+    border-left: 2px solid black;
+  }
+}
+@media screen and (min-width: 4320px) {
+  .CodeMirror-cursor {
+    border-left: 4px solid black;
+  }
+}
+/*
+
+Original style from softwaremaniacs.org (c) Ivan Sagalaev <Maniac@SoftwareManiacs.Org>
+Adapted from GitHub theme
+
+*/
+.highlight-base {
+  color: #000;
+}
+.highlight-variable {
+  color: #000;
+}
+.highlight-variable-2 {
+  color: #1a1a1a;
+}
+.highlight-variable-3 {
+  color: #333333;
+}
+.highlight-string {
+  color: #BA2121;
+}
+.highlight-comment {
+  color: #408080;
+  font-style: italic;
+}
+.highlight-number {
+  color: #080;
+}
+.highlight-atom {
+  color: #88F;
+}
+.highlight-keyword {
+  color: #008000;
+  font-weight: bold;
+}
+.highlight-builtin {
+  color: #008000;
+}
+.highlight-error {
+  color: #f00;
+}
+.highlight-operator {
+  color: #AA22FF;
+  font-weight: bold;
+}
+.highlight-meta {
+  color: #AA22FF;
+}
+/* previously not defined, copying from default codemirror */
+.highlight-def {
+  color: #00f;
+}
+.highlight-string-2 {
+  color: #f50;
+}
+.highlight-qualifier {
+  color: #555;
+}
+.highlight-bracket {
+  color: #997;
+}
+.highlight-tag {
+  color: #170;
+}
+.highlight-attribute {
+  color: #00c;
+}
+.highlight-header {
+  color: blue;
+}
+.highlight-quote {
+  color: #090;
+}
+.highlight-link {
+  color: #00c;
+}
+/* apply the same style to codemirror */
+.cm-s-ipython span.cm-keyword {
+  color: #008000;
+  font-weight: bold;
+}
+.cm-s-ipython span.cm-atom {
+  color: #88F;
+}
+.cm-s-ipython span.cm-number {
+  color: #080;
+}
+.cm-s-ipython span.cm-def {
+  color: #00f;
+}
+.cm-s-ipython span.cm-variable {
+  color: #000;
+}
+.cm-s-ipython span.cm-operator {
+  color: #AA22FF;
+  font-weight: bold;
+}
+.cm-s-ipython span.cm-variable-2 {
+  color: #1a1a1a;
+}
+.cm-s-ipython span.cm-variable-3 {
+  color: #333333;
+}
+.cm-s-ipython span.cm-comment {
+  color: #408080;
+  font-style: italic;
+}
+.cm-s-ipython span.cm-string {
+  color: #BA2121;
+}
+.cm-s-ipython span.cm-string-2 {
+  color: #f50;
+}
+.cm-s-ipython span.cm-meta {
+  color: #AA22FF;
+}
+.cm-s-ipython span.cm-qualifier {
+  color: #555;
+}
+.cm-s-ipython span.cm-builtin {
+  color: #008000;
+}
+.cm-s-ipython span.cm-bracket {
+  color: #997;
+}
+.cm-s-ipython span.cm-tag {
+  color: #170;
+}
+.cm-s-ipython span.cm-attribute {
+  color: #00c;
+}
+.cm-s-ipython span.cm-header {
+  color: blue;
+}
+.cm-s-ipython span.cm-quote {
+  color: #090;
+}
+.cm-s-ipython span.cm-link {
+  color: #00c;
+}
+.cm-s-ipython span.cm-error {
+  color: #f00;
+}
+.cm-s-ipython span.cm-tab {
+  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAMCAYAAAAkuj5RAAAAAXNSR0IArs4c6QAAAGFJREFUSMft1LsRQFAQheHPowAKoACx3IgEKtaEHujDjORSgWTH/ZOdnZOcM/sgk/kFFWY0qV8foQwS4MKBCS3qR6ixBJvElOobYAtivseIE120FaowJPN75GMu8j/LfMwNjh4HUpwg4LUAAAAASUVORK5CYII=);
+  background-position: right;
+  background-repeat: no-repeat;
+}
+div.output_wrapper {
+  /* this position must be relative to enable descendents to be absolute within it */
+  position: relative;
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: vertical;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: vertical;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  z-index: 1;
+}
+/* class for the output area when it should be height-limited */
+div.output_scroll {
+  /* ideally, this would be max-height, but FF barfs all over that */
+  height: 24em;
+  /* FF needs this *and the wrapper* to specify full width, or it will shrinkwrap */
+  width: 100%;
+  overflow: auto;
+  border-radius: 2px;
+  -webkit-box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.8);
+  box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.8);
+  display: block;
+}
+/* output div while it is collapsed */
+div.output_collapsed {
+  margin: 0px;
+  padding: 0px;
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: vertical;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: vertical;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+div.out_prompt_overlay {
+  height: 100%;
+  padding: 0px 0.4em;
+  position: absolute;
+  border-radius: 2px;
+}
+div.out_prompt_overlay:hover {
+  /* use inner shadow to get border that is computed the same on WebKit/FF */
+  -webkit-box-shadow: inset 0 0 1px #000;
+  box-shadow: inset 0 0 1px #000;
+  background: rgba(240, 240, 240, 0.5);
+}
+div.output_prompt {
+  color: #D84315;
+}
+/* This class is the outer container of all output sections. */
+div.output_area {
+  padding: 0px;
+  page-break-inside: avoid;
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: horizontal;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: horizontal;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: horizontal;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+}
+div.output_area .MathJax_Display {
+  text-align: left !important;
+}
+div.output_area 
+div.output_area 
+div.output_area img,
+div.output_area svg {
+  max-width: 100%;
+  height: auto;
+}
+div.output_area img.unconfined,
+div.output_area svg.unconfined {
+  max-width: none;
+}
+div.output_area .mglyph > img {
+  max-width: none;
+}
+/* This is needed to protect the pre formating from global settings such
+   as that of bootstrap */
+.output {
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: vertical;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: vertical;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+@media (max-width: 540px) {
+  div.output_area {
+    /* Old browsers */
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-box-align: stretch;
+    display: -moz-box;
+    -moz-box-orient: vertical;
+    -moz-box-align: stretch;
+    display: box;
+    box-orient: vertical;
+    box-align: stretch;
+    /* Modern browsers */
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+div.output_area pre {
+  margin: 0;
+  padding: 1px 0 1px 0;
+  border: 0;
+  vertical-align: baseline;
+  color: black;
+  background-color: transparent;
+  border-radius: 0;
+}
+/* This class is for the output subarea inside the output_area and after
+   the prompt div. */
+div.output_subarea {
+  overflow-x: auto;
+  padding: 0.4em;
+  /* Old browsers */
+  -webkit-box-flex: 1;
+  -moz-box-flex: 1;
+  box-flex: 1;
+  /* Modern browsers */
+  flex: 1;
+  max-width: calc(100% - 14ex);
+}
+div.output_scroll div.output_subarea {
+  overflow-x: visible;
+}
+/* The rest of the output_* classes are for special styling of the different
+   output types */
+/* all text output has this class: */
+div.output_text {
+  text-align: left;
+  color: #000;
+  /* This has to match that of the the CodeMirror class line-height below */
+  line-height: 1.21429em;
+}
+/* stdout/stderr are 'text' as well as 'stream', but execute_result/error are *not* streams */
+div.output_stderr {
+  background: #fdd;
+  /* very light red background for stderr */
+}
+div.output_latex {
+  text-align: left;
+}
+/* Empty output_javascript divs should have no height */
+div.output_javascript:empty {
+  padding: 0;
+}
+.js-error {
+  color: darkred;
+}
+/* raw_input styles */
+div.raw_input_container {
+  line-height: 1.21429em;
+  padding-top: 5px;
+}
+pre.raw_input_prompt {
+  /* nothing needed here. */
+}
+input.raw_input {
+  font-family: monospace;
+  font-size: inherit;
+  color: inherit;
+  width: auto;
+  /* make sure input baseline aligns with prompt */
+  vertical-align: baseline;
+  /* padding + margin = 0.5em between prompt and cursor */
+  padding: 0em 0.25em;
+  margin: 0em 0.25em;
+}
+input.raw_input:focus {
+  box-shadow: none;
+}
+p.p-space {
+  margin-bottom: 10px;
+}
+div.output_unrecognized {
+  padding: 5px;
+  font-weight: bold;
+  color: red;
+}
+div.output_unrecognized a {
+  color: inherit;
+  text-decoration: none;
+}
+div.output_unrecognized a:hover {
+  color: inherit;
+  text-decoration: none;
+}
+.rendered_html {
+  color: #000;
+  /* any extras will just be numbers: */
+}
+
+
+
+.rendered_html :link {
+  text-decoration: underline;
+}
+.rendered_html :visited {
+  text-decoration: underline;
+}
+
+
+
+
+
+
+.rendered_html h1:first-child {
+  margin-top: 0.538em;
+}
+.rendered_html h2:first-child {
+  margin-top: 0.636em;
+}
+.rendered_html h3:first-child {
+  margin-top: 0.777em;
+}
+.rendered_html h4:first-child {
+  margin-top: 1em;
+}
+.rendered_html h5:first-child {
+  margin-top: 1em;
+}
+.rendered_html h6:first-child {
+  margin-top: 1em;
+}
+.rendered_html ul:not(.list-inline),
+.rendered_html ol:not(.list-inline) {
+  padding-left: 2em;
+}
+
+
+
+
+
+
+
+
+.rendered_html * + ul {
+  margin-top: 1em;
+}
+.rendered_html * + ol {
+  margin-top: 1em;
+}
+
+
+
+
+
+.rendered_html pre,
+
+
+
+
+.rendered_html tr,
+.rendered_html th,
+
+
+.rendered_html tbody tr:nth-child(odd) {
+  background: #f5f5f5;
+}
+.rendered_html tbody tr:hover {
+  background: rgba(66, 165, 245, 0.2);
+}
+.rendered_html * + table {
+  margin-top: 1em;
+}
+
+.rendered_html * + p {
+  margin-top: 1em;
+}
+
+.rendered_html * + img {
+  margin-top: 1em;
+}
+.rendered_html img,
+
+.rendered_html img.unconfined,
+
+
+.rendered_html * + .alert {
+  margin-top: 1em;
+}
+[dir="rtl"] 
+div.text_cell {
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: horizontal;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: horizontal;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: horizontal;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+}
+@media (max-width: 540px) {
+  div.text_cell > div.prompt {
+    display: none;
+  }
+}
+div.text_cell_render {
+  /*font-family: "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;*/
+  outline: none;
+  resize: none;
+  width: inherit;
+  border-style: none;
+  padding: 0.5em 0.5em 0.5em 0.4em;
+  color: #000;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+}
+a.anchor-link:link {
+  text-decoration: none;
+  padding: 0px 20px;
+  visibility: hidden;
+}
+h1:hover .anchor-link,
+h2:hover .anchor-link,
+h3:hover .anchor-link,
+h4:hover .anchor-link,
+h5:hover .anchor-link,
+h6:hover .anchor-link {
+  visibility: visible;
+}
+.text_cell.rendered .input_area {
+  display: none;
+}
+.text_cell.rendered 
+.text_cell.rendered .rendered_html tr,
+.text_cell.rendered .rendered_html th,
+.text_cell.rendered 
+.text_cell.unrendered .text_cell_render {
+  display: none;
+}
+.text_cell .dropzone .input_area {
+  border: 2px dashed #bababa;
+  margin: -1px;
+}
+.cm-header-1,
+.cm-header-2,
+.cm-header-3,
+.cm-header-4,
+.cm-header-5,
+.cm-header-6 {
+  font-weight: bold;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+.cm-header-1 {
+  font-size: 185.7%;
+}
+.cm-header-2 {
+  font-size: 157.1%;
+}
+.cm-header-3 {
+  font-size: 128.6%;
+}
+.cm-header-4 {
+  font-size: 110%;
+}
+.cm-header-5 {
+  font-size: 100%;
+  font-style: italic;
+}
+.cm-header-6 {
+  font-size: 100%;
+  font-style: italic;
+}
+</style>
+<style type="text/css">pre { line-height: 125%; }
+td.linenos .normal { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+span.linenos { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+td.linenos .special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+ .highlight pre  .hll { background-color: #ffffcc }
+ .highlight pre  { background: #f8f8f8; }
+ .highlight pre  .c { color: #3D7B7B; font-style: italic } /* Comment */
+ .highlight pre  .err { border: 1px solid #FF0000 } /* Error */
+ .highlight pre  .k { color: #008000; font-weight: bold } /* Keyword */
+ .highlight pre  .o { color: #666666 } /* Operator */
+ .highlight pre  .ch { color: #3D7B7B; font-style: italic } /* Comment.Hashbang */
+ .highlight pre  .cm { color: #3D7B7B; font-style: italic } /* Comment.Multiline */
+ .highlight pre  .cp { color: #9C6500 } /* Comment.Preproc */
+ .highlight pre  .cpf { color: #3D7B7B; font-style: italic } /* Comment.PreprocFile */
+ .highlight pre  .c1 { color: #3D7B7B; font-style: italic } /* Comment.Single */
+ .highlight pre  .cs { color: #3D7B7B; font-style: italic } /* Comment.Special */
+ .highlight pre  .gd { color: #A00000 } /* Generic.Deleted */
+ .highlight pre  .ge { font-style: italic } /* Generic.Emph */
+ .highlight pre  .gr { color: #E40000 } /* Generic.Error */
+ .highlight pre  .gh { color: #000080; font-weight: bold } /* Generic.Heading */
+ .highlight pre  .gi { color: #008400 } /* Generic.Inserted */
+ .highlight pre  .go { color: #717171 } /* Generic.Output */
+ .highlight pre  .gp { color: #000080; font-weight: bold } /* Generic.Prompt */
+ .highlight pre  .gs { font-weight: bold } /* Generic.Strong */
+ .highlight pre  .gu { color: #800080; font-weight: bold } /* Generic.Subheading */
+ .highlight pre  .gt { color: #0044DD } /* Generic.Traceback */
+ .highlight pre  .kc { color: #008000; font-weight: bold } /* Keyword.Constant */
+ .highlight pre  .kd { color: #008000; font-weight: bold } /* Keyword.Declaration */
+ .highlight pre  .kn { color: #008000; font-weight: bold } /* Keyword.Namespace */
+ .highlight pre  .kp { color: #008000 } /* Keyword.Pseudo */
+ .highlight pre  .kr { color: #008000; font-weight: bold } /* Keyword.Reserved */
+ .highlight pre  .kt { color: #B00040 } /* Keyword.Type */
+ .highlight pre  .m { color: #666666 } /* Literal.Number */
+ .highlight pre  .s { color: #BA2121 } /* Literal.String */
+ .highlight pre  .na { color: #687822 } /* Name.Attribute */
+ .highlight pre  .nb { color: #008000 } /* Name.Builtin */
+ .highlight pre  .nc { color: #0000FF; font-weight: bold } /* Name.Class */
+ .highlight pre  .no { color: #880000 } /* Name.Constant */
+ .highlight pre  .nd { color: #AA22FF } /* Name.Decorator */
+ .highlight pre  .ni { color: #717171; font-weight: bold } /* Name.Entity */
+ .highlight pre  .ne { color: #CB3F38; font-weight: bold } /* Name.Exception */
+ .highlight pre  .nf { color: #0000FF } /* Name.Function */
+ .highlight pre  .nl { color: #767600 } /* Name.Label */
+ .highlight pre  .nn { color: #0000FF; font-weight: bold } /* Name.Namespace */
+ .highlight pre  .nt { color: #008000; font-weight: bold } /* Name.Tag */
+ .highlight pre  .nv { color: #19177C } /* Name.Variable */
+ .highlight pre  .ow { color: #AA22FF; font-weight: bold } /* Operator.Word */
+ .highlight pre  .w { color: #bbbbbb } /* Text.Whitespace */
+ .highlight pre  .mb { color: #666666 } /* Literal.Number.Bin */
+ .highlight pre  .mf { color: #666666 } /* Literal.Number.Float */
+ .highlight pre  .mh { color: #666666 } /* Literal.Number.Hex */
+ .highlight pre  .mi { color: #666666 } /* Literal.Number.Integer */
+ .highlight pre  .mo { color: #666666 } /* Literal.Number.Oct */
+ .highlight pre  .sa { color: #BA2121 } /* Literal.String.Affix */
+ .highlight pre  .sb { color: #BA2121 } /* Literal.String.Backtick */
+ .highlight pre  .sc { color: #BA2121 } /* Literal.String.Char */
+ .highlight pre  .dl { color: #BA2121 } /* Literal.String.Delimiter */
+ .highlight pre  .sd { color: #BA2121; font-style: italic } /* Literal.String.Doc */
+ .highlight pre  .s2 { color: #BA2121 } /* Literal.String.Double */
+ .highlight pre  .se { color: #AA5D1F; font-weight: bold } /* Literal.String.Escape */
+ .highlight pre  .sh { color: #BA2121 } /* Literal.String.Heredoc */
+ .highlight pre  .si { color: #A45A77; font-weight: bold } /* Literal.String.Interpol */
+ .highlight pre  .sx { color: #008000 } /* Literal.String.Other */
+ .highlight pre  .sr { color: #A45A77 } /* Literal.String.Regex */
+ .highlight pre  .s1 { color: #BA2121 } /* Literal.String.Single */
+ .highlight pre  .ss { color: #19177C } /* Literal.String.Symbol */
+ .highlight pre  .bp { color: #008000 } /* Name.Builtin.Pseudo */
+ .highlight pre  .fm { color: #0000FF } /* Name.Function.Magic */
+ .highlight pre  .vc { color: #19177C } /* Name.Variable.Class */
+ .highlight pre  .vg { color: #19177C } /* Name.Variable.Global */
+ .highlight pre  .vi { color: #19177C } /* Name.Variable.Instance */
+ .highlight pre  .vm { color: #19177C } /* Name.Variable.Magic */
+ .highlight pre  .il { color: #666666 } /* Literal.Number.Integer.Long */</style><body><div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Comments">Comments<a class="anchor-link" href="#Comments">&#182;</a></h2><p>Even though Spark DataFrame/SQL APIs do not distinguish cases of column names,
+the columns saved into HDFS are case-sensitive!</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[1]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-scala"><pre><span></span><span class="n">interp</span><span class="p">.</span><span class="n">load</span><span class="p">.</span><span class="n">ivy</span><span class="p">(</span><span class="s">&quot;org.apache.spark&quot;</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="s">&quot;spark-core_2.12&quot;</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="s">&quot;3.0.0&quot;</span><span class="p">)</span>
+<span class="n">interp</span><span class="p">.</span><span class="n">load</span><span class="p">.</span><span class="n">ivy</span><span class="p">(</span><span class="s">&quot;org.apache.spark&quot;</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="s">&quot;spark-sql_2.12&quot;</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="s">&quot;3.0.0&quot;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>Downloading https://repo1.maven.org/maven2/sh/almond/almond-spark_2.12/0.9.1/almond-spark_2.12-0.9.1.pom
+Downloading https://repo1.maven.org/maven2/org/apache/spark/spark-core_2.12/3.0.0/spark-core_2.12-3.0.0.pom
+Downloaded https://repo1.maven.org/maven2/sh/almond/almond-spark_2.12/0.9.1/almond-spark_2.12-0.9.1.pom
+Downloaded https://repo1.maven.org/maven2/org/apache/spark/spark-core_2.12/3.0.0/spark-core_2.12-3.0.0.pom
+Downloading https://repo1.maven.org/maven2/org/apache/spark/spark-parent_2.12/3.0.0/spark-parent_2.12-3.0.0.pom
+Downloaded https://repo1.maven.org/maven2/org/apache/spark/spark-parent_2.12/3.0.0/spark-parent_2.12-3.0.0.pom
+Downloading https://repo1.maven.org/maven2/org/apache/apache/18/apache-18.pom
+Downloaded https://repo1.maven.org/maven2/org/apache/apache/18/apache-18.pom
+Downloading https://repo1.maven.org/maven2/org/apache/commons/commons-crypto/1.0.0/commons-crypto-1.0.0.pom
+Downloading https://repo1.maven.org/maven2/com/github/luben/zstd-jni/1.4.4-3/zstd-jni-1.4.4-3.pom
+Downloading https://repo1.maven.org/maven2/io/dropwizard/metrics/metrics-core/4.1.1/metrics-core-4.1.1.pom
+Downloading https://repo1.maven.org/maven2/org/slf4j/jul-to-slf4j/1.7.30/jul-to-slf4j-1.7.30.pom
+Downloading https://repo1.maven.org/maven2/org/apache/ivy/ivy/2.4.0/ivy-2.4.0.pom
+Downloading https://repo1.maven.org/maven2/org/apache/avro/avro/1.8.2/avro-1.8.2.pom
+Downloaded https://repo1.maven.org/maven2/org/apache/commons/commons-crypto/1.0.0/commons-crypto-1.0.0.pom
+Downloaded https://repo1.maven.org/maven2/org/apache/ivy/ivy/2.4.0/ivy-2.4.0.pom
+Downloading https://repo1.maven.org/maven2/commons-net/commons-net/3.1/commons-net-3.1.pom
+Downloaded https://repo1.maven.org/maven2/org/slf4j/jul-to-slf4j/1.7.30/jul-to-slf4j-1.7.30.pom
+Downloading https://repo1.maven.org/maven2/org/scala-lang/modules/scala-xml_2.12/1.2.0/scala-xml_2.12-1.2.0.pom
+Downloading https://repo1.maven.org/maven2/org/apache/spark/spark-launcher_2.12/3.0.0/spark-launcher_2.12-3.0.0.pom
+Downloaded https://repo1.maven.org/maven2/com/github/luben/zstd-jni/1.4.4-3/zstd-jni-1.4.4-3.pom
+Downloading https://repo1.maven.org/maven2/com/fasterxml/jackson/module/jackson-module-scala_2.12/2.10.0/jackson-module-scala_2.12-2.10.0.pom
+Downloaded https://repo1.maven.org/maven2/org/apache/avro/avro/1.8.2/avro-1.8.2.pom
+Downloading https://repo1.maven.org/maven2/io/dropwizard/metrics/metrics-json/4.1.1/metrics-json-4.1.1.pom
+Downloaded https://repo1.maven.org/maven2/io/dropwizard/metrics/metrics-core/4.1.1/metrics-core-4.1.1.pom
+Downloading https://repo1.maven.org/maven2/org/scala-lang/scala-library/2.12.10/scala-library-2.12.10.pom
+Downloaded https://repo1.maven.org/maven2/commons-net/commons-net/3.1/commons-net-3.1.pom
+Downloading https://repo1.maven.org/maven2/org/apache/zookeeper/zookeeper/3.4.14/zookeeper-3.4.14.pom
+Downloaded https://repo1.maven.org/maven2/org/scala-lang/modules/scala-xml_2.12/1.2.0/scala-xml_2.12-1.2.0.pom
+Downloading https://repo1.maven.org/maven2/org/apache/commons/commons-math3/3.4.1/commons-math3-3.4.1.pom
+Downloaded https://repo1.maven.org/maven2/org/apache/spark/spark-launcher_2.12/3.0.0/spark-launcher_2.12-3.0.0.pom
+Downloading https://repo1.maven.org/maven2/org/glassfish/jersey/core/jersey-common/2.30/jersey-common-2.30.pom
+Downloaded https://repo1.maven.org/maven2/org/apache/zookeeper/zookeeper/3.4.14/zookeeper-3.4.14.pom
+Downloading https://repo1.maven.org/maven2/com/twitter/chill_2.12/0.9.5/chill_2.12-0.9.5.pom
+Downloaded https://repo1.maven.org/maven2/com/fasterxml/jackson/module/jackson-module-scala_2.12/2.10.0/jackson-module-scala_2.12-2.10.0.pom
+Downloading https://repo1.maven.org/maven2/org/glassfish/jersey/core/jersey-server/2.30/jersey-server-2.30.pom
+Downloaded https://repo1.maven.org/maven2/io/dropwizard/metrics/metrics-json/4.1.1/metrics-json-4.1.1.pom
+Downloading https://repo1.maven.org/maven2/io/netty/netty-all/4.1.47.Final/netty-all-4.1.47.Final.pom
+Downloaded https://repo1.maven.org/maven2/org/apache/commons/commons-math3/3.4.1/commons-math3-3.4.1.pom
+Downloading https://repo1.maven.org/maven2/org/slf4j/slf4j-api/1.7.30/slf4j-api-1.7.30.pom
+Downloaded https://repo1.maven.org/maven2/org/glassfish/jersey/core/jersey-server/2.30/jersey-server-2.30.pom
+Downloading https://repo1.maven.org/maven2/org/apache/spark/spark-tags_2.12/3.0.0/spark-tags_2.12-3.0.0.pom
+Downloaded https://repo1.maven.org/maven2/org/scala-lang/scala-library/2.12.10/scala-library-2.12.10.pom
+Downloading https://repo1.maven.org/maven2/org/apache/commons/commons-text/1.6/commons-text-1.6.pom
+Downloaded https://repo1.maven.org/maven2/org/glassfish/jersey/core/jersey-common/2.30/jersey-common-2.30.pom
+Downloading https://repo1.maven.org/maven2/org/scala-lang/scala-reflect/2.12.10/scala-reflect-2.12.10.pom
+Downloaded https://repo1.maven.org/maven2/com/twitter/chill_2.12/0.9.5/chill_2.12-0.9.5.pom
+Downloading https://repo1.maven.org/maven2/net/razorvine/pyrolite/4.30/pyrolite-4.30.pom
+Downloaded https://repo1.maven.org/maven2/io/netty/netty-all/4.1.47.Final/netty-all-4.1.47.Final.pom
+Downloading https://repo1.maven.org/maven2/com/clearspring/analytics/stream/2.9.6/stream-2.9.6.pom
+Downloaded https://repo1.maven.org/maven2/org/slf4j/slf4j-api/1.7.30/slf4j-api-1.7.30.pom
+Downloading https://repo1.maven.org/maven2/org/json4s/json4s-jackson_2.12/3.6.6/json4s-jackson_2.12-3.6.6.pom
+Downloaded https://repo1.maven.org/maven2/org/apache/commons/commons-text/1.6/commons-text-1.6.pom
+Downloaded https://repo1.maven.org/maven2/net/razorvine/pyrolite/4.30/pyrolite-4.30.pom
+Downloaded https://repo1.maven.org/maven2/org/apache/spark/spark-tags_2.12/3.0.0/spark-tags_2.12-3.0.0.pom
+Downloading https://repo1.maven.org/maven2/org/glassfish/jersey/containers/jersey-container-servlet-core/2.30/jersey-container-servlet-core-2.30.pom
+Downloading https://repo1.maven.org/maven2/org/apache/xbean/xbean-asm7-shaded/4.15/xbean-asm7-shaded-4.15.pom
+Downloading https://repo1.maven.org/maven2/org/roaringbitmap/RoaringBitmap/0.7.45/RoaringBitmap-0.7.45.pom
+Downloaded https://repo1.maven.org/maven2/org/scala-lang/scala-reflect/2.12.10/scala-reflect-2.12.10.pom
+Downloading https://repo1.maven.org/maven2/org/apache/avro/avro-mapred/1.8.2/avro-mapred-1.8.2.pom
+Downloaded https://repo1.maven.org/maven2/org/json4s/json4s-jackson_2.12/3.6.6/json4s-jackson_2.12-3.6.6.pom
+Downloading https://repo1.maven.org/maven2/org/glassfish/jersey/containers/jersey-container-servlet/2.30/jersey-container-servlet-2.30.pom
+Downloaded https://repo1.maven.org/maven2/com/clearspring/analytics/stream/2.9.6/stream-2.9.6.pom
+Downloading https://repo1.maven.org/maven2/org/apache/commons/commons-lang3/3.9/commons-lang3-3.9.pom
+Downloaded https://repo1.maven.org/maven2/org/roaringbitmap/RoaringBitmap/0.7.45/RoaringBitmap-0.7.45.pom
+Downloaded https://repo1.maven.org/maven2/org/glassfish/jersey/containers/jersey-container-servlet-core/2.30/jersey-container-servlet-core-2.30.pom
+Downloading https://repo1.maven.org/maven2/com/ning/compress-lzf/1.0.3/compress-lzf-1.0.3.pom
+Downloading https://repo1.maven.org/maven2/javax/servlet/javax.servlet-api/3.1.0/javax.servlet-api-3.1.0.pom
+Downloaded https://repo1.maven.org/maven2/org/apache/avro/avro-mapred/1.8.2/avro-mapred-1.8.2.pom
+Downloading https://repo1.maven.org/maven2/com/thoughtworks/paranamer/paranamer/2.8/paranamer-2.8.pom
+Downloaded https://repo1.maven.org/maven2/org/apache/xbean/xbean-asm7-shaded/4.15/xbean-asm7-shaded-4.15.pom
+Downloading https://repo1.maven.org/maven2/org/apache/spark/spark-unsafe_2.12/3.0.0/spark-unsafe_2.12-3.0.0.pom
+Downloaded https://repo1.maven.org/maven2/org/apache/commons/commons-lang3/3.9/commons-lang3-3.9.pom
+Downloading https://repo1.maven.org/maven2/com/fasterxml/jackson/core/jackson-databind/2.10.0/jackson-databind-2.10.0.pom
+Downloaded https://repo1.maven.org/maven2/javax/servlet/javax.servlet-api/3.1.0/javax.servlet-api-3.1.0.pom
+Downloaded https://repo1.maven.org/maven2/com/thoughtworks/paranamer/paranamer/2.8/paranamer-2.8.pom
+Downloading https://repo1.maven.org/maven2/org/apache/curator/curator-recipes/2.7.1/curator-recipes-2.7.1.pom
+Downloaded https://repo1.maven.org/maven2/org/glassfish/jersey/containers/jersey-container-servlet/2.30/jersey-container-servlet-2.30.pom
+Downloading https://repo1.maven.org/maven2/com/google/code/findbugs/jsr305/3.0.0/jsr305-3.0.0.pom
+Downloaded https://repo1.maven.org/maven2/com/ning/compress-lzf/1.0.3/compress-lzf-1.0.3.pom
+Downloading https://repo1.maven.org/maven2/org/slf4j/jcl-over-slf4j/1.7.30/jcl-over-slf4j-1.7.30.pom
+Downloading https://repo1.maven.org/maven2/net/sf/py4j/py4j/0.10.9/py4j-0.10.9.pom
+Downloaded https://repo1.maven.org/maven2/com/fasterxml/jackson/core/jackson-databind/2.10.0/jackson-databind-2.10.0.pom
+Downloading https://repo1.maven.org/maven2/com/github/plokhotnyuk/jsoniter-scala/jsoniter-scala-core_2.12/2.0.1/jsoniter-scala-core_2.12-2.0.1.pom
+Downloaded https://repo1.maven.org/maven2/org/apache/spark/spark-unsafe_2.12/3.0.0/spark-unsafe_2.12-3.0.0.pom
+Downloading https://repo1.maven.org/maven2/com/twitter/chill-java/0.9.5/chill-java-0.9.5.pom
+Downloaded https://repo1.maven.org/maven2/net/sf/py4j/py4j/0.10.9/py4j-0.10.9.pom
+Downloading https://repo1.maven.org/maven2/org/apache/spark/spark-network-common_2.12/3.0.0/spark-network-common_2.12-3.0.0.pom
+Downloaded https://repo1.maven.org/maven2/com/google/code/findbugs/jsr305/3.0.0/jsr305-3.0.0.pom
+Downloaded https://repo1.maven.org/maven2/org/apache/curator/curator-recipes/2.7.1/curator-recipes-2.7.1.pom
+Downloading https://repo1.maven.org/maven2/io/dropwizard/metrics/metrics-jvm/4.1.1/metrics-jvm-4.1.1.pom
+Downloading https://repo1.maven.org/maven2/org/spark-project/spark/unused/1.0.0/unused-1.0.0.pom
+Downloaded https://repo1.maven.org/maven2/org/slf4j/jcl-over-slf4j/1.7.30/jcl-over-slf4j-1.7.30.pom
+Downloading https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-client/2.7.4/hadoop-client-2.7.4.pom
+Downloaded https://repo1.maven.org/maven2/com/twitter/chill-java/0.9.5/chill-java-0.9.5.pom
+Downloading https://repo1.maven.org/maven2/org/apache/spark/spark-network-shuffle_2.12/3.0.0/spark-network-shuffle_2.12-3.0.0.pom
+Downloaded https://repo1.maven.org/maven2/org/apache/spark/spark-network-common_2.12/3.0.0/spark-network-common_2.12-3.0.0.pom
+Downloaded https://repo1.maven.org/maven2/com/github/plokhotnyuk/jsoniter-scala/jsoniter-scala-core_2.12/2.0.1/jsoniter-scala-core_2.12-2.0.1.pom
+Downloaded https://repo1.maven.org/maven2/io/dropwizard/metrics/metrics-jvm/4.1.1/metrics-jvm-4.1.1.pom
+Downloading https://repo1.maven.org/maven2/org/xerial/snappy/snappy-java/1.1.7.5/snappy-java-1.1.7.5.pom
+Downloading https://repo1.maven.org/maven2/io/dropwizard/metrics/metrics-jmx/4.1.1/metrics-jmx-4.1.1.pom
+Downloaded https://repo1.maven.org/maven2/org/spark-project/spark/unused/1.0.0/unused-1.0.0.pom
+Downloading https://repo1.maven.org/maven2/org/slf4j/slf4j-log4j12/1.7.30/slf4j-log4j12-1.7.30.pom
+Downloading https://repo1.maven.org/maven2/log4j/log4j/1.2.17/log4j-1.2.17.pom
+Downloaded https://repo1.maven.org/maven2/org/apache/spark/spark-network-shuffle_2.12/3.0.0/spark-network-shuffle_2.12-3.0.0.pom
+Downloaded https://repo1.maven.org/maven2/org/slf4j/slf4j-log4j12/1.7.30/slf4j-log4j12-1.7.30.pom
+Downloading https://repo1.maven.org/maven2/org/glassfish/jersey/inject/jersey-hk2/2.30/jersey-hk2-2.30.pom
+Downloading https://repo1.maven.org/maven2/org/apache/spark/spark-kvstore_2.12/3.0.0/spark-kvstore_2.12-3.0.0.pom
+Downloaded https://repo1.maven.org/maven2/io/dropwizard/metrics/metrics-jmx/4.1.1/metrics-jmx-4.1.1.pom
+Downloaded https://repo1.maven.org/maven2/org/xerial/snappy/snappy-java/1.1.7.5/snappy-java-1.1.7.5.pom
+Downloaded https://repo1.maven.org/maven2/log4j/log4j/1.2.17/log4j-1.2.17.pom
+Downloaded https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-client/2.7.4/hadoop-client-2.7.4.pom
+Downloading https://repo1.maven.org/maven2/oro/oro/2.0.8/oro-2.0.8.pom
+Downloaded https://repo1.maven.org/maven2/org/apache/spark/spark-kvstore_2.12/3.0.0/spark-kvstore_2.12-3.0.0.pom
+Downloaded https://repo1.maven.org/maven2/org/glassfish/jersey/inject/jersey-hk2/2.30/jersey-hk2-2.30.pom
+Downloaded https://repo1.maven.org/maven2/oro/oro/2.0.8/oro-2.0.8.pom
+Downloading https://repo1.maven.org/maven2/org/lz4/lz4-java/1.7.1/lz4-java-1.7.1.pom
+Downloading https://repo1.maven.org/maven2/io/dropwizard/metrics/metrics-graphite/4.1.1/metrics-graphite-4.1.1.pom
+Downloaded https://repo1.maven.org/maven2/org/lz4/lz4-java/1.7.1/lz4-java-1.7.1.pom
+Downloaded https://repo1.maven.org/maven2/io/dropwizard/metrics/metrics-graphite/4.1.1/metrics-graphite-4.1.1.pom
+Downloading https://repo1.maven.org/maven2/sh/almond/ammonite-spark_2.12/0.7.2/ammonite-spark_2.12-0.7.2.pom
+Downloading https://repo1.maven.org/maven2/org/glassfish/jersey/core/jersey-client/2.30/jersey-client-2.30.pom
+Downloading https://repo1.maven.org/maven2/javax/activation/activation/1.1.1/activation-1.1.1.pom
+Downloaded https://repo1.maven.org/maven2/sh/almond/ammonite-spark_2.12/0.7.2/ammonite-spark_2.12-0.7.2.pom
+Downloaded https://repo1.maven.org/maven2/org/glassfish/jersey/core/jersey-client/2.30/jersey-client-2.30.pom
+Downloaded https://repo1.maven.org/maven2/javax/activation/activation/1.1.1/activation-1.1.1.pom
+Downloading https://repo1.maven.org/maven2/org/roaringbitmap/RoaringBitmapParent/0.7.45/RoaringBitmapParent-0.7.45.pom
+Downloading https://repo1.maven.org/maven2/com/addthis/common/build/maven/pom/jar-pom/3.8.0/jar-pom-3.8.0.pom
+Downloaded https://repo1.maven.org/maven2/org/roaringbitmap/RoaringBitmapParent/0.7.45/RoaringBitmapParent-0.7.45.pom
+Downloading https://repo1.maven.org/maven2/net/java/jvnet-parent/3/jvnet-parent-3.pom
+Downloaded https://repo1.maven.org/maven2/net/java/jvnet-parent/3/jvnet-parent-3.pom
+Downloading https://repo1.maven.org/maven2/org/sonatype/oss/oss-parent/9/oss-parent-9.pom
+Downloading https://repo1.maven.org/maven2/io/dropwizard/metrics/metrics-parent/4.1.1/metrics-parent-4.1.1.pom
+Downloading https://repo1.maven.org/maven2/org/glassfish/jersey/project/2.30/project-2.30.pom
+Downloading https://repo1.maven.org/maven2/org/glassfish/jersey/containers/project/2.30/project-2.30.pom
+Downloading https://repo1.maven.org/maven2/com/fasterxml/jackson/jackson-base/2.10.0/jackson-base-2.10.0.pom
+Downloaded https://repo1.maven.org/maven2/org/glassfish/jersey/containers/project/2.30/project-2.30.pom
+Downloading https://repo1.maven.org/maven2/org/slf4j/slf4j-parent/1.7.30/slf4j-parent-1.7.30.pom
+Downloaded https://repo1.maven.org/maven2/com/addthis/common/build/maven/pom/jar-pom/3.8.0/jar-pom-3.8.0.pom
+Downloading https://repo1.maven.org/maven2/org/apache/apache/7/apache-7.pom
+Downloaded https://repo1.maven.org/maven2/com/fasterxml/jackson/jackson-base/2.10.0/jackson-base-2.10.0.pom
+Downloaded https://repo1.maven.org/maven2/org/sonatype/oss/oss-parent/9/oss-parent-9.pom
+Downloading https://repo1.maven.org/maven2/org/apache/commons/commons-parent/48/commons-parent-48.pom
+Downloaded https://repo1.maven.org/maven2/io/dropwizard/metrics/metrics-parent/4.1.1/metrics-parent-4.1.1.pom
+Downloading https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-project-dist/2.7.4/hadoop-project-dist-2.7.4.pom
+Downloading https://repo1.maven.org/maven2/org/apache/avro/avro-parent/1.8.2/avro-parent-1.8.2.pom
+Downloaded https://repo1.maven.org/maven2/org/slf4j/slf4j-parent/1.7.30/slf4j-parent-1.7.30.pom
+Downloading https://repo1.maven.org/maven2/io/netty/netty-parent/4.1.47.Final/netty-parent-4.1.47.Final.pom
+Downloaded https://repo1.maven.org/maven2/org/glassfish/jersey/project/2.30/project-2.30.pom
+Downloaded https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-project-dist/2.7.4/hadoop-project-dist-2.7.4.pom
+Downloaded https://repo1.maven.org/maven2/org/apache/avro/avro-parent/1.8.2/avro-parent-1.8.2.pom
+Downloaded https://repo1.maven.org/maven2/org/apache/apache/7/apache-7.pom
+Downloaded https://repo1.maven.org/maven2/org/apache/commons/commons-parent/48/commons-parent-48.pom
+Downloading https://repo1.maven.org/maven2/org/glassfish/jersey/inject/project/2.30/project-2.30.pom
+Downloaded https://repo1.maven.org/maven2/io/netty/netty-parent/4.1.47.Final/netty-parent-4.1.47.Final.pom
+Downloading https://repo1.maven.org/maven2/com/thoughtworks/paranamer/paranamer-parent/2.8/paranamer-parent-2.8.pom
+Downloading https://repo1.maven.org/maven2/org/apache/curator/apache-curator/2.7.1/apache-curator-2.7.1.pom
+Downloaded https://repo1.maven.org/maven2/org/glassfish/jersey/inject/project/2.30/project-2.30.pom
+Downloading https://repo1.maven.org/maven2/org/apache/xbean/xbean/4.15/xbean-4.15.pom
+Downloaded https://repo1.maven.org/maven2/com/thoughtworks/paranamer/paranamer-parent/2.8/paranamer-parent-2.8.pom
+Downloaded https://repo1.maven.org/maven2/org/apache/curator/apache-curator/2.7.1/apache-curator-2.7.1.pom
+Downloaded https://repo1.maven.org/maven2/org/apache/xbean/xbean/4.15/xbean-4.15.pom
+Downloading https://repo1.maven.org/maven2/org/sonatype/oss/oss-parent/7/oss-parent-7.pom
+Downloading https://repo1.maven.org/maven2/org/apache/commons/commons-parent/47/commons-parent-47.pom
+Downloaded https://repo1.maven.org/maven2/org/sonatype/oss/oss-parent/7/oss-parent-7.pom
+Downloaded https://repo1.maven.org/maven2/org/apache/commons/commons-parent/47/commons-parent-47.pom
+Downloading https://repo1.maven.org/maven2/org/apache/commons/commons-parent/40/commons-parent-40.pom
+Downloaded https://repo1.maven.org/maven2/org/apache/commons/commons-parent/40/commons-parent-40.pom
+Downloading https://repo1.maven.org/maven2/org/apache/commons/commons-parent/34/commons-parent-34.pom
+Downloaded https://repo1.maven.org/maven2/org/apache/commons/commons-parent/34/commons-parent-34.pom
+Downloading https://repo1.maven.org/maven2/org/apache/commons/commons-parent/23/commons-parent-23.pom
+Downloaded https://repo1.maven.org/maven2/org/apache/commons/commons-parent/23/commons-parent-23.pom
+Downloading https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-project/2.7.4/hadoop-project-2.7.4.pom
+Downloading https://repo1.maven.org/maven2/org/eclipse/ee4j/project/1.0.5/project-1.0.5.pom
+Downloading https://repo1.maven.org/maven2/com/fasterxml/jackson/jackson-bom/2.10.0/jackson-bom-2.10.0.pom
+Downloading https://repo1.maven.org/maven2/org/apache/geronimo/genesis/genesis-java5-flava/2.1/genesis-java5-flava-2.1.pom
+Downloading https://repo1.maven.org/maven2/org/apache/apache/21/apache-21.pom
+Downloaded https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-project/2.7.4/hadoop-project-2.7.4.pom
+Downloaded https://repo1.maven.org/maven2/org/apache/apache/21/apache-21.pom
+Downloaded https://repo1.maven.org/maven2/org/eclipse/ee4j/project/1.0.5/project-1.0.5.pom
+Downloading https://repo1.maven.org/maven2/org/apache/avro/avro-toplevel/1.8.2/avro-toplevel-1.8.2.pom
+Downloaded https://repo1.maven.org/maven2/com/fasterxml/jackson/jackson-bom/2.10.0/jackson-bom-2.10.0.pom
+Downloading https://repo1.maven.org/maven2/com/addthis/common/build/maven/pom/papa-pom/2.2.0/papa-pom-2.2.0.pom
+Downloaded https://repo1.maven.org/maven2/org/apache/geronimo/genesis/genesis-java5-flava/2.1/genesis-java5-flava-2.1.pom
+Downloaded https://repo1.maven.org/maven2/com/addthis/common/build/maven/pom/papa-pom/2.2.0/papa-pom-2.2.0.pom
+Downloaded https://repo1.maven.org/maven2/org/apache/avro/avro-toplevel/1.8.2/avro-toplevel-1.8.2.pom
+Downloading https://repo1.maven.org/maven2/org/apache/apache/19/apache-19.pom
+Downloaded https://repo1.maven.org/maven2/org/apache/apache/19/apache-19.pom
+Downloading https://repo1.maven.org/maven2/org/apache/apache/17/apache-17.pom
+Downloaded https://repo1.maven.org/maven2/org/apache/apache/17/apache-17.pom
+Downloading https://repo1.maven.org/maven2/org/apache/apache/14/apache-14.pom
+Downloaded https://repo1.maven.org/maven2/org/apache/apache/14/apache-14.pom
+Downloading https://repo1.maven.org/maven2/org/apache/apache/13/apache-13.pom
+Downloaded https://repo1.maven.org/maven2/org/apache/apache/13/apache-13.pom
+Downloading https://repo1.maven.org/maven2/org/apache/apache/9/apache-9.pom
+Downloaded https://repo1.maven.org/maven2/org/apache/apache/9/apache-9.pom
+Downloading https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-main/2.7.4/hadoop-main-2.7.4.pom
+Downloading https://repo1.maven.org/maven2/com/fasterxml/jackson/jackson-parent/2.10/jackson-parent-2.10.pom
+Downloading https://repo1.maven.org/maven2/org/apache/geronimo/genesis/genesis-default-flava/2.1/genesis-default-flava-2.1.pom
+Downloading https://repo1.maven.org/maven2/org/apache/apache/10/apache-10.pom
+Downloaded https://repo1.maven.org/maven2/org/apache/geronimo/genesis/genesis-default-flava/2.1/genesis-default-flava-2.1.pom
+Downloaded https://repo1.maven.org/maven2/org/apache/apache/10/apache-10.pom
+Downloaded https://repo1.maven.org/maven2/com/fasterxml/jackson/jackson-parent/2.10/jackson-parent-2.10.pom
+Downloaded https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-main/2.7.4/hadoop-main-2.7.4.pom
+Downloading https://repo1.maven.org/maven2/org/apache/geronimo/genesis/genesis/2.1/genesis-2.1.pom
+Downloading https://repo1.maven.org/maven2/com/fasterxml/oss-parent/38/oss-parent-38.pom
+Downloaded https://repo1.maven.org/maven2/org/apache/geronimo/genesis/genesis/2.1/genesis-2.1.pom
+Downloaded https://repo1.maven.org/maven2/com/fasterxml/oss-parent/38/oss-parent-38.pom
+Downloading https://repo1.maven.org/maven2/io/dropwizard/metrics/metrics-bom/4.1.1/metrics-bom-4.1.1.pom
+Downloading https://repo1.maven.org/maven2/org/junit/junit-bom/5.3.1/junit-bom-5.3.1.pom
+Downloaded https://repo1.maven.org/maven2/org/junit/junit-bom/5.3.1/junit-bom-5.3.1.pom
+Downloaded https://repo1.maven.org/maven2/io/dropwizard/metrics/metrics-bom/4.1.1/metrics-bom-4.1.1.pom
+Downloading https://repo1.maven.org/maven2/org/apache/curator/curator-framework/2.7.1/curator-framework-2.7.1.pom
+Downloading https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-yarn-api/2.7.4/hadoop-yarn-api-2.7.4.pom
+Downloading https://repo1.maven.org/maven2/com/fasterxml/jackson/module/jackson-module-paranamer/2.10.0/jackson-module-paranamer-2.10.0.pom
+Downloaded https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-yarn-api/2.7.4/hadoop-yarn-api-2.7.4.pom
+Downloaded https://repo1.maven.org/maven2/com/fasterxml/jackson/module/jackson-module-paranamer/2.10.0/jackson-module-paranamer-2.10.0.pom
+Downloaded https://repo1.maven.org/maven2/org/apache/curator/curator-framework/2.7.1/curator-framework-2.7.1.pom
+Downloading https://repo1.maven.org/maven2/org/glassfish/jersey/media/jersey-media-jaxb/2.30/jersey-media-jaxb-2.30.pom
+Downloading https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-annotations/2.7.4/hadoop-annotations-2.7.4.pom
+Downloading https://repo1.maven.org/maven2/org/roaringbitmap/shims/0.7.45/shims-0.7.45.pom
+Downloading https://repo1.maven.org/maven2/org/json4s/json4s-core_2.12/3.6.6/json4s-core_2.12-3.6.6.pom
+Downloading https://repo1.maven.org/maven2/org/eclipse/jetty/jetty-server/9.4.20.v20190813/jetty-server-9.4.20.v20190813.pom
+Downloading https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-mapreduce-client-app/2.7.4/hadoop-mapreduce-client-app-2.7.4.pom
+Downloaded https://repo1.maven.org/maven2/org/glassfish/jersey/media/jersey-media-jaxb/2.30/jersey-media-jaxb-2.30.pom
+Downloading https://repo1.maven.org/maven2/org/codehaus/jackson/jackson-mapper-asl/1.9.13/jackson-mapper-asl-1.9.13.pom
+Downloaded https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-annotations/2.7.4/hadoop-annotations-2.7.4.pom
+Downloading https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-mapreduce-client-core/2.7.4/hadoop-mapreduce-client-core-2.7.4.pom
+Downloaded https://repo1.maven.org/maven2/org/roaringbitmap/shims/0.7.45/shims-0.7.45.pom
+Downloading https://repo1.maven.org/maven2/jakarta/ws/rs/jakarta.ws.rs-api/2.1.6/jakarta.ws.rs-api-2.1.6.pom
+Downloaded https://repo1.maven.org/maven2/org/eclipse/jetty/jetty-server/9.4.20.v20190813/jetty-server-9.4.20.v20190813.pom
+Downloading https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-mapreduce-client-jobclient/2.7.4/hadoop-mapreduce-client-jobclient-2.7.4.pom
+Downloaded https://repo1.maven.org/maven2/org/codehaus/jackson/jackson-mapper-asl/1.9.13/jackson-mapper-asl-1.9.13.pom
+Downloading https://repo1.maven.org/maven2/org/javassist/javassist/3.25.0-GA/javassist-3.25.0-GA.pom
+Downloaded https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-mapreduce-client-app/2.7.4/hadoop-mapreduce-client-app-2.7.4.pom
+Downloading https://repo1.maven.org/maven2/org/glassfish/hk2/hk2-locator/2.6.1/hk2-locator-2.6.1.pom
+Downloaded https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-mapreduce-client-core/2.7.4/hadoop-mapreduce-client-core-2.7.4.pom
+Downloading https://repo1.maven.org/maven2/org/fusesource/leveldbjni/leveldbjni-all/1.8/leveldbjni-all-1.8.pom
+Downloaded https://repo1.maven.org/maven2/jakarta/ws/rs/jakarta.ws.rs-api/2.1.6/jakarta.ws.rs-api-2.1.6.pom
+Downloading https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-common/2.7.4/hadoop-common-2.7.4.pom
+Downloaded https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-mapreduce-client-jobclient/2.7.4/hadoop-mapreduce-client-jobclient-2.7.4.pom
+Downloaded https://repo1.maven.org/maven2/org/javassist/javassist/3.25.0-GA/javassist-3.25.0-GA.pom
+Downloading https://repo1.maven.org/maven2/org/codehaus/jackson/jackson-core-asl/1.9.13/jackson-core-asl-1.9.13.pom
+Downloaded https://repo1.maven.org/maven2/org/fusesource/leveldbjni/leveldbjni-all/1.8/leveldbjni-all-1.8.pom
+Downloading https://repo1.maven.org/maven2/org/apache/yetus/audience-annotations/0.5.0/audience-annotations-0.5.0.pom
+Downloaded https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-common/2.7.4/hadoop-common-2.7.4.pom
+Downloading https://repo1.maven.org/maven2/org/tukaani/xz/1.5/xz-1.5.pom
+Downloading https://repo1.maven.org/maven2/com/fasterxml/jackson/core/jackson-core/2.10.0/jackson-core-2.10.0.pom
+Downloaded https://repo1.maven.org/maven2/org/json4s/json4s-core_2.12/3.6.6/json4s-core_2.12-3.6.6.pom
+Downloading https://repo1.maven.org/maven2/org/glassfish/hk2/external/jakarta.inject/2.6.1/jakarta.inject-2.6.1.pom
+Downloaded https://repo1.maven.org/maven2/org/glassfish/hk2/hk2-locator/2.6.1/hk2-locator-2.6.1.pom
+Downloading https://repo1.maven.org/maven2/com/fasterxml/jackson/core/jackson-annotations/2.10.0/jackson-annotations-2.10.0.pom
+Downloaded https://repo1.maven.org/maven2/org/apache/yetus/audience-annotations/0.5.0/audience-annotations-0.5.0.pom
+Downloading https://repo1.maven.org/maven2/com/google/guava/guava/16.0.1/guava-16.0.1.pom
+Downloaded https://repo1.maven.org/maven2/org/tukaani/xz/1.5/xz-1.5.pom
+Downloading https://repo1.maven.org/maven2/org/apache/commons/commons-compress/1.8.1/commons-compress-1.8.1.pom
+Downloaded https://repo1.maven.org/maven2/org/codehaus/jackson/jackson-core-asl/1.9.13/jackson-core-asl-1.9.13.pom
+Downloading https://repo1.maven.org/maven2/commons-codec/commons-codec/1.9/commons-codec-1.9.pom
+Downloaded https://repo1.maven.org/maven2/com/fasterxml/jackson/core/jackson-core/2.10.0/jackson-core-2.10.0.pom
+Downloaded https://repo1.maven.org/maven2/org/glassfish/hk2/external/jakarta.inject/2.6.1/jakarta.inject-2.6.1.pom
+Downloaded https://repo1.maven.org/maven2/com/google/guava/guava/16.0.1/guava-16.0.1.pom
+Downloaded https://repo1.maven.org/maven2/com/fasterxml/jackson/core/jackson-annotations/2.10.0/jackson-annotations-2.10.0.pom
+Downloading https://repo1.maven.org/maven2/jakarta/validation/jakarta.validation-api/2.0.2/jakarta.validation-api-2.0.2.pom
+Downloading https://repo1.maven.org/maven2/org/glassfish/hk2/osgi-resource-locator/1.0.3/osgi-resource-locator-1.0.3.pom
+Downloaded https://repo1.maven.org/maven2/org/apache/commons/commons-compress/1.8.1/commons-compress-1.8.1.pom
+Downloaded https://repo1.maven.org/maven2/commons-codec/commons-codec/1.9/commons-codec-1.9.pom
+Downloaded https://repo1.maven.org/maven2/org/glassfish/hk2/osgi-resource-locator/1.0.3/osgi-resource-locator-1.0.3.pom
+Downloading https://repo1.maven.org/maven2/jakarta/annotation/jakarta.annotation-api/1.3.5/jakarta.annotation-api-1.3.5.pom
+Downloaded https://repo1.maven.org/maven2/jakarta/validation/jakarta.validation-api/2.0.2/jakarta.validation-api-2.0.2.pom
+Downloading https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-hdfs/2.7.4/hadoop-hdfs-2.7.4.pom
+Downloading https://repo1.maven.org/maven2/org/apache/avro/avro-ipc/1.8.2/avro-ipc-1.8.2.pom
+Downloading https://repo1.maven.org/maven2/com/esotericsoftware/kryo-shaded/4.0.2/kryo-shaded-4.0.2.pom
+Downloaded https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-hdfs/2.7.4/hadoop-hdfs-2.7.4.pom
+Downloaded https://repo1.maven.org/maven2/jakarta/annotation/jakarta.annotation-api/1.3.5/jakarta.annotation-api-1.3.5.pom
+Downloaded https://repo1.maven.org/maven2/org/apache/avro/avro-ipc/1.8.2/avro-ipc-1.8.2.pom
+Downloaded https://repo1.maven.org/maven2/com/esotericsoftware/kryo-shaded/4.0.2/kryo-shaded-4.0.2.pom
+Downloading https://repo1.maven.org/maven2/org/glassfish/jersey/media/project/2.30/project-2.30.pom
+Downloading https://repo1.maven.org/maven2/org/apache/yetus/yetus-project/0.5.0/yetus-project-0.5.0.pom
+Downloading https://repo1.maven.org/maven2/com/fasterxml/jackson/module/jackson-modules-base/2.10.0/jackson-modules-base-2.10.0.pom
+Downloading https://repo1.maven.org/maven2/org/eclipse/jetty/jetty-project/9.4.20.v20190813/jetty-project-9.4.20.v20190813.pom
+Downloading https://repo1.maven.org/maven2/com/google/guava/guava-parent/16.0.1/guava-parent-16.0.1.pom
+Downloading https://repo1.maven.org/maven2/org/glassfish/hk2/external/2.6.1/external-2.6.1.pom
+Downloaded https://repo1.maven.org/maven2/org/glassfish/jersey/media/project/2.30/project-2.30.pom
+Downloading https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-mapreduce-client/2.7.4/hadoop-mapreduce-client-2.7.4.pom
+Downloaded https://repo1.maven.org/maven2/org/apache/yetus/yetus-project/0.5.0/yetus-project-0.5.0.pom
+Downloading https://repo1.maven.org/maven2/org/apache/commons/commons-parent/33/commons-parent-33.pom
+Downloaded https://repo1.maven.org/maven2/org/glassfish/hk2/external/2.6.1/external-2.6.1.pom
+Downloading https://repo1.maven.org/maven2/jakarta/annotation/ca-parent/1.3.5/ca-parent-1.3.5.pom
+Downloaded https://repo1.maven.org/maven2/com/google/guava/guava-parent/16.0.1/guava-parent-16.0.1.pom
+Downloading https://repo1.maven.org/maven2/org/glassfish/hk2/hk2-parent/2.6.1/hk2-parent-2.6.1.pom
+Downloaded https://repo1.maven.org/maven2/org/eclipse/jetty/jetty-project/9.4.20.v20190813/jetty-project-9.4.20.v20190813.pom
+Downloaded https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-mapreduce-client/2.7.4/hadoop-mapreduce-client-2.7.4.pom
+Downloading https://repo1.maven.org/maven2/com/esotericsoftware/kryo-parent/4.0.2/kryo-parent-4.0.2.pom
+Downloading https://repo1.maven.org/maven2/org/fusesource/leveldbjni/leveldbjni-project/1.8/leveldbjni-project-1.8.pom
+Downloaded https://repo1.maven.org/maven2/org/apache/commons/commons-parent/33/commons-parent-33.pom
+Downloaded https://repo1.maven.org/maven2/org/glassfish/hk2/hk2-parent/2.6.1/hk2-parent-2.6.1.pom
+Downloaded https://repo1.maven.org/maven2/com/fasterxml/jackson/module/jackson-modules-base/2.10.0/jackson-modules-base-2.10.0.pom
+Downloaded https://repo1.maven.org/maven2/jakarta/annotation/ca-parent/1.3.5/ca-parent-1.3.5.pom
+Downloading https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-yarn/2.7.4/hadoop-yarn-2.7.4.pom
+Downloaded https://repo1.maven.org/maven2/org/fusesource/leveldbjni/leveldbjni-project/1.8/leveldbjni-project-1.8.pom
+Downloaded https://repo1.maven.org/maven2/com/esotericsoftware/kryo-parent/4.0.2/kryo-parent-4.0.2.pom
+Downloaded https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-yarn/2.7.4/hadoop-yarn-2.7.4.pom
+Downloading https://repo1.maven.org/maven2/org/apache/commons/commons-parent/32/commons-parent-32.pom
+Downloaded https://repo1.maven.org/maven2/org/apache/commons/commons-parent/32/commons-parent-32.pom
+Downloading https://repo1.maven.org/maven2/org/fusesource/fusesource-pom/1.9/fusesource-pom-1.9.pom
+Downloaded https://repo1.maven.org/maven2/org/fusesource/fusesource-pom/1.9/fusesource-pom-1.9.pom
+Downloading https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-mapreduce-client-common/2.7.4/hadoop-mapreduce-client-common-2.7.4.pom
+Downloading https://repo1.maven.org/maven2/commons-cli/commons-cli/1.2/commons-cli-1.2.pom
+Downloading https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-auth/2.7.4/hadoop-auth-2.7.4.pom
+Downloading https://repo1.maven.org/maven2/org/mortbay/jetty/jetty-util/6.1.26/jetty-util-6.1.26.pom
+Downloading https://repo1.maven.org/maven2/xmlenc/xmlenc/0.52/xmlenc-0.52.pom
+Downloading https://repo1.maven.org/maven2/commons-httpclient/commons-httpclient/3.1/commons-httpclient-3.1.pom
+Downloaded https://repo1.maven.org/maven2/commons-cli/commons-cli/1.2/commons-cli-1.2.pom
+Downloaded https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-auth/2.7.4/hadoop-auth-2.7.4.pom
+Downloaded https://repo1.maven.org/maven2/org/mortbay/jetty/jetty-util/6.1.26/jetty-util-6.1.26.pom
+Downloaded https://repo1.maven.org/maven2/xmlenc/xmlenc/0.52/xmlenc-0.52.pom
+Downloaded https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-mapreduce-client-common/2.7.4/hadoop-mapreduce-client-common-2.7.4.pom
+Downloading https://repo1.maven.org/maven2/commons-lang/commons-lang/2.6/commons-lang-2.6.pom
+Downloading https://repo1.maven.org/maven2/org/mortbay/jetty/jetty-sslengine/6.1.26/jetty-sslengine-6.1.26.pom
+Downloading https://repo1.maven.org/maven2/commons-collections/commons-collections/3.2.2/commons-collections-3.2.2.pom
+Downloading https://repo1.maven.org/maven2/org/glassfish/hk2/hk2-api/2.6.1/hk2-api-2.6.1.pom
+Downloading https://repo1.maven.org/maven2/com/esotericsoftware/minlog/1.3.0/minlog-1.3.0.pom
+Downloaded https://repo1.maven.org/maven2/com/esotericsoftware/minlog/1.3.0/minlog-1.3.0.pom
+Downloaded https://repo1.maven.org/maven2/org/mortbay/jetty/jetty-sslengine/6.1.26/jetty-sslengine-6.1.26.pom
+Downloading https://repo1.maven.org/maven2/com/sun/activation/jakarta.activation/1.2.1/jakarta.activation-1.2.1.pom
+Downloading https://repo1.maven.org/maven2/io/netty/netty/3.10.6.Final/netty-3.10.6.Final.pom
+Downloaded https://repo1.maven.org/maven2/commons-lang/commons-lang/2.6/commons-lang-2.6.pom
+Downloading https://repo1.maven.org/maven2/jakarta/xml/bind/jakarta.xml.bind-api/2.3.2/jakarta.xml.bind-api-2.3.2.pom
+Downloaded https://repo1.maven.org/maven2/commons-collections/commons-collections/3.2.2/commons-collections-3.2.2.pom
+Downloading https://repo1.maven.org/maven2/com/google/protobuf/protobuf-java/2.5.0/protobuf-java-2.5.0.pom
+Downloaded https://repo1.maven.org/maven2/org/glassfish/hk2/hk2-api/2.6.1/hk2-api-2.6.1.pom
+Downloading https://repo1.maven.org/maven2/org/eclipse/jetty/jetty-io/9.4.20.v20190813/jetty-io-9.4.20.v20190813.pom
+Downloaded https://repo1.maven.org/maven2/io/netty/netty/3.10.6.Final/netty-3.10.6.Final.pom
+Downloading https://repo1.maven.org/maven2/javax/servlet/jsp/jsp-api/2.1/jsp-api-2.1.pom
+Downloaded https://repo1.maven.org/maven2/commons-httpclient/commons-httpclient/3.1/commons-httpclient-3.1.pom
+Downloading https://repo1.maven.org/maven2/org/glassfish/hk2/external/aopalliance-repackaged/2.6.1/aopalliance-repackaged-2.6.1.pom
+Downloaded https://repo1.maven.org/maven2/com/google/protobuf/protobuf-java/2.5.0/protobuf-java-2.5.0.pom
+Downloading https://repo1.maven.org/maven2/commons-configuration/commons-configuration/1.6/commons-configuration-1.6.pom
+Downloaded https://repo1.maven.org/maven2/com/sun/activation/jakarta.activation/1.2.1/jakarta.activation-1.2.1.pom
+Downloading https://repo1.maven.org/maven2/xerces/xercesImpl/2.9.1/xercesImpl-2.9.1.pom
+Downloaded https://repo1.maven.org/maven2/jakarta/xml/bind/jakarta.xml.bind-api/2.3.2/jakarta.xml.bind-api-2.3.2.pom
+Downloading https://repo1.maven.org/maven2/org/apache/curator/curator-client/2.7.1/curator-client-2.7.1.pom
+Downloaded https://repo1.maven.org/maven2/org/eclipse/jetty/jetty-io/9.4.20.v20190813/jetty-io-9.4.20.v20190813.pom
+Downloading https://repo1.maven.org/maven2/org/eclipse/jetty/jetty-http/9.4.20.v20190813/jetty-http-9.4.20.v20190813.pom
+Downloaded https://repo1.maven.org/maven2/xerces/xercesImpl/2.9.1/xercesImpl-2.9.1.pom
+Downloaded https://repo1.maven.org/maven2/commons-configuration/commons-configuration/1.6/commons-configuration-1.6.pom
+Downloading https://repo1.maven.org/maven2/org/glassfish/hk2/hk2-utils/2.6.1/hk2-utils-2.6.1.pom
+Downloading https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-yarn-common/2.7.4/hadoop-yarn-common-2.7.4.pom
+Downloaded https://repo1.maven.org/maven2/javax/servlet/jsp/jsp-api/2.1/jsp-api-2.1.pom
+Downloading https://repo1.maven.org/maven2/com/google/code/gson/gson/2.2.4/gson-2.2.4.pom
+Downloaded https://repo1.maven.org/maven2/org/apache/curator/curator-client/2.7.1/curator-client-2.7.1.pom
+Downloading https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-mapreduce-client-shuffle/2.7.4/hadoop-mapreduce-client-shuffle-2.7.4.pom
+Downloaded https://repo1.maven.org/maven2/org/glassfish/hk2/external/aopalliance-repackaged/2.6.1/aopalliance-repackaged-2.6.1.pom
+Downloading https://repo1.maven.org/maven2/org/objenesis/objenesis/2.5.1/objenesis-2.5.1.pom
+Downloaded https://repo1.maven.org/maven2/org/eclipse/jetty/jetty-http/9.4.20.v20190813/jetty-http-9.4.20.v20190813.pom
+Downloading https://repo1.maven.org/maven2/commons-io/commons-io/2.4/commons-io-2.4.pom
+Downloaded https://repo1.maven.org/maven2/org/glassfish/hk2/hk2-utils/2.6.1/hk2-utils-2.6.1.pom
+Downloading https://repo1.maven.org/maven2/org/json4s/json4s-scalap_2.12/3.6.6/json4s-scalap_2.12-3.6.6.pom
+Downloaded https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-yarn-common/2.7.4/hadoop-yarn-common-2.7.4.pom
+Downloaded https://repo1.maven.org/maven2/org/json4s/json4s-scalap_2.12/3.6.6/json4s-scalap_2.12-3.6.6.pom
+Downloaded https://repo1.maven.org/maven2/com/google/code/gson/gson/2.2.4/gson-2.2.4.pom
+Downloaded https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-mapreduce-client-shuffle/2.7.4/hadoop-mapreduce-client-shuffle-2.7.4.pom
+Downloaded https://repo1.maven.org/maven2/commons-io/commons-io/2.4/commons-io-2.4.pom
+Downloading https://repo1.maven.org/maven2/org/apache/htrace/htrace-core/3.1.0-incubating/htrace-core-3.1.0-incubating.pom
+Downloading https://repo1.maven.org/maven2/org/json4s/json4s-ast_2.12/3.6.6/json4s-ast_2.12-3.6.6.pom
+Downloading https://repo1.maven.org/maven2/com/github/spotbugs/spotbugs-annotations/3.1.9/spotbugs-annotations-3.1.9.pom
+Downloaded https://repo1.maven.org/maven2/org/objenesis/objenesis/2.5.1/objenesis-2.5.1.pom
+Downloaded https://repo1.maven.org/maven2/org/apache/htrace/htrace-core/3.1.0-incubating/htrace-core-3.1.0-incubating.pom
+Downloaded https://repo1.maven.org/maven2/org/json4s/json4s-ast_2.12/3.6.6/json4s-ast_2.12-3.6.6.pom
+Downloaded https://repo1.maven.org/maven2/com/github/spotbugs/spotbugs-annotations/3.1.9/spotbugs-annotations-3.1.9.pom
+Downloading https://repo1.maven.org/maven2/org/apache/htrace/htrace/3.1.0-incubating/htrace-3.1.0-incubating.pom
+Downloading https://repo1.maven.org/maven2/org/apache/apache/4/apache-4.pom
+Downloading https://repo1.maven.org/maven2/jakarta/xml/bind/jakarta.xml.bind-api-parent/2.3.2/jakarta.xml.bind-api-parent-2.3.2.pom
+Downloading https://repo1.maven.org/maven2/org/objenesis/objenesis-parent/2.5.1/objenesis-parent-2.5.1.pom
+Downloading https://repo1.maven.org/maven2/com/sun/activation/all/1.2.1/all-1.2.1.pom
+Downloading https://repo1.maven.org/maven2/com/google/google/1/google-1.pom
+Downloaded https://repo1.maven.org/maven2/org/objenesis/objenesis-parent/2.5.1/objenesis-parent-2.5.1.pom
+Downloaded https://repo1.maven.org/maven2/org/apache/apache/4/apache-4.pom
+Downloaded https://repo1.maven.org/maven2/com/google/google/1/google-1.pom
+Downloading https://repo1.maven.org/maven2/org/apache/commons/commons-parent/39/commons-parent-39.pom
+Downloading https://repo1.maven.org/maven2/org/mortbay/jetty/project/6.1.26/project-6.1.26.pom
+Downloaded https://repo1.maven.org/maven2/jakarta/xml/bind/jakarta.xml.bind-api-parent/2.3.2/jakarta.xml.bind-api-parent-2.3.2.pom
+Downloaded https://repo1.maven.org/maven2/org/apache/htrace/htrace/3.1.0-incubating/htrace-3.1.0-incubating.pom
+Downloaded https://repo1.maven.org/maven2/com/sun/activation/all/1.2.1/all-1.2.1.pom
+Downloaded https://repo1.maven.org/maven2/org/mortbay/jetty/project/6.1.26/project-6.1.26.pom
+Downloaded https://repo1.maven.org/maven2/org/apache/commons/commons-parent/39/commons-parent-39.pom
+Downloading https://repo1.maven.org/maven2/org/apache/commons/commons-parent/25/commons-parent-25.pom
+Downloaded https://repo1.maven.org/maven2/org/apache/commons/commons-parent/25/commons-parent-25.pom
+Downloading https://repo1.maven.org/maven2/org/apache/commons/commons-parent/17/commons-parent-17.pom
+Downloaded https://repo1.maven.org/maven2/org/apache/commons/commons-parent/17/commons-parent-17.pom
+Downloading https://repo1.maven.org/maven2/org/apache/commons/commons-parent/11/commons-parent-11.pom
+Downloaded https://repo1.maven.org/maven2/org/apache/commons/commons-parent/11/commons-parent-11.pom
+Downloading https://repo1.maven.org/maven2/org/eclipse/ee4j/project/1.0.2/project-1.0.2.pom
+Downloading https://repo1.maven.org/maven2/org/apache/apache/16/apache-16.pom
+Downloading https://repo1.maven.org/maven2/org/mortbay/jetty/jetty-parent/10/jetty-parent-10.pom
+Downloaded https://repo1.maven.org/maven2/org/mortbay/jetty/jetty-parent/10/jetty-parent-10.pom
+Downloaded https://repo1.maven.org/maven2/org/eclipse/ee4j/project/1.0.2/project-1.0.2.pom
+Downloaded https://repo1.maven.org/maven2/org/apache/apache/16/apache-16.pom
+Downloading https://repo1.maven.org/maven2/org/apache/apache/12/apache-12.pom
+Downloaded https://repo1.maven.org/maven2/org/apache/apache/12/apache-12.pom
+Downloading https://repo1.maven.org/maven2/org/eclipse/jetty/jetty-parent/14/jetty-parent-14.pom
+Downloaded https://repo1.maven.org/maven2/org/eclipse/jetty/jetty-parent/14/jetty-parent-14.pom
+Downloading https://repo1.maven.org/maven2/org/codehaus/jackson/jackson-xc/1.9.13/jackson-xc-1.9.13.pom
+Downloading https://repo1.maven.org/maven2/xml-apis/xml-apis/1.3.04/xml-apis-1.3.04.pom
+Downloading https://repo1.maven.org/maven2/com/google/code/findbugs/jsr305/3.0.2/jsr305-3.0.2.pom
+Downloading https://repo1.maven.org/maven2/javax/xml/bind/jaxb-api/2.2.2/jaxb-api-2.2.2.pom
+Downloading https://repo1.maven.org/maven2/org/eclipse/jetty/jetty-util/9.4.20.v20190813/jetty-util-9.4.20.v20190813.pom
+Downloading https://repo1.maven.org/maven2/org/apache/directory/server/apacheds-kerberos-codec/2.0.0-M15/apacheds-kerberos-codec-2.0.0-M15.pom
+Downloaded https://repo1.maven.org/maven2/org/codehaus/jackson/jackson-xc/1.9.13/jackson-xc-1.9.13.pom
+Downloading https://repo1.maven.org/maven2/org/codehaus/jackson/jackson-jaxrs/1.9.13/jackson-jaxrs-1.9.13.pom
+Downloaded https://repo1.maven.org/maven2/com/google/code/findbugs/jsr305/3.0.2/jsr305-3.0.2.pom
+Downloading https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-yarn-server-common/2.7.4/hadoop-yarn-server-common-2.7.4.pom
+Downloaded https://repo1.maven.org/maven2/xml-apis/xml-apis/1.3.04/xml-apis-1.3.04.pom
+Downloaded https://repo1.maven.org/maven2/org/eclipse/jetty/jetty-util/9.4.20.v20190813/jetty-util-9.4.20.v20190813.pom
+Downloading https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-yarn-server-nodemanager/2.7.4/hadoop-yarn-server-nodemanager-2.7.4.pom
+Downloaded https://repo1.maven.org/maven2/javax/xml/bind/jaxb-api/2.2.2/jaxb-api-2.2.2.pom
+Downloading https://repo1.maven.org/maven2/jakarta/activation/jakarta.activation-api/1.2.1/jakarta.activation-api-1.2.1.pom
+Downloaded https://repo1.maven.org/maven2/org/apache/directory/server/apacheds-kerberos-codec/2.0.0-M15/apacheds-kerberos-codec-2.0.0-M15.pom
+Downloading https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-yarn-client/2.7.4/hadoop-yarn-client-2.7.4.pom
+Downloaded https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-yarn-server-nodemanager/2.7.4/hadoop-yarn-server-nodemanager-2.7.4.pom
+Downloading https://repo1.maven.org/maven2/org/apache/httpcomponents/httpclient/4.2.5/httpclient-4.2.5.pom
+Downloaded https://repo1.maven.org/maven2/jakarta/activation/jakarta.activation-api/1.2.1/jakarta.activation-api-1.2.1.pom
+Downloading https://repo1.maven.org/maven2/commons-digester/commons-digester/1.8/commons-digester-1.8.pom
+Downloaded https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-yarn-client/2.7.4/hadoop-yarn-client-2.7.4.pom
+Downloaded https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-yarn-server-common/2.7.4/hadoop-yarn-server-common-2.7.4.pom
+Downloaded https://repo1.maven.org/maven2/org/apache/httpcomponents/httpclient/4.2.5/httpclient-4.2.5.pom
+Downloaded https://repo1.maven.org/maven2/commons-digester/commons-digester/1.8/commons-digester-1.8.pom
+Downloaded https://repo1.maven.org/maven2/org/codehaus/jackson/jackson-jaxrs/1.9.13/jackson-jaxrs-1.9.13.pom
+Downloading https://repo1.maven.org/maven2/org/apache/apache/3/apache-3.pom
+Downloading https://repo1.maven.org/maven2/org/apache/directory/server/apacheds-parent/2.0.0-M15/apacheds-parent-2.0.0-M15.pom
+Downloading https://repo1.maven.org/maven2/org/apache/httpcomponents/httpcomponents-client/4.2.5/httpcomponents-client-4.2.5.pom
+Downloading https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-yarn-server/2.7.4/hadoop-yarn-server-2.7.4.pom
+Downloaded https://repo1.maven.org/maven2/org/apache/apache/3/apache-3.pom
+Downloaded https://repo1.maven.org/maven2/org/apache/directory/server/apacheds-parent/2.0.0-M15/apacheds-parent-2.0.0-M15.pom
+Downloaded https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-yarn-server/2.7.4/hadoop-yarn-server-2.7.4.pom
+Downloaded https://repo1.maven.org/maven2/org/apache/httpcomponents/httpcomponents-client/4.2.5/httpcomponents-client-4.2.5.pom
+Downloading https://repo1.maven.org/maven2/org/apache/directory/project/project/31/project-31.pom
+Downloading https://repo1.maven.org/maven2/org/apache/httpcomponents/project/6/project-6.pom
+Downloaded https://repo1.maven.org/maven2/org/apache/directory/project/project/31/project-31.pom
+Downloaded https://repo1.maven.org/maven2/org/apache/httpcomponents/project/6/project-6.pom
+Downloading https://repo1.maven.org/maven2/org/apache/apache/11/apache-11.pom
+Downloaded https://repo1.maven.org/maven2/org/apache/apache/11/apache-11.pom
+Downloading https://repo1.maven.org/maven2/jline/jline/0.9.94/jline-0.9.94.pom
+Downloading https://repo1.maven.org/maven2/org/codehaus/jettison/jettison/1.1/jettison-1.1.pom
+Downloading https://repo1.maven.org/maven2/commons-beanutils/commons-beanutils/1.7.0/commons-beanutils-1.7.0.pom
+Downloading https://repo1.maven.org/maven2/org/apache/directory/server/apacheds-i18n/2.0.0-M15/apacheds-i18n-2.0.0-M15.pom
+Downloading https://repo1.maven.org/maven2/javax/xml/stream/stax-api/1.0-2/stax-api-1.0-2.pom
+Downloading https://repo1.maven.org/maven2/org/apache/httpcomponents/httpcore/4.2.4/httpcore-4.2.4.pom
+Downloaded https://repo1.maven.org/maven2/org/codehaus/jettison/jettison/1.1/jettison-1.1.pom
+Downloaded https://repo1.maven.org/maven2/org/apache/httpcomponents/httpcore/4.2.4/httpcore-4.2.4.pom
+Downloaded https://repo1.maven.org/maven2/javax/xml/stream/stax-api/1.0-2/stax-api-1.0-2.pom
+Downloading https://repo1.maven.org/maven2/org/apache/directory/api/api-util/1.0.0-M20/api-util-1.0.0-M20.pom
+Downloading https://repo1.maven.org/maven2/com/google/inject/guice/3.0/guice-3.0.pom
+Downloaded https://repo1.maven.org/maven2/org/apache/directory/server/apacheds-i18n/2.0.0-M15/apacheds-i18n-2.0.0-M15.pom
+Downloading https://repo1.maven.org/maven2/org/apache/directory/api/api-asn1-api/1.0.0-M20/api-asn1-api-1.0.0-M20.pom
+Downloaded https://repo1.maven.org/maven2/jline/jline/0.9.94/jline-0.9.94.pom
+Downloaded https://repo1.maven.org/maven2/org/apache/directory/api/api-util/1.0.0-M20/api-util-1.0.0-M20.pom
+Downloaded https://repo1.maven.org/maven2/com/google/inject/guice/3.0/guice-3.0.pom
+Downloaded https://repo1.maven.org/maven2/org/apache/directory/api/api-asn1-api/1.0.0-M20/api-asn1-api-1.0.0-M20.pom
+Downloaded https://repo1.maven.org/maven2/commons-beanutils/commons-beanutils/1.7.0/commons-beanutils-1.7.0.pom
+Downloading https://repo1.maven.org/maven2/org/apache/httpcomponents/httpcomponents-core/4.2.4/httpcomponents-core-4.2.4.pom
+Downloading https://repo1.maven.org/maven2/com/google/inject/guice-parent/3.0/guice-parent-3.0.pom
+Downloading https://repo1.maven.org/maven2/org/apache/directory/api/api-asn1-parent/1.0.0-M20/api-asn1-parent-1.0.0-M20.pom
+Downloading https://repo1.maven.org/maven2/org/apache/directory/api/api-parent/1.0.0-M20/api-parent-1.0.0-M20.pom
+Downloaded https://repo1.maven.org/maven2/org/apache/httpcomponents/httpcomponents-core/4.2.4/httpcomponents-core-4.2.4.pom
+Downloaded https://repo1.maven.org/maven2/org/apache/directory/api/api-asn1-parent/1.0.0-M20/api-asn1-parent-1.0.0-M20.pom
+Downloaded https://repo1.maven.org/maven2/com/google/inject/guice-parent/3.0/guice-parent-3.0.pom
+Downloaded https://repo1.maven.org/maven2/org/apache/directory/api/api-parent/1.0.0-M20/api-parent-1.0.0-M20.pom
+Downloading https://repo1.maven.org/maven2/com/google/google/5/google-5.pom
+Downloaded https://repo1.maven.org/maven2/com/google/google/5/google-5.pom
+Downloading https://repo1.maven.org/maven2/aopalliance/aopalliance/1.0/aopalliance-1.0.pom
+Downloading https://repo1.maven.org/maven2/javax/inject/javax.inject/1/javax.inject-1.pom
+Downloaded https://repo1.maven.org/maven2/aopalliance/aopalliance/1.0/aopalliance-1.0.pom
+Downloaded https://repo1.maven.org/maven2/javax/inject/javax.inject/1/javax.inject-1.pom
+Downloading https://repo1.maven.org/maven2/org/codehaus/jackson/jackson-core-asl/1.9.13/jackson-core-asl-1.9.13.jar
+Downloading https://repo1.maven.org/maven2/commons-codec/commons-codec/1.9/commons-codec-1.9.jar
+Downloading https://repo1.maven.org/maven2/org/apache/avro/avro-mapred/1.8.2/avro-mapred-1.8.2-hadoop2.jar
+Downloading https://repo1.maven.org/maven2/com/esotericsoftware/minlog/1.3.0/minlog-1.3.0.jar
+Downloading https://repo1.maven.org/maven2/org/apache/avro/avro/1.8.2/avro-1.8.2.jar
+Downloading https://repo1.maven.org/maven2/org/apache/commons/commons-compress/1.8.1/commons-compress-1.8.1.jar
+Downloaded https://repo1.maven.org/maven2/org/codehaus/jackson/jackson-core-asl/1.9.13/jackson-core-asl-1.9.13.jar
+Downloading https://repo1.maven.org/maven2/com/esotericsoftware/kryo-shaded/4.0.2/kryo-shaded-4.0.2.jar
+Downloaded https://repo1.maven.org/maven2/com/esotericsoftware/minlog/1.3.0/minlog-1.3.0.jar
+Downloading https://repo1.maven.org/maven2/com/twitter/chill_2.12/0.9.5/chill_2.12-0.9.5.jar
+Downloaded https://repo1.maven.org/maven2/commons-codec/commons-codec/1.9/commons-codec-1.9.jar
+Downloading https://repo1.maven.org/maven2/com/twitter/chill-java/0.9.5/chill-java-0.9.5.jar
+Downloaded https://repo1.maven.org/maven2/org/apache/avro/avro-mapred/1.8.2/avro-mapred-1.8.2-hadoop2.jar
+Downloading https://repo1.maven.org/maven2/com/google/guava/guava/16.0.1/guava-16.0.1.jar
+Downloaded https://repo1.maven.org/maven2/com/twitter/chill-java/0.9.5/chill-java-0.9.5.jar
+Downloading https://repo1.maven.org/maven2/org/apache/avro/avro-ipc/1.8.2/avro-ipc-1.8.2.jar
+Downloaded https://repo1.maven.org/maven2/com/esotericsoftware/kryo-shaded/4.0.2/kryo-shaded-4.0.2.jar
+Downloading https://repo1.maven.org/maven2/commons-cli/commons-cli/1.2/commons-cli-1.2.jar
+Downloaded https://repo1.maven.org/maven2/com/twitter/chill_2.12/0.9.5/chill_2.12-0.9.5.jar
+Downloading https://repo1.maven.org/maven2/org/codehaus/jackson/jackson-mapper-asl/1.9.13/jackson-mapper-asl-1.9.13.jar
+Downloaded https://repo1.maven.org/maven2/commons-cli/commons-cli/1.2/commons-cli-1.2.jar
+Downloading https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-annotations/2.7.4/hadoop-annotations-2.7.4.jar
+Downloaded https://repo1.maven.org/maven2/org/apache/avro/avro-ipc/1.8.2/avro-ipc-1.8.2.jar
+Downloading https://repo1.maven.org/maven2/commons-httpclient/commons-httpclient/3.1/commons-httpclient-3.1.jar
+Downloaded https://repo1.maven.org/maven2/org/apache/avro/avro/1.8.2/avro-1.8.2.jar
+Downloading https://repo1.maven.org/maven2/org/apache/commons/commons-math3/3.4.1/commons-math3-3.4.1.jar
+Downloaded https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-annotations/2.7.4/hadoop-annotations-2.7.4.jar
+Downloading https://repo1.maven.org/maven2/xmlenc/xmlenc/0.52/xmlenc-0.52.jar
+Downloaded https://repo1.maven.org/maven2/org/apache/commons/commons-compress/1.8.1/commons-compress-1.8.1.jar
+Downloading https://repo1.maven.org/maven2/commons-collections/commons-collections/3.2.2/commons-collections-3.2.2.jar
+Downloaded https://repo1.maven.org/maven2/xmlenc/xmlenc/0.52/xmlenc-0.52.jar
+Downloading https://repo1.maven.org/maven2/org/xerial/snappy/snappy-java/1.1.7.5/snappy-java-1.1.7.5.jar
+Downloaded https://repo1.maven.org/maven2/commons-httpclient/commons-httpclient/3.1/commons-httpclient-3.1.jar
+Downloading https://repo1.maven.org/maven2/commons-lang/commons-lang/2.6/commons-lang-2.6.jar
+Downloaded https://repo1.maven.org/maven2/org/codehaus/jackson/jackson-mapper-asl/1.9.13/jackson-mapper-asl-1.9.13.jar
+Downloading https://repo1.maven.org/maven2/log4j/log4j/1.2.17/log4j-1.2.17.jar
+Downloaded https://repo1.maven.org/maven2/commons-collections/commons-collections/3.2.2/commons-collections-3.2.2.jar
+Downloading https://repo1.maven.org/maven2/com/google/code/gson/gson/2.2.4/gson-2.2.4.jar
+Downloaded https://repo1.maven.org/maven2/com/google/code/gson/gson/2.2.4/gson-2.2.4.jar
+Downloading https://repo1.maven.org/maven2/commons-io/commons-io/2.4/commons-io-2.4.jar
+Downloaded https://repo1.maven.org/maven2/commons-lang/commons-lang/2.6/commons-lang-2.6.jar
+Downloading https://repo1.maven.org/maven2/commons-configuration/commons-configuration/1.6/commons-configuration-1.6.jar
+Downloaded https://repo1.maven.org/maven2/log4j/log4j/1.2.17/log4j-1.2.17.jar
+Downloaded https://repo1.maven.org/maven2/com/google/guava/guava/16.0.1/guava-16.0.1.jar
+Downloading https://repo1.maven.org/maven2/org/apache/httpcomponents/httpcore/4.2.4/httpcore-4.2.4.jar
+Downloading https://repo1.maven.org/maven2/commons-beanutils/commons-beanutils/1.7.0/commons-beanutils-1.7.0.jar
+Downloaded https://repo1.maven.org/maven2/commons-io/commons-io/2.4/commons-io-2.4.jar
+Downloading https://repo1.maven.org/maven2/org/apache/directory/server/apacheds-i18n/2.0.0-M15/apacheds-i18n-2.0.0-M15.jar
+Downloaded https://repo1.maven.org/maven2/org/apache/httpcomponents/httpcore/4.2.4/httpcore-4.2.4.jar
+Downloading https://repo1.maven.org/maven2/org/apache/httpcomponents/httpclient/4.2.5/httpclient-4.2.5.jar
+Downloaded https://repo1.maven.org/maven2/commons-beanutils/commons-beanutils/1.7.0/commons-beanutils-1.7.0.jar
+Downloading https://repo1.maven.org/maven2/com/google/protobuf/protobuf-java/2.5.0/protobuf-java-2.5.0.jar
+Downloaded https://repo1.maven.org/maven2/org/apache/directory/server/apacheds-i18n/2.0.0-M15/apacheds-i18n-2.0.0-M15.jar
+Downloading https://repo1.maven.org/maven2/org/apache/directory/api/api-asn1-api/1.0.0-M20/api-asn1-api-1.0.0-M20.jar
+Downloaded https://repo1.maven.org/maven2/commons-configuration/commons-configuration/1.6/commons-configuration-1.6.jar
+Downloading https://repo1.maven.org/maven2/org/apache/directory/api/api-util/1.0.0-M20/api-util-1.0.0-M20.jar
+Downloaded https://repo1.maven.org/maven2/org/apache/httpcomponents/httpclient/4.2.5/httpclient-4.2.5.jar
+Downloading https://repo1.maven.org/maven2/org/apache/directory/server/apacheds-kerberos-codec/2.0.0-M15/apacheds-kerberos-codec-2.0.0-M15.jar
+Downloaded https://repo1.maven.org/maven2/org/apache/directory/api/api-util/1.0.0-M20/api-util-1.0.0-M20.jar
+Downloading https://repo1.maven.org/maven2/org/apache/yetus/audience-annotations/0.5.0/audience-annotations-0.5.0.jar
+Downloaded https://repo1.maven.org/maven2/org/apache/directory/api/api-asn1-api/1.0.0-M20/api-asn1-api-1.0.0-M20.jar
+Downloading https://repo1.maven.org/maven2/jline/jline/0.9.94/jline-0.9.94.jar
+Downloaded https://repo1.maven.org/maven2/com/google/protobuf/protobuf-java/2.5.0/protobuf-java-2.5.0.jar
+Downloading https://repo1.maven.org/maven2/org/apache/curator/curator-client/2.7.1/curator-client-2.7.1.jar
+Downloaded https://repo1.maven.org/maven2/org/apache/yetus/audience-annotations/0.5.0/audience-annotations-0.5.0.jar
+Downloading https://repo1.maven.org/maven2/org/apache/zookeeper/zookeeper/3.4.14/zookeeper-3.4.14.jar
+Downloaded https://repo1.maven.org/maven2/jline/jline/0.9.94/jline-0.9.94.jar
+Downloading https://repo1.maven.org/maven2/org/apache/curator/curator-framework/2.7.1/curator-framework-2.7.1.jar
+Downloaded https://repo1.maven.org/maven2/org/apache/curator/curator-client/2.7.1/curator-client-2.7.1.jar
+Downloading https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-auth/2.7.4/hadoop-auth-2.7.4.jar
+Downloaded https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-auth/2.7.4/hadoop-auth-2.7.4.jar
+Downloading https://repo1.maven.org/maven2/org/apache/htrace/htrace-core/3.1.0-incubating/htrace-core-3.1.0-incubating.jar
+Downloaded https://repo1.maven.org/maven2/org/apache/curator/curator-framework/2.7.1/curator-framework-2.7.1.jar
+Downloading https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-common/2.7.4/hadoop-common-2.7.4.jar
+Downloaded https://repo1.maven.org/maven2/org/apache/commons/commons-math3/3.4.1/commons-math3-3.4.1.jar
+Downloading https://repo1.maven.org/maven2/org/apache/curator/curator-recipes/2.7.1/curator-recipes-2.7.1.jar
+Downloaded https://repo1.maven.org/maven2/org/xerial/snappy/snappy-java/1.1.7.5/snappy-java-1.1.7.5.jar
+Downloading https://repo1.maven.org/maven2/xerces/xercesImpl/2.9.1/xercesImpl-2.9.1.jar
+Downloaded https://repo1.maven.org/maven2/org/apache/directory/server/apacheds-kerberos-codec/2.0.0-M15/apacheds-kerberos-codec-2.0.0-M15.jar
+Downloading https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-yarn-api/2.7.4/hadoop-yarn-api-2.7.4.jar
+Downloaded https://repo1.maven.org/maven2/org/apache/curator/curator-recipes/2.7.1/curator-recipes-2.7.1.jar
+Downloading https://repo1.maven.org/maven2/xml-apis/xml-apis/1.3.04/xml-apis-1.3.04.jar
+Downloaded https://repo1.maven.org/maven2/org/apache/zookeeper/zookeeper/3.4.14/zookeeper-3.4.14.jar
+Downloading https://repo1.maven.org/maven2/javax/xml/stream/stax-api/1.0-2/stax-api-1.0-2.jar
+Downloaded https://repo1.maven.org/maven2/xml-apis/xml-apis/1.3.04/xml-apis-1.3.04.jar
+Downloading https://repo1.maven.org/maven2/javax/activation/activation/1.1.1/activation-1.1.1.jar
+Downloaded https://repo1.maven.org/maven2/xerces/xercesImpl/2.9.1/xercesImpl-2.9.1.jar
+Downloading https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-hdfs/2.7.4/hadoop-hdfs-2.7.4.jar
+Downloaded https://repo1.maven.org/maven2/javax/xml/stream/stax-api/1.0-2/stax-api-1.0-2.jar
+Downloading https://repo1.maven.org/maven2/io/netty/netty-all/4.1.47.Final/netty-all-4.1.47.Final.jar
+Downloaded https://repo1.maven.org/maven2/javax/activation/activation/1.1.1/activation-1.1.1.jar
+Downloading https://repo1.maven.org/maven2/org/codehaus/jackson/jackson-xc/1.9.13/jackson-xc-1.9.13.jar
+Downloaded https://repo1.maven.org/maven2/org/codehaus/jackson/jackson-xc/1.9.13/jackson-xc-1.9.13.jar
+Downloading https://repo1.maven.org/maven2/javax/xml/bind/jaxb-api/2.2.2/jaxb-api-2.2.2.jar
+Downloaded https://repo1.maven.org/maven2/org/apache/htrace/htrace-core/3.1.0-incubating/htrace-core-3.1.0-incubating.jar
+Downloading https://repo1.maven.org/maven2/org/codehaus/jackson/jackson-jaxrs/1.9.13/jackson-jaxrs-1.9.13.jar
+Downloaded https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-common/2.7.4/hadoop-common-2.7.4.jar
+Downloading https://repo1.maven.org/maven2/javax/inject/javax.inject/1/javax.inject-1.jar
+Downloaded https://repo1.maven.org/maven2/org/codehaus/jackson/jackson-jaxrs/1.9.13/jackson-jaxrs-1.9.13.jar
+Downloading https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-yarn-common/2.7.4/hadoop-yarn-common-2.7.4.jar
+Downloaded https://repo1.maven.org/maven2/javax/xml/bind/jaxb-api/2.2.2/jaxb-api-2.2.2.jar
+Downloading https://repo1.maven.org/maven2/com/google/inject/guice/3.0/guice-3.0.jar
+Downloaded https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-yarn-api/2.7.4/hadoop-yarn-api-2.7.4.jar
+Downloading https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-yarn-client/2.7.4/hadoop-yarn-client-2.7.4.jar
+Downloaded https://repo1.maven.org/maven2/javax/inject/javax.inject/1/javax.inject-1.jar
+Downloading https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-mapreduce-client-common/2.7.4/hadoop-mapreduce-client-common-2.7.4.jar
+Downloaded https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-yarn-client/2.7.4/hadoop-yarn-client-2.7.4.jar
+Downloading https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-mapreduce-client-shuffle/2.7.4/hadoop-mapreduce-client-shuffle-2.7.4.jar
+Downloaded https://repo1.maven.org/maven2/com/google/inject/guice/3.0/guice-3.0.jar
+Downloading https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-mapreduce-client-jobclient/2.7.4/hadoop-mapreduce-client-jobclient-2.7.4.jar
+Downloaded https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-mapreduce-client-shuffle/2.7.4/hadoop-mapreduce-client-shuffle-2.7.4.jar
+Downloading https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-yarn-server-nodemanager/2.7.4/hadoop-yarn-server-nodemanager-2.7.4.jar
+Downloaded https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-mapreduce-client-common/2.7.4/hadoop-mapreduce-client-common-2.7.4.jar
+Downloading https://repo1.maven.org/maven2/org/codehaus/jettison/jettison/1.1/jettison-1.1.jar
+Downloaded https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-mapreduce-client-jobclient/2.7.4/hadoop-mapreduce-client-jobclient-2.7.4.jar
+Downloading https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-mapreduce-client-core/2.7.4/hadoop-mapreduce-client-core-2.7.4.jar
+Downloaded https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-yarn-common/2.7.4/hadoop-yarn-common-2.7.4.jar
+Downloading https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-client/2.7.4/hadoop-client-2.7.4.jar
+Downloaded https://repo1.maven.org/maven2/org/codehaus/jettison/jettison/1.1/jettison-1.1.jar
+Downloading https://repo1.maven.org/maven2/org/apache/spark/spark-tags_2.12/3.0.0/spark-tags_2.12-3.0.0.jar
+Downloaded https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-client/2.7.4/hadoop-client-2.7.4.jar
+Downloading https://repo1.maven.org/maven2/org/apache/spark/spark-launcher_2.12/3.0.0/spark-launcher_2.12-3.0.0.jar
+Downloaded https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-yarn-server-nodemanager/2.7.4/hadoop-yarn-server-nodemanager-2.7.4.jar
+Downloaded https://repo1.maven.org/maven2/org/apache/spark/spark-tags_2.12/3.0.0/spark-tags_2.12-3.0.0.jar
+Downloading https://repo1.maven.org/maven2/org/fusesource/leveldbjni/leveldbjni-all/1.8/leveldbjni-all-1.8.jar
+Downloading https://repo1.maven.org/maven2/org/spark-project/spark/unused/1.0.0/unused-1.0.0.jar
+Downloaded https://repo1.maven.org/maven2/org/apache/spark/spark-launcher_2.12/3.0.0/spark-launcher_2.12-3.0.0.jar
+Downloading https://repo1.maven.org/maven2/com/fasterxml/jackson/core/jackson-core/2.10.0/jackson-core-2.10.0.jar
+Downloaded https://repo1.maven.org/maven2/org/spark-project/spark/unused/1.0.0/unused-1.0.0.jar
+Downloading https://repo1.maven.org/maven2/com/fasterxml/jackson/core/jackson-annotations/2.10.0/jackson-annotations-2.10.0.jar
+Downloaded https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-mapreduce-client-core/2.7.4/hadoop-mapreduce-client-core-2.7.4.jar
+Downloaded https://repo1.maven.org/maven2/io/netty/netty-all/4.1.47.Final/netty-all-4.1.47.Final.jar
+Downloading https://repo1.maven.org/maven2/org/apache/spark/spark-kvstore_2.12/3.0.0/spark-kvstore_2.12-3.0.0.jar
+Downloading https://repo1.maven.org/maven2/org/apache/spark/spark-network-common_2.12/3.0.0/spark-network-common_2.12-3.0.0.jar
+Downloaded https://repo1.maven.org/maven2/com/fasterxml/jackson/core/jackson-core/2.10.0/jackson-core-2.10.0.jar
+Downloading https://repo1.maven.org/maven2/org/apache/spark/spark-unsafe_2.12/3.0.0/spark-unsafe_2.12-3.0.0.jar
+Downloaded https://repo1.maven.org/maven2/org/apache/spark/spark-kvstore_2.12/3.0.0/spark-kvstore_2.12-3.0.0.jar
+Downloading https://repo1.maven.org/maven2/io/netty/netty/3.10.6.Final/netty-3.10.6.Final.jar
+Downloaded https://repo1.maven.org/maven2/com/fasterxml/jackson/core/jackson-annotations/2.10.0/jackson-annotations-2.10.0.jar
+Downloading https://repo1.maven.org/maven2/org/apache/spark/spark-network-shuffle_2.12/3.0.0/spark-network-shuffle_2.12-3.0.0.jar
+Downloaded https://repo1.maven.org/maven2/org/apache/spark/spark-unsafe_2.12/3.0.0/spark-unsafe_2.12-3.0.0.jar
+Downloading https://repo1.maven.org/maven2/javax/servlet/javax.servlet-api/3.1.0/javax.servlet-api-3.1.0.jar
+Downloaded https://repo1.maven.org/maven2/org/fusesource/leveldbjni/leveldbjni-all/1.8/leveldbjni-all-1.8.jar
+Downloading https://repo1.maven.org/maven2/org/slf4j/jcl-over-slf4j/1.7.30/jcl-over-slf4j-1.7.30.jar
+Downloaded https://repo1.maven.org/maven2/org/apache/spark/spark-network-shuffle_2.12/3.0.0/spark-network-shuffle_2.12-3.0.0.jar
+Downloading https://repo1.maven.org/maven2/com/google/code/findbugs/jsr305/3.0.2/jsr305-3.0.2.jar
+Downloaded https://repo1.maven.org/maven2/javax/servlet/javax.servlet-api/3.1.0/javax.servlet-api-3.1.0.jar
+Downloading https://repo1.maven.org/maven2/org/apache/commons/commons-text/1.6/commons-text-1.6.jar
+Downloaded https://repo1.maven.org/maven2/com/google/code/findbugs/jsr305/3.0.2/jsr305-3.0.2.jar
+Downloaded https://repo1.maven.org/maven2/org/slf4j/jcl-over-slf4j/1.7.30/jcl-over-slf4j-1.7.30.jar
+Downloading https://repo1.maven.org/maven2/com/ning/compress-lzf/1.0.3/compress-lzf-1.0.3.jar
+Downloading https://repo1.maven.org/maven2/org/apache/commons/commons-crypto/1.0.0/commons-crypto-1.0.0.jar
+Downloaded https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-hdfs/2.7.4/hadoop-hdfs-2.7.4.jar
+Downloading https://repo1.maven.org/maven2/org/lz4/lz4-java/1.7.1/lz4-java-1.7.1.jar
+Downloaded https://repo1.maven.org/maven2/org/apache/commons/commons-text/1.6/commons-text-1.6.jar
+Downloading https://repo1.maven.org/maven2/org/slf4j/jul-to-slf4j/1.7.30/jul-to-slf4j-1.7.30.jar
+Downloaded https://repo1.maven.org/maven2/io/netty/netty/3.10.6.Final/netty-3.10.6.Final.jar
+Downloading https://repo1.maven.org/maven2/com/github/luben/zstd-jni/1.4.4-3/zstd-jni-1.4.4-3.jar
+Downloaded https://repo1.maven.org/maven2/org/apache/commons/commons-crypto/1.0.0/commons-crypto-1.0.0.jar
+Downloading https://repo1.maven.org/maven2/org/roaringbitmap/shims/0.7.45/shims-0.7.45.jar
+Downloaded https://repo1.maven.org/maven2/org/roaringbitmap/shims/0.7.45/shims-0.7.45.jar
+Downloading https://repo1.maven.org/maven2/org/roaringbitmap/RoaringBitmap/0.7.45/RoaringBitmap-0.7.45.jar
+Downloaded https://repo1.maven.org/maven2/org/slf4j/jul-to-slf4j/1.7.30/jul-to-slf4j-1.7.30.jar
+Downloading https://repo1.maven.org/maven2/org/json4s/json4s-ast_2.12/3.6.6/json4s-ast_2.12-3.6.6.jar
+Downloaded https://repo1.maven.org/maven2/org/lz4/lz4-java/1.7.1/lz4-java-1.7.1.jar
+Downloading https://repo1.maven.org/maven2/com/sun/activation/jakarta.activation/1.2.1/jakarta.activation-1.2.1.jar
+Downloaded https://repo1.maven.org/maven2/com/ning/compress-lzf/1.0.3/compress-lzf-1.0.3.jar
+Downloading https://repo1.maven.org/maven2/org/json4s/json4s-core_2.12/3.6.6/json4s-core_2.12-3.6.6.jar
+Downloaded https://repo1.maven.org/maven2/org/apache/spark/spark-network-common_2.12/3.0.0/spark-network-common_2.12-3.0.0.jar
+Downloading https://repo1.maven.org/maven2/javax/servlet/jsp/jsp-api/2.1/jsp-api-2.1.jar
+Downloaded https://repo1.maven.org/maven2/org/json4s/json4s-ast_2.12/3.6.6/json4s-ast_2.12-3.6.6.jar
+Downloading https://repo1.maven.org/maven2/jakarta/annotation/jakarta.annotation-api/1.3.5/jakarta.annotation-api-1.3.5.jar
+Downloaded https://repo1.maven.org/maven2/javax/servlet/jsp/jsp-api/2.1/jsp-api-2.1.jar
+Downloading https://repo1.maven.org/maven2/org/glassfish/hk2/osgi-resource-locator/1.0.3/osgi-resource-locator-1.0.3.jar
+Downloaded https://repo1.maven.org/maven2/com/sun/activation/jakarta.activation/1.2.1/jakarta.activation-1.2.1.jar
+Downloading https://repo1.maven.org/maven2/jakarta/ws/rs/jakarta.ws.rs-api/2.1.6/jakarta.ws.rs-api-2.1.6.jar
+Downloaded https://repo1.maven.org/maven2/org/roaringbitmap/RoaringBitmap/0.7.45/RoaringBitmap-0.7.45.jar
+Downloading https://repo1.maven.org/maven2/org/glassfish/jersey/core/jersey-common/2.30/jersey-common-2.30.jar
+Downloaded https://repo1.maven.org/maven2/jakarta/annotation/jakarta.annotation-api/1.3.5/jakarta.annotation-api-1.3.5.jar
+Downloading https://repo1.maven.org/maven2/org/glassfish/jersey/core/jersey-server/2.30/jersey-server-2.30.jar
+Downloaded https://repo1.maven.org/maven2/org/json4s/json4s-core_2.12/3.6.6/json4s-core_2.12-3.6.6.jar
+Downloading https://repo1.maven.org/maven2/jakarta/activation/jakarta.activation-api/1.2.1/jakarta.activation-api-1.2.1.jar
+Downloaded https://repo1.maven.org/maven2/org/glassfish/hk2/osgi-resource-locator/1.0.3/osgi-resource-locator-1.0.3.jar
+Downloading https://repo1.maven.org/maven2/org/glassfish/jersey/core/jersey-client/2.30/jersey-client-2.30.jar
+Downloaded https://repo1.maven.org/maven2/jakarta/ws/rs/jakarta.ws.rs-api/2.1.6/jakarta.ws.rs-api-2.1.6.jar
+Downloading https://repo1.maven.org/maven2/org/glassfish/jersey/containers/jersey-container-servlet/2.30/jersey-container-servlet-2.30.jar
+Downloaded https://repo1.maven.org/maven2/jakarta/activation/jakarta.activation-api/1.2.1/jakarta.activation-api-1.2.1.jar
+Downloading https://repo1.maven.org/maven2/org/glassfish/hk2/external/jakarta.inject/2.6.1/jakarta.inject-2.6.1.jar
+Downloaded https://repo1.maven.org/maven2/org/glassfish/jersey/containers/jersey-container-servlet/2.30/jersey-container-servlet-2.30.jar
+Downloading https://repo1.maven.org/maven2/jakarta/validation/jakarta.validation-api/2.0.2/jakarta.validation-api-2.0.2.jar
+Downloaded https://repo1.maven.org/maven2/org/glassfish/jersey/core/jersey-client/2.30/jersey-client-2.30.jar
+Downloading https://repo1.maven.org/maven2/jakarta/xml/bind/jakarta.xml.bind-api/2.3.2/jakarta.xml.bind-api-2.3.2.jar
+Downloaded https://repo1.maven.org/maven2/org/glassfish/jersey/core/jersey-common/2.30/jersey-common-2.30.jar
+Downloading https://repo1.maven.org/maven2/org/glassfish/hk2/external/aopalliance-repackaged/2.6.1/aopalliance-repackaged-2.6.1.jar
+Downloaded https://repo1.maven.org/maven2/org/glassfish/hk2/external/jakarta.inject/2.6.1/jakarta.inject-2.6.1.jar
+Downloading https://repo1.maven.org/maven2/org/glassfish/hk2/hk2-utils/2.6.1/hk2-utils-2.6.1.jar
+Downloaded https://repo1.maven.org/maven2/org/glassfish/jersey/core/jersey-server/2.30/jersey-server-2.30.jar
+Downloading https://repo1.maven.org/maven2/org/mortbay/jetty/jetty-util/6.1.26/jetty-util-6.1.26.jar
+Downloaded https://repo1.maven.org/maven2/jakarta/xml/bind/jakarta.xml.bind-api/2.3.2/jakarta.xml.bind-api-2.3.2.jar
+Downloading https://repo1.maven.org/maven2/org/glassfish/jersey/media/jersey-media-jaxb/2.30/jersey-media-jaxb-2.30.jar
+Downloaded https://repo1.maven.org/maven2/jakarta/validation/jakarta.validation-api/2.0.2/jakarta.validation-api-2.0.2.jar
+Downloading https://repo1.maven.org/maven2/org/glassfish/jersey/inject/jersey-hk2/2.30/jersey-hk2-2.30.jar
+Downloaded https://repo1.maven.org/maven2/org/mortbay/jetty/jetty-util/6.1.26/jetty-util-6.1.26.jar
+Downloading https://repo1.maven.org/maven2/org/glassfish/hk2/hk2-locator/2.6.1/hk2-locator-2.6.1.jar
+Downloaded https://repo1.maven.org/maven2/org/glassfish/hk2/external/aopalliance-repackaged/2.6.1/aopalliance-repackaged-2.6.1.jar
+Downloaded https://repo1.maven.org/maven2/org/glassfish/hk2/hk2-utils/2.6.1/hk2-utils-2.6.1.jar
+Downloading https://repo1.maven.org/maven2/org/javassist/javassist/3.25.0-GA/javassist-3.25.0-GA.jar
+Downloading https://repo1.maven.org/maven2/com/clearspring/analytics/stream/2.9.6/stream-2.9.6.jar
+Downloaded https://repo1.maven.org/maven2/org/glassfish/jersey/inject/jersey-hk2/2.30/jersey-hk2-2.30.jar
+Downloading https://repo1.maven.org/maven2/io/dropwizard/metrics/metrics-json/4.1.1/metrics-json-4.1.1.jar
+Downloaded https://repo1.maven.org/maven2/com/github/luben/zstd-jni/1.4.4-3/zstd-jni-1.4.4-3.jar
+Downloading https://repo1.maven.org/maven2/io/dropwizard/metrics/metrics-jvm/4.1.1/metrics-jvm-4.1.1.jar
+Downloaded https://repo1.maven.org/maven2/org/glassfish/jersey/media/jersey-media-jaxb/2.30/jersey-media-jaxb-2.30.jar
+Downloading https://repo1.maven.org/maven2/io/dropwizard/metrics/metrics-jmx/4.1.1/metrics-jmx-4.1.1.jar
+Downloaded https://repo1.maven.org/maven2/org/glassfish/hk2/hk2-locator/2.6.1/hk2-locator-2.6.1.jar
+Downloading https://repo1.maven.org/maven2/io/dropwizard/metrics/metrics-graphite/4.1.1/metrics-graphite-4.1.1.jar
+Downloaded https://repo1.maven.org/maven2/com/clearspring/analytics/stream/2.9.6/stream-2.9.6.jar
+Downloading https://repo1.maven.org/maven2/aopalliance/aopalliance/1.0/aopalliance-1.0.jar
+Downloaded https://repo1.maven.org/maven2/io/dropwizard/metrics/metrics-json/4.1.1/metrics-json-4.1.1.jar
+Downloading https://repo1.maven.org/maven2/net/razorvine/pyrolite/4.30/pyrolite-4.30.jar
+Downloaded https://repo1.maven.org/maven2/io/dropwizard/metrics/metrics-jmx/4.1.1/metrics-jmx-4.1.1.jar
+Downloading https://repo1.maven.org/maven2/oro/oro/2.0.8/oro-2.0.8.jar
+Downloaded https://repo1.maven.org/maven2/org/javassist/javassist/3.25.0-GA/javassist-3.25.0-GA.jar
+Downloaded https://repo1.maven.org/maven2/io/dropwizard/metrics/metrics-jvm/4.1.1/metrics-jvm-4.1.1.jar
+Downloading https://repo1.maven.org/maven2/org/eclipse/jetty/jetty-util/9.4.20.v20190813/jetty-util-9.4.20.v20190813.jar
+Downloading https://repo1.maven.org/maven2/com/fasterxml/jackson/module/jackson-module-paranamer/2.10.0/jackson-module-paranamer-2.10.0.jar
+Downloaded https://repo1.maven.org/maven2/io/dropwizard/metrics/metrics-graphite/4.1.1/metrics-graphite-4.1.1.jar
+Downloading https://repo1.maven.org/maven2/com/fasterxml/jackson/module/jackson-module-scala_2.12/2.10.0/jackson-module-scala_2.12-2.10.0.jar
+Downloaded https://repo1.maven.org/maven2/aopalliance/aopalliance/1.0/aopalliance-1.0.jar
+Downloading https://repo1.maven.org/maven2/org/eclipse/jetty/jetty-io/9.4.20.v20190813/jetty-io-9.4.20.v20190813.jar
+Downloaded https://repo1.maven.org/maven2/oro/oro/2.0.8/oro-2.0.8.jar
+Downloading https://repo1.maven.org/maven2/net/sf/py4j/py4j/0.10.9/py4j-0.10.9.jar
+Downloaded https://repo1.maven.org/maven2/com/fasterxml/jackson/module/jackson-module-paranamer/2.10.0/jackson-module-paranamer-2.10.0.jar
+Downloading https://repo1.maven.org/maven2/org/glassfish/jersey/containers/jersey-container-servlet-core/2.30/jersey-container-servlet-core-2.30.jar
+Downloaded https://repo1.maven.org/maven2/org/eclipse/jetty/jetty-util/9.4.20.v20190813/jetty-util-9.4.20.v20190813.jar
+Downloading https://repo1.maven.org/maven2/org/eclipse/jetty/jetty-http/9.4.20.v20190813/jetty-http-9.4.20.v20190813.jar
+Downloaded https://repo1.maven.org/maven2/net/sf/py4j/py4j/0.10.9/py4j-0.10.9.jar
+Downloading https://repo1.maven.org/maven2/org/apache/ivy/ivy/2.4.0/ivy-2.4.0.jar
+Downloaded https://repo1.maven.org/maven2/net/razorvine/pyrolite/4.30/pyrolite-4.30.jar
+Downloading https://repo1.maven.org/maven2/sh/almond/ammonite-spark_2.12/0.7.2/ammonite-spark_2.12-0.7.2.jar
+Downloaded https://repo1.maven.org/maven2/org/eclipse/jetty/jetty-io/9.4.20.v20190813/jetty-io-9.4.20.v20190813.jar
+Downloading https://repo1.maven.org/maven2/com/thoughtworks/paranamer/paranamer/2.8/paranamer-2.8-sources.jar
+Downloaded https://repo1.maven.org/maven2/org/glassfish/jersey/containers/jersey-container-servlet-core/2.30/jersey-container-servlet-core-2.30.jar
+Downloading https://repo1.maven.org/maven2/org/codehaus/jackson/jackson-mapper-asl/1.9.13/jackson-mapper-asl-1.9.13-sources.jar
+Downloaded https://repo1.maven.org/maven2/org/eclipse/jetty/jetty-http/9.4.20.v20190813/jetty-http-9.4.20.v20190813.jar
+Downloading https://repo1.maven.org/maven2/org/codehaus/jackson/jackson-core-asl/1.9.13/jackson-core-asl-1.9.13-sources.jar
+Downloaded https://repo1.maven.org/maven2/com/thoughtworks/paranamer/paranamer/2.8/paranamer-2.8-sources.jar
+Downloading https://repo1.maven.org/maven2/org/tukaani/xz/1.5/xz-1.5-sources.jar
+Downloaded https://repo1.maven.org/maven2/org/codehaus/jackson/jackson-mapper-asl/1.9.13/jackson-mapper-asl-1.9.13-sources.jar
+Downloading https://repo1.maven.org/maven2/org/xerial/snappy/snappy-java/1.1.7.5/snappy-java-1.1.7.5-sources.jar
+Downloaded https://repo1.maven.org/maven2/org/codehaus/jackson/jackson-core-asl/1.9.13/jackson-core-asl-1.9.13-sources.jar
+Downloading https://repo1.maven.org/maven2/org/slf4j/slf4j-api/1.7.30/slf4j-api-1.7.30-sources.jar
+Downloaded https://repo1.maven.org/maven2/org/tukaani/xz/1.5/xz-1.5-sources.jar
+Downloading https://repo1.maven.org/maven2/org/apache/avro/avro/1.8.2/avro-1.8.2-sources.jar
+Downloaded https://repo1.maven.org/maven2/org/apache/ivy/ivy/2.4.0/ivy-2.4.0.jar
+Downloading https://repo1.maven.org/maven2/org/apache/avro/avro-mapred/1.8.2/avro-mapred-1.8.2-sources.jar
+Downloaded https://repo1.maven.org/maven2/org/slf4j/slf4j-api/1.7.30/slf4j-api-1.7.30-sources.jar
+Downloading https://repo1.maven.org/maven2/com/esotericsoftware/minlog/1.3.0/minlog-1.3.0-sources.jar
+Downloaded https://repo1.maven.org/maven2/org/apache/avro/avro/1.8.2/avro-1.8.2-sources.jar
+Downloading https://repo1.maven.org/maven2/org/apache/avro/avro-ipc/1.8.2/avro-ipc-1.8.2-sources.jar
+Downloaded https://repo1.maven.org/maven2/org/apache/avro/avro-mapred/1.8.2/avro-mapred-1.8.2-sources.jar
+Downloading https://repo1.maven.org/maven2/commons-codec/commons-codec/1.9/commons-codec-1.9-sources.jar
+Downloaded https://repo1.maven.org/maven2/com/fasterxml/jackson/module/jackson-module-scala_2.12/2.10.0/jackson-module-scala_2.12-2.10.0.jar
+Downloading https://repo1.maven.org/maven2/org/eclipse/jetty/jetty-server/9.4.20.v20190813/jetty-server-9.4.20.v20190813.jar
+Downloaded https://repo1.maven.org/maven2/sh/almond/ammonite-spark_2.12/0.7.2/ammonite-spark_2.12-0.7.2.jar
+Downloading https://repo1.maven.org/maven2/org/json4s/json4s-jackson_2.12/3.6.6/json4s-jackson_2.12-3.6.6.jar
+Downloaded https://repo1.maven.org/maven2/com/esotericsoftware/minlog/1.3.0/minlog-1.3.0-sources.jar
+Downloading https://repo1.maven.org/maven2/com/twitter/chill-java/0.9.5/chill-java-0.9.5-sources.jar
+Downloaded https://repo1.maven.org/maven2/org/apache/avro/avro-ipc/1.8.2/avro-ipc-1.8.2-sources.jar
+Downloading https://repo1.maven.org/maven2/io/dropwizard/metrics/metrics-core/4.1.1/metrics-core-4.1.1.jar
+Downloaded https://repo1.maven.org/maven2/org/eclipse/jetty/jetty-server/9.4.20.v20190813/jetty-server-9.4.20.v20190813.jar
+Downloading https://repo1.maven.org/maven2/com/esotericsoftware/kryo-shaded/4.0.2/kryo-shaded-4.0.2-sources.jar
+Downloaded https://repo1.maven.org/maven2/org/json4s/json4s-jackson_2.12/3.6.6/json4s-jackson_2.12-3.6.6.jar
+Downloading https://repo1.maven.org/maven2/org/apache/xbean/xbean-asm7-shaded/4.15/xbean-asm7-shaded-4.15-sources.jar
+Downloaded https://repo1.maven.org/maven2/com/twitter/chill-java/0.9.5/chill-java-0.9.5-sources.jar
+Downloading https://repo1.maven.org/maven2/com/twitter/chill_2.12/0.9.5/chill_2.12-0.9.5-sources.jar
+Downloaded https://repo1.maven.org/maven2/org/xerial/snappy/snappy-java/1.1.7.5/snappy-java-1.1.7.5-sources.jar
+Downloading https://repo1.maven.org/maven2/org/apache/commons/commons-math3/3.4.1/commons-math3-3.4.1-sources.jar
+Downloaded https://repo1.maven.org/maven2/com/esotericsoftware/kryo-shaded/4.0.2/kryo-shaded-4.0.2-sources.jar
+Downloading https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-annotations/2.7.4/hadoop-annotations-2.7.4-sources.jar
+Downloaded https://repo1.maven.org/maven2/commons-codec/commons-codec/1.9/commons-codec-1.9-sources.jar
+Downloaded https://repo1.maven.org/maven2/org/apache/xbean/xbean-asm7-shaded/4.15/xbean-asm7-shaded-4.15-sources.jar
+Downloading https://repo1.maven.org/maven2/xmlenc/xmlenc/0.52/xmlenc-0.52-sources.jar
+Downloading https://repo1.maven.org/maven2/commons-cli/commons-cli/1.2/commons-cli-1.2-sources.jar
+Downloaded https://repo1.maven.org/maven2/io/dropwizard/metrics/metrics-core/4.1.1/metrics-core-4.1.1.jar
+Downloading https://repo1.maven.org/maven2/commons-net/commons-net/3.1/commons-net-3.1-sources.jar
+Downloaded https://repo1.maven.org/maven2/com/twitter/chill_2.12/0.9.5/chill_2.12-0.9.5-sources.jar
+Downloading https://repo1.maven.org/maven2/commons-io/commons-io/2.4/commons-io-2.4-sources.jar
+Downloaded https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-annotations/2.7.4/hadoop-annotations-2.7.4-sources.jar
+Downloading https://repo1.maven.org/maven2/commons-httpclient/commons-httpclient/3.1/commons-httpclient-3.1-sources.jar
+Downloaded https://repo1.maven.org/maven2/commons-cli/commons-cli/1.2/commons-cli-1.2-sources.jar
+Downloaded https://repo1.maven.org/maven2/commons-io/commons-io/2.4/commons-io-2.4-sources.jar
+Downloaded https://repo1.maven.org/maven2/commons-net/commons-net/3.1/commons-net-3.1-sources.jar
+Downloading https://repo1.maven.org/maven2/commons-collections/commons-collections/3.2.2/commons-collections-3.2.2-sources.jar
+Downloading https://repo1.maven.org/maven2/commons-lang/commons-lang/2.6/commons-lang-2.6-sources.jar
+Downloading https://repo1.maven.org/maven2/javax/servlet/jsp/jsp-api/2.1/jsp-api-2.1-sources.jar
+Downloaded https://repo1.maven.org/maven2/xmlenc/xmlenc/0.52/xmlenc-0.52-sources.jar
+Downloading https://repo1.maven.org/maven2/org/objenesis/objenesis/2.5.1/objenesis-2.5.1-sources.jar
+Downloaded https://repo1.maven.org/maven2/javax/servlet/jsp/jsp-api/2.1/jsp-api-2.1-sources.jar
+Downloading https://repo1.maven.org/maven2/log4j/log4j/1.2.17/log4j-1.2.17-sources.jar
+Downloaded https://repo1.maven.org/maven2/org/apache/commons/commons-math3/3.4.1/commons-math3-3.4.1-sources.jar
+Downloading https://repo1.maven.org/maven2/org/slf4j/slf4j-log4j12/1.7.30/slf4j-log4j12-1.7.30-sources.jar
+Downloaded https://repo1.maven.org/maven2/org/objenesis/objenesis/2.5.1/objenesis-2.5.1-sources.jar
+Downloaded https://repo1.maven.org/maven2/commons-collections/commons-collections/3.2.2/commons-collections-3.2.2-sources.jar
+Downloading https://repo1.maven.org/maven2/org/mortbay/jetty/jetty-sslengine/6.1.26/jetty-sslengine-6.1.26-sources.jar
+Downloading https://repo1.maven.org/maven2/commons-digester/commons-digester/1.8/commons-digester-1.8-sources.jar
+Downloaded https://repo1.maven.org/maven2/commons-lang/commons-lang/2.6/commons-lang-2.6-sources.jar
+Downloading https://repo1.maven.org/maven2/commons-configuration/commons-configuration/1.6/commons-configuration-1.6-sources.jar
+Downloaded https://repo1.maven.org/maven2/org/slf4j/slf4j-log4j12/1.7.30/slf4j-log4j12-1.7.30-sources.jar
+Downloading https://repo1.maven.org/maven2/com/google/code/gson/gson/2.2.4/gson-2.2.4-sources.jar
+Downloaded https://repo1.maven.org/maven2/log4j/log4j/1.2.17/log4j-1.2.17-sources.jar
+Downloading https://repo1.maven.org/maven2/org/apache/httpcomponents/httpcore/4.2.4/httpcore-4.2.4-sources.jar
+Downloaded https://repo1.maven.org/maven2/org/mortbay/jetty/jetty-sslengine/6.1.26/jetty-sslengine-6.1.26-sources.jar
+Downloading https://repo1.maven.org/maven2/com/google/protobuf/protobuf-java/2.5.0/protobuf-java-2.5.0-sources.jar
+Downloaded https://repo1.maven.org/maven2/commons-digester/commons-digester/1.8/commons-digester-1.8-sources.jar
+Downloading https://repo1.maven.org/maven2/commons-net/commons-net/3.1/commons-net-3.1.jar
+Downloaded https://repo1.maven.org/maven2/commons-configuration/commons-configuration/1.6/commons-configuration-1.6-sources.jar
+Downloading https://repo1.maven.org/maven2/org/apache/httpcomponents/httpclient/4.2.5/httpclient-4.2.5-sources.jar
+Downloaded https://repo1.maven.org/maven2/com/google/code/gson/gson/2.2.4/gson-2.2.4-sources.jar
+Downloading https://repo1.maven.org/maven2/org/apache/directory/server/apacheds-kerberos-codec/2.0.0-M15/apacheds-kerberos-codec-2.0.0-M15-sources.jar
+Downloaded https://repo1.maven.org/maven2/com/google/protobuf/protobuf-java/2.5.0/protobuf-java-2.5.0-sources.jar
+Downloading https://repo1.maven.org/maven2/org/apache/directory/api/api-asn1-api/1.0.0-M20/api-asn1-api-1.0.0-M20-sources.jar
+Downloaded https://repo1.maven.org/maven2/org/apache/httpcomponents/httpcore/4.2.4/httpcore-4.2.4-sources.jar
+Downloading https://repo1.maven.org/maven2/com/github/spotbugs/spotbugs-annotations/3.1.9/spotbugs-annotations-3.1.9-sources.jar
+Downloaded https://repo1.maven.org/maven2/commons-net/commons-net/3.1/commons-net-3.1.jar
+Downloading https://repo1.maven.org/maven2/org/apache/directory/server/apacheds-i18n/2.0.0-M15/apacheds-i18n-2.0.0-M15-sources.jar
+Downloaded https://repo1.maven.org/maven2/commons-httpclient/commons-httpclient/3.1/commons-httpclient-3.1-sources.jar
+Downloading https://repo1.maven.org/maven2/jline/jline/0.9.94/jline-0.9.94-sources.jar
+Downloaded https://repo1.maven.org/maven2/org/apache/httpcomponents/httpclient/4.2.5/httpclient-4.2.5-sources.jar
+Downloading https://repo1.maven.org/maven2/com/google/code/findbugs/jsr305/3.0.2/jsr305-3.0.2-sources.jar
+Downloaded https://repo1.maven.org/maven2/jline/jline/0.9.94/jline-0.9.94-sources.jar
+Downloading https://repo1.maven.org/maven2/org/apache/yetus/audience-annotations/0.5.0/audience-annotations-0.5.0-sources.jar
+Downloaded https://repo1.maven.org/maven2/org/apache/directory/server/apacheds-kerberos-codec/2.0.0-M15/apacheds-kerberos-codec-2.0.0-M15-sources.jar
+Downloading https://repo1.maven.org/maven2/org/apache/curator/curator-framework/2.7.1/curator-framework-2.7.1-sources.jar
+Downloaded https://repo1.maven.org/maven2/org/apache/directory/api/api-asn1-api/1.0.0-M20/api-asn1-api-1.0.0-M20-sources.jar
+Downloading https://repo1.maven.org/maven2/org/apache/zookeeper/zookeeper/3.4.14/zookeeper-3.4.14-sources.jar
+Downloaded https://repo1.maven.org/maven2/com/github/spotbugs/spotbugs-annotations/3.1.9/spotbugs-annotations-3.1.9-sources.jar
+Downloading https://repo1.maven.org/maven2/org/mortbay/jetty/jetty-util/6.1.26/jetty-util-6.1.26-sources.jar
+Downloaded https://repo1.maven.org/maven2/org/apache/directory/server/apacheds-i18n/2.0.0-M15/apacheds-i18n-2.0.0-M15-sources.jar
+Downloading https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-auth/2.7.4/hadoop-auth-2.7.4-sources.jar
+Downloaded https://repo1.maven.org/maven2/org/apache/yetus/audience-annotations/0.5.0/audience-annotations-0.5.0-sources.jar
+Downloading https://repo1.maven.org/maven2/org/apache/curator/curator-recipes/2.7.1/curator-recipes-2.7.1-sources.jar
+Downloaded https://repo1.maven.org/maven2/com/google/code/findbugs/jsr305/3.0.2/jsr305-3.0.2-sources.jar
+Downloading https://repo1.maven.org/maven2/org/apache/curator/curator-client/2.7.1/curator-client-2.7.1-sources.jar
+Downloaded https://repo1.maven.org/maven2/org/apache/curator/curator-client/2.7.1/curator-client-2.7.1-sources.jar
+Downloading https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-common/2.7.4/hadoop-common-2.7.4-sources.jar
+Downloaded https://repo1.maven.org/maven2/org/apache/curator/curator-framework/2.7.1/curator-framework-2.7.1-sources.jar
+Downloading https://repo1.maven.org/maven2/xerces/xercesImpl/2.9.1/xercesImpl-2.9.1-sources.jar
+Downloaded https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-auth/2.7.4/hadoop-auth-2.7.4-sources.jar
+Downloading https://repo1.maven.org/maven2/io/netty/netty-all/4.1.47.Final/netty-all-4.1.47.Final-sources.jar
+Downloaded https://repo1.maven.org/maven2/org/apache/curator/curator-recipes/2.7.1/curator-recipes-2.7.1-sources.jar
+Downloading https://repo1.maven.org/maven2/xml-apis/xml-apis/1.3.04/xml-apis-1.3.04-sources.jar
+Downloaded https://repo1.maven.org/maven2/org/mortbay/jetty/jetty-util/6.1.26/jetty-util-6.1.26-sources.jar
+Downloading https://repo1.maven.org/maven2/javax/activation/activation/1.1.1/activation-1.1.1-sources.jar
+Downloaded https://repo1.maven.org/maven2/org/apache/zookeeper/zookeeper/3.4.14/zookeeper-3.4.14-sources.jar
+Downloading https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-hdfs/2.7.4/hadoop-hdfs-2.7.4-sources.jar
+Downloaded https://repo1.maven.org/maven2/xerces/xercesImpl/2.9.1/xercesImpl-2.9.1-sources.jar
+Downloading https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-yarn-api/2.7.4/hadoop-yarn-api-2.7.4-sources.jar
+Downloaded https://repo1.maven.org/maven2/xml-apis/xml-apis/1.3.04/xml-apis-1.3.04-sources.jar
+Downloading https://repo1.maven.org/maven2/javax/xml/stream/stax-api/1.0-2/stax-api-1.0-2-sources.jar
+Downloaded https://repo1.maven.org/maven2/javax/activation/activation/1.1.1/activation-1.1.1-sources.jar
+Downloading https://repo1.maven.org/maven2/javax/xml/bind/jaxb-api/2.2.2/jaxb-api-2.2.2-sources.jar
+Downloaded https://repo1.maven.org/maven2/javax/xml/stream/stax-api/1.0-2/stax-api-1.0-2-sources.jar
+Downloading https://repo1.maven.org/maven2/aopalliance/aopalliance/1.0/aopalliance-1.0-sources.jar
+Downloaded https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-common/2.7.4/hadoop-common-2.7.4-sources.jar
+Downloading https://repo1.maven.org/maven2/javax/inject/javax.inject/1/javax.inject-1-sources.jar
+Downloaded https://repo1.maven.org/maven2/javax/xml/bind/jaxb-api/2.2.2/jaxb-api-2.2.2-sources.jar
+Downloading https://repo1.maven.org/maven2/com/google/inject/guice/3.0/guice-3.0-sources.jar
+Downloaded https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-yarn-api/2.7.4/hadoop-yarn-api-2.7.4-sources.jar
+Downloading https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-yarn-client/2.7.4/hadoop-yarn-client-2.7.4-sources.jar
+Downloaded https://repo1.maven.org/maven2/aopalliance/aopalliance/1.0/aopalliance-1.0-sources.jar
+Downloaded https://repo1.maven.org/maven2/javax/inject/javax.inject/1/javax.inject-1-sources.jar
+Downloading https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-yarn-common/2.7.4/hadoop-yarn-common-2.7.4-sources.jar
+Downloading https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-yarn-server-common/2.7.4/hadoop-yarn-server-common-2.7.4-sources.jar
+Downloaded https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-yarn-client/2.7.4/hadoop-yarn-client-2.7.4-sources.jar
+Downloading https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-mapreduce-client-common/2.7.4/hadoop-mapreduce-client-common-2.7.4-sources.jar
+Downloaded https://repo1.maven.org/maven2/com/google/inject/guice/3.0/guice-3.0-sources.jar
+Downloading https://repo1.maven.org/maven2/org/json4s/json4s-scalap_2.12/3.6.6/json4s-scalap_2.12-3.6.6.jar
+Downloaded https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-hdfs/2.7.4/hadoop-hdfs-2.7.4-sources.jar
+Downloading https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-mapreduce-client-shuffle/2.7.4/hadoop-mapreduce-client-shuffle-2.7.4-sources.jar
+Downloaded https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-yarn-server-common/2.7.4/hadoop-yarn-server-common-2.7.4-sources.jar
+Downloading https://repo1.maven.org/maven2/org/codehaus/jettison/jettison/1.1/jettison-1.1-sources.jar
+Downloaded https://repo1.maven.org/maven2/org/json4s/json4s-scalap_2.12/3.6.6/json4s-scalap_2.12-3.6.6.jar
+Downloading https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-client/2.7.4/hadoop-client-2.7.4-sources.jar
+Downloaded https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-mapreduce-client-shuffle/2.7.4/hadoop-mapreduce-client-shuffle-2.7.4-sources.jar
+Downloading https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-mapreduce-client-app/2.7.4/hadoop-mapreduce-client-app-2.7.4-sources.jar
+Downloaded https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-mapreduce-client-common/2.7.4/hadoop-mapreduce-client-common-2.7.4-sources.jar
+Downloading https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-yarn-server-nodemanager/2.7.4/hadoop-yarn-server-nodemanager-2.7.4-sources.jar
+Downloaded https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-yarn-common/2.7.4/hadoop-yarn-common-2.7.4-sources.jar
+Downloading https://repo1.maven.org/maven2/org/spark-project/spark/unused/1.0.0/unused-1.0.0-sources.jar
+Downloaded https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-client/2.7.4/hadoop-client-2.7.4-sources.jar
+Downloading https://repo1.maven.org/maven2/org/apache/spark/spark-launcher_2.12/3.0.0/spark-launcher_2.12-3.0.0-sources.jar
+Downloaded https://repo1.maven.org/maven2/org/codehaus/jettison/jettison/1.1/jettison-1.1-sources.jar
+Downloading https://repo1.maven.org/maven2/org/apache/spark/spark-tags_2.12/3.0.0/spark-tags_2.12-3.0.0-sources.jar
+Downloaded https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-mapreduce-client-app/2.7.4/hadoop-mapreduce-client-app-2.7.4-sources.jar
+Downloading https://repo1.maven.org/maven2/com/fasterxml/jackson/core/jackson-core/2.10.0/jackson-core-2.10.0-sources.jar
+Downloaded https://repo1.maven.org/maven2/org/spark-project/spark/unused/1.0.0/unused-1.0.0-sources.jar
+Downloading https://repo1.maven.org/maven2/org/fusesource/leveldbjni/leveldbjni-all/1.8/leveldbjni-all-1.8-sources.jar
+Downloaded https://repo1.maven.org/maven2/org/apache/spark/spark-launcher_2.12/3.0.0/spark-launcher_2.12-3.0.0-sources.jar
+Downloading https://repo1.maven.org/maven2/com/fasterxml/jackson/core/jackson-databind/2.10.0/jackson-databind-2.10.0-sources.jar
+Downloaded https://repo1.maven.org/maven2/org/apache/spark/spark-tags_2.12/3.0.0/spark-tags_2.12-3.0.0-sources.jar
+Downloading https://repo1.maven.org/maven2/org/apache/commons/commons-lang3/3.9/commons-lang3-3.9-sources.jar
+Downloaded https://repo1.maven.org/maven2/org/fusesource/leveldbjni/leveldbjni-all/1.8/leveldbjni-all-1.8-sources.jar
+Downloading https://repo1.maven.org/maven2/com/fasterxml/jackson/core/jackson-annotations/2.10.0/jackson-annotations-2.10.0-sources.jar
+Downloaded https://repo1.maven.org/maven2/com/fasterxml/jackson/core/jackson-core/2.10.0/jackson-core-2.10.0-sources.jar
+Downloading https://repo1.maven.org/maven2/io/dropwizard/metrics/metrics-core/4.1.1/metrics-core-4.1.1-sources.jar
+Downloaded https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-yarn-server-nodemanager/2.7.4/hadoop-yarn-server-nodemanager-2.7.4-sources.jar
+Downloading https://repo1.maven.org/maven2/org/apache/spark/spark-network-shuffle_2.12/3.0.0/spark-network-shuffle_2.12-3.0.0-sources.jar
+Downloaded https://repo1.maven.org/maven2/com/fasterxml/jackson/core/jackson-annotations/2.10.0/jackson-annotations-2.10.0-sources.jar
+Downloading https://repo1.maven.org/maven2/org/apache/spark/spark-network-common_2.12/3.0.0/spark-network-common_2.12-3.0.0-sources.jar
+Downloaded https://repo1.maven.org/maven2/com/fasterxml/jackson/core/jackson-databind/2.10.0/jackson-databind-2.10.0-sources.jar
+Downloading https://repo1.maven.org/maven2/org/apache/spark/spark-kvstore_2.12/3.0.0/spark-kvstore_2.12-3.0.0-sources.jar
+Downloaded https://repo1.maven.org/maven2/org/apache/commons/commons-lang3/3.9/commons-lang3-3.9-sources.jar
+Downloading https://repo1.maven.org/maven2/org/apache/commons/commons-text/1.6/commons-text-1.6-sources.jar
+Downloaded https://repo1.maven.org/maven2/io/dropwizard/metrics/metrics-core/4.1.1/metrics-core-4.1.1-sources.jar
+Downloading https://repo1.maven.org/maven2/javax/servlet/javax.servlet-api/3.1.0/javax.servlet-api-3.1.0-sources.jar
+Downloaded https://repo1.maven.org/maven2/org/apache/spark/spark-network-shuffle_2.12/3.0.0/spark-network-shuffle_2.12-3.0.0-sources.jar
+Downloading https://repo1.maven.org/maven2/org/slf4j/jul-to-slf4j/1.7.30/jul-to-slf4j-1.7.30-sources.jar
+Downloaded https://repo1.maven.org/maven2/javax/servlet/javax.servlet-api/3.1.0/javax.servlet-api-3.1.0-sources.jar
+Downloading https://repo1.maven.org/maven2/com/ning/compress-lzf/1.0.3/compress-lzf-1.0.3-sources.jar
+Downloaded https://repo1.maven.org/maven2/org/apache/spark/spark-network-common_2.12/3.0.0/spark-network-common_2.12-3.0.0-sources.jar
+Downloading https://repo1.maven.org/maven2/org/lz4/lz4-java/1.7.1/lz4-java-1.7.1-sources.jar
+Downloaded https://repo1.maven.org/maven2/org/slf4j/jul-to-slf4j/1.7.30/jul-to-slf4j-1.7.30-sources.jar
+Downloaded https://repo1.maven.org/maven2/org/apache/commons/commons-text/1.6/commons-text-1.6-sources.jar
+Downloading https://repo1.maven.org/maven2/org/roaringbitmap/shims/0.7.45/shims-0.7.45-sources.jar
+Downloaded https://repo1.maven.org/maven2/org/apache/spark/spark-kvstore_2.12/3.0.0/spark-kvstore_2.12-3.0.0-sources.jar
+Downloading https://repo1.maven.org/maven2/com/github/luben/zstd-jni/1.4.4-3/zstd-jni-1.4.4-3-sources.jar
+Downloading https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-mapreduce-client-jobclient/2.7.4/hadoop-mapreduce-client-jobclient-2.7.4-sources.jar
+Downloaded https://repo1.maven.org/maven2/org/roaringbitmap/shims/0.7.45/shims-0.7.45-sources.jar
+Downloaded https://repo1.maven.org/maven2/com/ning/compress-lzf/1.0.3/compress-lzf-1.0.3-sources.jar
+Downloading https://repo1.maven.org/maven2/org/roaringbitmap/RoaringBitmap/0.7.45/RoaringBitmap-0.7.45-sources.jar
+Downloading https://repo1.maven.org/maven2/org/scala-lang/modules/scala-xml_2.12/1.2.0/scala-xml_2.12-1.2.0-sources.jar
+Downloaded https://repo1.maven.org/maven2/com/github/luben/zstd-jni/1.4.4-3/zstd-jni-1.4.4-3-sources.jar
+Downloading https://repo1.maven.org/maven2/org/scala-lang/scala-reflect/2.12.10/scala-reflect-2.12.10-sources.jar
+Downloaded https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-mapreduce-client-jobclient/2.7.4/hadoop-mapreduce-client-jobclient-2.7.4-sources.jar
+Downloading https://repo1.maven.org/maven2/org/json4s/json4s-scalap_2.12/3.6.6/json4s-scalap_2.12-3.6.6-sources.jar
+Downloaded https://repo1.maven.org/maven2/org/lz4/lz4-java/1.7.1/lz4-java-1.7.1-sources.jar
+Downloading https://repo1.maven.org/maven2/org/json4s/json4s-ast_2.12/3.6.6/json4s-ast_2.12-3.6.6-sources.jar
+Downloaded https://repo1.maven.org/maven2/org/json4s/json4s-scalap_2.12/3.6.6/json4s-scalap_2.12-3.6.6-sources.jar
+Downloading https://repo1.maven.org/maven2/jakarta/ws/rs/jakarta.ws.rs-api/2.1.6/jakarta.ws.rs-api-2.1.6-sources.jar
+Downloaded https://repo1.maven.org/maven2/io/netty/netty-all/4.1.47.Final/netty-all-4.1.47.Final-sources.jar
+Downloading https://repo1.maven.org/maven2/org/json4s/json4s-core_2.12/3.6.6/json4s-core_2.12-3.6.6-sources.jar
+Downloaded https://repo1.maven.org/maven2/org/json4s/json4s-ast_2.12/3.6.6/json4s-ast_2.12-3.6.6-sources.jar
+Downloading https://repo1.maven.org/maven2/org/json4s/json4s-jackson_2.12/3.6.6/json4s-jackson_2.12-3.6.6-sources.jar
+Downloaded https://repo1.maven.org/maven2/org/scala-lang/modules/scala-xml_2.12/1.2.0/scala-xml_2.12-1.2.0-sources.jar
+Downloading https://repo1.maven.org/maven2/com/sun/activation/jakarta.activation/1.2.1/jakarta.activation-1.2.1-sources.jar
+Downloaded https://repo1.maven.org/maven2/org/roaringbitmap/RoaringBitmap/0.7.45/RoaringBitmap-0.7.45-sources.jar
+Downloading https://repo1.maven.org/maven2/jakarta/annotation/jakarta.annotation-api/1.3.5/jakarta.annotation-api-1.3.5-sources.jar
+Downloaded https://repo1.maven.org/maven2/org/json4s/json4s-jackson_2.12/3.6.6/json4s-jackson_2.12-3.6.6-sources.jar
+Downloading https://repo1.maven.org/maven2/org/glassfish/jersey/core/jersey-client/2.30/jersey-client-2.30-sources.jar
+Downloaded https://repo1.maven.org/maven2/org/json4s/json4s-core_2.12/3.6.6/json4s-core_2.12-3.6.6-sources.jar
+Downloading https://repo1.maven.org/maven2/org/glassfish/jersey/core/jersey-common/2.30/jersey-common-2.30-sources.jar
+Downloaded https://repo1.maven.org/maven2/org/scala-lang/scala-reflect/2.12.10/scala-reflect-2.12.10-sources.jar
+Downloading https://repo1.maven.org/maven2/org/glassfish/jersey/media/jersey-media-jaxb/2.30/jersey-media-jaxb-2.30-sources.jar
+Downloaded https://repo1.maven.org/maven2/jakarta/ws/rs/jakarta.ws.rs-api/2.1.6/jakarta.ws.rs-api-2.1.6-sources.jar
+Downloading https://repo1.maven.org/maven2/jakarta/validation/jakarta.validation-api/2.0.2/jakarta.validation-api-2.0.2-sources.jar
+Downloaded https://repo1.maven.org/maven2/com/sun/activation/jakarta.activation/1.2.1/jakarta.activation-1.2.1-sources.jar
+Downloading https://repo1.maven.org/maven2/jakarta/activation/jakarta.activation-api/1.2.1/jakarta.activation-api-1.2.1-sources.jar
+Downloaded https://repo1.maven.org/maven2/jakarta/annotation/jakarta.annotation-api/1.3.5/jakarta.annotation-api-1.3.5-sources.jar
+Downloading https://repo1.maven.org/maven2/org/glassfish/jersey/core/jersey-server/2.30/jersey-server-2.30-sources.jar
+Downloaded https://repo1.maven.org/maven2/jakarta/validation/jakarta.validation-api/2.0.2/jakarta.validation-api-2.0.2-sources.jar
+Downloading https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-yarn-server-common/2.7.4/hadoop-yarn-server-common-2.7.4.jar
+Downloaded https://repo1.maven.org/maven2/org/glassfish/jersey/media/jersey-media-jaxb/2.30/jersey-media-jaxb-2.30-sources.jar
+Downloaded https://repo1.maven.org/maven2/org/glassfish/jersey/core/jersey-client/2.30/jersey-client-2.30-sources.jar
+Downloading https://repo1.maven.org/maven2/jakarta/xml/bind/jakarta.xml.bind-api/2.3.2/jakarta.xml.bind-api-2.3.2-sources.jar
+Downloading https://repo1.maven.org/maven2/org/glassfish/jersey/containers/jersey-container-servlet-core/2.30/jersey-container-servlet-core-2.30-sources.jar
+Downloaded https://repo1.maven.org/maven2/jakarta/activation/jakarta.activation-api/1.2.1/jakarta.activation-api-1.2.1-sources.jar
+Downloading https://repo1.maven.org/maven2/commons-beanutils/commons-beanutils/1.7.0/commons-beanutils-1.7.0-sources.jar
+Downloaded https://repo1.maven.org/maven2/org/glassfish/jersey/core/jersey-common/2.30/jersey-common-2.30-sources.jar
+Downloading https://repo1.maven.org/maven2/org/glassfish/hk2/external/aopalliance-repackaged/2.6.1/aopalliance-repackaged-2.6.1-sources.jar
+Downloaded https://repo1.maven.org/maven2/org/glassfish/jersey/containers/jersey-container-servlet-core/2.30/jersey-container-servlet-core-2.30-sources.jar
+Downloading https://repo1.maven.org/maven2/org/glassfish/hk2/hk2-api/2.6.1/hk2-api-2.6.1-sources.jar
+Downloaded https://repo1.maven.org/maven2/commons-beanutils/commons-beanutils/1.7.0/commons-beanutils-1.7.0-sources.jar
+Downloading https://repo1.maven.org/maven2/org/glassfish/hk2/hk2-utils/2.6.1/hk2-utils-2.6.1-sources.jar
+Downloaded https://repo1.maven.org/maven2/jakarta/xml/bind/jakarta.xml.bind-api/2.3.2/jakarta.xml.bind-api-2.3.2-sources.jar
+Downloading https://repo1.maven.org/maven2/org/javassist/javassist/3.25.0-GA/javassist-3.25.0-GA-sources.jar
+Downloaded https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-yarn-server-common/2.7.4/hadoop-yarn-server-common-2.7.4.jar
+Downloading https://repo1.maven.org/maven2/io/dropwizard/metrics/metrics-jvm/4.1.1/metrics-jvm-4.1.1-sources.jar
+Downloaded https://repo1.maven.org/maven2/org/glassfish/hk2/external/aopalliance-repackaged/2.6.1/aopalliance-repackaged-2.6.1-sources.jar
+Downloading https://repo1.maven.org/maven2/org/glassfish/hk2/hk2-locator/2.6.1/hk2-locator-2.6.1-sources.jar
+Downloaded https://repo1.maven.org/maven2/org/glassfish/hk2/hk2-api/2.6.1/hk2-api-2.6.1-sources.jar
+Downloading https://repo1.maven.org/maven2/org/glassfish/jersey/inject/jersey-hk2/2.30/jersey-hk2-2.30-sources.jar
+Downloaded https://repo1.maven.org/maven2/io/dropwizard/metrics/metrics-jvm/4.1.1/metrics-jvm-4.1.1-sources.jar
+Downloading https://repo1.maven.org/maven2/io/dropwizard/metrics/metrics-graphite/4.1.1/metrics-graphite-4.1.1-sources.jar
+Downloaded https://repo1.maven.org/maven2/org/javassist/javassist/3.25.0-GA/javassist-3.25.0-GA-sources.jar
+Downloading https://repo1.maven.org/maven2/io/dropwizard/metrics/metrics-json/4.1.1/metrics-json-4.1.1-sources.jar
+Downloaded https://repo1.maven.org/maven2/org/glassfish/hk2/hk2-utils/2.6.1/hk2-utils-2.6.1-sources.jar
+Downloading https://repo1.maven.org/maven2/io/dropwizard/metrics/metrics-jmx/4.1.1/metrics-jmx-4.1.1-sources.jar
+Downloaded https://repo1.maven.org/maven2/org/glassfish/hk2/hk2-locator/2.6.1/hk2-locator-2.6.1-sources.jar
+Downloading https://repo1.maven.org/maven2/com/fasterxml/jackson/module/jackson-module-paranamer/2.10.0/jackson-module-paranamer-2.10.0-sources.jar
+Downloaded https://repo1.maven.org/maven2/org/glassfish/jersey/inject/jersey-hk2/2.30/jersey-hk2-2.30-sources.jar
+Downloading https://repo1.maven.org/maven2/oro/oro/2.0.8/oro-2.0.8-sources.jar
+Downloaded https://repo1.maven.org/maven2/io/dropwizard/metrics/metrics-graphite/4.1.1/metrics-graphite-4.1.1-sources.jar
+Downloading https://repo1.maven.org/maven2/net/razorvine/pyrolite/4.30/pyrolite-4.30-sources.jar
+Downloaded https://repo1.maven.org/maven2/io/dropwizard/metrics/metrics-json/4.1.1/metrics-json-4.1.1-sources.jar
+Downloading https://repo1.maven.org/maven2/org/apache/ivy/ivy/2.4.0/ivy-2.4.0-sources.jar
+Downloaded https://repo1.maven.org/maven2/io/dropwizard/metrics/metrics-jmx/4.1.1/metrics-jmx-4.1.1-sources.jar
+Downloading https://repo1.maven.org/maven2/net/sf/py4j/py4j/0.10.9/py4j-0.10.9-sources.jar
+Downloaded https://repo1.maven.org/maven2/com/fasterxml/jackson/module/jackson-module-paranamer/2.10.0/jackson-module-paranamer-2.10.0-sources.jar
+Downloading https://repo1.maven.org/maven2/org/eclipse/jetty/jetty-io/9.4.20.v20190813/jetty-io-9.4.20.v20190813-sources.jar
+Downloaded https://repo1.maven.org/maven2/net/sf/py4j/py4j/0.10.9/py4j-0.10.9-sources.jar
+Downloading https://repo1.maven.org/maven2/org/eclipse/jetty/jetty-http/9.4.20.v20190813/jetty-http-9.4.20.v20190813-sources.jar
+Downloaded https://repo1.maven.org/maven2/oro/oro/2.0.8/oro-2.0.8-sources.jar
+Downloading https://repo1.maven.org/maven2/sh/almond/ammonite-spark_2.12/0.7.2/ammonite-spark_2.12-0.7.2-sources.jar
+Downloaded https://repo1.maven.org/maven2/net/razorvine/pyrolite/4.30/pyrolite-4.30-sources.jar
+Downloading https://repo1.maven.org/maven2/org/eclipse/jetty/jetty-server/9.4.20.v20190813/jetty-server-9.4.20.v20190813-sources.jar
+Downloaded https://repo1.maven.org/maven2/org/eclipse/jetty/jetty-io/9.4.20.v20190813/jetty-io-9.4.20.v20190813-sources.jar
+Downloading https://repo1.maven.org/maven2/com/clearspring/analytics/stream/2.9.6/stream-2.9.6-sources.jar
+Downloaded https://repo1.maven.org/maven2/org/eclipse/jetty/jetty-http/9.4.20.v20190813/jetty-http-9.4.20.v20190813-sources.jar
+Downloading https://repo1.maven.org/maven2/com/github/plokhotnyuk/jsoniter-scala/jsoniter-scala-core_2.12/2.0.1/jsoniter-scala-core_2.12-2.0.1-sources.jar
+Downloaded https://repo1.maven.org/maven2/sh/almond/ammonite-spark_2.12/0.7.2/ammonite-spark_2.12-0.7.2-sources.jar
+Downloading https://repo1.maven.org/maven2/com/fasterxml/jackson/core/jackson-databind/2.10.0/jackson-databind-2.10.0.jar
+Downloaded https://repo1.maven.org/maven2/org/apache/ivy/ivy/2.4.0/ivy-2.4.0-sources.jar
+Downloading https://repo1.maven.org/maven2/org/apache/spark/spark-unsafe_2.12/3.0.0/spark-unsafe_2.12-3.0.0-sources.jar
+Downloaded https://repo1.maven.org/maven2/org/eclipse/jetty/jetty-server/9.4.20.v20190813/jetty-server-9.4.20.v20190813-sources.jar
+Downloading https://repo1.maven.org/maven2/com/fasterxml/jackson/module/jackson-module-scala_2.12/2.10.0/jackson-module-scala_2.12-2.10.0-sources.jar
+Downloaded https://repo1.maven.org/maven2/com/github/plokhotnyuk/jsoniter-scala/jsoniter-scala-core_2.12/2.0.1/jsoniter-scala-core_2.12-2.0.1-sources.jar
+Downloading https://repo1.maven.org/maven2/org/slf4j/slf4j-api/1.7.30/slf4j-api-1.7.30.jar
+Downloaded https://repo1.maven.org/maven2/org/apache/spark/spark-unsafe_2.12/3.0.0/spark-unsafe_2.12-3.0.0-sources.jar
+Downloading https://repo1.maven.org/maven2/org/mortbay/jetty/jetty-sslengine/6.1.26/jetty-sslengine-6.1.26.jar
+Downloaded https://repo1.maven.org/maven2/com/clearspring/analytics/stream/2.9.6/stream-2.9.6-sources.jar
+Downloading https://repo1.maven.org/maven2/org/apache/xbean/xbean-asm7-shaded/4.15/xbean-asm7-shaded-4.15.jar
+Downloaded https://repo1.maven.org/maven2/org/slf4j/slf4j-api/1.7.30/slf4j-api-1.7.30.jar
+Downloaded https://repo1.maven.org/maven2/org/glassfish/jersey/core/jersey-server/2.30/jersey-server-2.30-sources.jar
+Downloaded https://repo1.maven.org/maven2/org/mortbay/jetty/jetty-sslengine/6.1.26/jetty-sslengine-6.1.26.jar
+Downloading https://repo1.maven.org/maven2/org/glassfish/hk2/external/jakarta.inject/2.6.1/jakarta.inject-2.6.1-sources.jar
+Downloading https://repo1.maven.org/maven2/com/github/spotbugs/spotbugs-annotations/3.1.9/spotbugs-annotations-3.1.9.jar
+Downloading https://repo1.maven.org/maven2/com/google/guava/guava/16.0.1/guava-16.0.1-sources.jar
+Downloaded https://repo1.maven.org/maven2/com/fasterxml/jackson/module/jackson-module-scala_2.12/2.10.0/jackson-module-scala_2.12-2.10.0-sources.jar
+Downloading https://repo1.maven.org/maven2/org/codehaus/jackson/jackson-xc/1.9.13/jackson-xc-1.9.13-sources.jar
+Downloaded https://repo1.maven.org/maven2/org/apache/xbean/xbean-asm7-shaded/4.15/xbean-asm7-shaded-4.15.jar
+Downloading https://repo1.maven.org/maven2/org/eclipse/jetty/jetty-util/9.4.20.v20190813/jetty-util-9.4.20.v20190813-sources.jar
+Downloaded https://repo1.maven.org/maven2/com/github/spotbugs/spotbugs-annotations/3.1.9/spotbugs-annotations-3.1.9.jar
+Downloaded https://repo1.maven.org/maven2/org/codehaus/jackson/jackson-xc/1.9.13/jackson-xc-1.9.13-sources.jar
+Downloading https://repo1.maven.org/maven2/org/slf4j/jcl-over-slf4j/1.7.30/jcl-over-slf4j-1.7.30-sources.jar
+Downloaded https://repo1.maven.org/maven2/com/google/guava/guava/16.0.1/guava-16.0.1-sources.jar
+Downloaded https://repo1.maven.org/maven2/com/fasterxml/jackson/core/jackson-databind/2.10.0/jackson-databind-2.10.0.jar
+Downloading https://repo1.maven.org/maven2/org/glassfish/jersey/containers/jersey-container-servlet/2.30/jersey-container-servlet-2.30-sources.jar
+Downloading https://repo1.maven.org/maven2/org/slf4j/slf4j-log4j12/1.7.30/slf4j-log4j12-1.7.30.jar
+Downloaded https://repo1.maven.org/maven2/org/glassfish/hk2/external/jakarta.inject/2.6.1/jakarta.inject-2.6.1-sources.jar
+Downloading https://repo1.maven.org/maven2/org/objenesis/objenesis/2.5.1/objenesis-2.5.1.jar
+Downloading https://repo1.maven.org/maven2/org/glassfish/hk2/hk2-api/2.6.1/hk2-api-2.6.1.jar
+Downloaded https://repo1.maven.org/maven2/org/eclipse/jetty/jetty-util/9.4.20.v20190813/jetty-util-9.4.20.v20190813-sources.jar
+Downloaded https://repo1.maven.org/maven2/org/objenesis/objenesis/2.5.1/objenesis-2.5.1.jar
+Downloading https://repo1.maven.org/maven2/org/glassfish/hk2/osgi-resource-locator/1.0.3/osgi-resource-locator-1.0.3-sources.jar
+Downloaded https://repo1.maven.org/maven2/org/slf4j/jcl-over-slf4j/1.7.30/jcl-over-slf4j-1.7.30-sources.jar
+Downloaded https://repo1.maven.org/maven2/org/slf4j/slf4j-log4j12/1.7.30/slf4j-log4j12-1.7.30.jar
+Downloading https://repo1.maven.org/maven2/org/apache/htrace/htrace-core/3.1.0-incubating/htrace-core-3.1.0-incubating-sources.jar
+Downloading https://repo1.maven.org/maven2/org/apache/spark/spark-core_2.12/3.0.0/spark-core_2.12-3.0.0.jar
+Downloading https://repo1.maven.org/maven2/org/tukaani/xz/1.5/xz-1.5.jar
+Downloaded https://repo1.maven.org/maven2/org/glassfish/jersey/containers/jersey-container-servlet/2.30/jersey-container-servlet-2.30-sources.jar
+Downloading https://repo1.maven.org/maven2/org/codehaus/jackson/jackson-jaxrs/1.9.13/jackson-jaxrs-1.9.13-sources.jar
+Downloaded https://repo1.maven.org/maven2/org/glassfish/hk2/hk2-api/2.6.1/hk2-api-2.6.1.jar
+Downloading https://repo1.maven.org/maven2/sh/almond/almond-spark_2.12/0.9.1/almond-spark_2.12-0.9.1-sources.jar
+Downloaded https://repo1.maven.org/maven2/org/codehaus/jackson/jackson-jaxrs/1.9.13/jackson-jaxrs-1.9.13-sources.jar
+Downloading https://repo1.maven.org/maven2/org/apache/commons/commons-compress/1.8.1/commons-compress-1.8.1-sources.jar
+Downloaded https://repo1.maven.org/maven2/org/tukaani/xz/1.5/xz-1.5.jar
+Downloading https://repo1.maven.org/maven2/org/apache/commons/commons-crypto/1.0.0/commons-crypto-1.0.0-sources.jar
+Downloaded https://repo1.maven.org/maven2/org/apache/htrace/htrace-core/3.1.0-incubating/htrace-core-3.1.0-incubating-sources.jar
+Downloading https://repo1.maven.org/maven2/io/netty/netty/3.10.6.Final/netty-3.10.6.Final-sources.jar
+Downloaded https://repo1.maven.org/maven2/org/glassfish/hk2/osgi-resource-locator/1.0.3/osgi-resource-locator-1.0.3-sources.jar
+Downloading https://repo1.maven.org/maven2/commons-digester/commons-digester/1.8/commons-digester-1.8.jar
+Downloaded https://repo1.maven.org/maven2/sh/almond/almond-spark_2.12/0.9.1/almond-spark_2.12-0.9.1-sources.jar
+Downloading https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-mapreduce-client-core/2.7.4/hadoop-mapreduce-client-core-2.7.4-sources.jar
+Downloaded https://repo1.maven.org/maven2/org/apache/commons/commons-compress/1.8.1/commons-compress-1.8.1-sources.jar
+Downloaded https://repo1.maven.org/maven2/org/apache/commons/commons-crypto/1.0.0/commons-crypto-1.0.0-sources.jar
+Downloading https://repo1.maven.org/maven2/org/apache/spark/spark-core_2.12/3.0.0/spark-core_2.12-3.0.0-sources.jar
+Downloaded https://repo1.maven.org/maven2/io/netty/netty/3.10.6.Final/netty-3.10.6.Final-sources.jar
+Downloading https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-mapreduce-client-app/2.7.4/hadoop-mapreduce-client-app-2.7.4.jar
+Downloading https://repo1.maven.org/maven2/org/apache/commons/commons-lang3/3.9/commons-lang3-3.9.jar
+Downloaded https://repo1.maven.org/maven2/commons-digester/commons-digester/1.8/commons-digester-1.8.jar
+Downloaded https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-mapreduce-client-core/2.7.4/hadoop-mapreduce-client-core-2.7.4-sources.jar
+Downloading https://repo1.maven.org/maven2/org/apache/directory/api/api-util/1.0.0-M20/api-util-1.0.0-M20-sources.jar
+Downloaded https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-mapreduce-client-app/2.7.4/hadoop-mapreduce-client-app-2.7.4.jar
+Downloading https://repo1.maven.org/maven2/sh/almond/almond-spark_2.12/0.9.1/almond-spark_2.12-0.9.1.jar
+Downloaded https://repo1.maven.org/maven2/org/apache/commons/commons-lang3/3.9/commons-lang3-3.9.jar
+Downloading https://repo1.maven.org/maven2/xmlenc/xmlenc/0.52/xmlenc-0.52-sources.jar.sha1
+Downloading https://repo1.maven.org/maven2/xerces/xercesImpl/2.9.1/xercesImpl-2.9.1-sources.jar.sha1
+Downloaded https://repo1.maven.org/maven2/xmlenc/xmlenc/0.52/xmlenc-0.52-sources.jar.sha1
+Downloaded https://repo1.maven.org/maven2/org/apache/directory/api/api-util/1.0.0-M20/api-util-1.0.0-M20-sources.jar
+Downloaded https://repo1.maven.org/maven2/xerces/xercesImpl/2.9.1/xercesImpl-2.9.1-sources.jar.sha1
+Downloaded https://repo1.maven.org/maven2/sh/almond/almond-spark_2.12/0.9.1/almond-spark_2.12-0.9.1.jar
+Downloaded https://repo1.maven.org/maven2/org/apache/spark/spark-core_2.12/3.0.0/spark-core_2.12-3.0.0.jar
+Downloading https://repo1.maven.org/maven2/org/scala-lang/scala-library/2.12.10/scala-library-2.12.10-sources.jar
+Downloaded https://repo1.maven.org/maven2/org/scala-lang/scala-library/2.12.10/scala-library-2.12.10-sources.jar
+Downloaded https://repo1.maven.org/maven2/org/apache/spark/spark-core_2.12/3.0.0/spark-core_2.12-3.0.0-sources.jar
+Downloading https://repo1.maven.org/maven2/org/apache/spark/spark-sql_2.12/3.0.0/spark-sql_2.12-3.0.0.pom
+Downloaded https://repo1.maven.org/maven2/org/apache/spark/spark-sql_2.12/3.0.0/spark-sql_2.12-3.0.0.pom
+Downloading https://repo1.maven.org/maven2/org/apache/parquet/parquet-column/1.10.1/parquet-column-1.10.1.pom
+Downloading https://repo1.maven.org/maven2/org/apache/spark/spark-catalyst_2.12/3.0.0/spark-catalyst_2.12-3.0.0.pom
+Downloading https://repo1.maven.org/maven2/org/apache/orc/orc-core/1.5.10/orc-core-1.5.10.pom
+Downloading https://repo1.maven.org/maven2/org/apache/hive/hive-storage-api/2.7.1/hive-storage-api-2.7.1.pom
+Downloading https://repo1.maven.org/maven2/org/apache/orc/orc-mapreduce/1.5.10/orc-mapreduce-1.5.10.pom
+Downloading https://repo1.maven.org/maven2/com/univocity/univocity-parsers/2.8.3/univocity-parsers-2.8.3.pom
+Downloaded https://repo1.maven.org/maven2/org/apache/parquet/parquet-column/1.10.1/parquet-column-1.10.1.pom
+Downloading https://repo1.maven.org/maven2/org/apache/spark/spark-sketch_2.12/3.0.0/spark-sketch_2.12-3.0.0.pom
+Downloaded https://repo1.maven.org/maven2/org/apache/spark/spark-catalyst_2.12/3.0.0/spark-catalyst_2.12-3.0.0.pom
+Downloading https://repo1.maven.org/maven2/org/scala-lang/scala-library/2.12.8/scala-library-2.12.8.pom
+Downloaded https://repo1.maven.org/maven2/org/apache/hive/hive-storage-api/2.7.1/hive-storage-api-2.7.1.pom
+Downloading https://repo1.maven.org/maven2/org/apache/parquet/parquet-hadoop/1.10.1/parquet-hadoop-1.10.1.pom
+Downloaded https://repo1.maven.org/maven2/org/apache/orc/orc-mapreduce/1.5.10/orc-mapreduce-1.5.10.pom
+Downloaded https://repo1.maven.org/maven2/org/apache/spark/spark-sketch_2.12/3.0.0/spark-sketch_2.12-3.0.0.pom
+Downloaded https://repo1.maven.org/maven2/org/apache/orc/orc-core/1.5.10/orc-core-1.5.10.pom
+Downloaded https://repo1.maven.org/maven2/org/scala-lang/scala-library/2.12.8/scala-library-2.12.8.pom
+Downloaded https://repo1.maven.org/maven2/org/apache/parquet/parquet-hadoop/1.10.1/parquet-hadoop-1.10.1.pom
+Downloaded https://repo1.maven.org/maven2/com/univocity/univocity-parsers/2.8.3/univocity-parsers-2.8.3.pom
+Downloading https://repo1.maven.org/maven2/org/apache/orc/orc/1.5.10/orc-1.5.10.pom
+Downloading https://repo1.maven.org/maven2/org/apache/parquet/parquet/1.10.1/parquet-1.10.1.pom
+Downloaded https://repo1.maven.org/maven2/org/apache/orc/orc/1.5.10/orc-1.5.10.pom
+Downloaded https://repo1.maven.org/maven2/org/apache/parquet/parquet/1.10.1/parquet-1.10.1.pom
+Downloading https://repo1.maven.org/maven2/org/threeten/threeten-extra/1.5.0/threeten-extra-1.5.0.pom
+Downloading https://repo1.maven.org/maven2/commons-codec/commons-codec/1.10/commons-codec-1.10.pom
+Downloading https://repo1.maven.org/maven2/org/codehaus/janino/janino/3.0.16/janino-3.0.16.pom
+Downloading https://repo1.maven.org/maven2/org/apache/orc/orc-shims/1.5.10/orc-shims-1.5.10.pom
+Downloading https://repo1.maven.org/maven2/org/apache/parquet/parquet-encoding/1.10.1/parquet-encoding-1.10.1.pom
+Downloading https://repo1.maven.org/maven2/org/apache/parquet/parquet-jackson/1.10.1/parquet-jackson-1.10.1.pom
+Downloaded https://repo1.maven.org/maven2/org/threeten/threeten-extra/1.5.0/threeten-extra-1.5.0.pom
+Downloading https://repo1.maven.org/maven2/org/codehaus/janino/commons-compiler/3.0.16/commons-compiler-3.0.16.pom
+Downloaded https://repo1.maven.org/maven2/org/codehaus/janino/janino/3.0.16/janino-3.0.16.pom
+Downloaded https://repo1.maven.org/maven2/commons-codec/commons-codec/1.10/commons-codec-1.10.pom
+Downloading https://repo1.maven.org/maven2/org/scala-lang/modules/scala-parser-combinators_2.12/1.1.2/scala-parser-combinators_2.12-1.1.2.pom
+Downloaded https://repo1.maven.org/maven2/org/apache/parquet/parquet-jackson/1.10.1/parquet-jackson-1.10.1.pom
+Downloading https://repo1.maven.org/maven2/org/apache/parquet/parquet-common/1.10.1/parquet-common-1.10.1.pom
+Downloading https://repo1.maven.org/maven2/org/apache/parquet/parquet-format/2.4.0/parquet-format-2.4.0.pom
+Downloaded https://repo1.maven.org/maven2/org/apache/orc/orc-shims/1.5.10/orc-shims-1.5.10.pom
+Downloaded https://repo1.maven.org/maven2/org/scala-lang/modules/scala-parser-combinators_2.12/1.1.2/scala-parser-combinators_2.12-1.1.2.pom
+Downloaded https://repo1.maven.org/maven2/org/codehaus/janino/commons-compiler/3.0.16/commons-compiler-3.0.16.pom
+Downloading https://repo1.maven.org/maven2/org/apache/arrow/arrow-vector/0.15.1/arrow-vector-0.15.1.pom
+Downloading https://repo1.maven.org/maven2/org/antlr/antlr4-runtime/4.7.1/antlr4-runtime-4.7.1.pom
+Downloaded https://repo1.maven.org/maven2/org/apache/parquet/parquet-format/2.4.0/parquet-format-2.4.0.pom
+Downloaded https://repo1.maven.org/maven2/org/apache/parquet/parquet-common/1.10.1/parquet-common-1.10.1.pom
+Downloading https://repo1.maven.org/maven2/io/airlift/aircompressor/0.10/aircompressor-0.10.pom
+Downloaded https://repo1.maven.org/maven2/org/apache/arrow/arrow-vector/0.15.1/arrow-vector-0.15.1.pom
+Downloaded https://repo1.maven.org/maven2/org/antlr/antlr4-runtime/4.7.1/antlr4-runtime-4.7.1.pom
+Downloaded https://repo1.maven.org/maven2/org/apache/parquet/parquet-encoding/1.10.1/parquet-encoding-1.10.1.pom
+Downloaded https://repo1.maven.org/maven2/io/airlift/aircompressor/0.10/aircompressor-0.10.pom
+Downloading https://repo1.maven.org/maven2/org/codehaus/janino/janino-parent/3.0.16/janino-parent-3.0.16.pom
+Downloading https://repo1.maven.org/maven2/io/airlift/airbase/78/airbase-78.pom
+Downloading https://repo1.maven.org/maven2/org/apache/arrow/arrow-java-root/0.15.1/arrow-java-root-0.15.1.pom
+Downloading https://repo1.maven.org/maven2/org/antlr/antlr4-master/4.7.1/antlr4-master-4.7.1.pom
+Downloaded https://repo1.maven.org/maven2/org/codehaus/janino/janino-parent/3.0.16/janino-parent-3.0.16.pom
+Downloaded https://repo1.maven.org/maven2/org/antlr/antlr4-master/4.7.1/antlr4-master-4.7.1.pom
+Downloaded https://repo1.maven.org/maven2/org/apache/arrow/arrow-java-root/0.15.1/arrow-java-root-0.15.1.pom
+Downloaded https://repo1.maven.org/maven2/io/airlift/airbase/78/airbase-78.pom
+Downloading https://repo1.maven.org/maven2/org/apache/commons/commons-parent/35/commons-parent-35.pom
+Downloaded https://repo1.maven.org/maven2/org/apache/commons/commons-parent/35/commons-parent-35.pom
+Downloading https://repo1.maven.org/maven2/org/apache/apache/15/apache-15.pom
+Downloaded https://repo1.maven.org/maven2/org/apache/apache/15/apache-15.pom
+Downloading https://repo1.maven.org/maven2/org/apache/arrow/arrow-memory/0.15.1/arrow-memory-0.15.1.pom
+Downloading https://repo1.maven.org/maven2/com/google/flatbuffers/flatbuffers-java/1.9.0/flatbuffers-java-1.9.0.pom
+Downloading https://repo1.maven.org/maven2/org/apache/arrow/arrow-format/0.15.1/arrow-format-0.15.1.pom
+Downloaded https://repo1.maven.org/maven2/org/apache/arrow/arrow-memory/0.15.1/arrow-memory-0.15.1.pom
+Downloaded https://repo1.maven.org/maven2/org/apache/arrow/arrow-format/0.15.1/arrow-format-0.15.1.pom
+Downloaded https://repo1.maven.org/maven2/com/google/flatbuffers/flatbuffers-java/1.9.0/flatbuffers-java-1.9.0.pom
+Downloading https://repo1.maven.org/maven2/com/univocity/univocity-parsers/2.8.3/univocity-parsers-2.8.3.jar
+Downloading https://repo1.maven.org/maven2/commons-codec/commons-codec/1.10/commons-codec-1.10.jar
+Downloading https://repo1.maven.org/maven2/org/apache/arrow/arrow-memory/0.15.1/arrow-memory-0.15.1.jar
+Downloading https://repo1.maven.org/maven2/com/google/flatbuffers/flatbuffers-java/1.9.0/flatbuffers-java-1.9.0.jar
+Downloading https://repo1.maven.org/maven2/org/antlr/antlr4-runtime/4.7.1/antlr4-runtime-4.7.1.jar
+Downloading https://repo1.maven.org/maven2/org/codehaus/janino/janino/3.0.16/janino-3.0.16.jar
+Downloaded https://repo1.maven.org/maven2/com/univocity/univocity-parsers/2.8.3/univocity-parsers-2.8.3.jar
+Downloading https://repo1.maven.org/maven2/org/apache/spark/spark-catalyst_2.12/3.0.0/spark-catalyst_2.12-3.0.0.jar
+Downloaded https://repo1.maven.org/maven2/org/apache/arrow/arrow-memory/0.15.1/arrow-memory-0.15.1.jar
+Downloading https://repo1.maven.org/maven2/org/apache/orc/orc-shims/1.5.10/orc-shims-1.5.10.jar
+Downloaded https://repo1.maven.org/maven2/com/google/flatbuffers/flatbuffers-java/1.9.0/flatbuffers-java-1.9.0.jar
+Downloading https://repo1.maven.org/maven2/org/threeten/threeten-extra/1.5.0/threeten-extra-1.5.0.jar
+Downloaded https://repo1.maven.org/maven2/org/antlr/antlr4-runtime/4.7.1/antlr4-runtime-4.7.1.jar
+Downloading https://repo1.maven.org/maven2/org/apache/hive/hive-storage-api/2.7.1/hive-storage-api-2.7.1.jar
+Downloaded https://repo1.maven.org/maven2/org/apache/orc/orc-shims/1.5.10/orc-shims-1.5.10.jar
+Downloading https://repo1.maven.org/maven2/org/apache/orc/orc-mapreduce/1.5.10/orc-mapreduce-1.5.10.jar
+Downloaded https://repo1.maven.org/maven2/org/codehaus/janino/janino/3.0.16/janino-3.0.16.jar
+Downloaded https://repo1.maven.org/maven2/commons-codec/commons-codec/1.10/commons-codec-1.10.jar
+Downloading https://repo1.maven.org/maven2/org/apache/parquet/parquet-common/1.10.1/parquet-common-1.10.1.jar
+Downloading https://repo1.maven.org/maven2/org/apache/parquet/parquet-format/2.4.0/parquet-format-2.4.0.jar
+Downloaded https://repo1.maven.org/maven2/org/threeten/threeten-extra/1.5.0/threeten-extra-1.5.0.jar
+Downloading https://repo1.maven.org/maven2/org/apache/parquet/parquet-encoding/1.10.1/parquet-encoding-1.10.1.jar
+Downloaded https://repo1.maven.org/maven2/org/apache/hive/hive-storage-api/2.7.1/hive-storage-api-2.7.1.jar
+Downloading https://repo1.maven.org/maven2/org/apache/parquet/parquet-jackson/1.10.1/parquet-jackson-1.10.1.jar
+Downloaded https://repo1.maven.org/maven2/org/apache/orc/orc-mapreduce/1.5.10/orc-mapreduce-1.5.10.jar
+Downloading https://repo1.maven.org/maven2/org/apache/orc/orc-core/1.5.10/orc-core-1.5.10.jar
+Downloaded https://repo1.maven.org/maven2/org/apache/parquet/parquet-common/1.10.1/parquet-common-1.10.1.jar
+Downloading https://repo1.maven.org/maven2/org/apache/parquet/parquet-hadoop/1.10.1/parquet-hadoop-1.10.1.jar
+Downloaded https://repo1.maven.org/maven2/org/apache/parquet/parquet-encoding/1.10.1/parquet-encoding-1.10.1.jar
+Downloading https://repo1.maven.org/maven2/org/apache/parquet/parquet-column/1.10.1/parquet-column-1.10.1.jar
+Downloaded https://repo1.maven.org/maven2/org/apache/parquet/parquet-jackson/1.10.1/parquet-jackson-1.10.1.jar
+Downloading https://repo1.maven.org/maven2/org/apache/spark/spark-sql_2.12/3.0.0/spark-sql_2.12-3.0.0.jar
+Downloaded https://repo1.maven.org/maven2/org/apache/parquet/parquet-hadoop/1.10.1/parquet-hadoop-1.10.1.jar
+Downloading https://repo1.maven.org/maven2/org/codehaus/janino/commons-compiler/3.0.16/commons-compiler-3.0.16.jar
+Downloaded https://repo1.maven.org/maven2/org/apache/orc/orc-core/1.5.10/orc-core-1.5.10.jar
+Downloaded https://repo1.maven.org/maven2/org/apache/parquet/parquet-column/1.10.1/parquet-column-1.10.1.jar
+Downloading https://repo1.maven.org/maven2/org/apache/spark/spark-sketch_2.12/3.0.0/spark-sketch_2.12-3.0.0-sources.jar
+Downloading https://repo1.maven.org/maven2/io/airlift/aircompressor/0.10/aircompressor-0.10.jar
+Downloaded https://repo1.maven.org/maven2/org/codehaus/janino/commons-compiler/3.0.16/commons-compiler-3.0.16.jar
+Downloading https://repo1.maven.org/maven2/commons-codec/commons-codec/1.10/commons-codec-1.10-sources.jar
+Downloaded https://repo1.maven.org/maven2/io/airlift/aircompressor/0.10/aircompressor-0.10.jar
+Downloading https://repo1.maven.org/maven2/com/univocity/univocity-parsers/2.8.3/univocity-parsers-2.8.3-sources.jar
+Downloaded https://repo1.maven.org/maven2/org/apache/spark/spark-sketch_2.12/3.0.0/spark-sketch_2.12-3.0.0-sources.jar
+Downloading https://repo1.maven.org/maven2/org/codehaus/janino/commons-compiler/3.0.16/commons-compiler-3.0.16-sources.jar
+Downloaded https://repo1.maven.org/maven2/commons-codec/commons-codec/1.10/commons-codec-1.10-sources.jar
+Downloading https://repo1.maven.org/maven2/org/scala-lang/modules/scala-parser-combinators_2.12/1.1.2/scala-parser-combinators_2.12-1.1.2-sources.jar
+Downloaded https://repo1.maven.org/maven2/com/univocity/univocity-parsers/2.8.3/univocity-parsers-2.8.3-sources.jar
+Downloading https://repo1.maven.org/maven2/org/apache/spark/spark-catalyst_2.12/3.0.0/spark-catalyst_2.12-3.0.0-sources.jar
+Downloaded https://repo1.maven.org/maven2/org/apache/parquet/parquet-format/2.4.0/parquet-format-2.4.0.jar
+Downloading https://repo1.maven.org/maven2/org/apache/orc/orc-core/1.5.10/orc-core-1.5.10-sources.jar
+Downloaded https://repo1.maven.org/maven2/org/scala-lang/modules/scala-parser-combinators_2.12/1.1.2/scala-parser-combinators_2.12-1.1.2-sources.jar
+Downloading https://repo1.maven.org/maven2/io/airlift/aircompressor/0.10/aircompressor-0.10-sources.jar
+Downloaded https://repo1.maven.org/maven2/org/apache/spark/spark-sql_2.12/3.0.0/spark-sql_2.12-3.0.0.jar
+Downloading https://repo1.maven.org/maven2/org/threeten/threeten-extra/1.5.0/threeten-extra-1.5.0-sources.jar
+Downloaded https://repo1.maven.org/maven2/org/codehaus/janino/commons-compiler/3.0.16/commons-compiler-3.0.16-sources.jar
+Downloading https://repo1.maven.org/maven2/org/apache/hive/hive-storage-api/2.7.1/hive-storage-api-2.7.1-sources.jar
+Downloaded https://repo1.maven.org/maven2/io/airlift/aircompressor/0.10/aircompressor-0.10-sources.jar
+Downloading https://repo1.maven.org/maven2/org/codehaus/janino/janino/3.0.16/janino-3.0.16-sources.jar
+Downloaded https://repo1.maven.org/maven2/org/threeten/threeten-extra/1.5.0/threeten-extra-1.5.0-sources.jar
+Downloading https://repo1.maven.org/maven2/org/apache/parquet/parquet-common/1.10.1/parquet-common-1.10.1-sources.jar
+Downloaded https://repo1.maven.org/maven2/org/apache/hive/hive-storage-api/2.7.1/hive-storage-api-2.7.1-sources.jar
+Downloading https://repo1.maven.org/maven2/org/apache/parquet/parquet-column/1.10.1/parquet-column-1.10.1-sources.jar
+Downloaded https://repo1.maven.org/maven2/org/codehaus/janino/janino/3.0.16/janino-3.0.16-sources.jar
+Downloading https://repo1.maven.org/maven2/org/apache/orc/orc-mapreduce/1.5.10/orc-mapreduce-1.5.10-sources.jar
+Downloaded https://repo1.maven.org/maven2/org/apache/orc/orc-core/1.5.10/orc-core-1.5.10-sources.jar
+Downloaded https://repo1.maven.org/maven2/org/apache/parquet/parquet-column/1.10.1/parquet-column-1.10.1-sources.jar
+Downloading https://repo1.maven.org/maven2/org/apache/parquet/parquet-format/2.4.0/parquet-format-2.4.0-sources.jar
+Downloading https://repo1.maven.org/maven2/org/apache/parquet/parquet-encoding/1.10.1/parquet-encoding-1.10.1-sources.jar
+Downloaded https://repo1.maven.org/maven2/org/apache/parquet/parquet-common/1.10.1/parquet-common-1.10.1-sources.jar
+Downloading https://repo1.maven.org/maven2/org/apache/parquet/parquet-jackson/1.10.1/parquet-jackson-1.10.1-sources.jar
+Downloaded https://repo1.maven.org/maven2/org/apache/spark/spark-catalyst_2.12/3.0.0/spark-catalyst_2.12-3.0.0-sources.jar
+Downloading https://repo1.maven.org/maven2/org/apache/orc/orc-shims/1.5.10/orc-shims-1.5.10-sources.jar
+Downloaded https://repo1.maven.org/maven2/org/apache/orc/orc-mapreduce/1.5.10/orc-mapreduce-1.5.10-sources.jar
+Downloading https://repo1.maven.org/maven2/org/apache/spark/spark-sql_2.12/3.0.0/spark-sql_2.12-3.0.0-sources.jar
+Downloaded https://repo1.maven.org/maven2/org/apache/parquet/parquet-format/2.4.0/parquet-format-2.4.0-sources.jar
+Downloaded https://repo1.maven.org/maven2/org/apache/parquet/parquet-jackson/1.10.1/parquet-jackson-1.10.1-sources.jar
+Downloading https://repo1.maven.org/maven2/org/antlr/antlr4-runtime/4.7.1/antlr4-runtime-4.7.1-sources.jar
+Downloading https://repo1.maven.org/maven2/org/apache/parquet/parquet-hadoop/1.10.1/parquet-hadoop-1.10.1-sources.jar
+Downloaded https://repo1.maven.org/maven2/org/apache/orc/orc-shims/1.5.10/orc-shims-1.5.10-sources.jar
+Downloading https://repo1.maven.org/maven2/org/apache/spark/spark-sketch_2.12/3.0.0/spark-sketch_2.12-3.0.0.jar
+Downloaded https://repo1.maven.org/maven2/org/apache/parquet/parquet-hadoop/1.10.1/parquet-hadoop-1.10.1-sources.jar
+Downloading https://repo1.maven.org/maven2/org/apache/arrow/arrow-vector/0.15.1/arrow-vector-0.15.1.jar
+Downloaded https://repo1.maven.org/maven2/org/apache/spark/spark-sketch_2.12/3.0.0/spark-sketch_2.12-3.0.0.jar
+Downloading https://repo1.maven.org/maven2/org/scala-lang/modules/scala-parser-combinators_2.12/1.1.2/scala-parser-combinators_2.12-1.1.2.jar
+Downloaded https://repo1.maven.org/maven2/org/antlr/antlr4-runtime/4.7.1/antlr4-runtime-4.7.1-sources.jar
+Downloading https://repo1.maven.org/maven2/com/google/flatbuffers/flatbuffers-java/1.9.0/flatbuffers-java-1.9.0-sources.jar
+Downloaded https://repo1.maven.org/maven2/org/apache/parquet/parquet-encoding/1.10.1/parquet-encoding-1.10.1-sources.jar
+Downloading https://repo1.maven.org/maven2/org/apache/arrow/arrow-format/0.15.1/arrow-format-0.15.1-sources.jar
+Downloaded https://repo1.maven.org/maven2/org/scala-lang/modules/scala-parser-combinators_2.12/1.1.2/scala-parser-combinators_2.12-1.1.2.jar
+Downloading https://repo1.maven.org/maven2/org/apache/arrow/arrow-format/0.15.1/arrow-format-0.15.1.jar
+Downloaded https://repo1.maven.org/maven2/com/google/flatbuffers/flatbuffers-java/1.9.0/flatbuffers-java-1.9.0-sources.jar
+Downloaded https://repo1.maven.org/maven2/org/apache/arrow/arrow-vector/0.15.1/arrow-vector-0.15.1.jar
+Downloading https://repo1.maven.org/maven2/org/apache/arrow/arrow-vector/0.15.1/arrow-vector-0.15.1-sources.jar
+Downloaded https://repo1.maven.org/maven2/org/apache/arrow/arrow-format/0.15.1/arrow-format-0.15.1.jar
+Downloaded https://repo1.maven.org/maven2/org/apache/arrow/arrow-format/0.15.1/arrow-format-0.15.1-sources.jar
+Downloading https://repo1.maven.org/maven2/org/apache/arrow/arrow-memory/0.15.1/arrow-memory-0.15.1-sources.jar
+Downloaded https://repo1.maven.org/maven2/org/apache/arrow/arrow-memory/0.15.1/arrow-memory-0.15.1-sources.jar
+Downloaded https://repo1.maven.org/maven2/org/apache/arrow/arrow-vector/0.15.1/arrow-vector-0.15.1-sources.jar
+Downloaded https://repo1.maven.org/maven2/org/apache/spark/spark-sql_2.12/3.0.0/spark-sql_2.12-3.0.0-sources.jar
+Downloaded https://repo1.maven.org/maven2/org/apache/spark/spark-catalyst_2.12/3.0.0/spark-catalyst_2.12-3.0.0.jar
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[2]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-scala"><pre><span></span><span class="k">import</span><span class="w"> </span><span class="nn">org</span><span class="p">.</span><span class="nn">apache</span><span class="p">.</span><span class="nn">spark</span><span class="p">.</span><span class="nn">sql</span><span class="p">.</span><span class="nc">SparkSession</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">org</span><span class="p">.</span><span class="nn">apache</span><span class="p">.</span><span class="nn">spark</span><span class="p">.</span><span class="nn">sql</span><span class="p">.</span><span class="nn">functions</span><span class="p">.</span><span class="n">_</span>
+
+<span class="kd">val</span><span class="w"> </span><span class="n">spark</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">SparkSession</span><span class="p">.</span><span class="n">builder</span><span class="p">()</span>
+<span class="w">    </span><span class="p">.</span><span class="n">master</span><span class="p">(</span><span class="s">&quot;local[2]&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="p">.</span><span class="n">appName</span><span class="p">(</span><span class="s">&quot;Spark Column Example&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="p">.</span><span class="n">config</span><span class="p">(</span><span class="s">&quot;spark.some.config.option&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;some-value&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="p">.</span><span class="n">getOrCreate</span><span class="p">()</span>
+
+<span class="k">import</span><span class="w"> </span><span class="nn">spark</span><span class="p">.</span><span class="nn">implicits</span><span class="p">.</span><span class="n">_</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>Using Spark&#39;s default log4j profile: org/apache/spark/log4j-defaults.properties
+20/07/19 14:25:31 INFO SparkContext: Running Spark version 3.0.0
+20/07/19 14:25:32 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+20/07/19 14:25:32 INFO ResourceUtils: ==============================================================
+20/07/19 14:25:32 INFO ResourceUtils: Resources for spark.driver:
+
+20/07/19 14:25:32 INFO ResourceUtils: ==============================================================
+20/07/19 14:25:32 INFO SparkContext: Submitted application: Spark Column Example
+20/07/19 14:25:32 INFO SecurityManager: Changing view acls to: gitpod
+20/07/19 14:25:32 INFO SecurityManager: Changing modify acls to: gitpod
+20/07/19 14:25:32 INFO SecurityManager: Changing view acls groups to: 
+20/07/19 14:25:32 INFO SecurityManager: Changing modify acls groups to: 
+20/07/19 14:25:32 INFO SecurityManager: SecurityManager: authentication disabled; ui acls disabled; users  with view permissions: Set(gitpod); groups with view permissions: Set(); users  with modify permissions: Set(gitpod); groups with modify permissions: Set()
+20/07/19 14:25:33 INFO Utils: Successfully started service &#39;sparkDriver&#39; on port 44959.
+20/07/19 14:25:33 INFO SparkEnv: Registering MapOutputTracker
+20/07/19 14:25:33 INFO SparkEnv: Registering BlockManagerMaster
+20/07/19 14:25:33 INFO BlockManagerMasterEndpoint: Using org.apache.spark.storage.DefaultTopologyMapper for getting topology information
+20/07/19 14:25:33 INFO BlockManagerMasterEndpoint: BlockManagerMasterEndpoint up
+20/07/19 14:25:33 INFO SparkEnv: Registering BlockManagerMasterHeartbeat
+20/07/19 14:25:33 INFO DiskBlockManager: Created local directory at /tmp/blockmgr-9debccc3-c0df-48e2-9306-1e78a62a670d
+20/07/19 14:25:33 INFO MemoryStore: MemoryStore started with capacity 1172.4 MiB
+20/07/19 14:25:33 INFO SparkEnv: Registering OutputCommitCoordinator
+20/07/19 14:25:34 INFO Utils: Successfully started service &#39;SparkUI&#39; on port 4040.
+20/07/19 14:25:34 INFO SparkUI: Bound SparkUI to 0.0.0.0, and started at http://ws-2d470c6b-0983-4974-8000-c7b96edf3082:4040
+20/07/19 14:25:34 INFO Executor: Starting executor ID driver on host ws-2d470c6b-0983-4974-8000-c7b96edf3082
+20/07/19 14:25:34 INFO Utils: Successfully started service &#39;org.apache.spark.network.netty.NettyBlockTransferService&#39; on port 43519.
+20/07/19 14:25:34 INFO NettyBlockTransferService: Server created on ws-2d470c6b-0983-4974-8000-c7b96edf3082:43519
+20/07/19 14:25:34 INFO BlockManager: Using org.apache.spark.storage.RandomBlockReplicationPolicy for block replication policy
+20/07/19 14:25:34 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, ws-2d470c6b-0983-4974-8000-c7b96edf3082, 43519, None)
+20/07/19 14:25:34 INFO BlockManagerMasterEndpoint: Registering block manager ws-2d470c6b-0983-4974-8000-c7b96edf3082:43519 with 1172.4 MiB RAM, BlockManagerId(driver, ws-2d470c6b-0983-4974-8000-c7b96edf3082, 43519, None)
+20/07/19 14:25:34 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, ws-2d470c6b-0983-4974-8000-c7b96edf3082, 43519, None)
+20/07/19 14:25:34 INFO BlockManager: Initialized BlockManager: BlockManagerId(driver, ws-2d470c6b-0983-4974-8000-c7b96edf3082, 43519, None)
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[2]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre><span class="ansi-green-fg">import </span><span class="ansi-cyan-fg">org.apache.spark.sql.SparkSession
+</span>
+<span class="ansi-green-fg">import </span><span class="ansi-cyan-fg">org.apache.spark.sql.functions._
+
+</span>
+<span class="ansi-cyan-fg">spark</span>: <span class="ansi-green-fg">SparkSession</span> = org.apache.spark.sql.SparkSession@4e94577b
+<span class="ansi-green-fg">import </span><span class="ansi-cyan-fg">spark.implicits._</span></pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Create a Spark DataFrame whose column names are in lower case.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[3]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-scala"><pre><span></span><span class="kd">val</span><span class="w"> </span><span class="n">df</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Seq</span><span class="p">(</span>
+<span class="w">    </span><span class="p">(</span><span class="il">1L</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;a&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;foo&quot;</span><span class="p">,</span><span class="w"> </span><span class="mf">3.0</span><span class="p">),</span>
+<span class="w">    </span><span class="p">(</span><span class="il">2L</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;b&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;bar&quot;</span><span class="p">,</span><span class="w"> </span><span class="mf">4.0</span><span class="p">),</span>
+<span class="w">    </span><span class="p">(</span><span class="il">3L</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;c&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;foo&quot;</span><span class="p">,</span><span class="w"> </span><span class="mf">5.0</span><span class="p">),</span>
+<span class="w">    </span><span class="p">(</span><span class="il">4L</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;d&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;bar&quot;</span><span class="p">,</span><span class="w"> </span><span class="mf">7.0</span><span class="p">)</span>
+<span class="p">).</span><span class="n">toDF</span><span class="p">(</span><span class="s">&quot;col1&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;col2&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;col3&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;col4&quot;</span><span class="p">)</span>
+<span class="n">df</span><span class="p">.</span><span class="n">show</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>20/07/19 14:25:44 INFO SharedState: Setting hive.metastore.warehouse.dir (&#39;null&#39;) to the value of spark.sql.warehouse.dir (&#39;file:/workspace/blog/misc/content/spark-warehouse&#39;).
+20/07/19 14:25:44 INFO SharedState: Warehouse path is &#39;file:/workspace/blog/misc/content/spark-warehouse&#39;.
+20/07/19 14:25:46 INFO CodeGenerator: Code generated in 669.093681 ms
+20/07/19 14:25:48 INFO CodeGenerator: Code generated in 44.437548 ms
+20/07/19 14:25:48 INFO CodeGenerator: Code generated in 35.205708 ms
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>+----+----+----+----+
+|col1|col2|col3|col4|
++----+----+----+----+
+|   1|   a| foo| 3.0|
+|   2|   b| bar| 4.0|
+|   3|   c| foo| 5.0|
+|   4|   d| bar| 7.0|
++----+----+----+----+
+
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[3]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre><span class="ansi-cyan-fg">df</span>: <span class="ansi-green-fg">org</span>.<span class="ansi-green-fg">apache</span>.<span class="ansi-green-fg">spark</span>.<span class="ansi-green-fg">sql</span>.<span class="ansi-green-fg">package</span>.<span class="ansi-green-fg">DataFrame</span> = [col1: bigint, col2: string ... 2 more fields]</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Even though the column names of the DataFrame is in lower case,
+it is case-insensitive when you access them using Spark DataFrame/SQL APIs.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[4]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-scala"><pre><span></span><span class="n">df</span><span class="p">.</span><span class="n">select</span><span class="p">(</span><span class="s">&quot;col1&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;COL2&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Col3&quot;</span><span class="p">).</span><span class="n">show</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>20/07/19 14:25:52 INFO CodeGenerator: Code generated in 29.382467 ms
+20/07/19 14:25:52 INFO CodeGenerator: Code generated in 30.9852 ms
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>+----+----+----+
+|col1|COL2|Col3|
++----+----+----+
+|   1|   a| foo|
+|   2|   b| bar|
+|   3|   c| foo|
+|   4|   d| bar|
++----+----+----+
+
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The case of column names are preserved when you write a Spark DataFrame into disk.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[18]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-scala"><pre><span></span><span class="n">df</span><span class="p">.</span><span class="n">select</span><span class="p">(</span><span class="s">&quot;col1&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;COL2&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Col3&quot;</span><span class="p">).</span><span class="n">write</span><span class="p">.</span><span class="n">mode</span><span class="p">(</span><span class="s">&quot;overwrite&quot;</span><span class="p">).</span><span class="n">parquet</span><span class="p">(</span><span class="s">&quot;/tmp/df&quot;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[19]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-scala"><pre><span></span><span class="o">%%</span><span class="n">python</span>
+
+<span class="k">import</span><span class="w"> </span><span class="n">pandas</span><span class="w"> </span><span class="n">as</span><span class="w"> </span><span class="n">pd</span>
+<span class="n">pd</span><span class="p">.</span><span class="n">read_parquet</span><span class="p">(</span><span class="s">&quot;/tmp/df&quot;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[19]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>col1</th>
+      <th>COL2</th>
+      <th>Col3</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>a</td>
+      <td>foo</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>b</td>
+      <td>bar</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>c</td>
+      <td>foo</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4</td>
+      <td>d</td>
+      <td>bar</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="References">References<a class="anchor-link" href="#References">&#182;</a></h2><p><a href="https://spark.apache.org/docs/latest/api/java/index.html?org/apache/spark/sql/Dataset.html">https://spark.apache.org/docs/latest/api/java/index.html?org/apache/spark/sql/Dataset.html</a></p>
+<p><a href="https://spark.apache.org/docs/latest/api/java/index.html?org/apache/spark/sql/functions.html">https://spark.apache.org/docs/latest/api/java/index.html?org/apache/spark/sql/functions.html</a></p>
+<p><a href="https://spark.apache.org/docs/latest/api/java/org/apache/spark/sql/Row.html">https://spark.apache.org/docs/latest/api/java/org/apache/spark/sql/Row.html</a></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-scala"><pre><span></span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+ 
+
+</body>
+<script type="text/javascript">if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
+    var mathjaxscript = document.createElement('script');
+    mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
+    mathjaxscript.type = 'text/javascript';
+    mathjaxscript.src = '//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML';
+    mathjaxscript[(window.opera ? "innerHTML" : "text")] =
+        "MathJax.Hub.Config({" +
+        "    config: ['MMLorHTML.js']," +
+        "    TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'AMS' } }," +
+        "    jax: ['input/TeX','input/MathML','output/HTML-CSS']," +
+        "    extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']," +
+        "    displayAlign: 'center'," +
+        "    displayIndent: '0em'," +
+        "    showMathMenu: true," +
+        "    tex2jax: { " +
+        "        inlineMath: [ ['$','$'] ], " +
+        "        displayMath: [ ['$$','$$'] ]," +
+        "        processEscapes: true," +
+        "        preview: 'TeX'," +
+        "    }, " +
+        "    'HTML-CSS': { " +
+        " linebreaks: { automatic: true, width: '95% container' }, " +
+        "        styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: 'black ! important'} }" +
+        "    } " +
+        "}); ";
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
+}
+</script>
+</div>
+    <footer>
+<p class="meta">
+  <span class="byline author vcard">
+    Posted by <span class="fn">Ben Du</span>
+  </span>
+<time datetime="2019-12-03T00:00:00-08:00" pubdate>Dec 03, 2019</time>  <span class="categories">
+    <a class="category" href="https://misc.legendu.net/tag/programming.html">programming</a>
+    <a class="category" href="https://misc.legendu.net/tag/scala.html">Scala</a>
+    <a class="category" href="https://misc.legendu.net/tag/spark.html">Spark</a>
+    <a class="category" href="https://misc.legendu.net/tag/dataframe.html">DataFrame</a>
+    <a class="category" href="https://misc.legendu.net/tag/case.html">case</a>
+    <a class="category" href="https://misc.legendu.net/tag/column-names.html">column names</a>
+  </span>
+</p>    </footer>
+  </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div>
+  </section>
+</div>
+<aside class="sidebar">
+  <section>
+    <h1>Recent Posts</h1>
+    <ul id="recent_posts">
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/tips-on-health/">Tips on Health</a>
+      </li>
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/tips-on-child-education/">Tips on Child Education</a>
+      </li>
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/tips-on-fd/">Tips on fd</a>
+      </li>
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/the-fzf-command-is-a-great-alternative-to-find/">The fzf Command Is a Great Alternative to find</a>
+      </li>
+      <li class="post">
+          <a href="https://misc.legendu.net/blog/ruff-is-an-extremely-fast-python-linter-written-in-rust/">Ruff Is An Extremely Fast Python Linter Written in Rust</a>
+      </li>
+    </ul>
+  </section>
+  <section>
+    <h1>Categories</h1>
+    <ul id="recent_posts">
+        <li><a href="https://misc.legendu.net/category/ai.html">AI</a></li>
+        <li><a href="https://misc.legendu.net/category/career.html">Career</a></li>
+        <li><a href="https://misc.legendu.net/category/cloud.html">Cloud</a></li>
+        <li><a href="https://misc.legendu.net/category/computer-science.html">Computer Science</a></li>
+        <li><a href="https://misc.legendu.net/category/fiannce.html">Fiannce</a></li>
+        <li><a href="https://misc.legendu.net/category/finance.html">Finance</a></li>
+        <li><a href="https://misc.legendu.net/category/fun-problems.html">Fun Problems</a></li>
+        <li><a href="https://misc.legendu.net/category/hardware.html">Hardware</a></li>
+        <li><a href="https://misc.legendu.net/category/health.html">Health</a></li>
+        <li><a href="https://misc.legendu.net/category/house.html">House</a></li>
+        <li><a href="https://misc.legendu.net/category/internet.html">Internet</a></li>
+        <li><a href="https://misc.legendu.net/category/investment.html">Investment</a></li>
+        <li><a href="https://misc.legendu.net/category/life.html">life</a></li>
+        <li><a href="https://misc.legendu.net/category/linux.html">Linux</a></li>
+        <li><a href="https://misc.legendu.net/category/os.html">OS</a></li>
+        <li><a href="https://misc.legendu.net/category/people.html">People</a></li>
+        <li><a href="https://misc.legendu.net/category/philosophy.html">Philosophy</a></li>
+        <li><a href="https://misc.legendu.net/category/research.html">Research</a></li>
+        <li><a href="https://misc.legendu.net/category/shopping.html">Shopping</a></li>
+        <li><a href="https://misc.legendu.net/category/soft-skills.html">soft skills</a></li>
+        <li><a href="https://misc.legendu.net/category/software.html">Software</a></li>
+        <li><a href="https://misc.legendu.net/category/statistics.html">Statistics</a></li>
+        <li><a href="https://misc.legendu.net/category/tools.html">Tools</a></li>
+    </ul>
+  </section>
+ 
+
+  <section>
+  <h1>Tags</h1>
+  <ul class="tagcloud">
+  </ul>
+  </section>
+
+
+
+  <section>
+    <h1>GitHub Repos</h1>
+    <ul id="gh_repos">
+      <li class="loading">Status updating...</li>
+    </ul>
+      <a href="https://github.com/legendu-net">@legendu-net</a> on GitHub
+    <script type="text/javascript">
+      $.domReady(function(){
+          if (!window.jXHR){
+              var jxhr = document.createElement('script');
+              jxhr.type = 'text/javascript';
+              jxhr.src = 'https://misc.legendu.net/theme/js/jXHR.js';
+              var s = document.getElementsByTagName('script')[0];
+              s.parentNode.insertBefore(jxhr, s);
+          }
+
+          github.showRepos({
+              user: 'legendu-net',
+              count: 5,
+              skip_forks: true,
+              target: '#gh_repos'
+          });
+      });
+    </script>
+    <script src="https://misc.legendu.net/theme/js/github.js" type="text/javascript"> </script>
+  </section>
+
+    <section>
+        <h1>Social</h2>
+        <ul>
+            <li><a href="https://www.linkedin.com/in/ben-chuanlong-du-1239b221/" target="_blank">LinkedIn</a></li>
+            <li><a href="https://hub.docker.com/u/dclong" target="_blank">Docker Hub</a></li>
+            <li><a href="https://stackoverflow.com/users/7808204/benjamin-du?tab=profile" target="_blank">Stack Overflow</a></li>
+            <li><a href="https://twitter.com/longendu" target="_blank">Twitter</a></li>
+        <!--
+            <li><a href="https://misc.legendu.net/" type="application/rss+xml" rel="alternate">RSS</a></li>
+            -->
+        </ul>
+    </section>
+</aside>    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Ben Chuanlong Du -
+  <span class="credit">Powered by <a href="http://getpelican.com">Pelican</a></span>
+</p></footer>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-3STS9BVPF6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-3STS9BVPF6');
+</script>
+	<script type="text/javascript">
+	  var disqus_shortname = 'dclong';
+          var disqus_identifier = '/blog/spark-case-col-names/';
+          var disqus_url = 'https://misc.legendu.net/blog/spark-case-col-names/';
+          var disqus_title = 'Case of Column Names in Spark DataFrames';
+	  (function() {
+	    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	    dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+	    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	   })();
+	</script>
+</body>
+</html>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0"><channel><title>Ben Chuanlong Du's Blog - Ben Du</title><link>https://misc.legendu.net/</link><description>It is never too late to learn.</description><lastBuildDate>Fri, 08 Jan 2021 23:07:57 -0800</lastBuildDate><item><title>AI Learning</title><link>https://misc.legendu.net/blog/ai-learning/</link><description>&lt;p&gt;&lt;strong&gt;Things on this page are fragmentary and immature notes/thoughts of the author. Please read with your own judgement!&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Machine Learning Algorithms" src="https://jixta.files.wordpress.com/2015/11/machinelearningalgorithms.png"&gt;
+The picture comes from &lt;a href="https://jixta.wordpress.com/2015/07/17/machine-learning-algorithms-mindmap/"&gt;Machine Learning Algorithms Mindmap&lt;/a&gt;.&lt;/p&gt;
+&lt;h2 id="feature-engineering"&gt;Feature Engineering&lt;/h2&gt;
+&lt;p&gt;&lt;a href="http://www.legendu.net/misc/blog/handling-categorical-variables-in-machine-learning/"&gt;Handling Categorical Variables in Machine Learning&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id="regularization-in-machine-learning-models"&gt;&lt;a href="http://www.legendu.net/misc/blog/regularization-in-machine-learning-models/"&gt;Regularization in Machine Learning Models&lt;/a&gt;&lt;/h2&gt;
+&lt;h2 id="ensemble"&gt;&lt;a href="http://www.legendu.net/misc/blog/ai-ensemble/"&gt;Ensemble&lt;/a&gt;&lt;/h2&gt;
+&lt;h2 id="frameworks"&gt;Frameworks&lt;/h2&gt;
+&lt;p&gt;&lt;a href="http://www.legendu.net/misc/blog/libraries-for-gradient-boosting/"&gt;Libraries for Gradient Boosting&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id="big-data-spark-friendly-frameworks"&gt;Big-data (Spark) Friendly Frameworks …&lt;/h3&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Ben Du</dc:creator><pubDate>Sun, 08 Dec 2013 23:07:57 -0800</pubDate><guid isPermaLink="false">tag:misc.legendu.net,2013-12-08:/blog/ai-learning/</guid><category>AI</category><category>AI</category><category>machine learning</category><category>statistics</category><category>data science</category></item></channel></rss>

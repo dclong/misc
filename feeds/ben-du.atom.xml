@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Ben Chuanlong Du's Blog - Ben Du</title><link href="https://misc.legendu.net/" rel="alternate"></link><link href="https://misc.legendu.net/feeds/ben-du.atom.xml" rel="self"></link><id>https://misc.legendu.net/</id><updated>2021-01-08T23:07:57-08:00</updated><subtitle>It is never too late to learn.</subtitle><entry><title>AI Learning</title><link href="https://misc.legendu.net/blog/ai-learning/" rel="alternate"></link><published>2013-12-08T23:07:57-08:00</published><updated>2021-01-08T23:07:57-08:00</updated><author><name>Ben Du</name></author><id>tag:misc.legendu.net,2013-12-08:/blog/ai-learning/</id><summary type="html">&lt;p&gt;&lt;strong&gt;Things on this page are fragmentary and immature notes/thoughts of the author. Please read with your own judgement!&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Machine Learning Algorithms" src="https://jixta.files.wordpress.com/2015/11/machinelearningalgorithms.png"&gt;
+The picture comes from &lt;a href="https://jixta.wordpress.com/2015/07/17/machine-learning-algorithms-mindmap/"&gt;Machine Learning Algorithms Mindmap&lt;/a&gt;.&lt;/p&gt;
+&lt;h2 id="feature-engineering"&gt;Feature Engineering&lt;/h2&gt;
+&lt;p&gt;&lt;a href="http://www.legendu.net/misc/blog/handling-categorical-variables-in-machine-learning/"&gt;Handling Categorical Variables in Machine Learning&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id="regularization-in-machine-learning-models"&gt;&lt;a href="http://www.legendu.net/misc/blog/regularization-in-machine-learning-models/"&gt;Regularization in Machine Learning Models&lt;/a&gt;&lt;/h2&gt;
+&lt;h2 id="ensemble"&gt;&lt;a href="http://www.legendu.net/misc/blog/ai-ensemble/"&gt;Ensemble&lt;/a&gt;&lt;/h2&gt;
+&lt;h2 id="frameworks"&gt;Frameworks&lt;/h2&gt;
+&lt;p&gt;&lt;a href="http://www.legendu.net/misc/blog/libraries-for-gradient-boosting/"&gt;Libraries for Gradient Boosting&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id="big-data-spark-friendly-frameworks"&gt;Big-data (Spark) Friendly Frameworks …&lt;/h3&gt;</summary><content type="html">&lt;p&gt;&lt;strong&gt;Things on this page are fragmentary and immature notes/thoughts of the author. Please read with your own judgement!&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Machine Learning Algorithms" src="https://jixta.files.wordpress.com/2015/11/machinelearningalgorithms.png"&gt;
+The picture comes from &lt;a href="https://jixta.wordpress.com/2015/07/17/machine-learning-algorithms-mindmap/"&gt;Machine Learning Algorithms Mindmap&lt;/a&gt;.&lt;/p&gt;
+&lt;h2 id="feature-engineering"&gt;Feature Engineering&lt;/h2&gt;
+&lt;p&gt;&lt;a href="http://www.legendu.net/misc/blog/handling-categorical-variables-in-machine-learning/"&gt;Handling Categorical Variables in Machine Learning&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id="regularization-in-machine-learning-models"&gt;&lt;a href="http://www.legendu.net/misc/blog/regularization-in-machine-learning-models/"&gt;Regularization in Machine Learning Models&lt;/a&gt;&lt;/h2&gt;
+&lt;h2 id="ensemble"&gt;&lt;a href="http://www.legendu.net/misc/blog/ai-ensemble/"&gt;Ensemble&lt;/a&gt;&lt;/h2&gt;
+&lt;h2 id="frameworks"&gt;Frameworks&lt;/h2&gt;
+&lt;p&gt;&lt;a href="http://www.legendu.net/misc/blog/libraries-for-gradient-boosting/"&gt;Libraries for Gradient Boosting&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id="big-data-spark-friendly-frameworks"&gt;Big-data (Spark) Friendly Frameworks&lt;/h3&gt;
+&lt;p&gt;https://mmlspark.blob.core.windows.net/website/index.html&lt;/p&gt;
+&lt;h2 id="automl"&gt;&lt;a href="http://www.legendu.net/misc/blog/automl-tips/"&gt;AutoML&lt;/a&gt;&lt;/h2&gt;
+&lt;h2 id="questions"&gt;Questions&lt;/h2&gt;
+&lt;h3 id="random-forest"&gt;Random Forest&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Is discrete variables easier to handle than continous variables (in random forest)?
+    Is there any advantage of discretize variables?
+    The eseential question is how is categorical varialbes handled in RF?
+    Does RF use category variables directly or does it have to convert it to numerical somehow?&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Random forest has a way to impute missing values.
+    What if I treat missing values in categorical predictors and a new class?
+    It sounds like a good ...&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="imputation"&gt;Imputation&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;mean, median, etc.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;SVD imputation using low dimension to approximate high dimension data&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="tips-on-kaggle"&gt;&lt;a href="http://www.legendu.net/misc/blog/tips-on-kaggle/"&gt;Tips on Kaggle&lt;/a&gt;&lt;/h2&gt;
+&lt;h2 id="machine-learning-resources"&gt;&lt;a href="http://www.legendu.net/misc/blog/machine-learning-resources/"&gt;Machine Learning Resources&lt;/a&gt;&lt;/h2&gt;
+&lt;h2 id="ai-tools"&gt;AI Tools&lt;/h2&gt;
+&lt;p&gt;https://openai.com/blog/dall-e/&lt;/p&gt;
+&lt;h2 id="references"&gt;References&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;https://github.com/academic/awesome-datascience&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="https://startupsventurecapital.com/essential-cheat-sheets-for-machine-learning-and-deep-learning-researchers-efb6a8ebd2e5"&gt;Essential Cheat Sheets for Machine Learning and Deep Learning Engineers&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;https://rushter.com/dsreader/&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;</content><category term="AI"></category><category term="AI"></category><category term="machine learning"></category><category term="statistics"></category><category term="data science"></category></entry></feed>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Ben Chuanlong Du's Blog - Hardware</title><link href="https://misc.legendu.net/" rel="alternate"></link><link href="https://misc.legendu.net/feeds/hardware.atom.xml" rel="self"></link><id>https://misc.legendu.net/</id><updated>2021-11-08T09:08:17-08:00</updated><subtitle>It is never too late to learn.</subtitle><entry><title>Booting to the Boot Menu and BIOS</title><link href="https://misc.legendu.net/blog/booting-to-the-boot-menu-and-bios/" rel="alternate"></link><published>2018-04-29T16:35:14-07:00</published><updated>2021-11-08T09:08:17-08:00</updated><author><name>Ben Chuanlong Du</name></author><id>tag:misc.legendu.net,2018-04-29:/blog/booting-to-the-boot-menu-and-bios/</id><summary type="html">&lt;p&gt;&lt;strong&gt;Things on this page are fragmentary and immature notes/thoughts of the author. Please read with your own judgement!&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;There is a nice summary of the function keys in the post 
+&lt;a href="https://kb.wisc.edu/page.php?id=58779"&gt;Booting to the Boot Menu and BIOS&lt;/a&gt;
+.&lt;/p&gt;
+&lt;h2 id="digital-storm-workstation"&gt;Digital Storm Workstation:&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;F2: BIOS&lt;/li&gt;
+&lt;li&gt;F11: Boot menu selection (you can also …&lt;/li&gt;&lt;/ul&gt;</summary><content type="html">&lt;p&gt;&lt;strong&gt;Things on this page are fragmentary and immature notes/thoughts of the author. Please read with your own judgement!&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;There is a nice summary of the function keys in the post 
+&lt;a href="https://kb.wisc.edu/page.php?id=58779"&gt;Booting to the Boot Menu and BIOS&lt;/a&gt;
+.&lt;/p&gt;
+&lt;h2 id="digital-storm-workstation"&gt;Digital Storm Workstation:&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;F2: BIOS&lt;/li&gt;
+&lt;li&gt;F11: Boot menu selection (you can also go to BIOS from this menu)&lt;/li&gt;
+&lt;/ul&gt;</content><category term="Hardware"></category><category term="Hardware"></category><category term="boot"></category><category term="boot menu"></category><category term="BIOS"></category><category term="F12"></category><category term="F8"></category><category term="F2"></category><category term="Digital Storm"></category></entry><entry><title>Functional Keys on Computers</title><link href="https://misc.legendu.net/blog/functional-keys-on-computers/" rel="alternate"></link><published>2017-03-04T12:45:01-08:00</published><updated>2017-03-04T12:45:01-08:00</updated><author><name>Ben Chuanlong Du</name></author><id>tag:misc.legendu.net,2017-03-04:/blog/functional-keys-on-computers/</id><content type="html">&lt;p&gt;&lt;strong&gt;Things on this page are fragmentary and immature notes/thoughts of the author. Please read with your own judgement!&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id="lenovo"&gt;Lenovo&lt;/h2&gt;
+&lt;p&gt;F2: BIOS&lt;/p&gt;
+&lt;p&gt;F12: boot manager&lt;/p&gt;</content><category term="Hardware"></category><category term="hardware"></category><category term="computer"></category><category term="laptop"></category><category term="Lenovo"></category></entry><entry><title>Some Reading Notes About SSD</title><link href="https://misc.legendu.net/blog/some-reading-notes-about-ssd/" rel="alternate"></link><published>2013-06-23T00:00:00-07:00</published><updated>2013-06-23T00:00:00-07:00</updated><author><name>Ben Chuanlong Du</name></author><id>tag:misc.legendu.net,2013-06-23:/blog/some-reading-notes-about-ssd/</id><summary type="html">&lt;p&gt;&lt;strong&gt;Things on this page are fragmentary and immature notes/thoughts of the author. Please read with your own judgement!&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Samsung 840 pro is a good one&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;not necessary for SATA II interface&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;SSD is not as reliable as HD &lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;MLC has much longer life than VLC&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;don't defragment disk (on …&lt;/p&gt;&lt;/li&gt;&lt;/ol&gt;</summary><content type="html">&lt;p&gt;&lt;strong&gt;Things on this page are fragmentary and immature notes/thoughts of the author. Please read with your own judgement!&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Samsung 840 pro is a good one&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;not necessary for SATA II interface&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;SSD is not as reliable as HD &lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;MLC has much longer life than VLC&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;don't defragment disk (on Windows) if you use SSD&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;</content><category term="Hardware"></category><category term="Hardware"></category><category term="SSD"></category><category term="SATA"></category></entry></feed>
